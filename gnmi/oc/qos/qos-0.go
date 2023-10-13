@@ -48,6 +48,7 @@ using the following YANG input files:
   - public/release/models/platform/openconfig-platform-integrated-circuit.yang
   - public/release/models/platform/openconfig-platform-linecard.yang
   - public/release/models/platform/openconfig-platform-pipeline-counters.yang
+  - public/release/models/platform/openconfig-platform-psu.yang
   - public/release/models/platform/openconfig-platform-software.yang
   - public/release/models/platform/openconfig-platform-transceiver.yang
   - public/release/models/platform/openconfig-platform.yang
@@ -36284,6 +36285,9 @@ func (n *Qos_QueueManagementProfile_Wred_UniformPathAny) MinThresholdPercent() *
 // and lows in queue size are smoothed by a high value. For low values
 // of n, the average queue size is close to the current queue size.
 //
+// When this leaf is not present, implementation default value is
+// applied.
+//
 //	Defining module:      "openconfig-qos-mem-mgmt"
 //	Instantiating module: "openconfig-qos"
 //	Path from parent:     "*/weight"
@@ -36312,6 +36316,9 @@ func (n *Qos_QueueManagementProfile_Wred_UniformPath) Weight() *Qos_QueueManagem
 // The previous average is more important for high values of n. Peaks
 // and lows in queue size are smoothed by a high value. For low values
 // of n, the average queue size is close to the current queue size.
+//
+// When this leaf is not present, implementation default value is
+// applied.
 //
 //	Defining module:      "openconfig-qos-mem-mgmt"
 //	Instantiating module: "openconfig-qos"

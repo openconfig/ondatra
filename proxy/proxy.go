@@ -121,8 +121,8 @@ func New(d Dialer, sOpts ...grpc.ServerOption) (*Proxy, error) {
 		sOpts:    sOpts,
 	}
 
-	for k, d := range resv.GetDevices() {
-		if err := p.addGRPC(k, d); err != nil {
+	for _, d := range resv.GetDevices() {
+		if err := p.addGRPC(d); err != nil {
 			return nil, err
 		}
 	}
@@ -193,47 +193,46 @@ func (p *Proxy) Stop() error {
 	return errs.Err()
 }
 
-func (p *Proxy) addGRPC(key string, d *rpb.ResolvedDevice) error {
-	if _, ok := p.gProxies[key]; ok {
-		log.Infof("gRPC server already registered for device %q ignoring other grpc services", d.GetName())
-		return nil
+func (p *Proxy) addGRPC(d *rpb.ResolvedDevice) error {
+	for name, s := range d.GetServices() {
+		// Target has no services exported, nothing to do.
+		if s == nil || s.GetProxiedGrpc().GetAddress() == "" {
+			return nil
+		}
+		targetAddr := s.GetProxiedGrpc().GetAddress()
+		if _, ok := p.gProxies[targetAddr]; ok {
+			log.Infof("gRPC server already registered for address %q used by service %s, continuing", targetAddr, name)
+			continue
+		}
+		lis, err := net.Listen("tcp", ":0")
+		if err != nil {
+			return fmt.Errorf("failed to create listen port for %q: %w", targetAddr, err)
+		}
+
+		destProvider := func(md metadata.MD, _ string) (string, metadata.MD, error) {
+			return targetAddr, md, nil
+		}
+		srv, err := grpcproxy.NewServer(destProvider, grpcproxy.WithDialer(p.dialer), grpcproxy.WithServerProvider(
+			func(opts ...grpc.ServerOption) (grpcproxy.GRPCServer, error) {
+				opts = append(opts, p.sOpts...)
+				return grpc.NewServer(opts...), nil
+			}))
+		if err != nil {
+			return fmt.Errorf("failed to create new gRPC proxy server: %v", err)
+		}
+		gProxy := &grpcProxy{
+			srv:        srv,
+			localAddr:  lis.Addr().String(),
+			targetAddr: targetAddr,
+		}
+		go func() {
+			gProxy.errMu.Lock()
+			defer gProxy.errMu.Unlock()
+			gProxy.err = srv.Serve(lis)
+		}()
+		p.gProxies[targetAddr] = gProxy
+		log.Infof("Added grpc proxy for service %s, address %q on %q", name, targetAddr, gProxy.localAddr)
 	}
-	var s *rpb.Service
-	for _, s = range d.GetServices() {
-		break
-	}
-	// Target has no services exported, nothing to do.
-	if s == nil || s.GetProxiedGrpc().GetAddress() == "" {
-		return nil
-	}
-	lis, err := net.Listen("tcp", ":0")
-	if err != nil {
-		return fmt.Errorf("failed to create listen port for %q: %w", key, err)
-	}
-	targetAddr := s.GetProxiedGrpc().GetAddress()
-	destProvider := func(md metadata.MD, _ string) (string, metadata.MD, error) {
-		return targetAddr, md, nil
-	}
-	srv, err := grpcproxy.NewServer(destProvider, grpcproxy.WithDialer(p.dialer), grpcproxy.WithServerProvider(
-		func(opts ...grpc.ServerOption) (grpcproxy.GRPCServer, error) {
-			opts = append(opts, p.sOpts...)
-			return grpc.NewServer(opts...), nil
-		}))
-	if err != nil {
-		return fmt.Errorf("failed to create new gRPC proxy server: %v", err)
-	}
-	gProxy := &grpcProxy{
-		srv:        srv,
-		localAddr:  lis.Addr().String(),
-		targetAddr: s.GetProxiedGrpc().GetAddress(),
-	}
-	go func() {
-		gProxy.errMu.Lock()
-		defer gProxy.errMu.Unlock()
-		gProxy.err = srv.Serve(lis)
-	}()
-	p.gProxies[key] = gProxy
-	log.Infof("Added grpc proxy for %q on %s", key, gProxy.localAddr)
 	return nil
 }
 

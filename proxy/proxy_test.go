@@ -145,7 +145,7 @@ func TestAuthProxy(t *testing.T) {
 			}
 			defer m.Stop()
 			proxies := m.Endpoints()
-			conn, err := grpc.DialContext(context.Background(), proxies["dut1"].Addr, tt.dialOpts...)
+			conn, err := grpc.DialContext(context.Background(), proxies[f.Addr()].Addr, tt.dialOpts...)
 			if err != nil {
 				t.Fatalf("failed to dial proxy: %v", err)
 			}
@@ -209,7 +209,7 @@ func TestLongStream(t *testing.T) {
 	}
 	defer m.Stop()
 	proxies := m.Endpoints()
-	conn, err := grpc.DialContext(context.Background(), proxies["dut1"].Addr, grpc.WithTransportCredentials(insecure.NewCredentials()))
+	conn, err := grpc.DialContext(context.Background(), proxies[fAddr].Addr, grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
 		t.Fatalf("failed to dial proxy: %v", err)
 	}

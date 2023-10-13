@@ -48,6 +48,7 @@ using the following YANG input files:
   - public/release/models/platform/openconfig-platform-integrated-circuit.yang
   - public/release/models/platform/openconfig-platform-linecard.yang
   - public/release/models/platform/openconfig-platform-pipeline-counters.yang
+  - public/release/models/platform/openconfig-platform-psu.yang
   - public/release/models/platform/openconfig-platform-software.yang
   - public/release/models/platform/openconfig-platform-transceiver.yang
   - public/release/models/platform/openconfig-platform.yang
@@ -65015,6 +65016,674 @@ func (n *Component_Port_BreakoutMode_GroupPathMapAny) Config() ygnmi.WildcardQue
 	)
 }
 
+// Component_PowerSupply_CapacityPath represents the /openconfig-platform/components/component/power-supply/state/capacity YANG schema element.
+type Component_PowerSupply_CapacityPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_PowerSupply_CapacityPathAny represents the wildcard version of the /openconfig-platform/components/component/power-supply/state/capacity YANG schema element.
+type Component_PowerSupply_CapacityPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-psu"
+//	Instantiating module: "openconfig-platform-psu"
+//	Path from parent:     "state/capacity"
+//	Path from root:       "/components/component/power-supply/state/capacity"
+func (n *Component_PowerSupply_CapacityPath) State() ygnmi.SingletonQuery[float32] {
+	return ygnmi.NewSingletonQuery[float32](
+		"Component_PowerSupply",
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "capacity"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float32, bool) {
+			ret := gs.(*oc.Component_PowerSupply).Capacity
+			return ygot.BinaryToFloat32(ret), !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_PowerSupply) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-psu"
+//	Instantiating module: "openconfig-platform-psu"
+//	Path from parent:     "state/capacity"
+//	Path from root:       "/components/component/power-supply/state/capacity"
+func (n *Component_PowerSupply_CapacityPathAny) State() ygnmi.WildcardQuery[float32] {
+	return ygnmi.NewWildcardQuery[float32](
+		"Component_PowerSupply",
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "capacity"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float32, bool) {
+			ret := gs.(*oc.Component_PowerSupply).Capacity
+			return ygot.BinaryToFloat32(ret), !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_PowerSupply) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
+// Component_PowerSupply_EnabledPath represents the /openconfig-platform/components/component/power-supply/state/enabled YANG schema element.
+type Component_PowerSupply_EnabledPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_PowerSupply_EnabledPathAny represents the wildcard version of the /openconfig-platform/components/component/power-supply/state/enabled YANG schema element.
+type Component_PowerSupply_EnabledPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-psu"
+//	Instantiating module: "openconfig-platform-psu"
+//	Path from parent:     "state/enabled"
+//	Path from root:       "/components/component/power-supply/state/enabled"
+func (n *Component_PowerSupply_EnabledPath) State() ygnmi.SingletonQuery[bool] {
+	return ygnmi.NewSingletonQuery[bool](
+		"Component_PowerSupply",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "enabled"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Component_PowerSupply).Enabled
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_PowerSupply) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-psu"
+//	Instantiating module: "openconfig-platform-psu"
+//	Path from parent:     "state/enabled"
+//	Path from root:       "/components/component/power-supply/state/enabled"
+func (n *Component_PowerSupply_EnabledPathAny) State() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewWildcardQuery[bool](
+		"Component_PowerSupply",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "enabled"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Component_PowerSupply).Enabled
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_PowerSupply) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-psu"
+//	Instantiating module: "openconfig-platform-psu"
+//	Path from parent:     "config/enabled"
+//	Path from root:       "/components/component/power-supply/config/enabled"
+func (n *Component_PowerSupply_EnabledPath) Config() ygnmi.ConfigQuery[bool] {
+	return ygnmi.NewConfigQuery[bool](
+		"Component_PowerSupply",
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "enabled"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Component_PowerSupply).Enabled
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_PowerSupply) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-psu"
+//	Instantiating module: "openconfig-platform-psu"
+//	Path from parent:     "config/enabled"
+//	Path from root:       "/components/component/power-supply/config/enabled"
+func (n *Component_PowerSupply_EnabledPathAny) Config() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewWildcardQuery[bool](
+		"Component_PowerSupply",
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "enabled"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Component_PowerSupply).Enabled
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_PowerSupply) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
+// Component_PowerSupply_InputCurrentPath represents the /openconfig-platform/components/component/power-supply/state/input-current YANG schema element.
+type Component_PowerSupply_InputCurrentPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_PowerSupply_InputCurrentPathAny represents the wildcard version of the /openconfig-platform/components/component/power-supply/state/input-current YANG schema element.
+type Component_PowerSupply_InputCurrentPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-psu"
+//	Instantiating module: "openconfig-platform-psu"
+//	Path from parent:     "state/input-current"
+//	Path from root:       "/components/component/power-supply/state/input-current"
+func (n *Component_PowerSupply_InputCurrentPath) State() ygnmi.SingletonQuery[float32] {
+	return ygnmi.NewSingletonQuery[float32](
+		"Component_PowerSupply",
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "input-current"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float32, bool) {
+			ret := gs.(*oc.Component_PowerSupply).InputCurrent
+			return ygot.BinaryToFloat32(ret), !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_PowerSupply) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-psu"
+//	Instantiating module: "openconfig-platform-psu"
+//	Path from parent:     "state/input-current"
+//	Path from root:       "/components/component/power-supply/state/input-current"
+func (n *Component_PowerSupply_InputCurrentPathAny) State() ygnmi.WildcardQuery[float32] {
+	return ygnmi.NewWildcardQuery[float32](
+		"Component_PowerSupply",
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "input-current"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float32, bool) {
+			ret := gs.(*oc.Component_PowerSupply).InputCurrent
+			return ygot.BinaryToFloat32(ret), !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_PowerSupply) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
+// Component_PowerSupply_InputVoltagePath represents the /openconfig-platform/components/component/power-supply/state/input-voltage YANG schema element.
+type Component_PowerSupply_InputVoltagePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_PowerSupply_InputVoltagePathAny represents the wildcard version of the /openconfig-platform/components/component/power-supply/state/input-voltage YANG schema element.
+type Component_PowerSupply_InputVoltagePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-psu"
+//	Instantiating module: "openconfig-platform-psu"
+//	Path from parent:     "state/input-voltage"
+//	Path from root:       "/components/component/power-supply/state/input-voltage"
+func (n *Component_PowerSupply_InputVoltagePath) State() ygnmi.SingletonQuery[float32] {
+	return ygnmi.NewSingletonQuery[float32](
+		"Component_PowerSupply",
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "input-voltage"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float32, bool) {
+			ret := gs.(*oc.Component_PowerSupply).InputVoltage
+			return ygot.BinaryToFloat32(ret), !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_PowerSupply) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-psu"
+//	Instantiating module: "openconfig-platform-psu"
+//	Path from parent:     "state/input-voltage"
+//	Path from root:       "/components/component/power-supply/state/input-voltage"
+func (n *Component_PowerSupply_InputVoltagePathAny) State() ygnmi.WildcardQuery[float32] {
+	return ygnmi.NewWildcardQuery[float32](
+		"Component_PowerSupply",
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "input-voltage"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float32, bool) {
+			ret := gs.(*oc.Component_PowerSupply).InputVoltage
+			return ygot.BinaryToFloat32(ret), !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_PowerSupply) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
+// Component_PowerSupply_OutputCurrentPath represents the /openconfig-platform/components/component/power-supply/state/output-current YANG schema element.
+type Component_PowerSupply_OutputCurrentPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_PowerSupply_OutputCurrentPathAny represents the wildcard version of the /openconfig-platform/components/component/power-supply/state/output-current YANG schema element.
+type Component_PowerSupply_OutputCurrentPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-psu"
+//	Instantiating module: "openconfig-platform-psu"
+//	Path from parent:     "state/output-current"
+//	Path from root:       "/components/component/power-supply/state/output-current"
+func (n *Component_PowerSupply_OutputCurrentPath) State() ygnmi.SingletonQuery[float32] {
+	return ygnmi.NewSingletonQuery[float32](
+		"Component_PowerSupply",
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "output-current"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float32, bool) {
+			ret := gs.(*oc.Component_PowerSupply).OutputCurrent
+			return ygot.BinaryToFloat32(ret), !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_PowerSupply) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-psu"
+//	Instantiating module: "openconfig-platform-psu"
+//	Path from parent:     "state/output-current"
+//	Path from root:       "/components/component/power-supply/state/output-current"
+func (n *Component_PowerSupply_OutputCurrentPathAny) State() ygnmi.WildcardQuery[float32] {
+	return ygnmi.NewWildcardQuery[float32](
+		"Component_PowerSupply",
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "output-current"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float32, bool) {
+			ret := gs.(*oc.Component_PowerSupply).OutputCurrent
+			return ygot.BinaryToFloat32(ret), !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_PowerSupply) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
+// Component_PowerSupply_OutputPowerPath represents the /openconfig-platform/components/component/power-supply/state/output-power YANG schema element.
+type Component_PowerSupply_OutputPowerPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_PowerSupply_OutputPowerPathAny represents the wildcard version of the /openconfig-platform/components/component/power-supply/state/output-power YANG schema element.
+type Component_PowerSupply_OutputPowerPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-psu"
+//	Instantiating module: "openconfig-platform-psu"
+//	Path from parent:     "state/output-power"
+//	Path from root:       "/components/component/power-supply/state/output-power"
+func (n *Component_PowerSupply_OutputPowerPath) State() ygnmi.SingletonQuery[float32] {
+	return ygnmi.NewSingletonQuery[float32](
+		"Component_PowerSupply",
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "output-power"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float32, bool) {
+			ret := gs.(*oc.Component_PowerSupply).OutputPower
+			return ygot.BinaryToFloat32(ret), !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_PowerSupply) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-psu"
+//	Instantiating module: "openconfig-platform-psu"
+//	Path from parent:     "state/output-power"
+//	Path from root:       "/components/component/power-supply/state/output-power"
+func (n *Component_PowerSupply_OutputPowerPathAny) State() ygnmi.WildcardQuery[float32] {
+	return ygnmi.NewWildcardQuery[float32](
+		"Component_PowerSupply",
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "output-power"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float32, bool) {
+			ret := gs.(*oc.Component_PowerSupply).OutputPower
+			return ygot.BinaryToFloat32(ret), !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_PowerSupply) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
+// Component_PowerSupply_OutputVoltagePath represents the /openconfig-platform/components/component/power-supply/state/output-voltage YANG schema element.
+type Component_PowerSupply_OutputVoltagePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_PowerSupply_OutputVoltagePathAny represents the wildcard version of the /openconfig-platform/components/component/power-supply/state/output-voltage YANG schema element.
+type Component_PowerSupply_OutputVoltagePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-psu"
+//	Instantiating module: "openconfig-platform-psu"
+//	Path from parent:     "state/output-voltage"
+//	Path from root:       "/components/component/power-supply/state/output-voltage"
+func (n *Component_PowerSupply_OutputVoltagePath) State() ygnmi.SingletonQuery[float32] {
+	return ygnmi.NewSingletonQuery[float32](
+		"Component_PowerSupply",
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "output-voltage"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float32, bool) {
+			ret := gs.(*oc.Component_PowerSupply).OutputVoltage
+			return ygot.BinaryToFloat32(ret), !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_PowerSupply) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-psu"
+//	Instantiating module: "openconfig-platform-psu"
+//	Path from parent:     "state/output-voltage"
+//	Path from root:       "/components/component/power-supply/state/output-voltage"
+func (n *Component_PowerSupply_OutputVoltagePathAny) State() ygnmi.WildcardQuery[float32] {
+	return ygnmi.NewWildcardQuery[float32](
+		"Component_PowerSupply",
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "output-voltage"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float32, bool) {
+			ret := gs.(*oc.Component_PowerSupply).OutputVoltage
+			return ygot.BinaryToFloat32(ret), !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_PowerSupply) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
 // Component_PowerSupplyPath represents the /openconfig-platform/components/component/power-supply YANG schema element.
 type Component_PowerSupplyPath struct {
 	*ygnmi.NodePath
@@ -65023,6 +65692,260 @@ type Component_PowerSupplyPath struct {
 // Component_PowerSupplyPathAny represents the wildcard version of the /openconfig-platform/components/component/power-supply YANG schema element.
 type Component_PowerSupplyPathAny struct {
 	*ygnmi.NodePath
+}
+
+// Capacity (leaf): Maximum power capacity of the power supply.
+//
+//	Defining module:      "openconfig-platform-psu"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/capacity"
+//	Path from root:       "/components/component/power-supply/state/capacity"
+func (n *Component_PowerSupplyPath) Capacity() *Component_PowerSupply_CapacityPath {
+	ps := &Component_PowerSupply_CapacityPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "capacity"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Capacity (leaf): Maximum power capacity of the power supply.
+//
+//	Defining module:      "openconfig-platform-psu"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/capacity"
+//	Path from root:       "/components/component/power-supply/state/capacity"
+func (n *Component_PowerSupplyPathAny) Capacity() *Component_PowerSupply_CapacityPathAny {
+	ps := &Component_PowerSupply_CapacityPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "capacity"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Enabled (leaf): Adminsitrative control on the on/off state of the power
+// supply unit.
+//
+//	Defining module:      "openconfig-platform-psu"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "*/enabled"
+//	Path from root:       "/components/component/power-supply/*/enabled"
+func (n *Component_PowerSupplyPath) Enabled() *Component_PowerSupply_EnabledPath {
+	ps := &Component_PowerSupply_EnabledPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "enabled"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Enabled (leaf): Adminsitrative control on the on/off state of the power
+// supply unit.
+//
+//	Defining module:      "openconfig-platform-psu"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "*/enabled"
+//	Path from root:       "/components/component/power-supply/*/enabled"
+func (n *Component_PowerSupplyPathAny) Enabled() *Component_PowerSupply_EnabledPathAny {
+	ps := &Component_PowerSupply_EnabledPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "enabled"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// InputCurrent (leaf): The input current draw of the power supply.
+//
+//	Defining module:      "openconfig-platform-psu"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/input-current"
+//	Path from root:       "/components/component/power-supply/state/input-current"
+func (n *Component_PowerSupplyPath) InputCurrent() *Component_PowerSupply_InputCurrentPath {
+	ps := &Component_PowerSupply_InputCurrentPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "input-current"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// InputCurrent (leaf): The input current draw of the power supply.
+//
+//	Defining module:      "openconfig-platform-psu"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/input-current"
+//	Path from root:       "/components/component/power-supply/state/input-current"
+func (n *Component_PowerSupplyPathAny) InputCurrent() *Component_PowerSupply_InputCurrentPathAny {
+	ps := &Component_PowerSupply_InputCurrentPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "input-current"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// InputVoltage (leaf): Input voltage to the power supply.
+//
+//	Defining module:      "openconfig-platform-psu"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/input-voltage"
+//	Path from root:       "/components/component/power-supply/state/input-voltage"
+func (n *Component_PowerSupplyPath) InputVoltage() *Component_PowerSupply_InputVoltagePath {
+	ps := &Component_PowerSupply_InputVoltagePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "input-voltage"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// InputVoltage (leaf): Input voltage to the power supply.
+//
+//	Defining module:      "openconfig-platform-psu"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/input-voltage"
+//	Path from root:       "/components/component/power-supply/state/input-voltage"
+func (n *Component_PowerSupplyPathAny) InputVoltage() *Component_PowerSupply_InputVoltagePathAny {
+	ps := &Component_PowerSupply_InputVoltagePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "input-voltage"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// OutputCurrent (leaf): The output current supplied by the power supply.
+//
+//	Defining module:      "openconfig-platform-psu"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/output-current"
+//	Path from root:       "/components/component/power-supply/state/output-current"
+func (n *Component_PowerSupplyPath) OutputCurrent() *Component_PowerSupply_OutputCurrentPath {
+	ps := &Component_PowerSupply_OutputCurrentPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "output-current"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// OutputCurrent (leaf): The output current supplied by the power supply.
+//
+//	Defining module:      "openconfig-platform-psu"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/output-current"
+//	Path from root:       "/components/component/power-supply/state/output-current"
+func (n *Component_PowerSupplyPathAny) OutputCurrent() *Component_PowerSupply_OutputCurrentPathAny {
+	ps := &Component_PowerSupply_OutputCurrentPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "output-current"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// OutputPower (leaf): Output power supplied by the power supply.
+//
+//	Defining module:      "openconfig-platform-psu"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/output-power"
+//	Path from root:       "/components/component/power-supply/state/output-power"
+func (n *Component_PowerSupplyPath) OutputPower() *Component_PowerSupply_OutputPowerPath {
+	ps := &Component_PowerSupply_OutputPowerPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "output-power"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// OutputPower (leaf): Output power supplied by the power supply.
+//
+//	Defining module:      "openconfig-platform-psu"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/output-power"
+//	Path from root:       "/components/component/power-supply/state/output-power"
+func (n *Component_PowerSupplyPathAny) OutputPower() *Component_PowerSupply_OutputPowerPathAny {
+	ps := &Component_PowerSupply_OutputPowerPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "output-power"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// OutputVoltage (leaf): Output voltage supplied by the power supply.
+//
+//	Defining module:      "openconfig-platform-psu"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/output-voltage"
+//	Path from root:       "/components/component/power-supply/state/output-voltage"
+func (n *Component_PowerSupplyPath) OutputVoltage() *Component_PowerSupply_OutputVoltagePath {
+	ps := &Component_PowerSupply_OutputVoltagePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "output-voltage"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// OutputVoltage (leaf): Output voltage supplied by the power supply.
+//
+//	Defining module:      "openconfig-platform-psu"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/output-voltage"
+//	Path from root:       "/components/component/power-supply/state/output-voltage"
+func (n *Component_PowerSupplyPathAny) OutputVoltage() *Component_PowerSupply_OutputVoltagePathAny {
+	ps := &Component_PowerSupply_OutputVoltagePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "output-voltage"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
 }
 
 // State returns a Query that can be used in gNMI operations.

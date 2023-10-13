@@ -50,6 +50,7 @@ using the following YANG input files:
   - public/release/models/platform/openconfig-platform-integrated-circuit.yang
   - public/release/models/platform/openconfig-platform-linecard.yang
   - public/release/models/platform/openconfig-platform-pipeline-counters.yang
+  - public/release/models/platform/openconfig-platform-psu.yang
   - public/release/models/platform/openconfig-platform-software.yang
   - public/release/models/platform/openconfig-platform-transceiver.yang
   - public/release/models/platform/openconfig-platform.yang
@@ -3994,10 +3995,22 @@ func initΛEnumTypes() {
 		"/system/logging/console/selectors/selector/state/severity": {
 			reflect.TypeOf((E_SystemLogging_SyslogSeverity)(0)),
 		},
+		"/system/logging/files/file/selectors/selector/state/facility": {
+			reflect.TypeOf((E_SystemLogging_SYSLOG_FACILITY)(0)),
+		},
+		"/system/logging/files/file/selectors/selector/state/severity": {
+			reflect.TypeOf((E_SystemLogging_SyslogSeverity)(0)),
+		},
 		"/system/logging/remote-servers/remote-server/selectors/selector/state/facility": {
 			reflect.TypeOf((E_SystemLogging_SYSLOG_FACILITY)(0)),
 		},
 		"/system/logging/remote-servers/remote-server/selectors/selector/state/severity": {
+			reflect.TypeOf((E_SystemLogging_SyslogSeverity)(0)),
+		},
+		"/system/logging/vty/selectors/selector/state/facility": {
+			reflect.TypeOf((E_SystemLogging_SYSLOG_FACILITY)(0)),
+		},
+		"/system/logging/vty/selectors/selector/state/severity": {
 			reflect.TypeOf((E_SystemLogging_SyslogSeverity)(0)),
 		},
 		"/system/messages/debug-entries/debug-service/state/service": {

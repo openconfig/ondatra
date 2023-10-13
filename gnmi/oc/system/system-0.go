@@ -48,6 +48,7 @@ using the following YANG input files:
   - public/release/models/platform/openconfig-platform-integrated-circuit.yang
   - public/release/models/platform/openconfig-platform-linecard.yang
   - public/release/models/platform/openconfig-platform-pipeline-counters.yang
+  - public/release/models/platform/openconfig-platform-psu.yang
   - public/release/models/platform/openconfig-platform-software.yang
   - public/release/models/platform/openconfig-platform-transceiver.yang
   - public/release/models/platform/openconfig-platform.yang
@@ -32229,6 +32230,128 @@ func (n *System_LoggingPathAny) Console() *System_Logging_ConsolePathAny {
 	return ps
 }
 
+// FileAny (list): List of logfiles
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "files/file"
+//	Path from root:       "/system/logging/files/file"
+func (n *System_LoggingPath) FileAny() *System_Logging_FilePathAny {
+	ps := &System_Logging_FilePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"files", "file"},
+			map[string]interface{}{"path": "*", "filename-prefix": "*"},
+			n,
+		),
+	}
+	return ps
+}
+
+// FileAny (list): List of logfiles
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "files/file"
+//	Path from root:       "/system/logging/files/file"
+func (n *System_LoggingPathAny) FileAny() *System_Logging_FilePathAny {
+	ps := &System_Logging_FilePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"files", "file"},
+			map[string]interface{}{"path": "*", "filename-prefix": "*"},
+			n,
+		),
+	}
+	return ps
+}
+
+// WithPath sets System_Logging_FilePathAny's key "path" to the specified value.
+// Path: string
+func (n *System_Logging_FilePathAny) WithPath(Path string) *System_Logging_FilePathAny {
+	ygnmi.ModifyKey(n.NodePath, "path", Path)
+	return n
+}
+
+// WithFilenamePrefix sets System_Logging_FilePathAny's key "filename-prefix" to the specified value.
+// FilenamePrefix: string
+func (n *System_Logging_FilePathAny) WithFilenamePrefix(FilenamePrefix string) *System_Logging_FilePathAny {
+	ygnmi.ModifyKey(n.NodePath, "filename-prefix", FilenamePrefix)
+	return n
+}
+
+// File (list): List of logfiles
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "files/file"
+//	Path from root:       "/system/logging/files/file"
+//
+//	Path: string
+//	FilenamePrefix: string
+func (n *System_LoggingPath) File(Path string, FilenamePrefix string) *System_Logging_FilePath {
+	ps := &System_Logging_FilePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"files", "file"},
+			map[string]interface{}{"path": Path, "filename-prefix": FilenamePrefix},
+			n,
+		),
+	}
+	return ps
+}
+
+// File (list): List of logfiles
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "files/file"
+//	Path from root:       "/system/logging/files/file"
+//
+//	Path: string
+//	FilenamePrefix: string
+func (n *System_LoggingPathAny) File(Path string, FilenamePrefix string) *System_Logging_FilePathAny {
+	ps := &System_Logging_FilePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"files", "file"},
+			map[string]interface{}{"path": Path, "filename-prefix": FilenamePrefix},
+			n,
+		),
+	}
+	return ps
+}
+
+// FileMap (list): List of logfiles
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "files/file"
+//	Path from root:       "/system/logging/files/file"
+func (n *System_LoggingPath) FileMap() *System_Logging_FilePathMap {
+	ps := &System_Logging_FilePathMap{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"files"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// FileMap (list): List of logfiles
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "files/file"
+//	Path from root:       "/system/logging/files/file"
+func (n *System_LoggingPathAny) FileMap() *System_Logging_FilePathMapAny {
+	ps := &System_Logging_FilePathMapAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"files"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
 // RemoteServerAny (list): List of remote log servers
 //
 //	Defining module:      "openconfig-system-logging"
@@ -32328,6 +32451,42 @@ func (n *System_LoggingPathAny) RemoteServerMap() *System_Logging_RemoteServerPa
 	ps := &System_Logging_RemoteServerPathMapAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"remote-servers"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// Vty (container): Top-level container for data related to vty-based
+// logging (active sessions of ssh, telnet, etc )
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "vty"
+//	Path from root:       "/system/logging/vty"
+func (n *System_LoggingPath) Vty() *System_Logging_VtyPath {
+	ps := &System_Logging_VtyPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"vty"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// Vty (container): Top-level container for data related to vty-based
+// logging (active sessions of ssh, telnet, etc )
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "vty"
+//	Path from root:       "/system/logging/vty"
+func (n *System_LoggingPathAny) Vty() *System_Logging_VtyPathAny {
+	ps := &System_Logging_VtyPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"vty"},
 			map[string]interface{}{},
 			n,
 		),
@@ -33255,6 +33414,2171 @@ func (n *System_Logging_Console_SelectorPathMapAny) Config() ygnmi.WildcardQuery
 			return ret, ret != nil
 		},
 		func() ygot.ValidatedGoStruct { return new(oc.System_Logging_Console) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-system:selectors"},
+			PostRelPath: []string{"openconfig-system:selector"},
+		},
+	)
+}
+
+// System_Logging_File_FilenamePrefixPath represents the /openconfig-system/system/logging/files/file/state/filename-prefix YANG schema element.
+type System_Logging_File_FilenamePrefixPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_Logging_File_FilenamePrefixPathAny represents the wildcard version of the /openconfig-system/system/logging/files/file/state/filename-prefix YANG schema element.
+type System_Logging_File_FilenamePrefixPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/filename-prefix"
+//	Path from root:       "/system/logging/files/file/state/filename-prefix"
+func (n *System_Logging_File_FilenamePrefixPath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewSingletonQuery[string](
+		"System_Logging_File",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "filename-prefix"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_Logging_File).FilenamePrefix
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Logging_File) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/filename-prefix"
+//	Path from root:       "/system/logging/files/file/state/filename-prefix"
+func (n *System_Logging_File_FilenamePrefixPathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"System_Logging_File",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "filename-prefix"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_Logging_File).FilenamePrefix
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Logging_File) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "config/filename-prefix"
+//	Path from root:       "/system/logging/files/file/config/filename-prefix"
+func (n *System_Logging_File_FilenamePrefixPath) Config() ygnmi.ConfigQuery[string] {
+	return ygnmi.NewConfigQuery[string](
+		"System_Logging_File",
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "filename-prefix"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_Logging_File).FilenamePrefix
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Logging_File) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "config/filename-prefix"
+//	Path from root:       "/system/logging/files/file/config/filename-prefix"
+func (n *System_Logging_File_FilenamePrefixPathAny) Config() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"System_Logging_File",
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "filename-prefix"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_Logging_File).FilenamePrefix
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Logging_File) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
+// System_Logging_File_MaxOpenTimePath represents the /openconfig-system/system/logging/files/file/state/max-open-time YANG schema element.
+type System_Logging_File_MaxOpenTimePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_Logging_File_MaxOpenTimePathAny represents the wildcard version of the /openconfig-system/system/logging/files/file/state/max-open-time YANG schema element.
+type System_Logging_File_MaxOpenTimePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/max-open-time"
+//	Path from root:       "/system/logging/files/file/state/max-open-time"
+func (n *System_Logging_File_MaxOpenTimePath) State() ygnmi.SingletonQuery[uint32] {
+	return ygnmi.NewSingletonQuery[uint32](
+		"System_Logging_File",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "max-open-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.System_Logging_File).MaxOpenTime
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Logging_File) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/max-open-time"
+//	Path from root:       "/system/logging/files/file/state/max-open-time"
+func (n *System_Logging_File_MaxOpenTimePathAny) State() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewWildcardQuery[uint32](
+		"System_Logging_File",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "max-open-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.System_Logging_File).MaxOpenTime
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Logging_File) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "config/max-open-time"
+//	Path from root:       "/system/logging/files/file/config/max-open-time"
+func (n *System_Logging_File_MaxOpenTimePath) Config() ygnmi.ConfigQuery[uint32] {
+	return ygnmi.NewConfigQuery[uint32](
+		"System_Logging_File",
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "max-open-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.System_Logging_File).MaxOpenTime
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Logging_File) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "config/max-open-time"
+//	Path from root:       "/system/logging/files/file/config/max-open-time"
+func (n *System_Logging_File_MaxOpenTimePathAny) Config() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewWildcardQuery[uint32](
+		"System_Logging_File",
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "max-open-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.System_Logging_File).MaxOpenTime
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Logging_File) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
+// System_Logging_File_MaxSizePath represents the /openconfig-system/system/logging/files/file/state/max-size YANG schema element.
+type System_Logging_File_MaxSizePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_Logging_File_MaxSizePathAny represents the wildcard version of the /openconfig-system/system/logging/files/file/state/max-size YANG schema element.
+type System_Logging_File_MaxSizePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/max-size"
+//	Path from root:       "/system/logging/files/file/state/max-size"
+func (n *System_Logging_File_MaxSizePath) State() ygnmi.SingletonQuery[uint32] {
+	return ygnmi.NewSingletonQuery[uint32](
+		"System_Logging_File",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "max-size"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.System_Logging_File).MaxSize
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Logging_File) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/max-size"
+//	Path from root:       "/system/logging/files/file/state/max-size"
+func (n *System_Logging_File_MaxSizePathAny) State() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewWildcardQuery[uint32](
+		"System_Logging_File",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "max-size"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.System_Logging_File).MaxSize
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Logging_File) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "config/max-size"
+//	Path from root:       "/system/logging/files/file/config/max-size"
+func (n *System_Logging_File_MaxSizePath) Config() ygnmi.ConfigQuery[uint32] {
+	return ygnmi.NewConfigQuery[uint32](
+		"System_Logging_File",
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "max-size"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.System_Logging_File).MaxSize
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Logging_File) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "config/max-size"
+//	Path from root:       "/system/logging/files/file/config/max-size"
+func (n *System_Logging_File_MaxSizePathAny) Config() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewWildcardQuery[uint32](
+		"System_Logging_File",
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "max-size"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.System_Logging_File).MaxSize
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Logging_File) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
+// System_Logging_File_OpenLogfilePath represents the /openconfig-system/system/logging/files/file/state/open-logfile YANG schema element.
+type System_Logging_File_OpenLogfilePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_Logging_File_OpenLogfilePathAny represents the wildcard version of the /openconfig-system/system/logging/files/file/state/open-logfile YANG schema element.
+type System_Logging_File_OpenLogfilePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/open-logfile"
+//	Path from root:       "/system/logging/files/file/state/open-logfile"
+func (n *System_Logging_File_OpenLogfilePath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewSingletonQuery[string](
+		"System_Logging_File",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "open-logfile"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_Logging_File).OpenLogfile
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Logging_File) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/open-logfile"
+//	Path from root:       "/system/logging/files/file/state/open-logfile"
+func (n *System_Logging_File_OpenLogfilePathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"System_Logging_File",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "open-logfile"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_Logging_File).OpenLogfile
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Logging_File) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
+// System_Logging_File_PathPath represents the /openconfig-system/system/logging/files/file/state/path YANG schema element.
+type System_Logging_File_PathPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_Logging_File_PathPathAny represents the wildcard version of the /openconfig-system/system/logging/files/file/state/path YANG schema element.
+type System_Logging_File_PathPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/path"
+//	Path from root:       "/system/logging/files/file/state/path"
+func (n *System_Logging_File_PathPath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewSingletonQuery[string](
+		"System_Logging_File",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "path"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_Logging_File).Path
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Logging_File) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/path"
+//	Path from root:       "/system/logging/files/file/state/path"
+func (n *System_Logging_File_PathPathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"System_Logging_File",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "path"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_Logging_File).Path
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Logging_File) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "config/path"
+//	Path from root:       "/system/logging/files/file/config/path"
+func (n *System_Logging_File_PathPath) Config() ygnmi.ConfigQuery[string] {
+	return ygnmi.NewConfigQuery[string](
+		"System_Logging_File",
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "path"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_Logging_File).Path
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Logging_File) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "config/path"
+//	Path from root:       "/system/logging/files/file/config/path"
+func (n *System_Logging_File_PathPathAny) Config() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"System_Logging_File",
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "path"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_Logging_File).Path
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Logging_File) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
+// System_Logging_File_RotatePath represents the /openconfig-system/system/logging/files/file/state/rotate YANG schema element.
+type System_Logging_File_RotatePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_Logging_File_RotatePathAny represents the wildcard version of the /openconfig-system/system/logging/files/file/state/rotate YANG schema element.
+type System_Logging_File_RotatePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/rotate"
+//	Path from root:       "/system/logging/files/file/state/rotate"
+func (n *System_Logging_File_RotatePath) State() ygnmi.SingletonQuery[uint32] {
+	return ygnmi.NewSingletonQuery[uint32](
+		"System_Logging_File",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "rotate"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.System_Logging_File).Rotate
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Logging_File) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/rotate"
+//	Path from root:       "/system/logging/files/file/state/rotate"
+func (n *System_Logging_File_RotatePathAny) State() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewWildcardQuery[uint32](
+		"System_Logging_File",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "rotate"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.System_Logging_File).Rotate
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Logging_File) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "config/rotate"
+//	Path from root:       "/system/logging/files/file/config/rotate"
+func (n *System_Logging_File_RotatePath) Config() ygnmi.ConfigQuery[uint32] {
+	return ygnmi.NewConfigQuery[uint32](
+		"System_Logging_File",
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "rotate"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.System_Logging_File).Rotate
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Logging_File) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "config/rotate"
+//	Path from root:       "/system/logging/files/file/config/rotate"
+func (n *System_Logging_File_RotatePathAny) Config() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewWildcardQuery[uint32](
+		"System_Logging_File",
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "rotate"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.System_Logging_File).Rotate
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Logging_File) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
+// System_Logging_FilePath represents the /openconfig-system/system/logging/files/file YANG schema element.
+type System_Logging_FilePath struct {
+	*ygnmi.NodePath
+}
+
+// System_Logging_FilePathAny represents the wildcard version of the /openconfig-system/system/logging/files/file YANG schema element.
+type System_Logging_FilePathAny struct {
+	*ygnmi.NodePath
+}
+
+// System_Logging_FilePathMap represents the /openconfig-system/system/logging/files/file YANG schema element.
+type System_Logging_FilePathMap struct {
+	*ygnmi.NodePath
+}
+
+// System_Logging_FilePathMapAny represents the wildcard version of the /openconfig-system/system/logging/files/file YANG schema element.
+type System_Logging_FilePathMapAny struct {
+	*ygnmi.NodePath
+}
+
+// FilenamePrefix (leaf): A name used for the file.  It is expected that an
+// implementation may append timestamp, serial-number or
+// other identifier to the filename.
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/filename-prefix"
+//	Path from root:       "/system/logging/files/file/*/filename-prefix"
+func (n *System_Logging_FilePath) FilenamePrefix() *System_Logging_File_FilenamePrefixPath {
+	ps := &System_Logging_File_FilenamePrefixPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "filename-prefix"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// FilenamePrefix (leaf): A name used for the file.  It is expected that an
+// implementation may append timestamp, serial-number or
+// other identifier to the filename.
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/filename-prefix"
+//	Path from root:       "/system/logging/files/file/*/filename-prefix"
+func (n *System_Logging_FilePathAny) FilenamePrefix() *System_Logging_File_FilenamePrefixPathAny {
+	ps := &System_Logging_File_FilenamePrefixPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "filename-prefix"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// MaxOpenTime (leaf): Used for logfile rotation.
+// Maximum time, in minutes, the logfile can be open. When expires,
+// it triggers log rotation.
+// Actions are same ans when log file reaches its max-size.
+// it need to be closed, save, and new file open or future log
+// storage. If needed oldest logfile of same prefix shall be
+// deleted to
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/max-open-time"
+//	Path from root:       "/system/logging/files/file/*/max-open-time"
+func (n *System_Logging_FilePath) MaxOpenTime() *System_Logging_File_MaxOpenTimePath {
+	ps := &System_Logging_File_MaxOpenTimePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "max-open-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// MaxOpenTime (leaf): Used for logfile rotation.
+// Maximum time, in minutes, the logfile can be open. When expires,
+// it triggers log rotation.
+// Actions are same ans when log file reaches its max-size.
+// it need to be closed, save, and new file open or future log
+// storage. If needed oldest logfile of same prefix shall be
+// deleted to
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/max-open-time"
+//	Path from root:       "/system/logging/files/file/*/max-open-time"
+func (n *System_Logging_FilePathAny) MaxOpenTime() *System_Logging_File_MaxOpenTimePathAny {
+	ps := &System_Logging_File_MaxOpenTimePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "max-open-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// MaxSize (leaf): Used for logfile rotation.
+// Maximum size in Bytes, logfile may grow to. When logfile
+// reach this size it triggers log rotation. The log file need to
+// be save, closed, and new file open or future log storage.
+// If needed oldest logfile of same prefix shall be deleted to
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/max-size"
+//	Path from root:       "/system/logging/files/file/*/max-size"
+func (n *System_Logging_FilePath) MaxSize() *System_Logging_File_MaxSizePath {
+	ps := &System_Logging_File_MaxSizePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "max-size"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// MaxSize (leaf): Used for logfile rotation.
+// Maximum size in Bytes, logfile may grow to. When logfile
+// reach this size it triggers log rotation. The log file need to
+// be save, closed, and new file open or future log storage.
+// If needed oldest logfile of same prefix shall be deleted to
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/max-size"
+//	Path from root:       "/system/logging/files/file/*/max-size"
+func (n *System_Logging_FilePathAny) MaxSize() *System_Logging_File_MaxSizePathAny {
+	ps := &System_Logging_File_MaxSizePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "max-size"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// OpenLogfile (leaf): the currently active/open filename prepended by folder path
+// and including suffix appended to filename-prefix by system
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/open-logfile"
+//	Path from root:       "/system/logging/files/file/state/open-logfile"
+func (n *System_Logging_FilePath) OpenLogfile() *System_Logging_File_OpenLogfilePath {
+	ps := &System_Logging_File_OpenLogfilePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "open-logfile"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// OpenLogfile (leaf): the currently active/open filename prepended by folder path
+// and including suffix appended to filename-prefix by system
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/open-logfile"
+//	Path from root:       "/system/logging/files/file/state/open-logfile"
+func (n *System_Logging_FilePathAny) OpenLogfile() *System_Logging_File_OpenLogfilePathAny {
+	ps := &System_Logging_File_OpenLogfilePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "open-logfile"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Path (leaf): The fully specified path of the folder where the
+// logfile is stored.  The path is implementation specific
+// and may include attributes such as a drive identifier.
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/path"
+//	Path from root:       "/system/logging/files/file/*/path"
+func (n *System_Logging_FilePath) Path() *System_Logging_File_PathPath {
+	ps := &System_Logging_File_PathPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "path"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Path (leaf): The fully specified path of the folder where the
+// logfile is stored.  The path is implementation specific
+// and may include attributes such as a drive identifier.
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/path"
+//	Path from root:       "/system/logging/files/file/*/path"
+func (n *System_Logging_FilePathAny) Path() *System_Logging_File_PathPathAny {
+	ps := &System_Logging_File_PathPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "path"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Rotate (leaf): Used for logfile rotation.
+// Log files are rotated the number of times defined by
+// this leaf.
+// The default value of 1 indicates that there will be one
+// rotation file and one active file.  A 0 value indicates
+// old versions are removed rather than rotated.
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/rotate"
+//	Path from root:       "/system/logging/files/file/*/rotate"
+func (n *System_Logging_FilePath) Rotate() *System_Logging_File_RotatePath {
+	ps := &System_Logging_File_RotatePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "rotate"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Rotate (leaf): Used for logfile rotation.
+// Log files are rotated the number of times defined by
+// this leaf.
+// The default value of 1 indicates that there will be one
+// rotation file and one active file.  A 0 value indicates
+// old versions are removed rather than rotated.
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/rotate"
+//	Path from root:       "/system/logging/files/file/*/rotate"
+func (n *System_Logging_FilePathAny) Rotate() *System_Logging_File_RotatePathAny {
+	ps := &System_Logging_File_RotatePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "rotate"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// SelectorAny (list): List of selectors for log messages
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "selectors/selector"
+//	Path from root:       "/system/logging/files/file/selectors/selector"
+func (n *System_Logging_FilePath) SelectorAny() *System_Logging_File_SelectorPathAny {
+	ps := &System_Logging_File_SelectorPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"selectors", "selector"},
+			map[string]interface{}{"facility": "*", "severity": "*"},
+			n,
+		),
+	}
+	return ps
+}
+
+// SelectorAny (list): List of selectors for log messages
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "selectors/selector"
+//	Path from root:       "/system/logging/files/file/selectors/selector"
+func (n *System_Logging_FilePathAny) SelectorAny() *System_Logging_File_SelectorPathAny {
+	ps := &System_Logging_File_SelectorPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"selectors", "selector"},
+			map[string]interface{}{"facility": "*", "severity": "*"},
+			n,
+		),
+	}
+	return ps
+}
+
+// WithFacility sets System_Logging_File_SelectorPathAny's key "facility" to the specified value.
+// Facility: oc.E_SystemLogging_SYSLOG_FACILITY
+func (n *System_Logging_File_SelectorPathAny) WithFacility(Facility oc.E_SystemLogging_SYSLOG_FACILITY) *System_Logging_File_SelectorPathAny {
+	ygnmi.ModifyKey(n.NodePath, "facility", Facility)
+	return n
+}
+
+// WithSeverity sets System_Logging_File_SelectorPathAny's key "severity" to the specified value.
+// Severity: oc.E_SystemLogging_SyslogSeverity
+func (n *System_Logging_File_SelectorPathAny) WithSeverity(Severity oc.E_SystemLogging_SyslogSeverity) *System_Logging_File_SelectorPathAny {
+	ygnmi.ModifyKey(n.NodePath, "severity", Severity)
+	return n
+}
+
+// Selector (list): List of selectors for log messages
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "selectors/selector"
+//	Path from root:       "/system/logging/files/file/selectors/selector"
+//
+//	Facility: oc.E_SystemLogging_SYSLOG_FACILITY
+//	Severity: oc.E_SystemLogging_SyslogSeverity
+func (n *System_Logging_FilePath) Selector(Facility oc.E_SystemLogging_SYSLOG_FACILITY, Severity oc.E_SystemLogging_SyslogSeverity) *System_Logging_File_SelectorPath {
+	ps := &System_Logging_File_SelectorPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"selectors", "selector"},
+			map[string]interface{}{"facility": Facility, "severity": Severity},
+			n,
+		),
+	}
+	return ps
+}
+
+// Selector (list): List of selectors for log messages
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "selectors/selector"
+//	Path from root:       "/system/logging/files/file/selectors/selector"
+//
+//	Facility: oc.E_SystemLogging_SYSLOG_FACILITY
+//	Severity: oc.E_SystemLogging_SyslogSeverity
+func (n *System_Logging_FilePathAny) Selector(Facility oc.E_SystemLogging_SYSLOG_FACILITY, Severity oc.E_SystemLogging_SyslogSeverity) *System_Logging_File_SelectorPathAny {
+	ps := &System_Logging_File_SelectorPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"selectors", "selector"},
+			map[string]interface{}{"facility": Facility, "severity": Severity},
+			n,
+		),
+	}
+	return ps
+}
+
+// SelectorMap (list): List of selectors for log messages
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "selectors/selector"
+//	Path from root:       "/system/logging/files/file/selectors/selector"
+func (n *System_Logging_FilePath) SelectorMap() *System_Logging_File_SelectorPathMap {
+	ps := &System_Logging_File_SelectorPathMap{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"selectors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// SelectorMap (list): List of selectors for log messages
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "selectors/selector"
+//	Path from root:       "/system/logging/files/file/selectors/selector"
+func (n *System_Logging_FilePathAny) SelectorMap() *System_Logging_File_SelectorPathMapAny {
+	ps := &System_Logging_File_SelectorPathMapAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"selectors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_Logging_FilePath) State() ygnmi.SingletonQuery[*oc.System_Logging_File] {
+	return ygnmi.NewSingletonQuery[*oc.System_Logging_File](
+		"System_Logging_File",
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_Logging_FilePathAny) State() ygnmi.WildcardQuery[*oc.System_Logging_File] {
+	return ygnmi.NewWildcardQuery[*oc.System_Logging_File](
+		"System_Logging_File",
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *System_Logging_FilePath) Config() ygnmi.ConfigQuery[*oc.System_Logging_File] {
+	return ygnmi.NewConfigQuery[*oc.System_Logging_File](
+		"System_Logging_File",
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *System_Logging_FilePathAny) Config() ygnmi.WildcardQuery[*oc.System_Logging_File] {
+	return ygnmi.NewWildcardQuery[*oc.System_Logging_File](
+		"System_Logging_File",
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_Logging_FilePathMap) State() ygnmi.SingletonQuery[map[oc.System_Logging_File_Key]*oc.System_Logging_File] {
+	return ygnmi.NewSingletonQuery[map[oc.System_Logging_File_Key]*oc.System_Logging_File](
+		"System_Logging",
+		true,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[oc.System_Logging_File_Key]*oc.System_Logging_File, bool) {
+			ret := gs.(*oc.System_Logging).File
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Logging) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-system:files"},
+			PostRelPath: []string{"openconfig-system:file"},
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_Logging_FilePathMapAny) State() ygnmi.WildcardQuery[map[oc.System_Logging_File_Key]*oc.System_Logging_File] {
+	return ygnmi.NewWildcardQuery[map[oc.System_Logging_File_Key]*oc.System_Logging_File](
+		"System_Logging",
+		true,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[oc.System_Logging_File_Key]*oc.System_Logging_File, bool) {
+			ret := gs.(*oc.System_Logging).File
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Logging) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-system:files"},
+			PostRelPath: []string{"openconfig-system:file"},
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *System_Logging_FilePathMap) Config() ygnmi.ConfigQuery[map[oc.System_Logging_File_Key]*oc.System_Logging_File] {
+	return ygnmi.NewConfigQuery[map[oc.System_Logging_File_Key]*oc.System_Logging_File](
+		"System_Logging",
+		false,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[oc.System_Logging_File_Key]*oc.System_Logging_File, bool) {
+			ret := gs.(*oc.System_Logging).File
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Logging) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-system:files"},
+			PostRelPath: []string{"openconfig-system:file"},
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *System_Logging_FilePathMapAny) Config() ygnmi.WildcardQuery[map[oc.System_Logging_File_Key]*oc.System_Logging_File] {
+	return ygnmi.NewWildcardQuery[map[oc.System_Logging_File_Key]*oc.System_Logging_File](
+		"System_Logging",
+		false,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[oc.System_Logging_File_Key]*oc.System_Logging_File, bool) {
+			ret := gs.(*oc.System_Logging).File
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Logging) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-system:files"},
+			PostRelPath: []string{"openconfig-system:file"},
+		},
+	)
+}
+
+// System_Logging_File_Selector_FacilityPath represents the /openconfig-system/system/logging/files/file/selectors/selector/state/facility YANG schema element.
+type System_Logging_File_Selector_FacilityPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_Logging_File_Selector_FacilityPathAny represents the wildcard version of the /openconfig-system/system/logging/files/file/selectors/selector/state/facility YANG schema element.
+type System_Logging_File_Selector_FacilityPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/facility"
+//	Path from root:       "/system/logging/files/file/selectors/selector/state/facility"
+func (n *System_Logging_File_Selector_FacilityPath) State() ygnmi.SingletonQuery[oc.E_SystemLogging_SYSLOG_FACILITY] {
+	return ygnmi.NewSingletonQuery[oc.E_SystemLogging_SYSLOG_FACILITY](
+		"System_Logging_File_Selector",
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "facility"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_SystemLogging_SYSLOG_FACILITY, bool) {
+			ret := gs.(*oc.System_Logging_File_Selector).Facility
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Logging_File_Selector) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/facility"
+//	Path from root:       "/system/logging/files/file/selectors/selector/state/facility"
+func (n *System_Logging_File_Selector_FacilityPathAny) State() ygnmi.WildcardQuery[oc.E_SystemLogging_SYSLOG_FACILITY] {
+	return ygnmi.NewWildcardQuery[oc.E_SystemLogging_SYSLOG_FACILITY](
+		"System_Logging_File_Selector",
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "facility"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_SystemLogging_SYSLOG_FACILITY, bool) {
+			ret := gs.(*oc.System_Logging_File_Selector).Facility
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Logging_File_Selector) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "config/facility"
+//	Path from root:       "/system/logging/files/file/selectors/selector/config/facility"
+func (n *System_Logging_File_Selector_FacilityPath) Config() ygnmi.ConfigQuery[oc.E_SystemLogging_SYSLOG_FACILITY] {
+	return ygnmi.NewConfigQuery[oc.E_SystemLogging_SYSLOG_FACILITY](
+		"System_Logging_File_Selector",
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "facility"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_SystemLogging_SYSLOG_FACILITY, bool) {
+			ret := gs.(*oc.System_Logging_File_Selector).Facility
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Logging_File_Selector) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "config/facility"
+//	Path from root:       "/system/logging/files/file/selectors/selector/config/facility"
+func (n *System_Logging_File_Selector_FacilityPathAny) Config() ygnmi.WildcardQuery[oc.E_SystemLogging_SYSLOG_FACILITY] {
+	return ygnmi.NewWildcardQuery[oc.E_SystemLogging_SYSLOG_FACILITY](
+		"System_Logging_File_Selector",
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "facility"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_SystemLogging_SYSLOG_FACILITY, bool) {
+			ret := gs.(*oc.System_Logging_File_Selector).Facility
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Logging_File_Selector) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
+// System_Logging_File_Selector_SeverityPath represents the /openconfig-system/system/logging/files/file/selectors/selector/state/severity YANG schema element.
+type System_Logging_File_Selector_SeverityPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_Logging_File_Selector_SeverityPathAny represents the wildcard version of the /openconfig-system/system/logging/files/file/selectors/selector/state/severity YANG schema element.
+type System_Logging_File_Selector_SeverityPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/severity"
+//	Path from root:       "/system/logging/files/file/selectors/selector/state/severity"
+func (n *System_Logging_File_Selector_SeverityPath) State() ygnmi.SingletonQuery[oc.E_SystemLogging_SyslogSeverity] {
+	return ygnmi.NewSingletonQuery[oc.E_SystemLogging_SyslogSeverity](
+		"System_Logging_File_Selector",
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "severity"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_SystemLogging_SyslogSeverity, bool) {
+			ret := gs.(*oc.System_Logging_File_Selector).Severity
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Logging_File_Selector) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/severity"
+//	Path from root:       "/system/logging/files/file/selectors/selector/state/severity"
+func (n *System_Logging_File_Selector_SeverityPathAny) State() ygnmi.WildcardQuery[oc.E_SystemLogging_SyslogSeverity] {
+	return ygnmi.NewWildcardQuery[oc.E_SystemLogging_SyslogSeverity](
+		"System_Logging_File_Selector",
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "severity"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_SystemLogging_SyslogSeverity, bool) {
+			ret := gs.(*oc.System_Logging_File_Selector).Severity
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Logging_File_Selector) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "config/severity"
+//	Path from root:       "/system/logging/files/file/selectors/selector/config/severity"
+func (n *System_Logging_File_Selector_SeverityPath) Config() ygnmi.ConfigQuery[oc.E_SystemLogging_SyslogSeverity] {
+	return ygnmi.NewConfigQuery[oc.E_SystemLogging_SyslogSeverity](
+		"System_Logging_File_Selector",
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "severity"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_SystemLogging_SyslogSeverity, bool) {
+			ret := gs.(*oc.System_Logging_File_Selector).Severity
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Logging_File_Selector) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "config/severity"
+//	Path from root:       "/system/logging/files/file/selectors/selector/config/severity"
+func (n *System_Logging_File_Selector_SeverityPathAny) Config() ygnmi.WildcardQuery[oc.E_SystemLogging_SyslogSeverity] {
+	return ygnmi.NewWildcardQuery[oc.E_SystemLogging_SyslogSeverity](
+		"System_Logging_File_Selector",
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "severity"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_SystemLogging_SyslogSeverity, bool) {
+			ret := gs.(*oc.System_Logging_File_Selector).Severity
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Logging_File_Selector) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
+// System_Logging_File_SelectorPath represents the /openconfig-system/system/logging/files/file/selectors/selector YANG schema element.
+type System_Logging_File_SelectorPath struct {
+	*ygnmi.NodePath
+}
+
+// System_Logging_File_SelectorPathAny represents the wildcard version of the /openconfig-system/system/logging/files/file/selectors/selector YANG schema element.
+type System_Logging_File_SelectorPathAny struct {
+	*ygnmi.NodePath
+}
+
+// System_Logging_File_SelectorPathMap represents the /openconfig-system/system/logging/files/file/selectors/selector YANG schema element.
+type System_Logging_File_SelectorPathMap struct {
+	*ygnmi.NodePath
+}
+
+// System_Logging_File_SelectorPathMapAny represents the wildcard version of the /openconfig-system/system/logging/files/file/selectors/selector YANG schema element.
+type System_Logging_File_SelectorPathMapAny struct {
+	*ygnmi.NodePath
+}
+
+// Facility (leaf): Specifies the facility, or class of messages to log
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/facility"
+//	Path from root:       "/system/logging/files/file/selectors/selector/*/facility"
+func (n *System_Logging_File_SelectorPath) Facility() *System_Logging_File_Selector_FacilityPath {
+	ps := &System_Logging_File_Selector_FacilityPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "facility"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Facility (leaf): Specifies the facility, or class of messages to log
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/facility"
+//	Path from root:       "/system/logging/files/file/selectors/selector/*/facility"
+func (n *System_Logging_File_SelectorPathAny) Facility() *System_Logging_File_Selector_FacilityPathAny {
+	ps := &System_Logging_File_Selector_FacilityPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "facility"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Severity (leaf): Specifies that only messages of the given severity (or
+// greater severity) for the corresonding facility are logged
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/severity"
+//	Path from root:       "/system/logging/files/file/selectors/selector/*/severity"
+func (n *System_Logging_File_SelectorPath) Severity() *System_Logging_File_Selector_SeverityPath {
+	ps := &System_Logging_File_Selector_SeverityPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "severity"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Severity (leaf): Specifies that only messages of the given severity (or
+// greater severity) for the corresonding facility are logged
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/severity"
+//	Path from root:       "/system/logging/files/file/selectors/selector/*/severity"
+func (n *System_Logging_File_SelectorPathAny) Severity() *System_Logging_File_Selector_SeverityPathAny {
+	ps := &System_Logging_File_Selector_SeverityPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "severity"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_Logging_File_SelectorPath) State() ygnmi.SingletonQuery[*oc.System_Logging_File_Selector] {
+	return ygnmi.NewSingletonQuery[*oc.System_Logging_File_Selector](
+		"System_Logging_File_Selector",
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_Logging_File_SelectorPathAny) State() ygnmi.WildcardQuery[*oc.System_Logging_File_Selector] {
+	return ygnmi.NewWildcardQuery[*oc.System_Logging_File_Selector](
+		"System_Logging_File_Selector",
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *System_Logging_File_SelectorPath) Config() ygnmi.ConfigQuery[*oc.System_Logging_File_Selector] {
+	return ygnmi.NewConfigQuery[*oc.System_Logging_File_Selector](
+		"System_Logging_File_Selector",
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *System_Logging_File_SelectorPathAny) Config() ygnmi.WildcardQuery[*oc.System_Logging_File_Selector] {
+	return ygnmi.NewWildcardQuery[*oc.System_Logging_File_Selector](
+		"System_Logging_File_Selector",
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_Logging_File_SelectorPathMap) State() ygnmi.SingletonQuery[map[oc.System_Logging_File_Selector_Key]*oc.System_Logging_File_Selector] {
+	return ygnmi.NewSingletonQuery[map[oc.System_Logging_File_Selector_Key]*oc.System_Logging_File_Selector](
+		"System_Logging_File",
+		true,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[oc.System_Logging_File_Selector_Key]*oc.System_Logging_File_Selector, bool) {
+			ret := gs.(*oc.System_Logging_File).Selector
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Logging_File) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-system:selectors"},
+			PostRelPath: []string{"openconfig-system:selector"},
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_Logging_File_SelectorPathMapAny) State() ygnmi.WildcardQuery[map[oc.System_Logging_File_Selector_Key]*oc.System_Logging_File_Selector] {
+	return ygnmi.NewWildcardQuery[map[oc.System_Logging_File_Selector_Key]*oc.System_Logging_File_Selector](
+		"System_Logging_File",
+		true,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[oc.System_Logging_File_Selector_Key]*oc.System_Logging_File_Selector, bool) {
+			ret := gs.(*oc.System_Logging_File).Selector
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Logging_File) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-system:selectors"},
+			PostRelPath: []string{"openconfig-system:selector"},
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *System_Logging_File_SelectorPathMap) Config() ygnmi.ConfigQuery[map[oc.System_Logging_File_Selector_Key]*oc.System_Logging_File_Selector] {
+	return ygnmi.NewConfigQuery[map[oc.System_Logging_File_Selector_Key]*oc.System_Logging_File_Selector](
+		"System_Logging_File",
+		false,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[oc.System_Logging_File_Selector_Key]*oc.System_Logging_File_Selector, bool) {
+			ret := gs.(*oc.System_Logging_File).Selector
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Logging_File) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-system:selectors"},
+			PostRelPath: []string{"openconfig-system:selector"},
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *System_Logging_File_SelectorPathMapAny) Config() ygnmi.WildcardQuery[map[oc.System_Logging_File_Selector_Key]*oc.System_Logging_File_Selector] {
+	return ygnmi.NewWildcardQuery[map[oc.System_Logging_File_Selector_Key]*oc.System_Logging_File_Selector](
+		"System_Logging_File",
+		false,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[oc.System_Logging_File_Selector_Key]*oc.System_Logging_File_Selector, bool) {
+			ret := gs.(*oc.System_Logging_File).Selector
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Logging_File) },
 		func() *ytypes.Schema {
 			return &ytypes.Schema{
 				Root:       &oc.Root{},
@@ -35051,6 +37375,846 @@ func (n *System_Logging_RemoteServer_SelectorPathMapAny) Config() ygnmi.Wildcard
 			return ret, ret != nil
 		},
 		func() ygot.ValidatedGoStruct { return new(oc.System_Logging_RemoteServer) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-system:selectors"},
+			PostRelPath: []string{"openconfig-system:selector"},
+		},
+	)
+}
+
+// System_Logging_VtyPath represents the /openconfig-system/system/logging/vty YANG schema element.
+type System_Logging_VtyPath struct {
+	*ygnmi.NodePath
+}
+
+// System_Logging_VtyPathAny represents the wildcard version of the /openconfig-system/system/logging/vty YANG schema element.
+type System_Logging_VtyPathAny struct {
+	*ygnmi.NodePath
+}
+
+// SelectorAny (list): List of selectors for log messages
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "selectors/selector"
+//	Path from root:       "/system/logging/vty/selectors/selector"
+func (n *System_Logging_VtyPath) SelectorAny() *System_Logging_Vty_SelectorPathAny {
+	ps := &System_Logging_Vty_SelectorPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"selectors", "selector"},
+			map[string]interface{}{"facility": "*", "severity": "*"},
+			n,
+		),
+	}
+	return ps
+}
+
+// SelectorAny (list): List of selectors for log messages
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "selectors/selector"
+//	Path from root:       "/system/logging/vty/selectors/selector"
+func (n *System_Logging_VtyPathAny) SelectorAny() *System_Logging_Vty_SelectorPathAny {
+	ps := &System_Logging_Vty_SelectorPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"selectors", "selector"},
+			map[string]interface{}{"facility": "*", "severity": "*"},
+			n,
+		),
+	}
+	return ps
+}
+
+// WithFacility sets System_Logging_Vty_SelectorPathAny's key "facility" to the specified value.
+// Facility: oc.E_SystemLogging_SYSLOG_FACILITY
+func (n *System_Logging_Vty_SelectorPathAny) WithFacility(Facility oc.E_SystemLogging_SYSLOG_FACILITY) *System_Logging_Vty_SelectorPathAny {
+	ygnmi.ModifyKey(n.NodePath, "facility", Facility)
+	return n
+}
+
+// WithSeverity sets System_Logging_Vty_SelectorPathAny's key "severity" to the specified value.
+// Severity: oc.E_SystemLogging_SyslogSeverity
+func (n *System_Logging_Vty_SelectorPathAny) WithSeverity(Severity oc.E_SystemLogging_SyslogSeverity) *System_Logging_Vty_SelectorPathAny {
+	ygnmi.ModifyKey(n.NodePath, "severity", Severity)
+	return n
+}
+
+// Selector (list): List of selectors for log messages
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "selectors/selector"
+//	Path from root:       "/system/logging/vty/selectors/selector"
+//
+//	Facility: oc.E_SystemLogging_SYSLOG_FACILITY
+//	Severity: oc.E_SystemLogging_SyslogSeverity
+func (n *System_Logging_VtyPath) Selector(Facility oc.E_SystemLogging_SYSLOG_FACILITY, Severity oc.E_SystemLogging_SyslogSeverity) *System_Logging_Vty_SelectorPath {
+	ps := &System_Logging_Vty_SelectorPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"selectors", "selector"},
+			map[string]interface{}{"facility": Facility, "severity": Severity},
+			n,
+		),
+	}
+	return ps
+}
+
+// Selector (list): List of selectors for log messages
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "selectors/selector"
+//	Path from root:       "/system/logging/vty/selectors/selector"
+//
+//	Facility: oc.E_SystemLogging_SYSLOG_FACILITY
+//	Severity: oc.E_SystemLogging_SyslogSeverity
+func (n *System_Logging_VtyPathAny) Selector(Facility oc.E_SystemLogging_SYSLOG_FACILITY, Severity oc.E_SystemLogging_SyslogSeverity) *System_Logging_Vty_SelectorPathAny {
+	ps := &System_Logging_Vty_SelectorPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"selectors", "selector"},
+			map[string]interface{}{"facility": Facility, "severity": Severity},
+			n,
+		),
+	}
+	return ps
+}
+
+// SelectorMap (list): List of selectors for log messages
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "selectors/selector"
+//	Path from root:       "/system/logging/vty/selectors/selector"
+func (n *System_Logging_VtyPath) SelectorMap() *System_Logging_Vty_SelectorPathMap {
+	ps := &System_Logging_Vty_SelectorPathMap{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"selectors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// SelectorMap (list): List of selectors for log messages
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "selectors/selector"
+//	Path from root:       "/system/logging/vty/selectors/selector"
+func (n *System_Logging_VtyPathAny) SelectorMap() *System_Logging_Vty_SelectorPathMapAny {
+	ps := &System_Logging_Vty_SelectorPathMapAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"selectors"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_Logging_VtyPath) State() ygnmi.SingletonQuery[*oc.System_Logging_Vty] {
+	return ygnmi.NewSingletonQuery[*oc.System_Logging_Vty](
+		"System_Logging_Vty",
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_Logging_VtyPathAny) State() ygnmi.WildcardQuery[*oc.System_Logging_Vty] {
+	return ygnmi.NewWildcardQuery[*oc.System_Logging_Vty](
+		"System_Logging_Vty",
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *System_Logging_VtyPath) Config() ygnmi.ConfigQuery[*oc.System_Logging_Vty] {
+	return ygnmi.NewConfigQuery[*oc.System_Logging_Vty](
+		"System_Logging_Vty",
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *System_Logging_VtyPathAny) Config() ygnmi.WildcardQuery[*oc.System_Logging_Vty] {
+	return ygnmi.NewWildcardQuery[*oc.System_Logging_Vty](
+		"System_Logging_Vty",
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
+// System_Logging_Vty_Selector_FacilityPath represents the /openconfig-system/system/logging/vty/selectors/selector/state/facility YANG schema element.
+type System_Logging_Vty_Selector_FacilityPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_Logging_Vty_Selector_FacilityPathAny represents the wildcard version of the /openconfig-system/system/logging/vty/selectors/selector/state/facility YANG schema element.
+type System_Logging_Vty_Selector_FacilityPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/facility"
+//	Path from root:       "/system/logging/vty/selectors/selector/state/facility"
+func (n *System_Logging_Vty_Selector_FacilityPath) State() ygnmi.SingletonQuery[oc.E_SystemLogging_SYSLOG_FACILITY] {
+	return ygnmi.NewSingletonQuery[oc.E_SystemLogging_SYSLOG_FACILITY](
+		"System_Logging_Vty_Selector",
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "facility"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_SystemLogging_SYSLOG_FACILITY, bool) {
+			ret := gs.(*oc.System_Logging_Vty_Selector).Facility
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Logging_Vty_Selector) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/facility"
+//	Path from root:       "/system/logging/vty/selectors/selector/state/facility"
+func (n *System_Logging_Vty_Selector_FacilityPathAny) State() ygnmi.WildcardQuery[oc.E_SystemLogging_SYSLOG_FACILITY] {
+	return ygnmi.NewWildcardQuery[oc.E_SystemLogging_SYSLOG_FACILITY](
+		"System_Logging_Vty_Selector",
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "facility"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_SystemLogging_SYSLOG_FACILITY, bool) {
+			ret := gs.(*oc.System_Logging_Vty_Selector).Facility
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Logging_Vty_Selector) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "config/facility"
+//	Path from root:       "/system/logging/vty/selectors/selector/config/facility"
+func (n *System_Logging_Vty_Selector_FacilityPath) Config() ygnmi.ConfigQuery[oc.E_SystemLogging_SYSLOG_FACILITY] {
+	return ygnmi.NewConfigQuery[oc.E_SystemLogging_SYSLOG_FACILITY](
+		"System_Logging_Vty_Selector",
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "facility"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_SystemLogging_SYSLOG_FACILITY, bool) {
+			ret := gs.(*oc.System_Logging_Vty_Selector).Facility
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Logging_Vty_Selector) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "config/facility"
+//	Path from root:       "/system/logging/vty/selectors/selector/config/facility"
+func (n *System_Logging_Vty_Selector_FacilityPathAny) Config() ygnmi.WildcardQuery[oc.E_SystemLogging_SYSLOG_FACILITY] {
+	return ygnmi.NewWildcardQuery[oc.E_SystemLogging_SYSLOG_FACILITY](
+		"System_Logging_Vty_Selector",
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "facility"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_SystemLogging_SYSLOG_FACILITY, bool) {
+			ret := gs.(*oc.System_Logging_Vty_Selector).Facility
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Logging_Vty_Selector) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
+// System_Logging_Vty_Selector_SeverityPath represents the /openconfig-system/system/logging/vty/selectors/selector/state/severity YANG schema element.
+type System_Logging_Vty_Selector_SeverityPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_Logging_Vty_Selector_SeverityPathAny represents the wildcard version of the /openconfig-system/system/logging/vty/selectors/selector/state/severity YANG schema element.
+type System_Logging_Vty_Selector_SeverityPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/severity"
+//	Path from root:       "/system/logging/vty/selectors/selector/state/severity"
+func (n *System_Logging_Vty_Selector_SeverityPath) State() ygnmi.SingletonQuery[oc.E_SystemLogging_SyslogSeverity] {
+	return ygnmi.NewSingletonQuery[oc.E_SystemLogging_SyslogSeverity](
+		"System_Logging_Vty_Selector",
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "severity"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_SystemLogging_SyslogSeverity, bool) {
+			ret := gs.(*oc.System_Logging_Vty_Selector).Severity
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Logging_Vty_Selector) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/severity"
+//	Path from root:       "/system/logging/vty/selectors/selector/state/severity"
+func (n *System_Logging_Vty_Selector_SeverityPathAny) State() ygnmi.WildcardQuery[oc.E_SystemLogging_SyslogSeverity] {
+	return ygnmi.NewWildcardQuery[oc.E_SystemLogging_SyslogSeverity](
+		"System_Logging_Vty_Selector",
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "severity"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_SystemLogging_SyslogSeverity, bool) {
+			ret := gs.(*oc.System_Logging_Vty_Selector).Severity
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Logging_Vty_Selector) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "config/severity"
+//	Path from root:       "/system/logging/vty/selectors/selector/config/severity"
+func (n *System_Logging_Vty_Selector_SeverityPath) Config() ygnmi.ConfigQuery[oc.E_SystemLogging_SyslogSeverity] {
+	return ygnmi.NewConfigQuery[oc.E_SystemLogging_SyslogSeverity](
+		"System_Logging_Vty_Selector",
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "severity"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_SystemLogging_SyslogSeverity, bool) {
+			ret := gs.(*oc.System_Logging_Vty_Selector).Severity
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Logging_Vty_Selector) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "config/severity"
+//	Path from root:       "/system/logging/vty/selectors/selector/config/severity"
+func (n *System_Logging_Vty_Selector_SeverityPathAny) Config() ygnmi.WildcardQuery[oc.E_SystemLogging_SyslogSeverity] {
+	return ygnmi.NewWildcardQuery[oc.E_SystemLogging_SyslogSeverity](
+		"System_Logging_Vty_Selector",
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "severity"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_SystemLogging_SyslogSeverity, bool) {
+			ret := gs.(*oc.System_Logging_Vty_Selector).Severity
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Logging_Vty_Selector) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
+// System_Logging_Vty_SelectorPath represents the /openconfig-system/system/logging/vty/selectors/selector YANG schema element.
+type System_Logging_Vty_SelectorPath struct {
+	*ygnmi.NodePath
+}
+
+// System_Logging_Vty_SelectorPathAny represents the wildcard version of the /openconfig-system/system/logging/vty/selectors/selector YANG schema element.
+type System_Logging_Vty_SelectorPathAny struct {
+	*ygnmi.NodePath
+}
+
+// System_Logging_Vty_SelectorPathMap represents the /openconfig-system/system/logging/vty/selectors/selector YANG schema element.
+type System_Logging_Vty_SelectorPathMap struct {
+	*ygnmi.NodePath
+}
+
+// System_Logging_Vty_SelectorPathMapAny represents the wildcard version of the /openconfig-system/system/logging/vty/selectors/selector YANG schema element.
+type System_Logging_Vty_SelectorPathMapAny struct {
+	*ygnmi.NodePath
+}
+
+// Facility (leaf): Specifies the facility, or class of messages to log
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/facility"
+//	Path from root:       "/system/logging/vty/selectors/selector/*/facility"
+func (n *System_Logging_Vty_SelectorPath) Facility() *System_Logging_Vty_Selector_FacilityPath {
+	ps := &System_Logging_Vty_Selector_FacilityPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "facility"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Facility (leaf): Specifies the facility, or class of messages to log
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/facility"
+//	Path from root:       "/system/logging/vty/selectors/selector/*/facility"
+func (n *System_Logging_Vty_SelectorPathAny) Facility() *System_Logging_Vty_Selector_FacilityPathAny {
+	ps := &System_Logging_Vty_Selector_FacilityPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "facility"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Severity (leaf): Specifies that only messages of the given severity (or
+// greater severity) for the corresonding facility are logged
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/severity"
+//	Path from root:       "/system/logging/vty/selectors/selector/*/severity"
+func (n *System_Logging_Vty_SelectorPath) Severity() *System_Logging_Vty_Selector_SeverityPath {
+	ps := &System_Logging_Vty_Selector_SeverityPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "severity"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Severity (leaf): Specifies that only messages of the given severity (or
+// greater severity) for the corresonding facility are logged
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/severity"
+//	Path from root:       "/system/logging/vty/selectors/selector/*/severity"
+func (n *System_Logging_Vty_SelectorPathAny) Severity() *System_Logging_Vty_Selector_SeverityPathAny {
+	ps := &System_Logging_Vty_Selector_SeverityPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "severity"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_Logging_Vty_SelectorPath) State() ygnmi.SingletonQuery[*oc.System_Logging_Vty_Selector] {
+	return ygnmi.NewSingletonQuery[*oc.System_Logging_Vty_Selector](
+		"System_Logging_Vty_Selector",
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_Logging_Vty_SelectorPathAny) State() ygnmi.WildcardQuery[*oc.System_Logging_Vty_Selector] {
+	return ygnmi.NewWildcardQuery[*oc.System_Logging_Vty_Selector](
+		"System_Logging_Vty_Selector",
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *System_Logging_Vty_SelectorPath) Config() ygnmi.ConfigQuery[*oc.System_Logging_Vty_Selector] {
+	return ygnmi.NewConfigQuery[*oc.System_Logging_Vty_Selector](
+		"System_Logging_Vty_Selector",
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *System_Logging_Vty_SelectorPathAny) Config() ygnmi.WildcardQuery[*oc.System_Logging_Vty_Selector] {
+	return ygnmi.NewWildcardQuery[*oc.System_Logging_Vty_Selector](
+		"System_Logging_Vty_Selector",
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_Logging_Vty_SelectorPathMap) State() ygnmi.SingletonQuery[map[oc.System_Logging_Vty_Selector_Key]*oc.System_Logging_Vty_Selector] {
+	return ygnmi.NewSingletonQuery[map[oc.System_Logging_Vty_Selector_Key]*oc.System_Logging_Vty_Selector](
+		"System_Logging_Vty",
+		true,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[oc.System_Logging_Vty_Selector_Key]*oc.System_Logging_Vty_Selector, bool) {
+			ret := gs.(*oc.System_Logging_Vty).Selector
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Logging_Vty) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-system:selectors"},
+			PostRelPath: []string{"openconfig-system:selector"},
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_Logging_Vty_SelectorPathMapAny) State() ygnmi.WildcardQuery[map[oc.System_Logging_Vty_Selector_Key]*oc.System_Logging_Vty_Selector] {
+	return ygnmi.NewWildcardQuery[map[oc.System_Logging_Vty_Selector_Key]*oc.System_Logging_Vty_Selector](
+		"System_Logging_Vty",
+		true,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[oc.System_Logging_Vty_Selector_Key]*oc.System_Logging_Vty_Selector, bool) {
+			ret := gs.(*oc.System_Logging_Vty).Selector
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Logging_Vty) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-system:selectors"},
+			PostRelPath: []string{"openconfig-system:selector"},
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *System_Logging_Vty_SelectorPathMap) Config() ygnmi.ConfigQuery[map[oc.System_Logging_Vty_Selector_Key]*oc.System_Logging_Vty_Selector] {
+	return ygnmi.NewConfigQuery[map[oc.System_Logging_Vty_Selector_Key]*oc.System_Logging_Vty_Selector](
+		"System_Logging_Vty",
+		false,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[oc.System_Logging_Vty_Selector_Key]*oc.System_Logging_Vty_Selector, bool) {
+			ret := gs.(*oc.System_Logging_Vty).Selector
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Logging_Vty) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-system:selectors"},
+			PostRelPath: []string{"openconfig-system:selector"},
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *System_Logging_Vty_SelectorPathMapAny) Config() ygnmi.WildcardQuery[map[oc.System_Logging_Vty_Selector_Key]*oc.System_Logging_Vty_Selector] {
+	return ygnmi.NewWildcardQuery[map[oc.System_Logging_Vty_Selector_Key]*oc.System_Logging_Vty_Selector](
+		"System_Logging_Vty",
+		false,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[oc.System_Logging_Vty_Selector_Key]*oc.System_Logging_Vty_Selector, bool) {
+			ret := gs.(*oc.System_Logging_Vty).Selector
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Logging_Vty) },
 		func() *ytypes.Schema {
 			return &ytypes.Schema{
 				Root:       &oc.Root{},

@@ -41,15 +41,6 @@ var (
 	otgAPI = &OTG{ate: fakeATE}
 )
 
-func TestNewConfig(t *testing.T) {
-	wantCfg := gosnappi.NewConfig()
-	fakeSnappi.config = wantCfg
-	gotCfg := otgAPI.NewConfig(t)
-	if wantCfg != gotCfg {
-		t.Errorf("NewConfig got unexpected config %v, want %v", gotCfg, wantCfg)
-	}
-}
-
 func TestFetchConfig(t *testing.T) {
 	wantCfg := gosnappi.NewConfig()
 	fakeSnappi.config = wantCfg
@@ -156,10 +147,6 @@ type fakeGosnappi struct {
 	controlState  gosnappi.ControlState
 	controlAction gosnappi.ControlAction
 	captureReq    gosnappi.CaptureRequest
-}
-
-func (fg *fakeGosnappi) NewConfig() gosnappi.Config {
-	return fg.config
 }
 
 func (fg *fakeGosnappi) GetConfig() (gosnappi.Config, error) {

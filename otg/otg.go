@@ -56,26 +56,6 @@ func (o *OTG) String() string {
 	return fmt.Sprintf("{ate: %s}", o.ate)
 }
 
-// NewConfig creates a new OTG config.
-// Deprecated: Use gosnappi.NewConfig directly.
-func (o *OTG) NewConfig(t testing.TB) gosnappi.Config {
-	t.Helper()
-	t = events.ActionStarted(t, "Creating new config for %s", o.ate)
-	cfg, err := newConfig(context.Background(), o.ate)
-	if err != nil {
-		t.Fatalf("NewConfig(t) on %s: %v", o.ate, err)
-	}
-	return cfg
-}
-
-func newConfig(ctx context.Context, ate binding.ATE) (gosnappi.Config, error) {
-	api, err := rawapis.FetchOTG(ctx, ate)
-	if err != nil {
-		return nil, err
-	}
-	return api.NewConfig(), nil
-}
-
 // PushConfig pushes config to the ATE.
 func (o *OTG) PushConfig(t testing.TB, cfg gosnappi.Config) {
 	t.Helper()

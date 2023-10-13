@@ -19,6 +19,7 @@ import (
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
+	"github.com/open-traffic-generator/snappi/gosnappi"
 	"github.com/openconfig/ondatra"
 	"github.com/openconfig/ondatra/gnmi"
 	"github.com/openconfig/ondatra/gnmi/oc"
@@ -51,7 +52,7 @@ func TestGNMISubscribe(t *testing.T) {
 
 func TestOTG(t *testing.T) {
 	ate := ondatra.ATE(t, "ate")
-	cfg := ate.OTG().NewConfig(t)
+	cfg := gosnappi.NewConfig()
 	cfg.Ports().Add().SetName("port1")
 	cfg.Ports().Add().SetName("port2")
 	ate.OTG().PushConfig(t, cfg)
