@@ -18,7 +18,6 @@ import (
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/config"
 	"github.com/openconfig/ondatra/console"
-	"github.com/openconfig/ondatra/operations"
 	"github.com/openconfig/ondatra/raw"
 )
 
@@ -47,11 +46,6 @@ func (c *Config) New() *config.VendorConfig {
 // Console returns a handle to the DUT Console API.
 func (d *DUTDevice) Console() *console.Console {
 	return console.New(d.res.(binding.DUT))
-}
-
-// Operations returns a handle to the DUT operations API.
-func (d *DUTDevice) Operations() *operations.Operations {
-	return operations.New(d.res.(binding.DUT))
 }
 
 // RawAPIs returns a handle to raw protocol APIs on the DUT.

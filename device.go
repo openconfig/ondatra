@@ -88,7 +88,7 @@ func (v Vendor) String() string {
 
 // GNMIOpts returns a new set of options to customize gNMI queries.
 func (d *Device) GNMIOpts() *gnmi.Opts {
-	useGetForCfg := d.Vendor() == CISCO || d.Vendor() == JUNIPER
+	useGetForCfg := d.Vendor() == CISCO || d.Vendor() == JUNIPER || d.Vendor() == NOKIA
 	return gnmi.NewOpts(d.Name(), useGetForCfg, d.clientFn)
 }
 

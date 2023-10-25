@@ -20,6 +20,7 @@ import (
 	"golang.org/x/net/context"
 
 	"github.com/open-traffic-generator/snappi/gosnappi"
+	"github.com/openconfig/gnoigo"
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/fakebind"
 	"google.golang.org/grpc"
@@ -40,8 +41,8 @@ var (
 		DialGNMIFn: func(context.Context, ...grpc.DialOption) (gpb.GNMIClient, error) {
 			return &struct{ gpb.GNMIClient }{}, nil
 		},
-		DialGNOIFn: func(context.Context, ...grpc.DialOption) (binding.GNOIClients, error) {
-			return &struct{ binding.GNOIClients }{}, nil
+		DialGNOIFn: func(context.Context, ...grpc.DialOption) (gnoigo.Clients, error) {
+			return &struct{ gnoigo.Clients }{}, nil
 		},
 		DialGNSIFn: func(context.Context, ...grpc.DialOption) (binding.GNSIClients, error) {
 			return &struct{ binding.GNSIClients }{}, nil

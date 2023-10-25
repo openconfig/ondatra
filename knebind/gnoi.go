@@ -28,6 +28,7 @@ import (
 	mpb "github.com/openconfig/gnoi/mpls"
 	ospb "github.com/openconfig/gnoi/os"
 	otpb "github.com/openconfig/gnoi/otdr"
+	plqpb "github.com/openconfig/gnoi/packet_link_qualification"
 	spb "github.com/openconfig/gnoi/system"
 	wrpb "github.com/openconfig/gnoi/wavelength_router"
 )
@@ -63,6 +64,10 @@ func (g *gnoiClients) Healthz() hpb.HealthzClient {
 
 func (g *gnoiClients) Layer2() lpb.Layer2Client {
 	return lpb.NewLayer2Client(g.conn)
+}
+
+func (g *gnoiClients) LinkQualification() plqpb.LinkQualificationClient {
+	return plqpb.NewLinkQualificationClient(g.conn)
 }
 
 func (g *gnoiClients) MPLS() mpb.MPLSClient {

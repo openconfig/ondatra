@@ -23,23 +23,11 @@ import (
 	"golang.org/x/net/context"
 
 	"github.com/open-traffic-generator/snappi/gosnappi"
+	"github.com/openconfig/gnoigo"
 	"github.com/openconfig/ondatra/binding/ixweb"
 	"google.golang.org/grpc"
 
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
-	bpb "github.com/openconfig/gnoi/bgp"
-	cpb "github.com/openconfig/gnoi/cert"
-	dpb "github.com/openconfig/gnoi/diag"
-	frpb "github.com/openconfig/gnoi/factory_reset"
-	fpb "github.com/openconfig/gnoi/file"
-	hpb "github.com/openconfig/gnoi/healthz"
-	lpb "github.com/openconfig/gnoi/layer2"
-	mpb "github.com/openconfig/gnoi/mpls"
-	ospb "github.com/openconfig/gnoi/os"
-	otpb "github.com/openconfig/gnoi/otdr"
-	plqpb "github.com/openconfig/gnoi/packet_link_qualification"
-	spb "github.com/openconfig/gnoi/system"
-	wpb "github.com/openconfig/gnoi/wavelength_router"
 	acctzpb "github.com/openconfig/gnsi/acctz"
 	authzpb "github.com/openconfig/gnsi/authz"
 	certzpb "github.com/openconfig/gnsi/certz"
@@ -151,7 +139,7 @@ type DUT interface {
 
 	// DialGNOI creates a client connection to the DUT's gNOI endpoint.
 	// See the interface comment for proper handling of dial options.
-	DialGNOI(context.Context, ...grpc.DialOption) (GNOIClients, error)
+	DialGNOI(context.Context, ...grpc.DialOption) (gnoigo.Clients, error)
 
 	// DialGNSI creates a client connection to the DUT's gNSI endpoint.
 	// See the interface comment for proper handling of dial options.
@@ -221,23 +209,8 @@ type IxNetwork struct {
 }
 
 // GNOIClients stores APIs to GNOI services.
-// All implementations of this interface must embed AbstractGNOIClients.
-type GNOIClients interface {
-	BGP() bpb.BGPClient
-	CertificateManagement() cpb.CertificateManagementClient
-	Diag() dpb.DiagClient
-	FactoryReset() frpb.FactoryResetClient
-	File() fpb.FileClient
-	Healthz() hpb.HealthzClient
-	Layer2() lpb.Layer2Client
-	LinkQualification() plqpb.LinkQualificationClient
-	MPLS() mpb.MPLSClient
-	OS() ospb.OSClient
-	OTDR() otpb.OTDRClient
-	System() spb.SystemClient
-	WavelengthRouter() wpb.WavelengthRouterClient
-	mustEmbedAbstractGNOIClients()
-}
+// Deprecated: Use gnoigo.Clients instead.
+type GNOIClients = gnoigo.Clients
 
 // GNSIClients stores APIs to GNSI services.
 // All implementations of this interface must embed AbstractGNSIClients.

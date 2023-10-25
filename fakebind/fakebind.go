@@ -22,6 +22,7 @@ import (
 
 	log "github.com/golang/glog"
 	"github.com/open-traffic-generator/snappi/gosnappi"
+	"github.com/openconfig/gnoigo"
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/internal/testbed"
 	"google.golang.org/grpc"
@@ -91,7 +92,7 @@ type DUT struct {
 	DialCLIFn     func(context.Context) (binding.CLIClient, error)
 	DialConsoleFn func(context.Context) (binding.ConsoleClient, error)
 	DialGNMIFn    func(context.Context, ...grpc.DialOption) (gpb.GNMIClient, error)
-	DialGNOIFn    func(context.Context, ...grpc.DialOption) (binding.GNOIClients, error)
+	DialGNOIFn    func(context.Context, ...grpc.DialOption) (gnoigo.Clients, error)
 	DialGNSIFn    func(context.Context, ...grpc.DialOption) (binding.GNSIClients, error)
 	DialGRIBIFn   func(context.Context, ...grpc.DialOption) (grpb.GRIBIClient, error)
 	DialP4RTFn    func(context.Context, ...grpc.DialOption) (p4pb.P4RuntimeClient, error)
@@ -130,7 +131,7 @@ func (d *DUT) DialGNMI(ctx context.Context, opts ...grpc.DialOption) (gpb.GNMICl
 }
 
 // DialGNOI delegates to d.DialGNOIFn.
-func (d *DUT) DialGNOI(ctx context.Context, opts ...grpc.DialOption) (binding.GNOIClients, error) {
+func (d *DUT) DialGNOI(ctx context.Context, opts ...grpc.DialOption) (gnoigo.Clients, error) {
 	if d.DialGNOIFn == nil {
 		log.Fatal("fakebind DialGNOI called but DialGNOIFn not set")
 	}

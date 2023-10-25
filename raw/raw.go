@@ -25,11 +25,11 @@
 // # Accessing the Raw Client APIs
 //
 // For such test scenarios, tests should use the Ondatra "Raw APIs". Calling
-// "dut.RawAPIs()" returns a set of APIs for low-level access to `dut`. For
-// example, the calls `dut.RawAPIs().GNMI(t)` and `dut.RawAPIs().GNOI(t)`
+// "dut.RawAPIs()" returns a set of APIs for low-level access to "dut". For
+// example, the calls "dut.RawAPIs().GNMI(t)" and "dut.RawAPIs().GNOI(t)"
 // return handles to the Go gRPC clients that Ondatra uses for gNMI and gNOI
-// interactions, respectively. Similarly, calling `ate.RawAPIs()` returns a set
-// of APIs for low-level access to `ate`.
+// interactions, respectively. Similarly, calling "ate.RawAPIs()" returns a set
+// of APIs for low-level access to "ate".
 //
 // The clients returned by these methods are those returned by the test's
 // binding. As a result, if a test needs to access a proprietary method provided
@@ -46,9 +46,9 @@
 // insufficient. Some tests may deliberately need to create multiple clients, or
 // they may need fine-grained control over how the client is dialed, such as
 // special context metadata or dial options that the binding does not provide by
-// default. For these situations, a test should retrieve the `binding.DUT` and
-// `binding.ATE` instances underlying a DUT or ATE with the calls
-// `dut.RawAPIs().BindingDUT()` and `ate.RawAPIs().BindingATE()`, respectively.
+// default. For these situations, a test should retrieve the [binding.DUT] and
+// [binding.ATE] instances underlying a DUT or ATE with the calls
+// "dut.RawAPIs().BindingDUT()" and "ate.RawAPIs().BindingATE()," respectively.
 // With these, they can dial the client themselves, like so:
 //
 //	gnmiClient, err := dut.RawAPIs().BindingDUT().DialGNMI(ctx, gnmiDialOpts...)
@@ -65,8 +65,8 @@
 // that supports the method of interest. However, because the [binding.DUT] or
 // [binding.ATE] instance with the proprietary method may be embedded inside
 // a DUT or ATE wrapper type, a simple type assertion may fail. For that reason,
-// the assertion on a DUT or ATE should use the utility functions [DUTAs] or
-// [ATEAs] instead:
+// the assertion on a DUT or ATE should use the utility functions [binding.DUTAs]
+// or [binding.ATEAs] instead:
 //
 //	var target interface {
 //		MyProprietaryClient()
@@ -83,6 +83,7 @@ import (
 
 	"golang.org/x/net/context"
 
+	"github.com/openconfig/gnoigo"
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/internal/events"
 	"github.com/openconfig/ondatra/internal/rawapis"
@@ -120,7 +121,7 @@ func (r *DUTAPIs) GNMI(t testing.TB) gpb.GNMIClient {
 }
 
 // GNOI returns the default gNOI clients for the dut.
-func (r *DUTAPIs) GNOI(t testing.TB) binding.GNOIClients {
+func (r *DUTAPIs) GNOI(t testing.TB) gnoigo.Clients {
 	t.Helper()
 	t = events.ActionStarted(t, "Fetching gNOI clients for %s", r.dut)
 	bgnoi, err := rawapis.FetchGNOI(context.Background(), r.dut)

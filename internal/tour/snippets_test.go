@@ -20,9 +20,11 @@ import (
 	"testing"
 	"time"
 
+	"github.com/openconfig/gnoigo/system"
 	"github.com/openconfig/ondatra"
 	"github.com/openconfig/ondatra/gnmi"
 	"github.com/openconfig/ondatra/gnmi/oc"
+	"github.com/openconfig/ondatra/gnoi"
 	"github.com/openconfig/ondatra/netutil"
 
 	"google3/ops/netops/lab/ondatra/b2bind/b2bindinit"
@@ -111,10 +113,7 @@ func TestQueryTelemetry(t *testing.T) {
 
 func TestExecuteOperation(t *testing.T) {
 	dut := ondatra.DUT(t, "dut")
-	dut.Operations().
-		NewPing().
-		WithDestination("8.8.8.8").
-		Operate(t)
+	gnoi.Execute(t, dut, system.NewPingOperation().Destination("8.8.8.8"))
 
 	ate := ondatra.ATE(t, "ate")
 	ap := dut.Port(t, "port1")

@@ -29,6 +29,7 @@ import (
 	"golang.org/x/net/context"
 
 	"github.com/open-traffic-generator/snappi/gosnappi"
+	"github.com/openconfig/gnoigo"
 	"github.com/openconfig/ondatra/binding"
 	"google.golang.org/grpc"
 
@@ -88,16 +89,16 @@ func FetchGNMI(ctx context.Context, dut GNMIDialer) (gpb.GNMIClient, error) {
 
 var (
 	gnoiMu sync.Mutex
-	gnois  = make(map[binding.DUT]binding.GNOIClients)
+	gnois  = make(map[binding.DUT]gnoigo.Clients)
 )
 
 // NewGNOI creates a gNOI client for the specified DUT.
-func NewGNOI(ctx context.Context, dut binding.DUT) (binding.GNOIClients, error) {
+func NewGNOI(ctx context.Context, dut binding.DUT) (gnoigo.Clients, error) {
 	return dut.DialGNOI(ctx, CommonDialOpts...)
 }
 
 // FetchGNOI fetches the cached gNOI client for the specified DUT.
-func FetchGNOI(ctx context.Context, dut binding.DUT) (binding.GNOIClients, error) {
+func FetchGNOI(ctx context.Context, dut binding.DUT) (gnoigo.Clients, error) {
 	gnoiMu.Lock()
 	defer gnoiMu.Unlock()
 	c, ok := gnois[dut]

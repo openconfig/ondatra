@@ -23,6 +23,7 @@ import (
 
 	log "github.com/golang/glog"
 	"github.com/open-traffic-generator/snappi/gosnappi"
+	"github.com/openconfig/gnoigo"
 	"google.golang.org/grpc"
 
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
@@ -108,7 +109,7 @@ func (*AbstractDUT) DialGNMI(ctx context.Context, opts ...grpc.DialOption) (gpb.
 }
 
 // DialGNOI returns an unimplemented error.
-func (*AbstractDUT) DialGNOI(context.Context, ...grpc.DialOption) (GNOIClients, error) {
+func (*AbstractDUT) DialGNOI(context.Context, ...grpc.DialOption) (gnoigo.Clients, error) {
 	return nil, errors.New("DialGNOI unimplemented")
 }
 
@@ -183,7 +184,7 @@ func (*AbstractATE) DialOTG(context.Context, ...grpc.DialOption) (gosnappi.Gosna
 
 func (*AbstractATE) mustEmbedAbstractATE() {}
 
-var _ GNOIClients = &AbstractGNOIClients{}
+var _ gnoigo.Clients = &AbstractGNOIClients{}
 
 // AbstractGNOIClients is implementation support for the GNOIClients interface.
 type AbstractGNOIClients struct{}
@@ -265,8 +266,6 @@ func (*AbstractGNOIClients) WavelengthRouter() wpb.WavelengthRouterClient {
 	log.Fatal("WavelengthRouter unimplemented")
 	return nil
 }
-
-func (g *AbstractGNOIClients) mustEmbedAbstractGNOIClients() {}
 
 var _ GNSIClients = &AbstractGNSIClients{}
 

@@ -39,7 +39,7 @@ func TestExecute(t *testing.T) {
 	fakebind.Setup().WithReservation(
 		&binding.Reservation{DUTs: map[string]binding.DUT{"dut": &fakebind.DUT{
 			AbstractDUT: &binding.AbstractDUT{&binding.Dims{}},
-			DialGNOIFn: func(context.Context, ...grpc.DialOption) (binding.GNOIClients, error) {
+			DialGNOIFn: func(context.Context, ...grpc.DialOption) (gnoigo.Clients, error) {
 				return nil, nil
 			},
 		}}},

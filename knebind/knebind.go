@@ -30,6 +30,7 @@ import (
 
 	log "github.com/golang/glog"
 	"github.com/open-traffic-generator/snappi/gosnappi"
+	"github.com/openconfig/gnoigo"
 	closer "github.com/openconfig/gocloser"
 	"github.com/openconfig/kne/topo"
 	"github.com/openconfig/kne/topo/node"
@@ -187,7 +188,7 @@ func (d *kneDUT) DialGNMI(ctx context.Context, opts ...grpc.DialOption) (gpb.GNM
 	return gpb.NewGNMIClient(conn), nil
 }
 
-func (d *kneDUT) DialGNOI(ctx context.Context, opts ...grpc.DialOption) (binding.GNOIClients, error) {
+func (d *kneDUT) DialGNOI(ctx context.Context, opts ...grpc.DialOption) (gnoigo.Clients, error) {
 	conn, err := d.DialGRPC(ctx, "gnoi", opts...)
 	if err != nil {
 		return nil, err

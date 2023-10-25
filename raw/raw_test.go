@@ -21,6 +21,7 @@ import (
 
 	"golang.org/x/net/context"
 
+	"github.com/openconfig/gnoigo"
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/fakebind"
 	"github.com/openconfig/testt"
@@ -66,7 +67,7 @@ func TestGNMI(t *testing.T) {
 func TestGNOI(t *testing.T) {
 	t.Run("error", func(t *testing.T) {
 		wantErr := "bad gnoi"
-		dut.DialGNOIFn = func(context.Context, ...grpc.DialOption) (binding.GNOIClients, error) {
+		dut.DialGNOIFn = func(context.Context, ...grpc.DialOption) (gnoigo.Clients, error) {
 			return nil, errors.New(wantErr)
 		}
 		gotErr := testt.ExpectFatal(t, func(t testing.TB) {
@@ -78,8 +79,8 @@ func TestGNOI(t *testing.T) {
 	})
 
 	t.Run("success", func(t *testing.T) {
-		want := struct{ binding.GNOIClients }{}
-		dut.DialGNOIFn = func(context.Context, ...grpc.DialOption) (binding.GNOIClients, error) {
+		want := struct{ gnoigo.Clients }{}
+		dut.DialGNOIFn = func(context.Context, ...grpc.DialOption) (gnoigo.Clients, error) {
 			return want, nil
 		}
 		if got := dutAPIs.GNOI(t); got != want {
