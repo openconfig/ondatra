@@ -281,8 +281,9 @@ func Get[T any](t testing.TB, dev DeviceOrOpts, q ygnmi.SingletonQuery[T]) T {
 // GetConfig fetches the value of a SingletonQuery with a ONCE subscription,
 // failing the test fatally if no value is present at the path.
 // Use Lookup to also get metadata or tolerate no value present.
-// Note: This is a workaround for Go's type inference not working for this use case and may be removed in a subsequent release.
-// Note: This is equivalent to calling Get with a ConfigQuery and providing a fully-qualified type parameter.
+//
+// Deprecated: Use Get instead. This function was only a workaround for type inference issues in
+// versions of Go before 1.21.
 func GetConfig[T any](t testing.TB, dev DeviceOrOpts, q ygnmi.ConfigQuery[T]) T {
 	t.Helper()
 	return Get[T](t, dev, q)

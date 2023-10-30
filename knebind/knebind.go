@@ -45,6 +45,11 @@ import (
 	"google.golang.org/grpc/status"
 
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
+	acctzpb "github.com/openconfig/gnsi/acctz"
+	authzpb "github.com/openconfig/gnsi/authz"
+	certzpb "github.com/openconfig/gnsi/certz"
+	credzpb "github.com/openconfig/gnsi/credentialz"
+	pathzpb "github.com/openconfig/gnsi/pathz"
 	grpb "github.com/openconfig/gribi/v1/proto/service"
 	cpb "github.com/openconfig/kne/proto/controller"
 	tpb "github.com/openconfig/kne/proto/topo"
@@ -193,7 +198,7 @@ func (d *kneDUT) DialGNOI(ctx context.Context, opts ...grpc.DialOption) (gnoigo.
 	if err != nil {
 		return nil, err
 	}
-	return &gnoiClients{conn: conn}, nil
+	return gnoigo.NewClients(conn), nil
 }
 
 func (d *kneDUT) DialGRIBI(ctx context.Context, opts ...grpc.DialOption) (grpb.GRIBIClient, error) {
@@ -210,6 +215,41 @@ func (d *kneDUT) DialP4RT(ctx context.Context, opts ...grpc.DialOption) (p4pb.P4
 		return nil, err
 	}
 	return p4pb.NewP4RuntimeClient(conn), nil
+}
+
+// gnsiConn implements the stub builder needed by the Ondatra
+// binding.Binding interface.
+type gnsiConn struct {
+	*binding.AbstractGNSIClients
+	conn *grpc.ClientConn
+}
+
+func (c *gnsiConn) Authz() authzpb.AuthzClient {
+	return authzpb.NewAuthzClient(c.conn)
+}
+
+func (c *gnsiConn) Pathz() pathzpb.PathzClient {
+	return pathzpb.NewPathzClient(c.conn)
+}
+
+func (c *gnsiConn) Certz() certzpb.CertzClient {
+	return certzpb.NewCertzClient(c.conn)
+}
+
+func (c *gnsiConn) Credentialz() credzpb.CredentialzClient {
+	return credzpb.NewCredentialzClient(c.conn)
+}
+
+func (c *gnsiConn) Acctz() acctzpb.AcctzClient {
+	return acctzpb.NewAcctzClient(c.conn)
+}
+
+func (d *kneDUT) DialGNSI(ctx context.Context, opts ...grpc.DialOption) (binding.GNSIClients, error) {
+	conn, err := d.DialGRPC(ctx, "gnsi", opts...)
+	if err != nil {
+		return nil, err
+	}
+	return &gnsiConn{conn: conn}, nil
 }
 
 // DialGRPC dials the service with the specified name.

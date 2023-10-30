@@ -208,10 +208,6 @@ type IxNetwork struct {
 	SyslogHost string
 }
 
-// GNOIClients stores APIs to GNOI services.
-// Deprecated: Use gnoigo.Clients instead.
-type GNOIClients = gnoigo.Clients
-
 // GNSIClients stores APIs to GNSI services.
 // All implementations of this interface must embed AbstractGNSIClients.
 type GNSIClients interface {

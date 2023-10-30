@@ -9,7 +9,6 @@ require (
 	github.com/open-traffic-generator/snappi/gosnappi v0.11.14
 	github.com/openconfig/entity-naming v0.0.0-20230912181021-7ac806551a31
 	github.com/openconfig/gnmi v0.10.0
-	github.com/openconfig/gnoi v0.2.0
 	github.com/openconfig/gnoigo v0.0.0-20231025173800-d65570111f09
 	github.com/openconfig/gnsi v1.2.3
 	github.com/openconfig/gocloser v0.0.0-20220310182203-c6c950ed3b0b
@@ -80,6 +79,7 @@ require (
 	github.com/munnerz/goautoneg v0.0.0-20191010083416-a7dc8b61c822 // indirect
 	github.com/networkop/meshnet-cni v0.3.1-0.20230525201116-d7c306c635cf // indirect
 	github.com/open-traffic-generator/ixia-c-operator v0.3.4 // indirect
+	github.com/openconfig/gnoi v0.2.0 // indirect
 	github.com/openconfig/grpctunnel v0.0.0-20220819142823-6f5422b8ca70 // indirect
 	github.com/openconfig/lemming/operator v0.2.0 // indirect
 	github.com/pelletier/go-toml/v2 v2.0.8 // indirect

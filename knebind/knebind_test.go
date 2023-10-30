@@ -332,6 +332,32 @@ func TestServices(t *testing.T) {
 			}
 		},
 	}, {
+		desc: "missing gnsi",
+		tb: &opb.Testbed{
+			Duts: []*opb.Device{{
+				Id: "dut1",
+			}},
+		},
+		topo: &tpb.Topology{
+			Nodes: []*tpb.Node{{
+				Name:   "node1",
+				Vendor: tpb.Vendor_CISCO,
+				Services: map[uint32]*tpb.Service{
+					9339: &tpb.Service{
+						Name:      "gnmi",
+						Outside:   9339,
+						OutsideIp: "1.1.1.1",
+					},
+				},
+			}},
+		},
+		serviceCheck: func(t *testing.T, b binding.Binding, d binding.DUT) {
+			t.Helper()
+			if _, err := d.DialGNSI(context.Background()); err == nil {
+				t.Fatalf("DialGNSI() got unexpected error: %v", err)
+			}
+		},
+	}, {
 		desc: "valid",
 		tb: &opb.Testbed{
 			Duts: []*opb.Device{{
@@ -358,6 +384,11 @@ func TestServices(t *testing.T) {
 						Outside:   4242,
 						OutsideIp: "1.1.1.1",
 					},
+					9340: &tpb.Service{
+						Name:      "gnsi",
+						Outside:   9339,
+						OutsideIp: "1.1.1.1",
+					},
 				},
 			}},
 		},
@@ -371,6 +402,9 @@ func TestServices(t *testing.T) {
 			}
 			if _, err := d.DialP4RT(context.Background()); err != nil {
 				t.Fatalf("DialP4RT() got unexpected error: %v", err)
+			}
+			if _, err := d.DialGNSI(context.Background()); err != nil {
+				t.Fatalf("DialGNSI() got unexpected error: %v", err)
 			}
 		},
 	}}
