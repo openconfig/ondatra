@@ -334,15 +334,19 @@ type kneCLI struct {
 	dut *kneDUT
 }
 
-func (c *kneCLI) SendCommand(_ context.Context, cmd string) (_ string, rerr error) {
+func (c *kneCLI) SendCommand(ctx context.Context, cmd string) (string, error) {
+	return binding.SendCommandUsingRun(ctx, cmd, c)
+}
+
+func (c *kneCLI) RunCommand(_ context.Context, cmd string) (_ binding.CommandResult, rerr error) {
 	s, err := c.dut.Service("ssh")
 	if err != nil {
-		return "", err
+		return nil, err
 	}
 	addr := serviceAddr(s)
 	userPass := c.dut.newRPCCredentials()
 	if userPass == nil {
-		return "", errors.New("SendCommand requires node credentials be provided")
+		return nil, errors.New("SendCommand requires node credentials be provided")
 	}
 	log.Infof("Using credentials %v to SSH", userPass)
 	cfg := &ssh.ClientConfig{
@@ -357,12 +361,12 @@ func (c *kneCLI) SendCommand(_ context.Context, cmd string) (_ string, rerr erro
 	}
 	client, err := ssh.Dial("tcp", addr, cfg)
 	if err != nil {
-		return "", fmt.Errorf("could not dial SSH server %s: %w", addr, err)
+		return nil, fmt.Errorf("could not dial SSH server %s: %w", addr, err)
 	}
 	defer closer.Close(&rerr, client.Close, "error closing SSH client")
 	session, err := client.NewSession()
 	if err != nil {
-		return "", fmt.Errorf("could not create ssh session: %w", err)
+		return nil, fmt.Errorf("could not create ssh session: %w", err)
 	}
 	defer closer.Close(&rerr, func() error {
 		if err := session.Close(); err != io.EOF {
@@ -370,12 +374,30 @@ func (c *kneCLI) SendCommand(_ context.Context, cmd string) (_ string, rerr erro
 		}
 		return nil
 	}, "error closing SSH session")
+
 	var buf bytes.Buffer
 	session.Stdout = &buf
-	if err := session.Run(cmd); err != nil {
-		return "", fmt.Errorf("could not execute %q\noutput: %q: %w", cmd, buf.String(), err)
+	switch err := session.Run(cmd).(type) {
+	case nil:
+		return &cmdResult{output: buf.String()}, nil
+	case *ssh.ExitError, *ssh.ExitMissingError:
+		return &cmdResult{output: buf.String(), error: err.Error()}, nil
+	default:
+		return nil, err
 	}
-	return buf.String(), nil
+}
+
+type cmdResult struct {
+	*binding.AbstractCommandResult
+	output, error string
+}
+
+func (r *cmdResult) Output() string {
+	return r.output
+}
+
+func (r *cmdResult) Error() string {
+	return r.error
 }
 
 type kneATE struct {

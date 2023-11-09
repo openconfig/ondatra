@@ -18,6 +18,7 @@ import (
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
+	"github.com/openconfig/testt"
 )
 
 func TestParseCIDR(t *testing.T) {
@@ -67,11 +68,11 @@ func TestParseCIDR(t *testing.T) {
 	}
 }
 
-func TestCIDRRange(t *testing.T) {
+func TestGenCIDRs(t *testing.T) {
 	tests := []struct {
 		desc     string
 		cidr     string
-		count    uint32
+		count    int
 		wantNets []string
 		wantErr  bool
 	}{{
@@ -107,21 +108,20 @@ func TestCIDRRange(t *testing.T) {
 	}}
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
-			netsCh, gotErr := CIDRs(test.cidr, test.count)
-			if (gotErr != nil) != test.wantErr {
-				t.Fatalf("CIDRs{%s, %d}: unexpected error result, got err: %v, want err? %t",
-					test.cidr, test.count, gotErr, test.wantErr)
-			}
 			if test.wantErr {
+				testt.ExpectFatal(t, func(t testing.TB) {
+					GenCIDRs(t, test.cidr, test.count)
+				})
 				return
 			}
 
-			gotNets := make([]string, 0)
+			netsCh := GenCIDRs(t, test.cidr, test.count)
+			var gotNets []string
 			for net := range netsCh {
 				gotNets = append(gotNets, net)
 			}
 			if diff := cmp.Diff(test.wantNets, gotNets); diff != "" {
-				t.Fatalf("CIDRs{%s, %d}: unexpected diff in generated list of networks: %s",
+				t.Fatalf("GenCIDRs(t, %s, %d): unexpected diff in generated list of networks: %s",
 					test.cidr, test.count, diff)
 			}
 		})

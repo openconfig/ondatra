@@ -21,6 +21,7 @@ using the following YANG input files:
   - public/release/models/bfd/openconfig-bfd.yang
   - public/release/models/bgp/openconfig-bgp-policy.yang
   - public/release/models/bgp/openconfig-bgp-types.yang
+  - public/release/models/extensions/openconfig-metadata.yang
   - public/release/models/interfaces/openconfig-if-aggregate.yang
   - public/release/models/interfaces/openconfig-if-ethernet.yang
   - public/release/models/interfaces/openconfig-if-ethernet-ext.yang
@@ -3412,6 +3413,18 @@ func initΛEnumTypes() {
 		"/network-instances/network-instance/policy-forwarding/policies/policy/state/type": {
 			reflect.TypeOf((E_Policy_Type)(0)),
 		},
+		"/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/apply-policy/config/default-export-policy": {
+			reflect.TypeOf((E_RoutingPolicy_DefaultPolicyType)(0)),
+		},
+		"/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/apply-policy/config/default-import-policy": {
+			reflect.TypeOf((E_RoutingPolicy_DefaultPolicyType)(0)),
+		},
+		"/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/apply-policy/state/default-export-policy": {
+			reflect.TypeOf((E_RoutingPolicy_DefaultPolicyType)(0)),
+		},
+		"/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/apply-policy/state/default-import-policy": {
+			reflect.TypeOf((E_RoutingPolicy_DefaultPolicyType)(0)),
+		},
 		"/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/config/afi-safi-name": {
 			reflect.TypeOf((E_BgpTypes_AFI_SAFI_TYPE)(0)),
 		},
@@ -3423,6 +3436,18 @@ func initΛEnumTypes() {
 		},
 		"/network-instances/network-instance/protocols/protocol/bgp/global/afi-safis/afi-safi/state/send-community-type": {
 			reflect.TypeOf((E_Bgp_CommunityType)(0)),
+		},
+		"/network-instances/network-instance/protocols/protocol/bgp/global/apply-policy/config/default-export-policy": {
+			reflect.TypeOf((E_RoutingPolicy_DefaultPolicyType)(0)),
+		},
+		"/network-instances/network-instance/protocols/protocol/bgp/global/apply-policy/config/default-import-policy": {
+			reflect.TypeOf((E_RoutingPolicy_DefaultPolicyType)(0)),
+		},
+		"/network-instances/network-instance/protocols/protocol/bgp/global/apply-policy/state/default-export-policy": {
+			reflect.TypeOf((E_RoutingPolicy_DefaultPolicyType)(0)),
+		},
+		"/network-instances/network-instance/protocols/protocol/bgp/global/apply-policy/state/default-import-policy": {
+			reflect.TypeOf((E_RoutingPolicy_DefaultPolicyType)(0)),
 		},
 		"/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/apply-policy/config/default-export-policy": {
 			reflect.TypeOf((E_RoutingPolicy_DefaultPolicyType)(0)),

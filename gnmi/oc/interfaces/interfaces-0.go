@@ -19,6 +19,7 @@ using the following YANG input files:
   - public/release/models/bfd/openconfig-bfd.yang
   - public/release/models/bgp/openconfig-bgp-policy.yang
   - public/release/models/bgp/openconfig-bgp-types.yang
+  - public/release/models/extensions/openconfig-metadata.yang
   - public/release/models/interfaces/openconfig-if-aggregate.yang
   - public/release/models/interfaces/openconfig-if-ethernet.yang
   - public/release/models/interfaces/openconfig-if-ethernet-ext.yang
@@ -3680,6 +3681,40 @@ func (n *InterfacePathAny) OutRate() *Interface_OutRatePathAny {
 			n,
 		),
 		parent: n,
+	}
+	return ps
+}
+
+// PenaltyBasedAied (container): Top level container to suppress UP->DOWN link events using a penalty based additive-increase, exponential-decrease algorithm.
+//
+//	Defining module:      "openconfig-interfaces"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "penalty-based-aied"
+//	Path from root:       "/interfaces/interface/penalty-based-aied"
+func (n *InterfacePath) PenaltyBasedAied() *Interface_PenaltyBasedAiedPath {
+	ps := &Interface_PenaltyBasedAiedPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"penalty-based-aied"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// PenaltyBasedAied (container): Top level container to suppress UP->DOWN link events using a penalty based additive-increase, exponential-decrease algorithm.
+//
+//	Defining module:      "openconfig-interfaces"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "penalty-based-aied"
+//	Path from root:       "/interfaces/interface/penalty-based-aied"
+func (n *InterfacePathAny) PenaltyBasedAied() *Interface_PenaltyBasedAiedPathAny {
+	ps := &Interface_PenaltyBasedAiedPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"penalty-based-aied"},
+			map[string]interface{}{},
+			n,
+		),
 	}
 	return ps
 }
@@ -15986,6 +16021,1152 @@ func (n *Interface_HoldTimePath) Config() ygnmi.ConfigQuery[*oc.Interface_HoldTi
 func (n *Interface_HoldTimePathAny) Config() ygnmi.WildcardQuery[*oc.Interface_HoldTime] {
 	return ygnmi.NewWildcardQuery[*oc.Interface_HoldTime](
 		"Interface_HoldTime",
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_PenaltyBasedAied_DecayHalfLifePath represents the /openconfig-interfaces/interfaces/interface/penalty-based-aied/state/decay-half-life YANG schema element.
+type Interface_PenaltyBasedAied_DecayHalfLifePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_PenaltyBasedAied_DecayHalfLifePathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/penalty-based-aied/state/decay-half-life YANG schema element.
+type Interface_PenaltyBasedAied_DecayHalfLifePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-interfaces"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "state/decay-half-life"
+//	Path from root:       "/interfaces/interface/penalty-based-aied/state/decay-half-life"
+func (n *Interface_PenaltyBasedAied_DecayHalfLifePath) State() ygnmi.SingletonQuery[uint32] {
+	return ygnmi.NewSingletonQuery[uint32](
+		"Interface_PenaltyBasedAied",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "decay-half-life"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.Interface_PenaltyBasedAied).DecayHalfLife
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_PenaltyBasedAied) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-interfaces"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "state/decay-half-life"
+//	Path from root:       "/interfaces/interface/penalty-based-aied/state/decay-half-life"
+func (n *Interface_PenaltyBasedAied_DecayHalfLifePathAny) State() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewWildcardQuery[uint32](
+		"Interface_PenaltyBasedAied",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "decay-half-life"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.Interface_PenaltyBasedAied).DecayHalfLife
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_PenaltyBasedAied) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-interfaces"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "config/decay-half-life"
+//	Path from root:       "/interfaces/interface/penalty-based-aied/config/decay-half-life"
+func (n *Interface_PenaltyBasedAied_DecayHalfLifePath) Config() ygnmi.ConfigQuery[uint32] {
+	return ygnmi.NewConfigQuery[uint32](
+		"Interface_PenaltyBasedAied",
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "decay-half-life"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.Interface_PenaltyBasedAied).DecayHalfLife
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_PenaltyBasedAied) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-interfaces"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "config/decay-half-life"
+//	Path from root:       "/interfaces/interface/penalty-based-aied/config/decay-half-life"
+func (n *Interface_PenaltyBasedAied_DecayHalfLifePathAny) Config() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewWildcardQuery[uint32](
+		"Interface_PenaltyBasedAied",
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "decay-half-life"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.Interface_PenaltyBasedAied).DecayHalfLife
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_PenaltyBasedAied) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_PenaltyBasedAied_FlapPenaltyPath represents the /openconfig-interfaces/interfaces/interface/penalty-based-aied/state/flap-penalty YANG schema element.
+type Interface_PenaltyBasedAied_FlapPenaltyPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_PenaltyBasedAied_FlapPenaltyPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/penalty-based-aied/state/flap-penalty YANG schema element.
+type Interface_PenaltyBasedAied_FlapPenaltyPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-interfaces"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "state/flap-penalty"
+//	Path from root:       "/interfaces/interface/penalty-based-aied/state/flap-penalty"
+func (n *Interface_PenaltyBasedAied_FlapPenaltyPath) State() ygnmi.SingletonQuery[uint32] {
+	return ygnmi.NewSingletonQuery[uint32](
+		"Interface_PenaltyBasedAied",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "flap-penalty"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.Interface_PenaltyBasedAied).FlapPenalty
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_PenaltyBasedAied) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-interfaces"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "state/flap-penalty"
+//	Path from root:       "/interfaces/interface/penalty-based-aied/state/flap-penalty"
+func (n *Interface_PenaltyBasedAied_FlapPenaltyPathAny) State() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewWildcardQuery[uint32](
+		"Interface_PenaltyBasedAied",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "flap-penalty"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.Interface_PenaltyBasedAied).FlapPenalty
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_PenaltyBasedAied) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-interfaces"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "config/flap-penalty"
+//	Path from root:       "/interfaces/interface/penalty-based-aied/config/flap-penalty"
+func (n *Interface_PenaltyBasedAied_FlapPenaltyPath) Config() ygnmi.ConfigQuery[uint32] {
+	return ygnmi.NewConfigQuery[uint32](
+		"Interface_PenaltyBasedAied",
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "flap-penalty"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.Interface_PenaltyBasedAied).FlapPenalty
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_PenaltyBasedAied) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-interfaces"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "config/flap-penalty"
+//	Path from root:       "/interfaces/interface/penalty-based-aied/config/flap-penalty"
+func (n *Interface_PenaltyBasedAied_FlapPenaltyPathAny) Config() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewWildcardQuery[uint32](
+		"Interface_PenaltyBasedAied",
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "flap-penalty"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.Interface_PenaltyBasedAied).FlapPenalty
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_PenaltyBasedAied) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_PenaltyBasedAied_MaxSuppressTimePath represents the /openconfig-interfaces/interfaces/interface/penalty-based-aied/state/max-suppress-time YANG schema element.
+type Interface_PenaltyBasedAied_MaxSuppressTimePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_PenaltyBasedAied_MaxSuppressTimePathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/penalty-based-aied/state/max-suppress-time YANG schema element.
+type Interface_PenaltyBasedAied_MaxSuppressTimePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-interfaces"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "state/max-suppress-time"
+//	Path from root:       "/interfaces/interface/penalty-based-aied/state/max-suppress-time"
+func (n *Interface_PenaltyBasedAied_MaxSuppressTimePath) State() ygnmi.SingletonQuery[uint32] {
+	return ygnmi.NewSingletonQuery[uint32](
+		"Interface_PenaltyBasedAied",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "max-suppress-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.Interface_PenaltyBasedAied).MaxSuppressTime
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_PenaltyBasedAied) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-interfaces"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "state/max-suppress-time"
+//	Path from root:       "/interfaces/interface/penalty-based-aied/state/max-suppress-time"
+func (n *Interface_PenaltyBasedAied_MaxSuppressTimePathAny) State() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewWildcardQuery[uint32](
+		"Interface_PenaltyBasedAied",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "max-suppress-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.Interface_PenaltyBasedAied).MaxSuppressTime
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_PenaltyBasedAied) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-interfaces"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "config/max-suppress-time"
+//	Path from root:       "/interfaces/interface/penalty-based-aied/config/max-suppress-time"
+func (n *Interface_PenaltyBasedAied_MaxSuppressTimePath) Config() ygnmi.ConfigQuery[uint32] {
+	return ygnmi.NewConfigQuery[uint32](
+		"Interface_PenaltyBasedAied",
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "max-suppress-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.Interface_PenaltyBasedAied).MaxSuppressTime
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_PenaltyBasedAied) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-interfaces"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "config/max-suppress-time"
+//	Path from root:       "/interfaces/interface/penalty-based-aied/config/max-suppress-time"
+func (n *Interface_PenaltyBasedAied_MaxSuppressTimePathAny) Config() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewWildcardQuery[uint32](
+		"Interface_PenaltyBasedAied",
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "max-suppress-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.Interface_PenaltyBasedAied).MaxSuppressTime
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_PenaltyBasedAied) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_PenaltyBasedAied_ReuseThresholdPath represents the /openconfig-interfaces/interfaces/interface/penalty-based-aied/state/reuse-threshold YANG schema element.
+type Interface_PenaltyBasedAied_ReuseThresholdPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_PenaltyBasedAied_ReuseThresholdPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/penalty-based-aied/state/reuse-threshold YANG schema element.
+type Interface_PenaltyBasedAied_ReuseThresholdPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-interfaces"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "state/reuse-threshold"
+//	Path from root:       "/interfaces/interface/penalty-based-aied/state/reuse-threshold"
+func (n *Interface_PenaltyBasedAied_ReuseThresholdPath) State() ygnmi.SingletonQuery[uint32] {
+	return ygnmi.NewSingletonQuery[uint32](
+		"Interface_PenaltyBasedAied",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "reuse-threshold"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.Interface_PenaltyBasedAied).ReuseThreshold
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_PenaltyBasedAied) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-interfaces"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "state/reuse-threshold"
+//	Path from root:       "/interfaces/interface/penalty-based-aied/state/reuse-threshold"
+func (n *Interface_PenaltyBasedAied_ReuseThresholdPathAny) State() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewWildcardQuery[uint32](
+		"Interface_PenaltyBasedAied",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "reuse-threshold"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.Interface_PenaltyBasedAied).ReuseThreshold
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_PenaltyBasedAied) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-interfaces"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "config/reuse-threshold"
+//	Path from root:       "/interfaces/interface/penalty-based-aied/config/reuse-threshold"
+func (n *Interface_PenaltyBasedAied_ReuseThresholdPath) Config() ygnmi.ConfigQuery[uint32] {
+	return ygnmi.NewConfigQuery[uint32](
+		"Interface_PenaltyBasedAied",
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "reuse-threshold"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.Interface_PenaltyBasedAied).ReuseThreshold
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_PenaltyBasedAied) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-interfaces"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "config/reuse-threshold"
+//	Path from root:       "/interfaces/interface/penalty-based-aied/config/reuse-threshold"
+func (n *Interface_PenaltyBasedAied_ReuseThresholdPathAny) Config() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewWildcardQuery[uint32](
+		"Interface_PenaltyBasedAied",
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "reuse-threshold"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.Interface_PenaltyBasedAied).ReuseThreshold
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_PenaltyBasedAied) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_PenaltyBasedAied_SuppressThresholdPath represents the /openconfig-interfaces/interfaces/interface/penalty-based-aied/state/suppress-threshold YANG schema element.
+type Interface_PenaltyBasedAied_SuppressThresholdPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_PenaltyBasedAied_SuppressThresholdPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/penalty-based-aied/state/suppress-threshold YANG schema element.
+type Interface_PenaltyBasedAied_SuppressThresholdPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-interfaces"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "state/suppress-threshold"
+//	Path from root:       "/interfaces/interface/penalty-based-aied/state/suppress-threshold"
+func (n *Interface_PenaltyBasedAied_SuppressThresholdPath) State() ygnmi.SingletonQuery[uint32] {
+	return ygnmi.NewSingletonQuery[uint32](
+		"Interface_PenaltyBasedAied",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "suppress-threshold"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.Interface_PenaltyBasedAied).SuppressThreshold
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_PenaltyBasedAied) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-interfaces"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "state/suppress-threshold"
+//	Path from root:       "/interfaces/interface/penalty-based-aied/state/suppress-threshold"
+func (n *Interface_PenaltyBasedAied_SuppressThresholdPathAny) State() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewWildcardQuery[uint32](
+		"Interface_PenaltyBasedAied",
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "suppress-threshold"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.Interface_PenaltyBasedAied).SuppressThreshold
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_PenaltyBasedAied) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-interfaces"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "config/suppress-threshold"
+//	Path from root:       "/interfaces/interface/penalty-based-aied/config/suppress-threshold"
+func (n *Interface_PenaltyBasedAied_SuppressThresholdPath) Config() ygnmi.ConfigQuery[uint32] {
+	return ygnmi.NewConfigQuery[uint32](
+		"Interface_PenaltyBasedAied",
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "suppress-threshold"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.Interface_PenaltyBasedAied).SuppressThreshold
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_PenaltyBasedAied) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-interfaces"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "config/suppress-threshold"
+//	Path from root:       "/interfaces/interface/penalty-based-aied/config/suppress-threshold"
+func (n *Interface_PenaltyBasedAied_SuppressThresholdPathAny) Config() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewWildcardQuery[uint32](
+		"Interface_PenaltyBasedAied",
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "suppress-threshold"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.Interface_PenaltyBasedAied).SuppressThreshold
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_PenaltyBasedAied) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_PenaltyBasedAiedPath represents the /openconfig-interfaces/interfaces/interface/penalty-based-aied YANG schema element.
+type Interface_PenaltyBasedAiedPath struct {
+	*ygnmi.NodePath
+}
+
+// Interface_PenaltyBasedAiedPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/penalty-based-aied YANG schema element.
+type Interface_PenaltyBasedAiedPathAny struct {
+	*ygnmi.NodePath
+}
+
+// DecayHalfLife (leaf): The amount of time after which an interface’s penalty is decreased by half. Decay-half-time should not be more than max-suppress-time.
+//
+//	Defining module:      "openconfig-interfaces"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/decay-half-life"
+//	Path from root:       "/interfaces/interface/penalty-based-aied/*/decay-half-life"
+func (n *Interface_PenaltyBasedAiedPath) DecayHalfLife() *Interface_PenaltyBasedAied_DecayHalfLifePath {
+	ps := &Interface_PenaltyBasedAied_DecayHalfLifePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "decay-half-life"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// DecayHalfLife (leaf): The amount of time after which an interface’s penalty is decreased by half. Decay-half-time should not be more than max-suppress-time.
+//
+//	Defining module:      "openconfig-interfaces"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/decay-half-life"
+//	Path from root:       "/interfaces/interface/penalty-based-aied/*/decay-half-life"
+func (n *Interface_PenaltyBasedAiedPathAny) DecayHalfLife() *Interface_PenaltyBasedAied_DecayHalfLifePathAny {
+	ps := &Interface_PenaltyBasedAied_DecayHalfLifePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "decay-half-life"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// FlapPenalty (leaf): A penalty that each down event costs. A value of 0 indicates the config is disabled.
+//
+//	Defining module:      "openconfig-interfaces"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/flap-penalty"
+//	Path from root:       "/interfaces/interface/penalty-based-aied/*/flap-penalty"
+func (n *Interface_PenaltyBasedAiedPath) FlapPenalty() *Interface_PenaltyBasedAied_FlapPenaltyPath {
+	ps := &Interface_PenaltyBasedAied_FlapPenaltyPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "flap-penalty"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// FlapPenalty (leaf): A penalty that each down event costs. A value of 0 indicates the config is disabled.
+//
+//	Defining module:      "openconfig-interfaces"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/flap-penalty"
+//	Path from root:       "/interfaces/interface/penalty-based-aied/*/flap-penalty"
+func (n *Interface_PenaltyBasedAiedPathAny) FlapPenalty() *Interface_PenaltyBasedAied_FlapPenaltyPathAny {
+	ps := &Interface_PenaltyBasedAied_FlapPenaltyPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "flap-penalty"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// MaxSuppressTime (leaf): Maximum time an interface can remain damped since the last link down event no matter how unstable it has been prior to this period of stability. In a damped state, the interface’s state change will not be advertised.
+//
+//	Defining module:      "openconfig-interfaces"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/max-suppress-time"
+//	Path from root:       "/interfaces/interface/penalty-based-aied/*/max-suppress-time"
+func (n *Interface_PenaltyBasedAiedPath) MaxSuppressTime() *Interface_PenaltyBasedAied_MaxSuppressTimePath {
+	ps := &Interface_PenaltyBasedAied_MaxSuppressTimePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "max-suppress-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// MaxSuppressTime (leaf): Maximum time an interface can remain damped since the last link down event no matter how unstable it has been prior to this period of stability. In a damped state, the interface’s state change will not be advertised.
+//
+//	Defining module:      "openconfig-interfaces"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/max-suppress-time"
+//	Path from root:       "/interfaces/interface/penalty-based-aied/*/max-suppress-time"
+func (n *Interface_PenaltyBasedAiedPathAny) MaxSuppressTime() *Interface_PenaltyBasedAied_MaxSuppressTimePathAny {
+	ps := &Interface_PenaltyBasedAied_MaxSuppressTimePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "max-suppress-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// ReuseThreshold (leaf): When the accumulated penalty decreases to this reuse threshold, the interface is not damped anymore. Interface state changes are advertised to applications. A value of 0 indicates config is disabled.
+//
+//	Defining module:      "openconfig-interfaces"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/reuse-threshold"
+//	Path from root:       "/interfaces/interface/penalty-based-aied/*/reuse-threshold"
+func (n *Interface_PenaltyBasedAiedPath) ReuseThreshold() *Interface_PenaltyBasedAied_ReuseThresholdPath {
+	ps := &Interface_PenaltyBasedAied_ReuseThresholdPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "reuse-threshold"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// ReuseThreshold (leaf): When the accumulated penalty decreases to this reuse threshold, the interface is not damped anymore. Interface state changes are advertised to applications. A value of 0 indicates config is disabled.
+//
+//	Defining module:      "openconfig-interfaces"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/reuse-threshold"
+//	Path from root:       "/interfaces/interface/penalty-based-aied/*/reuse-threshold"
+func (n *Interface_PenaltyBasedAiedPathAny) ReuseThreshold() *Interface_PenaltyBasedAied_ReuseThresholdPathAny {
+	ps := &Interface_PenaltyBasedAied_ReuseThresholdPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "reuse-threshold"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// SuppressThreshold (leaf): The accumulated penalty that triggers the damping of an interface. A value of 0 indicates config is disabled.
+//
+//	Defining module:      "openconfig-interfaces"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/suppress-threshold"
+//	Path from root:       "/interfaces/interface/penalty-based-aied/*/suppress-threshold"
+func (n *Interface_PenaltyBasedAiedPath) SuppressThreshold() *Interface_PenaltyBasedAied_SuppressThresholdPath {
+	ps := &Interface_PenaltyBasedAied_SuppressThresholdPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "suppress-threshold"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// SuppressThreshold (leaf): The accumulated penalty that triggers the damping of an interface. A value of 0 indicates config is disabled.
+//
+//	Defining module:      "openconfig-interfaces"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/suppress-threshold"
+//	Path from root:       "/interfaces/interface/penalty-based-aied/*/suppress-threshold"
+func (n *Interface_PenaltyBasedAiedPathAny) SuppressThreshold() *Interface_PenaltyBasedAied_SuppressThresholdPathAny {
+	ps := &Interface_PenaltyBasedAied_SuppressThresholdPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "suppress-threshold"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Interface_PenaltyBasedAiedPath) State() ygnmi.SingletonQuery[*oc.Interface_PenaltyBasedAied] {
+	return ygnmi.NewSingletonQuery[*oc.Interface_PenaltyBasedAied](
+		"Interface_PenaltyBasedAied",
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Interface_PenaltyBasedAiedPathAny) State() ygnmi.WildcardQuery[*oc.Interface_PenaltyBasedAied] {
+	return ygnmi.NewWildcardQuery[*oc.Interface_PenaltyBasedAied](
+		"Interface_PenaltyBasedAied",
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *Interface_PenaltyBasedAiedPath) Config() ygnmi.ConfigQuery[*oc.Interface_PenaltyBasedAied] {
+	return ygnmi.NewConfigQuery[*oc.Interface_PenaltyBasedAied](
+		"Interface_PenaltyBasedAied",
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *Interface_PenaltyBasedAiedPathAny) Config() ygnmi.WildcardQuery[*oc.Interface_PenaltyBasedAied] {
+	return ygnmi.NewWildcardQuery[*oc.Interface_PenaltyBasedAied](
+		"Interface_PenaltyBasedAied",
 		false,
 		false,
 		false,

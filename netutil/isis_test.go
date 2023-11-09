@@ -18,13 +18,14 @@ import (
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
+	"github.com/openconfig/testt"
 )
 
-func TestSystemIDs(t *testing.T) {
+func TestGenSystemIDs(t *testing.T) {
 	tests := []struct {
 		desc    string
 		startID string
-		count   uint32
+		count   int
 		wantIDs []string
 		wantErr bool
 	}{{
@@ -55,21 +56,20 @@ func TestSystemIDs(t *testing.T) {
 	}}
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
-			idsCh, gotErr := SystemIDs(test.startID, test.count)
-			if (gotErr != nil) != test.wantErr {
-				t.Fatalf("SystemIDs{%s, %d}: unexpected error result, got err: %v, want err? %t",
-					test.startID, test.count, gotErr, test.wantErr)
-			}
 			if test.wantErr {
+				testt.ExpectFatal(t, func(t testing.TB) {
+					GenSystemIDs(t, test.startID, test.count)
+				})
 				return
 			}
 
-			gotIDs := make([]string, 0)
+			idsCh := GenSystemIDs(t, test.startID, test.count)
+			var gotIDs []string
 			for id := range idsCh {
 				gotIDs = append(gotIDs, id)
 			}
 			if diff := cmp.Diff(test.wantIDs, gotIDs); diff != "" {
-				t.Fatalf("SystemIDs{%s, %d}: unexpected diff in generated list of IDs: %s",
+				t.Fatalf("GenSystemIDs(t, %s, %d): unexpected diff in generated list of IDs: %s",
 					test.startID, test.count, diff)
 			}
 		})

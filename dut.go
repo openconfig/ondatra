@@ -16,6 +16,7 @@ package ondatra
 
 import (
 	"github.com/openconfig/ondatra/binding"
+	"github.com/openconfig/ondatra/cli"
 	"github.com/openconfig/ondatra/config"
 	"github.com/openconfig/ondatra/console"
 	"github.com/openconfig/ondatra/raw"
@@ -41,6 +42,11 @@ type Config struct {
 // New returns an empty DUT configuration.
 func (c *Config) New() *config.VendorConfig {
 	return config.NewVendorConfig(c.dut)
+}
+
+// CLI returns a handle to the DUT CLI API.
+func (d *DUTDevice) CLI() *cli.CLI {
+	return cli.New(d.res.(binding.DUT))
 }
 
 // Console returns a handle to the DUT Console API.

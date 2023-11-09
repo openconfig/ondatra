@@ -222,8 +222,22 @@ type GNSIClients interface {
 // CLIClient provides the interface for sending CLI commands to the DUT.
 // All implementations of this interface must embed AbstractCLIClient.
 type CLIClient interface {
+	// TODO(team): Remove when all clients using RunCommand.
 	SendCommand(context.Context, string) (string, error)
+	RunCommand(context.Context, string) (CommandResult, error)
 	mustEmbedAbstractCLIClient()
+}
+
+// CommandResult provides the interface for the result of a CLI command.
+// All implementations of this interface must embed AbstractCommandResult.
+type CommandResult interface {
+	// Output returns the output of the command.
+	// The return value may be non-empty even when the command fails.
+	Output() string
+	// Error returns an error message that occurred when running the command.
+	// The return value is the empty string if and only if the command succeeds.
+	Error() string
+	mustEmbedAbstractCommandResult()
 }
 
 // ConsoleClient provides the interface for console access to the DUT.

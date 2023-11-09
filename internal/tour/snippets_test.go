@@ -20,10 +20,12 @@ import (
 	"testing"
 	"time"
 
+	"github.com/open-traffic-generator/snappi/gosnappi"
 	"github.com/openconfig/gnoigo/system"
 	"github.com/openconfig/ondatra"
 	"github.com/openconfig/ondatra/gnmi"
 	"github.com/openconfig/ondatra/gnmi/oc"
+	"github.com/openconfig/ondatra/gnmi/otg"
 	"github.com/openconfig/ondatra/gnoi"
 	"github.com/openconfig/ondatra/netutil"
 
@@ -56,38 +58,67 @@ func TestPushConfig(t *testing.T) {
 
 func TestCreateTopology(t *testing.T) {
 	ate := ondatra.ATE(t, "ate")
-	ap1 := ate.Port(t, "port1")
-	ap2 := ate.Port(t, "port2")
-	top := ate.Topology().New()
-	if1 := top.AddInterface("if1").WithPort(ap1)
-	if2 := top.AddInterface("if2").WithPort(ap2)
-	if1.IPv4().
-		WithAddress("192.168.31.2/30").
-		WithDefaultGateway("192.168.31.1")
-	if2.IPv4().
-		WithAddress("192.168.32.2/30").
-		WithDefaultGateway("192.168.32.1")
-	net := if2.AddNetwork("net")
-	net.IPv4().
-		WithAddress("192.168.40.0/30").
-		WithCount(100)
-	top.Push(t).StartProtocols(t)
+	ap := ate.Port(t, "port")
+	top := gosnappi.NewConfig()
+	top.Ports().Add().SetName(ap.ID())
+
+	dev := top.Devices().Add().SetName("dev")
+	eth := dev.Ethernets().Add().SetName("eth").SetMac("02:00:01:01:01:01")
+	eth.Connection().SetPortName(ap.ID())
+	ip := eth.Ipv4Addresses().Add().SetName("ipv4").
+		SetAddress("192.168.31.2").SetPrefix(30).
+		SetGateway("192.168.31.1")
+	bgp := dev.Bgp().SetRouterId(ip.Address()).
+		Ipv4Interfaces().Add().SetIpv4Name(ip.Name())
+	bgpPeer := bgp.Peers().Add().SetName("peer").
+		SetPeerAddress("192.168.31.1").
+		SetAsType(gosnappi.BgpV4PeerAsType.EBGP)
+	bgpPeer.V4Routes().Add().SetName("routes").
+		Addresses().Add().SetAddress("192.168.40.0").
+		SetPrefix(30).SetCount(100)
+
+	ate.OTG().PushConfig(t, top)
+	ate.OTG().StartProtocols(t)
+}
+
+func addIPIntf(top gosnappi.Config, port *ondatra.Port, devName, mac, ip, gw string, prefixLen uint32) gosnappi.DeviceIpv4 {
+	top.Ports().Add().SetName(port.ID())
+	dev := top.Devices().Add().SetName(devName)
+	eth := dev.Ethernets().Add().SetName(dev.Name() + ".Eth").SetMac(mac)
+	eth.Connection().SetPortName(port.ID())
+	return eth.Ipv4Addresses().Add().SetName(eth.Name() + ".IPv4").
+		SetAddress(ip).SetGateway(gw).SetPrefix(prefixLen)
+}
+
+func addIntfs(t *testing.T, ate *ondatra.ATEDevice, top gosnappi.Config, srcIntfMAC string) (gosnappi.DeviceIpv4, gosnappi.DeviceIpv4) {
+	return addIPIntf(top, ate.Port(t, "port1"), "dev1", srcIntfMAC, "192.168.31.2", "192.168.31.1", 30),
+		addIPIntf(top, ate.Port(t, "port2"), "dev2", "02:00:01:01:01:02", "192.168.32.2", "192.168.32.1", 30)
 }
 
 func TestGenerateTraffic(t *testing.T) {
 	ate := ondatra.ATE(t, "ate")
-	ap1 := ate.Port(t, "port1")
-	ap2 := ate.Port(t, "port2")
-	top := ate.Topology().New()
-	if1 := top.AddInterface("if1").WithPort(ap1)
-	if2 := top.AddInterface("if2").WithPort(ap2)
-	flow := ate.Traffic().NewFlow("Flow1").
-		WithSrcEndpoints(if1).
-		WithDstEndpoints(if2).
-		WithFrameRatePct(50)
-	ate.Traffic().Start(t, flow)
+	top := gosnappi.NewConfig()
+	// Two IP interfaces configured similarly to TestCreateTopology.
+	srcIntfMAC := "02:00:01:01:01:01"
+	ip1, ip2 := addIntfs(t, ate, top, srcIntfMAC)
+
+	flow := top.Flows().Add().SetName("Flow1")
+	flow.Metrics().SetEnable(true)
+	flow.TxRx().Device().
+		SetTxNames([]string{ip1.Name()}).
+		SetRxNames([]string{ip2.Name()})
+
+	flow.Packet().Add().Ethernet().Src().
+		SetValue(srcIntfMAC)
+	ipHdr := flow.Packet().Add().Ipv4()
+	ipHdr.Src().SetValue(ip1.Address())
+	ipHdr.Dst().SetValue(ip2.Address())
+
+	ate.OTG().PushConfig(t, top)
+	ate.OTG().StartProtocols(t)
+	ate.OTG().StartTraffic(t)
 	time.Sleep(3 * time.Minute)
-	ate.Traffic().Stop(t)
+	ate.OTG().StopTraffic(t)
 }
 
 func TestQueryTelemetry(t *testing.T) {
@@ -97,11 +128,11 @@ func TestQueryTelemetry(t *testing.T) {
 	ap := ate.Port(t, "port1")
 
 	ds := gnmi.Get(t, dut, gnmi.OC().Interface(dp.Name()).OperStatus().State())
-	as := gnmi.Get(t, ate, gnmi.OC().Interface(ap.Name()).OperStatus().State())
+	as := gnmi.Get(t, ate.OTG(), gnmi.OTG().Port(ap.ID()).Link().State())
 	if want := oc.Interface_OperStatus_UP; ds != want {
 		t.Errorf("Get(DUT port1 status): got %v, want %v", ds, want)
 	}
-	if want := oc.Interface_OperStatus_UP; as != want {
+	if want := otg.Port_Link_UP; as != want {
 		t.Errorf("Get(ATE port1 status): got %v, want %v", as, want)
 	}
 
@@ -117,11 +148,11 @@ func TestExecuteOperation(t *testing.T) {
 
 	ate := ondatra.ATE(t, "ate")
 	ap := dut.Port(t, "port1")
-	ate.Actions().
-		NewSetPortState().
-		WithPort(ap).
-		WithEnabled(false).
-		Send(t)
+	portStateAction := gosnappi.NewControlState()
+	portStateAction.Port().Link().
+		SetPortNames([]string{ap.ID()}).
+		SetState(gosnappi.StatePortLinkState.DOWN)
+	ate.OTG().SetControlState(t, portStateAction)
 }
 
 func doSomethingWith(stuff ...any) {}

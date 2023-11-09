@@ -19,6 +19,7 @@ using the following YANG input files:
   - public/release/models/bfd/openconfig-bfd.yang
   - public/release/models/bgp/openconfig-bgp-policy.yang
   - public/release/models/bgp/openconfig-bgp-types.yang
+  - public/release/models/extensions/openconfig-metadata.yang
   - public/release/models/interfaces/openconfig-if-aggregate.yang
   - public/release/models/interfaces/openconfig-if-ethernet.yang
   - public/release/models/interfaces/openconfig-if-ethernet-ext.yang
@@ -9994,6 +9995,170 @@ func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetCommunit
 	)
 }
 
+// RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetCommunity_Reference_CommunitySetRefsPath represents the /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-community/reference/state/community-set-refs YANG schema element.
+type RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetCommunity_Reference_CommunitySetRefsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetCommunity_Reference_CommunitySetRefsPathAny represents the wildcard version of the /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-community/reference/state/community-set-refs YANG schema element.
+type RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetCommunity_Reference_CommunitySetRefsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-bgp-policy"
+//	Instantiating module: "openconfig-bgp-policy"
+//	Path from parent:     "state/community-set-refs"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-community/reference/state/community-set-refs"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetCommunity_Reference_CommunitySetRefsPath) State() ygnmi.SingletonQuery[[]string] {
+	return ygnmi.NewSingletonQuery[[]string](
+		"RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetCommunity_Reference",
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "community-set-refs"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) ([]string, bool) {
+			ret := gs.(*oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetCommunity_Reference).CommunitySetRefs
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetCommunity_Reference)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-bgp-policy"
+//	Instantiating module: "openconfig-bgp-policy"
+//	Path from parent:     "state/community-set-refs"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-community/reference/state/community-set-refs"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetCommunity_Reference_CommunitySetRefsPathAny) State() ygnmi.WildcardQuery[[]string] {
+	return ygnmi.NewWildcardQuery[[]string](
+		"RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetCommunity_Reference",
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "community-set-refs"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) ([]string, bool) {
+			ret := gs.(*oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetCommunity_Reference).CommunitySetRefs
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetCommunity_Reference)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-bgp-policy"
+//	Instantiating module: "openconfig-bgp-policy"
+//	Path from parent:     "config/community-set-refs"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-community/reference/config/community-set-refs"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetCommunity_Reference_CommunitySetRefsPath) Config() ygnmi.ConfigQuery[[]string] {
+	return ygnmi.NewConfigQuery[[]string](
+		"RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetCommunity_Reference",
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "community-set-refs"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) ([]string, bool) {
+			ret := gs.(*oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetCommunity_Reference).CommunitySetRefs
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetCommunity_Reference)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-bgp-policy"
+//	Instantiating module: "openconfig-bgp-policy"
+//	Path from parent:     "config/community-set-refs"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-community/reference/config/community-set-refs"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetCommunity_Reference_CommunitySetRefsPathAny) Config() ygnmi.WildcardQuery[[]string] {
+	return ygnmi.NewWildcardQuery[[]string](
+		"RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetCommunity_Reference",
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "community-set-refs"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) ([]string, bool) {
+			ret := gs.(*oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetCommunity_Reference).CommunitySetRefs
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetCommunity_Reference)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
 // RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetCommunity_ReferencePath represents the /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-community/reference YANG schema element.
 type RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetCommunity_ReferencePath struct {
 	*ygnmi.NodePath
@@ -10032,6 +10197,42 @@ func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetCommunit
 	ps := &RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetCommunity_Reference_CommunitySetRefPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"*", "community-set-ref"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// CommunitySetRefs (leaf-list): References a list of defined community sets by name
+//
+//	Defining module:      "openconfig-bgp-policy"
+//	Instantiating module: "openconfig-routing-policy"
+//	Path from parent:     "*/community-set-refs"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-community/reference/*/community-set-refs"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetCommunity_ReferencePath) CommunitySetRefs() *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetCommunity_Reference_CommunitySetRefsPath {
+	ps := &RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetCommunity_Reference_CommunitySetRefsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "community-set-refs"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// CommunitySetRefs (leaf-list): References a list of defined community sets by name
+//
+//	Defining module:      "openconfig-bgp-policy"
+//	Instantiating module: "openconfig-routing-policy"
+//	Path from parent:     "*/community-set-refs"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-community/reference/*/community-set-refs"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetCommunity_ReferencePathAny) CommunitySetRefs() *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetCommunity_Reference_CommunitySetRefsPathAny {
+	ps := &RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetCommunity_Reference_CommunitySetRefsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "community-set-refs"},
 			map[string]interface{}{},
 			n,
 		),
@@ -11208,6 +11409,170 @@ func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommu
 	)
 }
 
+// RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference_ExtCommunitySetRefsPath represents the /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-ext-community/reference/state/ext-community-set-refs YANG schema element.
+type RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference_ExtCommunitySetRefsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference_ExtCommunitySetRefsPathAny represents the wildcard version of the /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-ext-community/reference/state/ext-community-set-refs YANG schema element.
+type RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference_ExtCommunitySetRefsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-bgp-policy"
+//	Instantiating module: "openconfig-bgp-policy"
+//	Path from parent:     "state/ext-community-set-refs"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-ext-community/reference/state/ext-community-set-refs"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference_ExtCommunitySetRefsPath) State() ygnmi.SingletonQuery[[]string] {
+	return ygnmi.NewSingletonQuery[[]string](
+		"RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference",
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "ext-community-set-refs"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) ([]string, bool) {
+			ret := gs.(*oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference).ExtCommunitySetRefs
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-bgp-policy"
+//	Instantiating module: "openconfig-bgp-policy"
+//	Path from parent:     "state/ext-community-set-refs"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-ext-community/reference/state/ext-community-set-refs"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference_ExtCommunitySetRefsPathAny) State() ygnmi.WildcardQuery[[]string] {
+	return ygnmi.NewWildcardQuery[[]string](
+		"RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference",
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "ext-community-set-refs"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) ([]string, bool) {
+			ret := gs.(*oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference).ExtCommunitySetRefs
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-bgp-policy"
+//	Instantiating module: "openconfig-bgp-policy"
+//	Path from parent:     "config/ext-community-set-refs"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-ext-community/reference/config/ext-community-set-refs"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference_ExtCommunitySetRefsPath) Config() ygnmi.ConfigQuery[[]string] {
+	return ygnmi.NewConfigQuery[[]string](
+		"RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference",
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "ext-community-set-refs"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) ([]string, bool) {
+			ret := gs.(*oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference).ExtCommunitySetRefs
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-bgp-policy"
+//	Instantiating module: "openconfig-bgp-policy"
+//	Path from parent:     "config/ext-community-set-refs"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-ext-community/reference/config/ext-community-set-refs"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference_ExtCommunitySetRefsPathAny) Config() ygnmi.WildcardQuery[[]string] {
+	return ygnmi.NewWildcardQuery[[]string](
+		"RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference",
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "ext-community-set-refs"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) ([]string, bool) {
+			ret := gs.(*oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference).ExtCommunitySetRefs
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
 // RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_ReferencePath represents the /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-ext-community/reference YANG schema element.
 type RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_ReferencePath struct {
 	*ygnmi.NodePath
@@ -11248,6 +11613,44 @@ func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommu
 	ps := &RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference_ExtCommunitySetRefPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"*", "ext-community-set-ref"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// ExtCommunitySetRefs (leaf-list): References a list of defined extended community sets by
+// name
+//
+//	Defining module:      "openconfig-bgp-policy"
+//	Instantiating module: "openconfig-routing-policy"
+//	Path from parent:     "*/ext-community-set-refs"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-ext-community/reference/*/ext-community-set-refs"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_ReferencePath) ExtCommunitySetRefs() *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference_ExtCommunitySetRefsPath {
+	ps := &RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference_ExtCommunitySetRefsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "ext-community-set-refs"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// ExtCommunitySetRefs (leaf-list): References a list of defined extended community sets by
+// name
+//
+//	Defining module:      "openconfig-bgp-policy"
+//	Instantiating module: "openconfig-routing-policy"
+//	Path from parent:     "*/ext-community-set-refs"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-ext-community/reference/*/ext-community-set-refs"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_ReferencePathAny) ExtCommunitySetRefs() *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference_ExtCommunitySetRefsPathAny {
+	ps := &RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity_Reference_ExtCommunitySetRefsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "ext-community-set-refs"},
 			map[string]interface{}{},
 			n,
 		),

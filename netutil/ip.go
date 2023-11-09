@@ -20,6 +20,7 @@ import (
 	"math/big"
 	"net"
 	"strings"
+	"testing"
 )
 
 var (
@@ -27,35 +28,17 @@ var (
 	maxIPv6 = maxVal(net.IPv6len)
 )
 
-// network represents an IPv4 or IPv6 network.
-type network struct {
-	ip      []byte
-	maskLen uint
-	isIPv6  bool
-}
-
-// parseCIDR returns the network represented by the given CIDR.
-// Returns an error if the CIDR is not valid.
-func parseCIDR(cidr string) (*network, error) {
-	ip, netw, err := net.ParseCIDR(cidr)
+// GenCIDRs returns a channel of the specified number of CIDR strings starting from the given CIDR.
+func GenCIDRs(t testing.TB, cidr string, count int) <-chan string {
+	c, err := CIDRs(cidr, uint32(count))
 	if err != nil {
-		return nil, err
+		t.Fatalf("GenCIDRs(t, %q, %d) failed: %v", cidr, count, err)
 	}
-	maskLen, _ := netw.Mask.Size()
-	if strings.Contains(cidr, ":") {
-		return &network{
-			ip:      ip,
-			maskLen: uint(maskLen),
-			isIPv6:  true,
-		}, nil
-	}
-	return &network{
-		ip:      ip.To4(),
-		maskLen: uint(maskLen),
-	}, nil
+	return c
 }
 
 // CIDRs returns a channel of the specified number of CIDR strings starting from the given CIDR.
+// Deprecated: Use GenCIDRs instead.
 func CIDRs(cidr string, count uint32) (<-chan string, error) {
 	const (
 		maxIPv4StrLen = len("255.255.255.255")
@@ -96,6 +79,34 @@ func CIDRs(cidr string, count uint32) (<-chan string, error) {
 		}
 	}()
 	return netsCh, nil
+}
+
+// network represents an IPv4 or IPv6 network.
+type network struct {
+	ip      []byte
+	maskLen uint
+	isIPv6  bool
+}
+
+// parseCIDR returns the network represented by the given CIDR.
+// Returns an error if the CIDR is not valid.
+func parseCIDR(cidr string) (*network, error) {
+	ip, netw, err := net.ParseCIDR(cidr)
+	if err != nil {
+		return nil, err
+	}
+	maskLen, _ := netw.Mask.Size()
+	if strings.Contains(cidr, ":") {
+		return &network{
+			ip:      ip,
+			maskLen: uint(maskLen),
+			isIPv6:  true,
+		}, nil
+	}
+	return &network{
+		ip:      ip.To4(),
+		maskLen: uint(maskLen),
+	}, nil
 }
 
 func checkMax(start, inc, max *big.Int, numVals uint32) error {

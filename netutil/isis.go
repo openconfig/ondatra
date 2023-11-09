@@ -20,14 +20,23 @@ import (
 	"fmt"
 	"math/big"
 	"strings"
+	"testing"
 )
 
 const sysIDLen = 6
 
 var maxSysID = maxVal(sysIDLen)
 
-// SystemIDs returns a channel of the specified number of hex-formatted system IDs.
-func SystemIDs(startID string, count uint32) (<-chan string, error) {
+// GenSystemIDs returns a channel of the specified number of hex-formatted system IDs.
+func GenSystemIDs(t testing.TB, startID string, count int) <-chan string {
+	c, err := systemIDs(startID, count)
+	if err != nil {
+		t.Fatalf("GenSystemIDs(t, %q, %d) failed: %v", startID, count, err)
+	}
+	return c
+}
+
+func systemIDs(startID string, count int) (<-chan string, error) {
 	const strLen = len("ff ff ff ff ff ff")
 
 	b, err := hex.DecodeString(strings.NewReplacer(":", "", ".", "", " ", "").Replace(startID))

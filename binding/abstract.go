@@ -214,11 +214,49 @@ var _ CLIClient = &AbstractCLIClient{}
 type AbstractCLIClient struct{}
 
 // SendCommand returns an unimplemented error.
+// Deprecated: Use RunCommand() instead.
+// TODO(team): Remove when all clients using RunCommand.
 func (*AbstractCLIClient) SendCommand(ctx context.Context, cmd string) (string, error) {
 	return "", errors.New("SendCommand unimplemented")
 }
 
+// SendCommandUsingRun implements SendCommand using the client's RunCommand.
+func SendCommandUsingRun(ctx context.Context, cmd string, c CLIClient) (string, error) {
+	res, err := c.RunCommand(ctx, cmd)
+	if err != nil {
+		return "", err
+	}
+	if res.Error() != "" {
+		return "", errors.New(res.Error())
+	}
+	return res.Output(), nil
+}
+
+// RunCommand returns an unimplemented error.
+func (*AbstractCLIClient) RunCommand(ctx context.Context, cmd string) (CommandResult, error) {
+	return nil, errors.New("RunCommand unimplemented")
+}
+
 func (*AbstractCLIClient) mustEmbedAbstractCLIClient() {}
+
+var _ CommandResult = &AbstractCommandResult{}
+
+// AbstractCommandResult is implementation support for the CommandResult interface.
+type AbstractCommandResult struct{}
+
+// Output logs a fatal unimplemented error.
+func (*AbstractCommandResult) Output() string {
+	log.Fatal("Output unimplemented")
+	return ""
+}
+
+// Error logs a fatal unimplemented error.
+func (*AbstractCommandResult) Error() string {
+	log.Fatal("Error unimplemented")
+	return ""
+}
+
+func (*AbstractCommandResult) mustEmbedAbstractCommandResult() {}
 
 var _ ConsoleClient = &AbstractConsoleClient{}
 

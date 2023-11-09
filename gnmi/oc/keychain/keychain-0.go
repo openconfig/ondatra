@@ -19,6 +19,7 @@ using the following YANG input files:
   - public/release/models/bfd/openconfig-bfd.yang
   - public/release/models/bgp/openconfig-bgp-policy.yang
   - public/release/models/bgp/openconfig-bgp-types.yang
+  - public/release/models/extensions/openconfig-metadata.yang
   - public/release/models/interfaces/openconfig-if-aggregate.yang
   - public/release/models/interfaces/openconfig-if-ethernet.yang
   - public/release/models/interfaces/openconfig-if-ethernet-ext.yang
