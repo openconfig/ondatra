@@ -112,6 +112,7 @@ OTG_YANG_FILES=(
 
 go run github.com/openconfig/ygnmi/app/ygnmi generator \
   --trim_module_prefix=openconfig \
+  --typedef_enum_with_defmod=false \
   --exclude_modules="${EXCLUDE_MODULES}" \
   --base_package_path=github.com/openconfig/ondatra/gnmi/oc \
   --output_dir=gnmi/oc \
