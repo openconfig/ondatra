@@ -1161,6 +1161,44 @@ func (h *LDPHello) WithRequestTargeted(targeted bool) *LDPHello {
 	return h
 }
 
+// NewPwMplsControlWordHeader returns a new PW Control Word header.
+func NewPwMplsControlWordHeader() *PwMplsControlWordHeader {
+	return &PwMplsControlWordHeader{&opb.PwMplsControlWordHeader{}}
+}
+
+// PwMplsControlWordHeader is a ControlWord packet header.
+type PwMplsControlWordHeader struct {
+	pb *opb.PwMplsControlWordHeader
+}
+
+func (c *PwMplsControlWordHeader) asPB() *opb.Header {
+	return &opb.Header{Type: &opb.Header_PwMplsControlWord{c.pb}}
+}
+
+// WithCwRsvd sets the CW Rsvd field
+func (c *PwMplsControlWordHeader) WithCwRsvd(cwrsvd uint8) *PwMplsControlWordHeader {
+	c.pb.CwRsvd = uint32(cwrsvd)
+	return c
+}
+
+// WithCwFlags sets the CW Flags field
+func (c *PwMplsControlWordHeader) WithCwFlags(cwflags uint8) *PwMplsControlWordHeader {
+	c.pb.CwFlags = uint32(cwflags)
+	return c
+}
+
+// WithCwFrg sets the CW Flags field
+func (c *PwMplsControlWordHeader) WithCwFrg(cwfrg uint8) *PwMplsControlWordHeader {
+	c.pb.CwFrg = uint32(cwfrg)
+	return c
+}
+
+// WithCwSeq sets the CW Flags field
+func (c *PwMplsControlWordHeader) WithCwSeq(cwseq uint8) *PwMplsControlWordHeader {
+	c.pb.CwSeq = uint32(cwseq)
+	return c
+}
+
 // NewMACsecHeader returns a new MACsec header.
 func NewMACsecHeader() *MACsecHeader {
 	return &MACsecHeader{&opb.MacsecHeader{}}

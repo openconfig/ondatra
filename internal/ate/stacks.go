@@ -134,6 +134,12 @@ func headerStacks(hdr *opb.Header, idx int, hasSrcVLAN bool) ([]*ixconfig.Traffi
 			return nil, err
 		}
 		return []*ixconfig.TrafficTrafficItemConfigElementStack{s}, nil
+	case *opb.Header_PwMplsControlWord:
+		s, err := pwMplscontrolWordStack(v.PwMplsControlWord, idx)
+		if err != nil {
+			return nil, err
+		}
+		return []*ixconfig.TrafficTrafficItemConfigElementStack{s}, nil
 	default:
 		return nil, fmt.Errorf("unrecognized header type: %v", hdr)
 	}
@@ -687,6 +693,16 @@ func ldpStack(ldp *opb.LdpHeader, idx int) (*ixconfig.TrafficTrafficItemConfigEl
 
 func macsecStack(macsec *opb.MacsecHeader, idx int) (*ixconfig.TrafficTrafficItemConfigElementStack, error) {
 	return ixconfig.NewMacsecStack(idx).TrafficTrafficItemConfigElementStack(), nil
+}
+
+func pwMplscontrolWordStack(cw *opb.PwMplsControlWordHeader, idx int) (*ixconfig.TrafficTrafficItemConfigElementStack, error) {
+	stack := ixconfig.NewPreferedPwMPlsCwStack(idx)
+	setSingleValue(stack.Reserved(), uintToStr(cw.GetCwRsvd()))
+	setSingleValue(stack.Flags(), uintToStr(cw.GetCwFlags()))
+	setSingleValue(stack.Frg(), uintToStr(cw.GetCwFrg()))
+	setSingleValue(stack.SequenceNumber(), uintToStr(cw.GetCwFrg()))
+
+	return stack.TrafficTrafficItemConfigElementStack(), nil
 }
 
 func payloadProtocolTypeStack(idx int) (*ixconfig.TrafficTrafficItemConfigElementStack, error) {

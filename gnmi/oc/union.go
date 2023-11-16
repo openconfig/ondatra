@@ -65,6 +65,8 @@ using the following YANG input files:
   - public/release/models/sampling/openconfig-sampling-sflow.yang
   - public/release/models/segment-routing/openconfig-segment-routing-types.yang
   - public/release/models/system/openconfig-system.yang
+  - public/release/models/system/openconfig-system-bootz.yang
+  - public/release/models/system/openconfig-system-controlplane.yang
   - public/release/models/types/openconfig-inet-types.yang
   - public/release/models/types/openconfig-types.yang
   - public/release/models/types/openconfig-yang-types.yang

@@ -653,6 +653,7 @@ message Header {
     MacsecHeader macsec = 14;
     EspHeader esp = 15;
     EspOverMacSecHeader esp_over_macsec = 16;
+    PwMplsControlWordHeader pw_mpls_control_word = 17;
   }
 }
 
@@ -697,6 +698,13 @@ message MplsHeader {
   UIntRange label = 1;
   uint32 exp = 2;
   uint32 ttl = 3;
+}
+
+message PwMplsControlWordHeader {
+  uint32 cw_rsvd = 1;
+  uint32 cw_flags = 2;
+  uint32 cw_frg = 3;
+  uint32 cw_seq = 4;
 }
 
 message TcpHeader {

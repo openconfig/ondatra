@@ -30,16 +30,14 @@ var (
 
 // GenCIDRs returns a channel of the specified number of CIDR strings starting from the given CIDR.
 func GenCIDRs(t testing.TB, cidr string, count int) <-chan string {
-	c, err := CIDRs(cidr, uint32(count))
+	c, err := cidrs(cidr, count)
 	if err != nil {
 		t.Fatalf("GenCIDRs(t, %q, %d) failed: %v", cidr, count, err)
 	}
 	return c
 }
 
-// CIDRs returns a channel of the specified number of CIDR strings starting from the given CIDR.
-// Deprecated: Use GenCIDRs instead.
-func CIDRs(cidr string, count uint32) (<-chan string, error) {
+func cidrs(cidr string, count int) (<-chan string, error) {
 	const (
 		maxIPv4StrLen = len("255.255.255.255")
 		maxIPv6StrLen = len("ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff")
@@ -109,7 +107,7 @@ func parseCIDR(cidr string) (*network, error) {
 	}, nil
 }
 
-func checkMax(start, inc, max *big.Int, numVals uint32) error {
+func checkMax(start, inc, max *big.Int, numVals int) error {
 	num := big.NewInt(int64(numVals))
 	length := num.Mul(num, inc)
 	last := length.Add(start, length)

@@ -65,6 +65,8 @@ using the following YANG input files:
   - public/release/models/sampling/openconfig-sampling-sflow.yang
   - public/release/models/segment-routing/openconfig-segment-routing-types.yang
   - public/release/models/system/openconfig-system.yang
+  - public/release/models/system/openconfig-system-bootz.yang
+  - public/release/models/system/openconfig-system-controlplane.yang
   - public/release/models/types/openconfig-inet-types.yang
   - public/release/models/types/openconfig-types.yang
   - public/release/models/types/openconfig-yang-types.yang
@@ -1352,6 +1354,51 @@ const (
 	Bgp_RemovePrivateAsOption_PRIVATE_AS_REMOVE_ALL E_Bgp_RemovePrivateAsOption = 1
 	// Bgp_RemovePrivateAsOption_PRIVATE_AS_REPLACE_ALL corresponds to the value PRIVATE_AS_REPLACE_ALL of Bgp_RemovePrivateAsOption
 	Bgp_RemovePrivateAsOption_PRIVATE_AS_REPLACE_ALL E_Bgp_RemovePrivateAsOption = 2
+)
+
+// E_Bootz_Status is a derived int64 type which is used to represent
+// the enumerated node Bootz_Status. An additional value named
+// Bootz_Status_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_Bootz_Status int64
+
+// IsYANGGoEnum ensures that Bootz_Status implements the yang.GoEnum
+// interface. This ensures that Bootz_Status can be identified as a
+// mapped type for a YANG enumeration.
+func (E_Bootz_Status) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  Bootz_Status.
+func (E_Bootz_Status) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_Bootz_Status.
+func (e E_Bootz_Status) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_Bootz_Status")
+}
+
+const (
+	// Bootz_Status_UNSET corresponds to the value UNSET of Bootz_Status
+	Bootz_Status_UNSET E_Bootz_Status = 0
+	// Bootz_Status_BOOTZ_UNSPECIFIED corresponds to the value BOOTZ_UNSPECIFIED of Bootz_Status
+	Bootz_Status_BOOTZ_UNSPECIFIED E_Bootz_Status = 1
+	// Bootz_Status_BOOTZ_SENT corresponds to the value BOOTZ_SENT of Bootz_Status
+	Bootz_Status_BOOTZ_SENT E_Bootz_Status = 2
+	// Bootz_Status_BOOTZ_RECEIVED corresponds to the value BOOTZ_RECEIVED of Bootz_Status
+	Bootz_Status_BOOTZ_RECEIVED E_Bootz_Status = 3
+	// Bootz_Status_BOOTZ_CONFIGURATION_APPLIED corresponds to the value BOOTZ_CONFIGURATION_APPLIED of Bootz_Status
+	Bootz_Status_BOOTZ_CONFIGURATION_APPLIED E_Bootz_Status = 4
+	// Bootz_Status_BOOTZ_OK corresponds to the value BOOTZ_OK of Bootz_Status
+	Bootz_Status_BOOTZ_OK E_Bootz_Status = 5
+	// Bootz_Status_BOOTZ_OV_INVALID corresponds to the value BOOTZ_OV_INVALID of Bootz_Status
+	Bootz_Status_BOOTZ_OV_INVALID E_Bootz_Status = 6
+	// Bootz_Status_BOOTZ_OS_UPGRADE_IN_PROGRESS corresponds to the value BOOTZ_OS_UPGRADE_IN_PROGRESS of Bootz_Status
+	Bootz_Status_BOOTZ_OS_UPGRADE_IN_PROGRESS E_Bootz_Status = 7
+	// Bootz_Status_BOOTZ_OS_UPGRADE_COMPLETE corresponds to the value BOOTZ_OS_UPGRADE_COMPLETE of Bootz_Status
+	Bootz_Status_BOOTZ_OS_UPGRADE_COMPLETE E_Bootz_Status = 8
+	// Bootz_Status_BOOTZ_OS_INVALID_IMAGE corresponds to the value BOOTZ_OS_INVALID_IMAGE of Bootz_Status
+	Bootz_Status_BOOTZ_OS_INVALID_IMAGE E_Bootz_Status = 9
+	// Bootz_Status_BOOTZ_CONFIGURATION_INVALID corresponds to the value BOOTZ_CONFIGURATION_INVALID of Bootz_Status
+	Bootz_Status_BOOTZ_CONFIGURATION_INVALID E_Bootz_Status = 10
 )
 
 // E_Capability_Flags is a derived int64 type which is used to represent

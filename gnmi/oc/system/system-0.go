@@ -63,6 +63,8 @@ using the following YANG input files:
   - public/release/models/sampling/openconfig-sampling-sflow.yang
   - public/release/models/segment-routing/openconfig-segment-routing-types.yang
   - public/release/models/system/openconfig-system.yang
+  - public/release/models/system/openconfig-system-bootz.yang
+  - public/release/models/system/openconfig-system-controlplane.yang
   - public/release/models/types/openconfig-inet-types.yang
   - public/release/models/types/openconfig-types.yang
   - public/release/models/types/openconfig-yang-types.yang
@@ -1357,6 +1359,40 @@ func (n *SystemPathAny) BootTime() *System_BootTimePathAny {
 	return ps
 }
 
+// Bootz (container): Bootz protocol container for management of bootz protocol state.
+//
+//	Defining module:      "openconfig-system-bootz"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "bootz"
+//	Path from root:       "/system/bootz"
+func (n *SystemPath) Bootz() *System_BootzPath {
+	ps := &System_BootzPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"bootz"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// Bootz (container): Bootz protocol container for management of bootz protocol state.
+//
+//	Defining module:      "openconfig-system-bootz"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "bootz"
+//	Path from root:       "/system/bootz"
+func (n *SystemPathAny) Bootz() *System_BootzPathAny {
+	ps := &System_BootzPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"bootz"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
 // Clock (container): Top-level container for clock configuration data
 //
 //	Defining module:      "openconfig-system"
@@ -1384,6 +1420,42 @@ func (n *SystemPathAny) Clock() *System_ClockPathAny {
 	ps := &System_ClockPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"clock"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// ControlPlaneTraffic (container): Policies and configuration relating to the traffic destined towards
+//
+//	 the system control-plane.
+//		Defining module:      "openconfig-system-controlplane"
+//		Instantiating module: "openconfig-system"
+//		Path from parent:     "control-plane-traffic"
+//		Path from root:       "/system/control-plane-traffic"
+func (n *SystemPath) ControlPlaneTraffic() *System_ControlPlaneTrafficPath {
+	ps := &System_ControlPlaneTrafficPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"control-plane-traffic"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// ControlPlaneTraffic (container): Policies and configuration relating to the traffic destined towards
+//
+//	 the system control-plane.
+//		Defining module:      "openconfig-system-controlplane"
+//		Instantiating module: "openconfig-system"
+//		Path from parent:     "control-plane-traffic"
+//		Path from root:       "/system/control-plane-traffic"
+func (n *SystemPathAny) ControlPlaneTraffic() *System_ControlPlaneTrafficPathAny {
+	ps := &System_ControlPlaneTrafficPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"control-plane-traffic"},
 			map[string]interface{}{},
 			n,
 		),
@@ -14851,6 +14923,664 @@ func (n *System_AlarmPathMapAny) State() ygnmi.WildcardQuery[map[string]*oc.Syst
 	)
 }
 
+// System_Bootz_ChecksumPath represents the /openconfig-system/system/bootz/state/checksum YANG schema element.
+type System_Bootz_ChecksumPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_Bootz_ChecksumPathAny represents the wildcard version of the /openconfig-system/system/bootz/state/checksum YANG schema element.
+type System_Bootz_ChecksumPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-bootz"
+//	Instantiating module: "openconfig-system-bootz"
+//	Path from parent:     "state/checksum"
+//	Path from root:       "/system/bootz/state/checksum"
+func (n *System_Bootz_ChecksumPath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewSingletonQuery[string](
+		"System_Bootz",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "checksum"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_Bootz).Checksum
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Bootz) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-bootz"
+//	Instantiating module: "openconfig-system-bootz"
+//	Path from parent:     "state/checksum"
+//	Path from root:       "/system/bootz/state/checksum"
+func (n *System_Bootz_ChecksumPathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"System_Bootz",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "checksum"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_Bootz).Checksum
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Bootz) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// System_Bootz_ErrorCountPath represents the /openconfig-system/system/bootz/state/error-count YANG schema element.
+type System_Bootz_ErrorCountPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_Bootz_ErrorCountPathAny represents the wildcard version of the /openconfig-system/system/bootz/state/error-count YANG schema element.
+type System_Bootz_ErrorCountPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-bootz"
+//	Instantiating module: "openconfig-system-bootz"
+//	Path from parent:     "state/error-count"
+//	Path from root:       "/system/bootz/state/error-count"
+func (n *System_Bootz_ErrorCountPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"System_Bootz",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "error-count"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.System_Bootz).ErrorCount
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Bootz) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-bootz"
+//	Instantiating module: "openconfig-system-bootz"
+//	Path from parent:     "state/error-count"
+//	Path from root:       "/system/bootz/state/error-count"
+func (n *System_Bootz_ErrorCountPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"System_Bootz",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "error-count"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.System_Bootz).ErrorCount
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Bootz) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// System_Bootz_LastBootAttemptPath represents the /openconfig-system/system/bootz/state/last-boot-attempt YANG schema element.
+type System_Bootz_LastBootAttemptPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_Bootz_LastBootAttemptPathAny represents the wildcard version of the /openconfig-system/system/bootz/state/last-boot-attempt YANG schema element.
+type System_Bootz_LastBootAttemptPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-bootz"
+//	Instantiating module: "openconfig-system-bootz"
+//	Path from parent:     "state/last-boot-attempt"
+//	Path from root:       "/system/bootz/state/last-boot-attempt"
+func (n *System_Bootz_LastBootAttemptPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"System_Bootz",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "last-boot-attempt"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.System_Bootz).LastBootAttempt
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Bootz) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-bootz"
+//	Instantiating module: "openconfig-system-bootz"
+//	Path from parent:     "state/last-boot-attempt"
+//	Path from root:       "/system/bootz/state/last-boot-attempt"
+func (n *System_Bootz_LastBootAttemptPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"System_Bootz",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "last-boot-attempt"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.System_Bootz).LastBootAttempt
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Bootz) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// System_Bootz_StatusPath represents the /openconfig-system/system/bootz/state/status YANG schema element.
+type System_Bootz_StatusPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_Bootz_StatusPathAny represents the wildcard version of the /openconfig-system/system/bootz/state/status YANG schema element.
+type System_Bootz_StatusPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-bootz"
+//	Instantiating module: "openconfig-system-bootz"
+//	Path from parent:     "state/status"
+//	Path from root:       "/system/bootz/state/status"
+func (n *System_Bootz_StatusPath) State() ygnmi.SingletonQuery[oc.E_Bootz_Status] {
+	return ygnmi.NewSingletonQuery[oc.E_Bootz_Status](
+		"System_Bootz",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "status"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Bootz_Status, bool) {
+			ret := gs.(*oc.System_Bootz).Status
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Bootz) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-bootz"
+//	Instantiating module: "openconfig-system-bootz"
+//	Path from parent:     "state/status"
+//	Path from root:       "/system/bootz/state/status"
+func (n *System_Bootz_StatusPathAny) State() ygnmi.WildcardQuery[oc.E_Bootz_Status] {
+	return ygnmi.NewWildcardQuery[oc.E_Bootz_Status](
+		"System_Bootz",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "status"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Bootz_Status, bool) {
+			ret := gs.(*oc.System_Bootz).Status
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Bootz) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// System_BootzPath represents the /openconfig-system/system/bootz YANG schema element.
+type System_BootzPath struct {
+	*ygnmi.NodePath
+}
+
+// System_BootzPathAny represents the wildcard version of the /openconfig-system/system/bootz YANG schema element.
+type System_BootzPathAny struct {
+	*ygnmi.NodePath
+}
+
+// Checksum (leaf): The current checksum of the bootz protocol buffer.
+//
+// This value should refect the current sha-512 of the bootz
+// protocol buffer message BootstrapDataSigned. The protocol
+// buffer serialization must be done by tag value for each field
+// in the bootz protocol buffer. This will produce a
+// determintistic marshalled value which can be
+// checksummed.
+//
+//	Defining module:      "openconfig-system-bootz"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/checksum"
+//	Path from root:       "/system/bootz/state/checksum"
+func (n *System_BootzPath) Checksum() *System_Bootz_ChecksumPath {
+	ps := &System_Bootz_ChecksumPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "checksum"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Checksum (leaf): The current checksum of the bootz protocol buffer.
+//
+// This value should refect the current sha-512 of the bootz
+// protocol buffer message BootstrapDataSigned. The protocol
+// buffer serialization must be done by tag value for each field
+// in the bootz protocol buffer. This will produce a
+// determintistic marshalled value which can be
+// checksummed.
+//
+//	Defining module:      "openconfig-system-bootz"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/checksum"
+//	Path from root:       "/system/bootz/state/checksum"
+func (n *System_BootzPathAny) Checksum() *System_Bootz_ChecksumPathAny {
+	ps := &System_Bootz_ChecksumPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "checksum"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// ErrorCount (leaf): Total count of all bootz errors.
+//
+//	Defining module:      "openconfig-system-bootz"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/error-count"
+//	Path from root:       "/system/bootz/state/error-count"
+func (n *System_BootzPath) ErrorCount() *System_Bootz_ErrorCountPath {
+	ps := &System_Bootz_ErrorCountPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "error-count"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// ErrorCount (leaf): Total count of all bootz errors.
+//
+//	Defining module:      "openconfig-system-bootz"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/error-count"
+//	Path from root:       "/system/bootz/state/error-count"
+func (n *System_BootzPathAny) ErrorCount() *System_Bootz_ErrorCountPathAny {
+	ps := &System_Bootz_ErrorCountPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "error-count"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// LastBootAttempt (leaf): The timestamp of the last bootz attempt.
+//
+//	Defining module:      "openconfig-system-bootz"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/last-boot-attempt"
+//	Path from root:       "/system/bootz/state/last-boot-attempt"
+func (n *System_BootzPath) LastBootAttempt() *System_Bootz_LastBootAttemptPath {
+	ps := &System_Bootz_LastBootAttemptPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "last-boot-attempt"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// LastBootAttempt (leaf): The timestamp of the last bootz attempt.
+//
+//	Defining module:      "openconfig-system-bootz"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/last-boot-attempt"
+//	Path from root:       "/system/bootz/state/last-boot-attempt"
+func (n *System_BootzPathAny) LastBootAttempt() *System_Bootz_LastBootAttemptPathAny {
+	ps := &System_Bootz_LastBootAttemptPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "last-boot-attempt"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Status (leaf): The status of the bootz service.
+//
+// The general sequence for the flow would be:
+// BOOTZ_UNSPECIFIED            <- system initial state
+// BOOTZ_SENT                   <- bootz request sent
+// BOOTZ_RECEIVED               <- bootz response received
+// BOOTZ_OS_UPGRADE_IN_PROGRESS <- (if needed)
+// BOOTZ_OS_UPGRADE_COMPLETE    <- (if needed)
+// BOOTZ_CONFIGURATION_APPLIED  <- bootz configuration applied
+// BOOTZ_OK                     <- bootz process successful
+//
+// If any error is encounter an error ENUM will be returned.
+//
+//	Defining module:      "openconfig-system-bootz"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/status"
+//	Path from root:       "/system/bootz/state/status"
+func (n *System_BootzPath) Status() *System_Bootz_StatusPath {
+	ps := &System_Bootz_StatusPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "status"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Status (leaf): The status of the bootz service.
+//
+// The general sequence for the flow would be:
+// BOOTZ_UNSPECIFIED            <- system initial state
+// BOOTZ_SENT                   <- bootz request sent
+// BOOTZ_RECEIVED               <- bootz response received
+// BOOTZ_OS_UPGRADE_IN_PROGRESS <- (if needed)
+// BOOTZ_OS_UPGRADE_COMPLETE    <- (if needed)
+// BOOTZ_CONFIGURATION_APPLIED  <- bootz configuration applied
+// BOOTZ_OK                     <- bootz process successful
+//
+// If any error is encounter an error ENUM will be returned.
+//
+//	Defining module:      "openconfig-system-bootz"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/status"
+//	Path from root:       "/system/bootz/state/status"
+func (n *System_BootzPathAny) Status() *System_Bootz_StatusPathAny {
+	ps := &System_Bootz_StatusPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "status"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_BootzPath) State() ygnmi.SingletonQuery[*oc.System_Bootz] {
+	return ygnmi.NewSingletonQuery[*oc.System_Bootz](
+		"System_Bootz",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_BootzPathAny) State() ygnmi.WildcardQuery[*oc.System_Bootz] {
+	return ygnmi.NewWildcardQuery[*oc.System_Bootz](
+		"System_Bootz",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *System_BootzPath) Config() ygnmi.ConfigQuery[*oc.System_Bootz] {
+	return ygnmi.NewConfigQuery[*oc.System_Bootz](
+		"System_Bootz",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *System_BootzPathAny) Config() ygnmi.WildcardQuery[*oc.System_Bootz] {
+	return ygnmi.NewWildcardQuery[*oc.System_Bootz](
+		"System_Bootz",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
 // System_Clock_TimezoneNamePath represents the /openconfig-system/system/clock/state/timezone-name YANG schema element.
 type System_Clock_TimezoneNamePath struct {
 	*ygnmi.NodePath
@@ -15172,6 +15902,6428 @@ func (n *System_ClockPathAny) Config() ygnmi.WildcardQuery[*oc.System_Clock] {
 		},
 		nil,
 		nil,
+	)
+}
+
+// System_ControlPlaneTrafficPath represents the /openconfig-system/system/control-plane-traffic YANG schema element.
+type System_ControlPlaneTrafficPath struct {
+	*ygnmi.NodePath
+}
+
+// System_ControlPlaneTrafficPathAny represents the wildcard version of the /openconfig-system/system/control-plane-traffic YANG schema element.
+type System_ControlPlaneTrafficPathAny struct {
+	*ygnmi.NodePath
+}
+
+// Egress (container): Control-plane traffic parameters relating to egress traffic.
+// This refers to traffic that is sent by the system's control
+// plane to external-to-the-controlplane destinations.
+//
+//	Defining module:      "openconfig-system-controlplane"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "egress"
+//	Path from root:       "/system/control-plane-traffic/egress"
+func (n *System_ControlPlaneTrafficPath) Egress() *System_ControlPlaneTraffic_EgressPath {
+	ps := &System_ControlPlaneTraffic_EgressPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"egress"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// Egress (container): Control-plane traffic parameters relating to egress traffic.
+// This refers to traffic that is sent by the system's control
+// plane to external-to-the-controlplane destinations.
+//
+//	Defining module:      "openconfig-system-controlplane"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "egress"
+//	Path from root:       "/system/control-plane-traffic/egress"
+func (n *System_ControlPlaneTrafficPathAny) Egress() *System_ControlPlaneTraffic_EgressPathAny {
+	ps := &System_ControlPlaneTraffic_EgressPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"egress"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// Ingress (container): Control-plane traffic parameters relating to ingress traffic.
+// This refers to traffic that is being received by the system's
+// control plane from external-to-the-controlplane sources.
+//
+//	Defining module:      "openconfig-system-controlplane"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "ingress"
+//	Path from root:       "/system/control-plane-traffic/ingress"
+func (n *System_ControlPlaneTrafficPath) Ingress() *System_ControlPlaneTraffic_IngressPath {
+	ps := &System_ControlPlaneTraffic_IngressPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"ingress"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// Ingress (container): Control-plane traffic parameters relating to ingress traffic.
+// This refers to traffic that is being received by the system's
+// control plane from external-to-the-controlplane sources.
+//
+//	Defining module:      "openconfig-system-controlplane"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "ingress"
+//	Path from root:       "/system/control-plane-traffic/ingress"
+func (n *System_ControlPlaneTrafficPathAny) Ingress() *System_ControlPlaneTraffic_IngressPathAny {
+	ps := &System_ControlPlaneTraffic_IngressPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"ingress"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_ControlPlaneTrafficPath) State() ygnmi.SingletonQuery[*oc.System_ControlPlaneTraffic] {
+	return ygnmi.NewSingletonQuery[*oc.System_ControlPlaneTraffic](
+		"System_ControlPlaneTraffic",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_ControlPlaneTrafficPathAny) State() ygnmi.WildcardQuery[*oc.System_ControlPlaneTraffic] {
+	return ygnmi.NewWildcardQuery[*oc.System_ControlPlaneTraffic](
+		"System_ControlPlaneTraffic",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *System_ControlPlaneTrafficPath) Config() ygnmi.ConfigQuery[*oc.System_ControlPlaneTraffic] {
+	return ygnmi.NewConfigQuery[*oc.System_ControlPlaneTraffic](
+		"System_ControlPlaneTraffic",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *System_ControlPlaneTrafficPathAny) Config() ygnmi.WildcardQuery[*oc.System_ControlPlaneTraffic] {
+	return ygnmi.NewWildcardQuery[*oc.System_ControlPlaneTraffic](
+		"System_ControlPlaneTraffic",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// System_ControlPlaneTraffic_EgressPath represents the /openconfig-system/system/control-plane-traffic/egress YANG schema element.
+type System_ControlPlaneTraffic_EgressPath struct {
+	*ygnmi.NodePath
+}
+
+// System_ControlPlaneTraffic_EgressPathAny represents the wildcard version of the /openconfig-system/system/control-plane-traffic/egress YANG schema element.
+type System_ControlPlaneTraffic_EgressPathAny struct {
+	*ygnmi.NodePath
+}
+
+// AclSetAny (list): List of the ACL that is to be applied in the specific ingress
+// or egress context. The key of the list specifies the type of
+// traffic to be matched, along with a reference to an ACL
+// configured in the OpenConfig ACL model within the /acl hierarchy.
+//
+//	Defining module:      "openconfig-system-controlplane"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "acl/acl-set"
+//	Path from root:       "/system/control-plane-traffic/egress/acl/acl-set"
+func (n *System_ControlPlaneTraffic_EgressPath) AclSetAny() *System_ControlPlaneTraffic_Egress_AclSetPathAny {
+	ps := &System_ControlPlaneTraffic_Egress_AclSetPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"acl", "acl-set"},
+			map[string]interface{}{"set-name": "*", "type": "*"},
+			n,
+		),
+	}
+	return ps
+}
+
+// AclSetAny (list): List of the ACL that is to be applied in the specific ingress
+// or egress context. The key of the list specifies the type of
+// traffic to be matched, along with a reference to an ACL
+// configured in the OpenConfig ACL model within the /acl hierarchy.
+//
+//	Defining module:      "openconfig-system-controlplane"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "acl/acl-set"
+//	Path from root:       "/system/control-plane-traffic/egress/acl/acl-set"
+func (n *System_ControlPlaneTraffic_EgressPathAny) AclSetAny() *System_ControlPlaneTraffic_Egress_AclSetPathAny {
+	ps := &System_ControlPlaneTraffic_Egress_AclSetPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"acl", "acl-set"},
+			map[string]interface{}{"set-name": "*", "type": "*"},
+			n,
+		),
+	}
+	return ps
+}
+
+// WithSetName sets System_ControlPlaneTraffic_Egress_AclSetPathAny's key "set-name" to the specified value.
+// SetName: string
+func (n *System_ControlPlaneTraffic_Egress_AclSetPathAny) WithSetName(SetName string) *System_ControlPlaneTraffic_Egress_AclSetPathAny {
+	ygnmi.ModifyKey(n.NodePath, "set-name", SetName)
+	return n
+}
+
+// WithType sets System_ControlPlaneTraffic_Egress_AclSetPathAny's key "type" to the specified value.
+// Type: oc.E_Acl_ACL_TYPE
+func (n *System_ControlPlaneTraffic_Egress_AclSetPathAny) WithType(Type oc.E_Acl_ACL_TYPE) *System_ControlPlaneTraffic_Egress_AclSetPathAny {
+	ygnmi.ModifyKey(n.NodePath, "type", Type)
+	return n
+}
+
+// AclSet (list): List of the ACL that is to be applied in the specific ingress
+// or egress context. The key of the list specifies the type of
+// traffic to be matched, along with a reference to an ACL
+// configured in the OpenConfig ACL model within the /acl hierarchy.
+//
+//	Defining module:      "openconfig-system-controlplane"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "acl/acl-set"
+//	Path from root:       "/system/control-plane-traffic/egress/acl/acl-set"
+//
+//	SetName: string
+//	Type: oc.E_Acl_ACL_TYPE
+func (n *System_ControlPlaneTraffic_EgressPath) AclSet(SetName string, Type oc.E_Acl_ACL_TYPE) *System_ControlPlaneTraffic_Egress_AclSetPath {
+	ps := &System_ControlPlaneTraffic_Egress_AclSetPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"acl", "acl-set"},
+			map[string]interface{}{"set-name": SetName, "type": Type},
+			n,
+		),
+	}
+	return ps
+}
+
+// AclSet (list): List of the ACL that is to be applied in the specific ingress
+// or egress context. The key of the list specifies the type of
+// traffic to be matched, along with a reference to an ACL
+// configured in the OpenConfig ACL model within the /acl hierarchy.
+//
+//	Defining module:      "openconfig-system-controlplane"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "acl/acl-set"
+//	Path from root:       "/system/control-plane-traffic/egress/acl/acl-set"
+//
+//	SetName: string
+//	Type: oc.E_Acl_ACL_TYPE
+func (n *System_ControlPlaneTraffic_EgressPathAny) AclSet(SetName string, Type oc.E_Acl_ACL_TYPE) *System_ControlPlaneTraffic_Egress_AclSetPathAny {
+	ps := &System_ControlPlaneTraffic_Egress_AclSetPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"acl", "acl-set"},
+			map[string]interface{}{"set-name": SetName, "type": Type},
+			n,
+		),
+	}
+	return ps
+}
+
+// AclSetMap (list): List of the ACL that is to be applied in the specific ingress
+// or egress context. The key of the list specifies the type of
+// traffic to be matched, along with a reference to an ACL
+// configured in the OpenConfig ACL model within the /acl hierarchy.
+//
+//	Defining module:      "openconfig-system-controlplane"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "acl/acl-set"
+//	Path from root:       "/system/control-plane-traffic/egress/acl/acl-set"
+func (n *System_ControlPlaneTraffic_EgressPath) AclSetMap() *System_ControlPlaneTraffic_Egress_AclSetPathMap {
+	ps := &System_ControlPlaneTraffic_Egress_AclSetPathMap{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"acl"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// AclSetMap (list): List of the ACL that is to be applied in the specific ingress
+// or egress context. The key of the list specifies the type of
+// traffic to be matched, along with a reference to an ACL
+// configured in the OpenConfig ACL model within the /acl hierarchy.
+//
+//	Defining module:      "openconfig-system-controlplane"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "acl/acl-set"
+//	Path from root:       "/system/control-plane-traffic/egress/acl/acl-set"
+func (n *System_ControlPlaneTraffic_EgressPathAny) AclSetMap() *System_ControlPlaneTraffic_Egress_AclSetPathMapAny {
+	ps := &System_ControlPlaneTraffic_Egress_AclSetPathMapAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"acl"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_ControlPlaneTraffic_EgressPath) State() ygnmi.SingletonQuery[*oc.System_ControlPlaneTraffic_Egress] {
+	return ygnmi.NewSingletonQuery[*oc.System_ControlPlaneTraffic_Egress](
+		"System_ControlPlaneTraffic_Egress",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_ControlPlaneTraffic_EgressPathAny) State() ygnmi.WildcardQuery[*oc.System_ControlPlaneTraffic_Egress] {
+	return ygnmi.NewWildcardQuery[*oc.System_ControlPlaneTraffic_Egress](
+		"System_ControlPlaneTraffic_Egress",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *System_ControlPlaneTraffic_EgressPath) Config() ygnmi.ConfigQuery[*oc.System_ControlPlaneTraffic_Egress] {
+	return ygnmi.NewConfigQuery[*oc.System_ControlPlaneTraffic_Egress](
+		"System_ControlPlaneTraffic_Egress",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *System_ControlPlaneTraffic_EgressPathAny) Config() ygnmi.WildcardQuery[*oc.System_ControlPlaneTraffic_Egress] {
+	return ygnmi.NewWildcardQuery[*oc.System_ControlPlaneTraffic_Egress](
+		"System_ControlPlaneTraffic_Egress",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// System_ControlPlaneTraffic_Egress_AclSet_SetNamePath represents the /openconfig-system/system/control-plane-traffic/egress/acl/acl-set/state/set-name YANG schema element.
+type System_ControlPlaneTraffic_Egress_AclSet_SetNamePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_ControlPlaneTraffic_Egress_AclSet_SetNamePathAny represents the wildcard version of the /openconfig-system/system/control-plane-traffic/egress/acl/acl-set/state/set-name YANG schema element.
+type System_ControlPlaneTraffic_Egress_AclSet_SetNamePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-controlplane"
+//	Instantiating module: "openconfig-system-controlplane"
+//	Path from parent:     "state/set-name"
+//	Path from root:       "/system/control-plane-traffic/egress/acl/acl-set/state/set-name"
+func (n *System_ControlPlaneTraffic_Egress_AclSet_SetNamePath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewSingletonQuery[string](
+		"System_ControlPlaneTraffic_Egress_AclSet",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "set-name"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_ControlPlaneTraffic_Egress_AclSet).SetName
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_ControlPlaneTraffic_Egress_AclSet) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-controlplane"
+//	Instantiating module: "openconfig-system-controlplane"
+//	Path from parent:     "state/set-name"
+//	Path from root:       "/system/control-plane-traffic/egress/acl/acl-set/state/set-name"
+func (n *System_ControlPlaneTraffic_Egress_AclSet_SetNamePathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"System_ControlPlaneTraffic_Egress_AclSet",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "set-name"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_ControlPlaneTraffic_Egress_AclSet).SetName
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_ControlPlaneTraffic_Egress_AclSet) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-controlplane"
+//	Instantiating module: "openconfig-system-controlplane"
+//	Path from parent:     "config/set-name"
+//	Path from root:       "/system/control-plane-traffic/egress/acl/acl-set/config/set-name"
+func (n *System_ControlPlaneTraffic_Egress_AclSet_SetNamePath) Config() ygnmi.ConfigQuery[string] {
+	return ygnmi.NewConfigQuery[string](
+		"System_ControlPlaneTraffic_Egress_AclSet",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "set-name"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_ControlPlaneTraffic_Egress_AclSet).SetName
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_ControlPlaneTraffic_Egress_AclSet) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-controlplane"
+//	Instantiating module: "openconfig-system-controlplane"
+//	Path from parent:     "config/set-name"
+//	Path from root:       "/system/control-plane-traffic/egress/acl/acl-set/config/set-name"
+func (n *System_ControlPlaneTraffic_Egress_AclSet_SetNamePathAny) Config() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"System_ControlPlaneTraffic_Egress_AclSet",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "set-name"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_ControlPlaneTraffic_Egress_AclSet).SetName
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_ControlPlaneTraffic_Egress_AclSet) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// System_ControlPlaneTraffic_Egress_AclSet_TypePath represents the /openconfig-system/system/control-plane-traffic/egress/acl/acl-set/state/type YANG schema element.
+type System_ControlPlaneTraffic_Egress_AclSet_TypePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_ControlPlaneTraffic_Egress_AclSet_TypePathAny represents the wildcard version of the /openconfig-system/system/control-plane-traffic/egress/acl/acl-set/state/type YANG schema element.
+type System_ControlPlaneTraffic_Egress_AclSet_TypePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-controlplane"
+//	Instantiating module: "openconfig-system-controlplane"
+//	Path from parent:     "state/type"
+//	Path from root:       "/system/control-plane-traffic/egress/acl/acl-set/state/type"
+func (n *System_ControlPlaneTraffic_Egress_AclSet_TypePath) State() ygnmi.SingletonQuery[oc.E_Acl_ACL_TYPE] {
+	return ygnmi.NewSingletonQuery[oc.E_Acl_ACL_TYPE](
+		"System_ControlPlaneTraffic_Egress_AclSet",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Acl_ACL_TYPE, bool) {
+			ret := gs.(*oc.System_ControlPlaneTraffic_Egress_AclSet).Type
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_ControlPlaneTraffic_Egress_AclSet) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-controlplane"
+//	Instantiating module: "openconfig-system-controlplane"
+//	Path from parent:     "state/type"
+//	Path from root:       "/system/control-plane-traffic/egress/acl/acl-set/state/type"
+func (n *System_ControlPlaneTraffic_Egress_AclSet_TypePathAny) State() ygnmi.WildcardQuery[oc.E_Acl_ACL_TYPE] {
+	return ygnmi.NewWildcardQuery[oc.E_Acl_ACL_TYPE](
+		"System_ControlPlaneTraffic_Egress_AclSet",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Acl_ACL_TYPE, bool) {
+			ret := gs.(*oc.System_ControlPlaneTraffic_Egress_AclSet).Type
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_ControlPlaneTraffic_Egress_AclSet) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-controlplane"
+//	Instantiating module: "openconfig-system-controlplane"
+//	Path from parent:     "config/type"
+//	Path from root:       "/system/control-plane-traffic/egress/acl/acl-set/config/type"
+func (n *System_ControlPlaneTraffic_Egress_AclSet_TypePath) Config() ygnmi.ConfigQuery[oc.E_Acl_ACL_TYPE] {
+	return ygnmi.NewConfigQuery[oc.E_Acl_ACL_TYPE](
+		"System_ControlPlaneTraffic_Egress_AclSet",
+		false,
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Acl_ACL_TYPE, bool) {
+			ret := gs.(*oc.System_ControlPlaneTraffic_Egress_AclSet).Type
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_ControlPlaneTraffic_Egress_AclSet) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-controlplane"
+//	Instantiating module: "openconfig-system-controlplane"
+//	Path from parent:     "config/type"
+//	Path from root:       "/system/control-plane-traffic/egress/acl/acl-set/config/type"
+func (n *System_ControlPlaneTraffic_Egress_AclSet_TypePathAny) Config() ygnmi.WildcardQuery[oc.E_Acl_ACL_TYPE] {
+	return ygnmi.NewWildcardQuery[oc.E_Acl_ACL_TYPE](
+		"System_ControlPlaneTraffic_Egress_AclSet",
+		false,
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Acl_ACL_TYPE, bool) {
+			ret := gs.(*oc.System_ControlPlaneTraffic_Egress_AclSet).Type
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_ControlPlaneTraffic_Egress_AclSet) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// System_ControlPlaneTraffic_Egress_AclSetPath represents the /openconfig-system/system/control-plane-traffic/egress/acl/acl-set YANG schema element.
+type System_ControlPlaneTraffic_Egress_AclSetPath struct {
+	*ygnmi.NodePath
+}
+
+// System_ControlPlaneTraffic_Egress_AclSetPathAny represents the wildcard version of the /openconfig-system/system/control-plane-traffic/egress/acl/acl-set YANG schema element.
+type System_ControlPlaneTraffic_Egress_AclSetPathAny struct {
+	*ygnmi.NodePath
+}
+
+// System_ControlPlaneTraffic_Egress_AclSetPathMap represents the /openconfig-system/system/control-plane-traffic/egress/acl/acl-set YANG schema element.
+type System_ControlPlaneTraffic_Egress_AclSetPathMap struct {
+	*ygnmi.NodePath
+}
+
+// System_ControlPlaneTraffic_Egress_AclSetPathMapAny represents the wildcard version of the /openconfig-system/system/control-plane-traffic/egress/acl/acl-set YANG schema element.
+type System_ControlPlaneTraffic_Egress_AclSetPathMapAny struct {
+	*ygnmi.NodePath
+}
+
+// AclEntryAny (list): List of ACL entries assigned to an interface
+//
+//	Defining module:      "openconfig-acl"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "acl-entries/acl-entry"
+//	Path from root:       "/system/control-plane-traffic/egress/acl/acl-set/acl-entries/acl-entry"
+func (n *System_ControlPlaneTraffic_Egress_AclSetPath) AclEntryAny() *System_ControlPlaneTraffic_Egress_AclSet_AclEntryPathAny {
+	ps := &System_ControlPlaneTraffic_Egress_AclSet_AclEntryPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"acl-entries", "acl-entry"},
+			map[string]interface{}{"sequence-id": "*"},
+			n,
+		),
+	}
+	return ps
+}
+
+// AclEntryAny (list): List of ACL entries assigned to an interface
+//
+//	Defining module:      "openconfig-acl"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "acl-entries/acl-entry"
+//	Path from root:       "/system/control-plane-traffic/egress/acl/acl-set/acl-entries/acl-entry"
+func (n *System_ControlPlaneTraffic_Egress_AclSetPathAny) AclEntryAny() *System_ControlPlaneTraffic_Egress_AclSet_AclEntryPathAny {
+	ps := &System_ControlPlaneTraffic_Egress_AclSet_AclEntryPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"acl-entries", "acl-entry"},
+			map[string]interface{}{"sequence-id": "*"},
+			n,
+		),
+	}
+	return ps
+}
+
+// AclEntry (list): List of ACL entries assigned to an interface
+//
+//	Defining module:      "openconfig-acl"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "acl-entries/acl-entry"
+//	Path from root:       "/system/control-plane-traffic/egress/acl/acl-set/acl-entries/acl-entry"
+//
+//	SequenceId: uint32
+func (n *System_ControlPlaneTraffic_Egress_AclSetPath) AclEntry(SequenceId uint32) *System_ControlPlaneTraffic_Egress_AclSet_AclEntryPath {
+	ps := &System_ControlPlaneTraffic_Egress_AclSet_AclEntryPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"acl-entries", "acl-entry"},
+			map[string]interface{}{"sequence-id": SequenceId},
+			n,
+		),
+	}
+	return ps
+}
+
+// AclEntry (list): List of ACL entries assigned to an interface
+//
+//	Defining module:      "openconfig-acl"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "acl-entries/acl-entry"
+//	Path from root:       "/system/control-plane-traffic/egress/acl/acl-set/acl-entries/acl-entry"
+//
+//	SequenceId: uint32
+func (n *System_ControlPlaneTraffic_Egress_AclSetPathAny) AclEntry(SequenceId uint32) *System_ControlPlaneTraffic_Egress_AclSet_AclEntryPathAny {
+	ps := &System_ControlPlaneTraffic_Egress_AclSet_AclEntryPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"acl-entries", "acl-entry"},
+			map[string]interface{}{"sequence-id": SequenceId},
+			n,
+		),
+	}
+	return ps
+}
+
+// AclEntryMap (list): List of ACL entries assigned to an interface
+//
+//	Defining module:      "openconfig-acl"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "acl-entries/acl-entry"
+//	Path from root:       "/system/control-plane-traffic/egress/acl/acl-set/acl-entries/acl-entry"
+func (n *System_ControlPlaneTraffic_Egress_AclSetPath) AclEntryMap() *System_ControlPlaneTraffic_Egress_AclSet_AclEntryPathMap {
+	ps := &System_ControlPlaneTraffic_Egress_AclSet_AclEntryPathMap{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"acl-entries"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// AclEntryMap (list): List of ACL entries assigned to an interface
+//
+//	Defining module:      "openconfig-acl"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "acl-entries/acl-entry"
+//	Path from root:       "/system/control-plane-traffic/egress/acl/acl-set/acl-entries/acl-entry"
+func (n *System_ControlPlaneTraffic_Egress_AclSetPathAny) AclEntryMap() *System_ControlPlaneTraffic_Egress_AclSet_AclEntryPathMapAny {
+	ps := &System_ControlPlaneTraffic_Egress_AclSet_AclEntryPathMapAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"acl-entries"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// SetName (leaf): Reference to the ACL to be applied to traffic
+// in the specified context (ingress or egress).
+//
+//	Defining module:      "openconfig-system-controlplane"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/set-name"
+//	Path from root:       "/system/control-plane-traffic/egress/acl/acl-set/*/set-name"
+func (n *System_ControlPlaneTraffic_Egress_AclSetPath) SetName() *System_ControlPlaneTraffic_Egress_AclSet_SetNamePath {
+	ps := &System_ControlPlaneTraffic_Egress_AclSet_SetNamePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "set-name"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// SetName (leaf): Reference to the ACL to be applied to traffic
+// in the specified context (ingress or egress).
+//
+//	Defining module:      "openconfig-system-controlplane"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/set-name"
+//	Path from root:       "/system/control-plane-traffic/egress/acl/acl-set/*/set-name"
+func (n *System_ControlPlaneTraffic_Egress_AclSetPathAny) SetName() *System_ControlPlaneTraffic_Egress_AclSet_SetNamePathAny {
+	ps := &System_ControlPlaneTraffic_Egress_AclSet_SetNamePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "set-name"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Type (leaf): Reference to the ACL set type applied to traffic
+// in the specified context (ingress or egress).
+//
+//	Defining module:      "openconfig-system-controlplane"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/type"
+//	Path from root:       "/system/control-plane-traffic/egress/acl/acl-set/*/type"
+func (n *System_ControlPlaneTraffic_Egress_AclSetPath) Type() *System_ControlPlaneTraffic_Egress_AclSet_TypePath {
+	ps := &System_ControlPlaneTraffic_Egress_AclSet_TypePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "type"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Type (leaf): Reference to the ACL set type applied to traffic
+// in the specified context (ingress or egress).
+//
+//	Defining module:      "openconfig-system-controlplane"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/type"
+//	Path from root:       "/system/control-plane-traffic/egress/acl/acl-set/*/type"
+func (n *System_ControlPlaneTraffic_Egress_AclSetPathAny) Type() *System_ControlPlaneTraffic_Egress_AclSet_TypePathAny {
+	ps := &System_ControlPlaneTraffic_Egress_AclSet_TypePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "type"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_ControlPlaneTraffic_Egress_AclSetPath) State() ygnmi.SingletonQuery[*oc.System_ControlPlaneTraffic_Egress_AclSet] {
+	return ygnmi.NewSingletonQuery[*oc.System_ControlPlaneTraffic_Egress_AclSet](
+		"System_ControlPlaneTraffic_Egress_AclSet",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_ControlPlaneTraffic_Egress_AclSetPathAny) State() ygnmi.WildcardQuery[*oc.System_ControlPlaneTraffic_Egress_AclSet] {
+	return ygnmi.NewWildcardQuery[*oc.System_ControlPlaneTraffic_Egress_AclSet](
+		"System_ControlPlaneTraffic_Egress_AclSet",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *System_ControlPlaneTraffic_Egress_AclSetPath) Config() ygnmi.ConfigQuery[*oc.System_ControlPlaneTraffic_Egress_AclSet] {
+	return ygnmi.NewConfigQuery[*oc.System_ControlPlaneTraffic_Egress_AclSet](
+		"System_ControlPlaneTraffic_Egress_AclSet",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *System_ControlPlaneTraffic_Egress_AclSetPathAny) Config() ygnmi.WildcardQuery[*oc.System_ControlPlaneTraffic_Egress_AclSet] {
+	return ygnmi.NewWildcardQuery[*oc.System_ControlPlaneTraffic_Egress_AclSet](
+		"System_ControlPlaneTraffic_Egress_AclSet",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_ControlPlaneTraffic_Egress_AclSetPathMap) State() ygnmi.SingletonQuery[map[oc.System_ControlPlaneTraffic_Egress_AclSet_Key]*oc.System_ControlPlaneTraffic_Egress_AclSet] {
+	return ygnmi.NewSingletonQuery[map[oc.System_ControlPlaneTraffic_Egress_AclSet_Key]*oc.System_ControlPlaneTraffic_Egress_AclSet](
+		"System_ControlPlaneTraffic_Egress",
+		true,
+		false,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[oc.System_ControlPlaneTraffic_Egress_AclSet_Key]*oc.System_ControlPlaneTraffic_Egress_AclSet, bool) {
+			ret := gs.(*oc.System_ControlPlaneTraffic_Egress).AclSet
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_ControlPlaneTraffic_Egress) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-system-controlplane:acl"},
+			PostRelPath: []string{"openconfig-system-controlplane:acl-set"},
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_ControlPlaneTraffic_Egress_AclSetPathMapAny) State() ygnmi.WildcardQuery[map[oc.System_ControlPlaneTraffic_Egress_AclSet_Key]*oc.System_ControlPlaneTraffic_Egress_AclSet] {
+	return ygnmi.NewWildcardQuery[map[oc.System_ControlPlaneTraffic_Egress_AclSet_Key]*oc.System_ControlPlaneTraffic_Egress_AclSet](
+		"System_ControlPlaneTraffic_Egress",
+		true,
+		false,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[oc.System_ControlPlaneTraffic_Egress_AclSet_Key]*oc.System_ControlPlaneTraffic_Egress_AclSet, bool) {
+			ret := gs.(*oc.System_ControlPlaneTraffic_Egress).AclSet
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_ControlPlaneTraffic_Egress) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-system-controlplane:acl"},
+			PostRelPath: []string{"openconfig-system-controlplane:acl-set"},
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *System_ControlPlaneTraffic_Egress_AclSetPathMap) Config() ygnmi.ConfigQuery[map[oc.System_ControlPlaneTraffic_Egress_AclSet_Key]*oc.System_ControlPlaneTraffic_Egress_AclSet] {
+	return ygnmi.NewConfigQuery[map[oc.System_ControlPlaneTraffic_Egress_AclSet_Key]*oc.System_ControlPlaneTraffic_Egress_AclSet](
+		"System_ControlPlaneTraffic_Egress",
+		false,
+		true,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[oc.System_ControlPlaneTraffic_Egress_AclSet_Key]*oc.System_ControlPlaneTraffic_Egress_AclSet, bool) {
+			ret := gs.(*oc.System_ControlPlaneTraffic_Egress).AclSet
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_ControlPlaneTraffic_Egress) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-system-controlplane:acl"},
+			PostRelPath: []string{"openconfig-system-controlplane:acl-set"},
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *System_ControlPlaneTraffic_Egress_AclSetPathMapAny) Config() ygnmi.WildcardQuery[map[oc.System_ControlPlaneTraffic_Egress_AclSet_Key]*oc.System_ControlPlaneTraffic_Egress_AclSet] {
+	return ygnmi.NewWildcardQuery[map[oc.System_ControlPlaneTraffic_Egress_AclSet_Key]*oc.System_ControlPlaneTraffic_Egress_AclSet](
+		"System_ControlPlaneTraffic_Egress",
+		false,
+		true,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[oc.System_ControlPlaneTraffic_Egress_AclSet_Key]*oc.System_ControlPlaneTraffic_Egress_AclSet, bool) {
+			ret := gs.(*oc.System_ControlPlaneTraffic_Egress).AclSet
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_ControlPlaneTraffic_Egress) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-system-controlplane:acl"},
+			PostRelPath: []string{"openconfig-system-controlplane:acl-set"},
+		},
+	)
+}
+
+// System_ControlPlaneTraffic_Egress_AclSet_AclEntry_MatchedOctetsPath represents the /openconfig-system/system/control-plane-traffic/egress/acl/acl-set/acl-entries/acl-entry/state/matched-octets YANG schema element.
+type System_ControlPlaneTraffic_Egress_AclSet_AclEntry_MatchedOctetsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_ControlPlaneTraffic_Egress_AclSet_AclEntry_MatchedOctetsPathAny represents the wildcard version of the /openconfig-system/system/control-plane-traffic/egress/acl/acl-set/acl-entries/acl-entry/state/matched-octets YANG schema element.
+type System_ControlPlaneTraffic_Egress_AclSet_AclEntry_MatchedOctetsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-acl"
+//	Instantiating module: "openconfig-system-controlplane"
+//	Path from parent:     "state/matched-octets"
+//	Path from root:       "/system/control-plane-traffic/egress/acl/acl-set/acl-entries/acl-entry/state/matched-octets"
+func (n *System_ControlPlaneTraffic_Egress_AclSet_AclEntry_MatchedOctetsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"System_ControlPlaneTraffic_Egress_AclSet_AclEntry",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "matched-octets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.System_ControlPlaneTraffic_Egress_AclSet_AclEntry).MatchedOctets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_ControlPlaneTraffic_Egress_AclSet_AclEntry) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-acl"
+//	Instantiating module: "openconfig-system-controlplane"
+//	Path from parent:     "state/matched-octets"
+//	Path from root:       "/system/control-plane-traffic/egress/acl/acl-set/acl-entries/acl-entry/state/matched-octets"
+func (n *System_ControlPlaneTraffic_Egress_AclSet_AclEntry_MatchedOctetsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"System_ControlPlaneTraffic_Egress_AclSet_AclEntry",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "matched-octets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.System_ControlPlaneTraffic_Egress_AclSet_AclEntry).MatchedOctets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_ControlPlaneTraffic_Egress_AclSet_AclEntry) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// System_ControlPlaneTraffic_Egress_AclSet_AclEntry_MatchedPacketsPath represents the /openconfig-system/system/control-plane-traffic/egress/acl/acl-set/acl-entries/acl-entry/state/matched-packets YANG schema element.
+type System_ControlPlaneTraffic_Egress_AclSet_AclEntry_MatchedPacketsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_ControlPlaneTraffic_Egress_AclSet_AclEntry_MatchedPacketsPathAny represents the wildcard version of the /openconfig-system/system/control-plane-traffic/egress/acl/acl-set/acl-entries/acl-entry/state/matched-packets YANG schema element.
+type System_ControlPlaneTraffic_Egress_AclSet_AclEntry_MatchedPacketsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-acl"
+//	Instantiating module: "openconfig-system-controlplane"
+//	Path from parent:     "state/matched-packets"
+//	Path from root:       "/system/control-plane-traffic/egress/acl/acl-set/acl-entries/acl-entry/state/matched-packets"
+func (n *System_ControlPlaneTraffic_Egress_AclSet_AclEntry_MatchedPacketsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"System_ControlPlaneTraffic_Egress_AclSet_AclEntry",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "matched-packets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.System_ControlPlaneTraffic_Egress_AclSet_AclEntry).MatchedPackets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_ControlPlaneTraffic_Egress_AclSet_AclEntry) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-acl"
+//	Instantiating module: "openconfig-system-controlplane"
+//	Path from parent:     "state/matched-packets"
+//	Path from root:       "/system/control-plane-traffic/egress/acl/acl-set/acl-entries/acl-entry/state/matched-packets"
+func (n *System_ControlPlaneTraffic_Egress_AclSet_AclEntry_MatchedPacketsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"System_ControlPlaneTraffic_Egress_AclSet_AclEntry",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "matched-packets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.System_ControlPlaneTraffic_Egress_AclSet_AclEntry).MatchedPackets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_ControlPlaneTraffic_Egress_AclSet_AclEntry) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// System_ControlPlaneTraffic_Egress_AclSet_AclEntry_SequenceIdPath represents the /openconfig-system/system/control-plane-traffic/egress/acl/acl-set/acl-entries/acl-entry/state/sequence-id YANG schema element.
+type System_ControlPlaneTraffic_Egress_AclSet_AclEntry_SequenceIdPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_ControlPlaneTraffic_Egress_AclSet_AclEntry_SequenceIdPathAny represents the wildcard version of the /openconfig-system/system/control-plane-traffic/egress/acl/acl-set/acl-entries/acl-entry/state/sequence-id YANG schema element.
+type System_ControlPlaneTraffic_Egress_AclSet_AclEntry_SequenceIdPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-acl"
+//	Instantiating module: "openconfig-system-controlplane"
+//	Path from parent:     "state/sequence-id"
+//	Path from root:       "/system/control-plane-traffic/egress/acl/acl-set/acl-entries/acl-entry/state/sequence-id"
+func (n *System_ControlPlaneTraffic_Egress_AclSet_AclEntry_SequenceIdPath) State() ygnmi.SingletonQuery[uint32] {
+	return ygnmi.NewSingletonQuery[uint32](
+		"System_ControlPlaneTraffic_Egress_AclSet_AclEntry",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "sequence-id"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.System_ControlPlaneTraffic_Egress_AclSet_AclEntry).SequenceId
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_ControlPlaneTraffic_Egress_AclSet_AclEntry) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-acl"
+//	Instantiating module: "openconfig-system-controlplane"
+//	Path from parent:     "state/sequence-id"
+//	Path from root:       "/system/control-plane-traffic/egress/acl/acl-set/acl-entries/acl-entry/state/sequence-id"
+func (n *System_ControlPlaneTraffic_Egress_AclSet_AclEntry_SequenceIdPathAny) State() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewWildcardQuery[uint32](
+		"System_ControlPlaneTraffic_Egress_AclSet_AclEntry",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "sequence-id"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.System_ControlPlaneTraffic_Egress_AclSet_AclEntry).SequenceId
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_ControlPlaneTraffic_Egress_AclSet_AclEntry) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-acl"
+//	Instantiating module: "openconfig-system-controlplane"
+//	Path from parent:     "sequence-id"
+//	Path from root:       ""
+func (n *System_ControlPlaneTraffic_Egress_AclSet_AclEntry_SequenceIdPath) Config() ygnmi.ConfigQuery[uint32] {
+	return ygnmi.NewConfigQuery[uint32](
+		"System_ControlPlaneTraffic_Egress_AclSet_AclEntry",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"sequence-id"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.System_ControlPlaneTraffic_Egress_AclSet_AclEntry).SequenceId
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_ControlPlaneTraffic_Egress_AclSet_AclEntry) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-acl"
+//	Instantiating module: "openconfig-system-controlplane"
+//	Path from parent:     "sequence-id"
+//	Path from root:       ""
+func (n *System_ControlPlaneTraffic_Egress_AclSet_AclEntry_SequenceIdPathAny) Config() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewWildcardQuery[uint32](
+		"System_ControlPlaneTraffic_Egress_AclSet_AclEntry",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"sequence-id"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.System_ControlPlaneTraffic_Egress_AclSet_AclEntry).SequenceId
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_ControlPlaneTraffic_Egress_AclSet_AclEntry) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// System_ControlPlaneTraffic_Egress_AclSet_AclEntryPath represents the /openconfig-system/system/control-plane-traffic/egress/acl/acl-set/acl-entries/acl-entry YANG schema element.
+type System_ControlPlaneTraffic_Egress_AclSet_AclEntryPath struct {
+	*ygnmi.NodePath
+}
+
+// System_ControlPlaneTraffic_Egress_AclSet_AclEntryPathAny represents the wildcard version of the /openconfig-system/system/control-plane-traffic/egress/acl/acl-set/acl-entries/acl-entry YANG schema element.
+type System_ControlPlaneTraffic_Egress_AclSet_AclEntryPathAny struct {
+	*ygnmi.NodePath
+}
+
+// System_ControlPlaneTraffic_Egress_AclSet_AclEntryPathMap represents the /openconfig-system/system/control-plane-traffic/egress/acl/acl-set/acl-entries/acl-entry YANG schema element.
+type System_ControlPlaneTraffic_Egress_AclSet_AclEntryPathMap struct {
+	*ygnmi.NodePath
+}
+
+// System_ControlPlaneTraffic_Egress_AclSet_AclEntryPathMapAny represents the wildcard version of the /openconfig-system/system/control-plane-traffic/egress/acl/acl-set/acl-entries/acl-entry YANG schema element.
+type System_ControlPlaneTraffic_Egress_AclSet_AclEntryPathMapAny struct {
+	*ygnmi.NodePath
+}
+
+// MatchedOctets (leaf): Count of the number of octets (bytes) matching the current
+// ACL entry.
+//
+// An implementation should provide this counter on a
+// per-interface per-ACL-entry if possible.
+//
+// If an implementation only supports ACL counters per entry
+// (i.e., not broken out per interface), then the value
+// should be equal to the aggregate count across all interfaces.
+//
+// An implementation that provides counters per entry per
+// interface is not required to also provide an aggregate count,
+// e.g., per entry -- the user is expected to be able implement
+// the required aggregation if such a count is needed.
+//
+//	Defining module:      "openconfig-acl"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/matched-octets"
+//	Path from root:       "/system/control-plane-traffic/egress/acl/acl-set/acl-entries/acl-entry/state/matched-octets"
+func (n *System_ControlPlaneTraffic_Egress_AclSet_AclEntryPath) MatchedOctets() *System_ControlPlaneTraffic_Egress_AclSet_AclEntry_MatchedOctetsPath {
+	ps := &System_ControlPlaneTraffic_Egress_AclSet_AclEntry_MatchedOctetsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "matched-octets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// MatchedOctets (leaf): Count of the number of octets (bytes) matching the current
+// ACL entry.
+//
+// An implementation should provide this counter on a
+// per-interface per-ACL-entry if possible.
+//
+// If an implementation only supports ACL counters per entry
+// (i.e., not broken out per interface), then the value
+// should be equal to the aggregate count across all interfaces.
+//
+// An implementation that provides counters per entry per
+// interface is not required to also provide an aggregate count,
+// e.g., per entry -- the user is expected to be able implement
+// the required aggregation if such a count is needed.
+//
+//	Defining module:      "openconfig-acl"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/matched-octets"
+//	Path from root:       "/system/control-plane-traffic/egress/acl/acl-set/acl-entries/acl-entry/state/matched-octets"
+func (n *System_ControlPlaneTraffic_Egress_AclSet_AclEntryPathAny) MatchedOctets() *System_ControlPlaneTraffic_Egress_AclSet_AclEntry_MatchedOctetsPathAny {
+	ps := &System_ControlPlaneTraffic_Egress_AclSet_AclEntry_MatchedOctetsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "matched-octets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// MatchedPackets (leaf): Count of the number of packets matching the current ACL
+// entry.
+//
+// An implementation should provide this counter on a
+// per-interface per-ACL-entry if possible.
+//
+// If an implementation only supports ACL counters per entry
+// (i.e., not broken out per interface), then the value
+// should be equal to the aggregate count across all interfaces.
+//
+// An implementation that provides counters per entry per
+// interface is not required to also provide an aggregate count,
+// e.g., per entry -- the user is expected to be able implement
+// the required aggregation if such a count is needed.
+//
+//	Defining module:      "openconfig-acl"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/matched-packets"
+//	Path from root:       "/system/control-plane-traffic/egress/acl/acl-set/acl-entries/acl-entry/state/matched-packets"
+func (n *System_ControlPlaneTraffic_Egress_AclSet_AclEntryPath) MatchedPackets() *System_ControlPlaneTraffic_Egress_AclSet_AclEntry_MatchedPacketsPath {
+	ps := &System_ControlPlaneTraffic_Egress_AclSet_AclEntry_MatchedPacketsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "matched-packets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// MatchedPackets (leaf): Count of the number of packets matching the current ACL
+// entry.
+//
+// An implementation should provide this counter on a
+// per-interface per-ACL-entry if possible.
+//
+// If an implementation only supports ACL counters per entry
+// (i.e., not broken out per interface), then the value
+// should be equal to the aggregate count across all interfaces.
+//
+// An implementation that provides counters per entry per
+// interface is not required to also provide an aggregate count,
+// e.g., per entry -- the user is expected to be able implement
+// the required aggregation if such a count is needed.
+//
+//	Defining module:      "openconfig-acl"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/matched-packets"
+//	Path from root:       "/system/control-plane-traffic/egress/acl/acl-set/acl-entries/acl-entry/state/matched-packets"
+func (n *System_ControlPlaneTraffic_Egress_AclSet_AclEntryPathAny) MatchedPackets() *System_ControlPlaneTraffic_Egress_AclSet_AclEntry_MatchedPacketsPathAny {
+	ps := &System_ControlPlaneTraffic_Egress_AclSet_AclEntry_MatchedPacketsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "matched-packets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// SequenceId (leaf): Reference to an entry in the ACL set applied to an
+// interface
+//
+//	Defining module:      "openconfig-acl"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/sequence-id"
+//	Path from root:       "/system/control-plane-traffic/egress/acl/acl-set/acl-entries/acl-entry/*/sequence-id"
+func (n *System_ControlPlaneTraffic_Egress_AclSet_AclEntryPath) SequenceId() *System_ControlPlaneTraffic_Egress_AclSet_AclEntry_SequenceIdPath {
+	ps := &System_ControlPlaneTraffic_Egress_AclSet_AclEntry_SequenceIdPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "sequence-id"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// SequenceId (leaf): Reference to an entry in the ACL set applied to an
+// interface
+//
+//	Defining module:      "openconfig-acl"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/sequence-id"
+//	Path from root:       "/system/control-plane-traffic/egress/acl/acl-set/acl-entries/acl-entry/*/sequence-id"
+func (n *System_ControlPlaneTraffic_Egress_AclSet_AclEntryPathAny) SequenceId() *System_ControlPlaneTraffic_Egress_AclSet_AclEntry_SequenceIdPathAny {
+	ps := &System_ControlPlaneTraffic_Egress_AclSet_AclEntry_SequenceIdPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "sequence-id"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_ControlPlaneTraffic_Egress_AclSet_AclEntryPath) State() ygnmi.SingletonQuery[*oc.System_ControlPlaneTraffic_Egress_AclSet_AclEntry] {
+	return ygnmi.NewSingletonQuery[*oc.System_ControlPlaneTraffic_Egress_AclSet_AclEntry](
+		"System_ControlPlaneTraffic_Egress_AclSet_AclEntry",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_ControlPlaneTraffic_Egress_AclSet_AclEntryPathAny) State() ygnmi.WildcardQuery[*oc.System_ControlPlaneTraffic_Egress_AclSet_AclEntry] {
+	return ygnmi.NewWildcardQuery[*oc.System_ControlPlaneTraffic_Egress_AclSet_AclEntry](
+		"System_ControlPlaneTraffic_Egress_AclSet_AclEntry",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_ControlPlaneTraffic_Egress_AclSet_AclEntryPathMap) State() ygnmi.SingletonQuery[map[uint32]*oc.System_ControlPlaneTraffic_Egress_AclSet_AclEntry] {
+	return ygnmi.NewSingletonQuery[map[uint32]*oc.System_ControlPlaneTraffic_Egress_AclSet_AclEntry](
+		"System_ControlPlaneTraffic_Egress_AclSet",
+		true,
+		false,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[uint32]*oc.System_ControlPlaneTraffic_Egress_AclSet_AclEntry, bool) {
+			ret := gs.(*oc.System_ControlPlaneTraffic_Egress_AclSet).AclEntry
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_ControlPlaneTraffic_Egress_AclSet) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-system-controlplane:acl-entries"},
+			PostRelPath: []string{"openconfig-system-controlplane:acl-entry"},
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_ControlPlaneTraffic_Egress_AclSet_AclEntryPathMapAny) State() ygnmi.WildcardQuery[map[uint32]*oc.System_ControlPlaneTraffic_Egress_AclSet_AclEntry] {
+	return ygnmi.NewWildcardQuery[map[uint32]*oc.System_ControlPlaneTraffic_Egress_AclSet_AclEntry](
+		"System_ControlPlaneTraffic_Egress_AclSet",
+		true,
+		false,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[uint32]*oc.System_ControlPlaneTraffic_Egress_AclSet_AclEntry, bool) {
+			ret := gs.(*oc.System_ControlPlaneTraffic_Egress_AclSet).AclEntry
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_ControlPlaneTraffic_Egress_AclSet) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-system-controlplane:acl-entries"},
+			PostRelPath: []string{"openconfig-system-controlplane:acl-entry"},
+		},
+	)
+}
+
+// System_ControlPlaneTraffic_IngressPath represents the /openconfig-system/system/control-plane-traffic/ingress YANG schema element.
+type System_ControlPlaneTraffic_IngressPath struct {
+	*ygnmi.NodePath
+}
+
+// System_ControlPlaneTraffic_IngressPathAny represents the wildcard version of the /openconfig-system/system/control-plane-traffic/ingress YANG schema element.
+type System_ControlPlaneTraffic_IngressPathAny struct {
+	*ygnmi.NodePath
+}
+
+// AclSetAny (list): List of the ACL that is to be applied in the specific ingress
+// or egress context. The key of the list specifies the type of
+// traffic to be matched, along with a reference to an ACL
+// configured in the OpenConfig ACL model within the /acl hierarchy.
+//
+//	Defining module:      "openconfig-system-controlplane"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "acl/acl-set"
+//	Path from root:       "/system/control-plane-traffic/ingress/acl/acl-set"
+func (n *System_ControlPlaneTraffic_IngressPath) AclSetAny() *System_ControlPlaneTraffic_Ingress_AclSetPathAny {
+	ps := &System_ControlPlaneTraffic_Ingress_AclSetPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"acl", "acl-set"},
+			map[string]interface{}{"set-name": "*", "type": "*"},
+			n,
+		),
+	}
+	return ps
+}
+
+// AclSetAny (list): List of the ACL that is to be applied in the specific ingress
+// or egress context. The key of the list specifies the type of
+// traffic to be matched, along with a reference to an ACL
+// configured in the OpenConfig ACL model within the /acl hierarchy.
+//
+//	Defining module:      "openconfig-system-controlplane"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "acl/acl-set"
+//	Path from root:       "/system/control-plane-traffic/ingress/acl/acl-set"
+func (n *System_ControlPlaneTraffic_IngressPathAny) AclSetAny() *System_ControlPlaneTraffic_Ingress_AclSetPathAny {
+	ps := &System_ControlPlaneTraffic_Ingress_AclSetPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"acl", "acl-set"},
+			map[string]interface{}{"set-name": "*", "type": "*"},
+			n,
+		),
+	}
+	return ps
+}
+
+// WithSetName sets System_ControlPlaneTraffic_Ingress_AclSetPathAny's key "set-name" to the specified value.
+// SetName: string
+func (n *System_ControlPlaneTraffic_Ingress_AclSetPathAny) WithSetName(SetName string) *System_ControlPlaneTraffic_Ingress_AclSetPathAny {
+	ygnmi.ModifyKey(n.NodePath, "set-name", SetName)
+	return n
+}
+
+// WithType sets System_ControlPlaneTraffic_Ingress_AclSetPathAny's key "type" to the specified value.
+// Type: oc.E_Acl_ACL_TYPE
+func (n *System_ControlPlaneTraffic_Ingress_AclSetPathAny) WithType(Type oc.E_Acl_ACL_TYPE) *System_ControlPlaneTraffic_Ingress_AclSetPathAny {
+	ygnmi.ModifyKey(n.NodePath, "type", Type)
+	return n
+}
+
+// AclSet (list): List of the ACL that is to be applied in the specific ingress
+// or egress context. The key of the list specifies the type of
+// traffic to be matched, along with a reference to an ACL
+// configured in the OpenConfig ACL model within the /acl hierarchy.
+//
+//	Defining module:      "openconfig-system-controlplane"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "acl/acl-set"
+//	Path from root:       "/system/control-plane-traffic/ingress/acl/acl-set"
+//
+//	SetName: string
+//	Type: oc.E_Acl_ACL_TYPE
+func (n *System_ControlPlaneTraffic_IngressPath) AclSet(SetName string, Type oc.E_Acl_ACL_TYPE) *System_ControlPlaneTraffic_Ingress_AclSetPath {
+	ps := &System_ControlPlaneTraffic_Ingress_AclSetPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"acl", "acl-set"},
+			map[string]interface{}{"set-name": SetName, "type": Type},
+			n,
+		),
+	}
+	return ps
+}
+
+// AclSet (list): List of the ACL that is to be applied in the specific ingress
+// or egress context. The key of the list specifies the type of
+// traffic to be matched, along with a reference to an ACL
+// configured in the OpenConfig ACL model within the /acl hierarchy.
+//
+//	Defining module:      "openconfig-system-controlplane"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "acl/acl-set"
+//	Path from root:       "/system/control-plane-traffic/ingress/acl/acl-set"
+//
+//	SetName: string
+//	Type: oc.E_Acl_ACL_TYPE
+func (n *System_ControlPlaneTraffic_IngressPathAny) AclSet(SetName string, Type oc.E_Acl_ACL_TYPE) *System_ControlPlaneTraffic_Ingress_AclSetPathAny {
+	ps := &System_ControlPlaneTraffic_Ingress_AclSetPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"acl", "acl-set"},
+			map[string]interface{}{"set-name": SetName, "type": Type},
+			n,
+		),
+	}
+	return ps
+}
+
+// AclSetMap (list): List of the ACL that is to be applied in the specific ingress
+// or egress context. The key of the list specifies the type of
+// traffic to be matched, along with a reference to an ACL
+// configured in the OpenConfig ACL model within the /acl hierarchy.
+//
+//	Defining module:      "openconfig-system-controlplane"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "acl/acl-set"
+//	Path from root:       "/system/control-plane-traffic/ingress/acl/acl-set"
+func (n *System_ControlPlaneTraffic_IngressPath) AclSetMap() *System_ControlPlaneTraffic_Ingress_AclSetPathMap {
+	ps := &System_ControlPlaneTraffic_Ingress_AclSetPathMap{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"acl"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// AclSetMap (list): List of the ACL that is to be applied in the specific ingress
+// or egress context. The key of the list specifies the type of
+// traffic to be matched, along with a reference to an ACL
+// configured in the OpenConfig ACL model within the /acl hierarchy.
+//
+//	Defining module:      "openconfig-system-controlplane"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "acl/acl-set"
+//	Path from root:       "/system/control-plane-traffic/ingress/acl/acl-set"
+func (n *System_ControlPlaneTraffic_IngressPathAny) AclSetMap() *System_ControlPlaneTraffic_Ingress_AclSetPathMapAny {
+	ps := &System_ControlPlaneTraffic_Ingress_AclSetPathMapAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"acl"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// Qos (container): Configuration and operational state relating to QoS policies
+// that are applied to control-plane traffic.
+//
+//	Defining module:      "openconfig-system-controlplane"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "qos"
+//	Path from root:       "/system/control-plane-traffic/ingress/qos"
+func (n *System_ControlPlaneTraffic_IngressPath) Qos() *System_ControlPlaneTraffic_Ingress_QosPath {
+	ps := &System_ControlPlaneTraffic_Ingress_QosPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"qos"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// Qos (container): Configuration and operational state relating to QoS policies
+// that are applied to control-plane traffic.
+//
+//	Defining module:      "openconfig-system-controlplane"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "qos"
+//	Path from root:       "/system/control-plane-traffic/ingress/qos"
+func (n *System_ControlPlaneTraffic_IngressPathAny) Qos() *System_ControlPlaneTraffic_Ingress_QosPathAny {
+	ps := &System_ControlPlaneTraffic_Ingress_QosPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"qos"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_ControlPlaneTraffic_IngressPath) State() ygnmi.SingletonQuery[*oc.System_ControlPlaneTraffic_Ingress] {
+	return ygnmi.NewSingletonQuery[*oc.System_ControlPlaneTraffic_Ingress](
+		"System_ControlPlaneTraffic_Ingress",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_ControlPlaneTraffic_IngressPathAny) State() ygnmi.WildcardQuery[*oc.System_ControlPlaneTraffic_Ingress] {
+	return ygnmi.NewWildcardQuery[*oc.System_ControlPlaneTraffic_Ingress](
+		"System_ControlPlaneTraffic_Ingress",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *System_ControlPlaneTraffic_IngressPath) Config() ygnmi.ConfigQuery[*oc.System_ControlPlaneTraffic_Ingress] {
+	return ygnmi.NewConfigQuery[*oc.System_ControlPlaneTraffic_Ingress](
+		"System_ControlPlaneTraffic_Ingress",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *System_ControlPlaneTraffic_IngressPathAny) Config() ygnmi.WildcardQuery[*oc.System_ControlPlaneTraffic_Ingress] {
+	return ygnmi.NewWildcardQuery[*oc.System_ControlPlaneTraffic_Ingress](
+		"System_ControlPlaneTraffic_Ingress",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// System_ControlPlaneTraffic_Ingress_AclSet_SetNamePath represents the /openconfig-system/system/control-plane-traffic/ingress/acl/acl-set/state/set-name YANG schema element.
+type System_ControlPlaneTraffic_Ingress_AclSet_SetNamePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_ControlPlaneTraffic_Ingress_AclSet_SetNamePathAny represents the wildcard version of the /openconfig-system/system/control-plane-traffic/ingress/acl/acl-set/state/set-name YANG schema element.
+type System_ControlPlaneTraffic_Ingress_AclSet_SetNamePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-controlplane"
+//	Instantiating module: "openconfig-system-controlplane"
+//	Path from parent:     "state/set-name"
+//	Path from root:       "/system/control-plane-traffic/ingress/acl/acl-set/state/set-name"
+func (n *System_ControlPlaneTraffic_Ingress_AclSet_SetNamePath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewSingletonQuery[string](
+		"System_ControlPlaneTraffic_Ingress_AclSet",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "set-name"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_ControlPlaneTraffic_Ingress_AclSet).SetName
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_ControlPlaneTraffic_Ingress_AclSet) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-controlplane"
+//	Instantiating module: "openconfig-system-controlplane"
+//	Path from parent:     "state/set-name"
+//	Path from root:       "/system/control-plane-traffic/ingress/acl/acl-set/state/set-name"
+func (n *System_ControlPlaneTraffic_Ingress_AclSet_SetNamePathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"System_ControlPlaneTraffic_Ingress_AclSet",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "set-name"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_ControlPlaneTraffic_Ingress_AclSet).SetName
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_ControlPlaneTraffic_Ingress_AclSet) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-controlplane"
+//	Instantiating module: "openconfig-system-controlplane"
+//	Path from parent:     "config/set-name"
+//	Path from root:       "/system/control-plane-traffic/ingress/acl/acl-set/config/set-name"
+func (n *System_ControlPlaneTraffic_Ingress_AclSet_SetNamePath) Config() ygnmi.ConfigQuery[string] {
+	return ygnmi.NewConfigQuery[string](
+		"System_ControlPlaneTraffic_Ingress_AclSet",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "set-name"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_ControlPlaneTraffic_Ingress_AclSet).SetName
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_ControlPlaneTraffic_Ingress_AclSet) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-controlplane"
+//	Instantiating module: "openconfig-system-controlplane"
+//	Path from parent:     "config/set-name"
+//	Path from root:       "/system/control-plane-traffic/ingress/acl/acl-set/config/set-name"
+func (n *System_ControlPlaneTraffic_Ingress_AclSet_SetNamePathAny) Config() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"System_ControlPlaneTraffic_Ingress_AclSet",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "set-name"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_ControlPlaneTraffic_Ingress_AclSet).SetName
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_ControlPlaneTraffic_Ingress_AclSet) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// System_ControlPlaneTraffic_Ingress_AclSet_TypePath represents the /openconfig-system/system/control-plane-traffic/ingress/acl/acl-set/state/type YANG schema element.
+type System_ControlPlaneTraffic_Ingress_AclSet_TypePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_ControlPlaneTraffic_Ingress_AclSet_TypePathAny represents the wildcard version of the /openconfig-system/system/control-plane-traffic/ingress/acl/acl-set/state/type YANG schema element.
+type System_ControlPlaneTraffic_Ingress_AclSet_TypePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-controlplane"
+//	Instantiating module: "openconfig-system-controlplane"
+//	Path from parent:     "state/type"
+//	Path from root:       "/system/control-plane-traffic/ingress/acl/acl-set/state/type"
+func (n *System_ControlPlaneTraffic_Ingress_AclSet_TypePath) State() ygnmi.SingletonQuery[oc.E_Acl_ACL_TYPE] {
+	return ygnmi.NewSingletonQuery[oc.E_Acl_ACL_TYPE](
+		"System_ControlPlaneTraffic_Ingress_AclSet",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Acl_ACL_TYPE, bool) {
+			ret := gs.(*oc.System_ControlPlaneTraffic_Ingress_AclSet).Type
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_ControlPlaneTraffic_Ingress_AclSet) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-controlplane"
+//	Instantiating module: "openconfig-system-controlplane"
+//	Path from parent:     "state/type"
+//	Path from root:       "/system/control-plane-traffic/ingress/acl/acl-set/state/type"
+func (n *System_ControlPlaneTraffic_Ingress_AclSet_TypePathAny) State() ygnmi.WildcardQuery[oc.E_Acl_ACL_TYPE] {
+	return ygnmi.NewWildcardQuery[oc.E_Acl_ACL_TYPE](
+		"System_ControlPlaneTraffic_Ingress_AclSet",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Acl_ACL_TYPE, bool) {
+			ret := gs.(*oc.System_ControlPlaneTraffic_Ingress_AclSet).Type
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_ControlPlaneTraffic_Ingress_AclSet) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-controlplane"
+//	Instantiating module: "openconfig-system-controlplane"
+//	Path from parent:     "config/type"
+//	Path from root:       "/system/control-plane-traffic/ingress/acl/acl-set/config/type"
+func (n *System_ControlPlaneTraffic_Ingress_AclSet_TypePath) Config() ygnmi.ConfigQuery[oc.E_Acl_ACL_TYPE] {
+	return ygnmi.NewConfigQuery[oc.E_Acl_ACL_TYPE](
+		"System_ControlPlaneTraffic_Ingress_AclSet",
+		false,
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Acl_ACL_TYPE, bool) {
+			ret := gs.(*oc.System_ControlPlaneTraffic_Ingress_AclSet).Type
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_ControlPlaneTraffic_Ingress_AclSet) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-controlplane"
+//	Instantiating module: "openconfig-system-controlplane"
+//	Path from parent:     "config/type"
+//	Path from root:       "/system/control-plane-traffic/ingress/acl/acl-set/config/type"
+func (n *System_ControlPlaneTraffic_Ingress_AclSet_TypePathAny) Config() ygnmi.WildcardQuery[oc.E_Acl_ACL_TYPE] {
+	return ygnmi.NewWildcardQuery[oc.E_Acl_ACL_TYPE](
+		"System_ControlPlaneTraffic_Ingress_AclSet",
+		false,
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Acl_ACL_TYPE, bool) {
+			ret := gs.(*oc.System_ControlPlaneTraffic_Ingress_AclSet).Type
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_ControlPlaneTraffic_Ingress_AclSet) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// System_ControlPlaneTraffic_Ingress_AclSetPath represents the /openconfig-system/system/control-plane-traffic/ingress/acl/acl-set YANG schema element.
+type System_ControlPlaneTraffic_Ingress_AclSetPath struct {
+	*ygnmi.NodePath
+}
+
+// System_ControlPlaneTraffic_Ingress_AclSetPathAny represents the wildcard version of the /openconfig-system/system/control-plane-traffic/ingress/acl/acl-set YANG schema element.
+type System_ControlPlaneTraffic_Ingress_AclSetPathAny struct {
+	*ygnmi.NodePath
+}
+
+// System_ControlPlaneTraffic_Ingress_AclSetPathMap represents the /openconfig-system/system/control-plane-traffic/ingress/acl/acl-set YANG schema element.
+type System_ControlPlaneTraffic_Ingress_AclSetPathMap struct {
+	*ygnmi.NodePath
+}
+
+// System_ControlPlaneTraffic_Ingress_AclSetPathMapAny represents the wildcard version of the /openconfig-system/system/control-plane-traffic/ingress/acl/acl-set YANG schema element.
+type System_ControlPlaneTraffic_Ingress_AclSetPathMapAny struct {
+	*ygnmi.NodePath
+}
+
+// AclEntryAny (list): List of ACL entries assigned to an interface
+//
+//	Defining module:      "openconfig-acl"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "acl-entries/acl-entry"
+//	Path from root:       "/system/control-plane-traffic/ingress/acl/acl-set/acl-entries/acl-entry"
+func (n *System_ControlPlaneTraffic_Ingress_AclSetPath) AclEntryAny() *System_ControlPlaneTraffic_Ingress_AclSet_AclEntryPathAny {
+	ps := &System_ControlPlaneTraffic_Ingress_AclSet_AclEntryPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"acl-entries", "acl-entry"},
+			map[string]interface{}{"sequence-id": "*"},
+			n,
+		),
+	}
+	return ps
+}
+
+// AclEntryAny (list): List of ACL entries assigned to an interface
+//
+//	Defining module:      "openconfig-acl"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "acl-entries/acl-entry"
+//	Path from root:       "/system/control-plane-traffic/ingress/acl/acl-set/acl-entries/acl-entry"
+func (n *System_ControlPlaneTraffic_Ingress_AclSetPathAny) AclEntryAny() *System_ControlPlaneTraffic_Ingress_AclSet_AclEntryPathAny {
+	ps := &System_ControlPlaneTraffic_Ingress_AclSet_AclEntryPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"acl-entries", "acl-entry"},
+			map[string]interface{}{"sequence-id": "*"},
+			n,
+		),
+	}
+	return ps
+}
+
+// AclEntry (list): List of ACL entries assigned to an interface
+//
+//	Defining module:      "openconfig-acl"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "acl-entries/acl-entry"
+//	Path from root:       "/system/control-plane-traffic/ingress/acl/acl-set/acl-entries/acl-entry"
+//
+//	SequenceId: uint32
+func (n *System_ControlPlaneTraffic_Ingress_AclSetPath) AclEntry(SequenceId uint32) *System_ControlPlaneTraffic_Ingress_AclSet_AclEntryPath {
+	ps := &System_ControlPlaneTraffic_Ingress_AclSet_AclEntryPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"acl-entries", "acl-entry"},
+			map[string]interface{}{"sequence-id": SequenceId},
+			n,
+		),
+	}
+	return ps
+}
+
+// AclEntry (list): List of ACL entries assigned to an interface
+//
+//	Defining module:      "openconfig-acl"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "acl-entries/acl-entry"
+//	Path from root:       "/system/control-plane-traffic/ingress/acl/acl-set/acl-entries/acl-entry"
+//
+//	SequenceId: uint32
+func (n *System_ControlPlaneTraffic_Ingress_AclSetPathAny) AclEntry(SequenceId uint32) *System_ControlPlaneTraffic_Ingress_AclSet_AclEntryPathAny {
+	ps := &System_ControlPlaneTraffic_Ingress_AclSet_AclEntryPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"acl-entries", "acl-entry"},
+			map[string]interface{}{"sequence-id": SequenceId},
+			n,
+		),
+	}
+	return ps
+}
+
+// AclEntryMap (list): List of ACL entries assigned to an interface
+//
+//	Defining module:      "openconfig-acl"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "acl-entries/acl-entry"
+//	Path from root:       "/system/control-plane-traffic/ingress/acl/acl-set/acl-entries/acl-entry"
+func (n *System_ControlPlaneTraffic_Ingress_AclSetPath) AclEntryMap() *System_ControlPlaneTraffic_Ingress_AclSet_AclEntryPathMap {
+	ps := &System_ControlPlaneTraffic_Ingress_AclSet_AclEntryPathMap{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"acl-entries"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// AclEntryMap (list): List of ACL entries assigned to an interface
+//
+//	Defining module:      "openconfig-acl"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "acl-entries/acl-entry"
+//	Path from root:       "/system/control-plane-traffic/ingress/acl/acl-set/acl-entries/acl-entry"
+func (n *System_ControlPlaneTraffic_Ingress_AclSetPathAny) AclEntryMap() *System_ControlPlaneTraffic_Ingress_AclSet_AclEntryPathMapAny {
+	ps := &System_ControlPlaneTraffic_Ingress_AclSet_AclEntryPathMapAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"acl-entries"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// SetName (leaf): Reference to the ACL to be applied to traffic
+// in the specified context (ingress or egress).
+//
+//	Defining module:      "openconfig-system-controlplane"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/set-name"
+//	Path from root:       "/system/control-plane-traffic/ingress/acl/acl-set/*/set-name"
+func (n *System_ControlPlaneTraffic_Ingress_AclSetPath) SetName() *System_ControlPlaneTraffic_Ingress_AclSet_SetNamePath {
+	ps := &System_ControlPlaneTraffic_Ingress_AclSet_SetNamePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "set-name"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// SetName (leaf): Reference to the ACL to be applied to traffic
+// in the specified context (ingress or egress).
+//
+//	Defining module:      "openconfig-system-controlplane"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/set-name"
+//	Path from root:       "/system/control-plane-traffic/ingress/acl/acl-set/*/set-name"
+func (n *System_ControlPlaneTraffic_Ingress_AclSetPathAny) SetName() *System_ControlPlaneTraffic_Ingress_AclSet_SetNamePathAny {
+	ps := &System_ControlPlaneTraffic_Ingress_AclSet_SetNamePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "set-name"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Type (leaf): Reference to the ACL set type applied to traffic
+// in the specified context (ingress or egress).
+//
+//	Defining module:      "openconfig-system-controlplane"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/type"
+//	Path from root:       "/system/control-plane-traffic/ingress/acl/acl-set/*/type"
+func (n *System_ControlPlaneTraffic_Ingress_AclSetPath) Type() *System_ControlPlaneTraffic_Ingress_AclSet_TypePath {
+	ps := &System_ControlPlaneTraffic_Ingress_AclSet_TypePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "type"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Type (leaf): Reference to the ACL set type applied to traffic
+// in the specified context (ingress or egress).
+//
+//	Defining module:      "openconfig-system-controlplane"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/type"
+//	Path from root:       "/system/control-plane-traffic/ingress/acl/acl-set/*/type"
+func (n *System_ControlPlaneTraffic_Ingress_AclSetPathAny) Type() *System_ControlPlaneTraffic_Ingress_AclSet_TypePathAny {
+	ps := &System_ControlPlaneTraffic_Ingress_AclSet_TypePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "type"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_ControlPlaneTraffic_Ingress_AclSetPath) State() ygnmi.SingletonQuery[*oc.System_ControlPlaneTraffic_Ingress_AclSet] {
+	return ygnmi.NewSingletonQuery[*oc.System_ControlPlaneTraffic_Ingress_AclSet](
+		"System_ControlPlaneTraffic_Ingress_AclSet",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_ControlPlaneTraffic_Ingress_AclSetPathAny) State() ygnmi.WildcardQuery[*oc.System_ControlPlaneTraffic_Ingress_AclSet] {
+	return ygnmi.NewWildcardQuery[*oc.System_ControlPlaneTraffic_Ingress_AclSet](
+		"System_ControlPlaneTraffic_Ingress_AclSet",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *System_ControlPlaneTraffic_Ingress_AclSetPath) Config() ygnmi.ConfigQuery[*oc.System_ControlPlaneTraffic_Ingress_AclSet] {
+	return ygnmi.NewConfigQuery[*oc.System_ControlPlaneTraffic_Ingress_AclSet](
+		"System_ControlPlaneTraffic_Ingress_AclSet",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *System_ControlPlaneTraffic_Ingress_AclSetPathAny) Config() ygnmi.WildcardQuery[*oc.System_ControlPlaneTraffic_Ingress_AclSet] {
+	return ygnmi.NewWildcardQuery[*oc.System_ControlPlaneTraffic_Ingress_AclSet](
+		"System_ControlPlaneTraffic_Ingress_AclSet",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_ControlPlaneTraffic_Ingress_AclSetPathMap) State() ygnmi.SingletonQuery[map[oc.System_ControlPlaneTraffic_Ingress_AclSet_Key]*oc.System_ControlPlaneTraffic_Ingress_AclSet] {
+	return ygnmi.NewSingletonQuery[map[oc.System_ControlPlaneTraffic_Ingress_AclSet_Key]*oc.System_ControlPlaneTraffic_Ingress_AclSet](
+		"System_ControlPlaneTraffic_Ingress",
+		true,
+		false,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[oc.System_ControlPlaneTraffic_Ingress_AclSet_Key]*oc.System_ControlPlaneTraffic_Ingress_AclSet, bool) {
+			ret := gs.(*oc.System_ControlPlaneTraffic_Ingress).AclSet
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_ControlPlaneTraffic_Ingress) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-system-controlplane:acl"},
+			PostRelPath: []string{"openconfig-system-controlplane:acl-set"},
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_ControlPlaneTraffic_Ingress_AclSetPathMapAny) State() ygnmi.WildcardQuery[map[oc.System_ControlPlaneTraffic_Ingress_AclSet_Key]*oc.System_ControlPlaneTraffic_Ingress_AclSet] {
+	return ygnmi.NewWildcardQuery[map[oc.System_ControlPlaneTraffic_Ingress_AclSet_Key]*oc.System_ControlPlaneTraffic_Ingress_AclSet](
+		"System_ControlPlaneTraffic_Ingress",
+		true,
+		false,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[oc.System_ControlPlaneTraffic_Ingress_AclSet_Key]*oc.System_ControlPlaneTraffic_Ingress_AclSet, bool) {
+			ret := gs.(*oc.System_ControlPlaneTraffic_Ingress).AclSet
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_ControlPlaneTraffic_Ingress) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-system-controlplane:acl"},
+			PostRelPath: []string{"openconfig-system-controlplane:acl-set"},
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *System_ControlPlaneTraffic_Ingress_AclSetPathMap) Config() ygnmi.ConfigQuery[map[oc.System_ControlPlaneTraffic_Ingress_AclSet_Key]*oc.System_ControlPlaneTraffic_Ingress_AclSet] {
+	return ygnmi.NewConfigQuery[map[oc.System_ControlPlaneTraffic_Ingress_AclSet_Key]*oc.System_ControlPlaneTraffic_Ingress_AclSet](
+		"System_ControlPlaneTraffic_Ingress",
+		false,
+		true,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[oc.System_ControlPlaneTraffic_Ingress_AclSet_Key]*oc.System_ControlPlaneTraffic_Ingress_AclSet, bool) {
+			ret := gs.(*oc.System_ControlPlaneTraffic_Ingress).AclSet
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_ControlPlaneTraffic_Ingress) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-system-controlplane:acl"},
+			PostRelPath: []string{"openconfig-system-controlplane:acl-set"},
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *System_ControlPlaneTraffic_Ingress_AclSetPathMapAny) Config() ygnmi.WildcardQuery[map[oc.System_ControlPlaneTraffic_Ingress_AclSet_Key]*oc.System_ControlPlaneTraffic_Ingress_AclSet] {
+	return ygnmi.NewWildcardQuery[map[oc.System_ControlPlaneTraffic_Ingress_AclSet_Key]*oc.System_ControlPlaneTraffic_Ingress_AclSet](
+		"System_ControlPlaneTraffic_Ingress",
+		false,
+		true,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[oc.System_ControlPlaneTraffic_Ingress_AclSet_Key]*oc.System_ControlPlaneTraffic_Ingress_AclSet, bool) {
+			ret := gs.(*oc.System_ControlPlaneTraffic_Ingress).AclSet
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_ControlPlaneTraffic_Ingress) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-system-controlplane:acl"},
+			PostRelPath: []string{"openconfig-system-controlplane:acl-set"},
+		},
+	)
+}
+
+// System_ControlPlaneTraffic_Ingress_AclSet_AclEntry_MatchedOctetsPath represents the /openconfig-system/system/control-plane-traffic/ingress/acl/acl-set/acl-entries/acl-entry/state/matched-octets YANG schema element.
+type System_ControlPlaneTraffic_Ingress_AclSet_AclEntry_MatchedOctetsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_ControlPlaneTraffic_Ingress_AclSet_AclEntry_MatchedOctetsPathAny represents the wildcard version of the /openconfig-system/system/control-plane-traffic/ingress/acl/acl-set/acl-entries/acl-entry/state/matched-octets YANG schema element.
+type System_ControlPlaneTraffic_Ingress_AclSet_AclEntry_MatchedOctetsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-acl"
+//	Instantiating module: "openconfig-system-controlplane"
+//	Path from parent:     "state/matched-octets"
+//	Path from root:       "/system/control-plane-traffic/ingress/acl/acl-set/acl-entries/acl-entry/state/matched-octets"
+func (n *System_ControlPlaneTraffic_Ingress_AclSet_AclEntry_MatchedOctetsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"System_ControlPlaneTraffic_Ingress_AclSet_AclEntry",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "matched-octets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.System_ControlPlaneTraffic_Ingress_AclSet_AclEntry).MatchedOctets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_ControlPlaneTraffic_Ingress_AclSet_AclEntry) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-acl"
+//	Instantiating module: "openconfig-system-controlplane"
+//	Path from parent:     "state/matched-octets"
+//	Path from root:       "/system/control-plane-traffic/ingress/acl/acl-set/acl-entries/acl-entry/state/matched-octets"
+func (n *System_ControlPlaneTraffic_Ingress_AclSet_AclEntry_MatchedOctetsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"System_ControlPlaneTraffic_Ingress_AclSet_AclEntry",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "matched-octets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.System_ControlPlaneTraffic_Ingress_AclSet_AclEntry).MatchedOctets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_ControlPlaneTraffic_Ingress_AclSet_AclEntry) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// System_ControlPlaneTraffic_Ingress_AclSet_AclEntry_MatchedPacketsPath represents the /openconfig-system/system/control-plane-traffic/ingress/acl/acl-set/acl-entries/acl-entry/state/matched-packets YANG schema element.
+type System_ControlPlaneTraffic_Ingress_AclSet_AclEntry_MatchedPacketsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_ControlPlaneTraffic_Ingress_AclSet_AclEntry_MatchedPacketsPathAny represents the wildcard version of the /openconfig-system/system/control-plane-traffic/ingress/acl/acl-set/acl-entries/acl-entry/state/matched-packets YANG schema element.
+type System_ControlPlaneTraffic_Ingress_AclSet_AclEntry_MatchedPacketsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-acl"
+//	Instantiating module: "openconfig-system-controlplane"
+//	Path from parent:     "state/matched-packets"
+//	Path from root:       "/system/control-plane-traffic/ingress/acl/acl-set/acl-entries/acl-entry/state/matched-packets"
+func (n *System_ControlPlaneTraffic_Ingress_AclSet_AclEntry_MatchedPacketsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"System_ControlPlaneTraffic_Ingress_AclSet_AclEntry",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "matched-packets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.System_ControlPlaneTraffic_Ingress_AclSet_AclEntry).MatchedPackets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_ControlPlaneTraffic_Ingress_AclSet_AclEntry) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-acl"
+//	Instantiating module: "openconfig-system-controlplane"
+//	Path from parent:     "state/matched-packets"
+//	Path from root:       "/system/control-plane-traffic/ingress/acl/acl-set/acl-entries/acl-entry/state/matched-packets"
+func (n *System_ControlPlaneTraffic_Ingress_AclSet_AclEntry_MatchedPacketsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"System_ControlPlaneTraffic_Ingress_AclSet_AclEntry",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "matched-packets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.System_ControlPlaneTraffic_Ingress_AclSet_AclEntry).MatchedPackets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_ControlPlaneTraffic_Ingress_AclSet_AclEntry) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// System_ControlPlaneTraffic_Ingress_AclSet_AclEntry_SequenceIdPath represents the /openconfig-system/system/control-plane-traffic/ingress/acl/acl-set/acl-entries/acl-entry/state/sequence-id YANG schema element.
+type System_ControlPlaneTraffic_Ingress_AclSet_AclEntry_SequenceIdPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_ControlPlaneTraffic_Ingress_AclSet_AclEntry_SequenceIdPathAny represents the wildcard version of the /openconfig-system/system/control-plane-traffic/ingress/acl/acl-set/acl-entries/acl-entry/state/sequence-id YANG schema element.
+type System_ControlPlaneTraffic_Ingress_AclSet_AclEntry_SequenceIdPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-acl"
+//	Instantiating module: "openconfig-system-controlplane"
+//	Path from parent:     "state/sequence-id"
+//	Path from root:       "/system/control-plane-traffic/ingress/acl/acl-set/acl-entries/acl-entry/state/sequence-id"
+func (n *System_ControlPlaneTraffic_Ingress_AclSet_AclEntry_SequenceIdPath) State() ygnmi.SingletonQuery[uint32] {
+	return ygnmi.NewSingletonQuery[uint32](
+		"System_ControlPlaneTraffic_Ingress_AclSet_AclEntry",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "sequence-id"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.System_ControlPlaneTraffic_Ingress_AclSet_AclEntry).SequenceId
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_ControlPlaneTraffic_Ingress_AclSet_AclEntry) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-acl"
+//	Instantiating module: "openconfig-system-controlplane"
+//	Path from parent:     "state/sequence-id"
+//	Path from root:       "/system/control-plane-traffic/ingress/acl/acl-set/acl-entries/acl-entry/state/sequence-id"
+func (n *System_ControlPlaneTraffic_Ingress_AclSet_AclEntry_SequenceIdPathAny) State() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewWildcardQuery[uint32](
+		"System_ControlPlaneTraffic_Ingress_AclSet_AclEntry",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "sequence-id"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.System_ControlPlaneTraffic_Ingress_AclSet_AclEntry).SequenceId
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_ControlPlaneTraffic_Ingress_AclSet_AclEntry) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-acl"
+//	Instantiating module: "openconfig-system-controlplane"
+//	Path from parent:     "sequence-id"
+//	Path from root:       ""
+func (n *System_ControlPlaneTraffic_Ingress_AclSet_AclEntry_SequenceIdPath) Config() ygnmi.ConfigQuery[uint32] {
+	return ygnmi.NewConfigQuery[uint32](
+		"System_ControlPlaneTraffic_Ingress_AclSet_AclEntry",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"sequence-id"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.System_ControlPlaneTraffic_Ingress_AclSet_AclEntry).SequenceId
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_ControlPlaneTraffic_Ingress_AclSet_AclEntry) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-acl"
+//	Instantiating module: "openconfig-system-controlplane"
+//	Path from parent:     "sequence-id"
+//	Path from root:       ""
+func (n *System_ControlPlaneTraffic_Ingress_AclSet_AclEntry_SequenceIdPathAny) Config() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewWildcardQuery[uint32](
+		"System_ControlPlaneTraffic_Ingress_AclSet_AclEntry",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"sequence-id"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.System_ControlPlaneTraffic_Ingress_AclSet_AclEntry).SequenceId
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_ControlPlaneTraffic_Ingress_AclSet_AclEntry) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// System_ControlPlaneTraffic_Ingress_AclSet_AclEntryPath represents the /openconfig-system/system/control-plane-traffic/ingress/acl/acl-set/acl-entries/acl-entry YANG schema element.
+type System_ControlPlaneTraffic_Ingress_AclSet_AclEntryPath struct {
+	*ygnmi.NodePath
+}
+
+// System_ControlPlaneTraffic_Ingress_AclSet_AclEntryPathAny represents the wildcard version of the /openconfig-system/system/control-plane-traffic/ingress/acl/acl-set/acl-entries/acl-entry YANG schema element.
+type System_ControlPlaneTraffic_Ingress_AclSet_AclEntryPathAny struct {
+	*ygnmi.NodePath
+}
+
+// System_ControlPlaneTraffic_Ingress_AclSet_AclEntryPathMap represents the /openconfig-system/system/control-plane-traffic/ingress/acl/acl-set/acl-entries/acl-entry YANG schema element.
+type System_ControlPlaneTraffic_Ingress_AclSet_AclEntryPathMap struct {
+	*ygnmi.NodePath
+}
+
+// System_ControlPlaneTraffic_Ingress_AclSet_AclEntryPathMapAny represents the wildcard version of the /openconfig-system/system/control-plane-traffic/ingress/acl/acl-set/acl-entries/acl-entry YANG schema element.
+type System_ControlPlaneTraffic_Ingress_AclSet_AclEntryPathMapAny struct {
+	*ygnmi.NodePath
+}
+
+// MatchedOctets (leaf): Count of the number of octets (bytes) matching the current
+// ACL entry.
+//
+// An implementation should provide this counter on a
+// per-interface per-ACL-entry if possible.
+//
+// If an implementation only supports ACL counters per entry
+// (i.e., not broken out per interface), then the value
+// should be equal to the aggregate count across all interfaces.
+//
+// An implementation that provides counters per entry per
+// interface is not required to also provide an aggregate count,
+// e.g., per entry -- the user is expected to be able implement
+// the required aggregation if such a count is needed.
+//
+//	Defining module:      "openconfig-acl"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/matched-octets"
+//	Path from root:       "/system/control-plane-traffic/ingress/acl/acl-set/acl-entries/acl-entry/state/matched-octets"
+func (n *System_ControlPlaneTraffic_Ingress_AclSet_AclEntryPath) MatchedOctets() *System_ControlPlaneTraffic_Ingress_AclSet_AclEntry_MatchedOctetsPath {
+	ps := &System_ControlPlaneTraffic_Ingress_AclSet_AclEntry_MatchedOctetsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "matched-octets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// MatchedOctets (leaf): Count of the number of octets (bytes) matching the current
+// ACL entry.
+//
+// An implementation should provide this counter on a
+// per-interface per-ACL-entry if possible.
+//
+// If an implementation only supports ACL counters per entry
+// (i.e., not broken out per interface), then the value
+// should be equal to the aggregate count across all interfaces.
+//
+// An implementation that provides counters per entry per
+// interface is not required to also provide an aggregate count,
+// e.g., per entry -- the user is expected to be able implement
+// the required aggregation if such a count is needed.
+//
+//	Defining module:      "openconfig-acl"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/matched-octets"
+//	Path from root:       "/system/control-plane-traffic/ingress/acl/acl-set/acl-entries/acl-entry/state/matched-octets"
+func (n *System_ControlPlaneTraffic_Ingress_AclSet_AclEntryPathAny) MatchedOctets() *System_ControlPlaneTraffic_Ingress_AclSet_AclEntry_MatchedOctetsPathAny {
+	ps := &System_ControlPlaneTraffic_Ingress_AclSet_AclEntry_MatchedOctetsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "matched-octets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// MatchedPackets (leaf): Count of the number of packets matching the current ACL
+// entry.
+//
+// An implementation should provide this counter on a
+// per-interface per-ACL-entry if possible.
+//
+// If an implementation only supports ACL counters per entry
+// (i.e., not broken out per interface), then the value
+// should be equal to the aggregate count across all interfaces.
+//
+// An implementation that provides counters per entry per
+// interface is not required to also provide an aggregate count,
+// e.g., per entry -- the user is expected to be able implement
+// the required aggregation if such a count is needed.
+//
+//	Defining module:      "openconfig-acl"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/matched-packets"
+//	Path from root:       "/system/control-plane-traffic/ingress/acl/acl-set/acl-entries/acl-entry/state/matched-packets"
+func (n *System_ControlPlaneTraffic_Ingress_AclSet_AclEntryPath) MatchedPackets() *System_ControlPlaneTraffic_Ingress_AclSet_AclEntry_MatchedPacketsPath {
+	ps := &System_ControlPlaneTraffic_Ingress_AclSet_AclEntry_MatchedPacketsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "matched-packets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// MatchedPackets (leaf): Count of the number of packets matching the current ACL
+// entry.
+//
+// An implementation should provide this counter on a
+// per-interface per-ACL-entry if possible.
+//
+// If an implementation only supports ACL counters per entry
+// (i.e., not broken out per interface), then the value
+// should be equal to the aggregate count across all interfaces.
+//
+// An implementation that provides counters per entry per
+// interface is not required to also provide an aggregate count,
+// e.g., per entry -- the user is expected to be able implement
+// the required aggregation if such a count is needed.
+//
+//	Defining module:      "openconfig-acl"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/matched-packets"
+//	Path from root:       "/system/control-plane-traffic/ingress/acl/acl-set/acl-entries/acl-entry/state/matched-packets"
+func (n *System_ControlPlaneTraffic_Ingress_AclSet_AclEntryPathAny) MatchedPackets() *System_ControlPlaneTraffic_Ingress_AclSet_AclEntry_MatchedPacketsPathAny {
+	ps := &System_ControlPlaneTraffic_Ingress_AclSet_AclEntry_MatchedPacketsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "matched-packets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// SequenceId (leaf): Reference to an entry in the ACL set applied to an
+// interface
+//
+//	Defining module:      "openconfig-acl"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/sequence-id"
+//	Path from root:       "/system/control-plane-traffic/ingress/acl/acl-set/acl-entries/acl-entry/*/sequence-id"
+func (n *System_ControlPlaneTraffic_Ingress_AclSet_AclEntryPath) SequenceId() *System_ControlPlaneTraffic_Ingress_AclSet_AclEntry_SequenceIdPath {
+	ps := &System_ControlPlaneTraffic_Ingress_AclSet_AclEntry_SequenceIdPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "sequence-id"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// SequenceId (leaf): Reference to an entry in the ACL set applied to an
+// interface
+//
+//	Defining module:      "openconfig-acl"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/sequence-id"
+//	Path from root:       "/system/control-plane-traffic/ingress/acl/acl-set/acl-entries/acl-entry/*/sequence-id"
+func (n *System_ControlPlaneTraffic_Ingress_AclSet_AclEntryPathAny) SequenceId() *System_ControlPlaneTraffic_Ingress_AclSet_AclEntry_SequenceIdPathAny {
+	ps := &System_ControlPlaneTraffic_Ingress_AclSet_AclEntry_SequenceIdPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "sequence-id"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_ControlPlaneTraffic_Ingress_AclSet_AclEntryPath) State() ygnmi.SingletonQuery[*oc.System_ControlPlaneTraffic_Ingress_AclSet_AclEntry] {
+	return ygnmi.NewSingletonQuery[*oc.System_ControlPlaneTraffic_Ingress_AclSet_AclEntry](
+		"System_ControlPlaneTraffic_Ingress_AclSet_AclEntry",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_ControlPlaneTraffic_Ingress_AclSet_AclEntryPathAny) State() ygnmi.WildcardQuery[*oc.System_ControlPlaneTraffic_Ingress_AclSet_AclEntry] {
+	return ygnmi.NewWildcardQuery[*oc.System_ControlPlaneTraffic_Ingress_AclSet_AclEntry](
+		"System_ControlPlaneTraffic_Ingress_AclSet_AclEntry",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_ControlPlaneTraffic_Ingress_AclSet_AclEntryPathMap) State() ygnmi.SingletonQuery[map[uint32]*oc.System_ControlPlaneTraffic_Ingress_AclSet_AclEntry] {
+	return ygnmi.NewSingletonQuery[map[uint32]*oc.System_ControlPlaneTraffic_Ingress_AclSet_AclEntry](
+		"System_ControlPlaneTraffic_Ingress_AclSet",
+		true,
+		false,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[uint32]*oc.System_ControlPlaneTraffic_Ingress_AclSet_AclEntry, bool) {
+			ret := gs.(*oc.System_ControlPlaneTraffic_Ingress_AclSet).AclEntry
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_ControlPlaneTraffic_Ingress_AclSet) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-system-controlplane:acl-entries"},
+			PostRelPath: []string{"openconfig-system-controlplane:acl-entry"},
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_ControlPlaneTraffic_Ingress_AclSet_AclEntryPathMapAny) State() ygnmi.WildcardQuery[map[uint32]*oc.System_ControlPlaneTraffic_Ingress_AclSet_AclEntry] {
+	return ygnmi.NewWildcardQuery[map[uint32]*oc.System_ControlPlaneTraffic_Ingress_AclSet_AclEntry](
+		"System_ControlPlaneTraffic_Ingress_AclSet",
+		true,
+		false,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[uint32]*oc.System_ControlPlaneTraffic_Ingress_AclSet_AclEntry, bool) {
+			ret := gs.(*oc.System_ControlPlaneTraffic_Ingress_AclSet).AclEntry
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_ControlPlaneTraffic_Ingress_AclSet) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-system-controlplane:acl-entries"},
+			PostRelPath: []string{"openconfig-system-controlplane:acl-entry"},
+		},
+	)
+}
+
+// System_ControlPlaneTraffic_Ingress_QosPath represents the /openconfig-system/system/control-plane-traffic/ingress/qos YANG schema element.
+type System_ControlPlaneTraffic_Ingress_QosPath struct {
+	*ygnmi.NodePath
+}
+
+// System_ControlPlaneTraffic_Ingress_QosPathAny represents the wildcard version of the /openconfig-system/system/control-plane-traffic/ingress/qos YANG schema element.
+type System_ControlPlaneTraffic_Ingress_QosPathAny struct {
+	*ygnmi.NodePath
+}
+
+// Classifier (container): Configuration and state parameters relating to the QoS
+// classifier that is applied to control plane traffic. A QoS
+// classifier - defined in /qos/classifiers specifies how traffic
+// is mapped to QoS queues. The classifier specified in this
+// container and corresponding state allows for traffic towards
+// the control-plane to be classified.
+//
+//	Defining module:      "openconfig-system-controlplane"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "classifier"
+//	Path from root:       "/system/control-plane-traffic/ingress/qos/classifier"
+func (n *System_ControlPlaneTraffic_Ingress_QosPath) Classifier() *System_ControlPlaneTraffic_Ingress_Qos_ClassifierPath {
+	ps := &System_ControlPlaneTraffic_Ingress_Qos_ClassifierPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"classifier"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// Classifier (container): Configuration and state parameters relating to the QoS
+// classifier that is applied to control plane traffic. A QoS
+// classifier - defined in /qos/classifiers specifies how traffic
+// is mapped to QoS queues. The classifier specified in this
+// container and corresponding state allows for traffic towards
+// the control-plane to be classified.
+//
+//	Defining module:      "openconfig-system-controlplane"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "classifier"
+//	Path from root:       "/system/control-plane-traffic/ingress/qos/classifier"
+func (n *System_ControlPlaneTraffic_Ingress_QosPathAny) Classifier() *System_ControlPlaneTraffic_Ingress_Qos_ClassifierPathAny {
+	ps := &System_ControlPlaneTraffic_Ingress_Qos_ClassifierPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"classifier"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// SchedulerPolicy (container): Configuration and operational state relating to the QoS
+// scheduler policy that is applied to control-plane traffic.
+// The scheduler policy determines how traffic, classified by
+// the specified control-plane classifier is rate-limited towards
+// the control-plane. The scheduler policy is defined in
+// /qos/scheduler-policies.
+//
+//	Defining module:      "openconfig-system-controlplane"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "scheduler-policy"
+//	Path from root:       "/system/control-plane-traffic/ingress/qos/scheduler-policy"
+func (n *System_ControlPlaneTraffic_Ingress_QosPath) SchedulerPolicy() *System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicyPath {
+	ps := &System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicyPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"scheduler-policy"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// SchedulerPolicy (container): Configuration and operational state relating to the QoS
+// scheduler policy that is applied to control-plane traffic.
+// The scheduler policy determines how traffic, classified by
+// the specified control-plane classifier is rate-limited towards
+// the control-plane. The scheduler policy is defined in
+// /qos/scheduler-policies.
+//
+//	Defining module:      "openconfig-system-controlplane"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "scheduler-policy"
+//	Path from root:       "/system/control-plane-traffic/ingress/qos/scheduler-policy"
+func (n *System_ControlPlaneTraffic_Ingress_QosPathAny) SchedulerPolicy() *System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicyPathAny {
+	ps := &System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicyPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"scheduler-policy"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_ControlPlaneTraffic_Ingress_QosPath) State() ygnmi.SingletonQuery[*oc.System_ControlPlaneTraffic_Ingress_Qos] {
+	return ygnmi.NewSingletonQuery[*oc.System_ControlPlaneTraffic_Ingress_Qos](
+		"System_ControlPlaneTraffic_Ingress_Qos",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_ControlPlaneTraffic_Ingress_QosPathAny) State() ygnmi.WildcardQuery[*oc.System_ControlPlaneTraffic_Ingress_Qos] {
+	return ygnmi.NewWildcardQuery[*oc.System_ControlPlaneTraffic_Ingress_Qos](
+		"System_ControlPlaneTraffic_Ingress_Qos",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *System_ControlPlaneTraffic_Ingress_QosPath) Config() ygnmi.ConfigQuery[*oc.System_ControlPlaneTraffic_Ingress_Qos] {
+	return ygnmi.NewConfigQuery[*oc.System_ControlPlaneTraffic_Ingress_Qos](
+		"System_ControlPlaneTraffic_Ingress_Qos",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *System_ControlPlaneTraffic_Ingress_QosPathAny) Config() ygnmi.WildcardQuery[*oc.System_ControlPlaneTraffic_Ingress_Qos] {
+	return ygnmi.NewWildcardQuery[*oc.System_ControlPlaneTraffic_Ingress_Qos](
+		"System_ControlPlaneTraffic_Ingress_Qos",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// System_ControlPlaneTraffic_Ingress_Qos_Classifier_NamePath represents the /openconfig-system/system/control-plane-traffic/ingress/qos/classifier/state/name YANG schema element.
+type System_ControlPlaneTraffic_Ingress_Qos_Classifier_NamePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_ControlPlaneTraffic_Ingress_Qos_Classifier_NamePathAny represents the wildcard version of the /openconfig-system/system/control-plane-traffic/ingress/qos/classifier/state/name YANG schema element.
+type System_ControlPlaneTraffic_Ingress_Qos_Classifier_NamePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-controlplane"
+//	Instantiating module: "openconfig-system-controlplane"
+//	Path from parent:     "state/name"
+//	Path from root:       "/system/control-plane-traffic/ingress/qos/classifier/state/name"
+func (n *System_ControlPlaneTraffic_Ingress_Qos_Classifier_NamePath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewSingletonQuery[string](
+		"System_ControlPlaneTraffic_Ingress_Qos_Classifier",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "name"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_ControlPlaneTraffic_Ingress_Qos_Classifier).Name
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_ControlPlaneTraffic_Ingress_Qos_Classifier) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-controlplane"
+//	Instantiating module: "openconfig-system-controlplane"
+//	Path from parent:     "state/name"
+//	Path from root:       "/system/control-plane-traffic/ingress/qos/classifier/state/name"
+func (n *System_ControlPlaneTraffic_Ingress_Qos_Classifier_NamePathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"System_ControlPlaneTraffic_Ingress_Qos_Classifier",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "name"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_ControlPlaneTraffic_Ingress_Qos_Classifier).Name
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_ControlPlaneTraffic_Ingress_Qos_Classifier) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-controlplane"
+//	Instantiating module: "openconfig-system-controlplane"
+//	Path from parent:     "config/name"
+//	Path from root:       "/system/control-plane-traffic/ingress/qos/classifier/config/name"
+func (n *System_ControlPlaneTraffic_Ingress_Qos_Classifier_NamePath) Config() ygnmi.ConfigQuery[string] {
+	return ygnmi.NewConfigQuery[string](
+		"System_ControlPlaneTraffic_Ingress_Qos_Classifier",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "name"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_ControlPlaneTraffic_Ingress_Qos_Classifier).Name
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_ControlPlaneTraffic_Ingress_Qos_Classifier) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-controlplane"
+//	Instantiating module: "openconfig-system-controlplane"
+//	Path from parent:     "config/name"
+//	Path from root:       "/system/control-plane-traffic/ingress/qos/classifier/config/name"
+func (n *System_ControlPlaneTraffic_Ingress_Qos_Classifier_NamePathAny) Config() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"System_ControlPlaneTraffic_Ingress_Qos_Classifier",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "name"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_ControlPlaneTraffic_Ingress_Qos_Classifier).Name
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_ControlPlaneTraffic_Ingress_Qos_Classifier) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// System_ControlPlaneTraffic_Ingress_Qos_ClassifierPath represents the /openconfig-system/system/control-plane-traffic/ingress/qos/classifier YANG schema element.
+type System_ControlPlaneTraffic_Ingress_Qos_ClassifierPath struct {
+	*ygnmi.NodePath
+}
+
+// System_ControlPlaneTraffic_Ingress_Qos_ClassifierPathAny represents the wildcard version of the /openconfig-system/system/control-plane-traffic/ingress/qos/classifier YANG schema element.
+type System_ControlPlaneTraffic_Ingress_Qos_ClassifierPathAny struct {
+	*ygnmi.NodePath
+}
+
+// Name (leaf): Reference to a classifier that is used to classify traffic
+//
+//	 destined to the control-plane of the system.
+//	 This classifier determines how packets that match each terms
+//	 are classified into forwarding groups, and subsequently into
+//	 queues to be forwarded.
+//		Defining module:      "openconfig-system-controlplane"
+//		Instantiating module: "openconfig-system"
+//		Path from parent:     "*/name"
+//		Path from root:       "/system/control-plane-traffic/ingress/qos/classifier/*/name"
+func (n *System_ControlPlaneTraffic_Ingress_Qos_ClassifierPath) Name() *System_ControlPlaneTraffic_Ingress_Qos_Classifier_NamePath {
+	ps := &System_ControlPlaneTraffic_Ingress_Qos_Classifier_NamePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "name"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Name (leaf): Reference to a classifier that is used to classify traffic
+//
+//	 destined to the control-plane of the system.
+//	 This classifier determines how packets that match each terms
+//	 are classified into forwarding groups, and subsequently into
+//	 queues to be forwarded.
+//		Defining module:      "openconfig-system-controlplane"
+//		Instantiating module: "openconfig-system"
+//		Path from parent:     "*/name"
+//		Path from root:       "/system/control-plane-traffic/ingress/qos/classifier/*/name"
+func (n *System_ControlPlaneTraffic_Ingress_Qos_ClassifierPathAny) Name() *System_ControlPlaneTraffic_Ingress_Qos_Classifier_NamePathAny {
+	ps := &System_ControlPlaneTraffic_Ingress_Qos_Classifier_NamePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "name"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// TermAny (list): A list of the terms within the QoS classifier being
+// applied for control-plane traffic. Each term has
+// corresponding operational state parameters.
+//
+//	Defining module:      "openconfig-system-controlplane"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "terms/term"
+//	Path from root:       "/system/control-plane-traffic/ingress/qos/classifier/terms/term"
+func (n *System_ControlPlaneTraffic_Ingress_Qos_ClassifierPath) TermAny() *System_ControlPlaneTraffic_Ingress_Qos_Classifier_TermPathAny {
+	ps := &System_ControlPlaneTraffic_Ingress_Qos_Classifier_TermPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"terms", "term"},
+			map[string]interface{}{"id": "*"},
+			n,
+		),
+	}
+	return ps
+}
+
+// TermAny (list): A list of the terms within the QoS classifier being
+// applied for control-plane traffic. Each term has
+// corresponding operational state parameters.
+//
+//	Defining module:      "openconfig-system-controlplane"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "terms/term"
+//	Path from root:       "/system/control-plane-traffic/ingress/qos/classifier/terms/term"
+func (n *System_ControlPlaneTraffic_Ingress_Qos_ClassifierPathAny) TermAny() *System_ControlPlaneTraffic_Ingress_Qos_Classifier_TermPathAny {
+	ps := &System_ControlPlaneTraffic_Ingress_Qos_Classifier_TermPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"terms", "term"},
+			map[string]interface{}{"id": "*"},
+			n,
+		),
+	}
+	return ps
+}
+
+// Term (list): A list of the terms within the QoS classifier being
+// applied for control-plane traffic. Each term has
+// corresponding operational state parameters.
+//
+//	Defining module:      "openconfig-system-controlplane"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "terms/term"
+//	Path from root:       "/system/control-plane-traffic/ingress/qos/classifier/terms/term"
+//
+//	Id: string
+func (n *System_ControlPlaneTraffic_Ingress_Qos_ClassifierPath) Term(Id string) *System_ControlPlaneTraffic_Ingress_Qos_Classifier_TermPath {
+	ps := &System_ControlPlaneTraffic_Ingress_Qos_Classifier_TermPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"terms", "term"},
+			map[string]interface{}{"id": Id},
+			n,
+		),
+	}
+	return ps
+}
+
+// Term (list): A list of the terms within the QoS classifier being
+// applied for control-plane traffic. Each term has
+// corresponding operational state parameters.
+//
+//	Defining module:      "openconfig-system-controlplane"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "terms/term"
+//	Path from root:       "/system/control-plane-traffic/ingress/qos/classifier/terms/term"
+//
+//	Id: string
+func (n *System_ControlPlaneTraffic_Ingress_Qos_ClassifierPathAny) Term(Id string) *System_ControlPlaneTraffic_Ingress_Qos_Classifier_TermPathAny {
+	ps := &System_ControlPlaneTraffic_Ingress_Qos_Classifier_TermPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"terms", "term"},
+			map[string]interface{}{"id": Id},
+			n,
+		),
+	}
+	return ps
+}
+
+// TermMap (list): A list of the terms within the QoS classifier being
+// applied for control-plane traffic. Each term has
+// corresponding operational state parameters.
+//
+//	Defining module:      "openconfig-system-controlplane"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "terms/term"
+//	Path from root:       "/system/control-plane-traffic/ingress/qos/classifier/terms/term"
+func (n *System_ControlPlaneTraffic_Ingress_Qos_ClassifierPath) TermMap() *System_ControlPlaneTraffic_Ingress_Qos_Classifier_TermPathMap {
+	ps := &System_ControlPlaneTraffic_Ingress_Qos_Classifier_TermPathMap{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"terms"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// TermMap (list): A list of the terms within the QoS classifier being
+// applied for control-plane traffic. Each term has
+// corresponding operational state parameters.
+//
+//	Defining module:      "openconfig-system-controlplane"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "terms/term"
+//	Path from root:       "/system/control-plane-traffic/ingress/qos/classifier/terms/term"
+func (n *System_ControlPlaneTraffic_Ingress_Qos_ClassifierPathAny) TermMap() *System_ControlPlaneTraffic_Ingress_Qos_Classifier_TermPathMapAny {
+	ps := &System_ControlPlaneTraffic_Ingress_Qos_Classifier_TermPathMapAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"terms"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_ControlPlaneTraffic_Ingress_Qos_ClassifierPath) State() ygnmi.SingletonQuery[*oc.System_ControlPlaneTraffic_Ingress_Qos_Classifier] {
+	return ygnmi.NewSingletonQuery[*oc.System_ControlPlaneTraffic_Ingress_Qos_Classifier](
+		"System_ControlPlaneTraffic_Ingress_Qos_Classifier",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_ControlPlaneTraffic_Ingress_Qos_ClassifierPathAny) State() ygnmi.WildcardQuery[*oc.System_ControlPlaneTraffic_Ingress_Qos_Classifier] {
+	return ygnmi.NewWildcardQuery[*oc.System_ControlPlaneTraffic_Ingress_Qos_Classifier](
+		"System_ControlPlaneTraffic_Ingress_Qos_Classifier",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *System_ControlPlaneTraffic_Ingress_Qos_ClassifierPath) Config() ygnmi.ConfigQuery[*oc.System_ControlPlaneTraffic_Ingress_Qos_Classifier] {
+	return ygnmi.NewConfigQuery[*oc.System_ControlPlaneTraffic_Ingress_Qos_Classifier](
+		"System_ControlPlaneTraffic_Ingress_Qos_Classifier",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *System_ControlPlaneTraffic_Ingress_Qos_ClassifierPathAny) Config() ygnmi.WildcardQuery[*oc.System_ControlPlaneTraffic_Ingress_Qos_Classifier] {
+	return ygnmi.NewWildcardQuery[*oc.System_ControlPlaneTraffic_Ingress_Qos_Classifier](
+		"System_ControlPlaneTraffic_Ingress_Qos_Classifier",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// System_ControlPlaneTraffic_Ingress_Qos_Classifier_Term_IdPath represents the /openconfig-system/system/control-plane-traffic/ingress/qos/classifier/terms/term/state/id YANG schema element.
+type System_ControlPlaneTraffic_Ingress_Qos_Classifier_Term_IdPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_ControlPlaneTraffic_Ingress_Qos_Classifier_Term_IdPathAny represents the wildcard version of the /openconfig-system/system/control-plane-traffic/ingress/qos/classifier/terms/term/state/id YANG schema element.
+type System_ControlPlaneTraffic_Ingress_Qos_Classifier_Term_IdPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-controlplane"
+//	Instantiating module: "openconfig-system-controlplane"
+//	Path from parent:     "state/id"
+//	Path from root:       "/system/control-plane-traffic/ingress/qos/classifier/terms/term/state/id"
+func (n *System_ControlPlaneTraffic_Ingress_Qos_Classifier_Term_IdPath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewSingletonQuery[string](
+		"System_ControlPlaneTraffic_Ingress_Qos_Classifier_Term",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "id"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_ControlPlaneTraffic_Ingress_Qos_Classifier_Term).Id
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_ControlPlaneTraffic_Ingress_Qos_Classifier_Term) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-controlplane"
+//	Instantiating module: "openconfig-system-controlplane"
+//	Path from parent:     "state/id"
+//	Path from root:       "/system/control-plane-traffic/ingress/qos/classifier/terms/term/state/id"
+func (n *System_ControlPlaneTraffic_Ingress_Qos_Classifier_Term_IdPathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"System_ControlPlaneTraffic_Ingress_Qos_Classifier_Term",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "id"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_ControlPlaneTraffic_Ingress_Qos_Classifier_Term).Id
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_ControlPlaneTraffic_Ingress_Qos_Classifier_Term) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-controlplane"
+//	Instantiating module: "openconfig-system-controlplane"
+//	Path from parent:     "id"
+//	Path from root:       ""
+func (n *System_ControlPlaneTraffic_Ingress_Qos_Classifier_Term_IdPath) Config() ygnmi.ConfigQuery[string] {
+	return ygnmi.NewConfigQuery[string](
+		"System_ControlPlaneTraffic_Ingress_Qos_Classifier_Term",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"id"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_ControlPlaneTraffic_Ingress_Qos_Classifier_Term).Id
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_ControlPlaneTraffic_Ingress_Qos_Classifier_Term) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-controlplane"
+//	Instantiating module: "openconfig-system-controlplane"
+//	Path from parent:     "id"
+//	Path from root:       ""
+func (n *System_ControlPlaneTraffic_Ingress_Qos_Classifier_Term_IdPathAny) Config() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"System_ControlPlaneTraffic_Ingress_Qos_Classifier_Term",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"id"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_ControlPlaneTraffic_Ingress_Qos_Classifier_Term).Id
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_ControlPlaneTraffic_Ingress_Qos_Classifier_Term) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// System_ControlPlaneTraffic_Ingress_Qos_Classifier_Term_MatchedOctetsPath represents the /openconfig-system/system/control-plane-traffic/ingress/qos/classifier/terms/term/state/matched-octets YANG schema element.
+type System_ControlPlaneTraffic_Ingress_Qos_Classifier_Term_MatchedOctetsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_ControlPlaneTraffic_Ingress_Qos_Classifier_Term_MatchedOctetsPathAny represents the wildcard version of the /openconfig-system/system/control-plane-traffic/ingress/qos/classifier/terms/term/state/matched-octets YANG schema element.
+type System_ControlPlaneTraffic_Ingress_Qos_Classifier_Term_MatchedOctetsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-system-controlplane"
+//	Path from parent:     "state/matched-octets"
+//	Path from root:       "/system/control-plane-traffic/ingress/qos/classifier/terms/term/state/matched-octets"
+func (n *System_ControlPlaneTraffic_Ingress_Qos_Classifier_Term_MatchedOctetsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"System_ControlPlaneTraffic_Ingress_Qos_Classifier_Term",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "matched-octets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.System_ControlPlaneTraffic_Ingress_Qos_Classifier_Term).MatchedOctets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_ControlPlaneTraffic_Ingress_Qos_Classifier_Term) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-system-controlplane"
+//	Path from parent:     "state/matched-octets"
+//	Path from root:       "/system/control-plane-traffic/ingress/qos/classifier/terms/term/state/matched-octets"
+func (n *System_ControlPlaneTraffic_Ingress_Qos_Classifier_Term_MatchedOctetsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"System_ControlPlaneTraffic_Ingress_Qos_Classifier_Term",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "matched-octets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.System_ControlPlaneTraffic_Ingress_Qos_Classifier_Term).MatchedOctets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_ControlPlaneTraffic_Ingress_Qos_Classifier_Term) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// System_ControlPlaneTraffic_Ingress_Qos_Classifier_Term_MatchedPacketsPath represents the /openconfig-system/system/control-plane-traffic/ingress/qos/classifier/terms/term/state/matched-packets YANG schema element.
+type System_ControlPlaneTraffic_Ingress_Qos_Classifier_Term_MatchedPacketsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_ControlPlaneTraffic_Ingress_Qos_Classifier_Term_MatchedPacketsPathAny represents the wildcard version of the /openconfig-system/system/control-plane-traffic/ingress/qos/classifier/terms/term/state/matched-packets YANG schema element.
+type System_ControlPlaneTraffic_Ingress_Qos_Classifier_Term_MatchedPacketsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-system-controlplane"
+//	Path from parent:     "state/matched-packets"
+//	Path from root:       "/system/control-plane-traffic/ingress/qos/classifier/terms/term/state/matched-packets"
+func (n *System_ControlPlaneTraffic_Ingress_Qos_Classifier_Term_MatchedPacketsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"System_ControlPlaneTraffic_Ingress_Qos_Classifier_Term",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "matched-packets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.System_ControlPlaneTraffic_Ingress_Qos_Classifier_Term).MatchedPackets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_ControlPlaneTraffic_Ingress_Qos_Classifier_Term) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-system-controlplane"
+//	Path from parent:     "state/matched-packets"
+//	Path from root:       "/system/control-plane-traffic/ingress/qos/classifier/terms/term/state/matched-packets"
+func (n *System_ControlPlaneTraffic_Ingress_Qos_Classifier_Term_MatchedPacketsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"System_ControlPlaneTraffic_Ingress_Qos_Classifier_Term",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "matched-packets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.System_ControlPlaneTraffic_Ingress_Qos_Classifier_Term).MatchedPackets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_ControlPlaneTraffic_Ingress_Qos_Classifier_Term) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// System_ControlPlaneTraffic_Ingress_Qos_Classifier_TermPath represents the /openconfig-system/system/control-plane-traffic/ingress/qos/classifier/terms/term YANG schema element.
+type System_ControlPlaneTraffic_Ingress_Qos_Classifier_TermPath struct {
+	*ygnmi.NodePath
+}
+
+// System_ControlPlaneTraffic_Ingress_Qos_Classifier_TermPathAny represents the wildcard version of the /openconfig-system/system/control-plane-traffic/ingress/qos/classifier/terms/term YANG schema element.
+type System_ControlPlaneTraffic_Ingress_Qos_Classifier_TermPathAny struct {
+	*ygnmi.NodePath
+}
+
+// System_ControlPlaneTraffic_Ingress_Qos_Classifier_TermPathMap represents the /openconfig-system/system/control-plane-traffic/ingress/qos/classifier/terms/term YANG schema element.
+type System_ControlPlaneTraffic_Ingress_Qos_Classifier_TermPathMap struct {
+	*ygnmi.NodePath
+}
+
+// System_ControlPlaneTraffic_Ingress_Qos_Classifier_TermPathMapAny represents the wildcard version of the /openconfig-system/system/control-plane-traffic/ingress/qos/classifier/terms/term YANG schema element.
+type System_ControlPlaneTraffic_Ingress_Qos_Classifier_TermPathMapAny struct {
+	*ygnmi.NodePath
+}
+
+// Id (leaf): Reference to a term identifier within the configured control-plane
+// classifier.
+//
+//	Defining module:      "openconfig-system-controlplane"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/id"
+//	Path from root:       "/system/control-plane-traffic/ingress/qos/classifier/terms/term/*/id"
+func (n *System_ControlPlaneTraffic_Ingress_Qos_Classifier_TermPath) Id() *System_ControlPlaneTraffic_Ingress_Qos_Classifier_Term_IdPath {
+	ps := &System_ControlPlaneTraffic_Ingress_Qos_Classifier_Term_IdPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "id"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Id (leaf): Reference to a term identifier within the configured control-plane
+// classifier.
+//
+//	Defining module:      "openconfig-system-controlplane"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/id"
+//	Path from root:       "/system/control-plane-traffic/ingress/qos/classifier/terms/term/*/id"
+func (n *System_ControlPlaneTraffic_Ingress_Qos_Classifier_TermPathAny) Id() *System_ControlPlaneTraffic_Ingress_Qos_Classifier_Term_IdPathAny {
+	ps := &System_ControlPlaneTraffic_Ingress_Qos_Classifier_Term_IdPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "id"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// MatchedOctets (leaf): Count of the number of octets (bytes) matching this
+// classifier match term on the interface.
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/matched-octets"
+//	Path from root:       "/system/control-plane-traffic/ingress/qos/classifier/terms/term/state/matched-octets"
+func (n *System_ControlPlaneTraffic_Ingress_Qos_Classifier_TermPath) MatchedOctets() *System_ControlPlaneTraffic_Ingress_Qos_Classifier_Term_MatchedOctetsPath {
+	ps := &System_ControlPlaneTraffic_Ingress_Qos_Classifier_Term_MatchedOctetsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "matched-octets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// MatchedOctets (leaf): Count of the number of octets (bytes) matching this
+// classifier match term on the interface.
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/matched-octets"
+//	Path from root:       "/system/control-plane-traffic/ingress/qos/classifier/terms/term/state/matched-octets"
+func (n *System_ControlPlaneTraffic_Ingress_Qos_Classifier_TermPathAny) MatchedOctets() *System_ControlPlaneTraffic_Ingress_Qos_Classifier_Term_MatchedOctetsPathAny {
+	ps := &System_ControlPlaneTraffic_Ingress_Qos_Classifier_Term_MatchedOctetsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "matched-octets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// MatchedPackets (leaf): Count of the number of packets matching this classifier
+// match term on the interface.
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/matched-packets"
+//	Path from root:       "/system/control-plane-traffic/ingress/qos/classifier/terms/term/state/matched-packets"
+func (n *System_ControlPlaneTraffic_Ingress_Qos_Classifier_TermPath) MatchedPackets() *System_ControlPlaneTraffic_Ingress_Qos_Classifier_Term_MatchedPacketsPath {
+	ps := &System_ControlPlaneTraffic_Ingress_Qos_Classifier_Term_MatchedPacketsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "matched-packets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// MatchedPackets (leaf): Count of the number of packets matching this classifier
+// match term on the interface.
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/matched-packets"
+//	Path from root:       "/system/control-plane-traffic/ingress/qos/classifier/terms/term/state/matched-packets"
+func (n *System_ControlPlaneTraffic_Ingress_Qos_Classifier_TermPathAny) MatchedPackets() *System_ControlPlaneTraffic_Ingress_Qos_Classifier_Term_MatchedPacketsPathAny {
+	ps := &System_ControlPlaneTraffic_Ingress_Qos_Classifier_Term_MatchedPacketsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "matched-packets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_ControlPlaneTraffic_Ingress_Qos_Classifier_TermPath) State() ygnmi.SingletonQuery[*oc.System_ControlPlaneTraffic_Ingress_Qos_Classifier_Term] {
+	return ygnmi.NewSingletonQuery[*oc.System_ControlPlaneTraffic_Ingress_Qos_Classifier_Term](
+		"System_ControlPlaneTraffic_Ingress_Qos_Classifier_Term",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_ControlPlaneTraffic_Ingress_Qos_Classifier_TermPathAny) State() ygnmi.WildcardQuery[*oc.System_ControlPlaneTraffic_Ingress_Qos_Classifier_Term] {
+	return ygnmi.NewWildcardQuery[*oc.System_ControlPlaneTraffic_Ingress_Qos_Classifier_Term](
+		"System_ControlPlaneTraffic_Ingress_Qos_Classifier_Term",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_ControlPlaneTraffic_Ingress_Qos_Classifier_TermPathMap) State() ygnmi.SingletonQuery[map[string]*oc.System_ControlPlaneTraffic_Ingress_Qos_Classifier_Term] {
+	return ygnmi.NewSingletonQuery[map[string]*oc.System_ControlPlaneTraffic_Ingress_Qos_Classifier_Term](
+		"System_ControlPlaneTraffic_Ingress_Qos_Classifier",
+		true,
+		false,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[string]*oc.System_ControlPlaneTraffic_Ingress_Qos_Classifier_Term, bool) {
+			ret := gs.(*oc.System_ControlPlaneTraffic_Ingress_Qos_Classifier).Term
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_ControlPlaneTraffic_Ingress_Qos_Classifier) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-system-controlplane:terms"},
+			PostRelPath: []string{"openconfig-system-controlplane:term"},
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_ControlPlaneTraffic_Ingress_Qos_Classifier_TermPathMapAny) State() ygnmi.WildcardQuery[map[string]*oc.System_ControlPlaneTraffic_Ingress_Qos_Classifier_Term] {
+	return ygnmi.NewWildcardQuery[map[string]*oc.System_ControlPlaneTraffic_Ingress_Qos_Classifier_Term](
+		"System_ControlPlaneTraffic_Ingress_Qos_Classifier",
+		true,
+		false,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[string]*oc.System_ControlPlaneTraffic_Ingress_Qos_Classifier_Term, bool) {
+			ret := gs.(*oc.System_ControlPlaneTraffic_Ingress_Qos_Classifier).Term
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_ControlPlaneTraffic_Ingress_Qos_Classifier) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-system-controlplane:terms"},
+			PostRelPath: []string{"openconfig-system-controlplane:term"},
+		},
+	)
+}
+
+// System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_NamePath represents the /openconfig-system/system/control-plane-traffic/ingress/qos/scheduler-policy/state/name YANG schema element.
+type System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_NamePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_NamePathAny represents the wildcard version of the /openconfig-system/system/control-plane-traffic/ingress/qos/scheduler-policy/state/name YANG schema element.
+type System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_NamePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-controlplane"
+//	Instantiating module: "openconfig-system-controlplane"
+//	Path from parent:     "state/name"
+//	Path from root:       "/system/control-plane-traffic/ingress/qos/scheduler-policy/state/name"
+func (n *System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_NamePath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewSingletonQuery[string](
+		"System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "name"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy).Name
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-controlplane"
+//	Instantiating module: "openconfig-system-controlplane"
+//	Path from parent:     "state/name"
+//	Path from root:       "/system/control-plane-traffic/ingress/qos/scheduler-policy/state/name"
+func (n *System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_NamePathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "name"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy).Name
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-controlplane"
+//	Instantiating module: "openconfig-system-controlplane"
+//	Path from parent:     "config/name"
+//	Path from root:       "/system/control-plane-traffic/ingress/qos/scheduler-policy/config/name"
+func (n *System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_NamePath) Config() ygnmi.ConfigQuery[string] {
+	return ygnmi.NewConfigQuery[string](
+		"System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "name"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy).Name
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-controlplane"
+//	Instantiating module: "openconfig-system-controlplane"
+//	Path from parent:     "config/name"
+//	Path from root:       "/system/control-plane-traffic/ingress/qos/scheduler-policy/config/name"
+func (n *System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_NamePathAny) Config() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "name"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy).Name
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicyPath represents the /openconfig-system/system/control-plane-traffic/ingress/qos/scheduler-policy YANG schema element.
+type System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicyPath struct {
+	*ygnmi.NodePath
+}
+
+// System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicyPathAny represents the wildcard version of the /openconfig-system/system/control-plane-traffic/ingress/qos/scheduler-policy YANG schema element.
+type System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicyPathAny struct {
+	*ygnmi.NodePath
+}
+
+// Name (leaf): Reference to a scheduler policy that determines rate limits, or
+// shaping of packets towards the control-plane.
+//
+//	Defining module:      "openconfig-system-controlplane"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/name"
+//	Path from root:       "/system/control-plane-traffic/ingress/qos/scheduler-policy/*/name"
+func (n *System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicyPath) Name() *System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_NamePath {
+	ps := &System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_NamePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "name"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Name (leaf): Reference to a scheduler policy that determines rate limits, or
+// shaping of packets towards the control-plane.
+//
+//	Defining module:      "openconfig-system-controlplane"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/name"
+//	Path from root:       "/system/control-plane-traffic/ingress/qos/scheduler-policy/*/name"
+func (n *System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicyPathAny) Name() *System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_NamePathAny {
+	ps := &System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_NamePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "name"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// SchedulerAny (list): List of the schedulers that are part of the scheduler-policy
+// specified.
+//
+//	Defining module:      "openconfig-system-controlplane"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "scheduler-statistics/scheduler"
+//	Path from root:       "/system/control-plane-traffic/ingress/qos/scheduler-policy/scheduler-statistics/scheduler"
+func (n *System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicyPath) SchedulerAny() *System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_SchedulerPathAny {
+	ps := &System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_SchedulerPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"scheduler-statistics", "scheduler"},
+			map[string]interface{}{"sequence": "*"},
+			n,
+		),
+	}
+	return ps
+}
+
+// SchedulerAny (list): List of the schedulers that are part of the scheduler-policy
+// specified.
+//
+//	Defining module:      "openconfig-system-controlplane"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "scheduler-statistics/scheduler"
+//	Path from root:       "/system/control-plane-traffic/ingress/qos/scheduler-policy/scheduler-statistics/scheduler"
+func (n *System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicyPathAny) SchedulerAny() *System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_SchedulerPathAny {
+	ps := &System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_SchedulerPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"scheduler-statistics", "scheduler"},
+			map[string]interface{}{"sequence": "*"},
+			n,
+		),
+	}
+	return ps
+}
+
+// Scheduler (list): List of the schedulers that are part of the scheduler-policy
+// specified.
+//
+//	Defining module:      "openconfig-system-controlplane"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "scheduler-statistics/scheduler"
+//	Path from root:       "/system/control-plane-traffic/ingress/qos/scheduler-policy/scheduler-statistics/scheduler"
+//
+//	Sequence: uint32
+func (n *System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicyPath) Scheduler(Sequence uint32) *System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_SchedulerPath {
+	ps := &System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_SchedulerPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"scheduler-statistics", "scheduler"},
+			map[string]interface{}{"sequence": Sequence},
+			n,
+		),
+	}
+	return ps
+}
+
+// Scheduler (list): List of the schedulers that are part of the scheduler-policy
+// specified.
+//
+//	Defining module:      "openconfig-system-controlplane"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "scheduler-statistics/scheduler"
+//	Path from root:       "/system/control-plane-traffic/ingress/qos/scheduler-policy/scheduler-statistics/scheduler"
+//
+//	Sequence: uint32
+func (n *System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicyPathAny) Scheduler(Sequence uint32) *System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_SchedulerPathAny {
+	ps := &System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_SchedulerPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"scheduler-statistics", "scheduler"},
+			map[string]interface{}{"sequence": Sequence},
+			n,
+		),
+	}
+	return ps
+}
+
+// SchedulerMap (list): List of the schedulers that are part of the scheduler-policy
+// specified.
+//
+//	Defining module:      "openconfig-system-controlplane"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "scheduler-statistics/scheduler"
+//	Path from root:       "/system/control-plane-traffic/ingress/qos/scheduler-policy/scheduler-statistics/scheduler"
+func (n *System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicyPath) SchedulerMap() *System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_SchedulerPathMap {
+	ps := &System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_SchedulerPathMap{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"scheduler-statistics"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// SchedulerMap (list): List of the schedulers that are part of the scheduler-policy
+// specified.
+//
+//	Defining module:      "openconfig-system-controlplane"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "scheduler-statistics/scheduler"
+//	Path from root:       "/system/control-plane-traffic/ingress/qos/scheduler-policy/scheduler-statistics/scheduler"
+func (n *System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicyPathAny) SchedulerMap() *System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_SchedulerPathMapAny {
+	ps := &System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_SchedulerPathMapAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"scheduler-statistics"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicyPath) State() ygnmi.SingletonQuery[*oc.System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy] {
+	return ygnmi.NewSingletonQuery[*oc.System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy](
+		"System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicyPathAny) State() ygnmi.WildcardQuery[*oc.System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy] {
+	return ygnmi.NewWildcardQuery[*oc.System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy](
+		"System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicyPath) Config() ygnmi.ConfigQuery[*oc.System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy] {
+	return ygnmi.NewConfigQuery[*oc.System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy](
+		"System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicyPathAny) Config() ygnmi.WildcardQuery[*oc.System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy] {
+	return ygnmi.NewWildcardQuery[*oc.System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy](
+		"System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler_ConformingOctetsPath represents the /openconfig-system/system/control-plane-traffic/ingress/qos/scheduler-policy/scheduler-statistics/scheduler/state/conforming-octets YANG schema element.
+type System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler_ConformingOctetsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler_ConformingOctetsPathAny represents the wildcard version of the /openconfig-system/system/control-plane-traffic/ingress/qos/scheduler-policy/scheduler-statistics/scheduler/state/conforming-octets YANG schema element.
+type System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler_ConformingOctetsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-system-controlplane"
+//	Path from parent:     "state/conforming-octets"
+//	Path from root:       "/system/control-plane-traffic/ingress/qos/scheduler-policy/scheduler-statistics/scheduler/state/conforming-octets"
+func (n *System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler_ConformingOctetsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "conforming-octets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler).ConformingOctets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-system-controlplane"
+//	Path from parent:     "state/conforming-octets"
+//	Path from root:       "/system/control-plane-traffic/ingress/qos/scheduler-policy/scheduler-statistics/scheduler/state/conforming-octets"
+func (n *System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler_ConformingOctetsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "conforming-octets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler).ConformingOctets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler_ConformingPktsPath represents the /openconfig-system/system/control-plane-traffic/ingress/qos/scheduler-policy/scheduler-statistics/scheduler/state/conforming-pkts YANG schema element.
+type System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler_ConformingPktsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler_ConformingPktsPathAny represents the wildcard version of the /openconfig-system/system/control-plane-traffic/ingress/qos/scheduler-policy/scheduler-statistics/scheduler/state/conforming-pkts YANG schema element.
+type System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler_ConformingPktsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-system-controlplane"
+//	Path from parent:     "state/conforming-pkts"
+//	Path from root:       "/system/control-plane-traffic/ingress/qos/scheduler-policy/scheduler-statistics/scheduler/state/conforming-pkts"
+func (n *System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler_ConformingPktsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "conforming-pkts"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler).ConformingPkts
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-system-controlplane"
+//	Path from parent:     "state/conforming-pkts"
+//	Path from root:       "/system/control-plane-traffic/ingress/qos/scheduler-policy/scheduler-statistics/scheduler/state/conforming-pkts"
+func (n *System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler_ConformingPktsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "conforming-pkts"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler).ConformingPkts
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler_ExceedingOctetsPath represents the /openconfig-system/system/control-plane-traffic/ingress/qos/scheduler-policy/scheduler-statistics/scheduler/state/exceeding-octets YANG schema element.
+type System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler_ExceedingOctetsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler_ExceedingOctetsPathAny represents the wildcard version of the /openconfig-system/system/control-plane-traffic/ingress/qos/scheduler-policy/scheduler-statistics/scheduler/state/exceeding-octets YANG schema element.
+type System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler_ExceedingOctetsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-system-controlplane"
+//	Path from parent:     "state/exceeding-octets"
+//	Path from root:       "/system/control-plane-traffic/ingress/qos/scheduler-policy/scheduler-statistics/scheduler/state/exceeding-octets"
+func (n *System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler_ExceedingOctetsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "exceeding-octets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler).ExceedingOctets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-system-controlplane"
+//	Path from parent:     "state/exceeding-octets"
+//	Path from root:       "/system/control-plane-traffic/ingress/qos/scheduler-policy/scheduler-statistics/scheduler/state/exceeding-octets"
+func (n *System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler_ExceedingOctetsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "exceeding-octets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler).ExceedingOctets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler_ExceedingPktsPath represents the /openconfig-system/system/control-plane-traffic/ingress/qos/scheduler-policy/scheduler-statistics/scheduler/state/exceeding-pkts YANG schema element.
+type System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler_ExceedingPktsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler_ExceedingPktsPathAny represents the wildcard version of the /openconfig-system/system/control-plane-traffic/ingress/qos/scheduler-policy/scheduler-statistics/scheduler/state/exceeding-pkts YANG schema element.
+type System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler_ExceedingPktsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-system-controlplane"
+//	Path from parent:     "state/exceeding-pkts"
+//	Path from root:       "/system/control-plane-traffic/ingress/qos/scheduler-policy/scheduler-statistics/scheduler/state/exceeding-pkts"
+func (n *System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler_ExceedingPktsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "exceeding-pkts"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler).ExceedingPkts
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-system-controlplane"
+//	Path from parent:     "state/exceeding-pkts"
+//	Path from root:       "/system/control-plane-traffic/ingress/qos/scheduler-policy/scheduler-statistics/scheduler/state/exceeding-pkts"
+func (n *System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler_ExceedingPktsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "exceeding-pkts"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler).ExceedingPkts
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler_SequencePath represents the /openconfig-system/system/control-plane-traffic/ingress/qos/scheduler-policy/scheduler-statistics/scheduler/state/sequence YANG schema element.
+type System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler_SequencePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler_SequencePathAny represents the wildcard version of the /openconfig-system/system/control-plane-traffic/ingress/qos/scheduler-policy/scheduler-statistics/scheduler/state/sequence YANG schema element.
+type System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler_SequencePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-controlplane"
+//	Instantiating module: "openconfig-system-controlplane"
+//	Path from parent:     "state/sequence"
+//	Path from root:       "/system/control-plane-traffic/ingress/qos/scheduler-policy/scheduler-statistics/scheduler/state/sequence"
+func (n *System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler_SequencePath) State() ygnmi.SingletonQuery[uint32] {
+	return ygnmi.NewSingletonQuery[uint32](
+		"System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "sequence"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler).Sequence
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-controlplane"
+//	Instantiating module: "openconfig-system-controlplane"
+//	Path from parent:     "state/sequence"
+//	Path from root:       "/system/control-plane-traffic/ingress/qos/scheduler-policy/scheduler-statistics/scheduler/state/sequence"
+func (n *System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler_SequencePathAny) State() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewWildcardQuery[uint32](
+		"System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "sequence"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler).Sequence
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-controlplane"
+//	Instantiating module: "openconfig-system-controlplane"
+//	Path from parent:     "sequence"
+//	Path from root:       ""
+func (n *System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler_SequencePath) Config() ygnmi.ConfigQuery[uint32] {
+	return ygnmi.NewConfigQuery[uint32](
+		"System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"sequence"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler).Sequence
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-controlplane"
+//	Instantiating module: "openconfig-system-controlplane"
+//	Path from parent:     "sequence"
+//	Path from root:       ""
+func (n *System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler_SequencePathAny) Config() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewWildcardQuery[uint32](
+		"System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"sequence"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler).Sequence
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler_ViolatingOctetsPath represents the /openconfig-system/system/control-plane-traffic/ingress/qos/scheduler-policy/scheduler-statistics/scheduler/state/violating-octets YANG schema element.
+type System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler_ViolatingOctetsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler_ViolatingOctetsPathAny represents the wildcard version of the /openconfig-system/system/control-plane-traffic/ingress/qos/scheduler-policy/scheduler-statistics/scheduler/state/violating-octets YANG schema element.
+type System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler_ViolatingOctetsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-system-controlplane"
+//	Path from parent:     "state/violating-octets"
+//	Path from root:       "/system/control-plane-traffic/ingress/qos/scheduler-policy/scheduler-statistics/scheduler/state/violating-octets"
+func (n *System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler_ViolatingOctetsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "violating-octets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler).ViolatingOctets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-system-controlplane"
+//	Path from parent:     "state/violating-octets"
+//	Path from root:       "/system/control-plane-traffic/ingress/qos/scheduler-policy/scheduler-statistics/scheduler/state/violating-octets"
+func (n *System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler_ViolatingOctetsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "violating-octets"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler).ViolatingOctets
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler_ViolatingPktsPath represents the /openconfig-system/system/control-plane-traffic/ingress/qos/scheduler-policy/scheduler-statistics/scheduler/state/violating-pkts YANG schema element.
+type System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler_ViolatingPktsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler_ViolatingPktsPathAny represents the wildcard version of the /openconfig-system/system/control-plane-traffic/ingress/qos/scheduler-policy/scheduler-statistics/scheduler/state/violating-pkts YANG schema element.
+type System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler_ViolatingPktsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-system-controlplane"
+//	Path from parent:     "state/violating-pkts"
+//	Path from root:       "/system/control-plane-traffic/ingress/qos/scheduler-policy/scheduler-statistics/scheduler/state/violating-pkts"
+func (n *System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler_ViolatingPktsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "violating-pkts"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler).ViolatingPkts
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-system-controlplane"
+//	Path from parent:     "state/violating-pkts"
+//	Path from root:       "/system/control-plane-traffic/ingress/qos/scheduler-policy/scheduler-statistics/scheduler/state/violating-pkts"
+func (n *System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler_ViolatingPktsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "violating-pkts"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler).ViolatingPkts
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_SchedulerPath represents the /openconfig-system/system/control-plane-traffic/ingress/qos/scheduler-policy/scheduler-statistics/scheduler YANG schema element.
+type System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_SchedulerPath struct {
+	*ygnmi.NodePath
+}
+
+// System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_SchedulerPathAny represents the wildcard version of the /openconfig-system/system/control-plane-traffic/ingress/qos/scheduler-policy/scheduler-statistics/scheduler YANG schema element.
+type System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_SchedulerPathAny struct {
+	*ygnmi.NodePath
+}
+
+// System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_SchedulerPathMap represents the /openconfig-system/system/control-plane-traffic/ingress/qos/scheduler-policy/scheduler-statistics/scheduler YANG schema element.
+type System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_SchedulerPathMap struct {
+	*ygnmi.NodePath
+}
+
+// System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_SchedulerPathMapAny represents the wildcard version of the /openconfig-system/system/control-plane-traffic/ingress/qos/scheduler-policy/scheduler-statistics/scheduler YANG schema element.
+type System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_SchedulerPathMapAny struct {
+	*ygnmi.NodePath
+}
+
+// ConformingOctets (leaf): The number of octets in packets that were considered
+// conforming by the scheduler.
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/conforming-octets"
+//	Path from root:       "/system/control-plane-traffic/ingress/qos/scheduler-policy/scheduler-statistics/scheduler/state/conforming-octets"
+func (n *System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_SchedulerPath) ConformingOctets() *System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler_ConformingOctetsPath {
+	ps := &System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler_ConformingOctetsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "conforming-octets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// ConformingOctets (leaf): The number of octets in packets that were considered
+// conforming by the scheduler.
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/conforming-octets"
+//	Path from root:       "/system/control-plane-traffic/ingress/qos/scheduler-policy/scheduler-statistics/scheduler/state/conforming-octets"
+func (n *System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_SchedulerPathAny) ConformingOctets() *System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler_ConformingOctetsPathAny {
+	ps := &System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler_ConformingOctetsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "conforming-octets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// ConformingPkts (leaf): The number of packets that were considered conforming by
+// the scheduler.
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/conforming-pkts"
+//	Path from root:       "/system/control-plane-traffic/ingress/qos/scheduler-policy/scheduler-statistics/scheduler/state/conforming-pkts"
+func (n *System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_SchedulerPath) ConformingPkts() *System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler_ConformingPktsPath {
+	ps := &System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler_ConformingPktsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "conforming-pkts"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// ConformingPkts (leaf): The number of packets that were considered conforming by
+// the scheduler.
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/conforming-pkts"
+//	Path from root:       "/system/control-plane-traffic/ingress/qos/scheduler-policy/scheduler-statistics/scheduler/state/conforming-pkts"
+func (n *System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_SchedulerPathAny) ConformingPkts() *System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler_ConformingPktsPathAny {
+	ps := &System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler_ConformingPktsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "conforming-pkts"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// ExceedingOctets (leaf): The number of octets in packets that were considered
+// exceeding by the scheduler.
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/exceeding-octets"
+//	Path from root:       "/system/control-plane-traffic/ingress/qos/scheduler-policy/scheduler-statistics/scheduler/state/exceeding-octets"
+func (n *System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_SchedulerPath) ExceedingOctets() *System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler_ExceedingOctetsPath {
+	ps := &System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler_ExceedingOctetsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "exceeding-octets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// ExceedingOctets (leaf): The number of octets in packets that were considered
+// exceeding by the scheduler.
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/exceeding-octets"
+//	Path from root:       "/system/control-plane-traffic/ingress/qos/scheduler-policy/scheduler-statistics/scheduler/state/exceeding-octets"
+func (n *System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_SchedulerPathAny) ExceedingOctets() *System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler_ExceedingOctetsPathAny {
+	ps := &System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler_ExceedingOctetsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "exceeding-octets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// ExceedingPkts (leaf): The number of packets that were considered exceeding by
+// the scheduler.
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/exceeding-pkts"
+//	Path from root:       "/system/control-plane-traffic/ingress/qos/scheduler-policy/scheduler-statistics/scheduler/state/exceeding-pkts"
+func (n *System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_SchedulerPath) ExceedingPkts() *System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler_ExceedingPktsPath {
+	ps := &System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler_ExceedingPktsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "exceeding-pkts"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// ExceedingPkts (leaf): The number of packets that were considered exceeding by
+// the scheduler.
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/exceeding-pkts"
+//	Path from root:       "/system/control-plane-traffic/ingress/qos/scheduler-policy/scheduler-statistics/scheduler/state/exceeding-pkts"
+func (n *System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_SchedulerPathAny) ExceedingPkts() *System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler_ExceedingPktsPathAny {
+	ps := &System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler_ExceedingPktsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "exceeding-pkts"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Sequence (leaf): Reference to a scheduler within the configured scheduler policy.
+//
+//	Defining module:      "openconfig-system-controlplane"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/sequence"
+//	Path from root:       "/system/control-plane-traffic/ingress/qos/scheduler-policy/scheduler-statistics/scheduler/*/sequence"
+func (n *System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_SchedulerPath) Sequence() *System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler_SequencePath {
+	ps := &System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler_SequencePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "sequence"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Sequence (leaf): Reference to a scheduler within the configured scheduler policy.
+//
+//	Defining module:      "openconfig-system-controlplane"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/sequence"
+//	Path from root:       "/system/control-plane-traffic/ingress/qos/scheduler-policy/scheduler-statistics/scheduler/*/sequence"
+func (n *System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_SchedulerPathAny) Sequence() *System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler_SequencePathAny {
+	ps := &System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler_SequencePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "sequence"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// ViolatingOctets (leaf): The number of octets in packets that were considered
+// violating by the policer.
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/violating-octets"
+//	Path from root:       "/system/control-plane-traffic/ingress/qos/scheduler-policy/scheduler-statistics/scheduler/state/violating-octets"
+func (n *System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_SchedulerPath) ViolatingOctets() *System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler_ViolatingOctetsPath {
+	ps := &System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler_ViolatingOctetsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "violating-octets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// ViolatingOctets (leaf): The number of octets in packets that were considered
+// violating by the policer.
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/violating-octets"
+//	Path from root:       "/system/control-plane-traffic/ingress/qos/scheduler-policy/scheduler-statistics/scheduler/state/violating-octets"
+func (n *System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_SchedulerPathAny) ViolatingOctets() *System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler_ViolatingOctetsPathAny {
+	ps := &System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler_ViolatingOctetsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "violating-octets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// ViolatingPkts (leaf): The number of packets that were considered violating by
+// the policer.
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/violating-pkts"
+//	Path from root:       "/system/control-plane-traffic/ingress/qos/scheduler-policy/scheduler-statistics/scheduler/state/violating-pkts"
+func (n *System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_SchedulerPath) ViolatingPkts() *System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler_ViolatingPktsPath {
+	ps := &System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler_ViolatingPktsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "violating-pkts"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// ViolatingPkts (leaf): The number of packets that were considered violating by
+// the policer.
+//
+//	Defining module:      "openconfig-qos-interfaces"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/violating-pkts"
+//	Path from root:       "/system/control-plane-traffic/ingress/qos/scheduler-policy/scheduler-statistics/scheduler/state/violating-pkts"
+func (n *System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_SchedulerPathAny) ViolatingPkts() *System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler_ViolatingPktsPathAny {
+	ps := &System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler_ViolatingPktsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "violating-pkts"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_SchedulerPath) State() ygnmi.SingletonQuery[*oc.System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler] {
+	return ygnmi.NewSingletonQuery[*oc.System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler](
+		"System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_SchedulerPathAny) State() ygnmi.WildcardQuery[*oc.System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler] {
+	return ygnmi.NewWildcardQuery[*oc.System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler](
+		"System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_SchedulerPathMap) State() ygnmi.SingletonQuery[map[uint32]*oc.System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler] {
+	return ygnmi.NewSingletonQuery[map[uint32]*oc.System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler](
+		"System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy",
+		true,
+		false,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[uint32]*oc.System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler, bool) {
+			ret := gs.(*oc.System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy).Scheduler
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-system-controlplane:scheduler-statistics"},
+			PostRelPath: []string{"openconfig-system-controlplane:scheduler"},
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_SchedulerPathMapAny) State() ygnmi.WildcardQuery[map[uint32]*oc.System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler] {
+	return ygnmi.NewWildcardQuery[map[uint32]*oc.System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler](
+		"System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy",
+		true,
+		false,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[uint32]*oc.System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy_Scheduler, bool) {
+			ret := gs.(*oc.System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy).Scheduler
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_ControlPlaneTraffic_Ingress_Qos_SchedulerPolicy) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-system-controlplane:scheduler-statistics"},
+			PostRelPath: []string{"openconfig-system-controlplane:scheduler"},
+		},
 	)
 }
 

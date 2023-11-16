@@ -52,6 +52,7 @@ func TestHeaderStacks(t *testing.T) {
 		exp         = 1
 		srcPort     = 443
 		dstPort     = 80
+		cwParameter = 0
 	)
 	tests := []struct {
 		desc       string
@@ -948,6 +949,42 @@ func TestHeaderStacks(t *testing.T) {
 			},
 		},
 		wantFields: [][]wantField{{}, {}},
+	}, {
+		desc: "PwMplsControlWord header",
+		hdr: &opb.Header{
+			Type: &opb.Header_PwMplsControlWord{
+				&opb.PwMplsControlWordHeader{},
+			},
+		},
+		wantFields: [][]wantField{{{
+			name:    "cw_rsvd",
+			wantVal: ixconfig.String(strconv.Itoa(cwParameter)),
+			toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
+				c := ixconfig.PreferedPwMPlsCwStack(*s)
+				return (&c).Reserved()
+			},
+		}, {
+			name:    "cw_flags",
+			wantVal: ixconfig.String(strconv.Itoa(cwParameter)),
+			toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
+				c := ixconfig.PreferedPwMPlsCwStack(*s)
+				return (&c).Flags()
+			},
+		}, {
+			name:    "cw_frg",
+			wantVal: ixconfig.String(strconv.Itoa(cwParameter)),
+			toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
+				c := ixconfig.PreferedPwMPlsCwStack(*s)
+				return (&c).Frg()
+			},
+		}, {
+			name:    "cw_seq",
+			wantVal: ixconfig.String(strconv.Itoa(cwParameter)),
+			toField: func(s *ixconfig.TrafficTrafficItemConfigElementStack) *ixconfig.TrafficTrafficItemConfigElementStackField {
+				c := ixconfig.PreferedPwMPlsCwStack(*s)
+				return (&c).SequenceNumber()
+			},
+		}}},
 	}, {
 		desc: "ESP header",
 		hdr: &opb.Header{

@@ -346,7 +346,7 @@ func (c *kneCLI) RunCommand(_ context.Context, cmd string) (_ binding.CommandRes
 	addr := serviceAddr(s)
 	userPass := c.dut.newRPCCredentials()
 	if userPass == nil {
-		return nil, errors.New("SendCommand requires node credentials be provided")
+		return nil, errors.New("RunCommand requires node credentials be provided")
 	}
 	log.Infof("Using credentials %v to SSH", userPass)
 	cfg := &ssh.ClientConfig{
