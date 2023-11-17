@@ -213,13 +213,6 @@ var _ CLIClient = &AbstractCLIClient{}
 // AbstractCLIClient is implementation support for the CLIClient interface.
 type AbstractCLIClient struct{}
 
-// SendCommand returns an unimplemented error.
-// Deprecated: Use RunCommand() instead.
-// TODO(team): Remove when all clients using RunCommand.
-func (*AbstractCLIClient) SendCommand(ctx context.Context, cmd string) (string, error) {
-	return "", errors.New("SendCommand unimplemented")
-}
-
 // SendCommandUsingRun implements SendCommand using the client's RunCommand.
 func SendCommandUsingRun(ctx context.Context, cmd string, c CLIClient) (string, error) {
 	res, err := c.RunCommand(ctx, cmd)

@@ -222,8 +222,6 @@ type GNSIClients interface {
 // CLIClient provides the interface for sending CLI commands to the DUT.
 // All implementations of this interface must embed AbstractCLIClient.
 type CLIClient interface {
-	// TODO(team): Remove when all clients using RunCommand.
-	SendCommand(context.Context, string) (string, error)
 	RunCommand(context.Context, string) (CommandResult, error)
 	mustEmbedAbstractCLIClient()
 }
