@@ -20,7 +20,6 @@ import (
 
 	"golang.org/x/net/context"
 
-	"github.com/google/go-cmp/cmp"
 	"github.com/open-traffic-generator/snappi/gosnappi"
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/fakebind"
@@ -117,19 +116,6 @@ func TestSetControlAction(t *testing.T) {
 	otgAPI.SetControlAction(t, want)
 	if got := fakeSnappi.controlAction; got != want {
 		t.Errorf("SetControlAction got unexpected control action %v, want %v", got, want)
-	}
-}
-
-func TestDisableLACPMembers(t *testing.T) {
-	fakeSnappi.controlState = nil
-	wantNames := []string{"port1", "port2"}
-	otgAPI.DisableLACPMembers(t, wantNames...)
-	got := fakeSnappi.controlState.Protocol().Lacp().Admin()
-	if wantState := gosnappi.StateProtocolLacpAdminState.DOWN; got.State() != wantState {
-		t.Errorf("DisableLACPMembers got unexpected LACP member state %v, want %v", got.State(), wantState)
-	}
-	if !cmp.Equal(got.LagMemberNames(), wantNames) {
-		t.Errorf("DisableLACPMembers got unexpected LACP member ports %v, want %v", got.LagMemberNames(), wantNames)
 	}
 }
 

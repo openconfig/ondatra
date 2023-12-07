@@ -14,6 +14,7 @@ using the following YANG input files:
   - public/release/models/acl/openconfig-packet-match.yang
   - public/release/models/aft/openconfig-aft.yang
   - public/release/models/aft/openconfig-aft-network-instance.yang
+  - public/release/models/aft/openconfig-aft-summary.yang
   - public/release/models/ate/openconfig-ate-flow.yang
   - public/release/models/ate/openconfig-ate-intf.yang
   - public/release/models/bfd/openconfig-bfd.yang
@@ -53,6 +54,7 @@ using the following YANG input files:
   - public/release/models/platform/openconfig-platform-software.yang
   - public/release/models/platform/openconfig-platform-transceiver.yang
   - public/release/models/platform/openconfig-platform.yang
+  - public/release/models/platform/openconfig-platform-common.yang
   - public/release/models/policy-forwarding/openconfig-policy-forwarding.yang
   - public/release/models/policy/openconfig-policy-types.yang
   - public/release/models/qos/openconfig-qos-elements.yang
@@ -65,6 +67,7 @@ using the following YANG input files:
   - public/release/models/system/openconfig-system.yang
   - public/release/models/system/openconfig-system-bootz.yang
   - public/release/models/system/openconfig-system-controlplane.yang
+  - public/release/models/system/openconfig-system-utilization.yang
   - public/release/models/types/openconfig-inet-types.yang
   - public/release/models/types/openconfig-types.yang
   - public/release/models/types/openconfig-yang-types.yang
@@ -2592,6 +2595,40 @@ func (n *SystemPathAny) TelnetServer() *System_TelnetServerPathAny {
 	ps := &System_TelnetServerPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"telnet-server"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// Utilization (container): System wide resource utilization configuration.
+//
+//	Defining module:      "openconfig-system-utilization"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "utilization"
+//	Path from root:       "/system/utilization"
+func (n *SystemPath) Utilization() *System_UtilizationPath {
+	ps := &System_UtilizationPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"utilization"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// Utilization (container): System wide resource utilization configuration.
+//
+//	Defining module:      "openconfig-system-utilization"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "utilization"
+//	Path from root:       "/system/utilization"
+func (n *SystemPathAny) Utilization() *System_UtilizationPathAny {
+	ps := &System_UtilizationPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"utilization"},
 			map[string]interface{}{},
 			n,
 		),
@@ -58140,5 +58177,1233 @@ func (n *System_TelnetServerPathAny) Config() ygnmi.WildcardQuery[*oc.System_Tel
 		},
 		nil,
 		nil,
+	)
+}
+
+// System_UtilizationPath represents the /openconfig-system/system/utilization YANG schema element.
+type System_UtilizationPath struct {
+	*ygnmi.NodePath
+}
+
+// System_UtilizationPathAny represents the wildcard version of the /openconfig-system/system/utilization YANG schema element.
+type System_UtilizationPathAny struct {
+	*ygnmi.NodePath
+}
+
+// ResourceAny (list): The list of all resources across all platform components keyed by
+// resource name.
+//
+//	Defining module:      "openconfig-system-utilization"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "resources/resource"
+//	Path from root:       "/system/utilization/resources/resource"
+func (n *System_UtilizationPath) ResourceAny() *System_Utilization_ResourcePathAny {
+	ps := &System_Utilization_ResourcePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"resources", "resource"},
+			map[string]interface{}{"name": "*"},
+			n,
+		),
+	}
+	return ps
+}
+
+// ResourceAny (list): The list of all resources across all platform components keyed by
+// resource name.
+//
+//	Defining module:      "openconfig-system-utilization"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "resources/resource"
+//	Path from root:       "/system/utilization/resources/resource"
+func (n *System_UtilizationPathAny) ResourceAny() *System_Utilization_ResourcePathAny {
+	ps := &System_Utilization_ResourcePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"resources", "resource"},
+			map[string]interface{}{"name": "*"},
+			n,
+		),
+	}
+	return ps
+}
+
+// Resource (list): The list of all resources across all platform components keyed by
+// resource name.
+//
+//	Defining module:      "openconfig-system-utilization"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "resources/resource"
+//	Path from root:       "/system/utilization/resources/resource"
+//
+//	Name: string
+func (n *System_UtilizationPath) Resource(Name string) *System_Utilization_ResourcePath {
+	ps := &System_Utilization_ResourcePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"resources", "resource"},
+			map[string]interface{}{"name": Name},
+			n,
+		),
+	}
+	return ps
+}
+
+// Resource (list): The list of all resources across all platform components keyed by
+// resource name.
+//
+//	Defining module:      "openconfig-system-utilization"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "resources/resource"
+//	Path from root:       "/system/utilization/resources/resource"
+//
+//	Name: string
+func (n *System_UtilizationPathAny) Resource(Name string) *System_Utilization_ResourcePathAny {
+	ps := &System_Utilization_ResourcePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"resources", "resource"},
+			map[string]interface{}{"name": Name},
+			n,
+		),
+	}
+	return ps
+}
+
+// ResourceMap (list): The list of all resources across all platform components keyed by
+// resource name.
+//
+//	Defining module:      "openconfig-system-utilization"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "resources/resource"
+//	Path from root:       "/system/utilization/resources/resource"
+func (n *System_UtilizationPath) ResourceMap() *System_Utilization_ResourcePathMap {
+	ps := &System_Utilization_ResourcePathMap{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"resources"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// ResourceMap (list): The list of all resources across all platform components keyed by
+// resource name.
+//
+//	Defining module:      "openconfig-system-utilization"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "resources/resource"
+//	Path from root:       "/system/utilization/resources/resource"
+func (n *System_UtilizationPathAny) ResourceMap() *System_Utilization_ResourcePathMapAny {
+	ps := &System_Utilization_ResourcePathMapAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"resources"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_UtilizationPath) State() ygnmi.SingletonQuery[*oc.System_Utilization] {
+	return ygnmi.NewSingletonQuery[*oc.System_Utilization](
+		"System_Utilization",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_UtilizationPathAny) State() ygnmi.WildcardQuery[*oc.System_Utilization] {
+	return ygnmi.NewWildcardQuery[*oc.System_Utilization](
+		"System_Utilization",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *System_UtilizationPath) Config() ygnmi.ConfigQuery[*oc.System_Utilization] {
+	return ygnmi.NewConfigQuery[*oc.System_Utilization](
+		"System_Utilization",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *System_UtilizationPathAny) Config() ygnmi.WildcardQuery[*oc.System_Utilization] {
+	return ygnmi.NewWildcardQuery[*oc.System_Utilization](
+		"System_Utilization",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// System_Utilization_Resource_ActiveComponentListPath represents the /openconfig-system/system/utilization/resources/resource/state/active-component-list YANG schema element.
+type System_Utilization_Resource_ActiveComponentListPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_Utilization_Resource_ActiveComponentListPathAny represents the wildcard version of the /openconfig-system/system/utilization/resources/resource/state/active-component-list YANG schema element.
+type System_Utilization_Resource_ActiveComponentListPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-utilization"
+//	Instantiating module: "openconfig-system-utilization"
+//	Path from parent:     "state/active-component-list"
+//	Path from root:       "/system/utilization/resources/resource/state/active-component-list"
+func (n *System_Utilization_Resource_ActiveComponentListPath) State() ygnmi.SingletonQuery[[]string] {
+	return ygnmi.NewSingletonQuery[[]string](
+		"System_Utilization_Resource",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "active-component-list"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) ([]string, bool) {
+			ret := gs.(*oc.System_Utilization_Resource).ActiveComponentList
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Utilization_Resource) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-utilization"
+//	Instantiating module: "openconfig-system-utilization"
+//	Path from parent:     "state/active-component-list"
+//	Path from root:       "/system/utilization/resources/resource/state/active-component-list"
+func (n *System_Utilization_Resource_ActiveComponentListPathAny) State() ygnmi.WildcardQuery[[]string] {
+	return ygnmi.NewWildcardQuery[[]string](
+		"System_Utilization_Resource",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "active-component-list"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) ([]string, bool) {
+			ret := gs.(*oc.System_Utilization_Resource).ActiveComponentList
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Utilization_Resource) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// System_Utilization_Resource_NamePath represents the /openconfig-system/system/utilization/resources/resource/state/name YANG schema element.
+type System_Utilization_Resource_NamePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_Utilization_Resource_NamePathAny represents the wildcard version of the /openconfig-system/system/utilization/resources/resource/state/name YANG schema element.
+type System_Utilization_Resource_NamePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-utilization"
+//	Instantiating module: "openconfig-system-utilization"
+//	Path from parent:     "state/name"
+//	Path from root:       "/system/utilization/resources/resource/state/name"
+func (n *System_Utilization_Resource_NamePath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewSingletonQuery[string](
+		"System_Utilization_Resource",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "name"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_Utilization_Resource).Name
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Utilization_Resource) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-utilization"
+//	Instantiating module: "openconfig-system-utilization"
+//	Path from parent:     "state/name"
+//	Path from root:       "/system/utilization/resources/resource/state/name"
+func (n *System_Utilization_Resource_NamePathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"System_Utilization_Resource",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "name"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_Utilization_Resource).Name
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Utilization_Resource) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-utilization"
+//	Instantiating module: "openconfig-system-utilization"
+//	Path from parent:     "config/name"
+//	Path from root:       "/system/utilization/resources/resource/config/name"
+func (n *System_Utilization_Resource_NamePath) Config() ygnmi.ConfigQuery[string] {
+	return ygnmi.NewConfigQuery[string](
+		"System_Utilization_Resource",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "name"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_Utilization_Resource).Name
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Utilization_Resource) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-utilization"
+//	Instantiating module: "openconfig-system-utilization"
+//	Path from parent:     "config/name"
+//	Path from root:       "/system/utilization/resources/resource/config/name"
+func (n *System_Utilization_Resource_NamePathAny) Config() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"System_Utilization_Resource",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "name"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_Utilization_Resource).Name
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Utilization_Resource) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// System_Utilization_Resource_UsedThresholdUpperPath represents the /openconfig-system/system/utilization/resources/resource/state/used-threshold-upper YANG schema element.
+type System_Utilization_Resource_UsedThresholdUpperPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_Utilization_Resource_UsedThresholdUpperPathAny represents the wildcard version of the /openconfig-system/system/utilization/resources/resource/state/used-threshold-upper YANG schema element.
+type System_Utilization_Resource_UsedThresholdUpperPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-system-utilization"
+//	Path from parent:     "state/used-threshold-upper"
+//	Path from root:       "/system/utilization/resources/resource/state/used-threshold-upper"
+func (n *System_Utilization_Resource_UsedThresholdUpperPath) State() ygnmi.SingletonQuery[uint8] {
+	return ygnmi.NewSingletonQuery[uint8](
+		"System_Utilization_Resource",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "used-threshold-upper"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
+			ret := gs.(*oc.System_Utilization_Resource).UsedThresholdUpper
+			if ret == nil {
+				var zero uint8
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Utilization_Resource) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-system-utilization"
+//	Path from parent:     "state/used-threshold-upper"
+//	Path from root:       "/system/utilization/resources/resource/state/used-threshold-upper"
+func (n *System_Utilization_Resource_UsedThresholdUpperPathAny) State() ygnmi.WildcardQuery[uint8] {
+	return ygnmi.NewWildcardQuery[uint8](
+		"System_Utilization_Resource",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "used-threshold-upper"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
+			ret := gs.(*oc.System_Utilization_Resource).UsedThresholdUpper
+			if ret == nil {
+				var zero uint8
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Utilization_Resource) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-system-utilization"
+//	Path from parent:     "config/used-threshold-upper"
+//	Path from root:       "/system/utilization/resources/resource/config/used-threshold-upper"
+func (n *System_Utilization_Resource_UsedThresholdUpperPath) Config() ygnmi.ConfigQuery[uint8] {
+	return ygnmi.NewConfigQuery[uint8](
+		"System_Utilization_Resource",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "used-threshold-upper"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
+			ret := gs.(*oc.System_Utilization_Resource).UsedThresholdUpper
+			if ret == nil {
+				var zero uint8
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Utilization_Resource) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-system-utilization"
+//	Path from parent:     "config/used-threshold-upper"
+//	Path from root:       "/system/utilization/resources/resource/config/used-threshold-upper"
+func (n *System_Utilization_Resource_UsedThresholdUpperPathAny) Config() ygnmi.WildcardQuery[uint8] {
+	return ygnmi.NewWildcardQuery[uint8](
+		"System_Utilization_Resource",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "used-threshold-upper"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
+			ret := gs.(*oc.System_Utilization_Resource).UsedThresholdUpper
+			if ret == nil {
+				var zero uint8
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Utilization_Resource) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// System_Utilization_Resource_UsedThresholdUpperClearPath represents the /openconfig-system/system/utilization/resources/resource/state/used-threshold-upper-clear YANG schema element.
+type System_Utilization_Resource_UsedThresholdUpperClearPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_Utilization_Resource_UsedThresholdUpperClearPathAny represents the wildcard version of the /openconfig-system/system/utilization/resources/resource/state/used-threshold-upper-clear YANG schema element.
+type System_Utilization_Resource_UsedThresholdUpperClearPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-system-utilization"
+//	Path from parent:     "state/used-threshold-upper-clear"
+//	Path from root:       "/system/utilization/resources/resource/state/used-threshold-upper-clear"
+func (n *System_Utilization_Resource_UsedThresholdUpperClearPath) State() ygnmi.SingletonQuery[uint8] {
+	return ygnmi.NewSingletonQuery[uint8](
+		"System_Utilization_Resource",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "used-threshold-upper-clear"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
+			ret := gs.(*oc.System_Utilization_Resource).UsedThresholdUpperClear
+			if ret == nil {
+				var zero uint8
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Utilization_Resource) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-system-utilization"
+//	Path from parent:     "state/used-threshold-upper-clear"
+//	Path from root:       "/system/utilization/resources/resource/state/used-threshold-upper-clear"
+func (n *System_Utilization_Resource_UsedThresholdUpperClearPathAny) State() ygnmi.WildcardQuery[uint8] {
+	return ygnmi.NewWildcardQuery[uint8](
+		"System_Utilization_Resource",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "used-threshold-upper-clear"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
+			ret := gs.(*oc.System_Utilization_Resource).UsedThresholdUpperClear
+			if ret == nil {
+				var zero uint8
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Utilization_Resource) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-system-utilization"
+//	Path from parent:     "config/used-threshold-upper-clear"
+//	Path from root:       "/system/utilization/resources/resource/config/used-threshold-upper-clear"
+func (n *System_Utilization_Resource_UsedThresholdUpperClearPath) Config() ygnmi.ConfigQuery[uint8] {
+	return ygnmi.NewConfigQuery[uint8](
+		"System_Utilization_Resource",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "used-threshold-upper-clear"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
+			ret := gs.(*oc.System_Utilization_Resource).UsedThresholdUpperClear
+			if ret == nil {
+				var zero uint8
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Utilization_Resource) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-system-utilization"
+//	Path from parent:     "config/used-threshold-upper-clear"
+//	Path from root:       "/system/utilization/resources/resource/config/used-threshold-upper-clear"
+func (n *System_Utilization_Resource_UsedThresholdUpperClearPathAny) Config() ygnmi.WildcardQuery[uint8] {
+	return ygnmi.NewWildcardQuery[uint8](
+		"System_Utilization_Resource",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "used-threshold-upper-clear"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
+			ret := gs.(*oc.System_Utilization_Resource).UsedThresholdUpperClear
+			if ret == nil {
+				var zero uint8
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Utilization_Resource) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// System_Utilization_ResourcePath represents the /openconfig-system/system/utilization/resources/resource YANG schema element.
+type System_Utilization_ResourcePath struct {
+	*ygnmi.NodePath
+}
+
+// System_Utilization_ResourcePathAny represents the wildcard version of the /openconfig-system/system/utilization/resources/resource YANG schema element.
+type System_Utilization_ResourcePathAny struct {
+	*ygnmi.NodePath
+}
+
+// System_Utilization_ResourcePathMap represents the /openconfig-system/system/utilization/resources/resource YANG schema element.
+type System_Utilization_ResourcePathMap struct {
+	*ygnmi.NodePath
+}
+
+// System_Utilization_ResourcePathMapAny represents the wildcard version of the /openconfig-system/system/utilization/resources/resource YANG schema element.
+type System_Utilization_ResourcePathMapAny struct {
+	*ygnmi.NodePath
+}
+
+// ActiveComponentList (leaf-list): List of references to each component which has this resource.
+//
+//	Defining module:      "openconfig-system-utilization"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/active-component-list"
+//	Path from root:       "/system/utilization/resources/resource/state/active-component-list"
+func (n *System_Utilization_ResourcePath) ActiveComponentList() *System_Utilization_Resource_ActiveComponentListPath {
+	ps := &System_Utilization_Resource_ActiveComponentListPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "active-component-list"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// ActiveComponentList (leaf-list): List of references to each component which has this resource.
+//
+//	Defining module:      "openconfig-system-utilization"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/active-component-list"
+//	Path from root:       "/system/utilization/resources/resource/state/active-component-list"
+func (n *System_Utilization_ResourcePathAny) ActiveComponentList() *System_Utilization_Resource_ActiveComponentListPathAny {
+	ps := &System_Utilization_Resource_ActiveComponentListPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "active-component-list"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Name (leaf): Resource name within the system.
+//
+//	Defining module:      "openconfig-system-utilization"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/name"
+//	Path from root:       "/system/utilization/resources/resource/*/name"
+func (n *System_Utilization_ResourcePath) Name() *System_Utilization_Resource_NamePath {
+	ps := &System_Utilization_Resource_NamePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "name"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Name (leaf): Resource name within the system.
+//
+//	Defining module:      "openconfig-system-utilization"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/name"
+//	Path from root:       "/system/utilization/resources/resource/*/name"
+func (n *System_Utilization_ResourcePathAny) Name() *System_Utilization_Resource_NamePathAny {
+	ps := &System_Utilization_Resource_NamePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "name"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// UsedThresholdUpper (leaf): The used percentage value (used / (used + free) * 100) that
+// when crossed will set utilization-threshold-exceeded to 'true'.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/used-threshold-upper"
+//	Path from root:       "/system/utilization/resources/resource/*/used-threshold-upper"
+func (n *System_Utilization_ResourcePath) UsedThresholdUpper() *System_Utilization_Resource_UsedThresholdUpperPath {
+	ps := &System_Utilization_Resource_UsedThresholdUpperPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "used-threshold-upper"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// UsedThresholdUpper (leaf): The used percentage value (used / (used + free) * 100) that
+// when crossed will set utilization-threshold-exceeded to 'true'.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/used-threshold-upper"
+//	Path from root:       "/system/utilization/resources/resource/*/used-threshold-upper"
+func (n *System_Utilization_ResourcePathAny) UsedThresholdUpper() *System_Utilization_Resource_UsedThresholdUpperPathAny {
+	ps := &System_Utilization_Resource_UsedThresholdUpperPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "used-threshold-upper"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// UsedThresholdUpperClear (leaf): The used percentage value (used / (used + free) * 100) that when
+// crossed will set utilization-threshold-exceeded to 'false'.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/used-threshold-upper-clear"
+//	Path from root:       "/system/utilization/resources/resource/*/used-threshold-upper-clear"
+func (n *System_Utilization_ResourcePath) UsedThresholdUpperClear() *System_Utilization_Resource_UsedThresholdUpperClearPath {
+	ps := &System_Utilization_Resource_UsedThresholdUpperClearPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "used-threshold-upper-clear"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// UsedThresholdUpperClear (leaf): The used percentage value (used / (used + free) * 100) that when
+// crossed will set utilization-threshold-exceeded to 'false'.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/used-threshold-upper-clear"
+//	Path from root:       "/system/utilization/resources/resource/*/used-threshold-upper-clear"
+func (n *System_Utilization_ResourcePathAny) UsedThresholdUpperClear() *System_Utilization_Resource_UsedThresholdUpperClearPathAny {
+	ps := &System_Utilization_Resource_UsedThresholdUpperClearPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "used-threshold-upper-clear"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_Utilization_ResourcePath) State() ygnmi.SingletonQuery[*oc.System_Utilization_Resource] {
+	return ygnmi.NewSingletonQuery[*oc.System_Utilization_Resource](
+		"System_Utilization_Resource",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_Utilization_ResourcePathAny) State() ygnmi.WildcardQuery[*oc.System_Utilization_Resource] {
+	return ygnmi.NewWildcardQuery[*oc.System_Utilization_Resource](
+		"System_Utilization_Resource",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *System_Utilization_ResourcePath) Config() ygnmi.ConfigQuery[*oc.System_Utilization_Resource] {
+	return ygnmi.NewConfigQuery[*oc.System_Utilization_Resource](
+		"System_Utilization_Resource",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *System_Utilization_ResourcePathAny) Config() ygnmi.WildcardQuery[*oc.System_Utilization_Resource] {
+	return ygnmi.NewWildcardQuery[*oc.System_Utilization_Resource](
+		"System_Utilization_Resource",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_Utilization_ResourcePathMap) State() ygnmi.SingletonQuery[map[string]*oc.System_Utilization_Resource] {
+	return ygnmi.NewSingletonQuery[map[string]*oc.System_Utilization_Resource](
+		"System_Utilization",
+		true,
+		false,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[string]*oc.System_Utilization_Resource, bool) {
+			ret := gs.(*oc.System_Utilization).Resource
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Utilization) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-system-utilization:resources"},
+			PostRelPath: []string{"openconfig-system-utilization:resource"},
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_Utilization_ResourcePathMapAny) State() ygnmi.WildcardQuery[map[string]*oc.System_Utilization_Resource] {
+	return ygnmi.NewWildcardQuery[map[string]*oc.System_Utilization_Resource](
+		"System_Utilization",
+		true,
+		false,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[string]*oc.System_Utilization_Resource, bool) {
+			ret := gs.(*oc.System_Utilization).Resource
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Utilization) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-system-utilization:resources"},
+			PostRelPath: []string{"openconfig-system-utilization:resource"},
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *System_Utilization_ResourcePathMap) Config() ygnmi.ConfigQuery[map[string]*oc.System_Utilization_Resource] {
+	return ygnmi.NewConfigQuery[map[string]*oc.System_Utilization_Resource](
+		"System_Utilization",
+		false,
+		true,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[string]*oc.System_Utilization_Resource, bool) {
+			ret := gs.(*oc.System_Utilization).Resource
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Utilization) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-system-utilization:resources"},
+			PostRelPath: []string{"openconfig-system-utilization:resource"},
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *System_Utilization_ResourcePathMapAny) Config() ygnmi.WildcardQuery[map[string]*oc.System_Utilization_Resource] {
+	return ygnmi.NewWildcardQuery[map[string]*oc.System_Utilization_Resource](
+		"System_Utilization",
+		false,
+		true,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[string]*oc.System_Utilization_Resource, bool) {
+			ret := gs.(*oc.System_Utilization).Resource
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Utilization) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-system-utilization:resources"},
+			PostRelPath: []string{"openconfig-system-utilization:resource"},
+		},
 	)
 }

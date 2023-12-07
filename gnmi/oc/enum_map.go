@@ -16,6 +16,7 @@ using the following YANG input files:
   - public/release/models/acl/openconfig-packet-match.yang
   - public/release/models/aft/openconfig-aft.yang
   - public/release/models/aft/openconfig-aft-network-instance.yang
+  - public/release/models/aft/openconfig-aft-summary.yang
   - public/release/models/ate/openconfig-ate-flow.yang
   - public/release/models/ate/openconfig-ate-intf.yang
   - public/release/models/bfd/openconfig-bfd.yang
@@ -55,6 +56,7 @@ using the following YANG input files:
   - public/release/models/platform/openconfig-platform-software.yang
   - public/release/models/platform/openconfig-platform-transceiver.yang
   - public/release/models/platform/openconfig-platform.yang
+  - public/release/models/platform/openconfig-platform-common.yang
   - public/release/models/policy-forwarding/openconfig-policy-forwarding.yang
   - public/release/models/policy/openconfig-policy-types.yang
   - public/release/models/qos/openconfig-qos-elements.yang
@@ -67,6 +69,7 @@ using the following YANG input files:
   - public/release/models/system/openconfig-system.yang
   - public/release/models/system/openconfig-system-bootz.yang
   - public/release/models/system/openconfig-system-controlplane.yang
+  - public/release/models/system/openconfig-system-utilization.yang
   - public/release/models/types/openconfig-inet-types.yang
   - public/release/models/types/openconfig-types.yang
   - public/release/models/types/openconfig-yang-types.yang
@@ -2922,6 +2925,12 @@ func initΛEnumTypes() {
 		},
 		"/lldp/state/suppress-tlv-advertisement": {
 			reflect.TypeOf((E_LldpTypes_LLDP_TLV)(0)),
+		},
+		"/network-instances/network-instance/afts/aft-summaries/ipv4-unicast/protocols/protocol/state/origin-protocol": {
+			reflect.TypeOf((E_PolicyTypes_INSTALL_PROTOCOL_TYPE)(0)),
+		},
+		"/network-instances/network-instance/afts/aft-summaries/ipv6-unicast/protocols/protocol/state/origin-protocol": {
+			reflect.TypeOf((E_PolicyTypes_INSTALL_PROTOCOL_TYPE)(0)),
 		},
 		"/network-instances/network-instance/afts/ipv4-unicast/ipv4-entry/state/decapsulate-header": {
 			reflect.TypeOf((E_Aft_EncapsulationHeaderType)(0)),

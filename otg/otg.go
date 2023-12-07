@@ -239,22 +239,6 @@ func (o *OTG) setControlAction(action gosnappi.ControlAction) (gosnappi.ControlA
 	return api.SetControlAction(action)
 }
 
-// DisableLACPMembers disables lacp member ports on the ATE.
-// Deprecated: Use SetControlState instead.
-func (o *OTG) DisableLACPMembers(t testing.TB, ports ...string) {
-	t.Helper()
-	t = events.ActionStarted(t, "DisableLACPMembers on %v", o.ate)
-	controlState := gosnappi.NewControlState()
-	controlState.Protocol().Lacp().Admin().SetState(gosnappi.StateProtocolLacpAdminState.DOWN).SetLagMemberNames(ports)
-	resp, err := o.setControlState(context.Background(), controlState)
-	if err != nil {
-		t.Fatalf("DisableLACPMembers(t) on %s: %v", o.ate, err)
-	}
-	if len(resp.Warnings()) > 0 {
-		t.Logf("DisableLACPMembers(t) on %s non-fatal warnings: %v", o.ate, resp.Warnings())
-	}
-}
-
 // GetCapture gets the results of a port capture.
 func (o *OTG) GetCapture(t testing.TB, req gosnappi.CaptureRequest) []byte {
 	t.Helper()

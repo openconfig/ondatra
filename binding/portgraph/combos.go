@@ -163,11 +163,11 @@ func (g *nodeGenerator) recurse(nodes []*AbstractNode) bool {
 			}
 			delete(g.used, n)
 			delete(g.res, first)
-			for k := range g.conNode2Node2NeedPorts[n] {
-				delete(g.conNode2Node2NeedPorts[k], n)
-			}
-			delete(g.conNode2Node2NeedPorts, n)
 		}
+		for k := range g.conNode2Node2NeedPorts[n] {
+			delete(g.conNode2Node2NeedPorts[k], n)
+		}
+		delete(g.conNode2Node2NeedPorts, n)
 	}
 	return true
 }
