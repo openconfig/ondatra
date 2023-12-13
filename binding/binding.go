@@ -179,7 +179,7 @@ type ATE interface {
 
 	// DialOTG creates a client connection to the ATE's OTG endpoint.
 	// See the interface comment for proper handling of dial options.
-	DialOTG(context.Context, ...grpc.DialOption) (gosnappi.GosnappiApi, error)
+	DialOTG(context.Context, ...grpc.DialOption) (gosnappi.Api, error)
 
 	mustEmbedAbstractATE()
 }
