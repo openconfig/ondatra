@@ -1,4 +1,4 @@
-module github.com/openconfig/ondatra
+module github.com/open-traffic-generator/ondatra
 
 go 1.21
 
