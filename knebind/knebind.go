@@ -35,6 +35,7 @@ import (
 	"github.com/openconfig/kne/topo"
 	"github.com/openconfig/kne/topo/node"
 	"github.com/openconfig/ondatra/binding"
+	"github.com/openconfig/ondatra/binding/introspect"
 	"github.com/openconfig/ondatra/knebind/creds"
 	"github.com/openconfig/ondatra/knebind/solver"
 	"golang.org/x/crypto/ssh"
@@ -135,6 +136,22 @@ func (b *Bind) Release(context.Context) error {
 type kneDUT struct {
 	*solver.ServiceDUT
 	bind *Bind
+}
+
+var _ introspect.Introspector = (*kneDUT)(nil)
+
+// ConnDetails returns the details of the grpc service details.
+func (d *kneDUT) ConnDetails(service introspect.Service) (*introspect.ConnDetails, error) {
+	srv, ok := d.Services[string(service)]
+	if !ok {
+		return nil, fmt.Errorf("service %q not found on DUT %q", service, d.Name())
+	}
+	return &introspect.ConnDetails{
+		DevicePort:      int(srv.GetInside()),
+		DefaultDial:     d.dialConn,
+		DefaultTarget:   serviceAddr(srv),
+		DefaultDialOpts: d.dialOpts(),
+	}, nil
 }
 
 func (d *kneDUT) resetConfig(ctx context.Context) error {
@@ -260,13 +277,12 @@ func (d *kneDUT) DialGRPC(ctx context.Context, serviceName string, opts ...grpc.
 		return nil, err
 	}
 	addr := serviceAddr(s)
-	credOpts := []grpc.DialOption{grpc.WithTransportCredentials(credentials.NewTLS(&tls.Config{InsecureSkipVerify: true}))} // NOLINT
-	creds := d.newRPCCredentials()
-	if creds != nil {
-		credOpts = append(credOpts, grpc.WithPerRPCCredentials(creds))
-	}
-	opts = append(credOpts, opts...)
-	log.Infof("Dialing service %q on DUT %s@%s using credentials %+v", serviceName, d.Name(), addr, creds)
+	opts = append(d.dialOpts(), opts...)
+	log.Infof("Dialing service %q on DUT %s@%s with options %v", serviceName, d.Name(), addr, opts)
+	return d.dialConn(ctx, addr, opts...)
+}
+
+func (d *kneDUT) dialConn(ctx context.Context, addr string, opts ...grpc.DialOption) (*grpc.ClientConn, error) {
 	ctx, cancel := context.WithTimeout(ctx, grpcDialTimeout)
 	defer cancel()
 	conn, err := grpc.DialContext(ctx, addr, opts...)
@@ -274,6 +290,14 @@ func (d *kneDUT) DialGRPC(ctx context.Context, serviceName string, opts ...grpc.
 		return nil, fmt.Errorf("DialContext(ctx, %s, %v): %w", addr, opts, err)
 	}
 	return conn, nil
+}
+
+func (d *kneDUT) dialOpts() []grpc.DialOption {
+	opts := []grpc.DialOption{grpc.WithTransportCredentials(credentials.NewTLS(&tls.Config{InsecureSkipVerify: true}))} // NOLINT
+	if creds := d.newRPCCredentials(); creds != nil {
+		opts = append(opts, grpc.WithPerRPCCredentials(creds))
+	}
+	return opts
 }
 
 // serviceAddr returns the external IP address of a KNE service.
