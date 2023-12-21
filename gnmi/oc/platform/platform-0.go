@@ -1682,6 +1682,100 @@ func (n *Component_MfgNamePathAny) State() ygnmi.WildcardQuery[string] {
 	)
 }
 
+// Component_ModelNamePath represents the /openconfig-platform/components/component/state/model-name YANG schema element.
+type Component_ModelNamePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_ModelNamePathAny represents the wildcard version of the /openconfig-platform/components/component/state/model-name YANG schema element.
+type Component_ModelNamePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/model-name"
+//	Path from root:       "/components/component/state/model-name"
+func (n *Component_ModelNamePath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewSingletonQuery[string](
+		"Component",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "model-name"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Component).ModelName
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/model-name"
+//	Path from root:       "/components/component/state/model-name"
+func (n *Component_ModelNamePathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"Component",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "model-name"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Component).ModelName
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
 // Component_NamePath represents the /openconfig-platform/components/component/state/name YANG schema element.
 type Component_NamePath struct {
 	*ygnmi.NodePath
@@ -3812,6 +3906,46 @@ func (n *ComponentPathAny) MfgName() *Component_MfgNamePathAny {
 	ps := &Component_MfgNamePathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"state", "mfg-name"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// ModelName (leaf): A human readable string describing the model of a component.
+// This string is optional and should only be populated if part-no
+// is also populated.
+//
+//	Defining module:      "openconfig-platform"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/model-name"
+//	Path from root:       "/components/component/state/model-name"
+func (n *ComponentPath) ModelName() *Component_ModelNamePath {
+	ps := &Component_ModelNamePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "model-name"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// ModelName (leaf): A human readable string describing the model of a component.
+// This string is optional and should only be populated if part-no
+// is also populated.
+//
+//	Defining module:      "openconfig-platform"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/model-name"
+//	Path from root:       "/components/component/state/model-name"
+func (n *ComponentPathAny) ModelName() *Component_ModelNamePathAny {
+	ps := &Component_ModelNamePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "model-name"},
 			map[string]interface{}{},
 			n,
 		),

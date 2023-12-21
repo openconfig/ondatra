@@ -25,43 +25,68 @@ import (
 	"google.golang.org/grpc"
 )
 
-// Service is an enum of provided services.
+// Service is a grpc service.
+// The package includes an enumeration of well-known open source services,
+// but bindings may define their own services.
 type Service string
 
-// Enums of provided services.
+// Enumeration of well-known open source services.
 const (
 	GNMI  Service = "gnmi"
 	GNOI  Service = "gnoi"
 	GNSI  Service = "gnsi"
 	GRIBI Service = "gribi"
 	P4RT  Service = "p4rt"
+	OTG   Service = "otg"
 )
 
-// Introspect returns the grpc connection details for the specified service.
+// DUTDialer returns the grpc dialer for the specified DUT service.
 // It fails if the device does not meet the Introspector interface or if the
 // connection details cannot be retrieved.
-func Introspect(t testing.TB, dut *ondatra.DUTDevice, service Service) *ConnDetails {
+func DUTDialer(t testing.TB, dut *ondatra.DUTDevice, service Service) *Dialer {
 	t.Helper()
 	var i Introspector
 	if err := binding.DUTAs(dut.RawAPIs().BindingDUT(), &i); err != nil {
 		t.Fatalf("DUT does not support Introspector interface: %v", err)
 	}
-	cd, err := i.ConnDetails(service)
+	cd, err := i.Dialer(service)
 	if err != nil {
-		t.Fatalf("Failed to retrieve connection details: %v", err)
+		t.Fatalf("Failed to retrieve DUT grpc dialer: %v", err)
 	}
 	return cd
 }
 
-// Introspector is an interface to introspect grpc binding connections.
-type Introspector interface {
-	ConnDetails(Service) (*ConnDetails, error)
+// ATEDialer returns the grpc dialer for the specified ATE service.
+// It fails if the device does not meet the Introspector interface or if the
+// connection details cannot be retrieved.
+func ATEDialer(t testing.TB, ate *ondatra.ATEDevice, service Service) *Dialer {
+	t.Helper()
+	var i Introspector
+	if err := binding.ATEAs(ate.RawAPIs().BindingATE(), &i); err != nil {
+		t.Fatalf("ATE does not support Introspector interface: %v", err)
+	}
+	cd, err := i.Dialer(service)
+	if err != nil {
+		t.Fatalf("Failed to retrieve ATE grpc dialer: %v", err)
+	}
+	return cd
 }
 
-// ConnDetails provides details of a grpc binding connection.
-type ConnDetails struct {
-	DevicePort      int
-	DefaultDial     func(context.Context, string, ...grpc.DialOption) (*grpc.ClientConn, error)
-	DefaultTarget   string
-	DefaultDialOpts []grpc.DialOption
+// Introspector is an interface to introspect grpc service dialers.
+type Introspector interface {
+	Dialer(Service) (*Dialer, error)
+}
+
+// Dialer is capable of dialing grpc endpoints.
+type Dialer struct {
+	DialFunc   func(context.Context, string, ...grpc.DialOption) (*grpc.ClientConn, error)
+	Target     string
+	DialOpts   []grpc.DialOption
+	DevicePort int
+}
+
+// Dial dials a gRPC connection using the provided connection details.
+func (d *Dialer) Dial(ctx context.Context, opts ...grpc.DialOption) (*grpc.ClientConn, error) {
+	opts = append(append([]grpc.DialOption{}, d.DialOpts...), opts...)
+	return d.DialFunc(ctx, d.Target, opts...)
 }

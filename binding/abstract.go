@@ -213,18 +213,6 @@ var _ CLIClient = &AbstractCLIClient{}
 // AbstractCLIClient is implementation support for the CLIClient interface.
 type AbstractCLIClient struct{}
 
-// SendCommandUsingRun implements SendCommand using the client's RunCommand.
-func SendCommandUsingRun(ctx context.Context, cmd string, c CLIClient) (string, error) {
-	res, err := c.RunCommand(ctx, cmd)
-	if err != nil {
-		return "", err
-	}
-	if res.Error() != "" {
-		return "", errors.New(res.Error())
-	}
-	return res.Output(), nil
-}
-
 // RunCommand returns an unimplemented error.
 func (*AbstractCLIClient) RunCommand(ctx context.Context, cmd string) (CommandResult, error) {
 	return nil, errors.New("RunCommand unimplemented")
