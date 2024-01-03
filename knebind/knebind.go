@@ -405,7 +405,7 @@ type kneATE struct {
 	bind *Bind
 }
 
-func (a *kneATE) DialOTG(ctx context.Context, opts ...grpc.DialOption) (gosnappi.GosnappiApi, error) {
+func (a *kneATE) DialOTG(ctx context.Context, opts ...grpc.DialOption) (gosnappi.Api, error) {
 	opts = append(opts, grpc.WithTransportCredentials(insecure.NewCredentials()))
 	conn, err := a.dialGRPC(ctx, "grpc", opts...)
 	if err != nil {
