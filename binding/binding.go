@@ -63,7 +63,7 @@ type Binding interface {
 	// The 'partial' map gives a partial mapping of device and port IDs in the
 	// testbed to concrete names to constrain the topology that is reserved.
 	//
-	// Devices in the returned reservation should be initialiazed with a fixed
+	// Devices in the returned reservation should be initialized with a fixed
 	// base configuration. Implementations are encouraged to make this base
 	// configuration "minimal," meaning a configuration that ensures the device
 	// is reachable and capable of being configured further, but little else,
