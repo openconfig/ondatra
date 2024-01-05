@@ -956,6 +956,39 @@ const (
 	BgpPolicy_BgpSetCommunityOptionType_REPLACE E_BgpPolicy_BgpSetCommunityOptionType = 3
 )
 
+// E_BgpPolicy_MatchSetOptionsType is a derived int64 type which is used to represent
+// the enumerated node BgpPolicy_MatchSetOptionsType. An additional value named
+// BgpPolicy_MatchSetOptionsType_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_BgpPolicy_MatchSetOptionsType int64
+
+// IsYANGGoEnum ensures that BgpPolicy_MatchSetOptionsType implements the yang.GoEnum
+// interface. This ensures that BgpPolicy_MatchSetOptionsType can be identified as a
+// mapped type for a YANG enumeration.
+func (E_BgpPolicy_MatchSetOptionsType) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  BgpPolicy_MatchSetOptionsType.
+func (E_BgpPolicy_MatchSetOptionsType) ΛMap() map[string]map[int64]ygot.EnumDefinition {
+	return ΛEnum
+}
+
+// String returns a logging-friendly string for E_BgpPolicy_MatchSetOptionsType.
+func (e E_BgpPolicy_MatchSetOptionsType) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_BgpPolicy_MatchSetOptionsType")
+}
+
+const (
+	// BgpPolicy_MatchSetOptionsType_UNSET corresponds to the value UNSET of BgpPolicy_MatchSetOptionsType
+	BgpPolicy_MatchSetOptionsType_UNSET E_BgpPolicy_MatchSetOptionsType = 0
+	// BgpPolicy_MatchSetOptionsType_ANY corresponds to the value ANY of BgpPolicy_MatchSetOptionsType
+	BgpPolicy_MatchSetOptionsType_ANY E_BgpPolicy_MatchSetOptionsType = 1
+	// BgpPolicy_MatchSetOptionsType_ALL corresponds to the value ALL of BgpPolicy_MatchSetOptionsType
+	BgpPolicy_MatchSetOptionsType_ALL E_BgpPolicy_MatchSetOptionsType = 2
+	// BgpPolicy_MatchSetOptionsType_INVERT corresponds to the value INVERT of BgpPolicy_MatchSetOptionsType
+	BgpPolicy_MatchSetOptionsType_INVERT E_BgpPolicy_MatchSetOptionsType = 3
+)
+
 // E_BgpTypes_AFI_SAFI_TYPE is a derived int64 type which is used to represent
 // the enumerated node BgpTypes_AFI_SAFI_TYPE. An additional value named
 // BgpTypes_AFI_SAFI_TYPE_UNSET is added to the enumeration which is used as

@@ -25,6 +25,7 @@ import (
 
 	log "github.com/golang/glog"
 	"github.com/openconfig/ondatra/binding"
+	"github.com/openconfig/ondatra/binding/introspect"
 	"github.com/openconfig/ondatra/binding/portgraph"
 	"github.com/openconfig/ondatra/internal/orderedmap"
 	"github.com/pborman/uuid"
@@ -54,6 +55,25 @@ var (
 		tpb.Vendor_HOST:       opb.Device_VENDOR_UNSPECIFIED,
 	}
 )
+
+// ServiceName returns the name of the specified service in KNE.
+func ServiceName(svc introspect.Service) (string, bool) {
+	switch svc {
+	case introspect.GNMI:
+		return "gnmi", true
+	case introspect.GNOI:
+		return "gnoi", true
+	case introspect.GNSI:
+		return "gnsi", true
+	case introspect.GRIBI:
+		return "gribi", true
+	case introspect.OTG:
+		return "grpc", true
+	case introspect.P4RT:
+		return "p4rt", true
+	}
+	return "", false
+}
 
 func role(node *tpb.Node) string {
 	if role, ok := node.GetLabels()[roleLabel]; ok {
