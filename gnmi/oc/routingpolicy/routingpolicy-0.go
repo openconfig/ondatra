@@ -2264,12 +2264,12 @@ type RoutingPolicy_DefinedSets_BgpDefinedSets_CommunitySet_MatchSetOptionsPathAn
 
 // State returns a Query that can be used in gNMI operations.
 //
-//	Defining module:      "openconfig-routing-policy"
+//	Defining module:      "openconfig-bgp-policy"
 //	Instantiating module: "openconfig-bgp-policy"
 //	Path from parent:     "state/match-set-options"
 //	Path from root:       "/routing-policy/defined-sets/bgp-defined-sets/community-sets/community-set/state/match-set-options"
-func (n *RoutingPolicy_DefinedSets_BgpDefinedSets_CommunitySet_MatchSetOptionsPath) State() ygnmi.SingletonQuery[oc.E_RoutingPolicy_MatchSetOptionsType] {
-	return ygnmi.NewSingletonQuery[oc.E_RoutingPolicy_MatchSetOptionsType](
+func (n *RoutingPolicy_DefinedSets_BgpDefinedSets_CommunitySet_MatchSetOptionsPath) State() ygnmi.SingletonQuery[oc.E_BgpPolicy_MatchSetOptionsType] {
+	return ygnmi.NewSingletonQuery[oc.E_BgpPolicy_MatchSetOptionsType](
 		"RoutingPolicy_DefinedSets_BgpDefinedSets_CommunitySet",
 		true,
 		false,
@@ -2282,7 +2282,7 @@ func (n *RoutingPolicy_DefinedSets_BgpDefinedSets_CommunitySet_MatchSetOptionsPa
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (oc.E_RoutingPolicy_MatchSetOptionsType, bool) {
+		func(gs ygot.ValidatedGoStruct) (oc.E_BgpPolicy_MatchSetOptionsType, bool) {
 			ret := gs.(*oc.RoutingPolicy_DefinedSets_BgpDefinedSets_CommunitySet).MatchSetOptions
 			return ret, !reflect.ValueOf(ret).IsZero()
 		},
@@ -2301,12 +2301,12 @@ func (n *RoutingPolicy_DefinedSets_BgpDefinedSets_CommunitySet_MatchSetOptionsPa
 
 // State returns a Query that can be used in gNMI operations.
 //
-//	Defining module:      "openconfig-routing-policy"
+//	Defining module:      "openconfig-bgp-policy"
 //	Instantiating module: "openconfig-bgp-policy"
 //	Path from parent:     "state/match-set-options"
 //	Path from root:       "/routing-policy/defined-sets/bgp-defined-sets/community-sets/community-set/state/match-set-options"
-func (n *RoutingPolicy_DefinedSets_BgpDefinedSets_CommunitySet_MatchSetOptionsPathAny) State() ygnmi.WildcardQuery[oc.E_RoutingPolicy_MatchSetOptionsType] {
-	return ygnmi.NewWildcardQuery[oc.E_RoutingPolicy_MatchSetOptionsType](
+func (n *RoutingPolicy_DefinedSets_BgpDefinedSets_CommunitySet_MatchSetOptionsPathAny) State() ygnmi.WildcardQuery[oc.E_BgpPolicy_MatchSetOptionsType] {
+	return ygnmi.NewWildcardQuery[oc.E_BgpPolicy_MatchSetOptionsType](
 		"RoutingPolicy_DefinedSets_BgpDefinedSets_CommunitySet",
 		true,
 		false,
@@ -2319,7 +2319,7 @@ func (n *RoutingPolicy_DefinedSets_BgpDefinedSets_CommunitySet_MatchSetOptionsPa
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (oc.E_RoutingPolicy_MatchSetOptionsType, bool) {
+		func(gs ygot.ValidatedGoStruct) (oc.E_BgpPolicy_MatchSetOptionsType, bool) {
 			ret := gs.(*oc.RoutingPolicy_DefinedSets_BgpDefinedSets_CommunitySet).MatchSetOptions
 			return ret, !reflect.ValueOf(ret).IsZero()
 		},
@@ -2338,12 +2338,12 @@ func (n *RoutingPolicy_DefinedSets_BgpDefinedSets_CommunitySet_MatchSetOptionsPa
 
 // Config returns a Query that can be used in gNMI operations.
 //
-//	Defining module:      "openconfig-routing-policy"
+//	Defining module:      "openconfig-bgp-policy"
 //	Instantiating module: "openconfig-bgp-policy"
 //	Path from parent:     "config/match-set-options"
 //	Path from root:       "/routing-policy/defined-sets/bgp-defined-sets/community-sets/community-set/config/match-set-options"
-func (n *RoutingPolicy_DefinedSets_BgpDefinedSets_CommunitySet_MatchSetOptionsPath) Config() ygnmi.ConfigQuery[oc.E_RoutingPolicy_MatchSetOptionsType] {
-	return ygnmi.NewConfigQuery[oc.E_RoutingPolicy_MatchSetOptionsType](
+func (n *RoutingPolicy_DefinedSets_BgpDefinedSets_CommunitySet_MatchSetOptionsPath) Config() ygnmi.ConfigQuery[oc.E_BgpPolicy_MatchSetOptionsType] {
+	return ygnmi.NewConfigQuery[oc.E_BgpPolicy_MatchSetOptionsType](
 		"RoutingPolicy_DefinedSets_BgpDefinedSets_CommunitySet",
 		false,
 		true,
@@ -2356,7 +2356,7 @@ func (n *RoutingPolicy_DefinedSets_BgpDefinedSets_CommunitySet_MatchSetOptionsPa
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (oc.E_RoutingPolicy_MatchSetOptionsType, bool) {
+		func(gs ygot.ValidatedGoStruct) (oc.E_BgpPolicy_MatchSetOptionsType, bool) {
 			ret := gs.(*oc.RoutingPolicy_DefinedSets_BgpDefinedSets_CommunitySet).MatchSetOptions
 			return ret, !reflect.ValueOf(ret).IsZero()
 		},
@@ -2375,12 +2375,12 @@ func (n *RoutingPolicy_DefinedSets_BgpDefinedSets_CommunitySet_MatchSetOptionsPa
 
 // Config returns a Query that can be used in gNMI operations.
 //
-//	Defining module:      "openconfig-routing-policy"
+//	Defining module:      "openconfig-bgp-policy"
 //	Instantiating module: "openconfig-bgp-policy"
 //	Path from parent:     "config/match-set-options"
 //	Path from root:       "/routing-policy/defined-sets/bgp-defined-sets/community-sets/community-set/config/match-set-options"
-func (n *RoutingPolicy_DefinedSets_BgpDefinedSets_CommunitySet_MatchSetOptionsPathAny) Config() ygnmi.WildcardQuery[oc.E_RoutingPolicy_MatchSetOptionsType] {
-	return ygnmi.NewWildcardQuery[oc.E_RoutingPolicy_MatchSetOptionsType](
+func (n *RoutingPolicy_DefinedSets_BgpDefinedSets_CommunitySet_MatchSetOptionsPathAny) Config() ygnmi.WildcardQuery[oc.E_BgpPolicy_MatchSetOptionsType] {
+	return ygnmi.NewWildcardQuery[oc.E_BgpPolicy_MatchSetOptionsType](
 		"RoutingPolicy_DefinedSets_BgpDefinedSets_CommunitySet",
 		false,
 		true,
@@ -2393,7 +2393,7 @@ func (n *RoutingPolicy_DefinedSets_BgpDefinedSets_CommunitySet_MatchSetOptionsPa
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (oc.E_RoutingPolicy_MatchSetOptionsType, bool) {
+		func(gs ygot.ValidatedGoStruct) (oc.E_BgpPolicy_MatchSetOptionsType, bool) {
 			ret := gs.(*oc.RoutingPolicy_DefinedSets_BgpDefinedSets_CommunitySet).MatchSetOptions
 			return ret, !reflect.ValueOf(ret).IsZero()
 		},
@@ -2519,7 +2519,7 @@ func (n *RoutingPolicy_DefinedSets_BgpDefinedSets_CommunitySetPathAny) Community
 // MatchSetOptions (leaf): Optional parameter that governs the behaviour of the
 // match operation
 //
-//	Defining module:      "openconfig-routing-policy"
+//	Defining module:      "openconfig-bgp-policy"
 //	Instantiating module: "openconfig-routing-policy"
 //	Path from parent:     "*/match-set-options"
 //	Path from root:       "/routing-policy/defined-sets/bgp-defined-sets/community-sets/community-set/*/match-set-options"
@@ -2538,7 +2538,7 @@ func (n *RoutingPolicy_DefinedSets_BgpDefinedSets_CommunitySetPath) MatchSetOpti
 // MatchSetOptions (leaf): Optional parameter that governs the behaviour of the
 // match operation
 //
-//	Defining module:      "openconfig-routing-policy"
+//	Defining module:      "openconfig-bgp-policy"
 //	Instantiating module: "openconfig-routing-policy"
 //	Path from parent:     "*/match-set-options"
 //	Path from root:       "/routing-policy/defined-sets/bgp-defined-sets/community-sets/community-set/*/match-set-options"
@@ -3128,12 +3128,12 @@ type RoutingPolicy_DefinedSets_BgpDefinedSets_ExtCommunitySet_MatchSetOptionsPat
 
 // State returns a Query that can be used in gNMI operations.
 //
-//	Defining module:      "openconfig-routing-policy"
+//	Defining module:      "openconfig-bgp-policy"
 //	Instantiating module: "openconfig-bgp-policy"
 //	Path from parent:     "state/match-set-options"
 //	Path from root:       "/routing-policy/defined-sets/bgp-defined-sets/ext-community-sets/ext-community-set/state/match-set-options"
-func (n *RoutingPolicy_DefinedSets_BgpDefinedSets_ExtCommunitySet_MatchSetOptionsPath) State() ygnmi.SingletonQuery[oc.E_RoutingPolicy_MatchSetOptionsType] {
-	return ygnmi.NewSingletonQuery[oc.E_RoutingPolicy_MatchSetOptionsType](
+func (n *RoutingPolicy_DefinedSets_BgpDefinedSets_ExtCommunitySet_MatchSetOptionsPath) State() ygnmi.SingletonQuery[oc.E_BgpPolicy_MatchSetOptionsType] {
+	return ygnmi.NewSingletonQuery[oc.E_BgpPolicy_MatchSetOptionsType](
 		"RoutingPolicy_DefinedSets_BgpDefinedSets_ExtCommunitySet",
 		true,
 		false,
@@ -3146,7 +3146,7 @@ func (n *RoutingPolicy_DefinedSets_BgpDefinedSets_ExtCommunitySet_MatchSetOption
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (oc.E_RoutingPolicy_MatchSetOptionsType, bool) {
+		func(gs ygot.ValidatedGoStruct) (oc.E_BgpPolicy_MatchSetOptionsType, bool) {
 			ret := gs.(*oc.RoutingPolicy_DefinedSets_BgpDefinedSets_ExtCommunitySet).MatchSetOptions
 			return ret, !reflect.ValueOf(ret).IsZero()
 		},
@@ -3165,12 +3165,12 @@ func (n *RoutingPolicy_DefinedSets_BgpDefinedSets_ExtCommunitySet_MatchSetOption
 
 // State returns a Query that can be used in gNMI operations.
 //
-//	Defining module:      "openconfig-routing-policy"
+//	Defining module:      "openconfig-bgp-policy"
 //	Instantiating module: "openconfig-bgp-policy"
 //	Path from parent:     "state/match-set-options"
 //	Path from root:       "/routing-policy/defined-sets/bgp-defined-sets/ext-community-sets/ext-community-set/state/match-set-options"
-func (n *RoutingPolicy_DefinedSets_BgpDefinedSets_ExtCommunitySet_MatchSetOptionsPathAny) State() ygnmi.WildcardQuery[oc.E_RoutingPolicy_MatchSetOptionsType] {
-	return ygnmi.NewWildcardQuery[oc.E_RoutingPolicy_MatchSetOptionsType](
+func (n *RoutingPolicy_DefinedSets_BgpDefinedSets_ExtCommunitySet_MatchSetOptionsPathAny) State() ygnmi.WildcardQuery[oc.E_BgpPolicy_MatchSetOptionsType] {
+	return ygnmi.NewWildcardQuery[oc.E_BgpPolicy_MatchSetOptionsType](
 		"RoutingPolicy_DefinedSets_BgpDefinedSets_ExtCommunitySet",
 		true,
 		false,
@@ -3183,7 +3183,7 @@ func (n *RoutingPolicy_DefinedSets_BgpDefinedSets_ExtCommunitySet_MatchSetOption
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (oc.E_RoutingPolicy_MatchSetOptionsType, bool) {
+		func(gs ygot.ValidatedGoStruct) (oc.E_BgpPolicy_MatchSetOptionsType, bool) {
 			ret := gs.(*oc.RoutingPolicy_DefinedSets_BgpDefinedSets_ExtCommunitySet).MatchSetOptions
 			return ret, !reflect.ValueOf(ret).IsZero()
 		},
@@ -3202,12 +3202,12 @@ func (n *RoutingPolicy_DefinedSets_BgpDefinedSets_ExtCommunitySet_MatchSetOption
 
 // Config returns a Query that can be used in gNMI operations.
 //
-//	Defining module:      "openconfig-routing-policy"
+//	Defining module:      "openconfig-bgp-policy"
 //	Instantiating module: "openconfig-bgp-policy"
 //	Path from parent:     "config/match-set-options"
 //	Path from root:       "/routing-policy/defined-sets/bgp-defined-sets/ext-community-sets/ext-community-set/config/match-set-options"
-func (n *RoutingPolicy_DefinedSets_BgpDefinedSets_ExtCommunitySet_MatchSetOptionsPath) Config() ygnmi.ConfigQuery[oc.E_RoutingPolicy_MatchSetOptionsType] {
-	return ygnmi.NewConfigQuery[oc.E_RoutingPolicy_MatchSetOptionsType](
+func (n *RoutingPolicy_DefinedSets_BgpDefinedSets_ExtCommunitySet_MatchSetOptionsPath) Config() ygnmi.ConfigQuery[oc.E_BgpPolicy_MatchSetOptionsType] {
+	return ygnmi.NewConfigQuery[oc.E_BgpPolicy_MatchSetOptionsType](
 		"RoutingPolicy_DefinedSets_BgpDefinedSets_ExtCommunitySet",
 		false,
 		true,
@@ -3220,7 +3220,7 @@ func (n *RoutingPolicy_DefinedSets_BgpDefinedSets_ExtCommunitySet_MatchSetOption
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (oc.E_RoutingPolicy_MatchSetOptionsType, bool) {
+		func(gs ygot.ValidatedGoStruct) (oc.E_BgpPolicy_MatchSetOptionsType, bool) {
 			ret := gs.(*oc.RoutingPolicy_DefinedSets_BgpDefinedSets_ExtCommunitySet).MatchSetOptions
 			return ret, !reflect.ValueOf(ret).IsZero()
 		},
@@ -3239,12 +3239,12 @@ func (n *RoutingPolicy_DefinedSets_BgpDefinedSets_ExtCommunitySet_MatchSetOption
 
 // Config returns a Query that can be used in gNMI operations.
 //
-//	Defining module:      "openconfig-routing-policy"
+//	Defining module:      "openconfig-bgp-policy"
 //	Instantiating module: "openconfig-bgp-policy"
 //	Path from parent:     "config/match-set-options"
 //	Path from root:       "/routing-policy/defined-sets/bgp-defined-sets/ext-community-sets/ext-community-set/config/match-set-options"
-func (n *RoutingPolicy_DefinedSets_BgpDefinedSets_ExtCommunitySet_MatchSetOptionsPathAny) Config() ygnmi.WildcardQuery[oc.E_RoutingPolicy_MatchSetOptionsType] {
-	return ygnmi.NewWildcardQuery[oc.E_RoutingPolicy_MatchSetOptionsType](
+func (n *RoutingPolicy_DefinedSets_BgpDefinedSets_ExtCommunitySet_MatchSetOptionsPathAny) Config() ygnmi.WildcardQuery[oc.E_BgpPolicy_MatchSetOptionsType] {
+	return ygnmi.NewWildcardQuery[oc.E_BgpPolicy_MatchSetOptionsType](
 		"RoutingPolicy_DefinedSets_BgpDefinedSets_ExtCommunitySet",
 		false,
 		true,
@@ -3257,7 +3257,7 @@ func (n *RoutingPolicy_DefinedSets_BgpDefinedSets_ExtCommunitySet_MatchSetOption
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (oc.E_RoutingPolicy_MatchSetOptionsType, bool) {
+		func(gs ygot.ValidatedGoStruct) (oc.E_BgpPolicy_MatchSetOptionsType, bool) {
 			ret := gs.(*oc.RoutingPolicy_DefinedSets_BgpDefinedSets_ExtCommunitySet).MatchSetOptions
 			return ret, !reflect.ValueOf(ret).IsZero()
 		},
@@ -3383,7 +3383,7 @@ func (n *RoutingPolicy_DefinedSets_BgpDefinedSets_ExtCommunitySetPathAny) ExtCom
 // MatchSetOptions (leaf): Optional parameter that governs the behaviour of the
 // match operation
 //
-//	Defining module:      "openconfig-routing-policy"
+//	Defining module:      "openconfig-bgp-policy"
 //	Instantiating module: "openconfig-routing-policy"
 //	Path from parent:     "*/match-set-options"
 //	Path from root:       "/routing-policy/defined-sets/bgp-defined-sets/ext-community-sets/ext-community-set/*/match-set-options"
@@ -3402,7 +3402,7 @@ func (n *RoutingPolicy_DefinedSets_BgpDefinedSets_ExtCommunitySetPath) MatchSetO
 // MatchSetOptions (leaf): Optional parameter that governs the behaviour of the
 // match operation
 //
-//	Defining module:      "openconfig-routing-policy"
+//	Defining module:      "openconfig-bgp-policy"
 //	Instantiating module: "openconfig-routing-policy"
 //	Path from parent:     "*/match-set-options"
 //	Path from root:       "/routing-policy/defined-sets/bgp-defined-sets/ext-community-sets/ext-community-set/*/match-set-options"
@@ -16380,6 +16380,78 @@ func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditionsPathAn
 	return ps
 }
 
+// MatchCommunitySet (container): Match a referenced community set according to the logic
+// defined in the match-set-options leaf
+//
+//	Defining module:      "openconfig-bgp-policy"
+//	Instantiating module: "openconfig-routing-policy"
+//	Path from parent:     "match-community-set"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/bgp-conditions/match-community-set"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditionsPath) MatchCommunitySet() *RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchCommunitySetPath {
+	ps := &RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchCommunitySetPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"match-community-set"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// MatchCommunitySet (container): Match a referenced community set according to the logic
+// defined in the match-set-options leaf
+//
+//	Defining module:      "openconfig-bgp-policy"
+//	Instantiating module: "openconfig-routing-policy"
+//	Path from parent:     "match-community-set"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/bgp-conditions/match-community-set"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditionsPathAny) MatchCommunitySet() *RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchCommunitySetPathAny {
+	ps := &RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchCommunitySetPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"match-community-set"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// MatchExtCommunitySet (container): Match a referenced extended community set according to the logic
+// defined in the match-set-options leaf
+//
+//	Defining module:      "openconfig-bgp-policy"
+//	Instantiating module: "openconfig-routing-policy"
+//	Path from parent:     "match-ext-community-set"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/bgp-conditions/match-ext-community-set"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditionsPath) MatchExtCommunitySet() *RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchExtCommunitySetPath {
+	ps := &RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchExtCommunitySetPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"match-ext-community-set"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// MatchExtCommunitySet (container): Match a referenced extended community set according to the logic
+// defined in the match-set-options leaf
+//
+//	Defining module:      "openconfig-bgp-policy"
+//	Instantiating module: "openconfig-routing-policy"
+//	Path from parent:     "match-ext-community-set"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/bgp-conditions/match-ext-community-set"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditionsPathAny) MatchExtCommunitySet() *RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchExtCommunitySetPathAny {
+	ps := &RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchExtCommunitySetPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"match-ext-community-set"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
 // MedEq (leaf): Condition to check if the received MED value is equal to
 // the specified value
 //
@@ -18213,6 +18285,1078 @@ func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_Match
 func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchAsPathSetPathAny) Config() ygnmi.WildcardQuery[*oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchAsPathSet] {
 	return ygnmi.NewWildcardQuery[*oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchAsPathSet](
 		"RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchAsPathSet",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchCommunitySet_CommunitySetPath represents the /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/bgp-conditions/match-community-set/state/community-set YANG schema element.
+type RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchCommunitySet_CommunitySetPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchCommunitySet_CommunitySetPathAny represents the wildcard version of the /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/bgp-conditions/match-community-set/state/community-set YANG schema element.
+type RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchCommunitySet_CommunitySetPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-bgp-policy"
+//	Instantiating module: "openconfig-bgp-policy"
+//	Path from parent:     "state/community-set"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/bgp-conditions/match-community-set/state/community-set"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchCommunitySet_CommunitySetPath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewSingletonQuery[string](
+		"RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchCommunitySet",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "community-set"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchCommunitySet).CommunitySet
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchCommunitySet)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-bgp-policy"
+//	Instantiating module: "openconfig-bgp-policy"
+//	Path from parent:     "state/community-set"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/bgp-conditions/match-community-set/state/community-set"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchCommunitySet_CommunitySetPathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchCommunitySet",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "community-set"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchCommunitySet).CommunitySet
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchCommunitySet)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-bgp-policy"
+//	Instantiating module: "openconfig-bgp-policy"
+//	Path from parent:     "config/community-set"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/bgp-conditions/match-community-set/config/community-set"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchCommunitySet_CommunitySetPath) Config() ygnmi.ConfigQuery[string] {
+	return ygnmi.NewConfigQuery[string](
+		"RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchCommunitySet",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "community-set"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchCommunitySet).CommunitySet
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchCommunitySet)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-bgp-policy"
+//	Instantiating module: "openconfig-bgp-policy"
+//	Path from parent:     "config/community-set"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/bgp-conditions/match-community-set/config/community-set"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchCommunitySet_CommunitySetPathAny) Config() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchCommunitySet",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "community-set"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchCommunitySet).CommunitySet
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchCommunitySet)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchCommunitySet_MatchSetOptionsPath represents the /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/bgp-conditions/match-community-set/state/match-set-options YANG schema element.
+type RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchCommunitySet_MatchSetOptionsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchCommunitySet_MatchSetOptionsPathAny represents the wildcard version of the /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/bgp-conditions/match-community-set/state/match-set-options YANG schema element.
+type RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchCommunitySet_MatchSetOptionsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-routing-policy"
+//	Instantiating module: "openconfig-bgp-policy"
+//	Path from parent:     "state/match-set-options"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/bgp-conditions/match-community-set/state/match-set-options"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchCommunitySet_MatchSetOptionsPath) State() ygnmi.SingletonQuery[oc.E_RoutingPolicy_MatchSetOptionsType] {
+	return ygnmi.NewSingletonQuery[oc.E_RoutingPolicy_MatchSetOptionsType](
+		"RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchCommunitySet",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "match-set-options"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_RoutingPolicy_MatchSetOptionsType, bool) {
+			ret := gs.(*oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchCommunitySet).MatchSetOptions
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchCommunitySet)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-routing-policy"
+//	Instantiating module: "openconfig-bgp-policy"
+//	Path from parent:     "state/match-set-options"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/bgp-conditions/match-community-set/state/match-set-options"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchCommunitySet_MatchSetOptionsPathAny) State() ygnmi.WildcardQuery[oc.E_RoutingPolicy_MatchSetOptionsType] {
+	return ygnmi.NewWildcardQuery[oc.E_RoutingPolicy_MatchSetOptionsType](
+		"RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchCommunitySet",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "match-set-options"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_RoutingPolicy_MatchSetOptionsType, bool) {
+			ret := gs.(*oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchCommunitySet).MatchSetOptions
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchCommunitySet)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-routing-policy"
+//	Instantiating module: "openconfig-bgp-policy"
+//	Path from parent:     "config/match-set-options"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/bgp-conditions/match-community-set/config/match-set-options"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchCommunitySet_MatchSetOptionsPath) Config() ygnmi.ConfigQuery[oc.E_RoutingPolicy_MatchSetOptionsType] {
+	return ygnmi.NewConfigQuery[oc.E_RoutingPolicy_MatchSetOptionsType](
+		"RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchCommunitySet",
+		false,
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "match-set-options"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_RoutingPolicy_MatchSetOptionsType, bool) {
+			ret := gs.(*oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchCommunitySet).MatchSetOptions
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchCommunitySet)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-routing-policy"
+//	Instantiating module: "openconfig-bgp-policy"
+//	Path from parent:     "config/match-set-options"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/bgp-conditions/match-community-set/config/match-set-options"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchCommunitySet_MatchSetOptionsPathAny) Config() ygnmi.WildcardQuery[oc.E_RoutingPolicy_MatchSetOptionsType] {
+	return ygnmi.NewWildcardQuery[oc.E_RoutingPolicy_MatchSetOptionsType](
+		"RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchCommunitySet",
+		false,
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "match-set-options"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_RoutingPolicy_MatchSetOptionsType, bool) {
+			ret := gs.(*oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchCommunitySet).MatchSetOptions
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchCommunitySet)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchCommunitySetPath represents the /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/bgp-conditions/match-community-set YANG schema element.
+type RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchCommunitySetPath struct {
+	*ygnmi.NodePath
+}
+
+// RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchCommunitySetPathAny represents the wildcard version of the /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/bgp-conditions/match-community-set YANG schema element.
+type RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchCommunitySetPathAny struct {
+	*ygnmi.NodePath
+}
+
+// CommunitySet (leaf): References a defined community set
+//
+//	Defining module:      "openconfig-bgp-policy"
+//	Instantiating module: "openconfig-routing-policy"
+//	Path from parent:     "*/community-set"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/bgp-conditions/match-community-set/*/community-set"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchCommunitySetPath) CommunitySet() *RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchCommunitySet_CommunitySetPath {
+	ps := &RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchCommunitySet_CommunitySetPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "community-set"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// CommunitySet (leaf): References a defined community set
+//
+//	Defining module:      "openconfig-bgp-policy"
+//	Instantiating module: "openconfig-routing-policy"
+//	Path from parent:     "*/community-set"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/bgp-conditions/match-community-set/*/community-set"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchCommunitySetPathAny) CommunitySet() *RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchCommunitySet_CommunitySetPathAny {
+	ps := &RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchCommunitySet_CommunitySetPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "community-set"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// MatchSetOptions (leaf): Optional parameter that governs the behaviour of the
+// match operation
+//
+//	Defining module:      "openconfig-routing-policy"
+//	Instantiating module: "openconfig-routing-policy"
+//	Path from parent:     "*/match-set-options"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/bgp-conditions/match-community-set/*/match-set-options"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchCommunitySetPath) MatchSetOptions() *RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchCommunitySet_MatchSetOptionsPath {
+	ps := &RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchCommunitySet_MatchSetOptionsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "match-set-options"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// MatchSetOptions (leaf): Optional parameter that governs the behaviour of the
+// match operation
+//
+//	Defining module:      "openconfig-routing-policy"
+//	Instantiating module: "openconfig-routing-policy"
+//	Path from parent:     "*/match-set-options"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/bgp-conditions/match-community-set/*/match-set-options"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchCommunitySetPathAny) MatchSetOptions() *RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchCommunitySet_MatchSetOptionsPathAny {
+	ps := &RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchCommunitySet_MatchSetOptionsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "match-set-options"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchCommunitySetPath) State() ygnmi.SingletonQuery[*oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchCommunitySet] {
+	return ygnmi.NewSingletonQuery[*oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchCommunitySet](
+		"RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchCommunitySet",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchCommunitySetPathAny) State() ygnmi.WildcardQuery[*oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchCommunitySet] {
+	return ygnmi.NewWildcardQuery[*oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchCommunitySet](
+		"RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchCommunitySet",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchCommunitySetPath) Config() ygnmi.ConfigQuery[*oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchCommunitySet] {
+	return ygnmi.NewConfigQuery[*oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchCommunitySet](
+		"RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchCommunitySet",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchCommunitySetPathAny) Config() ygnmi.WildcardQuery[*oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchCommunitySet] {
+	return ygnmi.NewWildcardQuery[*oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchCommunitySet](
+		"RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchCommunitySet",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchExtCommunitySet_ExtCommunitySetPath represents the /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/bgp-conditions/match-ext-community-set/state/ext-community-set YANG schema element.
+type RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchExtCommunitySet_ExtCommunitySetPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchExtCommunitySet_ExtCommunitySetPathAny represents the wildcard version of the /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/bgp-conditions/match-ext-community-set/state/ext-community-set YANG schema element.
+type RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchExtCommunitySet_ExtCommunitySetPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-bgp-policy"
+//	Instantiating module: "openconfig-bgp-policy"
+//	Path from parent:     "state/ext-community-set"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/bgp-conditions/match-ext-community-set/state/ext-community-set"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchExtCommunitySet_ExtCommunitySetPath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewSingletonQuery[string](
+		"RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchExtCommunitySet",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "ext-community-set"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchExtCommunitySet).ExtCommunitySet
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchExtCommunitySet)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-bgp-policy"
+//	Instantiating module: "openconfig-bgp-policy"
+//	Path from parent:     "state/ext-community-set"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/bgp-conditions/match-ext-community-set/state/ext-community-set"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchExtCommunitySet_ExtCommunitySetPathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchExtCommunitySet",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "ext-community-set"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchExtCommunitySet).ExtCommunitySet
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchExtCommunitySet)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-bgp-policy"
+//	Instantiating module: "openconfig-bgp-policy"
+//	Path from parent:     "config/ext-community-set"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/bgp-conditions/match-ext-community-set/config/ext-community-set"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchExtCommunitySet_ExtCommunitySetPath) Config() ygnmi.ConfigQuery[string] {
+	return ygnmi.NewConfigQuery[string](
+		"RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchExtCommunitySet",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "ext-community-set"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchExtCommunitySet).ExtCommunitySet
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchExtCommunitySet)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-bgp-policy"
+//	Instantiating module: "openconfig-bgp-policy"
+//	Path from parent:     "config/ext-community-set"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/bgp-conditions/match-ext-community-set/config/ext-community-set"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchExtCommunitySet_ExtCommunitySetPathAny) Config() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchExtCommunitySet",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "ext-community-set"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchExtCommunitySet).ExtCommunitySet
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchExtCommunitySet)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchExtCommunitySet_MatchSetOptionsPath represents the /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/bgp-conditions/match-ext-community-set/state/match-set-options YANG schema element.
+type RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchExtCommunitySet_MatchSetOptionsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchExtCommunitySet_MatchSetOptionsPathAny represents the wildcard version of the /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/bgp-conditions/match-ext-community-set/state/match-set-options YANG schema element.
+type RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchExtCommunitySet_MatchSetOptionsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-routing-policy"
+//	Instantiating module: "openconfig-bgp-policy"
+//	Path from parent:     "state/match-set-options"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/bgp-conditions/match-ext-community-set/state/match-set-options"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchExtCommunitySet_MatchSetOptionsPath) State() ygnmi.SingletonQuery[oc.E_RoutingPolicy_MatchSetOptionsType] {
+	return ygnmi.NewSingletonQuery[oc.E_RoutingPolicy_MatchSetOptionsType](
+		"RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchExtCommunitySet",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "match-set-options"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_RoutingPolicy_MatchSetOptionsType, bool) {
+			ret := gs.(*oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchExtCommunitySet).MatchSetOptions
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchExtCommunitySet)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-routing-policy"
+//	Instantiating module: "openconfig-bgp-policy"
+//	Path from parent:     "state/match-set-options"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/bgp-conditions/match-ext-community-set/state/match-set-options"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchExtCommunitySet_MatchSetOptionsPathAny) State() ygnmi.WildcardQuery[oc.E_RoutingPolicy_MatchSetOptionsType] {
+	return ygnmi.NewWildcardQuery[oc.E_RoutingPolicy_MatchSetOptionsType](
+		"RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchExtCommunitySet",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "match-set-options"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_RoutingPolicy_MatchSetOptionsType, bool) {
+			ret := gs.(*oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchExtCommunitySet).MatchSetOptions
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchExtCommunitySet)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-routing-policy"
+//	Instantiating module: "openconfig-bgp-policy"
+//	Path from parent:     "config/match-set-options"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/bgp-conditions/match-ext-community-set/config/match-set-options"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchExtCommunitySet_MatchSetOptionsPath) Config() ygnmi.ConfigQuery[oc.E_RoutingPolicy_MatchSetOptionsType] {
+	return ygnmi.NewConfigQuery[oc.E_RoutingPolicy_MatchSetOptionsType](
+		"RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchExtCommunitySet",
+		false,
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "match-set-options"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_RoutingPolicy_MatchSetOptionsType, bool) {
+			ret := gs.(*oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchExtCommunitySet).MatchSetOptions
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchExtCommunitySet)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-routing-policy"
+//	Instantiating module: "openconfig-bgp-policy"
+//	Path from parent:     "config/match-set-options"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/bgp-conditions/match-ext-community-set/config/match-set-options"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchExtCommunitySet_MatchSetOptionsPathAny) Config() ygnmi.WildcardQuery[oc.E_RoutingPolicy_MatchSetOptionsType] {
+	return ygnmi.NewWildcardQuery[oc.E_RoutingPolicy_MatchSetOptionsType](
+		"RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchExtCommunitySet",
+		false,
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "match-set-options"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_RoutingPolicy_MatchSetOptionsType, bool) {
+			ret := gs.(*oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchExtCommunitySet).MatchSetOptions
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchExtCommunitySet)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchExtCommunitySetPath represents the /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/bgp-conditions/match-ext-community-set YANG schema element.
+type RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchExtCommunitySetPath struct {
+	*ygnmi.NodePath
+}
+
+// RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchExtCommunitySetPathAny represents the wildcard version of the /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/bgp-conditions/match-ext-community-set YANG schema element.
+type RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchExtCommunitySetPathAny struct {
+	*ygnmi.NodePath
+}
+
+// ExtCommunitySet (leaf): References a defined extended community set
+//
+//	Defining module:      "openconfig-bgp-policy"
+//	Instantiating module: "openconfig-routing-policy"
+//	Path from parent:     "*/ext-community-set"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/bgp-conditions/match-ext-community-set/*/ext-community-set"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchExtCommunitySetPath) ExtCommunitySet() *RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchExtCommunitySet_ExtCommunitySetPath {
+	ps := &RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchExtCommunitySet_ExtCommunitySetPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "ext-community-set"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// ExtCommunitySet (leaf): References a defined extended community set
+//
+//	Defining module:      "openconfig-bgp-policy"
+//	Instantiating module: "openconfig-routing-policy"
+//	Path from parent:     "*/ext-community-set"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/bgp-conditions/match-ext-community-set/*/ext-community-set"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchExtCommunitySetPathAny) ExtCommunitySet() *RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchExtCommunitySet_ExtCommunitySetPathAny {
+	ps := &RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchExtCommunitySet_ExtCommunitySetPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "ext-community-set"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// MatchSetOptions (leaf): Optional parameter that governs the behaviour of the
+// match operation
+//
+//	Defining module:      "openconfig-routing-policy"
+//	Instantiating module: "openconfig-routing-policy"
+//	Path from parent:     "*/match-set-options"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/bgp-conditions/match-ext-community-set/*/match-set-options"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchExtCommunitySetPath) MatchSetOptions() *RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchExtCommunitySet_MatchSetOptionsPath {
+	ps := &RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchExtCommunitySet_MatchSetOptionsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "match-set-options"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// MatchSetOptions (leaf): Optional parameter that governs the behaviour of the
+// match operation
+//
+//	Defining module:      "openconfig-routing-policy"
+//	Instantiating module: "openconfig-routing-policy"
+//	Path from parent:     "*/match-set-options"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/bgp-conditions/match-ext-community-set/*/match-set-options"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchExtCommunitySetPathAny) MatchSetOptions() *RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchExtCommunitySet_MatchSetOptionsPathAny {
+	ps := &RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchExtCommunitySet_MatchSetOptionsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "match-set-options"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchExtCommunitySetPath) State() ygnmi.SingletonQuery[*oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchExtCommunitySet] {
+	return ygnmi.NewSingletonQuery[*oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchExtCommunitySet](
+		"RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchExtCommunitySet",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchExtCommunitySetPathAny) State() ygnmi.WildcardQuery[*oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchExtCommunitySet] {
+	return ygnmi.NewWildcardQuery[*oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchExtCommunitySet](
+		"RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchExtCommunitySet",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchExtCommunitySetPath) Config() ygnmi.ConfigQuery[*oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchExtCommunitySet] {
+	return ygnmi.NewConfigQuery[*oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchExtCommunitySet](
+		"RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchExtCommunitySet",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchExtCommunitySetPathAny) Config() ygnmi.WildcardQuery[*oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchExtCommunitySet] {
+	return ygnmi.NewWildcardQuery[*oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchExtCommunitySet](
+		"RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_MatchExtCommunitySet",
 		false,
 		true,
 		false,

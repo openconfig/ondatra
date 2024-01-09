@@ -238,6 +238,11 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		2: {Name: "REMOVE"},
 		3: {Name: "REPLACE"},
 	},
+	"E_BgpPolicy_MatchSetOptionsType": {
+		1: {Name: "ANY"},
+		2: {Name: "ALL"},
+		3: {Name: "INVERT"},
+	},
 	"E_BgpTypes_AFI_SAFI_TYPE": {
 		1:  {Name: "IPV4_FLOWSPEC", DefiningModule: "openconfig-bgp-types"},
 		2:  {Name: "IPV4_LABELED_UNICAST", DefiningModule: "openconfig-bgp-types"},
@@ -4569,19 +4574,19 @@ func initΛEnumTypes() {
 			reflect.TypeOf((E_BgpTypes_BGP_WELL_KNOWN_STD_COMMUNITY)(0)),
 		},
 		"/routing-policy/defined-sets/bgp-defined-sets/community-sets/community-set/config/match-set-options": {
-			reflect.TypeOf((E_RoutingPolicy_MatchSetOptionsType)(0)),
+			reflect.TypeOf((E_BgpPolicy_MatchSetOptionsType)(0)),
 		},
 		"/routing-policy/defined-sets/bgp-defined-sets/community-sets/community-set/state/community-member": {
 			reflect.TypeOf((E_BgpTypes_BGP_WELL_KNOWN_STD_COMMUNITY)(0)),
 		},
 		"/routing-policy/defined-sets/bgp-defined-sets/community-sets/community-set/state/match-set-options": {
-			reflect.TypeOf((E_RoutingPolicy_MatchSetOptionsType)(0)),
+			reflect.TypeOf((E_BgpPolicy_MatchSetOptionsType)(0)),
 		},
 		"/routing-policy/defined-sets/bgp-defined-sets/ext-community-sets/ext-community-set/config/match-set-options": {
-			reflect.TypeOf((E_RoutingPolicy_MatchSetOptionsType)(0)),
+			reflect.TypeOf((E_BgpPolicy_MatchSetOptionsType)(0)),
 		},
 		"/routing-policy/defined-sets/bgp-defined-sets/ext-community-sets/ext-community-set/state/match-set-options": {
-			reflect.TypeOf((E_RoutingPolicy_MatchSetOptionsType)(0)),
+			reflect.TypeOf((E_BgpPolicy_MatchSetOptionsType)(0)),
 		},
 		"/routing-policy/defined-sets/prefix-sets/prefix-set/config/mode": {
 			reflect.TypeOf((E_PrefixSet_Mode)(0)),
@@ -4686,6 +4691,18 @@ func initΛEnumTypes() {
 			reflect.TypeOf((E_RoutingPolicy_MatchSetOptionsType)(0)),
 		},
 		"/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/bgp-conditions/match-as-path-set/state/match-set-options": {
+			reflect.TypeOf((E_RoutingPolicy_MatchSetOptionsType)(0)),
+		},
+		"/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/bgp-conditions/match-community-set/config/match-set-options": {
+			reflect.TypeOf((E_RoutingPolicy_MatchSetOptionsType)(0)),
+		},
+		"/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/bgp-conditions/match-community-set/state/match-set-options": {
+			reflect.TypeOf((E_RoutingPolicy_MatchSetOptionsType)(0)),
+		},
+		"/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/bgp-conditions/match-ext-community-set/config/match-set-options": {
+			reflect.TypeOf((E_RoutingPolicy_MatchSetOptionsType)(0)),
+		},
+		"/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/bgp-conditions/match-ext-community-set/state/match-set-options": {
 			reflect.TypeOf((E_RoutingPolicy_MatchSetOptionsType)(0)),
 		},
 		"/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/bgp-conditions/state/afi-safi-in": {

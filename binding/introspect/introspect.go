@@ -32,12 +32,12 @@ type Service string
 
 // Enumeration of well-known open source services.
 const (
-	GNMI  Service = "gnmi"
-	GNOI  Service = "gnoi"
-	GNSI  Service = "gnsi"
-	GRIBI Service = "gribi"
-	P4RT  Service = "p4rt"
-	OTG   Service = "otg"
+	GNMI  Service = "gNMI"
+	GNOI  Service = "gNOI"
+	GNSI  Service = "gNSI"
+	GRIBI Service = "gRIBI"
+	OTG   Service = "OTG"
+	P4RT  Service = "P4RT"
 )
 
 // DUTDialer returns the grpc dialer for the specified DUT service.
@@ -80,7 +80,7 @@ type Introspector interface {
 // Dialer is capable of dialing grpc endpoints.
 type Dialer struct {
 	DialFunc   func(context.Context, string, ...grpc.DialOption) (*grpc.ClientConn, error)
-	Target     string
+	DialTarget string
 	DialOpts   []grpc.DialOption
 	DevicePort int
 }
@@ -88,5 +88,5 @@ type Dialer struct {
 // Dial dials a gRPC connection using the provided connection details.
 func (d *Dialer) Dial(ctx context.Context, opts ...grpc.DialOption) (*grpc.ClientConn, error) {
 	opts = append(append([]grpc.DialOption{}, d.DialOpts...), opts...)
-	return d.DialFunc(ctx, d.Target, opts...)
+	return d.DialFunc(ctx, d.DialTarget, opts...)
 }
