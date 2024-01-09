@@ -434,7 +434,7 @@ func (a *kneATE) Dialer(svc introspect.Service) (*introspect.Dialer, error) {
 	return makeDialer(svcPB, grpc.WithTransportCredentials(creds)), nil
 }
 
-func (a *kneATE) DialOTG(ctx context.Context, opts ...grpc.DialOption) (gosnappi.GosnappiApi, error) {
+func (a *kneATE) DialOTG(ctx context.Context, opts ...grpc.DialOption) (gosnappi.Api, error) {
 	conn, err := a.dialGRPC(ctx, introspect.OTG, opts)
 	if err != nil {
 		return nil, err
