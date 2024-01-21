@@ -59,8 +59,8 @@ var (
 		DialIxNetworkFn: func(context.Context) (*binding.IxNetwork, error) {
 			return &binding.IxNetwork{}, nil
 		},
-		DialOTGFn: func(context.Context, ...grpc.DialOption) (gosnappi.GosnappiApi, error) {
-			return &struct{ gosnappi.GosnappiApi }{}, nil
+		DialOTGFn: func(context.Context, ...grpc.DialOption) (gosnappi.Api, error) {
+			return &struct{ gosnappi.Api }{}, nil
 		},
 		DialGNMIFn: func(context.Context, ...grpc.DialOption) (gpb.GNMIClient, error) {
 			return &struct{ gpb.GNMIClient }{}, nil

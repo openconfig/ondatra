@@ -123,6 +123,12 @@ func (c *VendorConfig) WithAristaText(text string) *VendorConfig {
 	return c
 }
 
+// WithCienaText sets the config to be pushed if the DUT vendor is Ciena.
+func (c *VendorConfig) WithCienaText(text string) *VendorConfig {
+	c.perVendor[opb.Device_CIENA] = configText(text)
+	return c
+}
+
 // WithCiscoText sets the config to be pushed if the DUT vendor is Cisco.
 func (c *VendorConfig) WithCiscoText(text string) *VendorConfig {
 	c.perVendor[opb.Device_CISCO] = configText(text)
@@ -146,6 +152,12 @@ func (c *VendorConfig) WithFile(path string) *VendorConfig {
 // WithAristaFile sets the config to be pushed if the DUT vendor is Arista.
 func (c *VendorConfig) WithAristaFile(path string) *VendorConfig {
 	c.perVendor[opb.Device_ARISTA] = configFile(path)
+	return c
+}
+
+// WithCienaFile sets the config to be pushed if the DUT vendor is Ciena.
+func (c *VendorConfig) WithCienaFile(path string) *VendorConfig {
+	c.perVendor[opb.Device_CIENA] = configFile(path)
 	return c
 }
 

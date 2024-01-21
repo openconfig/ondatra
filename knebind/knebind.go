@@ -143,7 +143,8 @@ var _ introspect.Introspector = (*kneDUT)(nil)
 func (d *kneDUT) Dialer(svc introspect.Service) (*introspect.Dialer, error) {
 	svcName, ok := solver.ServiceName(svc)
 	if !ok {
-		return nil, fmt.Errorf("service %q has no known KNE name", svc)
+		svcName = string(svc)
+		log.Warningf("Service %q has no known KNE name, trying %q", svc, svcName)
 	}
 	svcPB, ok := d.Services[svcName]
 	if !ok {
@@ -434,7 +435,7 @@ func (a *kneATE) Dialer(svc introspect.Service) (*introspect.Dialer, error) {
 	return makeDialer(svcPB, grpc.WithTransportCredentials(creds)), nil
 }
 
-func (a *kneATE) DialOTG(ctx context.Context, opts ...grpc.DialOption) (gosnappi.GosnappiApi, error) {
+func (a *kneATE) DialOTG(ctx context.Context, opts ...grpc.DialOption) (gosnappi.Api, error) {
 	conn, err := a.dialGRPC(ctx, introspect.OTG, opts)
 	if err != nil {
 		return nil, err

@@ -33,7 +33,7 @@ var (
 		AbstractATE: &binding.AbstractATE{&binding.Dims{
 			Ports: map[string]*binding.Port{"port1": {}},
 		}},
-		DialOTGFn: func(context.Context, ...grpc.DialOption) (gosnappi.GosnappiApi, error) {
+		DialOTGFn: func(context.Context, ...grpc.DialOption) (gosnappi.Api, error) {
 			return fakeSnappi, nil
 		},
 	}
@@ -128,7 +128,7 @@ func TestGetCapture(t *testing.T) {
 }
 
 type fakeGosnappi struct {
-	gosnappi.GosnappiApi
+	gosnappi.Api
 	config        gosnappi.Config
 	controlState  gosnappi.ControlState
 	controlAction gosnappi.ControlAction

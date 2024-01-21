@@ -1172,6 +1172,100 @@ func (n *System_SoftwareVersionPathAny) State() ygnmi.WildcardQuery[string] {
 	)
 }
 
+// System_UpTimePath represents the /openconfig-system/system/state/up-time YANG schema element.
+type System_UpTimePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_UpTimePathAny represents the wildcard version of the /openconfig-system/system/state/up-time YANG schema element.
+type System_UpTimePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/up-time"
+//	Path from root:       "/system/state/up-time"
+func (n *System_UpTimePath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"System",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "up-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.System).UpTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/up-time"
+//	Path from root:       "/system/state/up-time"
+func (n *System_UpTimePathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"System",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "up-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.System).UpTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
 // SystemPath represents the /openconfig-system/system YANG schema element.
 type SystemPath struct {
 	*ygnmi.NodePath
@@ -2598,6 +2692,44 @@ func (n *SystemPathAny) TelnetServer() *System_TelnetServerPathAny {
 			map[string]interface{}{},
 			n,
 		),
+	}
+	return ps
+}
+
+// UpTime (leaf): The amount of time since the network operating system was
+// initialized.
+//
+//	Defining module:      "openconfig-system"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/up-time"
+//	Path from root:       "/system/state/up-time"
+func (n *SystemPath) UpTime() *System_UpTimePath {
+	ps := &System_UpTimePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "up-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// UpTime (leaf): The amount of time since the network operating system was
+// initialized.
+//
+//	Defining module:      "openconfig-system"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/up-time"
+//	Path from root:       "/system/state/up-time"
+func (n *SystemPathAny) UpTime() *System_UpTimePathAny {
+	ps := &System_UpTimePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "up-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
 	}
 	return ps
 }
