@@ -53,6 +53,7 @@ var (
 		tpb.Vendor_NOKIA:      opb.Device_NOKIA,
 		tpb.Vendor_OPENCONFIG: opb.Device_OPENCONFIG,
 		tpb.Vendor_HOST:       opb.Device_VENDOR_UNSPECIFIED,
+		tpb.Vendor_ALPINE:     opb.Device_ALPINE,
 	}
 )
 
