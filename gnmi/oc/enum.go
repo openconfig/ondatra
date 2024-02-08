@@ -29,6 +29,7 @@ using the following YANG input files:
   - public/release/models/interfaces/openconfig-if-ip.yang
   - public/release/models/interfaces/openconfig-if-sdn-ext.yang
   - public/release/models/interfaces/openconfig-interfaces.yang
+  - public/release/models/isis/openconfig-isis-policy.yang
   - public/release/models/isis/openconfig-isis.yang
   - public/release/models/lacp/openconfig-lacp.yang
   - public/release/models/lldp/openconfig-lldp-types.yang
@@ -4437,6 +4438,64 @@ const (
 	IsisLsdbTypes_ISIS_TLV_TYPE_PURGE_OI E_IsisLsdbTypes_ISIS_TLV_TYPE = 26
 	// IsisLsdbTypes_ISIS_TLV_TYPE_ROUTER_CAPABILITY corresponds to the value ROUTER_CAPABILITY of IsisLsdbTypes_ISIS_TLV_TYPE
 	IsisLsdbTypes_ISIS_TLV_TYPE_ROUTER_CAPABILITY E_IsisLsdbTypes_ISIS_TLV_TYPE = 27
+)
+
+// E_IsisPolicy_MetricStyle is a derived int64 type which is used to represent
+// the enumerated node IsisPolicy_MetricStyle. An additional value named
+// IsisPolicy_MetricStyle_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_IsisPolicy_MetricStyle int64
+
+// IsYANGGoEnum ensures that IsisPolicy_MetricStyle implements the yang.GoEnum
+// interface. This ensures that IsisPolicy_MetricStyle can be identified as a
+// mapped type for a YANG enumeration.
+func (E_IsisPolicy_MetricStyle) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  IsisPolicy_MetricStyle.
+func (E_IsisPolicy_MetricStyle) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_IsisPolicy_MetricStyle.
+func (e E_IsisPolicy_MetricStyle) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_IsisPolicy_MetricStyle")
+}
+
+const (
+	// IsisPolicy_MetricStyle_UNSET corresponds to the value UNSET of IsisPolicy_MetricStyle
+	IsisPolicy_MetricStyle_UNSET E_IsisPolicy_MetricStyle = 0
+	// IsisPolicy_MetricStyle_NARROW_METRIC corresponds to the value NARROW_METRIC of IsisPolicy_MetricStyle
+	IsisPolicy_MetricStyle_NARROW_METRIC E_IsisPolicy_MetricStyle = 1
+	// IsisPolicy_MetricStyle_WIDE_METRIC corresponds to the value WIDE_METRIC of IsisPolicy_MetricStyle
+	IsisPolicy_MetricStyle_WIDE_METRIC E_IsisPolicy_MetricStyle = 2
+)
+
+// E_IsisPolicy_MetricType is a derived int64 type which is used to represent
+// the enumerated node IsisPolicy_MetricType. An additional value named
+// IsisPolicy_MetricType_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_IsisPolicy_MetricType int64
+
+// IsYANGGoEnum ensures that IsisPolicy_MetricType implements the yang.GoEnum
+// interface. This ensures that IsisPolicy_MetricType can be identified as a
+// mapped type for a YANG enumeration.
+func (E_IsisPolicy_MetricType) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  IsisPolicy_MetricType.
+func (E_IsisPolicy_MetricType) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_IsisPolicy_MetricType.
+func (e E_IsisPolicy_MetricType) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_IsisPolicy_MetricType")
+}
+
+const (
+	// IsisPolicy_MetricType_UNSET corresponds to the value UNSET of IsisPolicy_MetricType
+	IsisPolicy_MetricType_UNSET E_IsisPolicy_MetricType = 0
+	// IsisPolicy_MetricType_INTERNAL corresponds to the value INTERNAL of IsisPolicy_MetricType
+	IsisPolicy_MetricType_INTERNAL E_IsisPolicy_MetricType = 1
+	// IsisPolicy_MetricType_EXTERNAL corresponds to the value EXTERNAL of IsisPolicy_MetricType
+	IsisPolicy_MetricType_EXTERNAL E_IsisPolicy_MetricType = 2
 )
 
 // E_IsisTypes_AFI_SAFI_TYPE is a derived int64 type which is used to represent

@@ -29,6 +29,7 @@ using the following YANG input files:
   - public/release/models/interfaces/openconfig-if-ip.yang
   - public/release/models/interfaces/openconfig-if-sdn-ext.yang
   - public/release/models/interfaces/openconfig-interfaces.yang
+  - public/release/models/isis/openconfig-isis-policy.yang
   - public/release/models/isis/openconfig-isis.yang
   - public/release/models/lacp/openconfig-lacp.yang
   - public/release/models/lldp/openconfig-lldp-types.yang
@@ -1212,6 +1213,14 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		25: {Name: "NLPID", DefiningModule: "openconfig-isis-lsdb-types"},
 		26: {Name: "PURGE_OI", DefiningModule: "openconfig-isis-lsdb-types"},
 		27: {Name: "ROUTER_CAPABILITY", DefiningModule: "openconfig-isis-lsdb-types"},
+	},
+	"E_IsisPolicy_MetricStyle": {
+		1: {Name: "NARROW_METRIC"},
+		2: {Name: "WIDE_METRIC"},
+	},
+	"E_IsisPolicy_MetricType": {
+		1: {Name: "INTERNAL"},
+		2: {Name: "EXTERNAL"},
 	},
 	"E_IsisTypes_AFI_SAFI_TYPE": {
 		1: {Name: "IPV4_MULTICAST", DefiningModule: "openconfig-isis-types"},
@@ -4665,6 +4674,18 @@ func initΛEnumTypes() {
 		"/routing-policy/policy-definitions/policy-definition/statements/statement/actions/config/policy-result": {
 			reflect.TypeOf((E_RoutingPolicy_PolicyResultType)(0)),
 		},
+		"/routing-policy/policy-definitions/policy-definition/statements/statement/actions/isis-actions/config/set-metric-style-type": {
+			reflect.TypeOf((E_IsisPolicy_MetricStyle)(0)),
+		},
+		"/routing-policy/policy-definitions/policy-definition/statements/statement/actions/isis-actions/config/set-metric-type": {
+			reflect.TypeOf((E_IsisPolicy_MetricType)(0)),
+		},
+		"/routing-policy/policy-definitions/policy-definition/statements/statement/actions/isis-actions/state/set-metric-style-type": {
+			reflect.TypeOf((E_IsisPolicy_MetricStyle)(0)),
+		},
+		"/routing-policy/policy-definitions/policy-definition/statements/statement/actions/isis-actions/state/set-metric-type": {
+			reflect.TypeOf((E_IsisPolicy_MetricType)(0)),
+		},
 		"/routing-policy/policy-definitions/policy-definition/statements/statement/actions/ospf-actions/set-metric/config/metric-type": {
 			reflect.TypeOf((E_SetMetric_MetricType)(0)),
 		},
@@ -4730,6 +4751,12 @@ func initΛEnumTypes() {
 		},
 		"/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/config/install-protocol-eq": {
 			reflect.TypeOf((E_PolicyTypes_INSTALL_PROTOCOL_TYPE)(0)),
+		},
+		"/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/isis-conditions/config/match-metric-type": {
+			reflect.TypeOf((E_IsisPolicy_MetricType)(0)),
+		},
+		"/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/isis-conditions/state/match-metric-type": {
+			reflect.TypeOf((E_IsisPolicy_MetricType)(0)),
 		},
 		"/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/match-neighbor-set/config/match-set-options": {
 			reflect.TypeOf((E_RoutingPolicy_MatchSetOptionsRestrictedType)(0)),

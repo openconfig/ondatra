@@ -174,6 +174,8 @@ const (
 	Speed5Gb = Speed(opb.Port_S_5GB)
 	// Speed10Gb is a port speed of 10Gbps.
 	Speed10Gb = Speed(opb.Port_S_10GB)
+	// Speed40Gb is a port speed of 40Gbps.
+	Speed40Gb = Speed(opb.Port_S_40GB)
 	// Speed100Gb is a port speed of 100Gbps.
 	Speed100Gb = Speed(opb.Port_S_100GB)
 	// Speed400Gb is a port speed of 400Gbps.
