@@ -3,6 +3,7 @@ module github.com/openconfig/ondatra
 go 1.21
 
 require (
+	bitbucket.org/creachadair/stringset v0.0.12
 	github.com/golang/glog v1.1.2
 	github.com/google/go-cmp v0.6.0
 	github.com/jstemmer/go-junit-report/v2 v2.1.0
@@ -14,7 +15,7 @@ require (
 	github.com/openconfig/gocloser v0.0.0-20220310182203-c6c950ed3b0b
 	github.com/openconfig/goyang v1.4.5
 	github.com/openconfig/gribi v1.0.0
-	github.com/openconfig/kne v0.1.16
+	github.com/openconfig/kne v0.1.17
 	github.com/openconfig/testt v0.0.0-20220311054427-efbb1a32ec07
 	github.com/openconfig/ygnmi v0.11.1
 	github.com/openconfig/ygot v0.29.18
@@ -78,7 +79,7 @@ require (
 	github.com/modern-go/reflect2 v1.0.2 // indirect
 	github.com/munnerz/goautoneg v0.0.0-20191010083416-a7dc8b61c822 // indirect
 	github.com/networkop/meshnet-cni v0.3.1-0.20230525201116-d7c306c635cf // indirect
-	github.com/open-traffic-generator/keng-operator v0.3.13 // indirect
+	github.com/open-traffic-generator/keng-operator v0.3.15 // indirect
 	github.com/openconfig/gnoi v0.2.0 // indirect
 	github.com/openconfig/grpctunnel v0.0.0-20220819142823-6f5422b8ca70 // indirect
 	github.com/openconfig/lemming/operator v0.2.0 // indirect
@@ -95,7 +96,7 @@ require (
 	github.com/spf13/cobra v1.8.0 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/spf13/viper v1.17.0 // indirect
-	github.com/srl-labs/srl-controller v0.6.0 // indirect
+	github.com/srl-labs/srl-controller v0.6.1 // indirect
 	github.com/srl-labs/srlinux-scrapli v0.6.0 // indirect
 	github.com/subosito/gotenv v1.6.0 // indirect
 	go.uber.org/multierr v1.11.0 // indirect

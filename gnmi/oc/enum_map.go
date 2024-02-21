@@ -223,6 +223,7 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 	},
 	"E_BgpActions_SetNextHop": {
 		1: {Name: "SELF"},
+		2: {Name: "PEER_ADDRESS"},
 	},
 	"E_BgpConditions_RouteType": {
 		1: {Name: "INTERNAL"},
@@ -1141,6 +1142,10 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		1: {Name: "NONE"},
 		2: {Name: "FACILITY"},
 		3: {Name: "TERMINAL"},
+		4: {Name: "ASIC_PHY_LOCAL"},
+		5: {Name: "ASIC_PHY_REMOTE"},
+		6: {Name: "ASIC_MAC_LOCAL"},
+		7: {Name: "ASIC_MAC_REMOTE"},
 	},
 	"E_Ipv4Srlg_Flags": {
 		1: {Name: "NUMBERED"},
@@ -2185,6 +2190,10 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		1: {Name: "NONE"},
 		2: {Name: "FACILITY"},
 		3: {Name: "TERMINAL"},
+		4: {Name: "ASIC_PHY_LOCAL"},
+		5: {Name: "ASIC_PHY_REMOTE"},
+		6: {Name: "ASIC_MAC_LOCAL"},
+		7: {Name: "ASIC_MAC_REMOTE"},
 	},
 	"E_Tlv_Reason": {
 		1: {Name: "UNKNOWN"},

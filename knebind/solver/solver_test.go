@@ -85,6 +85,13 @@ func TestSolve(t *testing.T) {
 		    key: 3456
 		    value: {
 		      name: "gnmi"
+					names: ["gnoi", "gnsi", "gnmi", "", "gnoi"]
+		    }
+		  }
+			services: {
+		    key: 3457
+		    value: {
+					names: ["ssh", "p4rt", ""]
 		    }
 		  }
 		  interfaces: {
@@ -170,6 +177,14 @@ func TestSolve(t *testing.T) {
 	wantDUTServices := map[string]*tpb.Service{
 		"gnmi": &tpb.Service{Name: "gnmi"},
 	}
+
+	wantDUTMultiServices := map[string]*tpb.Service{
+		"gnmi": &tpb.Service{Name: "gnmi", Names: []string{"gnoi", "gnsi", "gnmi", "", "gnoi"}},
+		"gnoi": &tpb.Service{Name: "gnmi", Names: []string{"gnoi", "gnsi", "gnmi", "", "gnoi"}},
+		"gnsi": &tpb.Service{Name: "gnmi", Names: []string{"gnoi", "gnsi", "gnmi", "", "gnoi"}},
+		"ssh":  &tpb.Service{Names: []string{"ssh", "p4rt", ""}},
+		"p4rt": &tpb.Service{Names: []string{"ssh", "p4rt", ""}},
+	}
 	wantDUT1 := &ServiceDUT{
 		AbstractDUT: &binding.AbstractDUT{&binding.Dims{
 			Name:            "node1",
@@ -206,7 +221,7 @@ func TestSolve(t *testing.T) {
 				"port1": {Name: "eth1"},
 			},
 		}},
-		Services:   wantDUTServices,
+		Services:   wantDUTMultiServices,
 		NodeVendor: tpb.Vendor_JUNIPER,
 	}
 	wantATEServices := make(map[string]*tpb.Service)
@@ -268,7 +283,7 @@ func TestSolve(t *testing.T) {
 						SoftwareVersion: "evo",
 						Ports:           map[string]*binding.Port{},
 					}},
-					Services:   wantDUTServices,
+					Services:   wantDUTMultiServices,
 					NodeVendor: tpb.Vendor_JUNIPER,
 				},
 			},

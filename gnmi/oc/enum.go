@@ -861,6 +861,8 @@ const (
 	BgpActions_SetNextHop_UNSET E_BgpActions_SetNextHop = 0
 	// BgpActions_SetNextHop_SELF corresponds to the value SELF of BgpActions_SetNextHop
 	BgpActions_SetNextHop_SELF E_BgpActions_SetNextHop = 1
+	// BgpActions_SetNextHop_PEER_ADDRESS corresponds to the value PEER_ADDRESS of BgpActions_SetNextHop
+	BgpActions_SetNextHop_PEER_ADDRESS E_BgpActions_SetNextHop = 2
 )
 
 // E_BgpConditions_RouteType is a derived int64 type which is used to represent
@@ -4208,6 +4210,14 @@ const (
 	Interfaces_LoopbackModeType_FACILITY E_Interfaces_LoopbackModeType = 2
 	// Interfaces_LoopbackModeType_TERMINAL corresponds to the value TERMINAL of Interfaces_LoopbackModeType
 	Interfaces_LoopbackModeType_TERMINAL E_Interfaces_LoopbackModeType = 3
+	// Interfaces_LoopbackModeType_ASIC_PHY_LOCAL corresponds to the value ASIC_PHY_LOCAL of Interfaces_LoopbackModeType
+	Interfaces_LoopbackModeType_ASIC_PHY_LOCAL E_Interfaces_LoopbackModeType = 4
+	// Interfaces_LoopbackModeType_ASIC_PHY_REMOTE corresponds to the value ASIC_PHY_REMOTE of Interfaces_LoopbackModeType
+	Interfaces_LoopbackModeType_ASIC_PHY_REMOTE E_Interfaces_LoopbackModeType = 5
+	// Interfaces_LoopbackModeType_ASIC_MAC_LOCAL corresponds to the value ASIC_MAC_LOCAL of Interfaces_LoopbackModeType
+	Interfaces_LoopbackModeType_ASIC_MAC_LOCAL E_Interfaces_LoopbackModeType = 6
+	// Interfaces_LoopbackModeType_ASIC_MAC_REMOTE corresponds to the value ASIC_MAC_REMOTE of Interfaces_LoopbackModeType
+	Interfaces_LoopbackModeType_ASIC_MAC_REMOTE E_Interfaces_LoopbackModeType = 7
 )
 
 // E_Ipv4Srlg_Flags is a derived int64 type which is used to represent
@@ -10110,6 +10120,14 @@ const (
 	TerminalDevice_LoopbackModeType_FACILITY E_TerminalDevice_LoopbackModeType = 2
 	// TerminalDevice_LoopbackModeType_TERMINAL corresponds to the value TERMINAL of TerminalDevice_LoopbackModeType
 	TerminalDevice_LoopbackModeType_TERMINAL E_TerminalDevice_LoopbackModeType = 3
+	// TerminalDevice_LoopbackModeType_ASIC_PHY_LOCAL corresponds to the value ASIC_PHY_LOCAL of TerminalDevice_LoopbackModeType
+	TerminalDevice_LoopbackModeType_ASIC_PHY_LOCAL E_TerminalDevice_LoopbackModeType = 4
+	// TerminalDevice_LoopbackModeType_ASIC_PHY_REMOTE corresponds to the value ASIC_PHY_REMOTE of TerminalDevice_LoopbackModeType
+	TerminalDevice_LoopbackModeType_ASIC_PHY_REMOTE E_TerminalDevice_LoopbackModeType = 5
+	// TerminalDevice_LoopbackModeType_ASIC_MAC_LOCAL corresponds to the value ASIC_MAC_LOCAL of TerminalDevice_LoopbackModeType
+	TerminalDevice_LoopbackModeType_ASIC_MAC_LOCAL E_TerminalDevice_LoopbackModeType = 6
+	// TerminalDevice_LoopbackModeType_ASIC_MAC_REMOTE corresponds to the value ASIC_MAC_REMOTE of TerminalDevice_LoopbackModeType
+	TerminalDevice_LoopbackModeType_ASIC_MAC_REMOTE E_TerminalDevice_LoopbackModeType = 7
 )
 
 // E_Tlv_Reason is a derived int64 type which is used to represent

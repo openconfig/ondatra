@@ -23,6 +23,7 @@ import (
 
 	"golang.org/x/net/context"
 
+	"bitbucket.org/creachadair/stringset"
 	log "github.com/golang/glog"
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/binding/introspect"
@@ -589,7 +590,15 @@ func (a *assign) resolveDevice(dev *opb.Device) (*deviceResolution, error) {
 	}
 	sm := map[string]*tpb.Service{}
 	for _, s := range node.GetServices() {
-		sm[s.GetName()] = s
+		names := stringset.New()
+		for _, n := range append(s.GetNames(), s.GetName()) {
+			if n != "" {
+				names.Add(n)
+			}
+		}
+		for _, n := range names.Elements() {
+			sm[n] = s
+		}
 	}
 	dims := &binding.Dims{
 		Name:            node.GetName(),

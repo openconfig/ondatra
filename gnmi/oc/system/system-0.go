@@ -40004,14 +40004,14 @@ func (n *System_GrpcServer_AuthzPolicyCounters_RpcPathMapAny) State() ygnmi.Wild
 	)
 }
 
-// System_GrpcServer_Counters_AccessAcceptsPath represents the /openconfig-system/system/grpc-servers/grpc-server/state/counters/access-accepts YANG schema element.
-type System_GrpcServer_Counters_AccessAcceptsPath struct {
+// System_GrpcServer_Counters_ConnectionAcceptsPath represents the /openconfig-system/system/grpc-servers/grpc-server/state/counters/connection-accepts YANG schema element.
+type System_GrpcServer_Counters_ConnectionAcceptsPath struct {
 	*ygnmi.NodePath
 	parent ygnmi.PathStruct
 }
 
-// System_GrpcServer_Counters_AccessAcceptsPathAny represents the wildcard version of the /openconfig-system/system/grpc-servers/grpc-server/state/counters/access-accepts YANG schema element.
-type System_GrpcServer_Counters_AccessAcceptsPathAny struct {
+// System_GrpcServer_Counters_ConnectionAcceptsPathAny represents the wildcard version of the /openconfig-system/system/grpc-servers/grpc-server/state/counters/connection-accepts YANG schema element.
+type System_GrpcServer_Counters_ConnectionAcceptsPathAny struct {
 	*ygnmi.NodePath
 	parent ygnmi.PathStruct
 }
@@ -40020,9 +40020,9 @@ type System_GrpcServer_Counters_AccessAcceptsPathAny struct {
 //
 //	Defining module:      "gnsi-certz"
 //	Instantiating module: "gnsi-certz"
-//	Path from parent:     "access-accepts"
-//	Path from root:       "/system/grpc-servers/grpc-server/state/counters/access-accepts"
-func (n *System_GrpcServer_Counters_AccessAcceptsPath) State() ygnmi.SingletonQuery[uint64] {
+//	Path from parent:     "connection-accepts"
+//	Path from root:       "/system/grpc-servers/grpc-server/state/counters/connection-accepts"
+func (n *System_GrpcServer_Counters_ConnectionAcceptsPath) State() ygnmi.SingletonQuery[uint64] {
 	return ygnmi.NewSingletonQuery[uint64](
 		"System_GrpcServer_Counters",
 		true,
@@ -40032,12 +40032,12 @@ func (n *System_GrpcServer_Counters_AccessAcceptsPath) State() ygnmi.SingletonQu
 		true,
 		false,
 		ygnmi.NewNodePath(
-			[]string{"access-accepts"},
+			[]string{"connection-accepts"},
 			nil,
 			n.parent,
 		),
 		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
-			ret := gs.(*oc.System_GrpcServer_Counters).AccessAccepts
+			ret := gs.(*oc.System_GrpcServer_Counters).ConnectionAccepts
 			if ret == nil {
 				var zero uint64
 				return zero, false
@@ -40061,9 +40061,9 @@ func (n *System_GrpcServer_Counters_AccessAcceptsPath) State() ygnmi.SingletonQu
 //
 //	Defining module:      "gnsi-certz"
 //	Instantiating module: "gnsi-certz"
-//	Path from parent:     "access-accepts"
-//	Path from root:       "/system/grpc-servers/grpc-server/state/counters/access-accepts"
-func (n *System_GrpcServer_Counters_AccessAcceptsPathAny) State() ygnmi.WildcardQuery[uint64] {
+//	Path from parent:     "connection-accepts"
+//	Path from root:       "/system/grpc-servers/grpc-server/state/counters/connection-accepts"
+func (n *System_GrpcServer_Counters_ConnectionAcceptsPathAny) State() ygnmi.WildcardQuery[uint64] {
 	return ygnmi.NewWildcardQuery[uint64](
 		"System_GrpcServer_Counters",
 		true,
@@ -40073,12 +40073,12 @@ func (n *System_GrpcServer_Counters_AccessAcceptsPathAny) State() ygnmi.Wildcard
 		true,
 		false,
 		ygnmi.NewNodePath(
-			[]string{"access-accepts"},
+			[]string{"connection-accepts"},
 			nil,
 			n.parent,
 		),
 		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
-			ret := gs.(*oc.System_GrpcServer_Counters).AccessAccepts
+			ret := gs.(*oc.System_GrpcServer_Counters).ConnectionAccepts
 			if ret == nil {
 				var zero uint64
 				return zero, false
@@ -40098,14 +40098,14 @@ func (n *System_GrpcServer_Counters_AccessAcceptsPathAny) State() ygnmi.Wildcard
 	)
 }
 
-// System_GrpcServer_Counters_AccessRejectsPath represents the /openconfig-system/system/grpc-servers/grpc-server/state/counters/access-rejects YANG schema element.
-type System_GrpcServer_Counters_AccessRejectsPath struct {
+// System_GrpcServer_Counters_ConnectionRejectsPath represents the /openconfig-system/system/grpc-servers/grpc-server/state/counters/connection-rejects YANG schema element.
+type System_GrpcServer_Counters_ConnectionRejectsPath struct {
 	*ygnmi.NodePath
 	parent ygnmi.PathStruct
 }
 
-// System_GrpcServer_Counters_AccessRejectsPathAny represents the wildcard version of the /openconfig-system/system/grpc-servers/grpc-server/state/counters/access-rejects YANG schema element.
-type System_GrpcServer_Counters_AccessRejectsPathAny struct {
+// System_GrpcServer_Counters_ConnectionRejectsPathAny represents the wildcard version of the /openconfig-system/system/grpc-servers/grpc-server/state/counters/connection-rejects YANG schema element.
+type System_GrpcServer_Counters_ConnectionRejectsPathAny struct {
 	*ygnmi.NodePath
 	parent ygnmi.PathStruct
 }
@@ -40114,9 +40114,9 @@ type System_GrpcServer_Counters_AccessRejectsPathAny struct {
 //
 //	Defining module:      "gnsi-certz"
 //	Instantiating module: "gnsi-certz"
-//	Path from parent:     "access-rejects"
-//	Path from root:       "/system/grpc-servers/grpc-server/state/counters/access-rejects"
-func (n *System_GrpcServer_Counters_AccessRejectsPath) State() ygnmi.SingletonQuery[uint64] {
+//	Path from parent:     "connection-rejects"
+//	Path from root:       "/system/grpc-servers/grpc-server/state/counters/connection-rejects"
+func (n *System_GrpcServer_Counters_ConnectionRejectsPath) State() ygnmi.SingletonQuery[uint64] {
 	return ygnmi.NewSingletonQuery[uint64](
 		"System_GrpcServer_Counters",
 		true,
@@ -40126,12 +40126,12 @@ func (n *System_GrpcServer_Counters_AccessRejectsPath) State() ygnmi.SingletonQu
 		true,
 		false,
 		ygnmi.NewNodePath(
-			[]string{"access-rejects"},
+			[]string{"connection-rejects"},
 			nil,
 			n.parent,
 		),
 		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
-			ret := gs.(*oc.System_GrpcServer_Counters).AccessRejects
+			ret := gs.(*oc.System_GrpcServer_Counters).ConnectionRejects
 			if ret == nil {
 				var zero uint64
 				return zero, false
@@ -40155,9 +40155,9 @@ func (n *System_GrpcServer_Counters_AccessRejectsPath) State() ygnmi.SingletonQu
 //
 //	Defining module:      "gnsi-certz"
 //	Instantiating module: "gnsi-certz"
-//	Path from parent:     "access-rejects"
-//	Path from root:       "/system/grpc-servers/grpc-server/state/counters/access-rejects"
-func (n *System_GrpcServer_Counters_AccessRejectsPathAny) State() ygnmi.WildcardQuery[uint64] {
+//	Path from parent:     "connection-rejects"
+//	Path from root:       "/system/grpc-servers/grpc-server/state/counters/connection-rejects"
+func (n *System_GrpcServer_Counters_ConnectionRejectsPathAny) State() ygnmi.WildcardQuery[uint64] {
 	return ygnmi.NewWildcardQuery[uint64](
 		"System_GrpcServer_Counters",
 		true,
@@ -40167,12 +40167,12 @@ func (n *System_GrpcServer_Counters_AccessRejectsPathAny) State() ygnmi.Wildcard
 		true,
 		false,
 		ygnmi.NewNodePath(
-			[]string{"access-rejects"},
+			[]string{"connection-rejects"},
 			nil,
 			n.parent,
 		),
 		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
-			ret := gs.(*oc.System_GrpcServer_Counters).AccessRejects
+			ret := gs.(*oc.System_GrpcServer_Counters).ConnectionRejects
 			if ret == nil {
 				var zero uint64
 				return zero, false
@@ -40192,14 +40192,14 @@ func (n *System_GrpcServer_Counters_AccessRejectsPathAny) State() ygnmi.Wildcard
 	)
 }
 
-// System_GrpcServer_Counters_LastAccessAcceptPath represents the /openconfig-system/system/grpc-servers/grpc-server/state/counters/last-access-accept YANG schema element.
-type System_GrpcServer_Counters_LastAccessAcceptPath struct {
+// System_GrpcServer_Counters_LastConnectionAcceptPath represents the /openconfig-system/system/grpc-servers/grpc-server/state/counters/last-connection-accept YANG schema element.
+type System_GrpcServer_Counters_LastConnectionAcceptPath struct {
 	*ygnmi.NodePath
 	parent ygnmi.PathStruct
 }
 
-// System_GrpcServer_Counters_LastAccessAcceptPathAny represents the wildcard version of the /openconfig-system/system/grpc-servers/grpc-server/state/counters/last-access-accept YANG schema element.
-type System_GrpcServer_Counters_LastAccessAcceptPathAny struct {
+// System_GrpcServer_Counters_LastConnectionAcceptPathAny represents the wildcard version of the /openconfig-system/system/grpc-servers/grpc-server/state/counters/last-connection-accept YANG schema element.
+type System_GrpcServer_Counters_LastConnectionAcceptPathAny struct {
 	*ygnmi.NodePath
 	parent ygnmi.PathStruct
 }
@@ -40208,9 +40208,9 @@ type System_GrpcServer_Counters_LastAccessAcceptPathAny struct {
 //
 //	Defining module:      "gnsi-certz"
 //	Instantiating module: "gnsi-certz"
-//	Path from parent:     "last-access-accept"
-//	Path from root:       "/system/grpc-servers/grpc-server/state/counters/last-access-accept"
-func (n *System_GrpcServer_Counters_LastAccessAcceptPath) State() ygnmi.SingletonQuery[uint64] {
+//	Path from parent:     "last-connection-accept"
+//	Path from root:       "/system/grpc-servers/grpc-server/state/counters/last-connection-accept"
+func (n *System_GrpcServer_Counters_LastConnectionAcceptPath) State() ygnmi.SingletonQuery[uint64] {
 	return ygnmi.NewSingletonQuery[uint64](
 		"System_GrpcServer_Counters",
 		true,
@@ -40220,12 +40220,12 @@ func (n *System_GrpcServer_Counters_LastAccessAcceptPath) State() ygnmi.Singleto
 		true,
 		false,
 		ygnmi.NewNodePath(
-			[]string{"last-access-accept"},
+			[]string{"last-connection-accept"},
 			nil,
 			n.parent,
 		),
 		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
-			ret := gs.(*oc.System_GrpcServer_Counters).LastAccessAccept
+			ret := gs.(*oc.System_GrpcServer_Counters).LastConnectionAccept
 			if ret == nil {
 				var zero uint64
 				return zero, false
@@ -40249,9 +40249,9 @@ func (n *System_GrpcServer_Counters_LastAccessAcceptPath) State() ygnmi.Singleto
 //
 //	Defining module:      "gnsi-certz"
 //	Instantiating module: "gnsi-certz"
-//	Path from parent:     "last-access-accept"
-//	Path from root:       "/system/grpc-servers/grpc-server/state/counters/last-access-accept"
-func (n *System_GrpcServer_Counters_LastAccessAcceptPathAny) State() ygnmi.WildcardQuery[uint64] {
+//	Path from parent:     "last-connection-accept"
+//	Path from root:       "/system/grpc-servers/grpc-server/state/counters/last-connection-accept"
+func (n *System_GrpcServer_Counters_LastConnectionAcceptPathAny) State() ygnmi.WildcardQuery[uint64] {
 	return ygnmi.NewWildcardQuery[uint64](
 		"System_GrpcServer_Counters",
 		true,
@@ -40261,12 +40261,12 @@ func (n *System_GrpcServer_Counters_LastAccessAcceptPathAny) State() ygnmi.Wildc
 		true,
 		false,
 		ygnmi.NewNodePath(
-			[]string{"last-access-accept"},
+			[]string{"last-connection-accept"},
 			nil,
 			n.parent,
 		),
 		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
-			ret := gs.(*oc.System_GrpcServer_Counters).LastAccessAccept
+			ret := gs.(*oc.System_GrpcServer_Counters).LastConnectionAccept
 			if ret == nil {
 				var zero uint64
 				return zero, false
@@ -40286,14 +40286,14 @@ func (n *System_GrpcServer_Counters_LastAccessAcceptPathAny) State() ygnmi.Wildc
 	)
 }
 
-// System_GrpcServer_Counters_LastAccessRejectPath represents the /openconfig-system/system/grpc-servers/grpc-server/state/counters/last-access-reject YANG schema element.
-type System_GrpcServer_Counters_LastAccessRejectPath struct {
+// System_GrpcServer_Counters_LastConnectionRejectPath represents the /openconfig-system/system/grpc-servers/grpc-server/state/counters/last-connection-reject YANG schema element.
+type System_GrpcServer_Counters_LastConnectionRejectPath struct {
 	*ygnmi.NodePath
 	parent ygnmi.PathStruct
 }
 
-// System_GrpcServer_Counters_LastAccessRejectPathAny represents the wildcard version of the /openconfig-system/system/grpc-servers/grpc-server/state/counters/last-access-reject YANG schema element.
-type System_GrpcServer_Counters_LastAccessRejectPathAny struct {
+// System_GrpcServer_Counters_LastConnectionRejectPathAny represents the wildcard version of the /openconfig-system/system/grpc-servers/grpc-server/state/counters/last-connection-reject YANG schema element.
+type System_GrpcServer_Counters_LastConnectionRejectPathAny struct {
 	*ygnmi.NodePath
 	parent ygnmi.PathStruct
 }
@@ -40302,9 +40302,9 @@ type System_GrpcServer_Counters_LastAccessRejectPathAny struct {
 //
 //	Defining module:      "gnsi-certz"
 //	Instantiating module: "gnsi-certz"
-//	Path from parent:     "last-access-reject"
-//	Path from root:       "/system/grpc-servers/grpc-server/state/counters/last-access-reject"
-func (n *System_GrpcServer_Counters_LastAccessRejectPath) State() ygnmi.SingletonQuery[uint64] {
+//	Path from parent:     "last-connection-reject"
+//	Path from root:       "/system/grpc-servers/grpc-server/state/counters/last-connection-reject"
+func (n *System_GrpcServer_Counters_LastConnectionRejectPath) State() ygnmi.SingletonQuery[uint64] {
 	return ygnmi.NewSingletonQuery[uint64](
 		"System_GrpcServer_Counters",
 		true,
@@ -40314,12 +40314,12 @@ func (n *System_GrpcServer_Counters_LastAccessRejectPath) State() ygnmi.Singleto
 		true,
 		false,
 		ygnmi.NewNodePath(
-			[]string{"last-access-reject"},
+			[]string{"last-connection-reject"},
 			nil,
 			n.parent,
 		),
 		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
-			ret := gs.(*oc.System_GrpcServer_Counters).LastAccessReject
+			ret := gs.(*oc.System_GrpcServer_Counters).LastConnectionReject
 			if ret == nil {
 				var zero uint64
 				return zero, false
@@ -40343,9 +40343,9 @@ func (n *System_GrpcServer_Counters_LastAccessRejectPath) State() ygnmi.Singleto
 //
 //	Defining module:      "gnsi-certz"
 //	Instantiating module: "gnsi-certz"
-//	Path from parent:     "last-access-reject"
-//	Path from root:       "/system/grpc-servers/grpc-server/state/counters/last-access-reject"
-func (n *System_GrpcServer_Counters_LastAccessRejectPathAny) State() ygnmi.WildcardQuery[uint64] {
+//	Path from parent:     "last-connection-reject"
+//	Path from root:       "/system/grpc-servers/grpc-server/state/counters/last-connection-reject"
+func (n *System_GrpcServer_Counters_LastConnectionRejectPathAny) State() ygnmi.WildcardQuery[uint64] {
 	return ygnmi.NewWildcardQuery[uint64](
 		"System_GrpcServer_Counters",
 		true,
@@ -40355,12 +40355,12 @@ func (n *System_GrpcServer_Counters_LastAccessRejectPathAny) State() ygnmi.Wildc
 		true,
 		false,
 		ygnmi.NewNodePath(
-			[]string{"last-access-reject"},
+			[]string{"last-connection-reject"},
 			nil,
 			n.parent,
 		),
 		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
-			ret := gs.(*oc.System_GrpcServer_Counters).LastAccessReject
+			ret := gs.(*oc.System_GrpcServer_Counters).LastConnectionReject
 			if ret == nil {
 				var zero uint64
 				return zero, false
@@ -40390,17 +40390,17 @@ type System_GrpcServer_CountersPathAny struct {
 	*ygnmi.NodePath
 }
 
-// AccessAccepts (leaf): The total number of times the gPRC allowed access to
-// the server.
+// ConnectionAccepts (leaf): The total number of times that gRPC clients have succeeded
+// in establishing a connection to the server.
 //
 //	Defining module:      "gnsi-certz"
 //	Instantiating module: "openconfig-system"
-//	Path from parent:     "access-accepts"
-//	Path from root:       "/system/grpc-servers/grpc-server/state/counters/access-accepts"
-func (n *System_GrpcServer_CountersPath) AccessAccepts() *System_GrpcServer_Counters_AccessAcceptsPath {
-	ps := &System_GrpcServer_Counters_AccessAcceptsPath{
+//	Path from parent:     "connection-accepts"
+//	Path from root:       "/system/grpc-servers/grpc-server/state/counters/connection-accepts"
+func (n *System_GrpcServer_CountersPath) ConnectionAccepts() *System_GrpcServer_Counters_ConnectionAcceptsPath {
+	ps := &System_GrpcServer_Counters_ConnectionAcceptsPath{
 		NodePath: ygnmi.NewNodePath(
-			[]string{"access-accepts"},
+			[]string{"connection-accepts"},
 			map[string]interface{}{},
 			n,
 		),
@@ -40409,17 +40409,17 @@ func (n *System_GrpcServer_CountersPath) AccessAccepts() *System_GrpcServer_Coun
 	return ps
 }
 
-// AccessAccepts (leaf): The total number of times the gPRC allowed access to
-// the server.
+// ConnectionAccepts (leaf): The total number of times that gRPC clients have succeeded
+// in establishing a connection to the server.
 //
 //	Defining module:      "gnsi-certz"
 //	Instantiating module: "openconfig-system"
-//	Path from parent:     "access-accepts"
-//	Path from root:       "/system/grpc-servers/grpc-server/state/counters/access-accepts"
-func (n *System_GrpcServer_CountersPathAny) AccessAccepts() *System_GrpcServer_Counters_AccessAcceptsPathAny {
-	ps := &System_GrpcServer_Counters_AccessAcceptsPathAny{
+//	Path from parent:     "connection-accepts"
+//	Path from root:       "/system/grpc-servers/grpc-server/state/counters/connection-accepts"
+func (n *System_GrpcServer_CountersPathAny) ConnectionAccepts() *System_GrpcServer_Counters_ConnectionAcceptsPathAny {
+	ps := &System_GrpcServer_Counters_ConnectionAcceptsPathAny{
 		NodePath: ygnmi.NewNodePath(
-			[]string{"access-accepts"},
+			[]string{"connection-accepts"},
 			map[string]interface{}{},
 			n,
 		),
@@ -40428,16 +40428,17 @@ func (n *System_GrpcServer_CountersPathAny) AccessAccepts() *System_GrpcServer_C
 	return ps
 }
 
-// AccessRejects (leaf): The total number of times the gRPC denied access to the server.
+// ConnectionRejects (leaf): The total number of times that gRPC clients have failed
+// in establishing a connection to the server.
 //
 //	Defining module:      "gnsi-certz"
 //	Instantiating module: "openconfig-system"
-//	Path from parent:     "access-rejects"
-//	Path from root:       "/system/grpc-servers/grpc-server/state/counters/access-rejects"
-func (n *System_GrpcServer_CountersPath) AccessRejects() *System_GrpcServer_Counters_AccessRejectsPath {
-	ps := &System_GrpcServer_Counters_AccessRejectsPath{
+//	Path from parent:     "connection-rejects"
+//	Path from root:       "/system/grpc-servers/grpc-server/state/counters/connection-rejects"
+func (n *System_GrpcServer_CountersPath) ConnectionRejects() *System_GrpcServer_Counters_ConnectionRejectsPath {
+	ps := &System_GrpcServer_Counters_ConnectionRejectsPath{
 		NodePath: ygnmi.NewNodePath(
-			[]string{"access-rejects"},
+			[]string{"connection-rejects"},
 			map[string]interface{}{},
 			n,
 		),
@@ -40446,16 +40447,17 @@ func (n *System_GrpcServer_CountersPath) AccessRejects() *System_GrpcServer_Coun
 	return ps
 }
 
-// AccessRejects (leaf): The total number of times the gRPC denied access to the server.
+// ConnectionRejects (leaf): The total number of times that gRPC clients have failed
+// in establishing a connection to the server.
 //
 //	Defining module:      "gnsi-certz"
 //	Instantiating module: "openconfig-system"
-//	Path from parent:     "access-rejects"
-//	Path from root:       "/system/grpc-servers/grpc-server/state/counters/access-rejects"
-func (n *System_GrpcServer_CountersPathAny) AccessRejects() *System_GrpcServer_Counters_AccessRejectsPathAny {
-	ps := &System_GrpcServer_Counters_AccessRejectsPathAny{
+//	Path from parent:     "connection-rejects"
+//	Path from root:       "/system/grpc-servers/grpc-server/state/counters/connection-rejects"
+func (n *System_GrpcServer_CountersPathAny) ConnectionRejects() *System_GrpcServer_Counters_ConnectionRejectsPathAny {
+	ps := &System_GrpcServer_Counters_ConnectionRejectsPathAny{
 		NodePath: ygnmi.NewNodePath(
-			[]string{"access-rejects"},
+			[]string{"connection-rejects"},
 			map[string]interface{}{},
 			n,
 		),
@@ -40464,17 +40466,17 @@ func (n *System_GrpcServer_CountersPathAny) AccessRejects() *System_GrpcServer_C
 	return ps
 }
 
-// LastAccessAccept (leaf): A timestamp of the last time the gRPC allowed access to
-// the server.
+// LastConnectionAccept (leaf): A timestamp of the last time a gRPC client succeeded
+// in establishing a connection to the server.
 //
 //	Defining module:      "gnsi-certz"
 //	Instantiating module: "openconfig-system"
-//	Path from parent:     "last-access-accept"
-//	Path from root:       "/system/grpc-servers/grpc-server/state/counters/last-access-accept"
-func (n *System_GrpcServer_CountersPath) LastAccessAccept() *System_GrpcServer_Counters_LastAccessAcceptPath {
-	ps := &System_GrpcServer_Counters_LastAccessAcceptPath{
+//	Path from parent:     "last-connection-accept"
+//	Path from root:       "/system/grpc-servers/grpc-server/state/counters/last-connection-accept"
+func (n *System_GrpcServer_CountersPath) LastConnectionAccept() *System_GrpcServer_Counters_LastConnectionAcceptPath {
+	ps := &System_GrpcServer_Counters_LastConnectionAcceptPath{
 		NodePath: ygnmi.NewNodePath(
-			[]string{"last-access-accept"},
+			[]string{"last-connection-accept"},
 			map[string]interface{}{},
 			n,
 		),
@@ -40483,17 +40485,17 @@ func (n *System_GrpcServer_CountersPath) LastAccessAccept() *System_GrpcServer_C
 	return ps
 }
 
-// LastAccessAccept (leaf): A timestamp of the last time the gRPC allowed access to
-// the server.
+// LastConnectionAccept (leaf): A timestamp of the last time a gRPC client succeeded
+// in establishing a connection to the server.
 //
 //	Defining module:      "gnsi-certz"
 //	Instantiating module: "openconfig-system"
-//	Path from parent:     "last-access-accept"
-//	Path from root:       "/system/grpc-servers/grpc-server/state/counters/last-access-accept"
-func (n *System_GrpcServer_CountersPathAny) LastAccessAccept() *System_GrpcServer_Counters_LastAccessAcceptPathAny {
-	ps := &System_GrpcServer_Counters_LastAccessAcceptPathAny{
+//	Path from parent:     "last-connection-accept"
+//	Path from root:       "/system/grpc-servers/grpc-server/state/counters/last-connection-accept"
+func (n *System_GrpcServer_CountersPathAny) LastConnectionAccept() *System_GrpcServer_Counters_LastConnectionAcceptPathAny {
+	ps := &System_GrpcServer_Counters_LastConnectionAcceptPathAny{
 		NodePath: ygnmi.NewNodePath(
-			[]string{"last-access-accept"},
+			[]string{"last-connection-accept"},
 			map[string]interface{}{},
 			n,
 		),
@@ -40502,17 +40504,17 @@ func (n *System_GrpcServer_CountersPathAny) LastAccessAccept() *System_GrpcServe
 	return ps
 }
 
-// LastAccessReject (leaf): A timestamp of the last time the gRPC denied access to
-// the server.
+// LastConnectionReject (leaf): A timestamp of the last time a gRPC client failed
+// in establishing a connection to the server.
 //
 //	Defining module:      "gnsi-certz"
 //	Instantiating module: "openconfig-system"
-//	Path from parent:     "last-access-reject"
-//	Path from root:       "/system/grpc-servers/grpc-server/state/counters/last-access-reject"
-func (n *System_GrpcServer_CountersPath) LastAccessReject() *System_GrpcServer_Counters_LastAccessRejectPath {
-	ps := &System_GrpcServer_Counters_LastAccessRejectPath{
+//	Path from parent:     "last-connection-reject"
+//	Path from root:       "/system/grpc-servers/grpc-server/state/counters/last-connection-reject"
+func (n *System_GrpcServer_CountersPath) LastConnectionReject() *System_GrpcServer_Counters_LastConnectionRejectPath {
+	ps := &System_GrpcServer_Counters_LastConnectionRejectPath{
 		NodePath: ygnmi.NewNodePath(
-			[]string{"last-access-reject"},
+			[]string{"last-connection-reject"},
 			map[string]interface{}{},
 			n,
 		),
@@ -40521,17 +40523,17 @@ func (n *System_GrpcServer_CountersPath) LastAccessReject() *System_GrpcServer_C
 	return ps
 }
 
-// LastAccessReject (leaf): A timestamp of the last time the gRPC denied access to
-// the server.
+// LastConnectionReject (leaf): A timestamp of the last time a gRPC client failed
+// in establishing a connection to the server.
 //
 //	Defining module:      "gnsi-certz"
 //	Instantiating module: "openconfig-system"
-//	Path from parent:     "last-access-reject"
-//	Path from root:       "/system/grpc-servers/grpc-server/state/counters/last-access-reject"
-func (n *System_GrpcServer_CountersPathAny) LastAccessReject() *System_GrpcServer_Counters_LastAccessRejectPathAny {
-	ps := &System_GrpcServer_Counters_LastAccessRejectPathAny{
+//	Path from parent:     "last-connection-reject"
+//	Path from root:       "/system/grpc-servers/grpc-server/state/counters/last-connection-reject"
+func (n *System_GrpcServer_CountersPathAny) LastConnectionReject() *System_GrpcServer_Counters_LastConnectionRejectPathAny {
+	ps := &System_GrpcServer_Counters_LastConnectionRejectPathAny{
 		NodePath: ygnmi.NewNodePath(
-			[]string{"last-access-reject"},
+			[]string{"last-connection-reject"},
 			map[string]interface{}{},
 			n,
 		),
@@ -56472,8 +56474,8 @@ type System_Ntp_Server_OffsetPathAny struct {
 //	Instantiating module: "openconfig-system"
 //	Path from parent:     "state/offset"
 //	Path from root:       "/system/ntp/servers/server/state/offset"
-func (n *System_Ntp_Server_OffsetPath) State() ygnmi.SingletonQuery[uint64] {
-	return ygnmi.NewSingletonQuery[uint64](
+func (n *System_Ntp_Server_OffsetPath) State() ygnmi.SingletonQuery[int64] {
+	return ygnmi.NewSingletonQuery[int64](
 		"System_Ntp_Server",
 		true,
 		false,
@@ -56486,10 +56488,10 @@ func (n *System_Ntp_Server_OffsetPath) State() ygnmi.SingletonQuery[uint64] {
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+		func(gs ygot.ValidatedGoStruct) (int64, bool) {
 			ret := gs.(*oc.System_Ntp_Server).Offset
 			if ret == nil {
-				var zero uint64
+				var zero int64
 				return zero, false
 			}
 			return *ret, true
@@ -56513,8 +56515,8 @@ func (n *System_Ntp_Server_OffsetPath) State() ygnmi.SingletonQuery[uint64] {
 //	Instantiating module: "openconfig-system"
 //	Path from parent:     "state/offset"
 //	Path from root:       "/system/ntp/servers/server/state/offset"
-func (n *System_Ntp_Server_OffsetPathAny) State() ygnmi.WildcardQuery[uint64] {
-	return ygnmi.NewWildcardQuery[uint64](
+func (n *System_Ntp_Server_OffsetPathAny) State() ygnmi.WildcardQuery[int64] {
+	return ygnmi.NewWildcardQuery[int64](
 		"System_Ntp_Server",
 		true,
 		false,
@@ -56527,10 +56529,10 @@ func (n *System_Ntp_Server_OffsetPathAny) State() ygnmi.WildcardQuery[uint64] {
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+		func(gs ygot.ValidatedGoStruct) (int64, bool) {
 			ret := gs.(*oc.System_Ntp_Server).Offset
 			if ret == nil {
-				var zero uint64
+				var zero int64
 				return zero, false
 			}
 			return *ret, true
@@ -57012,8 +57014,8 @@ type System_Ntp_Server_RootDelayPathAny struct {
 //	Instantiating module: "openconfig-system"
 //	Path from parent:     "state/root-delay"
 //	Path from root:       "/system/ntp/servers/server/state/root-delay"
-func (n *System_Ntp_Server_RootDelayPath) State() ygnmi.SingletonQuery[uint32] {
-	return ygnmi.NewSingletonQuery[uint32](
+func (n *System_Ntp_Server_RootDelayPath) State() ygnmi.SingletonQuery[int64] {
+	return ygnmi.NewSingletonQuery[int64](
 		"System_Ntp_Server",
 		true,
 		false,
@@ -57026,10 +57028,10 @@ func (n *System_Ntp_Server_RootDelayPath) State() ygnmi.SingletonQuery[uint32] {
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+		func(gs ygot.ValidatedGoStruct) (int64, bool) {
 			ret := gs.(*oc.System_Ntp_Server).RootDelay
 			if ret == nil {
-				var zero uint32
+				var zero int64
 				return zero, false
 			}
 			return *ret, true
@@ -57053,8 +57055,8 @@ func (n *System_Ntp_Server_RootDelayPath) State() ygnmi.SingletonQuery[uint32] {
 //	Instantiating module: "openconfig-system"
 //	Path from parent:     "state/root-delay"
 //	Path from root:       "/system/ntp/servers/server/state/root-delay"
-func (n *System_Ntp_Server_RootDelayPathAny) State() ygnmi.WildcardQuery[uint32] {
-	return ygnmi.NewWildcardQuery[uint32](
+func (n *System_Ntp_Server_RootDelayPathAny) State() ygnmi.WildcardQuery[int64] {
+	return ygnmi.NewWildcardQuery[int64](
 		"System_Ntp_Server",
 		true,
 		false,
@@ -57067,10 +57069,10 @@ func (n *System_Ntp_Server_RootDelayPathAny) State() ygnmi.WildcardQuery[uint32]
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+		func(gs ygot.ValidatedGoStruct) (int64, bool) {
 			ret := gs.(*oc.System_Ntp_Server).RootDelay
 			if ret == nil {
-				var zero uint32
+				var zero int64
 				return zero, false
 			}
 			return *ret, true
@@ -57106,8 +57108,8 @@ type System_Ntp_Server_RootDispersionPathAny struct {
 //	Instantiating module: "openconfig-system"
 //	Path from parent:     "state/root-dispersion"
 //	Path from root:       "/system/ntp/servers/server/state/root-dispersion"
-func (n *System_Ntp_Server_RootDispersionPath) State() ygnmi.SingletonQuery[uint64] {
-	return ygnmi.NewSingletonQuery[uint64](
+func (n *System_Ntp_Server_RootDispersionPath) State() ygnmi.SingletonQuery[int64] {
+	return ygnmi.NewSingletonQuery[int64](
 		"System_Ntp_Server",
 		true,
 		false,
@@ -57120,10 +57122,10 @@ func (n *System_Ntp_Server_RootDispersionPath) State() ygnmi.SingletonQuery[uint
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+		func(gs ygot.ValidatedGoStruct) (int64, bool) {
 			ret := gs.(*oc.System_Ntp_Server).RootDispersion
 			if ret == nil {
-				var zero uint64
+				var zero int64
 				return zero, false
 			}
 			return *ret, true
@@ -57147,8 +57149,8 @@ func (n *System_Ntp_Server_RootDispersionPath) State() ygnmi.SingletonQuery[uint
 //	Instantiating module: "openconfig-system"
 //	Path from parent:     "state/root-dispersion"
 //	Path from root:       "/system/ntp/servers/server/state/root-dispersion"
-func (n *System_Ntp_Server_RootDispersionPathAny) State() ygnmi.WildcardQuery[uint64] {
-	return ygnmi.NewWildcardQuery[uint64](
+func (n *System_Ntp_Server_RootDispersionPathAny) State() ygnmi.WildcardQuery[int64] {
+	return ygnmi.NewWildcardQuery[int64](
 		"System_Ntp_Server",
 		true,
 		false,
@@ -57161,10 +57163,10 @@ func (n *System_Ntp_Server_RootDispersionPathAny) State() ygnmi.WildcardQuery[ui
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+		func(gs ygot.ValidatedGoStruct) (int64, bool) {
 			ret := gs.(*oc.System_Ntp_Server).RootDispersion
 			if ret == nil {
-				var zero uint64
+				var zero int64
 				return zero, false
 			}
 			return *ret, true
@@ -57795,7 +57797,7 @@ func (n *System_Ntp_ServerPathAny) NetworkInstance() *System_Ntp_Server_NetworkI
 }
 
 // Offset (leaf): Estimate of the current time offset from the peer.  This is
-// the time difference between the local and reference clock.
+// the time difference of the peer's clock minus the local clock.
 //
 //	Defining module:      "openconfig-system"
 //	Instantiating module: "openconfig-system"
@@ -57814,7 +57816,7 @@ func (n *System_Ntp_ServerPath) Offset() *System_Ntp_Server_OffsetPath {
 }
 
 // Offset (leaf): Estimate of the current time offset from the peer.  This is
-// the time difference between the local and reference clock.
+// the time difference of the peer's clock minus the local clock.
 //
 //	Defining module:      "openconfig-system"
 //	Instantiating module: "openconfig-system"
@@ -57942,7 +57944,7 @@ func (n *System_Ntp_ServerPathAny) Prefer() *System_Ntp_Server_PreferPathAny {
 	return ps
 }
 
-// RootDelay (leaf): The round-trip delay to the server, in milliseconds.
+// RootDelay (leaf): The total round-trip delay to the reference clock, in nanoseconds.
 //
 //	Defining module:      "openconfig-system"
 //	Instantiating module: "openconfig-system"
@@ -57960,7 +57962,7 @@ func (n *System_Ntp_ServerPath) RootDelay() *System_Ntp_Server_RootDelayPath {
 	return ps
 }
 
-// RootDelay (leaf): The round-trip delay to the server, in milliseconds.
+// RootDelay (leaf): The total round-trip delay to the reference clock, in nanoseconds.
 //
 //	Defining module:      "openconfig-system"
 //	Instantiating module: "openconfig-system"
@@ -57978,8 +57980,8 @@ func (n *System_Ntp_ServerPathAny) RootDelay() *System_Ntp_Server_RootDelayPathA
 	return ps
 }
 
-// RootDispersion (leaf): Dispersion (epsilon) represents the maximum error inherent
-// in the measurement
+// RootDispersion (leaf): The maximum error inherent in the measurement, accumulated over the
+// stratum levels from the reference clock.
 //
 //	Defining module:      "openconfig-system"
 //	Instantiating module: "openconfig-system"
@@ -57997,8 +57999,8 @@ func (n *System_Ntp_ServerPath) RootDispersion() *System_Ntp_Server_RootDispersi
 	return ps
 }
 
-// RootDispersion (leaf): Dispersion (epsilon) represents the maximum error inherent
-// in the measurement
+// RootDispersion (leaf): The maximum error inherent in the measurement, accumulated over the
+// stratum levels from the reference clock.
 //
 //	Defining module:      "openconfig-system"
 //	Instantiating module: "openconfig-system"
