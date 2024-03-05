@@ -37,6 +37,14 @@ func (c *Config) String() string {
 	return fmt.Sprintf("%+v", *c)
 }
 
+// ValidateConfig checks if the provided config is valid.
+func ValidateConfig(cfg *Config) error {
+	if cfg.Topology == "" {
+		return fmt.Errorf("Topology not specified")
+	}
+	return nil
+}
+
 // ParseConfigFile parses a yaml file containing a serialized Config.
 func ParseConfigFile(configFile string) (*Config, error) {
 	data, err := os.ReadFile(configFile)
@@ -46,9 +54,6 @@ func ParseConfigFile(configFile string) (*Config, error) {
 	c := &Config{}
 	if err := yaml.Unmarshal(data, c); err != nil {
 		return nil, fmt.Errorf("error unmarshalling config YAML: %w", err)
-	}
-	if c.Topology == "" {
-		return nil, fmt.Errorf("no topology path specified in config: %v", c)
 	}
 	if c.Username != "" || c.Password != "" {
 		log.Error("The top-level 'username' and 'password' keys are deprecated; " +

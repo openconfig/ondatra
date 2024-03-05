@@ -18,7 +18,6 @@
 package init
 
 import (
-	"errors"
 	"flag"
 
 	log "github.com/golang/glog"
@@ -40,9 +39,6 @@ var (
 // Init provides a generator for a KNE bind instance which uses the
 // configuration set by the flag --config. To be used with ondatra.RunTests.
 func Init() (binding.Binding, error) {
-	if *topology == "" && *configFile == "" {
-		return nil, errors.New("either --topology or --config flag must be provided")
-	}
 	var cfg *knebind.Config
 	var err error
 	if *configFile != "" {
@@ -52,6 +48,9 @@ func Init() (binding.Binding, error) {
 		cfg, err = parseFlags()
 	}
 	if err != nil {
+		return nil, err
+	}
+	if err := knebind.ValidateConfig(cfg); err != nil {
 		return nil, err
 	}
 	return knebind.New(cfg)

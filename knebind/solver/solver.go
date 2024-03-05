@@ -23,11 +23,11 @@ import (
 
 	"golang.org/x/net/context"
 
+	"bitbucket.org/creachadair/stringset"
 	log "github.com/golang/glog"
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/binding/introspect"
 	"github.com/openconfig/ondatra/binding/portgraph"
-	"github.com/openconfig/ondatra/internal/orderedmap"
 	"github.com/pborman/uuid"
 
 	tpb "github.com/openconfig/kne/proto/topo"
@@ -36,8 +36,6 @@ import (
 
 const (
 	roleLabel = "ondatra-role"
-	roleDUT   = "DUT"
-	roleATE   = "ATE"
 )
 
 var (
@@ -53,6 +51,7 @@ var (
 		tpb.Vendor_NOKIA:      opb.Device_NOKIA,
 		tpb.Vendor_OPENCONFIG: opb.Device_OPENCONFIG,
 		tpb.Vendor_HOST:       opb.Device_VENDOR_UNSPECIFIED,
+		tpb.Vendor_ALPINE:     opb.Device_ALPINE,
 	}
 )
 
@@ -80,9 +79,9 @@ func role(node *tpb.Node) string {
 		return role
 	}
 	if _, ok := ateVendors[node.GetVendor()]; ok {
-		return roleATE
+		return portgraph.RoleATE
 	}
-	return roleDUT
+	return portgraph.RoleDUT
 }
 
 func filterTopology(topo *tpb.Topology) *tpb.Topology {
@@ -114,220 +113,13 @@ func filterTopology(topo *tpb.Topology) *tpb.Topology {
 	return t
 }
 
-const (
-	// Attribute names mapping message fields to graph attributes/constraints.
-	vendorAttr = "vendor"
-	roleAttr   = "role"
-	hwAttr     = "hardware_model"
-	swAttr     = "software_version"
-	speedAttr  = "speed"
-	cardAttr   = "card_model"
-	pmdAttr    = "pmd"
-	groupAttr  = "group"
-	mtuAttr    = "mtu"
-	nameAttr   = "name"
-)
-
 var (
 	reAny = portgraph.Regex(regexp.MustCompile(".*"))
 )
 
-// testbedToAbstractGraph translates an Ondatra testbed to an AbstractGraph for solving.
-func testbedToAbstractGraph(tb *opb.Testbed, partial map[string]string) (*portgraph.AbstractGraph, map[*portgraph.AbstractNode]*opb.Device, map[*portgraph.AbstractPort]*opb.Port, error) {
-	var nodes []*portgraph.AbstractNode
-	var edges []*portgraph.AbstractEdge
-	name2Port := make(map[string]*portgraph.AbstractPort) // Name of the port to the AbstractPort.
-	node2Dev := make(map[*portgraph.AbstractNode]*opb.Device)
-	port2Port := make(map[*portgraph.AbstractPort]*opb.Port)
-
-	// addDevice creates an AbstractNode from a Device.
-	// If the field is empty, there is not a Constraint on that field.
-	addDevice := func(dev *opb.Device, isATE bool) {
-		nodeConstraints := make(map[string]portgraph.NodeConstraint)
-		if isATE {
-			nodeConstraints[roleAttr] = portgraph.Equal(roleATE)
-		} else {
-			nodeConstraints[roleAttr] = portgraph.Equal(roleDUT)
-		}
-		if v := dev.GetVendor(); v != opb.Device_VENDOR_UNSPECIFIED {
-			nodeConstraints[vendorAttr] = portgraph.Equal(v.String())
-		}
-		if hw, ok := modelConstraint(dev); ok {
-			nodeConstraints[hwAttr] = hw
-		}
-		if sw, ok := versionConstraint(dev); ok {
-			nodeConstraints[swAttr] = sw
-		}
-		if name, ok := partial[dev.GetId()]; ok {
-			nodeConstraints[nameAttr] = portgraph.Equal(name)
-		}
-		for k, v := range dev.GetExtraDimensions() {
-			nodeConstraints[k] = portgraph.Equal(v)
-		}
-		// Process each port on the device.
-		var ports []*portgraph.AbstractPort
-		group2PortNames := orderedmap.NewOrderedMap[string, []string]()
-		absPortName2DevPort := make(map[string]*opb.Port)
-		for _, port := range dev.GetPorts() {
-			portConstraints := make(map[string]portgraph.PortConstraint)
-			if s := port.GetSpeed(); s != opb.Port_SPEED_UNSPECIFIED {
-				portConstraints[speedAttr] = portgraph.Equal(s.String())
-			}
-			if cm, ok := cardModelConstraint(port); ok {
-				portConstraints[cardAttr] = cm
-			}
-			if pmd, ok := pmdConstraint(port); ok {
-				portConstraints[pmdAttr] = pmd
-			}
-			portName := fmt.Sprintf("%s:%s", dev.GetId(), port.GetId())
-			if name, ok := partial[portName]; ok {
-				portConstraints[nameAttr] = portgraph.Equal(name)
-			}
-			// Create the AbstractPort, but do not add group constraints until all ports are processed.
-			p := &portgraph.AbstractPort{Desc: portName, Constraints: portConstraints}
-			name2Port[portName] = p
-
-			// Check if the port has a group. If it does, additional constraint(s) need to be added.
-			if port.GetGroup() != "" {
-				pns, _ := group2PortNames.Get(port.GetGroup())
-				group2PortNames.Set(port.GetGroup(), append(pns, portName))
-				absPortName2DevPort[portName] = port
-			} else { // This port is not part of a group; no further processing.
-				port2Port[p] = port
-				ports = append(ports, p)
-			}
-		}
-		processedGroups := map[string]struct{}{}
-		groups := group2PortNames.Keys()
-		for _, group := range groups {
-			portNames, _ := group2PortNames.Get(group)
-			processedGroups[group] = struct{}{}
-			var constraints []portgraph.LeafPortConstraint
-			pn := portNames[0]
-			for _, pn2 := range portNames[1:] {
-				p2 := name2Port[pn2]
-				constraints = append(constraints, portgraph.SameAsPort(p2))
-				name2Port[pn2].Constraints[groupAttr] = reAny
-				port2Port[p2] = absPortName2DevPort[pn2]
-				ports = append(ports, p2)
-			}
-			for _, g2 := range groups {
-				if _, ok := processedGroups[g2]; !ok {
-					p, _ := group2PortNames.Get(g2)
-					constraints = append(constraints, portgraph.NotSameAsPort(name2Port[p[0]]))
-				} else if len(constraints) == 0 {
-					constraints = append(constraints, reAny)
-				}
-			}
-			p := name2Port[pn]
-			if len(constraints) == 1 {
-				p.Constraints[groupAttr] = constraints[0]
-			} else {
-				p.Constraints[groupAttr] = portgraph.AndPort(constraints...)
-			}
-			name2Port[pn] = p
-			ports = append(ports, p)
-			port2Port[p] = absPortName2DevPort[pn]
-		}
-		n := &portgraph.AbstractNode{Desc: dev.GetId(), Constraints: nodeConstraints, Ports: ports}
-		node2Dev[n] = dev
-		nodes = append(nodes, n)
-	}
-
-	for _, dev := range tb.GetDuts() {
-		addDevice(dev, false)
-	}
-	for _, dev := range tb.GetAtes() {
-		addDevice(dev, true)
-	}
-	for _, link := range tb.GetLinks() {
-		src, ok := name2Port[link.GetA()]
-		if !ok {
-			return nil, nil, nil, fmt.Errorf("port %q in links not present in specified testbed", link.GetA())
-		}
-		dst, ok := name2Port[link.GetB()]
-		if !ok {
-			return nil, nil, nil, fmt.Errorf("port %q in links not present in specified testbed", link.GetB())
-		}
-		edges = append(edges, &portgraph.AbstractEdge{Src: src, Dst: dst})
-	}
-	return &portgraph.AbstractGraph{Desc: "KNE testbed", Nodes: nodes, Edges: edges}, node2Dev, port2Port, nil
-}
-
-func modelConstraint(d *opb.Device) (portgraph.NodeConstraint, bool) {
-	switch v := d.GetHardwareModelValue().(type) {
-	case nil:
-		// handled after switch
-	case *opb.Device_HardwareModel:
-		if v.HardwareModel != "" {
-			return portgraph.Equal(v.HardwareModel), true
-		}
-	case *opb.Device_HardwareModelRegex:
-		if v.HardwareModelRegex != "" {
-			return portgraph.Regex(regexp.MustCompile(v.HardwareModelRegex)), true
-		}
-	default:
-		log.Fatalf("unknown hardware model type: %v(%T)", v, v)
-	}
-	return nil, false
-}
-
-func versionConstraint(d *opb.Device) (portgraph.NodeConstraint, bool) {
-	switch v := d.GetSoftwareVersionValue().(type) {
-	case nil:
-		// handled after switch
-	case *opb.Device_SoftwareVersion:
-		if v.SoftwareVersion != "" {
-			return portgraph.Equal(v.SoftwareVersion), true
-		}
-	case *opb.Device_SoftwareVersionRegex:
-		if v.SoftwareVersionRegex != "" {
-			return portgraph.Regex(regexp.MustCompile(v.SoftwareVersionRegex)), true
-		}
-	default:
-		log.Fatalf("unknown software version type: %v(%T)", v, v)
-	}
-	return nil, false
-}
-
-func cardModelConstraint(p *opb.Port) (portgraph.PortConstraint, bool) {
-	switch v := p.GetCardModelValue().(type) {
-	case nil:
-		// handled after switch
-	case *opb.Port_CardModel:
-		if v.CardModel != "" {
-			return portgraph.Equal(v.CardModel), true
-		}
-	case *opb.Port_CardModelRegex:
-		if v.CardModelRegex != "" {
-			return portgraph.Regex(regexp.MustCompile(v.CardModelRegex)), true
-		}
-	default:
-		log.Fatalf("unknown card model type: %v(%T)", v, v)
-	}
-	return nil, false
-}
-
-func pmdConstraint(p *opb.Port) (portgraph.PortConstraint, bool) {
-	switch v := p.GetPmdValue().(type) {
-	case nil:
-		// handled after switch
-	case *opb.Port_Pmd_:
-		if v.Pmd != opb.Port_PMD_UNSPECIFIED {
-			return portgraph.Equal(v.Pmd.String()), true
-		}
-	case *opb.Port_PmdRegex:
-		if v.PmdRegex != "" {
-			return portgraph.Regex(regexp.MustCompile(v.PmdRegex)), true
-		}
-	default:
-		log.Fatalf("unknown PMD type: %v(%T)", v, v)
-	}
-	return nil, false
-}
-
 // topoToConcreteGraph translates a Topology to a ConcreteGraph.
 func topoToConcreteGraph(topo *tpb.Topology) (*portgraph.ConcreteGraph, map[*portgraph.ConcreteNode]*tpb.Node, map[*portgraph.ConcretePort]*intf, error) {
+	const mtuAttr = "mtu"
 	var nodes []*portgraph.ConcreteNode
 	var edges []*portgraph.ConcreteEdge
 	nodeName2Node := make(map[string]*portgraph.ConcreteNode)
@@ -349,19 +141,19 @@ func topoToConcreteGraph(topo *tpb.Topology) (*portgraph.ConcreteGraph, map[*por
 	for _, node := range topo.GetNodes() {
 		attrs := make(map[string]string)
 		if vendor, ok := deviceVendors[node.GetVendor()]; ok {
-			attrs[vendorAttr] = vendor.String()
+			attrs[portgraph.VendorAttr] = vendor.String()
 		}
 		if r := role(node); r != "" {
-			attrs[roleAttr] = r
+			attrs[portgraph.RoleAttr] = r
 		}
 		if m := node.GetModel(); m != "" {
-			attrs[hwAttr] = m
+			attrs[portgraph.HWAttr] = m
 		}
 		if os := node.GetOs(); os != "" {
-			attrs[swAttr] = os
+			attrs[portgraph.SWAttr] = os
 		}
 		if name := node.GetName(); name != "" {
-			attrs[nameAttr] = name
+			attrs[portgraph.NameAttr] = name
 		}
 		var ports []*portgraph.ConcretePort
 		for intfName, nodeIntf := range node.GetInterfaces() {
@@ -370,13 +162,13 @@ func topoToConcreteGraph(topo *tpb.Topology) (*portgraph.ConcreteGraph, map[*por
 				portAttrs[mtuAttr] = strconv.FormatInt(int64(mtu), 10)
 			}
 			if group := nodeIntf.GetGroup(); group != "" {
-				portAttrs[groupAttr] = group
+				portAttrs[portgraph.GroupAttr] = group
 			}
 			switch {
 			case nodeIntf.GetName() != "": // use the vendor name if specified
-				portAttrs[nameAttr] = nodeIntf.GetName()
+				portAttrs[portgraph.NameAttr] = nodeIntf.GetName()
 			case intfName != "": // else use the interface name
-				portAttrs[nameAttr] = intfName
+				portAttrs[portgraph.NameAttr] = intfName
 			}
 			p, i := makePortAndIntf(node.GetName(), intfName, nodeIntf.GetName(), portAttrs)
 			port2Intf[p] = i
@@ -468,7 +260,7 @@ func Solve(ctx context.Context, tb *opb.Testbed, topo *tpb.Topology, partial map
 			" testbed has %d links and topology only has %d links", numTBLinks, numTopoLinks)
 	}
 
-	abstractGraph, absNode2Dev, absPort2Port, err := testbedToAbstractGraph(tb, partial)
+	abstractGraph, absNode2Dev, absPort2Port, err := portgraph.TestbedToAbstractGraph(tb, partial)
 	if err != nil {
 		return nil, fmt.Errorf("could not parse specified testbed: %w", err)
 	}
@@ -588,7 +380,15 @@ func (a *assign) resolveDevice(dev *opb.Device) (*deviceResolution, error) {
 	}
 	sm := map[string]*tpb.Service{}
 	for _, s := range node.GetServices() {
-		sm[s.GetName()] = s
+		names := stringset.New()
+		for _, n := range append(s.GetNames(), s.GetName()) {
+			if n != "" {
+				names.Add(n)
+			}
+		}
+		for _, n := range names.Elements() {
+			sm[n] = s
+		}
 	}
 	dims := &binding.Dims{
 		Name:            node.GetName(),

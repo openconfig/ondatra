@@ -214,11 +214,11 @@ func FetchIxNetwork(ctx context.Context, ate binding.ATE) (*binding.IxNetwork, e
 
 var (
 	otgMu sync.Mutex
-	otgs  = make(map[binding.ATE]gosnappi.GosnappiApi)
+	otgs  = make(map[binding.ATE]gosnappi.Api)
 )
 
 // FetchOTG fetches the cached OTG client for the specified ATE.
-func FetchOTG(ctx context.Context, ate binding.ATE) (gosnappi.GosnappiApi, error) {
+func FetchOTG(ctx context.Context, ate binding.ATE) (gosnappi.Api, error) {
 	otgMu.Lock()
 	defer otgMu.Unlock()
 	c, ok := otgs[ate]

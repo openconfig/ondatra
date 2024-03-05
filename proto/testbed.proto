@@ -47,6 +47,7 @@ message Device {
     DELL = 9;
     OPENCONFIG = 10;
     ARUBA = 11;
+    ALPINE = 12;
   }
   Vendor vendor = 2;
 
@@ -93,6 +94,7 @@ message Port {
     S_1GB = 1;
     S_5GB = 5;
     S_10GB = 10;
+    S_40GB = 40;
     S_100GB = 100;
     S_400GB = 400;
   }

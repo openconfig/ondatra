@@ -169,7 +169,7 @@ type ATE struct {
 	*binding.AbstractATE
 	DialIxNetworkFn func(context.Context) (*binding.IxNetwork, error)
 	DialGNMIFn      func(context.Context, ...grpc.DialOption) (gpb.GNMIClient, error)
-	DialOTGFn       func(context.Context, ...grpc.DialOption) (gosnappi.GosnappiApi, error)
+	DialOTGFn       func(context.Context, ...grpc.DialOption) (gosnappi.Api, error)
 }
 
 // DialIxNetwork delegates to a.DialIxNetworkFn.
@@ -189,7 +189,7 @@ func (a *ATE) DialGNMI(ctx context.Context, opts ...grpc.DialOption) (gpb.GNMICl
 }
 
 // DialOTG delegates to a.DialOTGFn.
-func (a *ATE) DialOTG(ctx context.Context, opts ...grpc.DialOption) (gosnappi.GosnappiApi, error) {
+func (a *ATE) DialOTG(ctx context.Context, opts ...grpc.DialOption) (gosnappi.Api, error) {
 	if a.DialOTGFn == nil {
 		log.Fatal("fakebind DialOTG called but DialOTGFn not set")
 	}

@@ -23,6 +23,7 @@ import (
 	"github.com/google/go-cmp/cmp"
 	"github.com/openconfig/gnmi/errdiff"
 	"github.com/openconfig/ondatra/binding"
+	"github.com/openconfig/ondatra/binding/portgraph"
 	"google.golang.org/protobuf/encoding/prototext"
 	"google.golang.org/protobuf/testing/protocmp"
 
@@ -85,6 +86,13 @@ func TestSolve(t *testing.T) {
 		    key: 3456
 		    value: {
 		      name: "gnmi"
+					names: ["gnoi", "gnsi", "gnmi", "", "gnoi"]
+		    }
+		  }
+			services: {
+		    key: 3457
+		    value: {
+					names: ["ssh", "p4rt", ""]
 		    }
 		  }
 		  interfaces: {
@@ -170,6 +178,14 @@ func TestSolve(t *testing.T) {
 	wantDUTServices := map[string]*tpb.Service{
 		"gnmi": &tpb.Service{Name: "gnmi"},
 	}
+
+	wantDUTMultiServices := map[string]*tpb.Service{
+		"gnmi": &tpb.Service{Name: "gnmi", Names: []string{"gnoi", "gnsi", "gnmi", "", "gnoi"}},
+		"gnoi": &tpb.Service{Name: "gnmi", Names: []string{"gnoi", "gnsi", "gnmi", "", "gnoi"}},
+		"gnsi": &tpb.Service{Name: "gnmi", Names: []string{"gnoi", "gnsi", "gnmi", "", "gnoi"}},
+		"ssh":  &tpb.Service{Names: []string{"ssh", "p4rt", ""}},
+		"p4rt": &tpb.Service{Names: []string{"ssh", "p4rt", ""}},
+	}
 	wantDUT1 := &ServiceDUT{
 		AbstractDUT: &binding.AbstractDUT{&binding.Dims{
 			Name:            "node1",
@@ -206,7 +222,7 @@ func TestSolve(t *testing.T) {
 				"port1": {Name: "eth1"},
 			},
 		}},
-		Services:   wantDUTServices,
+		Services:   wantDUTMultiServices,
 		NodeVendor: tpb.Vendor_JUNIPER,
 	}
 	wantATEServices := make(map[string]*tpb.Service)
@@ -268,7 +284,7 @@ func TestSolve(t *testing.T) {
 						SoftwareVersion: "evo",
 						Ports:           map[string]*binding.Port{},
 					}},
-					Services:   wantDUTServices,
+					Services:   wantDUTMultiServices,
 					NodeVendor: tpb.Vendor_JUNIPER,
 				},
 			},
@@ -620,95 +636,6 @@ func TestPortGroupsSolve(t *testing.T) {
 	}
 }
 
-func TestTestbedToAbstractGraph(t *testing.T) {
-	port := &opb.Port{
-		Id:             "port1",
-		Speed:          opb.Port_S_100GB,
-		CardModelValue: &opb.Port_CardModel{"model"},
-		PmdValue:       &opb.Port_Pmd_{opb.Port_PMD_100GBASE_LR4},
-	}
-	portEmpty := &opb.Port{
-		Id:             "portEmpty",
-		Speed:          opb.Port_SPEED_UNSPECIFIED,
-		CardModelValue: &opb.Port_CardModel{},
-		PmdValue:       &opb.Port_Pmd_{opb.Port_PMD_UNSPECIFIED},
-	}
-	portRegex := &opb.Port{
-		Id:             "portRegex",
-		CardModelValue: &opb.Port_CardModelRegex{"modelregex"},
-		PmdValue:       &opb.Port_PmdRegex{".*"},
-	}
-	dut := &opb.Device{
-		Id:                   "dut",
-		Vendor:               opb.Device_ARISTA,
-		HardwareModelValue:   &opb.Device_HardwareModel{"hw"},
-		SoftwareVersionValue: &opb.Device_SoftwareVersion{"sw"},
-		Ports:                []*opb.Port{port},
-		ExtraDimensions:      map[string]string{"extra_dimension": "hello"},
-	}
-	dutEmpty := &opb.Device{
-		Id:                   "dutEmpty",
-		Vendor:               opb.Device_VENDOR_UNSPECIFIED,
-		HardwareModelValue:   &opb.Device_HardwareModel{},
-		SoftwareVersionValue: &opb.Device_SoftwareVersion{},
-		Ports:                []*opb.Port{portEmpty},
-	}
-	dutRegex := &opb.Device{
-		Id:                   "dutRegex",
-		HardwareModelValue:   &opb.Device_HardwareModelRegex{"hwreg"},
-		SoftwareVersionValue: &opb.Device_SoftwareVersionRegex{"swreg"},
-		Ports:                []*opb.Port{portRegex},
-	}
-	ate := &opb.Device{
-		Id:    "ate",
-		Ports: []*opb.Port{port},
-	}
-	link := &opb.Link{
-		A: "dut:port1",
-		B: "ate:port1",
-	}
-
-	tb := &opb.Testbed{
-		Duts:  []*opb.Device{dut, dutEmpty, dutRegex},
-		Ates:  []*opb.Device{ate},
-		Links: []*opb.Link{link},
-	}
-	wantDev := map[string]*opb.Device{
-		"dut":      dut,
-		"dutEmpty": dutEmpty,
-		"dutRegex": dutRegex,
-		"ate":      ate,
-	}
-	wantPort := map[string]*opb.Port{
-		"dut:port1":          port,
-		"dutEmpty:portEmpty": portEmpty,
-		"dutRegex:portRegex": portRegex,
-		"ate:port1":          port,
-	}
-
-	graph, node2Dev, port2Port, err := testbedToAbstractGraph(tb, nil)
-	if err != nil {
-		t.Fatalf("testbedToAbstractGraph() got error %v, want nil", err)
-	}
-	if wantNodes := 4; len(graph.Nodes) != wantNodes {
-		t.Fatalf("testbedToAbstractGraph() got %d nodes, want %v", len(graph.Nodes), wantNodes)
-	}
-	for _, node := range graph.Nodes {
-		if got, ok := node2Dev[node]; !ok {
-			t.Errorf("testbedToAbstractGraph() got node %q not mapped to any device", node.Desc)
-		} else if diff := cmp.Diff(wantDev[node.Desc], got, protocmp.Transform()); diff != "" {
-			t.Errorf("testbedToAbstractGraph() returned unexpected device diff (-want +got):\n%s", diff)
-		}
-		for _, port := range node.Ports {
-			if got, ok := port2Port[port]; !ok {
-				t.Errorf("testbedToAbstractGraph() got port %q not mapped to any port", port.Desc)
-			} else if diff := cmp.Diff(wantPort[port.Desc], got, protocmp.Transform()); diff != "" {
-				t.Errorf("testbedToAbstractGraph() returned unexpected port diff (-want +got):\n%s", diff)
-			}
-		}
-	}
-}
-
 func TestTopologyToConcreteGraph(t *testing.T) {
 	intf1 := &tpb.Interface{
 		Name:  "Ethernet1",
@@ -786,41 +713,41 @@ func TestRole(t *testing.T) {
 		node: &tpb.Node{
 			Name: "node",
 		},
-		want: roleDUT,
+		want: portgraph.RoleDUT,
 	}, {
 		desc: "vendor DUT",
 		node: &tpb.Node{
 			Name:   "node",
 			Vendor: tpb.Vendor_ARISTA,
 		},
-		want: roleDUT,
+		want: portgraph.RoleDUT,
 	}, {
 		desc: "vendor ATE",
 		node: &tpb.Node{
 			Name:   "node",
 			Vendor: tpb.Vendor_KEYSIGHT,
 		},
-		want: roleATE,
+		want: portgraph.RoleATE,
 	}, {
 		desc: "label ATE",
 		node: &tpb.Node{
 			Name:   "node",
 			Vendor: tpb.Vendor_ARISTA,
 			Labels: map[string]string{
-				roleLabel: roleATE,
+				roleLabel: portgraph.RoleATE,
 			},
 		},
-		want: roleATE,
+		want: portgraph.RoleATE,
 	}, {
 		desc: "label DUT",
 		node: &tpb.Node{
 			Name:   "node",
 			Vendor: tpb.Vendor_KEYSIGHT,
 			Labels: map[string]string{
-				roleLabel: roleDUT,
+				roleLabel: portgraph.RoleDUT,
 			},
 		},
-		want: roleDUT,
+		want: portgraph.RoleDUT,
 	}}
 	for _, tc := range tests {
 		t.Run(tc.desc, func(t *testing.T) {
@@ -902,7 +829,7 @@ func TestSolveErrors(t *testing.T) {
 			Duts: []*opb.Device{{
 				Id:                   "dut1",
 				Vendor:               opb.Device_ARISTA,
-				SoftwareVersionValue: &opb.Device_SoftwareVersion{"eos"},
+				SoftwareVersionValue: &opb.Device_SoftwareVersion{SoftwareVersion: "eos"},
 			}},
 		},
 		topo: `

@@ -22,18 +22,17 @@ git clone https://github.com/openconfig/public.git
 wget https://raw.githubusercontent.com/openconfig/gnmi/master/metadata/yang/gnmi-collector-metadata.yang
 git clone https://github.com/open-traffic-generator/models-yang.git
 git clone https://github.com/openconfig/gnsi.git
-# TODO(team): Remove the following line once the new gNSI version is ready for use
-pushd gnsi && git checkout c2ebf3e && popd
 
 EXCLUDE_MODULES=ietf-interfaces,openconfig-bfd,openconfig-messages
 
 YANG_FILES=(
   gnmi-collector-metadata.yang
+  # TODO(greg-dennis): Uncomment when b/322159436 is fixed.
+  # gnsi/acctz/gnsi-acctz.yang
   gnsi/authz/gnsi-authz.yang
-  gnsi/cert/gnsi-cert.yang
-  gnsi/console/gnsi-console.yang
+  gnsi/certz/gnsi-certz.yang
+  gnsi/credentialz/gnsi-credentialz.yang
   gnsi/pathz/gnsi-pathz.yang
-  gnsi/ssh/gnsi-ssh.yang
   public/release/models/acl/openconfig-acl.yang
   public/release/models/acl/openconfig-packet-match.yang
   public/release/models/aft/openconfig-aft.yang
@@ -52,6 +51,7 @@ YANG_FILES=(
   public/release/models/interfaces/openconfig-if-ip.yang
   public/release/models/interfaces/openconfig-if-sdn-ext.yang
   public/release/models/interfaces/openconfig-interfaces.yang
+  public/release/models/isis/openconfig-isis-policy.yang
   public/release/models/isis/openconfig-isis.yang
   public/release/models/lacp/openconfig-lacp.yang
   public/release/models/lldp/openconfig-lldp-types.yang
