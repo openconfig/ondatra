@@ -343,6 +343,38 @@ func isSwitchPort(portSrc, portDst string, swName string, switchPorts []string) 
 	return ""
 }
 
+func processDestinations(srcPort *ConcretePort, srcNode *ConcreteNode, dstNodes []*ConcreteNode, connectedDevicesList []string, processedPorts map[string]bool, mutex *sync.Mutex, s *solver) {
+	for _, dstNode := range dstNodes {
+		if srcNode != dstNode && contains(connectedDevicesList, dstNode.Desc) {
+			for _, dstPort := range dstNode.Ports {
+				if srcPort != dstPort { // Skip if source and destination ports are the same
+					key := fmt.Sprintf("%s-%s", srcPort.Desc, dstPort.Desc)
+					reverseKey := fmt.Sprintf("%s-%s", dstPort.Desc, srcPort.Desc)
+					mutex.Lock()
+					if !processedPorts[key] && !processedPorts[reverseKey] {
+						edge := &ConcreteEdge{Src: srcPort, Dst: dstPort}
+						s.superGraph.Edges = append(s.superGraph.Edges, edge)
+						processedPorts[key] = true
+					}
+					mutex.Unlock()
+				}
+			}
+		}
+	}
+}
+
+func processPorts(srcNode *ConcreteNode, abs2ConNodes map[*AbstractNode][]*ConcreteNode, connectedDevicesList []string, processedPorts map[string]bool, mutex *sync.Mutex, s *solver, wg *sync.WaitGroup) {
+	for _, srcPort := range srcNode.Ports {
+		wg.Add(1)
+		go func(srcPort *ConcretePort) {
+			defer wg.Done()
+			for _, dstNodes := range abs2ConNodes {
+				processDestinations(srcPort, srcNode, dstNodes, connectedDevicesList, processedPorts, mutex, s)
+			}
+		}(srcPort)
+	}
+}
+
 func AddEdges(abs2ConNodes map[*AbstractNode][]*ConcreteNode, connectedDevicesList []string, s *solver) {
 	processedPorts := make(map[string]bool)
 	var mutex sync.Mutex
@@ -352,39 +384,13 @@ func AddEdges(abs2ConNodes map[*AbstractNode][]*ConcreteNode, connectedDevicesLi
 		for _, srcNode := range conNodes {
 			// Check if the source node is in the connectedDevicesList
 			if contains(connectedDevicesList, srcNode.Desc) {
-				for _, srcPort := range srcNode.Ports {
-					wg.Add(1)
-					go func(srcPort *ConcretePort) {
-						defer wg.Done()
-						for _, dstNodes := range abs2ConNodes {
-							for _, dstNode := range dstNodes {
-								if srcNode != dstNode {
-									// Check if the destination node is in the connectedDevicesList
-									if contains(connectedDevicesList, dstNode.Desc) {
-										for _, dstPort := range dstNode.Ports {
-											if srcPort != dstPort { // Skip if source and destination ports are the same
-												key := fmt.Sprintf("%s-%s", srcPort.Desc, dstPort.Desc)
-												reverseKey := fmt.Sprintf("%s-%s", dstPort.Desc, srcPort.Desc)
-												mutex.Lock()
-												if !processedPorts[key] && !processedPorts[reverseKey] {
-													edge := &ConcreteEdge{Src: srcPort, Dst: dstPort}
-													s.superGraph.Edges = append(s.superGraph.Edges, edge)
-													processedPorts[key] = true
-												}
-												mutex.Unlock()
-											}
-										}
-									}
-								}
-							}
-						}
-					}(srcPort)
-				}
+				processPorts(srcNode, abs2ConNodes, connectedDevicesList, processedPorts, &mutex, s, &wg)
 			}
 		}
 	}
 	wg.Wait()
 }
+
 
 // Function to check if a string exists in a slice of strings
 func contains(s []string, e string) bool {
@@ -434,7 +440,11 @@ func (s *solver) solve(ctx context.Context) (*Assignment, bool) {
 
 				if isSwitchPort(extract_Device_Switch_Name(edge.Src.Desc), extract_Device_Switch_Name(edge.Dst.Desc), switchName, switchPorts) != "" {
 					connectedDevices[isSwitchPort(extract_Device_Switch_Name(edge.Src.Desc), extract_Device_Switch_Name(edge.Dst.Desc), switchName, switchPorts)] = true
-				}				
+					// connectedDevices[getDeviceFromPort(isSwitchPort(extract_Device_Switch_Name(edge.Src.Desc), extract_Device_Switch_Name(edge.Dst.Desc), switchPorts))] = true
+				}
+				// if isSwitchPort(edge.Src.Desc, edge.Dst.Desc, switchPorts) != "" {
+				// 	connectedDevices[getDeviceFromPort(isSwitchPort(edge.Src.Desc, edge.Dst.Desc, switchPorts))] = true
+				// }
 			}
 
 			// Convert the map keys to a list of devices
