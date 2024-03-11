@@ -223,12 +223,15 @@ type solver struct {
 // Solve returns an assignment from superGraph that satisfies abstractGraph.
 // Solve accepts a context to handle termination if the solve takes too long.
 func Solve(ctx context.Context, abstractGraph *AbstractGraph, superGraph *ConcreteGraph) (*Assignment, error) {
-	solveErr := &SolveErr{absGraphDesc: abstractGraph.Desc, conGraphDesc: superGraph.Desc}
+	solveErr := &solveError{absGraphDesc: abstractGraph.Desc, conGraphDesc: superGraph.Desc}
 	if len(abstractGraph.Nodes) > len(superGraph.Nodes) {
+		solveErr.wrappedErr = fmt.Errorf("%q has %d nodes, but %q has %d nodes",
+			abstractGraph.Desc, len(abstractGraph.Nodes), superGraph.Desc, len(superGraph.Nodes))
 		return nil, solveErr
-
 	}
 	if len(abstractGraph.Edges) > len(superGraph.Edges) {
+		solveErr.wrappedErr = fmt.Errorf("%q has %d edges, but %q has %d edges",
+			abstractGraph.Desc, len(abstractGraph.Edges), superGraph.Desc, len(superGraph.Edges))
 		return nil, solveErr
 	}
 
@@ -262,6 +265,7 @@ func Solve(ctx context.Context, abstractGraph *AbstractGraph, superGraph *Concre
 
 	absPort2Port2Edge, err := abstractGraph.fetchPort2Port2EdgeMap()
 	if err != nil {
+		solveErr.wrappedErr = err
 		return nil, solveErr
 	}
 

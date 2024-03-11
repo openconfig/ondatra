@@ -19,32 +19,43 @@ import (
 	"strings"
 )
 
-// SolveErr implements error and contains information about a call to Solve.
-type SolveErr struct {
-	maxAssign                  *Assignment
-	absGraphDesc, conGraphDesc string
+// solveError implements error and contains information about a call to Solve.
+type solveError struct {
+	absGraphDesc string
+	conGraphDesc string
+	wrappedErr   error
+	maxAssign    *Assignment
+}
+
+func (s *solveError) Unwrap() error {
+	return s.wrappedErr
 }
 
 // Error returns and error string. This function implements error.
-func (s *SolveErr) Error() string { return s.String() }
+func (s *solveError) Error() string { return s.String() }
 
 // String compiles SolveErr to a string format.
-func (s *SolveErr) String() string {
+func (s *solveError) String() string {
 	ret := &strings.Builder{}
-	fmt.Fprintf(ret, "Could not satisfy %q from %q\n", s.absGraphDesc, s.conGraphDesc)
-	fmt.Fprintf(ret, "\nMax assignment:\n")
-	for a, c := range s.maxAssign.Node2Node {
-		if c != nil {
-			fmt.Fprintf(ret, "Node %q is assigned to %q\n", a.Desc, c.Desc)
-		} else {
-			fmt.Fprintf(ret, "Node %q was not assigned\n", a.Desc)
-		}
+	fmt.Fprintf(ret, "Could not satisfy %q from %q", s.absGraphDesc, s.conGraphDesc)
+	if s.wrappedErr != nil {
+		fmt.Fprintf(ret, ": %v", s.wrappedErr)
 	}
-	for a, c := range s.maxAssign.Port2Port {
-		if c != nil {
-			fmt.Fprintf(ret, "Port %q is assigned to %q\n", a.Desc, c.Desc)
-		} else {
-			fmt.Fprintf(ret, "Port %q was not assigned\n", a.Desc)
+	if s.maxAssign != nil {
+		fmt.Fprintf(ret, "\nMax assignment:\n")
+		for a, c := range s.maxAssign.Node2Node {
+			if c != nil {
+				fmt.Fprintf(ret, "Node %q is assigned to %q\n", a.Desc, c.Desc)
+			} else {
+				fmt.Fprintf(ret, "Node %q was not assigned\n", a.Desc)
+			}
+		}
+		for a, c := range s.maxAssign.Port2Port {
+			if c != nil {
+				fmt.Fprintf(ret, "Port %q is assigned to %q\n", a.Desc, c.Desc)
+			} else {
+				fmt.Fprintf(ret, "Port %q was not assigned\n", a.Desc)
+			}
 		}
 	}
 	return ret.String()

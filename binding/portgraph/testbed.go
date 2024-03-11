@@ -169,7 +169,7 @@ func TestbedToAbstractGraph(tb *opb.Testbed, partial map[string]string) (*Abstra
 		}
 		edges = append(edges, &AbstractEdge{Src: src, Dst: dst})
 	}
-	return &AbstractGraph{Desc: "KNE testbed", Nodes: nodes, Edges: edges}, node2Dev, port2Port, nil
+	return &AbstractGraph{Desc: "Ondatra Testbed", Nodes: nodes, Edges: edges}, node2Dev, port2Port, nil
 }
 
 func modelConstraint(d *opb.Device) (NodeConstraint, bool) {
