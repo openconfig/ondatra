@@ -316,8 +316,8 @@ func TestSolveCancelledSwitch(t *testing.T) {
 		Desc:  "four nodes, interconnected with Switch",
 		// Nodes: []*AbstractNode{absdut, absdut1, absate, absate1},
 		// Edges: []*AbstractEdge{{absdutport1, absateport1}, {absdut1port1, absate1port1}},
-		Nodes: []*AbstractNode{abs3, abs4, abs5, abs6},
-		Edges: []*AbstractEdge{{abs3port1, abs4port1}, {abs3port2, abs4port2}, {abs5port1, abs6port1}},
+		Nodes: []*AbstractNode{sabs3, sabs4, sabs5, sabs6},
+		Edges: []*AbstractEdge{{sabs3port1, sabs4port1}, {sabs3port2, sabs4port2}, {sabs5port1, sabs6port1}},
 	}
 	_, err := Solve(ctx, requestGraph, superGraphTest)
 	if err == nil {
@@ -331,8 +331,8 @@ func Benchmark4DutSolveSwitch(b *testing.B) {
 	b.ReportAllocs()
 	requestGraph := &AbstractGraph{
 		Desc:  "four nodes, interconnected with Switch",
-		Nodes: []*AbstractNode{abs3, abs4, abs5, abs6},
-		Edges: []*AbstractEdge{{abs3port1, abs4port1}, {abs3port2, abs4port2}, {abs5port1, abs6port1}},
+		Nodes: []*AbstractNode{sabs3, sabs4, sabs5, sabs6},
+		Edges: []*AbstractEdge{{sabs3port1, sabs4port1}, {sabs3port2, sabs4port2}, {sabs5port1, sabs6port1}},
 	}
 	for i := 0; i < b.N; i++ {
 		Solve(context.Background(), requestGraph, superGraphTest)
