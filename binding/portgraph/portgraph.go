@@ -316,7 +316,7 @@ func Solve(ctx context.Context, abstractGraph *AbstractGraph, superGraph *Concre
 // 3. Assign concrete ports.
 // solve always returns the max assignment and true if the solve completed.
 
-func extract_Device_Switch_Name(portDesc string) string {
+func extractDeviceSwitchName(portDesc string) string {
 	parts := strings.Split(portDesc, ":")
 	if len(parts) != 2 {
 		return ""
@@ -333,7 +333,7 @@ func getDeviceFromPort(portDesc string) string {
 
 func isSwitchPort(portSrc, portDst string, swName string, switchPorts []string) string {
 	for _, switchPort := range switchPorts {
-		swport := extract_Device_Switch_Name(switchPort)
+		swport := extractDeviceSwitchName(switchPort)
 		if portSrc != swport && swport == swName && portDst == swName {
 			return portSrc
 		} else if portDst != swport && swport == swName && portSrc == swName {
@@ -391,7 +391,6 @@ func AddEdges(abs2ConNodes map[*AbstractNode][]*ConcreteNode, connectedDevicesLi
 	wg.Wait()
 }
 
-
 // Function to check if a string exists in a slice of strings
 func contains(s []string, e string) bool {
 	for _, a := range s {
@@ -436,15 +435,10 @@ func (s *solver) solve(ctx context.Context) (*Assignment, bool) {
 		if len(switchPorts) != 0 {
 			connectedDevices := make(map[string]bool) // Map to store connected devices to avoid duplicates
 			for _, edge := range s.superGraph.Edges {
-				// switchPorts := []string{} // Assuming switchPorts is defined and populated earlier in your code
-
-				if isSwitchPort(extract_Device_Switch_Name(edge.Src.Desc), extract_Device_Switch_Name(edge.Dst.Desc), switchName, switchPorts) != "" {
-					connectedDevices[isSwitchPort(extract_Device_Switch_Name(edge.Src.Desc), extract_Device_Switch_Name(edge.Dst.Desc), switchName, switchPorts)] = true
-					// connectedDevices[getDeviceFromPort(isSwitchPort(extract_Device_Switch_Name(edge.Src.Desc), extract_Device_Switch_Name(edge.Dst.Desc), switchPorts))] = true
+				if isSwitchPort(extractDeviceSwitchName(edge.Src.Desc), extractDeviceSwitchName(edge.Dst.Desc), switchName, switchPorts) != "" {
+					connectedDevices[isSwitchPort(extractDeviceSwitchName(edge.Src.Desc), extractDeviceSwitchName(edge.Dst.Desc), switchName, switchPorts)] = true
+					// connectedDevices[getDeviceFromPort(isSwitchPort(extractDeviceSwitchName(edge.Src.Desc), extractDeviceSwitchName(edge.Dst.Desc), switchPorts))] = true
 				}
-				// if isSwitchPort(edge.Src.Desc, edge.Dst.Desc, switchPorts) != "" {
-				// 	connectedDevices[getDeviceFromPort(isSwitchPort(edge.Src.Desc, edge.Dst.Desc, switchPorts))] = true
-				// }
 			}
 
 			// Convert the map keys to a list of devices
