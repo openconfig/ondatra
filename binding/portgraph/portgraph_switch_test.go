@@ -17,8 +17,8 @@ package portgraph
 import (
 	"fmt"
 	"regexp"
-	"testing"
 	"strings"
+	"testing"
 
 	"golang.org/x/net/context"
 )
@@ -93,7 +93,7 @@ var superGraphTest = &ConcreteGraph{
 		{Src: dutnode5port1, Dst: switchnode10port5},
 		{Src: switchnode10port6, Dst: atenode6port1},
 		{Src: dutnode7port1, Dst: atenode8port1},
-		
+
 		{Src: dutnode9port1, Dst: atenode10port1},
 		{Src: dutnode9port1, Dst: atenode10port2},
 		{Src: dutnode9port2, Dst: atenode10port1},
@@ -103,14 +103,14 @@ var superGraphTest = &ConcreteGraph{
 // Setup abstract Nodes and Ports for testing.
 var (
 
-	// Two Nodes, interconnected with Switch
+	// Two Nodes, interconnected via Switch
 	abst1      = &AbstractNode{Desc: "abst1", Ports: []*AbstractPort{abst1port1, abst1port2}, Constraints: map[string]NodeConstraint{"vendor": Equal("CISCO")}}
 	abst2      = &AbstractNode{Desc: "abst2", Ports: []*AbstractPort{abst2port1, abst2port2}, Constraints: map[string]NodeConstraint{"vendor": Equal("TGEN")}}
 	abst1port1 = &AbstractPort{Desc: "abst1:port1", Constraints: map[string]PortConstraint{"speed": Equal("S_400GB")}}
 	abst1port2 = &AbstractPort{Desc: "abst1:port2", Constraints: map[string]PortConstraint{"speed": Equal("S_400GB")}}
 	abst2port1 = &AbstractPort{Desc: "abst2:port1", Constraints: map[string]PortConstraint{"speed": Equal("S_400GB")}}
 	abst2port2 = &AbstractPort{Desc: "abst2:port2", Constraints: map[string]PortConstraint{"speed": Equal("S_400GB")}}
-	// Four Nodes, interconnected with multiple Switch
+	// Four Nodes, interconnected via Switch
 	abst3      = &AbstractNode{Desc: "abst3", Ports: []*AbstractPort{abst3port1, abst3port2}, Constraints: map[string]NodeConstraint{"vendor": Equal("CISCO")}}
 	abst4      = &AbstractNode{Desc: "abst4", Ports: []*AbstractPort{abst4port1, abst4port2}, Constraints: map[string]NodeConstraint{"vendor": Equal("TGEN")}}
 	abst5      = &AbstractNode{Desc: "abst5", Ports: []*AbstractPort{abst5port1}, Constraints: map[string]NodeConstraint{"vendor": Equal("CISCO")}}
@@ -131,9 +131,9 @@ func TestSolveTest(t *testing.T) {
 		wantPorts       map[*AbstractPort]*ConcretePort
 		wantSolvedPorts []*AbstractPort
 	}{{
-		desc: "Two nodes, interconnected with Switch",
+		desc: "Two nodes, interconnected via Switch",
 		graph: &AbstractGraph{
-			Desc:  "two nodes, interconnected with Switch",
+			Desc:  "two nodes, interconnected via Switch",
 			Nodes: []*AbstractNode{abst1, abst2},
 			Edges: []*AbstractEdge{{abst1port1, abst2port1}, {abst1port2, abst2port2}},
 		},
@@ -143,17 +143,12 @@ func TestSolveTest(t *testing.T) {
 			abst1port2: dutnode1port2,
 			abst2port1: atenode2port1,
 			abst2port2: atenode2port2,
-			// abst1port1: dutnode1port2,
-			// abst1port2: dutnode1port1,
-			// abst2port1: atenode2port2,
-			// abst2port2: atenode2port1,
 		},
 	}, {
-		desc: "Four nodes, interconnected with multiple Switch",
+		desc: "Four nodes, with multiple connections via Switch",
 		graph: &AbstractGraph{
-			Desc:  "four nodes, interconnected with multiple Switch",
+			Desc:  "four nodes, with multiple connections via Switch",
 			Nodes: []*AbstractNode{abst3, abst4, abst5, abst6},
-			// Edges: []*AbstractEdge{{abst3port1, abst4port1}, {abst3port2, abst4port2}, {abst5port1, abst6port1}},
 			Edges: []*AbstractEdge{{abst3port1, abst4port1}, {abst3port2, abst6port1}, {abst4port2, abst5port1}},
 		},
 		wantNodes: map[*AbstractNode]*ConcreteNode{abst3: dutnode3, abst4: atenode4, abst5: dutnode5, abst6: atenode6},
@@ -197,9 +192,6 @@ func TestSolveTest(t *testing.T) {
 					if !ok2 {
 						t.Fatalf("Solve assigned port %q to %q; port does not exist", port.Desc, got.Desc)
 					}
-					// } else if got != want {
-					// 	t.Errorf("Solve for port %q got %q, want %q", port.Desc, got.Desc, want.Desc)
-					// }
 				} else {
 					gotPrefix := strings.Split(got.Desc, ":")[0]
 					wantPrefix := strings.Split(want.Desc, ":")[0]
@@ -240,8 +232,10 @@ func TestSolveNotSolvableTest(t *testing.T) {
 		wantAssigned   map[string]string
 		wantUnassigned []string
 	}{{
-		desc:           "Node does not exist in super",
-		graph:          &AbstractGraph{Desc: "Node does not exist", Nodes: []*AbstractNode{&AbstractNode{Desc: nodeDesc1, Constraints: map[string]NodeConstraint{"DOES NOT EXIST": Equal("???")}}}},
+		desc: "Node does not exist in super",
+		graph: &AbstractGraph{
+			Desc:  "Node does not exist",
+			Nodes: []*AbstractNode{&AbstractNode{Desc: nodeDesc1, Constraints: map[string]NodeConstraint{"DOES NOT EXIST": Equal("???")}}}},
 		wantUnassigned: []string{nodeDesc1},
 	}, {
 		desc: "Port does not exist in super",
@@ -327,9 +321,7 @@ func TestSolveCancelledSwitch(t *testing.T) {
 	ctx, cancel := context.WithCancel(context.Background())
 	cancel()
 	requestGraph := &AbstractGraph{
-		Desc: "four nodes, interconnected with Switch",
-		// Nodes: []*AbstractNode{absdut, absdut1, absate, absate1},
-		// Edges: []*AbstractEdge{{absdutport1, absateport1}, {absdut1port1, absate1port1}},
+		Desc:  "four nodes, with multiple connections via switch",
 		Nodes: []*AbstractNode{abst3, abst4, abst5, abst6},
 		Edges: []*AbstractEdge{{abst3port1, abst4port1}, {abst3port2, abs4port2}, {abst5port1, abst6port1}},
 	}
@@ -344,7 +336,7 @@ func TestSolveCancelledSwitch(t *testing.T) {
 func Benchmark4DutSolveSwitch(b *testing.B) {
 	b.ReportAllocs()
 	requestGraph := &AbstractGraph{
-		Desc:  "four nodes, interconnected with Switch",
+		Desc:  "four nodes, with multiple connections via switch",
 		Nodes: []*AbstractNode{abst3, abst4, abst5, abst6},
 		Edges: []*AbstractEdge{{abst3port1, abst4port1}, {abst3port2, abst4port2}, {abst5port1, abst6port1}},
 	}
