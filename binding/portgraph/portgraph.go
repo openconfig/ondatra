@@ -327,6 +327,7 @@ func extractDeviceSwitchName(portDesc string) string {
 	}
 	return parts[0]
 }
+
 func getDeviceFromPort(portDesc string) string {
 	parts := strings.Split(portDesc, ":")
 	if len(parts) != 2 {
@@ -441,7 +442,6 @@ func (s *solver) solve(ctx context.Context) (*Assignment, bool) {
 			for _, edge := range s.superGraph.Edges {
 				if isSwitchPort(extractDeviceSwitchName(edge.Src.Desc), extractDeviceSwitchName(edge.Dst.Desc), switchName, switchPorts) != "" {
 					connectedDevices[isSwitchPort(extractDeviceSwitchName(edge.Src.Desc), extractDeviceSwitchName(edge.Dst.Desc), switchName, switchPorts)] = true
-					// connectedDevices[getDeviceFromPort(isSwitchPort(extractDeviceSwitchName(edge.Src.Desc), extractDeviceSwitchName(edge.Dst.Desc), switchPorts))] = true
 				}
 			}
 
@@ -451,8 +451,6 @@ func (s *solver) solve(ctx context.Context) (*Assignment, bool) {
 				connectedDevicesList = append(connectedDevicesList, device)
 			}
 
-			// connectedDevicesList now contains the list of devices connected to the switch
-			fmt.Println("Connected Devices to switch:", connectedDevicesList)
 			AddEdges(abs2ConNodes, connectedDevicesList, s)
 		}
 	}
