@@ -901,7 +901,7 @@ func TestSolveNotSolvable(t *testing.T) {
 			if err == nil {
 				t.Errorf("Solve got nil error, want error")
 			}
-			solveErr, ok := err.(*SolveErr)
+			solveErr, ok := err.(*solveError)
 			if !ok {
 				t.Fatal("Solve got not *SolveErr type err, want *SolveErr type")
 			}
