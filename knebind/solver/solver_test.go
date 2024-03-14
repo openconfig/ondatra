@@ -140,8 +140,8 @@ func TestSolve(t *testing.T) {
 	dut1 := &opb.Device{
 		Id:                   "dut1",
 		Vendor:               opb.Device_ARISTA,
-		HardwareModelValue:   &opb.Device_HardwareModel{"ceos"},
-		SoftwareVersionValue: &opb.Device_SoftwareVersion{"eos"},
+		HardwareModelValue:   &opb.Device_HardwareModel{HardwareModel: "ceos"},
+		SoftwareVersionValue: &opb.Device_SoftwareVersion{SoftwareVersion: "eos"},
 		Ports:                []*opb.Port{{Id: "port1"}, {Id: "port2"}},
 	}
 	dut2 := &opb.Device{
@@ -151,7 +151,7 @@ func TestSolve(t *testing.T) {
 	dut3 := &opb.Device{
 		Id:                   "dut3",
 		Vendor:               opb.Device_JUNIPER,
-		SoftwareVersionValue: &opb.Device_SoftwareVersionRegex{"^evo$"},
+		SoftwareVersionValue: &opb.Device_SoftwareVersionRegex{SoftwareVersionRegex: "^evo$"},
 		Ports:                []*opb.Port{{Id: "port1"}},
 	}
 	ate1 := &opb.Device{
@@ -187,7 +187,7 @@ func TestSolve(t *testing.T) {
 		"p4rt": &tpb.Service{Names: []string{"ssh", "p4rt", ""}},
 	}
 	wantDUT1 := &ServiceDUT{
-		AbstractDUT: &binding.AbstractDUT{&binding.Dims{
+		AbstractDUT: &binding.AbstractDUT{Dims: &binding.Dims{
 			Name:            "node1",
 			Vendor:          opb.Device_ARISTA,
 			HardwareModel:   "ceos",
@@ -201,7 +201,7 @@ func TestSolve(t *testing.T) {
 		NodeVendor: tpb.Vendor_ARISTA,
 	}
 	wantDUT2 := &ServiceDUT{
-		AbstractDUT: &binding.AbstractDUT{&binding.Dims{
+		AbstractDUT: &binding.AbstractDUT{Dims: &binding.Dims{
 			Name:   "node2",
 			Vendor: opb.Device_CISCO,
 			Ports: map[string]*binding.Port{
@@ -213,7 +213,7 @@ func TestSolve(t *testing.T) {
 		NodeVendor: tpb.Vendor_CISCO,
 	}
 	wantDUT3 := &ServiceDUT{
-		AbstractDUT: &binding.AbstractDUT{&binding.Dims{
+		AbstractDUT: &binding.AbstractDUT{Dims: &binding.Dims{
 			Name:            "node3",
 			Vendor:          opb.Device_JUNIPER,
 			HardwareModel:   "cptx",
@@ -227,7 +227,7 @@ func TestSolve(t *testing.T) {
 	}
 	wantATEServices := make(map[string]*tpb.Service)
 	wantATE1 := &ServiceATE{
-		AbstractATE: &binding.AbstractATE{&binding.Dims{
+		AbstractATE: &binding.AbstractATE{Dims: &binding.Dims{
 			Name:   "node4",
 			Vendor: opb.Device_IXIA,
 			Ports: map[string]*binding.Port{
@@ -238,7 +238,7 @@ func TestSolve(t *testing.T) {
 		NodeVendor: tpb.Vendor_KEYSIGHT,
 	}
 	wantATE2 := &ServiceATE{
-		AbstractATE: &binding.AbstractATE{&binding.Dims{
+		AbstractATE: &binding.AbstractATE{Dims: &binding.Dims{
 			Name:          "node5",
 			Vendor:        opb.Device_OPENCONFIG,
 			HardwareModel: "MAGNA",
@@ -251,6 +251,7 @@ func TestSolve(t *testing.T) {
 	tests := []struct {
 		desc    string
 		tb      *opb.Testbed
+		topo    *tpb.Topology
 		partial map[string]string
 		wantRes *binding.Reservation
 	}{{
@@ -258,6 +259,7 @@ func TestSolve(t *testing.T) {
 		tb: &opb.Testbed{
 			Duts: []*opb.Device{dut3},
 		},
+		topo: topo,
 		wantRes: &binding.Reservation{
 			DUTs: map[string]binding.DUT{
 				"dut3": wantDUT3,
@@ -273,11 +275,12 @@ func TestSolve(t *testing.T) {
 				},
 			},
 		},
+		topo:    topo,
 		partial: map[string]string{"dut": "node3"},
 		wantRes: &binding.Reservation{
 			DUTs: map[string]binding.DUT{
 				"dut": &ServiceDUT{
-					AbstractDUT: &binding.AbstractDUT{&binding.Dims{
+					AbstractDUT: &binding.AbstractDUT{Dims: &binding.Dims{
 						Name:            "node3",
 						Vendor:          opb.Device_JUNIPER,
 						HardwareModel:   "cptx",
@@ -300,11 +303,12 @@ func TestSolve(t *testing.T) {
 				},
 			},
 		},
+		topo:    topo,
 		partial: map[string]string{"dut": "node2", "dut:port": "eth2"},
 		wantRes: &binding.Reservation{
 			DUTs: map[string]binding.DUT{
 				"dut": &ServiceDUT{
-					AbstractDUT: &binding.AbstractDUT{&binding.Dims{
+					AbstractDUT: &binding.AbstractDUT{Dims: &binding.Dims{
 						Name:   "node2",
 						Vendor: opb.Device_CISCO,
 						Ports: map[string]*binding.Port{
@@ -327,11 +331,12 @@ func TestSolve(t *testing.T) {
 				},
 			},
 		},
+		topo:    topo,
 		partial: map[string]string{"dut": "node2", "dut:port": "GigabitEthernet0/0/0/0"},
 		wantRes: &binding.Reservation{
 			DUTs: map[string]binding.DUT{
 				"dut": &ServiceDUT{
-					AbstractDUT: &binding.AbstractDUT{&binding.Dims{
+					AbstractDUT: &binding.AbstractDUT{Dims: &binding.Dims{
 						Name:   "node2",
 						Vendor: opb.Device_CISCO,
 						Ports: map[string]*binding.Port{
@@ -349,6 +354,7 @@ func TestSolve(t *testing.T) {
 		tb: &opb.Testbed{
 			Ates: []*opb.Device{ate1},
 		},
+		topo: topo,
 		wantRes: &binding.Reservation{
 			DUTs: map[string]binding.DUT{},
 			ATEs: map[string]binding.ATE{
@@ -360,6 +366,7 @@ func TestSolve(t *testing.T) {
 		tb: &opb.Testbed{
 			Ates: []*opb.Device{ate1, ate2},
 		},
+		topo: topo,
 		wantRes: &binding.Reservation{
 			DUTs: map[string]binding.DUT{},
 			ATEs: map[string]binding.ATE{
@@ -373,6 +380,7 @@ func TestSolve(t *testing.T) {
 			Duts:  []*opb.Device{dut1, dut2},
 			Links: []*opb.Link{link12},
 		},
+		topo: topo,
 		wantRes: &binding.Reservation{
 			DUTs: map[string]binding.DUT{
 				"dut1": wantDUT1,
@@ -387,6 +395,7 @@ func TestSolve(t *testing.T) {
 			Ates:  []*opb.Device{ate1},
 			Links: []*opb.Link{link14},
 		},
+		topo: topo,
 		wantRes: &binding.Reservation{
 			DUTs: map[string]binding.DUT{
 				"dut1": wantDUT1,
@@ -401,6 +410,7 @@ func TestSolve(t *testing.T) {
 			Duts:  []*opb.Device{dut1, dut2, dut3},
 			Links: []*opb.Link{link12, link23},
 		},
+		topo: topo,
 		wantRes: &binding.Reservation{
 			DUTs: map[string]binding.DUT{
 				"dut1": wantDUT1,
@@ -409,11 +419,212 @@ func TestSolve(t *testing.T) {
 			},
 			ATEs: map[string]binding.ATE{},
 		},
+	}, {
+		desc: "exact solve",
+		tb: &opb.Testbed{
+			Duts: []*opb.Device{
+				&opb.Device{
+					Id: "r1",
+					Ports: []*opb.Port{
+						{Id: "port1"},
+						{Id: "port2"},
+					},
+				},
+				&opb.Device{
+					Id: "a2",
+					Ports: []*opb.Port{
+						{Id: "port1"},
+						{Id: "port2"},
+					},
+				},
+				&opb.Device{
+					Id: "r_3",
+					Ports: []*opb.Port{
+						{Id: "port1"},
+						{Id: "port2"},
+					},
+				},
+				&opb.Device{
+					Id: "r4",
+					Ports: []*opb.Port{
+						{Id: "port1"},
+						{Id: "port2"},
+					},
+				},
+			},
+			Ates: []*opb.Device{
+				&opb.Device{
+					Id: "r5",
+					Ports: []*opb.Port{
+						{Id: "port1"},
+						{Id: "port2"},
+					},
+				},
+			},
+			Links: []*opb.Link{
+				&opb.Link{
+					A: "r1:port1",
+					B: "a2:port2",
+				},
+				&opb.Link{
+					A: "a2:port1",
+					B: "r_3:port2",
+				},
+				&opb.Link{
+					A: "r_3:port1",
+					B: "r4:port2",
+				},
+				&opb.Link{
+					A: "r4:port1",
+					B: "r5:port2",
+				},
+				&opb.Link{
+					A: "r5:port1",
+					B: "r1:port2",
+				},
+			},
+		},
+		topo: &tpb.Topology{
+			Name: "topo_exact",
+			Nodes: []*tpb.Node{{
+				Name:   "r1",
+				Vendor: tpb.Vendor_OPENCONFIG,
+				Model:  "LEMMING",
+				Interfaces: map[string]*tpb.Interface{
+					"eth1": {
+						Name: "eth1",
+					},
+					"eth2": {
+						Name: "eth2",
+					},
+				},
+			}, {
+				Name:   "r2",
+				Vendor: tpb.Vendor_OPENCONFIG,
+				Model:  "LEMMING",
+				Interfaces: map[string]*tpb.Interface{
+					"eth1": {
+						Name: "eth1",
+					},
+					"eth2": {
+						Name: "eth2",
+					},
+				},
+			}, {
+				Name:   "r-3",
+				Vendor: tpb.Vendor_OPENCONFIG,
+				Model:  "LEMMING",
+				Interfaces: map[string]*tpb.Interface{
+					"eth1": {
+						Name: "eth1",
+					},
+					"eth2": {
+						Name: "eth2",
+					},
+				},
+			}, {
+				Name:   "r4",
+				Vendor: tpb.Vendor_OPENCONFIG,
+				Model:  "LEMMING",
+				Interfaces: map[string]*tpb.Interface{
+					"eth1": {
+						Name: "eth1",
+					},
+					"eth2": {
+						Name: "eth2",
+					},
+				},
+			}, {
+				Name:   "r5",
+				Vendor: tpb.Vendor_KEYSIGHT,
+				Interfaces: map[string]*tpb.Interface{
+					"eth1": {},
+					"eth2": {},
+				},
+			}},
+			Links: []*tpb.Link{
+				{ANode: "r1", AInt: "eth1", ZNode: "r2", ZInt: "eth2"},
+				{ANode: "r2", AInt: "eth1", ZNode: "r-3", ZInt: "eth2"},
+				{ANode: "r-3", AInt: "eth1", ZNode: "r4", ZInt: "eth2"},
+				{ANode: "r4", AInt: "eth1", ZNode: "r5", ZInt: "eth2"},
+				{ANode: "r5", AInt: "eth1", ZNode: "r1", ZInt: "eth2"},
+			},
+		},
+		wantRes: &binding.Reservation{
+			DUTs: map[string]binding.DUT{
+				"r1": &ServiceDUT{
+					AbstractDUT: &binding.AbstractDUT{Dims: &binding.Dims{
+						Name:          "r1",
+						Vendor:        opb.Device_OPENCONFIG,
+						HardwareModel: "LEMMING",
+						Ports: map[string]*binding.Port{
+							"port1": {Name: "eth1"},
+							"port2": {Name: "eth2"},
+						},
+					}},
+					Services:   map[string]*tpb.Service{},
+					NodeVendor: tpb.Vendor_OPENCONFIG,
+				},
+				"a2": &ServiceDUT{
+					AbstractDUT: &binding.AbstractDUT{Dims: &binding.Dims{
+						Name:          "r2",
+						Vendor:        opb.Device_OPENCONFIG,
+						HardwareModel: "LEMMING",
+						Ports: map[string]*binding.Port{
+							"port1": {Name: "eth1"},
+							"port2": {Name: "eth2"},
+						},
+					}},
+					Services:   map[string]*tpb.Service{},
+					NodeVendor: tpb.Vendor_OPENCONFIG,
+				},
+				"r_3": &ServiceDUT{
+					AbstractDUT: &binding.AbstractDUT{Dims: &binding.Dims{
+						Name:          "r-3",
+						Vendor:        opb.Device_OPENCONFIG,
+						HardwareModel: "LEMMING",
+						Ports: map[string]*binding.Port{
+							"port1": {Name: "eth1"},
+							"port2": {Name: "eth2"},
+						},
+					}},
+					Services:   map[string]*tpb.Service{},
+					NodeVendor: tpb.Vendor_OPENCONFIG,
+				},
+				"r4": &ServiceDUT{
+					AbstractDUT: &binding.AbstractDUT{Dims: &binding.Dims{
+						Name:          "r4",
+						Vendor:        opb.Device_OPENCONFIG,
+						HardwareModel: "LEMMING",
+						Ports: map[string]*binding.Port{
+							"port1": {Name: "eth1"},
+							"port2": {Name: "eth2"},
+						},
+					}},
+					Services:   map[string]*tpb.Service{},
+					NodeVendor: tpb.Vendor_OPENCONFIG,
+				},
+			},
+			ATEs: map[string]binding.ATE{
+				"r5": &ServiceATE{
+					AbstractATE: &binding.AbstractATE{Dims: &binding.Dims{
+						Name:   "r5",
+						Vendor: opb.Device_IXIA,
+						Ports: map[string]*binding.Port{
+							"port1": {Name: "eth1"},
+							"port2": {Name: "eth2"},
+						},
+					}},
+					Services:   map[string]*tpb.Service{},
+					NodeVendor: tpb.Vendor_KEYSIGHT,
+				},
+			},
+		},
 	}}
 
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
-			gotRes, err := Solve(context.Background(), test.tb, topo, test.partial)
+			gotRes, err := Solve(context.Background(), test.tb, test.topo, test.partial)
 			if err != nil {
 				t.Fatalf("Solve() got unexpected error: %v", err)
 			}
@@ -812,7 +1023,7 @@ func TestSolveErrors(t *testing.T) {
 			Duts: []*opb.Device{{
 				Id:                 "dut1",
 				Vendor:             opb.Device_ARISTA,
-				HardwareModelValue: &opb.Device_HardwareModel{"ceos"},
+				HardwareModelValue: &opb.Device_HardwareModel{HardwareModel: "ceos"},
 			}},
 		},
 		topo: `

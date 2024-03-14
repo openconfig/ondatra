@@ -2430,13 +2430,20 @@ type RoutingPolicy_DefinedSets_BgpDefinedSets_CommunitySetPathMapAny struct {
 	*ygnmi.NodePath
 }
 
-// CommunityMember (leaf-list): members of the community set.
-// For an ADD operation these are the communities that will be added;
-// the regexp type is not valid in this operation.
+// CommunityMember (leaf-list): Members of the community set.
+// For an ADD operation these are the communities that will be
+// added.  The regexp type is not valid in this operation.
+//
 // For REMOVE or REPLACE operations then matching communities will
 // be removed unless match-set-options is INVERT which will
 // reverse this to mean that anything that does not match will be
 // removed.
+//
+// For MATCH operations the posix-eregexp type should be evaluated
+// against each community associated with a prefix one community
+// at a time.  Communities must be represented as strings in formats
+// conforming to oc-bgp-types:bgp-std-community-type.  For example:
+// `1000:1000` for a standard community
 //
 //	Defining module:      "openconfig-bgp-policy"
 //	Instantiating module: "openconfig-routing-policy"
@@ -2454,13 +2461,20 @@ func (n *RoutingPolicy_DefinedSets_BgpDefinedSets_CommunitySetPath) CommunityMem
 	return ps
 }
 
-// CommunityMember (leaf-list): members of the community set.
-// For an ADD operation these are the communities that will be added;
-// the regexp type is not valid in this operation.
+// CommunityMember (leaf-list): Members of the community set.
+// For an ADD operation these are the communities that will be
+// added.  The regexp type is not valid in this operation.
+//
 // For REMOVE or REPLACE operations then matching communities will
 // be removed unless match-set-options is INVERT which will
 // reverse this to mean that anything that does not match will be
 // removed.
+//
+// For MATCH operations the posix-eregexp type should be evaluated
+// against each community associated with a prefix one community
+// at a time.  Communities must be represented as strings in formats
+// conforming to oc-bgp-types:bgp-std-community-type.  For example:
+// `1000:1000` for a standard community
 //
 //	Defining module:      "openconfig-bgp-policy"
 //	Instantiating module: "openconfig-routing-policy"
@@ -3294,13 +3308,21 @@ type RoutingPolicy_DefinedSets_BgpDefinedSets_ExtCommunitySetPathMapAny struct {
 	*ygnmi.NodePath
 }
 
-// ExtCommunityMember (leaf-list): members of the extended community set
+// ExtCommunityMember (leaf-list): Members of the extended community set.
 // For an ADD operation these are the communities that will be added;
 // the regexp type is not valid in this operation.
+//
 // For REMOVE or REPLACE operations then matching communities will
 // be removed unless match-set-options is INVERT which will
 // reverse this to mean that anything that does not match will be
 // removed.
+//
+// For MATCH operations the posix-eregexp type should be evaluated
+// against each community associated with a prefix one community
+// at a time.  Communities must be represented as strings in formats
+// conforming to oc-bgp-types:bgp-ext-community-type.  For example:
+// `route-origin:1000:1000` for the origin type extended community,
+// and so on.
 //
 //	Defining module:      "openconfig-bgp-policy"
 //	Instantiating module: "openconfig-routing-policy"
@@ -3318,13 +3340,21 @@ func (n *RoutingPolicy_DefinedSets_BgpDefinedSets_ExtCommunitySetPath) ExtCommun
 	return ps
 }
 
-// ExtCommunityMember (leaf-list): members of the extended community set
+// ExtCommunityMember (leaf-list): Members of the extended community set.
 // For an ADD operation these are the communities that will be added;
 // the regexp type is not valid in this operation.
+//
 // For REMOVE or REPLACE operations then matching communities will
 // be removed unless match-set-options is INVERT which will
 // reverse this to mean that anything that does not match will be
 // removed.
+//
+// For MATCH operations the posix-eregexp type should be evaluated
+// against each community associated with a prefix one community
+// at a time.  Communities must be represented as strings in formats
+// conforming to oc-bgp-types:bgp-ext-community-type.  For example:
+// `route-origin:1000:1000` for the origin type extended community,
+// and so on.
 //
 //	Defining module:      "openconfig-bgp-policy"
 //	Instantiating module: "openconfig-routing-policy"

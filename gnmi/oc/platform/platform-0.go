@@ -89596,7 +89596,10 @@ type Component_Transceiver_ThresholdPathMapAny struct {
 	*ygnmi.NodePath
 }
 
-// InputPowerLower (leaf): The lower power threshold for the laser input power.
+// InputPowerLower (leaf): The lower power threshold for the laser input power. This threshold
+// applies to every physical-channel on the transceiver and does not
+// apply to the aggregate transceiver optical-input-power. This leaf
+// value is compared to the instant value of optical-input-power.
 //
 //	Defining module:      "openconfig-platform-transceiver"
 //	Instantiating module: "openconfig-platform"
@@ -89614,7 +89617,10 @@ func (n *Component_Transceiver_ThresholdPath) InputPowerLower() *Component_Trans
 	return ps
 }
 
-// InputPowerLower (leaf): The lower power threshold for the laser input power.
+// InputPowerLower (leaf): The lower power threshold for the laser input power. This threshold
+// applies to every physical-channel on the transceiver and does not
+// apply to the aggregate transceiver optical-input-power. This leaf
+// value is compared to the instant value of optical-input-power.
 //
 //	Defining module:      "openconfig-platform-transceiver"
 //	Instantiating module: "openconfig-platform"
@@ -89632,7 +89638,10 @@ func (n *Component_Transceiver_ThresholdPathAny) InputPowerLower() *Component_Tr
 	return ps
 }
 
-// InputPowerUpper (leaf): The upper power threshold for the laser input power.
+// InputPowerUpper (leaf): The upper power threshold for the laser input power. This threshold
+// applies to every physical-channel on the transceiver and does not
+// apply to the aggregate transceiver optical-input-power. This leaf
+// value is compared to the instant value of optical-input-power.
 //
 //	Defining module:      "openconfig-platform-transceiver"
 //	Instantiating module: "openconfig-platform"
@@ -89650,7 +89659,10 @@ func (n *Component_Transceiver_ThresholdPath) InputPowerUpper() *Component_Trans
 	return ps
 }
 
-// InputPowerUpper (leaf): The upper power threshold for the laser input power.
+// InputPowerUpper (leaf): The upper power threshold for the laser input power. This threshold
+// applies to every physical-channel on the transceiver and does not
+// apply to the aggregate transceiver optical-input-power. This leaf
+// value is compared to the instant value of optical-input-power.
 //
 //	Defining module:      "openconfig-platform-transceiver"
 //	Instantiating module: "openconfig-platform"
@@ -89668,7 +89680,8 @@ func (n *Component_Transceiver_ThresholdPathAny) InputPowerUpper() *Component_Tr
 	return ps
 }
 
-// LaserBiasCurrentLower (leaf): The lower threshold for the laser bias current.
+// LaserBiasCurrentLower (leaf): The lower threshold for the laser bias current. This leaf value is
+// compared to the instant value of last-bias-current.
 //
 //	Defining module:      "openconfig-platform-transceiver"
 //	Instantiating module: "openconfig-platform"
@@ -89686,7 +89699,8 @@ func (n *Component_Transceiver_ThresholdPath) LaserBiasCurrentLower() *Component
 	return ps
 }
 
-// LaserBiasCurrentLower (leaf): The lower threshold for the laser bias current.
+// LaserBiasCurrentLower (leaf): The lower threshold for the laser bias current. This leaf value is
+// compared to the instant value of last-bias-current.
 //
 //	Defining module:      "openconfig-platform-transceiver"
 //	Instantiating module: "openconfig-platform"
@@ -89704,7 +89718,8 @@ func (n *Component_Transceiver_ThresholdPathAny) LaserBiasCurrentLower() *Compon
 	return ps
 }
 
-// LaserBiasCurrentUpper (leaf): The upper threshold for the laser bias current.
+// LaserBiasCurrentUpper (leaf): The upper threshold for the laser bias current. This leaf value is
+// compared to the instant value of last-bias-current.
 //
 //	Defining module:      "openconfig-platform-transceiver"
 //	Instantiating module: "openconfig-platform"
@@ -89722,7 +89737,8 @@ func (n *Component_Transceiver_ThresholdPath) LaserBiasCurrentUpper() *Component
 	return ps
 }
 
-// LaserBiasCurrentUpper (leaf): The upper threshold for the laser bias current.
+// LaserBiasCurrentUpper (leaf): The upper threshold for the laser bias current. This leaf value is
+// compared to the instant value of last-bias-current.
 //
 //	Defining module:      "openconfig-platform-transceiver"
 //	Instantiating module: "openconfig-platform"
@@ -89741,6 +89757,8 @@ func (n *Component_Transceiver_ThresholdPathAny) LaserBiasCurrentUpper() *Compon
 }
 
 // LaserTemperatureLower (leaf): The lower temperature threshold for the laser temperature sensor.
+// This leaf value is compared to the instant value of
+// laser-temperature.
 //
 //	Defining module:      "openconfig-platform-transceiver"
 //	Instantiating module: "openconfig-platform"
@@ -89759,6 +89777,8 @@ func (n *Component_Transceiver_ThresholdPath) LaserTemperatureLower() *Component
 }
 
 // LaserTemperatureLower (leaf): The lower temperature threshold for the laser temperature sensor.
+// This leaf value is compared to the instant value of
+// laser-temperature.
 //
 //	Defining module:      "openconfig-platform-transceiver"
 //	Instantiating module: "openconfig-platform"
@@ -89777,6 +89797,8 @@ func (n *Component_Transceiver_ThresholdPathAny) LaserTemperatureLower() *Compon
 }
 
 // LaserTemperatureUpper (leaf): The upper temperature threshold for the laser temperature sensor.
+// This leaf value is compared to the instant value of
+// laser-temperature.
 //
 //	Defining module:      "openconfig-platform-transceiver"
 //	Instantiating module: "openconfig-platform"
@@ -89795,6 +89817,8 @@ func (n *Component_Transceiver_ThresholdPath) LaserTemperatureUpper() *Component
 }
 
 // LaserTemperatureUpper (leaf): The upper temperature threshold for the laser temperature sensor.
+// This leaf value is compared to the instant value of
+// laser-temperature.
 //
 //	Defining module:      "openconfig-platform-transceiver"
 //	Instantiating module: "openconfig-platform"
@@ -89812,7 +89836,8 @@ func (n *Component_Transceiver_ThresholdPathAny) LaserTemperatureUpper() *Compon
 	return ps
 }
 
-// ModuleTemperatureLower (leaf): The lower temperature threshold for the transceiver module.
+// ModuleTemperatureLower (leaf): The lower temperature threshold for the transceiver module. This
+// leaf value is compared to the instant value of module-temperature.
 //
 //	Defining module:      "openconfig-platform-transceiver"
 //	Instantiating module: "openconfig-platform"
@@ -89830,7 +89855,8 @@ func (n *Component_Transceiver_ThresholdPath) ModuleTemperatureLower() *Componen
 	return ps
 }
 
-// ModuleTemperatureLower (leaf): The lower temperature threshold for the transceiver module.
+// ModuleTemperatureLower (leaf): The lower temperature threshold for the transceiver module. This
+// leaf value is compared to the instant value of module-temperature.
 //
 //	Defining module:      "openconfig-platform-transceiver"
 //	Instantiating module: "openconfig-platform"
@@ -89848,7 +89874,8 @@ func (n *Component_Transceiver_ThresholdPathAny) ModuleTemperatureLower() *Compo
 	return ps
 }
 
-// ModuleTemperatureUpper (leaf): The upper temperature threshold for the transceiver module.
+// ModuleTemperatureUpper (leaf): The upper temperature threshold for the transceiver module. This
+// leaf value is compared to the instant value of module-temperature.
 //
 //	Defining module:      "openconfig-platform-transceiver"
 //	Instantiating module: "openconfig-platform"
@@ -89866,7 +89893,8 @@ func (n *Component_Transceiver_ThresholdPath) ModuleTemperatureUpper() *Componen
 	return ps
 }
 
-// ModuleTemperatureUpper (leaf): The upper temperature threshold for the transceiver module.
+// ModuleTemperatureUpper (leaf): The upper temperature threshold for the transceiver module. This
+// leaf value is compared to the instant value of module-temperature.
 //
 //	Defining module:      "openconfig-platform-transceiver"
 //	Instantiating module: "openconfig-platform"
@@ -89884,7 +89912,10 @@ func (n *Component_Transceiver_ThresholdPathAny) ModuleTemperatureUpper() *Compo
 	return ps
 }
 
-// OutputPowerLower (leaf): The lower power threshold for the laser output power.
+// OutputPowerLower (leaf): The lower power threshold for the laser output power. This threshold
+// applies to every physical-channel on the transceiver and does not
+// apply to the aggregate transceiver optical-output-power. This leaf
+// value is compared to the instant value of optical-output-power.
 //
 //	Defining module:      "openconfig-platform-transceiver"
 //	Instantiating module: "openconfig-platform"
@@ -89902,7 +89933,10 @@ func (n *Component_Transceiver_ThresholdPath) OutputPowerLower() *Component_Tran
 	return ps
 }
 
-// OutputPowerLower (leaf): The lower power threshold for the laser output power.
+// OutputPowerLower (leaf): The lower power threshold for the laser output power. This threshold
+// applies to every physical-channel on the transceiver and does not
+// apply to the aggregate transceiver optical-output-power. This leaf
+// value is compared to the instant value of optical-output-power.
 //
 //	Defining module:      "openconfig-platform-transceiver"
 //	Instantiating module: "openconfig-platform"
@@ -89920,7 +89954,10 @@ func (n *Component_Transceiver_ThresholdPathAny) OutputPowerLower() *Component_T
 	return ps
 }
 
-// OutputPowerUpper (leaf): The upper power threshold for the laser output power.
+// OutputPowerUpper (leaf): The upper power threshold for the laser output power. This threshold
+// applies to every physical-channel on the transceiver and does not
+// apply to the aggregate transceiver optical-output-power. This leaf
+// value is compared to the instant value of optical-output-power.
 //
 //	Defining module:      "openconfig-platform-transceiver"
 //	Instantiating module: "openconfig-platform"
@@ -89938,7 +89975,10 @@ func (n *Component_Transceiver_ThresholdPath) OutputPowerUpper() *Component_Tran
 	return ps
 }
 
-// OutputPowerUpper (leaf): The upper power threshold for the laser output power.
+// OutputPowerUpper (leaf): The upper power threshold for the laser output power. This threshold
+// applies to every physical-channel on the transceiver and does not
+// apply to the aggregate transceiver optical-output-power. This leaf
+// value is compared to the instant value of optical-output-power.
 //
 //	Defining module:      "openconfig-platform-transceiver"
 //	Instantiating module: "openconfig-platform"
@@ -89992,7 +90032,8 @@ func (n *Component_Transceiver_ThresholdPathAny) Severity() *Component_Transceiv
 	return ps
 }
 
-// SupplyVoltageLower (leaf): The lower threshold for the transceiver supply voltage.
+// SupplyVoltageLower (leaf): The lower threshold for the transceiver supply voltage. This leaf
+// value is compared to the instant value of supply-voltage.
 //
 //	Defining module:      "openconfig-platform-transceiver"
 //	Instantiating module: "openconfig-platform"
@@ -90010,7 +90051,8 @@ func (n *Component_Transceiver_ThresholdPath) SupplyVoltageLower() *Component_Tr
 	return ps
 }
 
-// SupplyVoltageLower (leaf): The lower threshold for the transceiver supply voltage.
+// SupplyVoltageLower (leaf): The lower threshold for the transceiver supply voltage. This leaf
+// value is compared to the instant value of supply-voltage.
 //
 //	Defining module:      "openconfig-platform-transceiver"
 //	Instantiating module: "openconfig-platform"
@@ -90028,7 +90070,8 @@ func (n *Component_Transceiver_ThresholdPathAny) SupplyVoltageLower() *Component
 	return ps
 }
 
-// SupplyVoltageUpper (leaf): The upper threshold for the transceiver supply voltage.
+// SupplyVoltageUpper (leaf): The upper threshold for the transceiver supply voltage. This leaf
+// value is compared to the instant value of supply-voltage.
 //
 //	Defining module:      "openconfig-platform-transceiver"
 //	Instantiating module: "openconfig-platform"
@@ -90046,7 +90089,8 @@ func (n *Component_Transceiver_ThresholdPath) SupplyVoltageUpper() *Component_Tr
 	return ps
 }
 
-// SupplyVoltageUpper (leaf): The upper threshold for the transceiver supply voltage.
+// SupplyVoltageUpper (leaf): The upper threshold for the transceiver supply voltage. This leaf
+// value is compared to the instant value of supply-voltage.
 //
 //	Defining module:      "openconfig-platform-transceiver"
 //	Instantiating module: "openconfig-platform"
