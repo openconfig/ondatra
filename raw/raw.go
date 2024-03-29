@@ -83,6 +83,7 @@ import (
 
 	"golang.org/x/net/context"
 
+	"github.com/open-traffic-generator/snappi/gosnappi"
 	"github.com/openconfig/gnoigo"
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/internal/events"
@@ -211,4 +212,15 @@ func (r *ATEAPIs) GNMI(t testing.TB) gpb.GNMIClient {
 		t.Fatalf("Failed to fetch gNMI client for %v: %v", r.ate, err)
 	}
 	return gnmi
+}
+
+// OTG returns the default Open Traffic Generator client for the ATE.
+func (r *ATEAPIs) OTG(t testing.TB) gosnappi.Api {
+	t.Helper()
+	t = events.ActionStarted(t, "Fetching OTG client for %s", r.ate)
+	otg, err := rawapis.FetchOTG(context.Background(), r.ate)
+	if err != nil {
+		t.Fatalf("Failed to fetch OTG client for %v: %v", r.ate, err)
+	}
+	return otg
 }
