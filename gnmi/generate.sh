@@ -21,32 +21,31 @@ set -e
 git clone https://github.com/openconfig/public.git
 wget https://raw.githubusercontent.com/openconfig/gnmi/master/metadata/yang/gnmi-collector-metadata.yang
 git clone https://github.com/open-traffic-generator/models-yang.git
-git clone https://github.com/openconfig/gnsi.git
 
 EXCLUDE_MODULES=ietf-interfaces,openconfig-bfd,openconfig-messages
 
 YANG_FILES=(
   gnmi-collector-metadata.yang
-  # TODO(greg-dennis): Uncomment when b/322159436 is fixed.
-  # gnsi/acctz/gnsi-acctz.yang
-  gnsi/authz/gnsi-authz.yang
-  gnsi/certz/gnsi-certz.yang
-  gnsi/credentialz/gnsi-credentialz.yang
-  gnsi/pathz/gnsi-pathz.yang
   public/release/models/acl/openconfig-acl.yang
   public/release/models/acl/openconfig-packet-match.yang
-  public/release/models/aft/openconfig-aft.yang
   public/release/models/aft/openconfig-aft-network-instance.yang
   public/release/models/aft/openconfig-aft-summary.yang
+  public/release/models/aft/openconfig-aft.yang
   public/release/models/ate/openconfig-ate-flow.yang
   public/release/models/ate/openconfig-ate-intf.yang
   public/release/models/bfd/openconfig-bfd.yang
   public/release/models/bgp/openconfig-bgp-policy.yang
   public/release/models/bgp/openconfig-bgp-types.yang
   public/release/models/extensions/openconfig-metadata.yang
+  public/release/models/gnsi/openconfig-gnsi-acctz.yang
+  public/release/models/gnsi/openconfig-gnsi-authz.yang
+  public/release/models/gnsi/openconfig-gnsi-certz.yang
+  public/release/models/gnsi/openconfig-gnsi-credentialz.yang
+  public/release/models/gnsi/openconfig-gnsi-pathz.yang
+  public/release/models/gnsi/openconfig-gnsi.yang
   public/release/models/interfaces/openconfig-if-aggregate.yang
-  public/release/models/interfaces/openconfig-if-ethernet.yang
   public/release/models/interfaces/openconfig-if-ethernet-ext.yang
+  public/release/models/interfaces/openconfig-if-ethernet.yang
   public/release/models/interfaces/openconfig-if-ip-ext.yang
   public/release/models/interfaces/openconfig-if-ip.yang
   public/release/models/interfaces/openconfig-if-sdn-ext.yang
@@ -63,9 +62,10 @@ YANG_FILES=(
   public/release/models/openconfig-extensions.yang
   public/release/models/optical-transport/openconfig-terminal-device.yang
   public/release/models/optical-transport/openconfig-transport-types.yang
-  public/release/models/ospf/openconfig-ospfv2.yang
   public/release/models/ospf/openconfig-ospf-policy.yang
+  public/release/models/ospf/openconfig-ospfv2.yang
   public/release/models/p4rt/openconfig-p4rt.yang
+  public/release/models/platform/openconfig-platform-common.yang
   public/release/models/platform/openconfig-platform-controller-card.yang
   public/release/models/platform/openconfig-platform-cpu.yang
   public/release/models/platform/openconfig-platform-ext.yang
@@ -78,7 +78,6 @@ YANG_FILES=(
   public/release/models/platform/openconfig-platform-software.yang
   public/release/models/platform/openconfig-platform-transceiver.yang
   public/release/models/platform/openconfig-platform.yang
-  public/release/models/platform/openconfig-platform-common.yang
   public/release/models/policy-forwarding/openconfig-policy-forwarding.yang
   public/release/models/policy/openconfig-policy-types.yang
   public/release/models/qos/openconfig-qos-elements.yang
@@ -88,10 +87,10 @@ YANG_FILES=(
   public/release/models/rib/openconfig-rib-bgp.yang
   public/release/models/sampling/openconfig-sampling-sflow.yang
   public/release/models/segment-routing/openconfig-segment-routing-types.yang
-  public/release/models/system/openconfig-system.yang
   public/release/models/system/openconfig-system-bootz.yang
   public/release/models/system/openconfig-system-controlplane.yang
   public/release/models/system/openconfig-system-utilization.yang
+  public/release/models/system/openconfig-system.yang
   public/release/models/types/openconfig-inet-types.yang
   public/release/models/types/openconfig-types.yang
   public/release/models/types/openconfig-yang-types.yang
@@ -137,4 +136,4 @@ go run github.com/openconfig/ygnmi/app/ygnmi generator \
 find gnmi -name "*.go" -exec goimports -w {} +
 find gnmi -name "*.go" -exec gofmt -w -s {} +
 
-rm -rf public gnmi-collector-metadata.yang models-yang gnsi
+rm -rf public gnmi-collector-metadata.yang models-yang
