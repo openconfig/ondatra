@@ -24,6 +24,7 @@ using the following YANG input files:
   - public/release/models/gnsi/openconfig-gnsi-credentialz.yang
   - public/release/models/gnsi/openconfig-gnsi-pathz.yang
   - public/release/models/gnsi/openconfig-gnsi.yang
+  - public/release/models/gribi/openconfig-gribi.yang
   - public/release/models/interfaces/openconfig-if-aggregate.yang
   - public/release/models/interfaces/openconfig-if-ethernet-ext.yang
   - public/release/models/interfaces/openconfig-if-ethernet.yang
@@ -9989,8 +9990,10 @@ const (
 	SystemGrpc_GRPC_SERVICE_GNMI E_SystemGrpc_GRPC_SERVICE = 1
 	// SystemGrpc_GRPC_SERVICE_GNSI corresponds to the value GNSI of SystemGrpc_GRPC_SERVICE
 	SystemGrpc_GRPC_SERVICE_GNSI E_SystemGrpc_GRPC_SERVICE = 2
+	// SystemGrpc_GRPC_SERVICE_GRIBI corresponds to the value GRIBI of SystemGrpc_GRPC_SERVICE
+	SystemGrpc_GRPC_SERVICE_GRIBI E_SystemGrpc_GRPC_SERVICE = 3
 	// SystemGrpc_GRPC_SERVICE_P4RT corresponds to the value P4RT of SystemGrpc_GRPC_SERVICE
-	SystemGrpc_GRPC_SERVICE_P4RT E_SystemGrpc_GRPC_SERVICE = 3
+	SystemGrpc_GRPC_SERVICE_P4RT E_SystemGrpc_GRPC_SERVICE = 4
 )
 
 // E_SystemLogging_SYSLOG_FACILITY is a derived int64 type which is used to represent

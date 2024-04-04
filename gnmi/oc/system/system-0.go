@@ -22,6 +22,7 @@ using the following YANG input files:
   - public/release/models/gnsi/openconfig-gnsi-credentialz.yang
   - public/release/models/gnsi/openconfig-gnsi-pathz.yang
   - public/release/models/gnsi/openconfig-gnsi.yang
+  - public/release/models/gribi/openconfig-gribi.yang
   - public/release/models/interfaces/openconfig-if-aggregate.yang
   - public/release/models/interfaces/openconfig-if-ethernet-ext.yang
   - public/release/models/interfaces/openconfig-if-ethernet.yang

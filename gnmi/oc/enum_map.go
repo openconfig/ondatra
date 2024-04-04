@@ -24,6 +24,7 @@ using the following YANG input files:
   - public/release/models/gnsi/openconfig-gnsi-credentialz.yang
   - public/release/models/gnsi/openconfig-gnsi-pathz.yang
   - public/release/models/gnsi/openconfig-gnsi.yang
+  - public/release/models/gribi/openconfig-gribi.yang
   - public/release/models/interfaces/openconfig-if-aggregate.yang
   - public/release/models/interfaces/openconfig-if-ethernet-ext.yang
   - public/release/models/interfaces/openconfig-if-ethernet.yang
@@ -2160,7 +2161,8 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 	"E_SystemGrpc_GRPC_SERVICE": {
 		1: {Name: "GNMI", DefiningModule: "openconfig-system-grpc"},
 		2: {Name: "GNSI", DefiningModule: "openconfig-gnsi"},
-		3: {Name: "P4RT", DefiningModule: "openconfig-p4rt"},
+		3: {Name: "GRIBI", DefiningModule: "openconfig-gribi"},
+		4: {Name: "P4RT", DefiningModule: "openconfig-p4rt"},
 	},
 	"E_SystemLogging_SYSLOG_FACILITY": {
 		1:  {Name: "ALL", DefiningModule: "openconfig-system-logging"},
