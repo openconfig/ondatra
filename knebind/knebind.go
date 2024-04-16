@@ -45,6 +45,8 @@ import (
 	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/status"
 
+	attestzpb "github.com/openconfig/attestz/proto/tpm_attestz"
+	enrollzpb "github.com/openconfig/attestz/proto/tpm_enrollz"
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 	acctzpb "github.com/openconfig/gnsi/acctz"
 	authzpb "github.com/openconfig/gnsi/authz"
@@ -262,6 +264,14 @@ func (c *gnsiConn) Credentialz() credzpb.CredentialzClient {
 
 func (c *gnsiConn) Acctz() acctzpb.AcctzClient {
 	return acctzpb.NewAcctzClient(c.conn)
+}
+
+func (c *gnsiConn) Attestz() attestzpb.TpmAttestzServiceClient {
+	return attestzpb.NewTpmAttestzServiceClient(c.conn)
+}
+
+func (c *gnsiConn) Enrollz() enrollzpb.TpmEnrollzServiceClient {
+	return enrollzpb.NewTpmEnrollzServiceClient(c.conn)
 }
 
 func (d *kneDUT) DialGNSI(ctx context.Context, opts ...grpc.DialOption) (binding.GNSIClients, error) {

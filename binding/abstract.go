@@ -26,6 +26,8 @@ import (
 	"github.com/openconfig/gnoigo"
 	"google.golang.org/grpc"
 
+	attestzpb "github.com/openconfig/attestz/proto/tpm_attestz"
+	enrollzpb "github.com/openconfig/attestz/proto/tpm_enrollz"
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 	acctzpb "github.com/openconfig/gnsi/acctz"
 	authzpb "github.com/openconfig/gnsi/authz"
@@ -203,6 +205,18 @@ func (*AbstractGNSIClients) Credentialz() credzpb.CredentialzClient {
 // Acctz logs a fatal unimplemented error.
 func (*AbstractGNSIClients) Acctz() acctzpb.AcctzClient {
 	log.Fatal("AccountingPull unimplemented")
+	return nil
+}
+
+// Attestz logs a fatal unimplemented error.
+func (*AbstractGNSIClients) Attestz() attestzpb.TpmAttestzServiceClient {
+	log.Fatal("Attestz unimplemented")
+	return nil
+}
+
+// Enrollz logs a fatal unimplemented error.
+func (*AbstractGNSIClients) Enrollz() enrollzpb.TpmEnrollzServiceClient {
+	log.Fatal("Enrollz unimplemented")
 	return nil
 }
 

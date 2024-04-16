@@ -4,10 +4,11 @@ go 1.21
 
 require (
 	bitbucket.org/creachadair/stringset v0.0.14
-	github.com/golang/glog v1.1.2
+	github.com/golang/glog v1.2.0
 	github.com/google/go-cmp v0.6.0
 	github.com/jstemmer/go-junit-report/v2 v2.1.0
 	github.com/open-traffic-generator/snappi/gosnappi v0.13.7
+	github.com/openconfig/attestz v0.2.0
 	github.com/openconfig/entity-naming v0.0.0-20230912181021-7ac806551a31
 	github.com/openconfig/gnmi v0.10.0
 	github.com/openconfig/gnoigo v0.0.0-20231026010722-87413fdb22e7
@@ -29,7 +30,7 @@ require (
 	golang.org/x/net v0.20.0
 	golang.org/x/sys v0.16.0
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20240116215550-a9fa1716bcac
-	google.golang.org/grpc v1.60.1
+	google.golang.org/grpc v1.61.0
 	google.golang.org/protobuf v1.33.0
 	gopkg.in/yaml.v2 v2.4.0
 )
@@ -100,8 +101,8 @@ require (
 	github.com/srl-labs/srlinux-scrapli v0.6.0 // indirect
 	github.com/subosito/gotenv v1.6.0 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
-	golang.org/x/oauth2 v0.13.0 // indirect
-	golang.org/x/sync v0.4.0 // indirect
+	golang.org/x/oauth2 v0.14.0 // indirect
+	golang.org/x/sync v0.5.0 // indirect
 	golang.org/x/term v0.16.0 // indirect
 	golang.org/x/text v0.14.0 // indirect
 	golang.org/x/time v0.3.0 // indirect

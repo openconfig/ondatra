@@ -27,6 +27,8 @@ import (
 	"github.com/openconfig/ondatra/binding/ixweb"
 	"google.golang.org/grpc"
 
+	attestzpb "github.com/openconfig/attestz/proto/tpm_attestz"
+	enrollzpb "github.com/openconfig/attestz/proto/tpm_enrollz"
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 	acctzpb "github.com/openconfig/gnsi/acctz"
 	authzpb "github.com/openconfig/gnsi/authz"
@@ -216,6 +218,8 @@ type GNSIClients interface {
 	Certz() certzpb.CertzClient
 	Credentialz() credzpb.CredentialzClient
 	Acctz() acctzpb.AcctzClient
+	Attestz() attestzpb.TpmAttestzServiceClient
+	Enrollz() enrollzpb.TpmEnrollzServiceClient
 	mustEmbedAbstractGNSIClients()
 }
 
