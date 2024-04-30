@@ -247,8 +247,33 @@ func assignmentToReservation(
 	return res, nil
 }
 
+// createExactMap finds any exact mappings from testbed device ID to topology node names. If an
+// exact mapping exists, i.e. there is a testbed device ID that equals a topology node name, then
+// add it to the returned map. This mapping can be used to increase the efficiency of the solver.
+func createExactMap(tb *opb.Testbed, topo *tpb.Topology) map[string]string {
+	names := make(map[string]bool)
+	for _, node := range topo.GetNodes() {
+		names[node.GetName()] = true
+	}
+	m := make(map[string]string)
+	for _, dut := range tb.GetDuts() {
+		id := dut.GetId()
+		// Ondatra testbed devices cannot contain "-" and KNE topology node names cannot contain "_" so
+		// allow an exact match to include the substitution.
+		name := strings.ReplaceAll(id, "_", "-")
+		if names[name] {
+			log.Infof("Found exact mapping for device %q -> %q", id, name)
+			m[id] = name
+		}
+	}
+	return m
+}
+
 // Solve creates a new Reservation from a desired testbed and an available topology.
 func Solve(ctx context.Context, tb *opb.Testbed, topo *tpb.Topology, partial map[string]string) (*binding.Reservation, error) {
+	if partial == nil {
+		partial = createExactMap(tb, topo)
+	}
 	topo = filterTopology(topo)
 	devs := append(append([]*opb.Device{}, tb.GetDuts()...), tb.GetAtes()...)
 	if numDevs, numNodes := len(devs), len(topo.GetNodes()); numDevs > numNodes {
@@ -342,7 +367,7 @@ func (a *assign) resolveDUT(dev *opb.Device) (*ServiceDUT, error) {
 		return nil, err
 	}
 	return &ServiceDUT{
-		AbstractDUT: &binding.AbstractDUT{dr.dims},
+		AbstractDUT: &binding.AbstractDUT{Dims: dr.dims},
 		Services:    dr.services,
 		Cert:        dr.cert,
 		NodeVendor:  dr.nodeVendor,
@@ -355,7 +380,7 @@ func (a *assign) resolveATE(dev *opb.Device) (*ServiceATE, error) {
 		return nil, err
 	}
 	return &ServiceATE{
-		AbstractATE: &binding.AbstractATE{dr.dims},
+		AbstractATE: &binding.AbstractATE{Dims: dr.dims},
 		Services:    dr.services,
 		Cert:        dr.cert,
 		NodeVendor:  dr.nodeVendor,
