@@ -147,6 +147,43 @@ const (
 	Ero_Type_UNNUMBERED_INTERFACE E_Ero_Type = 6
 )
 
+// E_ExtendedCommunity_BgpExtendedCommunityStructuredType is a derived int64 type which is used to represent
+// the enumerated node ExtendedCommunity_BgpExtendedCommunityStructuredType. An additional value named
+// ExtendedCommunity_BgpExtendedCommunityStructuredType_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_ExtendedCommunity_BgpExtendedCommunityStructuredType int64
+
+// IsYANGGoEnum ensures that ExtendedCommunity_BgpExtendedCommunityStructuredType implements the yang.GoEnum
+// interface. This ensures that ExtendedCommunity_BgpExtendedCommunityStructuredType can be identified as a
+// mapped type for a YANG enumeration.
+func (E_ExtendedCommunity_BgpExtendedCommunityStructuredType) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  ExtendedCommunity_BgpExtendedCommunityStructuredType.
+func (E_ExtendedCommunity_BgpExtendedCommunityStructuredType) ΛMap() map[string]map[int64]ygot.EnumDefinition {
+	return ΛEnum
+}
+
+// String returns a logging-friendly string for E_ExtendedCommunity_BgpExtendedCommunityStructuredType.
+func (e E_ExtendedCommunity_BgpExtendedCommunityStructuredType) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_ExtendedCommunity_BgpExtendedCommunityStructuredType")
+}
+
+const (
+	// ExtendedCommunity_BgpExtendedCommunityStructuredType_UNSET corresponds to the value UNSET of ExtendedCommunity_BgpExtendedCommunityStructuredType
+	ExtendedCommunity_BgpExtendedCommunityStructuredType_UNSET E_ExtendedCommunity_BgpExtendedCommunityStructuredType = 0
+	// ExtendedCommunity_BgpExtendedCommunityStructuredType_TRANSITIVE_2OCTET_AS_TYPE corresponds to the value TRANSITIVE_2OCTET_AS_TYPE of ExtendedCommunity_BgpExtendedCommunityStructuredType
+	ExtendedCommunity_BgpExtendedCommunityStructuredType_TRANSITIVE_2OCTET_AS_TYPE E_ExtendedCommunity_BgpExtendedCommunityStructuredType = 1
+	// ExtendedCommunity_BgpExtendedCommunityStructuredType_TRANSITIVE_IPV4_ADDRESS_TYPE corresponds to the value TRANSITIVE_IPV4_ADDRESS_TYPE of ExtendedCommunity_BgpExtendedCommunityStructuredType
+	ExtendedCommunity_BgpExtendedCommunityStructuredType_TRANSITIVE_IPV4_ADDRESS_TYPE E_ExtendedCommunity_BgpExtendedCommunityStructuredType = 2
+	// ExtendedCommunity_BgpExtendedCommunityStructuredType_TRANSITIVE_4OCTET_AS_TYPE corresponds to the value TRANSITIVE_4OCTET_AS_TYPE of ExtendedCommunity_BgpExtendedCommunityStructuredType
+	ExtendedCommunity_BgpExtendedCommunityStructuredType_TRANSITIVE_4OCTET_AS_TYPE E_ExtendedCommunity_BgpExtendedCommunityStructuredType = 3
+	// ExtendedCommunity_BgpExtendedCommunityStructuredType_TRANSITIVE_OPAQUE_TYPE corresponds to the value TRANSITIVE_OPAQUE_TYPE of ExtendedCommunity_BgpExtendedCommunityStructuredType
+	ExtendedCommunity_BgpExtendedCommunityStructuredType_TRANSITIVE_OPAQUE_TYPE E_ExtendedCommunity_BgpExtendedCommunityStructuredType = 4
+	// ExtendedCommunity_BgpExtendedCommunityStructuredType_NON_TRANSITIVE_2OCTET_AS_TYPE corresponds to the value NON_TRANSITIVE_2OCTET_AS_TYPE of ExtendedCommunity_BgpExtendedCommunityStructuredType
+	ExtendedCommunity_BgpExtendedCommunityStructuredType_NON_TRANSITIVE_2OCTET_AS_TYPE E_ExtendedCommunity_BgpExtendedCommunityStructuredType = 5
+)
+
 // E_ExtendedIpv4Reachability_Prefix_RedistributionType is a derived int64 type which is used to represent
 // the enumerated node ExtendedIpv4Reachability_Prefix_RedistributionType. An additional value named
 // ExtendedIpv4Reachability_Prefix_RedistributionType_UNSET is added to the enumeration which is used as
@@ -750,6 +787,159 @@ const (
 	State_SegmentType_AS_CONFED_SEQUENCE E_State_SegmentType = 3
 	// State_SegmentType_AS_CONFED_SET corresponds to the value AS_CONFED_SET of State_SegmentType
 	State_SegmentType_AS_CONFED_SET E_State_SegmentType = 4
+)
+
+// E_Structured_NonTransitive_2OctetAsType is a derived int64 type which is used to represent
+// the enumerated node Structured_NonTransitive_2OctetAsType. An additional value named
+// Structured_NonTransitive_2OctetAsType_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_Structured_NonTransitive_2OctetAsType int64
+
+// IsYANGGoEnum ensures that Structured_NonTransitive_2OctetAsType implements the yang.GoEnum
+// interface. This ensures that Structured_NonTransitive_2OctetAsType can be identified as a
+// mapped type for a YANG enumeration.
+func (E_Structured_NonTransitive_2OctetAsType) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  Structured_NonTransitive_2OctetAsType.
+func (E_Structured_NonTransitive_2OctetAsType) ΛMap() map[string]map[int64]ygot.EnumDefinition {
+	return ΛEnum
+}
+
+// String returns a logging-friendly string for E_Structured_NonTransitive_2OctetAsType.
+func (e E_Structured_NonTransitive_2OctetAsType) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_Structured_NonTransitive_2OctetAsType")
+}
+
+const (
+	// Structured_NonTransitive_2OctetAsType_UNSET corresponds to the value UNSET of Structured_NonTransitive_2OctetAsType
+	Structured_NonTransitive_2OctetAsType_UNSET E_Structured_NonTransitive_2OctetAsType = 0
+	// Structured_NonTransitive_2OctetAsType_LINK_BANDWIDTH_SUBTYPE corresponds to the value LINK_BANDWIDTH_SUBTYPE of Structured_NonTransitive_2OctetAsType
+	Structured_NonTransitive_2OctetAsType_LINK_BANDWIDTH_SUBTYPE E_Structured_NonTransitive_2OctetAsType = 1
+)
+
+// E_Structured_TransitiveIpv4AddressType is a derived int64 type which is used to represent
+// the enumerated node Structured_TransitiveIpv4AddressType. An additional value named
+// Structured_TransitiveIpv4AddressType_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_Structured_TransitiveIpv4AddressType int64
+
+// IsYANGGoEnum ensures that Structured_TransitiveIpv4AddressType implements the yang.GoEnum
+// interface. This ensures that Structured_TransitiveIpv4AddressType can be identified as a
+// mapped type for a YANG enumeration.
+func (E_Structured_TransitiveIpv4AddressType) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  Structured_TransitiveIpv4AddressType.
+func (E_Structured_TransitiveIpv4AddressType) ΛMap() map[string]map[int64]ygot.EnumDefinition {
+	return ΛEnum
+}
+
+// String returns a logging-friendly string for E_Structured_TransitiveIpv4AddressType.
+func (e E_Structured_TransitiveIpv4AddressType) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_Structured_TransitiveIpv4AddressType")
+}
+
+const (
+	// Structured_TransitiveIpv4AddressType_UNSET corresponds to the value UNSET of Structured_TransitiveIpv4AddressType
+	Structured_TransitiveIpv4AddressType_UNSET E_Structured_TransitiveIpv4AddressType = 0
+	// Structured_TransitiveIpv4AddressType_ROUTE_TARGET_SUBTYPE corresponds to the value ROUTE_TARGET_SUBTYPE of Structured_TransitiveIpv4AddressType
+	Structured_TransitiveIpv4AddressType_ROUTE_TARGET_SUBTYPE E_Structured_TransitiveIpv4AddressType = 1
+	// Structured_TransitiveIpv4AddressType_ROUTE_ORIGIN_SUBTYPE corresponds to the value ROUTE_ORIGIN_SUBTYPE of Structured_TransitiveIpv4AddressType
+	Structured_TransitiveIpv4AddressType_ROUTE_ORIGIN_SUBTYPE E_Structured_TransitiveIpv4AddressType = 2
+)
+
+// E_Structured_TransitiveOpaqueType is a derived int64 type which is used to represent
+// the enumerated node Structured_TransitiveOpaqueType. An additional value named
+// Structured_TransitiveOpaqueType_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_Structured_TransitiveOpaqueType int64
+
+// IsYANGGoEnum ensures that Structured_TransitiveOpaqueType implements the yang.GoEnum
+// interface. This ensures that Structured_TransitiveOpaqueType can be identified as a
+// mapped type for a YANG enumeration.
+func (E_Structured_TransitiveOpaqueType) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  Structured_TransitiveOpaqueType.
+func (E_Structured_TransitiveOpaqueType) ΛMap() map[string]map[int64]ygot.EnumDefinition {
+	return ΛEnum
+}
+
+// String returns a logging-friendly string for E_Structured_TransitiveOpaqueType.
+func (e E_Structured_TransitiveOpaqueType) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_Structured_TransitiveOpaqueType")
+}
+
+const (
+	// Structured_TransitiveOpaqueType_UNSET corresponds to the value UNSET of Structured_TransitiveOpaqueType
+	Structured_TransitiveOpaqueType_UNSET E_Structured_TransitiveOpaqueType = 0
+	// Structured_TransitiveOpaqueType_COLOR_SUBTYPE corresponds to the value COLOR_SUBTYPE of Structured_TransitiveOpaqueType
+	Structured_TransitiveOpaqueType_COLOR_SUBTYPE E_Structured_TransitiveOpaqueType = 1
+	// Structured_TransitiveOpaqueType_ENCAPSULATION_SUBTYPE corresponds to the value ENCAPSULATION_SUBTYPE of Structured_TransitiveOpaqueType
+	Structured_TransitiveOpaqueType_ENCAPSULATION_SUBTYPE E_Structured_TransitiveOpaqueType = 2
+)
+
+// E_Structured_Transitive_2OctetAsType is a derived int64 type which is used to represent
+// the enumerated node Structured_Transitive_2OctetAsType. An additional value named
+// Structured_Transitive_2OctetAsType_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_Structured_Transitive_2OctetAsType int64
+
+// IsYANGGoEnum ensures that Structured_Transitive_2OctetAsType implements the yang.GoEnum
+// interface. This ensures that Structured_Transitive_2OctetAsType can be identified as a
+// mapped type for a YANG enumeration.
+func (E_Structured_Transitive_2OctetAsType) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  Structured_Transitive_2OctetAsType.
+func (E_Structured_Transitive_2OctetAsType) ΛMap() map[string]map[int64]ygot.EnumDefinition {
+	return ΛEnum
+}
+
+// String returns a logging-friendly string for E_Structured_Transitive_2OctetAsType.
+func (e E_Structured_Transitive_2OctetAsType) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_Structured_Transitive_2OctetAsType")
+}
+
+const (
+	// Structured_Transitive_2OctetAsType_UNSET corresponds to the value UNSET of Structured_Transitive_2OctetAsType
+	Structured_Transitive_2OctetAsType_UNSET E_Structured_Transitive_2OctetAsType = 0
+	// Structured_Transitive_2OctetAsType_ROUTE_TARGET_SUBTYPE corresponds to the value ROUTE_TARGET_SUBTYPE of Structured_Transitive_2OctetAsType
+	Structured_Transitive_2OctetAsType_ROUTE_TARGET_SUBTYPE E_Structured_Transitive_2OctetAsType = 1
+	// Structured_Transitive_2OctetAsType_ROUTE_ORIGIN_SUBTYPE corresponds to the value ROUTE_ORIGIN_SUBTYPE of Structured_Transitive_2OctetAsType
+	Structured_Transitive_2OctetAsType_ROUTE_ORIGIN_SUBTYPE E_Structured_Transitive_2OctetAsType = 2
+)
+
+// E_Structured_Transitive_4OctetAsType is a derived int64 type which is used to represent
+// the enumerated node Structured_Transitive_4OctetAsType. An additional value named
+// Structured_Transitive_4OctetAsType_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_Structured_Transitive_4OctetAsType int64
+
+// IsYANGGoEnum ensures that Structured_Transitive_4OctetAsType implements the yang.GoEnum
+// interface. This ensures that Structured_Transitive_4OctetAsType can be identified as a
+// mapped type for a YANG enumeration.
+func (E_Structured_Transitive_4OctetAsType) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  Structured_Transitive_4OctetAsType.
+func (E_Structured_Transitive_4OctetAsType) ΛMap() map[string]map[int64]ygot.EnumDefinition {
+	return ΛEnum
+}
+
+// String returns a logging-friendly string for E_Structured_Transitive_4OctetAsType.
+func (e E_Structured_Transitive_4OctetAsType) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_Structured_Transitive_4OctetAsType")
+}
+
+const (
+	// Structured_Transitive_4OctetAsType_UNSET corresponds to the value UNSET of Structured_Transitive_4OctetAsType
+	Structured_Transitive_4OctetAsType_UNSET E_Structured_Transitive_4OctetAsType = 0
+	// Structured_Transitive_4OctetAsType_ROUTE_TARGET_SUBTYPE corresponds to the value ROUTE_TARGET_SUBTYPE of Structured_Transitive_4OctetAsType
+	Structured_Transitive_4OctetAsType_ROUTE_TARGET_SUBTYPE E_Structured_Transitive_4OctetAsType = 1
+	// Structured_Transitive_4OctetAsType_ROUTE_ORIGIN_SUBTYPE corresponds to the value ROUTE_ORIGIN_SUBTYPE of Structured_Transitive_4OctetAsType
+	Structured_Transitive_4OctetAsType_ROUTE_ORIGIN_SUBTYPE E_Structured_Transitive_4OctetAsType = 2
 )
 
 // E_Tags_ValueType is a derived int64 type which is used to represent
