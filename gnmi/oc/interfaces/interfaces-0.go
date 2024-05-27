@@ -17275,7 +17275,7 @@ type Interface_PenaltyBasedAiedPathAny struct {
 	*ygnmi.NodePath
 }
 
-// DecayHalfLife (leaf): The amount of time after which an interface’s penalty is decreased by half. Decay-half-time should not be more than max-suppress-time.
+// DecayHalfLife (leaf): The amount of time after which an interface's penalty is decreased by half. Decay-half-time should not be more than max-suppress-time.
 //
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-interfaces"
@@ -17293,7 +17293,7 @@ func (n *Interface_PenaltyBasedAiedPath) DecayHalfLife() *Interface_PenaltyBased
 	return ps
 }
 
-// DecayHalfLife (leaf): The amount of time after which an interface’s penalty is decreased by half. Decay-half-time should not be more than max-suppress-time.
+// DecayHalfLife (leaf): The amount of time after which an interface's penalty is decreased by half. Decay-half-time should not be more than max-suppress-time.
 //
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-interfaces"
@@ -17347,7 +17347,7 @@ func (n *Interface_PenaltyBasedAiedPathAny) FlapPenalty() *Interface_PenaltyBase
 	return ps
 }
 
-// MaxSuppressTime (leaf): Maximum time an interface can remain damped since the last link down event no matter how unstable it has been prior to this period of stability. In a damped state, the interface’s state change will not be advertised.
+// MaxSuppressTime (leaf): Maximum time an interface can remain damped since the last link down event no matter how unstable it has been prior to this period of stability. In a damped state, the interface's state change will not be advertised.
 //
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-interfaces"
@@ -17365,7 +17365,7 @@ func (n *Interface_PenaltyBasedAiedPath) MaxSuppressTime() *Interface_PenaltyBas
 	return ps
 }
 
-// MaxSuppressTime (leaf): Maximum time an interface can remain damped since the last link down event no matter how unstable it has been prior to this period of stability. In a damped state, the interface’s state change will not be advertised.
+// MaxSuppressTime (leaf): Maximum time an interface can remain damped since the last link down event no matter how unstable it has been prior to this period of stability. In a damped state, the interface's state change will not be advertised.
 //
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-interfaces"

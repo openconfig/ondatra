@@ -1129,6 +1129,100 @@ func (n *Component_IdPathAny) State() ygnmi.WildcardQuery[string] {
 	)
 }
 
+// Component_LastPoweroffTimePath represents the /openconfig-platform/components/component/state/last-poweroff-time YANG schema element.
+type Component_LastPoweroffTimePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_LastPoweroffTimePathAny represents the wildcard version of the /openconfig-platform/components/component/state/last-poweroff-time YANG schema element.
+type Component_LastPoweroffTimePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/last-poweroff-time"
+//	Path from root:       "/components/component/state/last-poweroff-time"
+func (n *Component_LastPoweroffTimePath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Component",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "last-poweroff-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component).LastPoweroffTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/last-poweroff-time"
+//	Path from root:       "/components/component/state/last-poweroff-time"
+func (n *Component_LastPoweroffTimePathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Component",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "last-poweroff-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component).LastPoweroffTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
 // Component_LastRebootReasonPath represents the /openconfig-platform/components/component/state/last-reboot-reason YANG schema element.
 type Component_LastRebootReasonPath struct {
 	*ygnmi.NodePath
@@ -3563,6 +3657,90 @@ func (n *ComponentPathAny) IntegratedCircuit() *Component_IntegratedCircuitPathA
 	return ps
 }
 
+// LastPoweroffReason (container): Records last power-off reason for a component.
+//
+//	Defining module:      "openconfig-platform"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/last-poweroff-reason"
+//	Path from root:       "/components/component/state/last-poweroff-reason"
+func (n *ComponentPath) LastPoweroffReason() *Component_LastPoweroffReasonPath {
+	ps := &Component_LastPoweroffReasonPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "last-poweroff-reason"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// LastPoweroffReason (container): Records last power-off reason for a component.
+//
+//	Defining module:      "openconfig-platform"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/last-poweroff-reason"
+//	Path from root:       "/components/component/state/last-poweroff-reason"
+func (n *ComponentPathAny) LastPoweroffReason() *Component_LastPoweroffReasonPathAny {
+	ps := &Component_LastPoweroffReasonPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "last-poweroff-reason"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// LastPoweroffTime (leaf): This records the last time a component was directly powered
+// down. The value is a Unix Epoch timestamp (nanoseconds since
+// Jan 1, 1970 00:00:00 UTC). Component power-off can be:
+// - USER_INITIATED
+// - SYSTEM_INITIATED
+// - POWER_FAILURE
+// This field is not updated during reboots; those are tracked
+// in the 'last-reboot-time' leaf.
+//
+//	Defining module:      "openconfig-platform"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/last-poweroff-time"
+//	Path from root:       "/components/component/state/last-poweroff-time"
+func (n *ComponentPath) LastPoweroffTime() *Component_LastPoweroffTimePath {
+	ps := &Component_LastPoweroffTimePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "last-poweroff-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// LastPoweroffTime (leaf): This records the last time a component was directly powered
+// down. The value is a Unix Epoch timestamp (nanoseconds since
+// Jan 1, 1970 00:00:00 UTC). Component power-off can be:
+// - USER_INITIATED
+// - SYSTEM_INITIATED
+// - POWER_FAILURE
+// This field is not updated during reboots; those are tracked
+// in the 'last-reboot-time' leaf.
+//
+//	Defining module:      "openconfig-platform"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/last-poweroff-time"
+//	Path from root:       "/components/component/state/last-poweroff-time"
+func (n *ComponentPathAny) LastPoweroffTime() *Component_LastPoweroffTimePathAny {
+	ps := &Component_LastPoweroffTimePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "last-poweroff-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
 // LastRebootReason (leaf): This reports the reason of the last reboot of the component.
 //
 //	Defining module:      "openconfig-platform"
@@ -3601,7 +3779,8 @@ func (n *ComponentPathAny) LastRebootReason() *Component_LastRebootReasonPathAny
 
 // LastRebootTime (leaf): This reports the time of the last reboot of the component. The
 // value is the timestamp in nanoseconds relative to the Unix Epoch
-// (Jan 1, 1970 00:00:00 UTC).
+// (Jan 1, 1970 00:00:00 UTC). This timer is not updated during
+// power shutdowns; those are tracked in 'last-poweroff-time' leaf.
 //
 //	Defining module:      "openconfig-platform"
 //	Instantiating module: "openconfig-platform"
@@ -3621,7 +3800,8 @@ func (n *ComponentPath) LastRebootTime() *Component_LastRebootTimePath {
 
 // LastRebootTime (leaf): This reports the time of the last reboot of the component. The
 // value is the timestamp in nanoseconds relative to the Unix Epoch
-// (Jan 1, 1970 00:00:00 UTC).
+// (Jan 1, 1970 00:00:00 UTC). This timer is not updated during
+// power shutdowns; those are tracked in 'last-poweroff-time' leaf.
 //
 //	Defining module:      "openconfig-platform"
 //	Instantiating module: "openconfig-platform"
@@ -7571,7 +7751,11 @@ type Component_ControllerCardPathAny struct {
 	*ygnmi.NodePath
 }
 
-// PowerAdminState (leaf): Enable or disable power to the component
+// PowerAdminState (leaf): When set to POWER_DISABLED, the component should be shut down by removing
+// electrical power.  This is intended to be used to prevent the component
+// from becoming active even after a reboot of the system. A component
+// (if controller-card) may not honor power-admin-state depending on rules
+// defined in the description of the component config container.
 //
 //	Defining module:      "openconfig-platform-common"
 //	Instantiating module: "openconfig-platform"
@@ -7589,7 +7773,11 @@ func (n *Component_ControllerCardPath) PowerAdminState() *Component_ControllerCa
 	return ps
 }
 
-// PowerAdminState (leaf): Enable or disable power to the component
+// PowerAdminState (leaf): When set to POWER_DISABLED, the component should be shut down by removing
+// electrical power.  This is intended to be used to prevent the component
+// from becoming active even after a reboot of the system. A component
+// (if controller-card) may not honor power-admin-state depending on rules
+// defined in the description of the component config container.
 //
 //	Defining module:      "openconfig-platform-common"
 //	Instantiating module: "openconfig-platform"
@@ -9061,7 +9249,11 @@ type Component_FabricPathAny struct {
 	*ygnmi.NodePath
 }
 
-// PowerAdminState (leaf): Enable or disable power to the component
+// PowerAdminState (leaf): When set to POWER_DISABLED, the component should be shut down by removing
+// electrical power.  This is intended to be used to prevent the component
+// from becoming active even after a reboot of the system. A component
+// (if controller-card) may not honor power-admin-state depending on rules
+// defined in the description of the component config container.
 //
 //	Defining module:      "openconfig-platform-common"
 //	Instantiating module: "openconfig-platform"
@@ -9079,7 +9271,11 @@ func (n *Component_FabricPath) PowerAdminState() *Component_Fabric_PowerAdminSta
 	return ps
 }
 
-// PowerAdminState (leaf): Enable or disable power to the component
+// PowerAdminState (leaf): When set to POWER_DISABLED, the component should be shut down by removing
+// electrical power.  This is intended to be used to prevent the component
+// from becoming active even after a reboot of the system. A component
+// (if controller-card) may not honor power-admin-state depending on rules
+// defined in the description of the component config container.
 //
 //	Defining module:      "openconfig-platform-common"
 //	Instantiating module: "openconfig-platform"
@@ -32883,6 +33079,340 @@ func (n *Component_IntegratedCircuit_Utilization_ResourcePathMapAny) Config() yg
 	)
 }
 
+// Component_LastPoweroffReason_DetailsPath represents the /openconfig-platform/components/component/state/last-poweroff-reason/details YANG schema element.
+type Component_LastPoweroffReason_DetailsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_LastPoweroffReason_DetailsPathAny represents the wildcard version of the /openconfig-platform/components/component/state/last-poweroff-reason/details YANG schema element.
+type Component_LastPoweroffReason_DetailsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "details"
+//	Path from root:       "/components/component/state/last-poweroff-reason/details"
+func (n *Component_LastPoweroffReason_DetailsPath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewSingletonQuery[string](
+		"Component_LastPoweroffReason",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"details"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Component_LastPoweroffReason).Details
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_LastPoweroffReason) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "details"
+//	Path from root:       "/components/component/state/last-poweroff-reason/details"
+func (n *Component_LastPoweroffReason_DetailsPathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"Component_LastPoweroffReason",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"details"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Component_LastPoweroffReason).Details
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_LastPoweroffReason) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Component_LastPoweroffReason_TriggerPath represents the /openconfig-platform/components/component/state/last-poweroff-reason/trigger YANG schema element.
+type Component_LastPoweroffReason_TriggerPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_LastPoweroffReason_TriggerPathAny represents the wildcard version of the /openconfig-platform/components/component/state/last-poweroff-reason/trigger YANG schema element.
+type Component_LastPoweroffReason_TriggerPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "trigger"
+//	Path from root:       "/components/component/state/last-poweroff-reason/trigger"
+func (n *Component_LastPoweroffReason_TriggerPath) State() ygnmi.SingletonQuery[oc.E_PlatformTypes_ComponentLastPoweroffReasonTrigger] {
+	return ygnmi.NewSingletonQuery[oc.E_PlatformTypes_ComponentLastPoweroffReasonTrigger](
+		"Component_LastPoweroffReason",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"trigger"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_PlatformTypes_ComponentLastPoweroffReasonTrigger, bool) {
+			ret := gs.(*oc.Component_LastPoweroffReason).Trigger
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_LastPoweroffReason) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "trigger"
+//	Path from root:       "/components/component/state/last-poweroff-reason/trigger"
+func (n *Component_LastPoweroffReason_TriggerPathAny) State() ygnmi.WildcardQuery[oc.E_PlatformTypes_ComponentLastPoweroffReasonTrigger] {
+	return ygnmi.NewWildcardQuery[oc.E_PlatformTypes_ComponentLastPoweroffReasonTrigger](
+		"Component_LastPoweroffReason",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"trigger"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_PlatformTypes_ComponentLastPoweroffReasonTrigger, bool) {
+			ret := gs.(*oc.Component_LastPoweroffReason).Trigger
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_LastPoweroffReason) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Component_LastPoweroffReasonPath represents the /openconfig-platform/components/component/state/last-poweroff-reason YANG schema element.
+type Component_LastPoweroffReasonPath struct {
+	*ygnmi.NodePath
+}
+
+// Component_LastPoweroffReasonPathAny represents the wildcard version of the /openconfig-platform/components/component/state/last-poweroff-reason YANG schema element.
+type Component_LastPoweroffReasonPathAny struct {
+	*ygnmi.NodePath
+}
+
+// Details (leaf): Provides a detailed reason for component power-off.
+// For system-initiated power-offs, this field can include
+// specific causes (e.g., critical errors resulting in a
+// controller-card bootloop).
+//
+//	Defining module:      "openconfig-platform-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "details"
+//	Path from root:       "/components/component/state/last-poweroff-reason/details"
+func (n *Component_LastPoweroffReasonPath) Details() *Component_LastPoweroffReason_DetailsPath {
+	ps := &Component_LastPoweroffReason_DetailsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"details"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Details (leaf): Provides a detailed reason for component power-off.
+// For system-initiated power-offs, this field can include
+// specific causes (e.g., critical errors resulting in a
+// controller-card bootloop).
+//
+//	Defining module:      "openconfig-platform-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "details"
+//	Path from root:       "/components/component/state/last-poweroff-reason/details"
+func (n *Component_LastPoweroffReasonPathAny) Details() *Component_LastPoweroffReason_DetailsPathAny {
+	ps := &Component_LastPoweroffReason_DetailsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"details"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Trigger (leaf): Records the generic triggers for the last poweroff
+// event. Component power-off can be triggered
+// in various ways,
+//   - USER_INITIATED
+//   - SYSTEM_INITIATED
+//   - POWER_FAILURE
+//
+// This field is not updated during reboots; those are
+// tracked in the 'last-reboot-reason' leaf.
+//
+//	Defining module:      "openconfig-platform-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "trigger"
+//	Path from root:       "/components/component/state/last-poweroff-reason/trigger"
+func (n *Component_LastPoweroffReasonPath) Trigger() *Component_LastPoweroffReason_TriggerPath {
+	ps := &Component_LastPoweroffReason_TriggerPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"trigger"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Trigger (leaf): Records the generic triggers for the last poweroff
+// event. Component power-off can be triggered
+// in various ways,
+//   - USER_INITIATED
+//   - SYSTEM_INITIATED
+//   - POWER_FAILURE
+//
+// This field is not updated during reboots; those are
+// tracked in the 'last-reboot-reason' leaf.
+//
+//	Defining module:      "openconfig-platform-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "trigger"
+//	Path from root:       "/components/component/state/last-poweroff-reason/trigger"
+func (n *Component_LastPoweroffReasonPathAny) Trigger() *Component_LastPoweroffReason_TriggerPathAny {
+	ps := &Component_LastPoweroffReason_TriggerPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"trigger"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_LastPoweroffReasonPath) State() ygnmi.SingletonQuery[*oc.Component_LastPoweroffReason] {
+	return ygnmi.NewSingletonQuery[*oc.Component_LastPoweroffReason](
+		"Component_LastPoweroffReason",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_LastPoweroffReasonPathAny) State() ygnmi.WildcardQuery[*oc.Component_LastPoweroffReason] {
+	return ygnmi.NewWildcardQuery[*oc.Component_LastPoweroffReason](
+		"Component_LastPoweroffReason",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
 // Component_LastSwitchoverReason_DetailsPath represents the /openconfig-platform/components/component/state/last-switchover-reason/details YANG schema element.
 type Component_LastSwitchoverReason_DetailsPath struct {
 	*ygnmi.NodePath
@@ -33467,7 +33997,11 @@ type Component_LinecardPathAny struct {
 	*ygnmi.NodePath
 }
 
-// PowerAdminState (leaf): Enable or disable power to the component
+// PowerAdminState (leaf): When set to POWER_DISABLED, the component should be shut down by removing
+// electrical power.  This is intended to be used to prevent the component
+// from becoming active even after a reboot of the system. A component
+// (if controller-card) may not honor power-admin-state depending on rules
+// defined in the description of the component config container.
 //
 //	Defining module:      "openconfig-platform-common"
 //	Instantiating module: "openconfig-platform"
@@ -33485,7 +34019,11 @@ func (n *Component_LinecardPath) PowerAdminState() *Component_Linecard_PowerAdmi
 	return ps
 }
 
-// PowerAdminState (leaf): Enable or disable power to the component
+// PowerAdminState (leaf): When set to POWER_DISABLED, the component should be shut down by removing
+// electrical power.  This is intended to be used to prevent the component
+// from becoming active even after a reboot of the system. A component
+// (if controller-card) may not honor power-admin-state depending on rules
+// defined in the description of the component config container.
 //
 //	Defining module:      "openconfig-platform-common"
 //	Instantiating module: "openconfig-platform"

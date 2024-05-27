@@ -992,16 +992,17 @@ func (*BgpPeer_Counters) ΛBelongingModule() string {
 
 // BgpPeer_UnicastIpv4Prefix represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix YANG schema element.
 type BgpPeer_UnicastIpv4Prefix struct {
-	Address                *string                                `path:"state/address|address" module:"open-traffic-generator-bgp/open-traffic-generator-bgp|open-traffic-generator-bgp" shadow-path:"address" shadow-module:"open-traffic-generator-bgp"`
-	AsPath                 []*BgpPeer_UnicastIpv4Prefix_AsPath    `path:"state/as-path" module:"open-traffic-generator-bgp/open-traffic-generator-bgp"`
-	Community              []*BgpPeer_UnicastIpv4Prefix_Community `path:"state/community" module:"open-traffic-generator-bgp/open-traffic-generator-bgp"`
-	LocalPreference        *uint32                                `path:"state/local-preference" module:"open-traffic-generator-bgp/open-traffic-generator-bgp"`
-	MultiExitDiscriminator *uint32                                `path:"state/multi-exit-discriminator" module:"open-traffic-generator-bgp/open-traffic-generator-bgp"`
-	NextHopIpv4Address     *string                                `path:"state/next-hop-ipv4-address" module:"open-traffic-generator-bgp/open-traffic-generator-bgp"`
-	NextHopIpv6Address     *string                                `path:"state/next-hop-ipv6-address" module:"open-traffic-generator-bgp/open-traffic-generator-bgp"`
-	Origin                 E_UnicastIpv4Prefix_Origin             `path:"state/origin|origin" module:"open-traffic-generator-bgp/open-traffic-generator-bgp|open-traffic-generator-bgp" shadow-path:"origin" shadow-module:"open-traffic-generator-bgp"`
-	PathId                 *uint32                                `path:"state/path-id|path-id" module:"open-traffic-generator-bgp/open-traffic-generator-bgp|open-traffic-generator-bgp" shadow-path:"path-id" shadow-module:"open-traffic-generator-bgp"`
-	PrefixLength           *uint32                                `path:"state/prefix-length|prefix-length" module:"open-traffic-generator-bgp/open-traffic-generator-bgp|open-traffic-generator-bgp" shadow-path:"prefix-length" shadow-module:"open-traffic-generator-bgp"`
+	Address                *string                                        `path:"state/address|address" module:"open-traffic-generator-bgp/open-traffic-generator-bgp|open-traffic-generator-bgp" shadow-path:"address" shadow-module:"open-traffic-generator-bgp"`
+	AsPath                 []*BgpPeer_UnicastIpv4Prefix_AsPath            `path:"state/as-path" module:"open-traffic-generator-bgp/open-traffic-generator-bgp"`
+	Community              []*BgpPeer_UnicastIpv4Prefix_Community         `path:"state/community" module:"open-traffic-generator-bgp/open-traffic-generator-bgp"`
+	ExtendedCommunity      []*BgpPeer_UnicastIpv4Prefix_ExtendedCommunity `path:"state/extended-community" module:"open-traffic-generator-bgp/open-traffic-generator-bgp"`
+	LocalPreference        *uint32                                        `path:"state/local-preference" module:"open-traffic-generator-bgp/open-traffic-generator-bgp"`
+	MultiExitDiscriminator *uint32                                        `path:"state/multi-exit-discriminator" module:"open-traffic-generator-bgp/open-traffic-generator-bgp"`
+	NextHopIpv4Address     *string                                        `path:"state/next-hop-ipv4-address" module:"open-traffic-generator-bgp/open-traffic-generator-bgp"`
+	NextHopIpv6Address     *string                                        `path:"state/next-hop-ipv6-address" module:"open-traffic-generator-bgp/open-traffic-generator-bgp"`
+	Origin                 E_UnicastIpv4Prefix_Origin                     `path:"state/origin|origin" module:"open-traffic-generator-bgp/open-traffic-generator-bgp|open-traffic-generator-bgp" shadow-path:"origin" shadow-module:"open-traffic-generator-bgp"`
+	PathId                 *uint32                                        `path:"state/path-id|path-id" module:"open-traffic-generator-bgp/open-traffic-generator-bgp|open-traffic-generator-bgp" shadow-path:"path-id" shadow-module:"open-traffic-generator-bgp"`
+	PrefixLength           *uint32                                        `path:"state/prefix-length|prefix-length" module:"open-traffic-generator-bgp/open-traffic-generator-bgp|open-traffic-generator-bgp" shadow-path:"prefix-length" shadow-module:"open-traffic-generator-bgp"`
 }
 
 // IsYANGGoStruct ensures that BgpPeer_UnicastIpv4Prefix implements the yang.GoStruct
@@ -1201,6 +1202,9 @@ func (t *BgpPeer_UnicastIpv4Prefix) PopulateDefaults() {
 		e.PopulateDefaults()
 	}
 	for _, e := range t.Community {
+		e.PopulateDefaults()
+	}
+	for _, e := range t.ExtendedCommunity {
 		e.PopulateDefaults()
 	}
 }
@@ -1453,18 +1457,1642 @@ func (*BgpPeer_UnicastIpv4Prefix_Community) ΛBelongingModule() string {
 	return "open-traffic-generator-bgp"
 }
 
+// BgpPeer_UnicastIpv4Prefix_ExtendedCommunity represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/extended-community YANG schema element.
+type BgpPeer_UnicastIpv4Prefix_ExtendedCommunity struct {
+	Raw        *string                                                 `path:"raw" module:"open-traffic-generator-bgp"`
+	Structured *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured `path:"structured" module:"open-traffic-generator-bgp"`
+}
+
+// IsYANGGoStruct ensures that BgpPeer_UnicastIpv4Prefix_ExtendedCommunity implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*BgpPeer_UnicastIpv4Prefix_ExtendedCommunity) IsYANGGoStruct() {}
+
+// GetOrCreateStructured retrieves the value of the Structured field
+// or returns the existing field if it already exists.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity) GetOrCreateStructured() *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured {
+	if t.Structured != nil {
+		return t.Structured
+	}
+	t.Structured = &BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured{}
+	return t.Structured
+}
+
+// GetStructured returns the value of the Structured struct pointer
+// from BgpPeer_UnicastIpv4Prefix_ExtendedCommunity. If the receiver or the field Structured is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity) GetStructured() *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured {
+	if t != nil && t.Structured != nil {
+		return t.Structured
+	}
+	return nil
+}
+
+// GetRaw retrieves the value of the leaf Raw from the BgpPeer_UnicastIpv4Prefix_ExtendedCommunity
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Raw is set, it can
+// safely use t.GetRaw() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Raw == nil' before retrieving the leaf's value.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity) GetRaw() string {
+	if t == nil || t.Raw == nil {
+		return ""
+	}
+	return *t.Raw
+}
+
+// SetRaw sets the value of the leaf Raw in the BgpPeer_UnicastIpv4Prefix_ExtendedCommunity
+// struct.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity) SetRaw(v string) {
+	t.Raw = &v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the BgpPeer_UnicastIpv4Prefix_ExtendedCommunity
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+	t.Structured.PopulateDefaults()
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["BgpPeer_UnicastIpv4Prefix_ExtendedCommunity"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of BgpPeer_UnicastIpv4Prefix_ExtendedCommunity.
+func (*BgpPeer_UnicastIpv4Prefix_ExtendedCommunity) ΛBelongingModule() string {
+	return "open-traffic-generator-bgp"
+}
+
+// BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/extended-community/structured YANG schema element.
+type BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured struct {
+	BgpExtendedCommunityStructuredType E_ExtendedCommunity_BgpExtendedCommunityStructuredType                             `path:"bgp-extended-community-structured_type" module:"open-traffic-generator-bgp"`
+	NonTransitive_2OctetAsType         *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType `path:"non_transitive_2octet_as_type" module:"open-traffic-generator-bgp"`
+	Transitive_2OctetAsType            *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType    `path:"transitive_2octet_as_type" module:"open-traffic-generator-bgp"`
+	Transitive_4OctetAsType            *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType    `path:"transitive_4octet_as_type" module:"open-traffic-generator-bgp"`
+	TransitiveIpv4AddressType          *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType  `path:"transitive_ipv4_address_type" module:"open-traffic-generator-bgp"`
+	TransitiveOpaqueType               *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType       `path:"transitive_opaque_type" module:"open-traffic-generator-bgp"`
+}
+
+// IsYANGGoStruct ensures that BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured) IsYANGGoStruct() {}
+
+// GetOrCreateNonTransitive_2OctetAsType retrieves the value of the NonTransitive_2OctetAsType field
+// or returns the existing field if it already exists.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured) GetOrCreateNonTransitive_2OctetAsType() *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType {
+	if t.NonTransitive_2OctetAsType != nil {
+		return t.NonTransitive_2OctetAsType
+	}
+	t.NonTransitive_2OctetAsType = &BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType{}
+	return t.NonTransitive_2OctetAsType
+}
+
+// GetOrCreateTransitive_2OctetAsType retrieves the value of the Transitive_2OctetAsType field
+// or returns the existing field if it already exists.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured) GetOrCreateTransitive_2OctetAsType() *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType {
+	if t.Transitive_2OctetAsType != nil {
+		return t.Transitive_2OctetAsType
+	}
+	t.Transitive_2OctetAsType = &BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType{}
+	return t.Transitive_2OctetAsType
+}
+
+// GetOrCreateTransitive_4OctetAsType retrieves the value of the Transitive_4OctetAsType field
+// or returns the existing field if it already exists.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured) GetOrCreateTransitive_4OctetAsType() *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType {
+	if t.Transitive_4OctetAsType != nil {
+		return t.Transitive_4OctetAsType
+	}
+	t.Transitive_4OctetAsType = &BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType{}
+	return t.Transitive_4OctetAsType
+}
+
+// GetOrCreateTransitiveIpv4AddressType retrieves the value of the TransitiveIpv4AddressType field
+// or returns the existing field if it already exists.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured) GetOrCreateTransitiveIpv4AddressType() *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType {
+	if t.TransitiveIpv4AddressType != nil {
+		return t.TransitiveIpv4AddressType
+	}
+	t.TransitiveIpv4AddressType = &BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType{}
+	return t.TransitiveIpv4AddressType
+}
+
+// GetOrCreateTransitiveOpaqueType retrieves the value of the TransitiveOpaqueType field
+// or returns the existing field if it already exists.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured) GetOrCreateTransitiveOpaqueType() *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType {
+	if t.TransitiveOpaqueType != nil {
+		return t.TransitiveOpaqueType
+	}
+	t.TransitiveOpaqueType = &BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType{}
+	return t.TransitiveOpaqueType
+}
+
+// GetNonTransitive_2OctetAsType returns the value of the NonTransitive_2OctetAsType struct pointer
+// from BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured. If the receiver or the field NonTransitive_2OctetAsType is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured) GetNonTransitive_2OctetAsType() *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType {
+	if t != nil && t.NonTransitive_2OctetAsType != nil {
+		return t.NonTransitive_2OctetAsType
+	}
+	return nil
+}
+
+// GetTransitive_2OctetAsType returns the value of the Transitive_2OctetAsType struct pointer
+// from BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured. If the receiver or the field Transitive_2OctetAsType is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured) GetTransitive_2OctetAsType() *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType {
+	if t != nil && t.Transitive_2OctetAsType != nil {
+		return t.Transitive_2OctetAsType
+	}
+	return nil
+}
+
+// GetTransitive_4OctetAsType returns the value of the Transitive_4OctetAsType struct pointer
+// from BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured. If the receiver or the field Transitive_4OctetAsType is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured) GetTransitive_4OctetAsType() *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType {
+	if t != nil && t.Transitive_4OctetAsType != nil {
+		return t.Transitive_4OctetAsType
+	}
+	return nil
+}
+
+// GetTransitiveIpv4AddressType returns the value of the TransitiveIpv4AddressType struct pointer
+// from BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured. If the receiver or the field TransitiveIpv4AddressType is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured) GetTransitiveIpv4AddressType() *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType {
+	if t != nil && t.TransitiveIpv4AddressType != nil {
+		return t.TransitiveIpv4AddressType
+	}
+	return nil
+}
+
+// GetTransitiveOpaqueType returns the value of the TransitiveOpaqueType struct pointer
+// from BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured. If the receiver or the field TransitiveOpaqueType is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured) GetTransitiveOpaqueType() *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType {
+	if t != nil && t.TransitiveOpaqueType != nil {
+		return t.TransitiveOpaqueType
+	}
+	return nil
+}
+
+// GetBgpExtendedCommunityStructuredType retrieves the value of the leaf BgpExtendedCommunityStructuredType from the BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if BgpExtendedCommunityStructuredType is set, it can
+// safely use t.GetBgpExtendedCommunityStructuredType() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.BgpExtendedCommunityStructuredType == nil' before retrieving the leaf's value.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured) GetBgpExtendedCommunityStructuredType() E_ExtendedCommunity_BgpExtendedCommunityStructuredType {
+	if t == nil || t.BgpExtendedCommunityStructuredType == 0 {
+		return 0
+	}
+	return t.BgpExtendedCommunityStructuredType
+}
+
+// SetBgpExtendedCommunityStructuredType sets the value of the leaf BgpExtendedCommunityStructuredType in the BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured
+// struct.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured) SetBgpExtendedCommunityStructuredType(v E_ExtendedCommunity_BgpExtendedCommunityStructuredType) {
+	t.BgpExtendedCommunityStructuredType = v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+	t.NonTransitive_2OctetAsType.PopulateDefaults()
+	t.Transitive_2OctetAsType.PopulateDefaults()
+	t.Transitive_4OctetAsType.PopulateDefaults()
+	t.TransitiveIpv4AddressType.PopulateDefaults()
+	t.TransitiveOpaqueType.PopulateDefaults()
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured.
+func (*BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured) ΛBelongingModule() string {
+	return "open-traffic-generator-bgp"
+}
+
+// BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/extended-community/structured/non_transitive_2octet_as_type YANG schema element.
+type BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType struct {
+	LinkBandwidthSubtype       *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype `path:"link_bandwidth_subtype" module:"open-traffic-generator-bgp"`
+	NonTransitive_2OctetAsType E_Structured_NonTransitive_2OctetAsType                                                                 `path:"non_transitive_2octet_as_type" module:"open-traffic-generator-bgp"`
+}
+
+// IsYANGGoStruct ensures that BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType) IsYANGGoStruct() {
+}
+
+// GetOrCreateLinkBandwidthSubtype retrieves the value of the LinkBandwidthSubtype field
+// or returns the existing field if it already exists.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType) GetOrCreateLinkBandwidthSubtype() *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype {
+	if t.LinkBandwidthSubtype != nil {
+		return t.LinkBandwidthSubtype
+	}
+	t.LinkBandwidthSubtype = &BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype{}
+	return t.LinkBandwidthSubtype
+}
+
+// GetLinkBandwidthSubtype returns the value of the LinkBandwidthSubtype struct pointer
+// from BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType. If the receiver or the field LinkBandwidthSubtype is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType) GetLinkBandwidthSubtype() *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype {
+	if t != nil && t.LinkBandwidthSubtype != nil {
+		return t.LinkBandwidthSubtype
+	}
+	return nil
+}
+
+// GetNonTransitive_2OctetAsType retrieves the value of the leaf NonTransitive_2OctetAsType from the BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if NonTransitive_2OctetAsType is set, it can
+// safely use t.GetNonTransitive_2OctetAsType() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.NonTransitive_2OctetAsType == nil' before retrieving the leaf's value.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType) GetNonTransitive_2OctetAsType() E_Structured_NonTransitive_2OctetAsType {
+	if t == nil || t.NonTransitive_2OctetAsType == 0 {
+		return 0
+	}
+	return t.NonTransitive_2OctetAsType
+}
+
+// SetNonTransitive_2OctetAsType sets the value of the leaf NonTransitive_2OctetAsType in the BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType
+// struct.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType) SetNonTransitive_2OctetAsType(v E_Structured_NonTransitive_2OctetAsType) {
+	t.NonTransitive_2OctetAsType = v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+	t.LinkBandwidthSubtype.PopulateDefaults()
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType.
+func (*BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType) ΛBelongingModule() string {
+	return "open-traffic-generator-bgp"
+}
+
+// BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/extended-community/structured/non_transitive_2octet_as_type/link_bandwidth_subtype YANG schema element.
+type BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype struct {
+	Bandwidth      Binary  `path:"bandwidth" module:"open-traffic-generator-bgp"`
+	Global_2ByteAs *uint16 `path:"global_2byte_as" module:"open-traffic-generator-bgp"`
+}
+
+// IsYANGGoStruct ensures that BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype) IsYANGGoStruct() {
+}
+
+// GetBandwidth retrieves the value of the leaf Bandwidth from the BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Bandwidth is set, it can
+// safely use t.GetBandwidth() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Bandwidth == nil' before retrieving the leaf's value.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype) GetBandwidth() Binary {
+	if t == nil || t.Bandwidth == nil {
+		return nil
+	}
+	return t.Bandwidth
+}
+
+// GetGlobal_2ByteAs retrieves the value of the leaf Global_2ByteAs from the BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Global_2ByteAs is set, it can
+// safely use t.GetGlobal_2ByteAs() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Global_2ByteAs == nil' before retrieving the leaf's value.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype) GetGlobal_2ByteAs() uint16 {
+	if t == nil || t.Global_2ByteAs == nil {
+		return 0
+	}
+	return *t.Global_2ByteAs
+}
+
+// SetBandwidth sets the value of the leaf Bandwidth in the BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype
+// struct.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype) SetBandwidth(v Binary) {
+	t.Bandwidth = v
+}
+
+// SetGlobal_2ByteAs sets the value of the leaf Global_2ByteAs in the BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype
+// struct.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype) SetGlobal_2ByteAs(v uint16) {
+	t.Global_2ByteAs = &v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype.
+func (*BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype) ΛBelongingModule() string {
+	return "open-traffic-generator-bgp"
+}
+
+// BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/extended-community/structured/transitive_ipv4_address_type YANG schema element.
+type BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType struct {
+	RouteOriginSubtype        *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype `path:"route_origin_subtype" module:"open-traffic-generator-bgp"`
+	RouteTargetSubtype        *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype `path:"route_target_subtype" module:"open-traffic-generator-bgp"`
+	TransitiveIpv4AddressType E_Structured_TransitiveIpv4AddressType                                                               `path:"transitive_ipv4_address_type" module:"open-traffic-generator-bgp"`
+}
+
+// IsYANGGoStruct ensures that BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType) IsYANGGoStruct() {
+}
+
+// GetOrCreateRouteOriginSubtype retrieves the value of the RouteOriginSubtype field
+// or returns the existing field if it already exists.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType) GetOrCreateRouteOriginSubtype() *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype {
+	if t.RouteOriginSubtype != nil {
+		return t.RouteOriginSubtype
+	}
+	t.RouteOriginSubtype = &BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype{}
+	return t.RouteOriginSubtype
+}
+
+// GetOrCreateRouteTargetSubtype retrieves the value of the RouteTargetSubtype field
+// or returns the existing field if it already exists.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType) GetOrCreateRouteTargetSubtype() *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype {
+	if t.RouteTargetSubtype != nil {
+		return t.RouteTargetSubtype
+	}
+	t.RouteTargetSubtype = &BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype{}
+	return t.RouteTargetSubtype
+}
+
+// GetRouteOriginSubtype returns the value of the RouteOriginSubtype struct pointer
+// from BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType. If the receiver or the field RouteOriginSubtype is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType) GetRouteOriginSubtype() *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype {
+	if t != nil && t.RouteOriginSubtype != nil {
+		return t.RouteOriginSubtype
+	}
+	return nil
+}
+
+// GetRouteTargetSubtype returns the value of the RouteTargetSubtype struct pointer
+// from BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType. If the receiver or the field RouteTargetSubtype is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType) GetRouteTargetSubtype() *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype {
+	if t != nil && t.RouteTargetSubtype != nil {
+		return t.RouteTargetSubtype
+	}
+	return nil
+}
+
+// GetTransitiveIpv4AddressType retrieves the value of the leaf TransitiveIpv4AddressType from the BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if TransitiveIpv4AddressType is set, it can
+// safely use t.GetTransitiveIpv4AddressType() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.TransitiveIpv4AddressType == nil' before retrieving the leaf's value.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType) GetTransitiveIpv4AddressType() E_Structured_TransitiveIpv4AddressType {
+	if t == nil || t.TransitiveIpv4AddressType == 0 {
+		return 0
+	}
+	return t.TransitiveIpv4AddressType
+}
+
+// SetTransitiveIpv4AddressType sets the value of the leaf TransitiveIpv4AddressType in the BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType
+// struct.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType) SetTransitiveIpv4AddressType(v E_Structured_TransitiveIpv4AddressType) {
+	t.TransitiveIpv4AddressType = v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+	t.RouteOriginSubtype.PopulateDefaults()
+	t.RouteTargetSubtype.PopulateDefaults()
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType.
+func (*BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType) ΛBelongingModule() string {
+	return "open-traffic-generator-bgp"
+}
+
+// BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/extended-community/structured/transitive_ipv4_address_type/route_origin_subtype YANG schema element.
+type BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype struct {
+	GlobalIpv4Admin  *string `path:"global_ipv4_admin" module:"open-traffic-generator-bgp"`
+	Local_2ByteAdmin *uint16 `path:"local_2byte_admin" module:"open-traffic-generator-bgp"`
+}
+
+// IsYANGGoStruct ensures that BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype) IsYANGGoStruct() {
+}
+
+// GetGlobalIpv4Admin retrieves the value of the leaf GlobalIpv4Admin from the BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if GlobalIpv4Admin is set, it can
+// safely use t.GetGlobalIpv4Admin() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.GlobalIpv4Admin == nil' before retrieving the leaf's value.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype) GetGlobalIpv4Admin() string {
+	if t == nil || t.GlobalIpv4Admin == nil {
+		return ""
+	}
+	return *t.GlobalIpv4Admin
+}
+
+// GetLocal_2ByteAdmin retrieves the value of the leaf Local_2ByteAdmin from the BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Local_2ByteAdmin is set, it can
+// safely use t.GetLocal_2ByteAdmin() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Local_2ByteAdmin == nil' before retrieving the leaf's value.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype) GetLocal_2ByteAdmin() uint16 {
+	if t == nil || t.Local_2ByteAdmin == nil {
+		return 0
+	}
+	return *t.Local_2ByteAdmin
+}
+
+// SetGlobalIpv4Admin sets the value of the leaf GlobalIpv4Admin in the BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype
+// struct.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype) SetGlobalIpv4Admin(v string) {
+	t.GlobalIpv4Admin = &v
+}
+
+// SetLocal_2ByteAdmin sets the value of the leaf Local_2ByteAdmin in the BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype
+// struct.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype) SetLocal_2ByteAdmin(v uint16) {
+	t.Local_2ByteAdmin = &v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype.
+func (*BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype) ΛBelongingModule() string {
+	return "open-traffic-generator-bgp"
+}
+
+// BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/extended-community/structured/transitive_ipv4_address_type/route_target_subtype YANG schema element.
+type BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype struct {
+	GlobalIpv4Admin  *string `path:"global_ipv4_admin" module:"open-traffic-generator-bgp"`
+	Local_2ByteAdmin *uint16 `path:"local_2byte_admin" module:"open-traffic-generator-bgp"`
+}
+
+// IsYANGGoStruct ensures that BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype) IsYANGGoStruct() {
+}
+
+// GetGlobalIpv4Admin retrieves the value of the leaf GlobalIpv4Admin from the BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if GlobalIpv4Admin is set, it can
+// safely use t.GetGlobalIpv4Admin() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.GlobalIpv4Admin == nil' before retrieving the leaf's value.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype) GetGlobalIpv4Admin() string {
+	if t == nil || t.GlobalIpv4Admin == nil {
+		return ""
+	}
+	return *t.GlobalIpv4Admin
+}
+
+// GetLocal_2ByteAdmin retrieves the value of the leaf Local_2ByteAdmin from the BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Local_2ByteAdmin is set, it can
+// safely use t.GetLocal_2ByteAdmin() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Local_2ByteAdmin == nil' before retrieving the leaf's value.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype) GetLocal_2ByteAdmin() uint16 {
+	if t == nil || t.Local_2ByteAdmin == nil {
+		return 0
+	}
+	return *t.Local_2ByteAdmin
+}
+
+// SetGlobalIpv4Admin sets the value of the leaf GlobalIpv4Admin in the BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype
+// struct.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype) SetGlobalIpv4Admin(v string) {
+	t.GlobalIpv4Admin = &v
+}
+
+// SetLocal_2ByteAdmin sets the value of the leaf Local_2ByteAdmin in the BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype
+// struct.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype) SetLocal_2ByteAdmin(v uint16) {
+	t.Local_2ByteAdmin = &v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype.
+func (*BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype) ΛBelongingModule() string {
+	return "open-traffic-generator-bgp"
+}
+
+// BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/extended-community/structured/transitive_opaque_type YANG schema element.
+type BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType struct {
+	ColorSubtype         *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype         `path:"color_subtype" module:"open-traffic-generator-bgp"`
+	EncapsulationSubtype *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype `path:"encapsulation_subtype" module:"open-traffic-generator-bgp"`
+	TransitiveOpaqueType E_Structured_TransitiveOpaqueType                                                                 `path:"transitive_opaque_type" module:"open-traffic-generator-bgp"`
+}
+
+// IsYANGGoStruct ensures that BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType) IsYANGGoStruct() {
+}
+
+// GetOrCreateColorSubtype retrieves the value of the ColorSubtype field
+// or returns the existing field if it already exists.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType) GetOrCreateColorSubtype() *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype {
+	if t.ColorSubtype != nil {
+		return t.ColorSubtype
+	}
+	t.ColorSubtype = &BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype{}
+	return t.ColorSubtype
+}
+
+// GetOrCreateEncapsulationSubtype retrieves the value of the EncapsulationSubtype field
+// or returns the existing field if it already exists.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType) GetOrCreateEncapsulationSubtype() *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype {
+	if t.EncapsulationSubtype != nil {
+		return t.EncapsulationSubtype
+	}
+	t.EncapsulationSubtype = &BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype{}
+	return t.EncapsulationSubtype
+}
+
+// GetColorSubtype returns the value of the ColorSubtype struct pointer
+// from BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType. If the receiver or the field ColorSubtype is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType) GetColorSubtype() *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype {
+	if t != nil && t.ColorSubtype != nil {
+		return t.ColorSubtype
+	}
+	return nil
+}
+
+// GetEncapsulationSubtype returns the value of the EncapsulationSubtype struct pointer
+// from BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType. If the receiver or the field EncapsulationSubtype is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType) GetEncapsulationSubtype() *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype {
+	if t != nil && t.EncapsulationSubtype != nil {
+		return t.EncapsulationSubtype
+	}
+	return nil
+}
+
+// GetTransitiveOpaqueType retrieves the value of the leaf TransitiveOpaqueType from the BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if TransitiveOpaqueType is set, it can
+// safely use t.GetTransitiveOpaqueType() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.TransitiveOpaqueType == nil' before retrieving the leaf's value.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType) GetTransitiveOpaqueType() E_Structured_TransitiveOpaqueType {
+	if t == nil || t.TransitiveOpaqueType == 0 {
+		return 0
+	}
+	return t.TransitiveOpaqueType
+}
+
+// SetTransitiveOpaqueType sets the value of the leaf TransitiveOpaqueType in the BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType
+// struct.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType) SetTransitiveOpaqueType(v E_Structured_TransitiveOpaqueType) {
+	t.TransitiveOpaqueType = v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+	t.ColorSubtype.PopulateDefaults()
+	t.EncapsulationSubtype.PopulateDefaults()
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType.
+func (*BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType) ΛBelongingModule() string {
+	return "open-traffic-generator-bgp"
+}
+
+// BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/extended-community/structured/transitive_opaque_type/color_subtype YANG schema element.
+type BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype struct {
+	Color *uint32 `path:"color" module:"open-traffic-generator-bgp"`
+	Flags *uint16 `path:"flags" module:"open-traffic-generator-bgp"`
+}
+
+// IsYANGGoStruct ensures that BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype) IsYANGGoStruct() {
+}
+
+// GetColor retrieves the value of the leaf Color from the BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Color is set, it can
+// safely use t.GetColor() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Color == nil' before retrieving the leaf's value.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype) GetColor() uint32 {
+	if t == nil || t.Color == nil {
+		return 0
+	}
+	return *t.Color
+}
+
+// GetFlags retrieves the value of the leaf Flags from the BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Flags is set, it can
+// safely use t.GetFlags() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Flags == nil' before retrieving the leaf's value.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype) GetFlags() uint16 {
+	if t == nil || t.Flags == nil {
+		return 0
+	}
+	return *t.Flags
+}
+
+// SetColor sets the value of the leaf Color in the BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype
+// struct.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype) SetColor(v uint32) {
+	t.Color = &v
+}
+
+// SetFlags sets the value of the leaf Flags in the BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype
+// struct.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype) SetFlags(v uint16) {
+	t.Flags = &v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype.
+func (*BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype) ΛBelongingModule() string {
+	return "open-traffic-generator-bgp"
+}
+
+// BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/extended-community/structured/transitive_opaque_type/encapsulation_subtype YANG schema element.
+type BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype struct {
+	Reserved   *uint32 `path:"reserved" module:"open-traffic-generator-bgp"`
+	TunnelType *uint16 `path:"tunnel_type" module:"open-traffic-generator-bgp"`
+}
+
+// IsYANGGoStruct ensures that BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype) IsYANGGoStruct() {
+}
+
+// GetReserved retrieves the value of the leaf Reserved from the BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Reserved is set, it can
+// safely use t.GetReserved() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Reserved == nil' before retrieving the leaf's value.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype) GetReserved() uint32 {
+	if t == nil || t.Reserved == nil {
+		return 0
+	}
+	return *t.Reserved
+}
+
+// GetTunnelType retrieves the value of the leaf TunnelType from the BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if TunnelType is set, it can
+// safely use t.GetTunnelType() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.TunnelType == nil' before retrieving the leaf's value.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype) GetTunnelType() uint16 {
+	if t == nil || t.TunnelType == nil {
+		return 0
+	}
+	return *t.TunnelType
+}
+
+// SetReserved sets the value of the leaf Reserved in the BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype
+// struct.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype) SetReserved(v uint32) {
+	t.Reserved = &v
+}
+
+// SetTunnelType sets the value of the leaf TunnelType in the BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype
+// struct.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype) SetTunnelType(v uint16) {
+	t.TunnelType = &v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype.
+func (*BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype) ΛBelongingModule() string {
+	return "open-traffic-generator-bgp"
+}
+
+// BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/extended-community/structured/transitive_2octet_as_type YANG schema element.
+type BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType struct {
+	RouteOriginSubtype      *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype `path:"route_origin_subtype" module:"open-traffic-generator-bgp"`
+	RouteTargetSubtype      *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype `path:"route_target_subtype" module:"open-traffic-generator-bgp"`
+	Transitive_2OctetAsType E_Structured_Transitive_2OctetAsType                                                               `path:"transitive_2octet_as_type" module:"open-traffic-generator-bgp"`
+}
+
+// IsYANGGoStruct ensures that BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType) IsYANGGoStruct() {
+}
+
+// GetOrCreateRouteOriginSubtype retrieves the value of the RouteOriginSubtype field
+// or returns the existing field if it already exists.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType) GetOrCreateRouteOriginSubtype() *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype {
+	if t.RouteOriginSubtype != nil {
+		return t.RouteOriginSubtype
+	}
+	t.RouteOriginSubtype = &BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype{}
+	return t.RouteOriginSubtype
+}
+
+// GetOrCreateRouteTargetSubtype retrieves the value of the RouteTargetSubtype field
+// or returns the existing field if it already exists.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType) GetOrCreateRouteTargetSubtype() *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype {
+	if t.RouteTargetSubtype != nil {
+		return t.RouteTargetSubtype
+	}
+	t.RouteTargetSubtype = &BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype{}
+	return t.RouteTargetSubtype
+}
+
+// GetRouteOriginSubtype returns the value of the RouteOriginSubtype struct pointer
+// from BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType. If the receiver or the field RouteOriginSubtype is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType) GetRouteOriginSubtype() *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype {
+	if t != nil && t.RouteOriginSubtype != nil {
+		return t.RouteOriginSubtype
+	}
+	return nil
+}
+
+// GetRouteTargetSubtype returns the value of the RouteTargetSubtype struct pointer
+// from BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType. If the receiver or the field RouteTargetSubtype is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType) GetRouteTargetSubtype() *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype {
+	if t != nil && t.RouteTargetSubtype != nil {
+		return t.RouteTargetSubtype
+	}
+	return nil
+}
+
+// GetTransitive_2OctetAsType retrieves the value of the leaf Transitive_2OctetAsType from the BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Transitive_2OctetAsType is set, it can
+// safely use t.GetTransitive_2OctetAsType() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Transitive_2OctetAsType == nil' before retrieving the leaf's value.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType) GetTransitive_2OctetAsType() E_Structured_Transitive_2OctetAsType {
+	if t == nil || t.Transitive_2OctetAsType == 0 {
+		return 0
+	}
+	return t.Transitive_2OctetAsType
+}
+
+// SetTransitive_2OctetAsType sets the value of the leaf Transitive_2OctetAsType in the BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType
+// struct.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType) SetTransitive_2OctetAsType(v E_Structured_Transitive_2OctetAsType) {
+	t.Transitive_2OctetAsType = v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+	t.RouteOriginSubtype.PopulateDefaults()
+	t.RouteTargetSubtype.PopulateDefaults()
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType.
+func (*BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType) ΛBelongingModule() string {
+	return "open-traffic-generator-bgp"
+}
+
+// BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/extended-community/structured/transitive_2octet_as_type/route_origin_subtype YANG schema element.
+type BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype struct {
+	Global_2ByteAs   *uint16 `path:"global_2byte_as" module:"open-traffic-generator-bgp"`
+	Local_4ByteAdmin *uint32 `path:"local_4byte_admin" module:"open-traffic-generator-bgp"`
+}
+
+// IsYANGGoStruct ensures that BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype) IsYANGGoStruct() {
+}
+
+// GetGlobal_2ByteAs retrieves the value of the leaf Global_2ByteAs from the BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Global_2ByteAs is set, it can
+// safely use t.GetGlobal_2ByteAs() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Global_2ByteAs == nil' before retrieving the leaf's value.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype) GetGlobal_2ByteAs() uint16 {
+	if t == nil || t.Global_2ByteAs == nil {
+		return 0
+	}
+	return *t.Global_2ByteAs
+}
+
+// GetLocal_4ByteAdmin retrieves the value of the leaf Local_4ByteAdmin from the BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Local_4ByteAdmin is set, it can
+// safely use t.GetLocal_4ByteAdmin() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Local_4ByteAdmin == nil' before retrieving the leaf's value.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype) GetLocal_4ByteAdmin() uint32 {
+	if t == nil || t.Local_4ByteAdmin == nil {
+		return 0
+	}
+	return *t.Local_4ByteAdmin
+}
+
+// SetGlobal_2ByteAs sets the value of the leaf Global_2ByteAs in the BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype
+// struct.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype) SetGlobal_2ByteAs(v uint16) {
+	t.Global_2ByteAs = &v
+}
+
+// SetLocal_4ByteAdmin sets the value of the leaf Local_4ByteAdmin in the BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype
+// struct.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype) SetLocal_4ByteAdmin(v uint32) {
+	t.Local_4ByteAdmin = &v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype.
+func (*BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype) ΛBelongingModule() string {
+	return "open-traffic-generator-bgp"
+}
+
+// BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/extended-community/structured/transitive_2octet_as_type/route_target_subtype YANG schema element.
+type BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype struct {
+	Global_2ByteAs   *uint16 `path:"global_2byte_as" module:"open-traffic-generator-bgp"`
+	Local_4ByteAdmin *uint32 `path:"local_4byte_admin" module:"open-traffic-generator-bgp"`
+}
+
+// IsYANGGoStruct ensures that BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype) IsYANGGoStruct() {
+}
+
+// GetGlobal_2ByteAs retrieves the value of the leaf Global_2ByteAs from the BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Global_2ByteAs is set, it can
+// safely use t.GetGlobal_2ByteAs() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Global_2ByteAs == nil' before retrieving the leaf's value.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype) GetGlobal_2ByteAs() uint16 {
+	if t == nil || t.Global_2ByteAs == nil {
+		return 0
+	}
+	return *t.Global_2ByteAs
+}
+
+// GetLocal_4ByteAdmin retrieves the value of the leaf Local_4ByteAdmin from the BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Local_4ByteAdmin is set, it can
+// safely use t.GetLocal_4ByteAdmin() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Local_4ByteAdmin == nil' before retrieving the leaf's value.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype) GetLocal_4ByteAdmin() uint32 {
+	if t == nil || t.Local_4ByteAdmin == nil {
+		return 0
+	}
+	return *t.Local_4ByteAdmin
+}
+
+// SetGlobal_2ByteAs sets the value of the leaf Global_2ByteAs in the BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype
+// struct.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype) SetGlobal_2ByteAs(v uint16) {
+	t.Global_2ByteAs = &v
+}
+
+// SetLocal_4ByteAdmin sets the value of the leaf Local_4ByteAdmin in the BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype
+// struct.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype) SetLocal_4ByteAdmin(v uint32) {
+	t.Local_4ByteAdmin = &v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype.
+func (*BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype) ΛBelongingModule() string {
+	return "open-traffic-generator-bgp"
+}
+
+// BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/extended-community/structured/transitive_4octet_as_type YANG schema element.
+type BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType struct {
+	RouteOriginSubtype      *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype `path:"route_origin_subtype" module:"open-traffic-generator-bgp"`
+	RouteTargetSubtype      *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype `path:"route_target_subtype" module:"open-traffic-generator-bgp"`
+	Transitive_4OctetAsType E_Structured_Transitive_4OctetAsType                                                               `path:"transitive_4octet_as_type" module:"open-traffic-generator-bgp"`
+}
+
+// IsYANGGoStruct ensures that BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType) IsYANGGoStruct() {
+}
+
+// GetOrCreateRouteOriginSubtype retrieves the value of the RouteOriginSubtype field
+// or returns the existing field if it already exists.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType) GetOrCreateRouteOriginSubtype() *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype {
+	if t.RouteOriginSubtype != nil {
+		return t.RouteOriginSubtype
+	}
+	t.RouteOriginSubtype = &BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype{}
+	return t.RouteOriginSubtype
+}
+
+// GetOrCreateRouteTargetSubtype retrieves the value of the RouteTargetSubtype field
+// or returns the existing field if it already exists.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType) GetOrCreateRouteTargetSubtype() *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype {
+	if t.RouteTargetSubtype != nil {
+		return t.RouteTargetSubtype
+	}
+	t.RouteTargetSubtype = &BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype{}
+	return t.RouteTargetSubtype
+}
+
+// GetRouteOriginSubtype returns the value of the RouteOriginSubtype struct pointer
+// from BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType. If the receiver or the field RouteOriginSubtype is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType) GetRouteOriginSubtype() *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype {
+	if t != nil && t.RouteOriginSubtype != nil {
+		return t.RouteOriginSubtype
+	}
+	return nil
+}
+
+// GetRouteTargetSubtype returns the value of the RouteTargetSubtype struct pointer
+// from BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType. If the receiver or the field RouteTargetSubtype is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType) GetRouteTargetSubtype() *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype {
+	if t != nil && t.RouteTargetSubtype != nil {
+		return t.RouteTargetSubtype
+	}
+	return nil
+}
+
+// GetTransitive_4OctetAsType retrieves the value of the leaf Transitive_4OctetAsType from the BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Transitive_4OctetAsType is set, it can
+// safely use t.GetTransitive_4OctetAsType() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Transitive_4OctetAsType == nil' before retrieving the leaf's value.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType) GetTransitive_4OctetAsType() E_Structured_Transitive_4OctetAsType {
+	if t == nil || t.Transitive_4OctetAsType == 0 {
+		return 0
+	}
+	return t.Transitive_4OctetAsType
+}
+
+// SetTransitive_4OctetAsType sets the value of the leaf Transitive_4OctetAsType in the BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType
+// struct.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType) SetTransitive_4OctetAsType(v E_Structured_Transitive_4OctetAsType) {
+	t.Transitive_4OctetAsType = v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+	t.RouteOriginSubtype.PopulateDefaults()
+	t.RouteTargetSubtype.PopulateDefaults()
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType.
+func (*BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType) ΛBelongingModule() string {
+	return "open-traffic-generator-bgp"
+}
+
+// BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/extended-community/structured/transitive_4octet_as_type/route_origin_subtype YANG schema element.
+type BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype struct {
+	Global_4ByteAs   *uint32 `path:"global_4byte_as" module:"open-traffic-generator-bgp"`
+	Local_2ByteAdmin *uint16 `path:"local_2byte_admin" module:"open-traffic-generator-bgp"`
+}
+
+// IsYANGGoStruct ensures that BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype) IsYANGGoStruct() {
+}
+
+// GetGlobal_4ByteAs retrieves the value of the leaf Global_4ByteAs from the BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Global_4ByteAs is set, it can
+// safely use t.GetGlobal_4ByteAs() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Global_4ByteAs == nil' before retrieving the leaf's value.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype) GetGlobal_4ByteAs() uint32 {
+	if t == nil || t.Global_4ByteAs == nil {
+		return 0
+	}
+	return *t.Global_4ByteAs
+}
+
+// GetLocal_2ByteAdmin retrieves the value of the leaf Local_2ByteAdmin from the BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Local_2ByteAdmin is set, it can
+// safely use t.GetLocal_2ByteAdmin() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Local_2ByteAdmin == nil' before retrieving the leaf's value.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype) GetLocal_2ByteAdmin() uint16 {
+	if t == nil || t.Local_2ByteAdmin == nil {
+		return 0
+	}
+	return *t.Local_2ByteAdmin
+}
+
+// SetGlobal_4ByteAs sets the value of the leaf Global_4ByteAs in the BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype
+// struct.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype) SetGlobal_4ByteAs(v uint32) {
+	t.Global_4ByteAs = &v
+}
+
+// SetLocal_2ByteAdmin sets the value of the leaf Local_2ByteAdmin in the BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype
+// struct.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype) SetLocal_2ByteAdmin(v uint16) {
+	t.Local_2ByteAdmin = &v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype.
+func (*BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype) ΛBelongingModule() string {
+	return "open-traffic-generator-bgp"
+}
+
+// BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/extended-community/structured/transitive_4octet_as_type/route_target_subtype YANG schema element.
+type BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype struct {
+	Global_4ByteAs   *uint32 `path:"global_4byte_as" module:"open-traffic-generator-bgp"`
+	Local_2ByteAdmin *uint16 `path:"local_2byte_admin" module:"open-traffic-generator-bgp"`
+}
+
+// IsYANGGoStruct ensures that BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype) IsYANGGoStruct() {
+}
+
+// GetGlobal_4ByteAs retrieves the value of the leaf Global_4ByteAs from the BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Global_4ByteAs is set, it can
+// safely use t.GetGlobal_4ByteAs() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Global_4ByteAs == nil' before retrieving the leaf's value.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype) GetGlobal_4ByteAs() uint32 {
+	if t == nil || t.Global_4ByteAs == nil {
+		return 0
+	}
+	return *t.Global_4ByteAs
+}
+
+// GetLocal_2ByteAdmin retrieves the value of the leaf Local_2ByteAdmin from the BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Local_2ByteAdmin is set, it can
+// safely use t.GetLocal_2ByteAdmin() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Local_2ByteAdmin == nil' before retrieving the leaf's value.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype) GetLocal_2ByteAdmin() uint16 {
+	if t == nil || t.Local_2ByteAdmin == nil {
+		return 0
+	}
+	return *t.Local_2ByteAdmin
+}
+
+// SetGlobal_4ByteAs sets the value of the leaf Global_4ByteAs in the BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype
+// struct.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype) SetGlobal_4ByteAs(v uint32) {
+	t.Global_4ByteAs = &v
+}
+
+// SetLocal_2ByteAdmin sets the value of the leaf Local_2ByteAdmin in the BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype
+// struct.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype) SetLocal_2ByteAdmin(v uint16) {
+	t.Local_2ByteAdmin = &v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype.
+func (*BgpPeer_UnicastIpv4Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype) ΛBelongingModule() string {
+	return "open-traffic-generator-bgp"
+}
+
 // BgpPeer_UnicastIpv6Prefix represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix YANG schema element.
 type BgpPeer_UnicastIpv6Prefix struct {
-	Address                *string                                `path:"state/address|address" module:"open-traffic-generator-bgp/open-traffic-generator-bgp|open-traffic-generator-bgp" shadow-path:"address" shadow-module:"open-traffic-generator-bgp"`
-	AsPath                 []*BgpPeer_UnicastIpv6Prefix_AsPath    `path:"state/as-path" module:"open-traffic-generator-bgp/open-traffic-generator-bgp"`
-	Community              []*BgpPeer_UnicastIpv6Prefix_Community `path:"state/community" module:"open-traffic-generator-bgp/open-traffic-generator-bgp"`
-	LocalPreference        *uint32                                `path:"state/local-preference" module:"open-traffic-generator-bgp/open-traffic-generator-bgp"`
-	MultiExitDiscriminator *uint32                                `path:"state/multi-exit-discriminator" module:"open-traffic-generator-bgp/open-traffic-generator-bgp"`
-	NextHopIpv4Address     *string                                `path:"state/next-hop-ipv4-address" module:"open-traffic-generator-bgp/open-traffic-generator-bgp"`
-	NextHopIpv6Address     *string                                `path:"state/next-hop-ipv6-address" module:"open-traffic-generator-bgp/open-traffic-generator-bgp"`
-	Origin                 E_UnicastIpv6Prefix_Origin             `path:"state/origin|origin" module:"open-traffic-generator-bgp/open-traffic-generator-bgp|open-traffic-generator-bgp" shadow-path:"origin" shadow-module:"open-traffic-generator-bgp"`
-	PathId                 *uint32                                `path:"state/path-id|path-id" module:"open-traffic-generator-bgp/open-traffic-generator-bgp|open-traffic-generator-bgp" shadow-path:"path-id" shadow-module:"open-traffic-generator-bgp"`
-	PrefixLength           *uint32                                `path:"state/prefix-length|prefix-length" module:"open-traffic-generator-bgp/open-traffic-generator-bgp|open-traffic-generator-bgp" shadow-path:"prefix-length" shadow-module:"open-traffic-generator-bgp"`
+	Address                *string                                        `path:"state/address|address" module:"open-traffic-generator-bgp/open-traffic-generator-bgp|open-traffic-generator-bgp" shadow-path:"address" shadow-module:"open-traffic-generator-bgp"`
+	AsPath                 []*BgpPeer_UnicastIpv6Prefix_AsPath            `path:"state/as-path" module:"open-traffic-generator-bgp/open-traffic-generator-bgp"`
+	Community              []*BgpPeer_UnicastIpv6Prefix_Community         `path:"state/community" module:"open-traffic-generator-bgp/open-traffic-generator-bgp"`
+	ExtendedCommunity      []*BgpPeer_UnicastIpv6Prefix_ExtendedCommunity `path:"state/extended-community" module:"open-traffic-generator-bgp/open-traffic-generator-bgp"`
+	LocalPreference        *uint32                                        `path:"state/local-preference" module:"open-traffic-generator-bgp/open-traffic-generator-bgp"`
+	MultiExitDiscriminator *uint32                                        `path:"state/multi-exit-discriminator" module:"open-traffic-generator-bgp/open-traffic-generator-bgp"`
+	NextHopIpv4Address     *string                                        `path:"state/next-hop-ipv4-address" module:"open-traffic-generator-bgp/open-traffic-generator-bgp"`
+	NextHopIpv6Address     *string                                        `path:"state/next-hop-ipv6-address" module:"open-traffic-generator-bgp/open-traffic-generator-bgp"`
+	Origin                 E_UnicastIpv6Prefix_Origin                     `path:"state/origin|origin" module:"open-traffic-generator-bgp/open-traffic-generator-bgp|open-traffic-generator-bgp" shadow-path:"origin" shadow-module:"open-traffic-generator-bgp"`
+	PathId                 *uint32                                        `path:"state/path-id|path-id" module:"open-traffic-generator-bgp/open-traffic-generator-bgp|open-traffic-generator-bgp" shadow-path:"path-id" shadow-module:"open-traffic-generator-bgp"`
+	PrefixLength           *uint32                                        `path:"state/prefix-length|prefix-length" module:"open-traffic-generator-bgp/open-traffic-generator-bgp|open-traffic-generator-bgp" shadow-path:"prefix-length" shadow-module:"open-traffic-generator-bgp"`
 }
 
 // IsYANGGoStruct ensures that BgpPeer_UnicastIpv6Prefix implements the yang.GoStruct
@@ -1664,6 +3292,9 @@ func (t *BgpPeer_UnicastIpv6Prefix) PopulateDefaults() {
 		e.PopulateDefaults()
 	}
 	for _, e := range t.Community {
+		e.PopulateDefaults()
+	}
+	for _, e := range t.ExtendedCommunity {
 		e.PopulateDefaults()
 	}
 }
@@ -1913,6 +3544,1629 @@ func (t *BgpPeer_UnicastIpv6Prefix_Community) ΛEnumTypeMap() map[string][]refle
 // ΛBelongingModule returns the name of the module that defines the namespace
 // of BgpPeer_UnicastIpv6Prefix_Community.
 func (*BgpPeer_UnicastIpv6Prefix_Community) ΛBelongingModule() string {
+	return "open-traffic-generator-bgp"
+}
+
+// BgpPeer_UnicastIpv6Prefix_ExtendedCommunity represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/extended-community YANG schema element.
+type BgpPeer_UnicastIpv6Prefix_ExtendedCommunity struct {
+	Raw        *string                                                 `path:"raw" module:"open-traffic-generator-bgp"`
+	Structured *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured `path:"structured" module:"open-traffic-generator-bgp"`
+}
+
+// IsYANGGoStruct ensures that BgpPeer_UnicastIpv6Prefix_ExtendedCommunity implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*BgpPeer_UnicastIpv6Prefix_ExtendedCommunity) IsYANGGoStruct() {}
+
+// GetOrCreateStructured retrieves the value of the Structured field
+// or returns the existing field if it already exists.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity) GetOrCreateStructured() *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured {
+	if t.Structured != nil {
+		return t.Structured
+	}
+	t.Structured = &BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured{}
+	return t.Structured
+}
+
+// GetStructured returns the value of the Structured struct pointer
+// from BgpPeer_UnicastIpv6Prefix_ExtendedCommunity. If the receiver or the field Structured is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity) GetStructured() *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured {
+	if t != nil && t.Structured != nil {
+		return t.Structured
+	}
+	return nil
+}
+
+// GetRaw retrieves the value of the leaf Raw from the BgpPeer_UnicastIpv6Prefix_ExtendedCommunity
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Raw is set, it can
+// safely use t.GetRaw() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Raw == nil' before retrieving the leaf's value.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity) GetRaw() string {
+	if t == nil || t.Raw == nil {
+		return ""
+	}
+	return *t.Raw
+}
+
+// SetRaw sets the value of the leaf Raw in the BgpPeer_UnicastIpv6Prefix_ExtendedCommunity
+// struct.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity) SetRaw(v string) {
+	t.Raw = &v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the BgpPeer_UnicastIpv6Prefix_ExtendedCommunity
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+	t.Structured.PopulateDefaults()
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["BgpPeer_UnicastIpv6Prefix_ExtendedCommunity"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of BgpPeer_UnicastIpv6Prefix_ExtendedCommunity.
+func (*BgpPeer_UnicastIpv6Prefix_ExtendedCommunity) ΛBelongingModule() string {
+	return "open-traffic-generator-bgp"
+}
+
+// BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/extended-community/structured YANG schema element.
+type BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured struct {
+	BgpExtendedCommunityStructuredType E_ExtendedCommunity_BgpExtendedCommunityStructuredType                             `path:"bgp-extended-community-structured_type" module:"open-traffic-generator-bgp"`
+	NonTransitive_2OctetAsType         *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType `path:"non_transitive_2octet_as_type" module:"open-traffic-generator-bgp"`
+	Transitive_2OctetAsType            *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType    `path:"transitive_2octet_as_type" module:"open-traffic-generator-bgp"`
+	Transitive_4OctetAsType            *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType    `path:"transitive_4octet_as_type" module:"open-traffic-generator-bgp"`
+	TransitiveIpv4AddressType          *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType  `path:"transitive_ipv4_address_type" module:"open-traffic-generator-bgp"`
+	TransitiveOpaqueType               *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType       `path:"transitive_opaque_type" module:"open-traffic-generator-bgp"`
+}
+
+// IsYANGGoStruct ensures that BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured) IsYANGGoStruct() {}
+
+// GetOrCreateNonTransitive_2OctetAsType retrieves the value of the NonTransitive_2OctetAsType field
+// or returns the existing field if it already exists.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured) GetOrCreateNonTransitive_2OctetAsType() *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType {
+	if t.NonTransitive_2OctetAsType != nil {
+		return t.NonTransitive_2OctetAsType
+	}
+	t.NonTransitive_2OctetAsType = &BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType{}
+	return t.NonTransitive_2OctetAsType
+}
+
+// GetOrCreateTransitive_2OctetAsType retrieves the value of the Transitive_2OctetAsType field
+// or returns the existing field if it already exists.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured) GetOrCreateTransitive_2OctetAsType() *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType {
+	if t.Transitive_2OctetAsType != nil {
+		return t.Transitive_2OctetAsType
+	}
+	t.Transitive_2OctetAsType = &BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType{}
+	return t.Transitive_2OctetAsType
+}
+
+// GetOrCreateTransitive_4OctetAsType retrieves the value of the Transitive_4OctetAsType field
+// or returns the existing field if it already exists.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured) GetOrCreateTransitive_4OctetAsType() *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType {
+	if t.Transitive_4OctetAsType != nil {
+		return t.Transitive_4OctetAsType
+	}
+	t.Transitive_4OctetAsType = &BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType{}
+	return t.Transitive_4OctetAsType
+}
+
+// GetOrCreateTransitiveIpv4AddressType retrieves the value of the TransitiveIpv4AddressType field
+// or returns the existing field if it already exists.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured) GetOrCreateTransitiveIpv4AddressType() *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType {
+	if t.TransitiveIpv4AddressType != nil {
+		return t.TransitiveIpv4AddressType
+	}
+	t.TransitiveIpv4AddressType = &BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType{}
+	return t.TransitiveIpv4AddressType
+}
+
+// GetOrCreateTransitiveOpaqueType retrieves the value of the TransitiveOpaqueType field
+// or returns the existing field if it already exists.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured) GetOrCreateTransitiveOpaqueType() *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType {
+	if t.TransitiveOpaqueType != nil {
+		return t.TransitiveOpaqueType
+	}
+	t.TransitiveOpaqueType = &BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType{}
+	return t.TransitiveOpaqueType
+}
+
+// GetNonTransitive_2OctetAsType returns the value of the NonTransitive_2OctetAsType struct pointer
+// from BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured. If the receiver or the field NonTransitive_2OctetAsType is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured) GetNonTransitive_2OctetAsType() *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType {
+	if t != nil && t.NonTransitive_2OctetAsType != nil {
+		return t.NonTransitive_2OctetAsType
+	}
+	return nil
+}
+
+// GetTransitive_2OctetAsType returns the value of the Transitive_2OctetAsType struct pointer
+// from BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured. If the receiver or the field Transitive_2OctetAsType is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured) GetTransitive_2OctetAsType() *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType {
+	if t != nil && t.Transitive_2OctetAsType != nil {
+		return t.Transitive_2OctetAsType
+	}
+	return nil
+}
+
+// GetTransitive_4OctetAsType returns the value of the Transitive_4OctetAsType struct pointer
+// from BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured. If the receiver or the field Transitive_4OctetAsType is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured) GetTransitive_4OctetAsType() *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType {
+	if t != nil && t.Transitive_4OctetAsType != nil {
+		return t.Transitive_4OctetAsType
+	}
+	return nil
+}
+
+// GetTransitiveIpv4AddressType returns the value of the TransitiveIpv4AddressType struct pointer
+// from BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured. If the receiver or the field TransitiveIpv4AddressType is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured) GetTransitiveIpv4AddressType() *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType {
+	if t != nil && t.TransitiveIpv4AddressType != nil {
+		return t.TransitiveIpv4AddressType
+	}
+	return nil
+}
+
+// GetTransitiveOpaqueType returns the value of the TransitiveOpaqueType struct pointer
+// from BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured. If the receiver or the field TransitiveOpaqueType is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured) GetTransitiveOpaqueType() *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType {
+	if t != nil && t.TransitiveOpaqueType != nil {
+		return t.TransitiveOpaqueType
+	}
+	return nil
+}
+
+// GetBgpExtendedCommunityStructuredType retrieves the value of the leaf BgpExtendedCommunityStructuredType from the BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if BgpExtendedCommunityStructuredType is set, it can
+// safely use t.GetBgpExtendedCommunityStructuredType() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.BgpExtendedCommunityStructuredType == nil' before retrieving the leaf's value.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured) GetBgpExtendedCommunityStructuredType() E_ExtendedCommunity_BgpExtendedCommunityStructuredType {
+	if t == nil || t.BgpExtendedCommunityStructuredType == 0 {
+		return 0
+	}
+	return t.BgpExtendedCommunityStructuredType
+}
+
+// SetBgpExtendedCommunityStructuredType sets the value of the leaf BgpExtendedCommunityStructuredType in the BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured
+// struct.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured) SetBgpExtendedCommunityStructuredType(v E_ExtendedCommunity_BgpExtendedCommunityStructuredType) {
+	t.BgpExtendedCommunityStructuredType = v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+	t.NonTransitive_2OctetAsType.PopulateDefaults()
+	t.Transitive_2OctetAsType.PopulateDefaults()
+	t.Transitive_4OctetAsType.PopulateDefaults()
+	t.TransitiveIpv4AddressType.PopulateDefaults()
+	t.TransitiveOpaqueType.PopulateDefaults()
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured.
+func (*BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured) ΛBelongingModule() string {
+	return "open-traffic-generator-bgp"
+}
+
+// BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/extended-community/structured/non_transitive_2octet_as_type YANG schema element.
+type BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType struct {
+	LinkBandwidthSubtype       *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype `path:"link_bandwidth_subtype" module:"open-traffic-generator-bgp"`
+	NonTransitive_2OctetAsType E_Structured_NonTransitive_2OctetAsType                                                                 `path:"non_transitive_2octet_as_type" module:"open-traffic-generator-bgp"`
+}
+
+// IsYANGGoStruct ensures that BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType) IsYANGGoStruct() {
+}
+
+// GetOrCreateLinkBandwidthSubtype retrieves the value of the LinkBandwidthSubtype field
+// or returns the existing field if it already exists.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType) GetOrCreateLinkBandwidthSubtype() *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype {
+	if t.LinkBandwidthSubtype != nil {
+		return t.LinkBandwidthSubtype
+	}
+	t.LinkBandwidthSubtype = &BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype{}
+	return t.LinkBandwidthSubtype
+}
+
+// GetLinkBandwidthSubtype returns the value of the LinkBandwidthSubtype struct pointer
+// from BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType. If the receiver or the field LinkBandwidthSubtype is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType) GetLinkBandwidthSubtype() *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype {
+	if t != nil && t.LinkBandwidthSubtype != nil {
+		return t.LinkBandwidthSubtype
+	}
+	return nil
+}
+
+// GetNonTransitive_2OctetAsType retrieves the value of the leaf NonTransitive_2OctetAsType from the BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if NonTransitive_2OctetAsType is set, it can
+// safely use t.GetNonTransitive_2OctetAsType() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.NonTransitive_2OctetAsType == nil' before retrieving the leaf's value.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType) GetNonTransitive_2OctetAsType() E_Structured_NonTransitive_2OctetAsType {
+	if t == nil || t.NonTransitive_2OctetAsType == 0 {
+		return 0
+	}
+	return t.NonTransitive_2OctetAsType
+}
+
+// SetNonTransitive_2OctetAsType sets the value of the leaf NonTransitive_2OctetAsType in the BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType
+// struct.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType) SetNonTransitive_2OctetAsType(v E_Structured_NonTransitive_2OctetAsType) {
+	t.NonTransitive_2OctetAsType = v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+	t.LinkBandwidthSubtype.PopulateDefaults()
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType.
+func (*BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType) ΛBelongingModule() string {
+	return "open-traffic-generator-bgp"
+}
+
+// BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/extended-community/structured/non_transitive_2octet_as_type/link_bandwidth_subtype YANG schema element.
+type BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype struct {
+	Bandwidth      Binary  `path:"bandwidth" module:"open-traffic-generator-bgp"`
+	Global_2ByteAs *uint16 `path:"global_2byte_as" module:"open-traffic-generator-bgp"`
+}
+
+// IsYANGGoStruct ensures that BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype) IsYANGGoStruct() {
+}
+
+// GetBandwidth retrieves the value of the leaf Bandwidth from the BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Bandwidth is set, it can
+// safely use t.GetBandwidth() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Bandwidth == nil' before retrieving the leaf's value.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype) GetBandwidth() Binary {
+	if t == nil || t.Bandwidth == nil {
+		return nil
+	}
+	return t.Bandwidth
+}
+
+// GetGlobal_2ByteAs retrieves the value of the leaf Global_2ByteAs from the BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Global_2ByteAs is set, it can
+// safely use t.GetGlobal_2ByteAs() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Global_2ByteAs == nil' before retrieving the leaf's value.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype) GetGlobal_2ByteAs() uint16 {
+	if t == nil || t.Global_2ByteAs == nil {
+		return 0
+	}
+	return *t.Global_2ByteAs
+}
+
+// SetBandwidth sets the value of the leaf Bandwidth in the BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype
+// struct.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype) SetBandwidth(v Binary) {
+	t.Bandwidth = v
+}
+
+// SetGlobal_2ByteAs sets the value of the leaf Global_2ByteAs in the BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype
+// struct.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype) SetGlobal_2ByteAs(v uint16) {
+	t.Global_2ByteAs = &v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype.
+func (*BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype) ΛBelongingModule() string {
+	return "open-traffic-generator-bgp"
+}
+
+// BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/extended-community/structured/transitive_ipv4_address_type YANG schema element.
+type BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType struct {
+	RouteOriginSubtype        *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype `path:"route_origin_subtype" module:"open-traffic-generator-bgp"`
+	RouteTargetSubtype        *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype `path:"route_target_subtype" module:"open-traffic-generator-bgp"`
+	TransitiveIpv4AddressType E_Structured_TransitiveIpv4AddressType                                                               `path:"transitive_ipv4_address_type" module:"open-traffic-generator-bgp"`
+}
+
+// IsYANGGoStruct ensures that BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType) IsYANGGoStruct() {
+}
+
+// GetOrCreateRouteOriginSubtype retrieves the value of the RouteOriginSubtype field
+// or returns the existing field if it already exists.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType) GetOrCreateRouteOriginSubtype() *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype {
+	if t.RouteOriginSubtype != nil {
+		return t.RouteOriginSubtype
+	}
+	t.RouteOriginSubtype = &BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype{}
+	return t.RouteOriginSubtype
+}
+
+// GetOrCreateRouteTargetSubtype retrieves the value of the RouteTargetSubtype field
+// or returns the existing field if it already exists.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType) GetOrCreateRouteTargetSubtype() *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype {
+	if t.RouteTargetSubtype != nil {
+		return t.RouteTargetSubtype
+	}
+	t.RouteTargetSubtype = &BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype{}
+	return t.RouteTargetSubtype
+}
+
+// GetRouteOriginSubtype returns the value of the RouteOriginSubtype struct pointer
+// from BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType. If the receiver or the field RouteOriginSubtype is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType) GetRouteOriginSubtype() *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype {
+	if t != nil && t.RouteOriginSubtype != nil {
+		return t.RouteOriginSubtype
+	}
+	return nil
+}
+
+// GetRouteTargetSubtype returns the value of the RouteTargetSubtype struct pointer
+// from BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType. If the receiver or the field RouteTargetSubtype is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType) GetRouteTargetSubtype() *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype {
+	if t != nil && t.RouteTargetSubtype != nil {
+		return t.RouteTargetSubtype
+	}
+	return nil
+}
+
+// GetTransitiveIpv4AddressType retrieves the value of the leaf TransitiveIpv4AddressType from the BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if TransitiveIpv4AddressType is set, it can
+// safely use t.GetTransitiveIpv4AddressType() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.TransitiveIpv4AddressType == nil' before retrieving the leaf's value.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType) GetTransitiveIpv4AddressType() E_Structured_TransitiveIpv4AddressType {
+	if t == nil || t.TransitiveIpv4AddressType == 0 {
+		return 0
+	}
+	return t.TransitiveIpv4AddressType
+}
+
+// SetTransitiveIpv4AddressType sets the value of the leaf TransitiveIpv4AddressType in the BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType
+// struct.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType) SetTransitiveIpv4AddressType(v E_Structured_TransitiveIpv4AddressType) {
+	t.TransitiveIpv4AddressType = v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+	t.RouteOriginSubtype.PopulateDefaults()
+	t.RouteTargetSubtype.PopulateDefaults()
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType.
+func (*BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType) ΛBelongingModule() string {
+	return "open-traffic-generator-bgp"
+}
+
+// BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/extended-community/structured/transitive_ipv4_address_type/route_origin_subtype YANG schema element.
+type BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype struct {
+	GlobalIpv4Admin  *string `path:"global_ipv4_admin" module:"open-traffic-generator-bgp"`
+	Local_2ByteAdmin *uint16 `path:"local_2byte_admin" module:"open-traffic-generator-bgp"`
+}
+
+// IsYANGGoStruct ensures that BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype) IsYANGGoStruct() {
+}
+
+// GetGlobalIpv4Admin retrieves the value of the leaf GlobalIpv4Admin from the BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if GlobalIpv4Admin is set, it can
+// safely use t.GetGlobalIpv4Admin() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.GlobalIpv4Admin == nil' before retrieving the leaf's value.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype) GetGlobalIpv4Admin() string {
+	if t == nil || t.GlobalIpv4Admin == nil {
+		return ""
+	}
+	return *t.GlobalIpv4Admin
+}
+
+// GetLocal_2ByteAdmin retrieves the value of the leaf Local_2ByteAdmin from the BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Local_2ByteAdmin is set, it can
+// safely use t.GetLocal_2ByteAdmin() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Local_2ByteAdmin == nil' before retrieving the leaf's value.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype) GetLocal_2ByteAdmin() uint16 {
+	if t == nil || t.Local_2ByteAdmin == nil {
+		return 0
+	}
+	return *t.Local_2ByteAdmin
+}
+
+// SetGlobalIpv4Admin sets the value of the leaf GlobalIpv4Admin in the BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype
+// struct.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype) SetGlobalIpv4Admin(v string) {
+	t.GlobalIpv4Admin = &v
+}
+
+// SetLocal_2ByteAdmin sets the value of the leaf Local_2ByteAdmin in the BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype
+// struct.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype) SetLocal_2ByteAdmin(v uint16) {
+	t.Local_2ByteAdmin = &v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype.
+func (*BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype) ΛBelongingModule() string {
+	return "open-traffic-generator-bgp"
+}
+
+// BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/extended-community/structured/transitive_ipv4_address_type/route_target_subtype YANG schema element.
+type BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype struct {
+	GlobalIpv4Admin  *string `path:"global_ipv4_admin" module:"open-traffic-generator-bgp"`
+	Local_2ByteAdmin *uint16 `path:"local_2byte_admin" module:"open-traffic-generator-bgp"`
+}
+
+// IsYANGGoStruct ensures that BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype) IsYANGGoStruct() {
+}
+
+// GetGlobalIpv4Admin retrieves the value of the leaf GlobalIpv4Admin from the BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if GlobalIpv4Admin is set, it can
+// safely use t.GetGlobalIpv4Admin() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.GlobalIpv4Admin == nil' before retrieving the leaf's value.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype) GetGlobalIpv4Admin() string {
+	if t == nil || t.GlobalIpv4Admin == nil {
+		return ""
+	}
+	return *t.GlobalIpv4Admin
+}
+
+// GetLocal_2ByteAdmin retrieves the value of the leaf Local_2ByteAdmin from the BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Local_2ByteAdmin is set, it can
+// safely use t.GetLocal_2ByteAdmin() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Local_2ByteAdmin == nil' before retrieving the leaf's value.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype) GetLocal_2ByteAdmin() uint16 {
+	if t == nil || t.Local_2ByteAdmin == nil {
+		return 0
+	}
+	return *t.Local_2ByteAdmin
+}
+
+// SetGlobalIpv4Admin sets the value of the leaf GlobalIpv4Admin in the BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype
+// struct.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype) SetGlobalIpv4Admin(v string) {
+	t.GlobalIpv4Admin = &v
+}
+
+// SetLocal_2ByteAdmin sets the value of the leaf Local_2ByteAdmin in the BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype
+// struct.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype) SetLocal_2ByteAdmin(v uint16) {
+	t.Local_2ByteAdmin = &v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype.
+func (*BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype) ΛBelongingModule() string {
+	return "open-traffic-generator-bgp"
+}
+
+// BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/extended-community/structured/transitive_opaque_type YANG schema element.
+type BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType struct {
+	ColorSubtype         *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype         `path:"color_subtype" module:"open-traffic-generator-bgp"`
+	EncapsulationSubtype *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype `path:"encapsulation_subtype" module:"open-traffic-generator-bgp"`
+	TransitiveOpaqueType E_Structured_TransitiveOpaqueType                                                                 `path:"transitive_opaque_type" module:"open-traffic-generator-bgp"`
+}
+
+// IsYANGGoStruct ensures that BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType) IsYANGGoStruct() {
+}
+
+// GetOrCreateColorSubtype retrieves the value of the ColorSubtype field
+// or returns the existing field if it already exists.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType) GetOrCreateColorSubtype() *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype {
+	if t.ColorSubtype != nil {
+		return t.ColorSubtype
+	}
+	t.ColorSubtype = &BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype{}
+	return t.ColorSubtype
+}
+
+// GetOrCreateEncapsulationSubtype retrieves the value of the EncapsulationSubtype field
+// or returns the existing field if it already exists.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType) GetOrCreateEncapsulationSubtype() *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype {
+	if t.EncapsulationSubtype != nil {
+		return t.EncapsulationSubtype
+	}
+	t.EncapsulationSubtype = &BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype{}
+	return t.EncapsulationSubtype
+}
+
+// GetColorSubtype returns the value of the ColorSubtype struct pointer
+// from BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType. If the receiver or the field ColorSubtype is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType) GetColorSubtype() *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype {
+	if t != nil && t.ColorSubtype != nil {
+		return t.ColorSubtype
+	}
+	return nil
+}
+
+// GetEncapsulationSubtype returns the value of the EncapsulationSubtype struct pointer
+// from BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType. If the receiver or the field EncapsulationSubtype is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType) GetEncapsulationSubtype() *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype {
+	if t != nil && t.EncapsulationSubtype != nil {
+		return t.EncapsulationSubtype
+	}
+	return nil
+}
+
+// GetTransitiveOpaqueType retrieves the value of the leaf TransitiveOpaqueType from the BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if TransitiveOpaqueType is set, it can
+// safely use t.GetTransitiveOpaqueType() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.TransitiveOpaqueType == nil' before retrieving the leaf's value.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType) GetTransitiveOpaqueType() E_Structured_TransitiveOpaqueType {
+	if t == nil || t.TransitiveOpaqueType == 0 {
+		return 0
+	}
+	return t.TransitiveOpaqueType
+}
+
+// SetTransitiveOpaqueType sets the value of the leaf TransitiveOpaqueType in the BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType
+// struct.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType) SetTransitiveOpaqueType(v E_Structured_TransitiveOpaqueType) {
+	t.TransitiveOpaqueType = v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+	t.ColorSubtype.PopulateDefaults()
+	t.EncapsulationSubtype.PopulateDefaults()
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType.
+func (*BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType) ΛBelongingModule() string {
+	return "open-traffic-generator-bgp"
+}
+
+// BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/extended-community/structured/transitive_opaque_type/color_subtype YANG schema element.
+type BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype struct {
+	Color *uint32 `path:"color" module:"open-traffic-generator-bgp"`
+	Flags *uint16 `path:"flags" module:"open-traffic-generator-bgp"`
+}
+
+// IsYANGGoStruct ensures that BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype) IsYANGGoStruct() {
+}
+
+// GetColor retrieves the value of the leaf Color from the BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Color is set, it can
+// safely use t.GetColor() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Color == nil' before retrieving the leaf's value.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype) GetColor() uint32 {
+	if t == nil || t.Color == nil {
+		return 0
+	}
+	return *t.Color
+}
+
+// GetFlags retrieves the value of the leaf Flags from the BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Flags is set, it can
+// safely use t.GetFlags() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Flags == nil' before retrieving the leaf's value.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype) GetFlags() uint16 {
+	if t == nil || t.Flags == nil {
+		return 0
+	}
+	return *t.Flags
+}
+
+// SetColor sets the value of the leaf Color in the BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype
+// struct.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype) SetColor(v uint32) {
+	t.Color = &v
+}
+
+// SetFlags sets the value of the leaf Flags in the BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype
+// struct.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype) SetFlags(v uint16) {
+	t.Flags = &v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype.
+func (*BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype) ΛBelongingModule() string {
+	return "open-traffic-generator-bgp"
+}
+
+// BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/extended-community/structured/transitive_opaque_type/encapsulation_subtype YANG schema element.
+type BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype struct {
+	Reserved   *uint32 `path:"reserved" module:"open-traffic-generator-bgp"`
+	TunnelType *uint16 `path:"tunnel_type" module:"open-traffic-generator-bgp"`
+}
+
+// IsYANGGoStruct ensures that BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype) IsYANGGoStruct() {
+}
+
+// GetReserved retrieves the value of the leaf Reserved from the BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Reserved is set, it can
+// safely use t.GetReserved() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Reserved == nil' before retrieving the leaf's value.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype) GetReserved() uint32 {
+	if t == nil || t.Reserved == nil {
+		return 0
+	}
+	return *t.Reserved
+}
+
+// GetTunnelType retrieves the value of the leaf TunnelType from the BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if TunnelType is set, it can
+// safely use t.GetTunnelType() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.TunnelType == nil' before retrieving the leaf's value.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype) GetTunnelType() uint16 {
+	if t == nil || t.TunnelType == nil {
+		return 0
+	}
+	return *t.TunnelType
+}
+
+// SetReserved sets the value of the leaf Reserved in the BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype
+// struct.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype) SetReserved(v uint32) {
+	t.Reserved = &v
+}
+
+// SetTunnelType sets the value of the leaf TunnelType in the BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype
+// struct.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype) SetTunnelType(v uint16) {
+	t.TunnelType = &v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype.
+func (*BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype) ΛBelongingModule() string {
+	return "open-traffic-generator-bgp"
+}
+
+// BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/extended-community/structured/transitive_2octet_as_type YANG schema element.
+type BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType struct {
+	RouteOriginSubtype      *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype `path:"route_origin_subtype" module:"open-traffic-generator-bgp"`
+	RouteTargetSubtype      *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype `path:"route_target_subtype" module:"open-traffic-generator-bgp"`
+	Transitive_2OctetAsType E_Structured_Transitive_2OctetAsType                                                               `path:"transitive_2octet_as_type" module:"open-traffic-generator-bgp"`
+}
+
+// IsYANGGoStruct ensures that BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType) IsYANGGoStruct() {
+}
+
+// GetOrCreateRouteOriginSubtype retrieves the value of the RouteOriginSubtype field
+// or returns the existing field if it already exists.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType) GetOrCreateRouteOriginSubtype() *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype {
+	if t.RouteOriginSubtype != nil {
+		return t.RouteOriginSubtype
+	}
+	t.RouteOriginSubtype = &BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype{}
+	return t.RouteOriginSubtype
+}
+
+// GetOrCreateRouteTargetSubtype retrieves the value of the RouteTargetSubtype field
+// or returns the existing field if it already exists.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType) GetOrCreateRouteTargetSubtype() *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype {
+	if t.RouteTargetSubtype != nil {
+		return t.RouteTargetSubtype
+	}
+	t.RouteTargetSubtype = &BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype{}
+	return t.RouteTargetSubtype
+}
+
+// GetRouteOriginSubtype returns the value of the RouteOriginSubtype struct pointer
+// from BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType. If the receiver or the field RouteOriginSubtype is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType) GetRouteOriginSubtype() *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype {
+	if t != nil && t.RouteOriginSubtype != nil {
+		return t.RouteOriginSubtype
+	}
+	return nil
+}
+
+// GetRouteTargetSubtype returns the value of the RouteTargetSubtype struct pointer
+// from BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType. If the receiver or the field RouteTargetSubtype is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType) GetRouteTargetSubtype() *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype {
+	if t != nil && t.RouteTargetSubtype != nil {
+		return t.RouteTargetSubtype
+	}
+	return nil
+}
+
+// GetTransitive_2OctetAsType retrieves the value of the leaf Transitive_2OctetAsType from the BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Transitive_2OctetAsType is set, it can
+// safely use t.GetTransitive_2OctetAsType() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Transitive_2OctetAsType == nil' before retrieving the leaf's value.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType) GetTransitive_2OctetAsType() E_Structured_Transitive_2OctetAsType {
+	if t == nil || t.Transitive_2OctetAsType == 0 {
+		return 0
+	}
+	return t.Transitive_2OctetAsType
+}
+
+// SetTransitive_2OctetAsType sets the value of the leaf Transitive_2OctetAsType in the BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType
+// struct.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType) SetTransitive_2OctetAsType(v E_Structured_Transitive_2OctetAsType) {
+	t.Transitive_2OctetAsType = v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+	t.RouteOriginSubtype.PopulateDefaults()
+	t.RouteTargetSubtype.PopulateDefaults()
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType.
+func (*BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType) ΛBelongingModule() string {
+	return "open-traffic-generator-bgp"
+}
+
+// BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/extended-community/structured/transitive_2octet_as_type/route_origin_subtype YANG schema element.
+type BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype struct {
+	Global_2ByteAs   *uint16 `path:"global_2byte_as" module:"open-traffic-generator-bgp"`
+	Local_4ByteAdmin *uint32 `path:"local_4byte_admin" module:"open-traffic-generator-bgp"`
+}
+
+// IsYANGGoStruct ensures that BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype) IsYANGGoStruct() {
+}
+
+// GetGlobal_2ByteAs retrieves the value of the leaf Global_2ByteAs from the BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Global_2ByteAs is set, it can
+// safely use t.GetGlobal_2ByteAs() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Global_2ByteAs == nil' before retrieving the leaf's value.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype) GetGlobal_2ByteAs() uint16 {
+	if t == nil || t.Global_2ByteAs == nil {
+		return 0
+	}
+	return *t.Global_2ByteAs
+}
+
+// GetLocal_4ByteAdmin retrieves the value of the leaf Local_4ByteAdmin from the BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Local_4ByteAdmin is set, it can
+// safely use t.GetLocal_4ByteAdmin() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Local_4ByteAdmin == nil' before retrieving the leaf's value.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype) GetLocal_4ByteAdmin() uint32 {
+	if t == nil || t.Local_4ByteAdmin == nil {
+		return 0
+	}
+	return *t.Local_4ByteAdmin
+}
+
+// SetGlobal_2ByteAs sets the value of the leaf Global_2ByteAs in the BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype
+// struct.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype) SetGlobal_2ByteAs(v uint16) {
+	t.Global_2ByteAs = &v
+}
+
+// SetLocal_4ByteAdmin sets the value of the leaf Local_4ByteAdmin in the BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype
+// struct.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype) SetLocal_4ByteAdmin(v uint32) {
+	t.Local_4ByteAdmin = &v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype.
+func (*BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype) ΛBelongingModule() string {
+	return "open-traffic-generator-bgp"
+}
+
+// BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/extended-community/structured/transitive_2octet_as_type/route_target_subtype YANG schema element.
+type BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype struct {
+	Global_2ByteAs   *uint16 `path:"global_2byte_as" module:"open-traffic-generator-bgp"`
+	Local_4ByteAdmin *uint32 `path:"local_4byte_admin" module:"open-traffic-generator-bgp"`
+}
+
+// IsYANGGoStruct ensures that BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype) IsYANGGoStruct() {
+}
+
+// GetGlobal_2ByteAs retrieves the value of the leaf Global_2ByteAs from the BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Global_2ByteAs is set, it can
+// safely use t.GetGlobal_2ByteAs() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Global_2ByteAs == nil' before retrieving the leaf's value.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype) GetGlobal_2ByteAs() uint16 {
+	if t == nil || t.Global_2ByteAs == nil {
+		return 0
+	}
+	return *t.Global_2ByteAs
+}
+
+// GetLocal_4ByteAdmin retrieves the value of the leaf Local_4ByteAdmin from the BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Local_4ByteAdmin is set, it can
+// safely use t.GetLocal_4ByteAdmin() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Local_4ByteAdmin == nil' before retrieving the leaf's value.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype) GetLocal_4ByteAdmin() uint32 {
+	if t == nil || t.Local_4ByteAdmin == nil {
+		return 0
+	}
+	return *t.Local_4ByteAdmin
+}
+
+// SetGlobal_2ByteAs sets the value of the leaf Global_2ByteAs in the BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype
+// struct.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype) SetGlobal_2ByteAs(v uint16) {
+	t.Global_2ByteAs = &v
+}
+
+// SetLocal_4ByteAdmin sets the value of the leaf Local_4ByteAdmin in the BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype
+// struct.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype) SetLocal_4ByteAdmin(v uint32) {
+	t.Local_4ByteAdmin = &v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype.
+func (*BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype) ΛBelongingModule() string {
+	return "open-traffic-generator-bgp"
+}
+
+// BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/extended-community/structured/transitive_4octet_as_type YANG schema element.
+type BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType struct {
+	RouteOriginSubtype      *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype `path:"route_origin_subtype" module:"open-traffic-generator-bgp"`
+	RouteTargetSubtype      *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype `path:"route_target_subtype" module:"open-traffic-generator-bgp"`
+	Transitive_4OctetAsType E_Structured_Transitive_4OctetAsType                                                               `path:"transitive_4octet_as_type" module:"open-traffic-generator-bgp"`
+}
+
+// IsYANGGoStruct ensures that BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType) IsYANGGoStruct() {
+}
+
+// GetOrCreateRouteOriginSubtype retrieves the value of the RouteOriginSubtype field
+// or returns the existing field if it already exists.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType) GetOrCreateRouteOriginSubtype() *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype {
+	if t.RouteOriginSubtype != nil {
+		return t.RouteOriginSubtype
+	}
+	t.RouteOriginSubtype = &BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype{}
+	return t.RouteOriginSubtype
+}
+
+// GetOrCreateRouteTargetSubtype retrieves the value of the RouteTargetSubtype field
+// or returns the existing field if it already exists.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType) GetOrCreateRouteTargetSubtype() *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype {
+	if t.RouteTargetSubtype != nil {
+		return t.RouteTargetSubtype
+	}
+	t.RouteTargetSubtype = &BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype{}
+	return t.RouteTargetSubtype
+}
+
+// GetRouteOriginSubtype returns the value of the RouteOriginSubtype struct pointer
+// from BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType. If the receiver or the field RouteOriginSubtype is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType) GetRouteOriginSubtype() *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype {
+	if t != nil && t.RouteOriginSubtype != nil {
+		return t.RouteOriginSubtype
+	}
+	return nil
+}
+
+// GetRouteTargetSubtype returns the value of the RouteTargetSubtype struct pointer
+// from BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType. If the receiver or the field RouteTargetSubtype is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType) GetRouteTargetSubtype() *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype {
+	if t != nil && t.RouteTargetSubtype != nil {
+		return t.RouteTargetSubtype
+	}
+	return nil
+}
+
+// GetTransitive_4OctetAsType retrieves the value of the leaf Transitive_4OctetAsType from the BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Transitive_4OctetAsType is set, it can
+// safely use t.GetTransitive_4OctetAsType() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Transitive_4OctetAsType == nil' before retrieving the leaf's value.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType) GetTransitive_4OctetAsType() E_Structured_Transitive_4OctetAsType {
+	if t == nil || t.Transitive_4OctetAsType == 0 {
+		return 0
+	}
+	return t.Transitive_4OctetAsType
+}
+
+// SetTransitive_4OctetAsType sets the value of the leaf Transitive_4OctetAsType in the BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType
+// struct.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType) SetTransitive_4OctetAsType(v E_Structured_Transitive_4OctetAsType) {
+	t.Transitive_4OctetAsType = v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+	t.RouteOriginSubtype.PopulateDefaults()
+	t.RouteTargetSubtype.PopulateDefaults()
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType.
+func (*BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType) ΛBelongingModule() string {
+	return "open-traffic-generator-bgp"
+}
+
+// BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/extended-community/structured/transitive_4octet_as_type/route_origin_subtype YANG schema element.
+type BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype struct {
+	Global_4ByteAs   *uint32 `path:"global_4byte_as" module:"open-traffic-generator-bgp"`
+	Local_2ByteAdmin *uint16 `path:"local_2byte_admin" module:"open-traffic-generator-bgp"`
+}
+
+// IsYANGGoStruct ensures that BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype) IsYANGGoStruct() {
+}
+
+// GetGlobal_4ByteAs retrieves the value of the leaf Global_4ByteAs from the BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Global_4ByteAs is set, it can
+// safely use t.GetGlobal_4ByteAs() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Global_4ByteAs == nil' before retrieving the leaf's value.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype) GetGlobal_4ByteAs() uint32 {
+	if t == nil || t.Global_4ByteAs == nil {
+		return 0
+	}
+	return *t.Global_4ByteAs
+}
+
+// GetLocal_2ByteAdmin retrieves the value of the leaf Local_2ByteAdmin from the BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Local_2ByteAdmin is set, it can
+// safely use t.GetLocal_2ByteAdmin() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Local_2ByteAdmin == nil' before retrieving the leaf's value.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype) GetLocal_2ByteAdmin() uint16 {
+	if t == nil || t.Local_2ByteAdmin == nil {
+		return 0
+	}
+	return *t.Local_2ByteAdmin
+}
+
+// SetGlobal_4ByteAs sets the value of the leaf Global_4ByteAs in the BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype
+// struct.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype) SetGlobal_4ByteAs(v uint32) {
+	t.Global_4ByteAs = &v
+}
+
+// SetLocal_2ByteAdmin sets the value of the leaf Local_2ByteAdmin in the BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype
+// struct.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype) SetLocal_2ByteAdmin(v uint16) {
+	t.Local_2ByteAdmin = &v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype.
+func (*BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype) ΛBelongingModule() string {
+	return "open-traffic-generator-bgp"
+}
+
+// BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/extended-community/structured/transitive_4octet_as_type/route_target_subtype YANG schema element.
+type BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype struct {
+	Global_4ByteAs   *uint32 `path:"global_4byte_as" module:"open-traffic-generator-bgp"`
+	Local_2ByteAdmin *uint16 `path:"local_2byte_admin" module:"open-traffic-generator-bgp"`
+}
+
+// IsYANGGoStruct ensures that BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype) IsYANGGoStruct() {
+}
+
+// GetGlobal_4ByteAs retrieves the value of the leaf Global_4ByteAs from the BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Global_4ByteAs is set, it can
+// safely use t.GetGlobal_4ByteAs() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Global_4ByteAs == nil' before retrieving the leaf's value.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype) GetGlobal_4ByteAs() uint32 {
+	if t == nil || t.Global_4ByteAs == nil {
+		return 0
+	}
+	return *t.Global_4ByteAs
+}
+
+// GetLocal_2ByteAdmin retrieves the value of the leaf Local_2ByteAdmin from the BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Local_2ByteAdmin is set, it can
+// safely use t.GetLocal_2ByteAdmin() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Local_2ByteAdmin == nil' before retrieving the leaf's value.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype) GetLocal_2ByteAdmin() uint16 {
+	if t == nil || t.Local_2ByteAdmin == nil {
+		return 0
+	}
+	return *t.Local_2ByteAdmin
+}
+
+// SetGlobal_4ByteAs sets the value of the leaf Global_4ByteAs in the BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype
+// struct.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype) SetGlobal_4ByteAs(v uint32) {
+	t.Global_4ByteAs = &v
+}
+
+// SetLocal_2ByteAdmin sets the value of the leaf Local_2ByteAdmin in the BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype
+// struct.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype) SetLocal_2ByteAdmin(v uint16) {
+	t.Local_2ByteAdmin = &v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype.
+func (*BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype) ΛBelongingModule() string {
 	return "open-traffic-generator-bgp"
 }
 

@@ -63,6 +63,13 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		5: {Name: "LABEL"},
 		6: {Name: "UNNUMBERED_INTERFACE"},
 	},
+	"E_ExtendedCommunity_BgpExtendedCommunityStructuredType": {
+		1: {Name: "TRANSITIVE_2OCTET_AS_TYPE"},
+		2: {Name: "TRANSITIVE_IPV4_ADDRESS_TYPE"},
+		3: {Name: "TRANSITIVE_4OCTET_AS_TYPE"},
+		4: {Name: "TRANSITIVE_OPAQUE_TYPE"},
+		5: {Name: "NON_TRANSITIVE_2OCTET_AS_TYPE"},
+	},
 	"E_ExtendedIpv4Reachability_Prefix_RedistributionType": {
 		1: {Name: "UP"},
 		2: {Name: "DOWN"},
@@ -161,6 +168,25 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		3: {Name: "AS_CONFED_SEQUENCE"},
 		4: {Name: "AS_CONFED_SET"},
 	},
+	"E_Structured_NonTransitive_2OctetAsType": {
+		1: {Name: "LINK_BANDWIDTH_SUBTYPE"},
+	},
+	"E_Structured_TransitiveIpv4AddressType": {
+		1: {Name: "ROUTE_TARGET_SUBTYPE"},
+		2: {Name: "ROUTE_ORIGIN_SUBTYPE"},
+	},
+	"E_Structured_TransitiveOpaqueType": {
+		1: {Name: "COLOR_SUBTYPE"},
+		2: {Name: "ENCAPSULATION_SUBTYPE"},
+	},
+	"E_Structured_Transitive_2OctetAsType": {
+		1: {Name: "ROUTE_TARGET_SUBTYPE"},
+		2: {Name: "ROUTE_ORIGIN_SUBTYPE"},
+	},
+	"E_Structured_Transitive_4OctetAsType": {
+		1: {Name: "ROUTE_TARGET_SUBTYPE"},
+		2: {Name: "ROUTE_ORIGIN_SUBTYPE"},
+	},
 	"E_Tags_ValueType": {
 		1: {Name: "STRING"},
 		2: {Name: "HEX"},
@@ -205,6 +231,24 @@ func initΛEnumTypes() {
 		"/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/community/community-type": {
 			reflect.TypeOf((E_State_CommunityType)(0)),
 		},
+		"/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/extended-community/structured/bgp-extended-community-structured_type": {
+			reflect.TypeOf((E_ExtendedCommunity_BgpExtendedCommunityStructuredType)(0)),
+		},
+		"/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/extended-community/structured/non_transitive_2octet_as_type/non_transitive_2octet_as_type": {
+			reflect.TypeOf((E_Structured_NonTransitive_2OctetAsType)(0)),
+		},
+		"/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/extended-community/structured/transitive_2octet_as_type/transitive_2octet_as_type": {
+			reflect.TypeOf((E_Structured_Transitive_2OctetAsType)(0)),
+		},
+		"/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/extended-community/structured/transitive_4octet_as_type/transitive_4octet_as_type": {
+			reflect.TypeOf((E_Structured_Transitive_4OctetAsType)(0)),
+		},
+		"/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/extended-community/structured/transitive_ipv4_address_type/transitive_ipv4_address_type": {
+			reflect.TypeOf((E_Structured_TransitiveIpv4AddressType)(0)),
+		},
+		"/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/extended-community/structured/transitive_opaque_type/transitive_opaque_type": {
+			reflect.TypeOf((E_Structured_TransitiveOpaqueType)(0)),
+		},
 		"/bgp-peers/bgp-peer/unicast-ipv4-prefixes/unicast-ipv4-prefix/state/origin": {
 			reflect.TypeOf((E_UnicastIpv4Prefix_Origin)(0)),
 		},
@@ -213,6 +257,24 @@ func initΛEnumTypes() {
 		},
 		"/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/community/community-type": {
 			reflect.TypeOf((E_State_CommunityType)(0)),
+		},
+		"/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/extended-community/structured/bgp-extended-community-structured_type": {
+			reflect.TypeOf((E_ExtendedCommunity_BgpExtendedCommunityStructuredType)(0)),
+		},
+		"/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/extended-community/structured/non_transitive_2octet_as_type/non_transitive_2octet_as_type": {
+			reflect.TypeOf((E_Structured_NonTransitive_2OctetAsType)(0)),
+		},
+		"/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/extended-community/structured/transitive_2octet_as_type/transitive_2octet_as_type": {
+			reflect.TypeOf((E_Structured_Transitive_2OctetAsType)(0)),
+		},
+		"/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/extended-community/structured/transitive_4octet_as_type/transitive_4octet_as_type": {
+			reflect.TypeOf((E_Structured_Transitive_4OctetAsType)(0)),
+		},
+		"/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/extended-community/structured/transitive_ipv4_address_type/transitive_ipv4_address_type": {
+			reflect.TypeOf((E_Structured_TransitiveIpv4AddressType)(0)),
+		},
+		"/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/extended-community/structured/transitive_opaque_type/transitive_opaque_type": {
+			reflect.TypeOf((E_Structured_TransitiveOpaqueType)(0)),
 		},
 		"/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/origin": {
 			reflect.TypeOf((E_UnicastIpv6Prefix_Origin)(0)),

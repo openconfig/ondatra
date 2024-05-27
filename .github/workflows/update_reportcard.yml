@@ -1,0 +1,12 @@
+
+name: Update Go Report Card
+
+on:
+  schedule:
+   - cron: "0 0 * * *"
+
+jobs:
+  update_reportcard:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: creekorful/goreportcard-action@v1.0
