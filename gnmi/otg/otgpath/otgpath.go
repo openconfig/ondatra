@@ -14,6 +14,8 @@ using the following YANG input files:
   - models-yang/models/lldp/open-traffic-generator-lldp.yang
   - models-yang/models/rsvp/open-traffic-generator-rsvp.yang
   - models-yang/models/types/open-traffic-generator-types.yang
+  - models-yang/models/dhcp/v4client/open-traffic-generator-dhcpv4client.yang
+  - models-yang/models/dhcp/v4server/open-traffic-generator-dhcpv4server.yang
 
 Imported modules were sourced from:
   - models-yang/models/...
@@ -23,6 +25,8 @@ package otgpath
 import (
 	oc "github.com/openconfig/ondatra/gnmi/otg"
 	"github.com/openconfig/ondatra/gnmi/otg/bgp"
+	"github.com/openconfig/ondatra/gnmi/otg/dhcpv4client"
+	"github.com/openconfig/ondatra/gnmi/otg/dhcpv4server"
 	"github.com/openconfig/ondatra/gnmi/otg/discovery"
 	"github.com/openconfig/ondatra/gnmi/otg/flow"
 	"github.com/openconfig/ondatra/gnmi/otg/isis"
@@ -77,6 +81,82 @@ func (n *RootPath) BgpPeer(Name string) *bgp.BgpPeerPath {
 	ps := &bgp.BgpPeerPath{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"bgp-peers", "bgp-peer"},
+			map[string]interface{}{"name": Name},
+			n,
+		),
+	}
+	return ps
+}
+
+// Dhcpv4ClientAny (list): Each DHCPv4 Client is identified by an arbitrary string
+// identifier.
+//
+//	Defining module:      "open-traffic-generator-dhcpv4client"
+//	Instantiating module: "open-traffic-generator-dhcpv4client"
+//	Path from parent:     "dhcpv4-clients/dhcpv4-client"
+//	Path from root:       "/dhcpv4-clients/dhcpv4-client"
+func (n *RootPath) Dhcpv4ClientAny() *dhcpv4client.Dhcpv4ClientPathAny {
+	ps := &dhcpv4client.Dhcpv4ClientPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"dhcpv4-clients", "dhcpv4-client"},
+			map[string]interface{}{"name": "*"},
+			n,
+		),
+	}
+	return ps
+}
+
+// Dhcpv4Client (list): Each DHCPv4 Client is identified by an arbitrary string
+// identifier.
+//
+//	Defining module:      "open-traffic-generator-dhcpv4client"
+//	Instantiating module: "open-traffic-generator-dhcpv4client"
+//	Path from parent:     "dhcpv4-clients/dhcpv4-client"
+//	Path from root:       "/dhcpv4-clients/dhcpv4-client"
+//
+//	Name: string
+func (n *RootPath) Dhcpv4Client(Name string) *dhcpv4client.Dhcpv4ClientPath {
+	ps := &dhcpv4client.Dhcpv4ClientPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"dhcpv4-clients", "dhcpv4-client"},
+			map[string]interface{}{"name": Name},
+			n,
+		),
+	}
+	return ps
+}
+
+// Dhcpv4ServerAny (list): Each DHCPv4 Server is identified by an arbitrary string
+// identifier.
+//
+//	Defining module:      "open-traffic-generator-dhcpv4server"
+//	Instantiating module: "open-traffic-generator-dhcpv4server"
+//	Path from parent:     "dhcpv4-servers/dhcpv4-server"
+//	Path from root:       "/dhcpv4-servers/dhcpv4-server"
+func (n *RootPath) Dhcpv4ServerAny() *dhcpv4server.Dhcpv4ServerPathAny {
+	ps := &dhcpv4server.Dhcpv4ServerPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"dhcpv4-servers", "dhcpv4-server"},
+			map[string]interface{}{"name": "*"},
+			n,
+		),
+	}
+	return ps
+}
+
+// Dhcpv4Server (list): Each DHCPv4 Server is identified by an arbitrary string
+// identifier.
+//
+//	Defining module:      "open-traffic-generator-dhcpv4server"
+//	Instantiating module: "open-traffic-generator-dhcpv4server"
+//	Path from parent:     "dhcpv4-servers/dhcpv4-server"
+//	Path from root:       "/dhcpv4-servers/dhcpv4-server"
+//
+//	Name: string
+func (n *RootPath) Dhcpv4Server(Name string) *dhcpv4server.Dhcpv4ServerPath {
+	ps := &dhcpv4server.Dhcpv4ServerPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"dhcpv4-servers", "dhcpv4-server"},
 			map[string]interface{}{"name": Name},
 			n,
 		),
