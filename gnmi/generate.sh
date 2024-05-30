@@ -115,6 +115,7 @@ OTG_YANG_FILES=(
   models-yang/models/types/open-traffic-generator-types.yang
   models-yang/models/dhcp/v4client/open-traffic-generator-dhcpv4client.yang
   models-yang/models/dhcp/v4server/open-traffic-generator-dhcpv4server.yang
+  models-yang/models/platform/open-traffic-generator-platform.yang
 )
 
 go run github.com/openconfig/ygnmi/app/ygnmi generator \

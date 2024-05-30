@@ -18,6 +18,7 @@ using the following YANG input files:
   - models-yang/models/types/open-traffic-generator-types.yang
   - models-yang/models/dhcp/v4client/open-traffic-generator-dhcpv4client.yang
   - models-yang/models/dhcp/v4server/open-traffic-generator-dhcpv4server.yang
+  - models-yang/models/platform/open-traffic-generator-platform.yang
 
 Imported modules were sourced from:
   - models-yang/models/...
@@ -110,6 +111,33 @@ const (
 	Capabilities_Name_STATION_ONLY E_Capabilities_Name = 10
 	// Capabilities_Name_WLAN_ACCESS_POINT corresponds to the value WLAN_ACCESS_POINT of Capabilities_Name
 	Capabilities_Name_WLAN_ACCESS_POINT E_Capabilities_Name = 11
+)
+
+// E_Component_Name is a derived int64 type which is used to represent
+// the enumerated node Component_Name. An additional value named
+// Component_Name_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_Component_Name int64
+
+// IsYANGGoEnum ensures that Component_Name implements the yang.GoEnum
+// interface. This ensures that Component_Name can be identified as a
+// mapped type for a YANG enumeration.
+func (E_Component_Name) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  Component_Name.
+func (E_Component_Name) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_Component_Name.
+func (e E_Component_Name) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_Component_Name")
+}
+
+const (
+	// Component_Name_UNSET corresponds to the value UNSET of Component_Name
+	Component_Name_UNSET E_Component_Name = 0
+	// Component_Name_keng_controller corresponds to the value keng_controller of Component_Name
+	Component_Name_keng_controller E_Component_Name = 1
 )
 
 // E_Ero_Type is a derived int64 type which is used to represent

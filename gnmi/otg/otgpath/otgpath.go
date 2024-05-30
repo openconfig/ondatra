@@ -16,6 +16,7 @@ using the following YANG input files:
   - models-yang/models/types/open-traffic-generator-types.yang
   - models-yang/models/dhcp/v4client/open-traffic-generator-dhcpv4client.yang
   - models-yang/models/dhcp/v4server/open-traffic-generator-dhcpv4server.yang
+  - models-yang/models/platform/open-traffic-generator-platform.yang
 
 Imported modules were sourced from:
   - models-yang/models/...
@@ -33,6 +34,7 @@ import (
 	"github.com/openconfig/ondatra/gnmi/otg/lacp"
 	"github.com/openconfig/ondatra/gnmi/otg/lag"
 	"github.com/openconfig/ondatra/gnmi/otg/lldp"
+	"github.com/openconfig/ondatra/gnmi/otg/platform"
 	"github.com/openconfig/ondatra/gnmi/otg/port"
 	"github.com/openconfig/ondatra/gnmi/otg/rsvp"
 	"github.com/openconfig/ygnmi/ygnmi"
@@ -81,6 +83,42 @@ func (n *RootPath) BgpPeer(Name string) *bgp.BgpPeerPath {
 	ps := &bgp.BgpPeerPath{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"bgp-peers", "bgp-peer"},
+			map[string]interface{}{"name": Name},
+			n,
+		),
+	}
+	return ps
+}
+
+// ComponentAny (list): An individual component of an OTG compliant implementation.
+//
+//	Defining module:      "open-traffic-generator-platform"
+//	Instantiating module: "open-traffic-generator-platform"
+//	Path from parent:     "components/component"
+//	Path from root:       "/components/component"
+func (n *RootPath) ComponentAny() *platform.ComponentPathAny {
+	ps := &platform.ComponentPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"components", "component"},
+			map[string]interface{}{"name": "*"},
+			n,
+		),
+	}
+	return ps
+}
+
+// Component (list): An individual component of an OTG compliant implementation.
+//
+//	Defining module:      "open-traffic-generator-platform"
+//	Instantiating module: "open-traffic-generator-platform"
+//	Path from parent:     "components/component"
+//	Path from root:       "/components/component"
+//
+//	Name: oc.E_Component_Name
+func (n *RootPath) Component(Name oc.E_Component_Name) *platform.ComponentPath {
+	ps := &platform.ComponentPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"components", "component"},
 			map[string]interface{}{"name": Name},
 			n,
 		),

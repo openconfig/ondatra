@@ -18,6 +18,7 @@ using the following YANG input files:
   - models-yang/models/types/open-traffic-generator-types.yang
   - models-yang/models/dhcp/v4client/open-traffic-generator-dhcpv4client.yang
   - models-yang/models/dhcp/v4server/open-traffic-generator-dhcpv4server.yang
+  - models-yang/models/platform/open-traffic-generator-platform.yang
 
 Imported modules were sourced from:
   - models-yang/models/...
@@ -56,6 +57,9 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		9:  {Name: "C_VLAN"},
 		10: {Name: "STATION_ONLY"},
 		11: {Name: "WLAN_ACCESS_POINT"},
+	},
+	"E_Component_Name": {
+		1: {Name: "keng-controller"},
 	},
 	"E_Ero_Type": {
 		1: {Name: "IPV4"},
@@ -280,6 +284,9 @@ func initΛEnumTypes() {
 		},
 		"/bgp-peers/bgp-peer/unicast-ipv6-prefixes/unicast-ipv6-prefix/state/origin": {
 			reflect.TypeOf((E_UnicastIpv6Prefix_Origin)(0)),
+		},
+		"/components/component/state/name": {
+			reflect.TypeOf((E_Component_Name)(0)),
 		},
 		"/flows/flow/tagged-metrics/tagged-metric/state/tags/tag-value/value-type": {
 			reflect.TypeOf((E_Tags_ValueType)(0)),
