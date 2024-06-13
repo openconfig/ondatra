@@ -1129,6 +1129,194 @@ func (n *Component_IdPathAny) State() ygnmi.WildcardQuery[string] {
 	)
 }
 
+// Component_InstallComponentPath represents the /openconfig-platform/components/component/state/install-component YANG schema element.
+type Component_InstallComponentPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_InstallComponentPathAny represents the wildcard version of the /openconfig-platform/components/component/state/install-component YANG schema element.
+type Component_InstallComponentPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/install-component"
+//	Path from root:       "/components/component/state/install-component"
+func (n *Component_InstallComponentPath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewSingletonQuery[string](
+		"Component",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "install-component"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Component).InstallComponent
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/install-component"
+//	Path from root:       "/components/component/state/install-component"
+func (n *Component_InstallComponentPathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"Component",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "install-component"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Component).InstallComponent
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Component_InstallPositionPath represents the /openconfig-platform/components/component/state/install-position YANG schema element.
+type Component_InstallPositionPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_InstallPositionPathAny represents the wildcard version of the /openconfig-platform/components/component/state/install-position YANG schema element.
+type Component_InstallPositionPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/install-position"
+//	Path from root:       "/components/component/state/install-position"
+func (n *Component_InstallPositionPath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewSingletonQuery[string](
+		"Component",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "install-position"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Component).InstallPosition
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/install-position"
+//	Path from root:       "/components/component/state/install-position"
+func (n *Component_InstallPositionPathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"Component",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "install-position"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Component).InstallPosition
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
 // Component_LastPoweroffTimePath represents the /openconfig-platform/components/component/state/last-poweroff-time YANG schema element.
 type Component_LastPoweroffTimePath struct {
 	*ygnmi.NodePath
@@ -3623,6 +3811,140 @@ func (n *ComponentPathAny) Id() *Component_IdPathAny {
 	return ps
 }
 
+// InstallComponent (leaf): This leaf contains the name of the ancestor component which
+// contains the 'install-position'.  This creates a distinct
+// mapping between a removable component and the target component
+// it is installed into.  Note there may be zero or more
+// intermediate components between the removable component and
+// the install-component.
+//
+// For example, consider the component tree
+// PORT ['eth1/2']-> INTEGRATED_CIRCUIT ['npu1']-> LINECARD ['lc1'].
+// The PORT has an install-position of '2' and install-component named
+// 'lc1'.  The intermediate INTEGRATED-CIRCUIT component is not
+// present in either install-position or install-component leaves.
+//
+//	Defining module:      "openconfig-platform"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/install-component"
+//	Path from root:       "/components/component/state/install-component"
+func (n *ComponentPath) InstallComponent() *Component_InstallComponentPath {
+	ps := &Component_InstallComponentPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "install-component"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// InstallComponent (leaf): This leaf contains the name of the ancestor component which
+// contains the 'install-position'.  This creates a distinct
+// mapping between a removable component and the target component
+// it is installed into.  Note there may be zero or more
+// intermediate components between the removable component and
+// the install-component.
+//
+// For example, consider the component tree
+// PORT ['eth1/2']-> INTEGRATED_CIRCUIT ['npu1']-> LINECARD ['lc1'].
+// The PORT has an install-position of '2' and install-component named
+// 'lc1'.  The intermediate INTEGRATED-CIRCUIT component is not
+// present in either install-position or install-component leaves.
+//
+//	Defining module:      "openconfig-platform"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/install-component"
+//	Path from root:       "/components/component/state/install-component"
+func (n *ComponentPathAny) InstallComponent() *Component_InstallComponentPathAny {
+	ps := &Component_InstallComponentPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "install-component"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// InstallPosition (leaf): System-supplied index to a position where this component is
+// installed.  The position may be referred in device documenation
+// as a port, slot, bay, socket, etc.  This string must only
+// indicate the name of the position, and not any indication of
+// the name of the parent component within the system.  Instead,
+// parent component name should be present in the 'parent' leaf.
+//
+// Typically the install-position is a number, but it is observed
+// that some devices may use letters or alphanumerics.  The
+// position name should be the same name used to physically
+// identify the position in documentation or printed on the
+// device.
+//
+// Any component which is removable is expected to have
+// an install-position and an install-component which points to
+// an ancestor component where the connection occurs.
+//
+// For component types that have an explicit slot-id attribute,
+// such as LINECARD, the system should populate slot-id,
+// install-position and install-component.  This will facilitate a
+// transition to deprecate slot-id.
+//
+//	Defining module:      "openconfig-platform"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/install-position"
+//	Path from root:       "/components/component/state/install-position"
+func (n *ComponentPath) InstallPosition() *Component_InstallPositionPath {
+	ps := &Component_InstallPositionPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "install-position"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// InstallPosition (leaf): System-supplied index to a position where this component is
+// installed.  The position may be referred in device documenation
+// as a port, slot, bay, socket, etc.  This string must only
+// indicate the name of the position, and not any indication of
+// the name of the parent component within the system.  Instead,
+// parent component name should be present in the 'parent' leaf.
+//
+// Typically the install-position is a number, but it is observed
+// that some devices may use letters or alphanumerics.  The
+// position name should be the same name used to physically
+// identify the position in documentation or printed on the
+// device.
+//
+// Any component which is removable is expected to have
+// an install-position and an install-component which points to
+// an ancestor component where the connection occurs.
+//
+// For component types that have an explicit slot-id attribute,
+// such as LINECARD, the system should populate slot-id,
+// install-position and install-component.  This will facilitate a
+// transition to deprecate slot-id.
+//
+//	Defining module:      "openconfig-platform"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/install-position"
+//	Path from root:       "/components/component/state/install-position"
+func (n *ComponentPathAny) InstallPosition() *Component_InstallPositionPathAny {
+	ps := &Component_InstallPositionPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "install-position"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
 // IntegratedCircuit (container): Data for chip components, such as ASIC, NPUs, etc.
 //
 //	Defining module:      "openconfig-platform"
@@ -3943,6 +4265,9 @@ func (n *ComponentPathAny) Linecard() *Component_LinecardPathAny {
 // have an explicit slot-id attribute, such as linecards, the
 // system should populate the more specific slot-id.
 //
+// This leaf is deprecated and replaced by install-position and
+// install-component.
+//
 //	Defining module:      "openconfig-platform"
 //	Instantiating module: "openconfig-platform"
 //	Path from parent:     "state/location"
@@ -3964,6 +4289,9 @@ func (n *ComponentPath) Location() *Component_LocationPath {
 // slot number, socket location, etc. For component types that
 // have an explicit slot-id attribute, such as linecards, the
 // system should populate the more specific slot-id.
+//
+// This leaf is deprecated and replaced by install-position and
+// install-component.
 //
 //	Defining module:      "openconfig-platform"
 //	Instantiating module: "openconfig-platform"
@@ -34042,7 +34370,11 @@ func (n *Component_LinecardPathAny) PowerAdminState() *Component_Linecard_PowerA
 }
 
 // SlotId (leaf): Identifier for the slot or chassis position in which the
-// linecard is installed
+// linecard is installed.
+//
+// This leaf is deprecated and will be replaced by install-position
+// and install-component leaves in a future major revision of this
+// model.
 //
 //	Defining module:      "openconfig-platform-linecard"
 //	Instantiating module: "openconfig-platform"
@@ -34061,7 +34393,11 @@ func (n *Component_LinecardPath) SlotId() *Component_Linecard_SlotIdPath {
 }
 
 // SlotId (leaf): Identifier for the slot or chassis position in which the
-// linecard is installed
+// linecard is installed.
+//
+// This leaf is deprecated and will be replaced by install-position
+// and install-component leaves in a future major revision of this
+// model.
 //
 //	Defining module:      "openconfig-platform-linecard"
 //	Instantiating module: "openconfig-platform"
