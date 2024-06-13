@@ -28,6 +28,7 @@ import (
 	"google.golang.org/grpc"
 
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
+	gnpsipb "github.com/openconfig/gnpsi/proto/gnpsi"
 	grpb "github.com/openconfig/gribi/v1/proto/service"
 	opb "github.com/openconfig/ondatra/proto"
 	p4pb "github.com/p4lang/p4runtime/go/p4/v1"
@@ -96,6 +97,7 @@ type DUT struct {
 	DialGNSIFn    func(context.Context, ...grpc.DialOption) (binding.GNSIClients, error)
 	DialGRIBIFn   func(context.Context, ...grpc.DialOption) (grpb.GRIBIClient, error)
 	DialP4RTFn    func(context.Context, ...grpc.DialOption) (p4pb.P4RuntimeClient, error)
+	DialGNPSIFn   func(context.Context, ...grpc.DialOption) (gnpsipb.GNPSIClient, error)
 }
 
 // PushConfig delegates to d.PushConfigFn.
@@ -144,6 +146,14 @@ func (d *DUT) DialGNSI(ctx context.Context, opts ...grpc.DialOption) (binding.GN
 		log.Fatal("fakebind DialGNSI called but DialGNSIFn not set")
 	}
 	return d.DialGNSIFn(ctx, opts...)
+}
+
+// DialGNPSI delegates to d.DialGNPSIFn.
+func (d *DUT) DialGNPSI(ctx context.Context, opts ...grpc.DialOption) (gnpsipb.GNPSIClient, error) {
+	if d.DialGNPSIFn == nil {
+		log.FatalContext(ctx, "fakebind DialGNPSI called but DialGNPSIFn not set")
+	}
+	return d.DialGNPSIFn(ctx, opts...)
 }
 
 // DialGRIBI delegates to d.DialGRIBIFn.

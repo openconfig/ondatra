@@ -90,6 +90,7 @@ import (
 	"github.com/openconfig/ondatra/internal/rawapis"
 
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
+	gnpsipb "github.com/openconfig/gnpsi/proto/gnpsi"
 	grpb "github.com/openconfig/gribi/v1/proto/service"
 	p4pb "github.com/p4lang/p4runtime/go/p4/v1"
 )
@@ -152,6 +153,17 @@ func (r *DUTAPIs) GRIBI(t testing.TB) grpb.GRIBIClient {
 		t.Fatalf("Failed to fetch gRIBI client for %v: %v", r.dut, err)
 	}
 	return grc
+}
+
+// GNPSI returns the default GNPSI client for the dut.
+func (r *DUTAPIs) GNPSI(t testing.TB) gnpsipb.GNPSIClient {
+	t.Helper()
+	t = events.ActionStarted(t, "Fetching GNPSI client for %s", r.dut)
+	gnpsi, err := rawapis.FetchGNPSI(context.Background(), r.dut)
+	if err != nil {
+		t.Fatalf("Failed to fetch GNPSI client for %v: %v", r.dut, err)
+	}
+	return gnpsi
 }
 
 // P4RT returns the default P4RT client for the dut.

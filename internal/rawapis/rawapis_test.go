@@ -26,6 +26,7 @@ import (
 	"google.golang.org/grpc"
 
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
+	gnpsipb "github.com/openconfig/gnpsi/proto/gnpsi"
 	grpb "github.com/openconfig/gribi/v1/proto/service"
 	ppb "github.com/p4lang/p4runtime/go/p4/v1"
 )
@@ -52,6 +53,9 @@ var (
 		},
 		DialP4RTFn: func(context.Context, ...grpc.DialOption) (ppb.P4RuntimeClient, error) {
 			return &struct{ ppb.P4RuntimeClient }{}, nil
+		},
+		DialGNPSIFn: func(context.Context, ...grpc.DialOption) (gnpsipb.GNPSIClient, error) {
+			return &struct{ gnpsipb.GNPSIClient }{}, nil
 		},
 	}
 
@@ -140,6 +144,27 @@ func TestGNSI(t *testing.T) {
 	}
 	if gotFetch == gotNew {
 		t.Errorf("FetchGNSI() unexpected result: got %v, want unique value", gotFetch)
+	}
+}
+
+func TestGNPSI(t *testing.T) {
+	gotNew, err := NewGNPSI(context.Background(), dut)
+	if err != nil {
+		t.Fatalf("NewGNPSI() unexpected error: %v", err)
+	}
+	wantFetch, err := FetchGNPSI(context.Background(), dut)
+	if err != nil {
+		t.Fatalf("FetchGNPSI() unexpected error: %v", err)
+	}
+	gotFetch, err := FetchGNPSI(context.Background(), dut)
+	if err != nil {
+		t.Fatalf("FetchGNPSI() unexpected error: %v", err)
+	}
+	if gotFetch != wantFetch {
+		t.Errorf("FetchGNPSI() unexpected result: got %v, want %v", gotFetch, wantFetch)
+	}
+	if gotFetch == gotNew {
+		t.Errorf("FetchGNPSI() unexpected result: got %v, want unique value", gotFetch)
 	}
 }
 

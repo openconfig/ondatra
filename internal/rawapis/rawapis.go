@@ -34,6 +34,7 @@ import (
 	"google.golang.org/grpc"
 
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
+	gnpsipb "github.com/openconfig/gnpsi/proto/gnpsi"
 	grpb "github.com/openconfig/gribi/v1/proto/service"
 	p4pb "github.com/p4lang/p4runtime/go/p4/v1"
 )
@@ -187,6 +188,32 @@ func FetchP4RT(ctx context.Context, dut binding.DUT) (p4pb.P4RuntimeClient, erro
 			return nil, fmt.Errorf("error dialing P4RT: %w", err)
 		}
 		p4rts[dut] = c
+	}
+	return c, nil
+}
+
+var (
+	gnpsiMu      sync.Mutex
+	gnpsiClients = make(map[binding.DUT]gnpsipb.GNPSIClient)
+)
+
+// NewGNPSI creates a new gNPSI client for the specified DUT.
+func NewGNPSI(ctx context.Context, dut binding.DUT) (gnpsipb.GNPSIClient, error) {
+	return dut.DialGNPSI(ctx, CommonDialOpts...)
+}
+
+// FetchGNPSI fetches the cached gNPSI client for the specified DUT.
+func FetchGNPSI(ctx context.Context, dut binding.DUT) (gnpsipb.GNPSIClient, error) {
+	gnpsiMu.Lock()
+	defer gnpsiMu.Unlock()
+	c, ok := gnpsiClients[dut]
+	if !ok {
+		var err error
+		c, err = NewGNPSI(ctx, dut)
+		if err != nil {
+			return nil, fmt.Errorf("error dialing GNPSI: %w", err)
+		}
+		gnpsiClients[dut] = c
 	}
 	return c, nil
 }

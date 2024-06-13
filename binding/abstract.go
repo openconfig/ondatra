@@ -35,6 +35,7 @@ import (
 	credzpb "github.com/openconfig/gnsi/credentialz"
 	pathzpb "github.com/openconfig/gnsi/pathz"
 
+	gnpsipb "github.com/openconfig/gnpsi/proto/gnpsi"
 	grpb "github.com/openconfig/gribi/v1/proto/service"
 	opb "github.com/openconfig/ondatra/proto"
 	p4pb "github.com/p4lang/p4runtime/go/p4/v1"
@@ -115,6 +116,11 @@ func (*AbstractDUT) DialGRIBI(context.Context, ...grpc.DialOption) (grpb.GRIBICl
 // DialP4RT returns an unimplemented error.
 func (*AbstractDUT) DialP4RT(context.Context, ...grpc.DialOption) (p4pb.P4RuntimeClient, error) {
 	return nil, errors.New("DialP4RT unimplemented")
+}
+
+// DialGNPSI returns an unimplemented error.
+func (*AbstractDUT) DialGNPSI(context.Context, ...grpc.DialOption) (gnpsipb.GNPSIClient, error) {
+	return nil, errors.New("DialGNPSI unimplemented")
 }
 
 func (*AbstractDUT) mustEmbedAbstractDUT() {}
