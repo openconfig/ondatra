@@ -14,6 +14,11 @@ using the following YANG input files:
   - models-yang/models/lldp/open-traffic-generator-lldp.yang
   - models-yang/models/rsvp/open-traffic-generator-rsvp.yang
   - models-yang/models/types/open-traffic-generator-types.yang
+  - models-yang/models/dhcp/v4client/open-traffic-generator-dhcpv4client.yang
+  - models-yang/models/dhcp/v4server/open-traffic-generator-dhcpv4server.yang
+  - models-yang/models/platform/open-traffic-generator-platform.yang
+  - models-yang/models/dhcp/v6client/open-traffic-generator-dhcpv6client.yang
+  - models-yang/models/dhcp/v6server/open-traffic-generator-dhcpv6server.yang
 
 Imported modules were sourced from:
   - models-yang/models/...
@@ -295,7 +300,7 @@ func (n *IsisRouterPathAny) LinkStateDatabase() *IsisRouter_LinkStateDatabasePat
 	return ps
 }
 
-// Name (leaf): An arbitary name of the ISIS router determined by the OTG
+// Name (leaf): An arbitrary name of the ISIS router determined by the OTG
 // configuration.
 //
 //	Defining module:      "open-traffic-generator-isis"
@@ -314,7 +319,7 @@ func (n *IsisRouterPath) Name() *IsisRouter_NamePath {
 	return ps
 }
 
-// Name (leaf): An arbitary name of the ISIS router determined by the OTG
+// Name (leaf): An arbitrary name of the ISIS router determined by the OTG
 // configuration.
 //
 //	Defining module:      "open-traffic-generator-isis"
