@@ -17,6 +17,8 @@ using the following YANG input files:
   - models-yang/models/dhcp/v4client/open-traffic-generator-dhcpv4client.yang
   - models-yang/models/dhcp/v4server/open-traffic-generator-dhcpv4server.yang
   - models-yang/models/platform/open-traffic-generator-platform.yang
+  - models-yang/models/dhcp/v6client/open-traffic-generator-dhcpv6client.yang
+  - models-yang/models/dhcp/v6server/open-traffic-generator-dhcpv6server.yang
 
 Imported modules were sourced from:
   - models-yang/models/...
@@ -294,7 +296,7 @@ func (n *Dhcpv4ClientPathAny) Interface() *Dhcpv4Client_InterfacePathAny {
 	return ps
 }
 
-// Name (leaf): An arbitary name of the DHCPv4 Client determined by the OTG
+// Name (leaf): An arbitrary name of the DHCPv4 Client determined by the OTG
 // configuration.
 //
 //	Defining module:      "open-traffic-generator-dhcpv4client"
@@ -313,7 +315,7 @@ func (n *Dhcpv4ClientPath) Name() *Dhcpv4Client_NamePath {
 	return ps
 }
 
-// Name (leaf): An arbitary name of the DHCPv4 Client determined by the OTG
+// Name (leaf): An arbitrary name of the DHCPv4 Client determined by the OTG
 // configuration.
 //
 //	Defining module:      "open-traffic-generator-dhcpv4client"

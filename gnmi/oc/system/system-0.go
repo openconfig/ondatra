@@ -38255,6 +38255,128 @@ func (n *System_GrpcServerPathAny) CertificateVersion() *System_GrpcServer_Certi
 	return ps
 }
 
+// ConnectionAny (list): List of gRPC connections
+//
+//	Defining module:      "openconfig-system-grpc"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "connections/connection"
+//	Path from root:       "/system/grpc-servers/grpc-server/connections/connection"
+func (n *System_GrpcServerPath) ConnectionAny() *System_GrpcServer_ConnectionPathAny {
+	ps := &System_GrpcServer_ConnectionPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"connections", "connection"},
+			map[string]interface{}{"address": "*", "port": "*"},
+			n,
+		),
+	}
+	return ps
+}
+
+// ConnectionAny (list): List of gRPC connections
+//
+//	Defining module:      "openconfig-system-grpc"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "connections/connection"
+//	Path from root:       "/system/grpc-servers/grpc-server/connections/connection"
+func (n *System_GrpcServerPathAny) ConnectionAny() *System_GrpcServer_ConnectionPathAny {
+	ps := &System_GrpcServer_ConnectionPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"connections", "connection"},
+			map[string]interface{}{"address": "*", "port": "*"},
+			n,
+		),
+	}
+	return ps
+}
+
+// WithAddress sets System_GrpcServer_ConnectionPathAny's key "address" to the specified value.
+// Address: string
+func (n *System_GrpcServer_ConnectionPathAny) WithAddress(Address string) *System_GrpcServer_ConnectionPathAny {
+	ygnmi.ModifyKey(n.NodePath, "address", Address)
+	return n
+}
+
+// WithPort sets System_GrpcServer_ConnectionPathAny's key "port" to the specified value.
+// Port: uint16
+func (n *System_GrpcServer_ConnectionPathAny) WithPort(Port uint16) *System_GrpcServer_ConnectionPathAny {
+	ygnmi.ModifyKey(n.NodePath, "port", Port)
+	return n
+}
+
+// Connection (list): List of gRPC connections
+//
+//	Defining module:      "openconfig-system-grpc"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "connections/connection"
+//	Path from root:       "/system/grpc-servers/grpc-server/connections/connection"
+//
+//	Address: string
+//	Port: uint16
+func (n *System_GrpcServerPath) Connection(Address string, Port uint16) *System_GrpcServer_ConnectionPath {
+	ps := &System_GrpcServer_ConnectionPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"connections", "connection"},
+			map[string]interface{}{"address": Address, "port": Port},
+			n,
+		),
+	}
+	return ps
+}
+
+// Connection (list): List of gRPC connections
+//
+//	Defining module:      "openconfig-system-grpc"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "connections/connection"
+//	Path from root:       "/system/grpc-servers/grpc-server/connections/connection"
+//
+//	Address: string
+//	Port: uint16
+func (n *System_GrpcServerPathAny) Connection(Address string, Port uint16) *System_GrpcServer_ConnectionPathAny {
+	ps := &System_GrpcServer_ConnectionPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"connections", "connection"},
+			map[string]interface{}{"address": Address, "port": Port},
+			n,
+		),
+	}
+	return ps
+}
+
+// ConnectionMap (list): List of gRPC connections
+//
+//	Defining module:      "openconfig-system-grpc"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "connections/connection"
+//	Path from root:       "/system/grpc-servers/grpc-server/connections/connection"
+func (n *System_GrpcServerPath) ConnectionMap() *System_GrpcServer_ConnectionPathMap {
+	ps := &System_GrpcServer_ConnectionPathMap{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"connections"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// ConnectionMap (list): List of gRPC connections
+//
+//	Defining module:      "openconfig-system-grpc"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "connections/connection"
+//	Path from root:       "/system/grpc-servers/grpc-server/connections/connection"
+func (n *System_GrpcServerPathAny) ConnectionMap() *System_GrpcServer_ConnectionPathMapAny {
+	ps := &System_GrpcServer_ConnectionPathMapAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"connections"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
 // Counters (container): A collection of counters that were collected by the gRPC during
 // the authentication process.
 //
@@ -41658,6 +41780,1048 @@ func (n *System_GrpcServer_AuthzPolicyCounters_RpcPathMapAny) State() ygnmi.Wild
 			PreRelPath:  []string{"openconfig-gnsi-authz:rpcs"},
 			PostRelPath: []string{"openconfig-gnsi-authz:rpc"},
 		},
+	)
+}
+
+// System_GrpcServer_Connection_AddressPath represents the /openconfig-system/system/grpc-servers/grpc-server/connections/connection/state/address YANG schema element.
+type System_GrpcServer_Connection_AddressPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_GrpcServer_Connection_AddressPathAny represents the wildcard version of the /openconfig-system/system/grpc-servers/grpc-server/connections/connection/state/address YANG schema element.
+type System_GrpcServer_Connection_AddressPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-grpc"
+//	Instantiating module: "openconfig-system-grpc"
+//	Path from parent:     "state/address"
+//	Path from root:       "/system/grpc-servers/grpc-server/connections/connection/state/address"
+func (n *System_GrpcServer_Connection_AddressPath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewSingletonQuery[string](
+		"System_GrpcServer_Connection",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "address"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_GrpcServer_Connection).Address
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_GrpcServer_Connection) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-grpc"
+//	Instantiating module: "openconfig-system-grpc"
+//	Path from parent:     "state/address"
+//	Path from root:       "/system/grpc-servers/grpc-server/connections/connection/state/address"
+func (n *System_GrpcServer_Connection_AddressPathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"System_GrpcServer_Connection",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "address"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_GrpcServer_Connection).Address
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_GrpcServer_Connection) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-grpc"
+//	Instantiating module: "openconfig-system-grpc"
+//	Path from parent:     "address"
+//	Path from root:       ""
+func (n *System_GrpcServer_Connection_AddressPath) Config() ygnmi.ConfigQuery[string] {
+	return ygnmi.NewConfigQuery[string](
+		"System_GrpcServer_Connection",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"address"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_GrpcServer_Connection).Address
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_GrpcServer_Connection) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-grpc"
+//	Instantiating module: "openconfig-system-grpc"
+//	Path from parent:     "address"
+//	Path from root:       ""
+func (n *System_GrpcServer_Connection_AddressPathAny) Config() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"System_GrpcServer_Connection",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"address"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_GrpcServer_Connection).Address
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_GrpcServer_Connection) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// System_GrpcServer_Connection_PortPath represents the /openconfig-system/system/grpc-servers/grpc-server/connections/connection/state/port YANG schema element.
+type System_GrpcServer_Connection_PortPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_GrpcServer_Connection_PortPathAny represents the wildcard version of the /openconfig-system/system/grpc-servers/grpc-server/connections/connection/state/port YANG schema element.
+type System_GrpcServer_Connection_PortPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-grpc"
+//	Instantiating module: "openconfig-system-grpc"
+//	Path from parent:     "state/port"
+//	Path from root:       "/system/grpc-servers/grpc-server/connections/connection/state/port"
+func (n *System_GrpcServer_Connection_PortPath) State() ygnmi.SingletonQuery[uint16] {
+	return ygnmi.NewSingletonQuery[uint16](
+		"System_GrpcServer_Connection",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "port"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.System_GrpcServer_Connection).Port
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_GrpcServer_Connection) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-grpc"
+//	Instantiating module: "openconfig-system-grpc"
+//	Path from parent:     "state/port"
+//	Path from root:       "/system/grpc-servers/grpc-server/connections/connection/state/port"
+func (n *System_GrpcServer_Connection_PortPathAny) State() ygnmi.WildcardQuery[uint16] {
+	return ygnmi.NewWildcardQuery[uint16](
+		"System_GrpcServer_Connection",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "port"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.System_GrpcServer_Connection).Port
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_GrpcServer_Connection) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-grpc"
+//	Instantiating module: "openconfig-system-grpc"
+//	Path from parent:     "port"
+//	Path from root:       ""
+func (n *System_GrpcServer_Connection_PortPath) Config() ygnmi.ConfigQuery[uint16] {
+	return ygnmi.NewConfigQuery[uint16](
+		"System_GrpcServer_Connection",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"port"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.System_GrpcServer_Connection).Port
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_GrpcServer_Connection) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-grpc"
+//	Instantiating module: "openconfig-system-grpc"
+//	Path from parent:     "port"
+//	Path from root:       ""
+func (n *System_GrpcServer_Connection_PortPathAny) Config() ygnmi.WildcardQuery[uint16] {
+	return ygnmi.NewWildcardQuery[uint16](
+		"System_GrpcServer_Connection",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"port"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.System_GrpcServer_Connection).Port
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_GrpcServer_Connection) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// System_GrpcServer_ConnectionPath represents the /openconfig-system/system/grpc-servers/grpc-server/connections/connection YANG schema element.
+type System_GrpcServer_ConnectionPath struct {
+	*ygnmi.NodePath
+}
+
+// System_GrpcServer_ConnectionPathAny represents the wildcard version of the /openconfig-system/system/grpc-servers/grpc-server/connections/connection YANG schema element.
+type System_GrpcServer_ConnectionPathAny struct {
+	*ygnmi.NodePath
+}
+
+// System_GrpcServer_ConnectionPathMap represents the /openconfig-system/system/grpc-servers/grpc-server/connections/connection YANG schema element.
+type System_GrpcServer_ConnectionPathMap struct {
+	*ygnmi.NodePath
+}
+
+// System_GrpcServer_ConnectionPathMapAny represents the wildcard version of the /openconfig-system/system/grpc-servers/grpc-server/connections/connection YANG schema element.
+type System_GrpcServer_ConnectionPathMapAny struct {
+	*ygnmi.NodePath
+}
+
+// Address (leaf): IPv4/IPv6 address of the gRPC server connection.
+//
+//	Defining module:      "openconfig-system-grpc"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/address"
+//	Path from root:       "/system/grpc-servers/grpc-server/connections/connection/*/address"
+func (n *System_GrpcServer_ConnectionPath) Address() *System_GrpcServer_Connection_AddressPath {
+	ps := &System_GrpcServer_Connection_AddressPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "address"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Address (leaf): IPv4/IPv6 address of the gRPC server connection.
+//
+//	Defining module:      "openconfig-system-grpc"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/address"
+//	Path from root:       "/system/grpc-servers/grpc-server/connections/connection/*/address"
+func (n *System_GrpcServer_ConnectionPathAny) Address() *System_GrpcServer_Connection_AddressPathAny {
+	ps := &System_GrpcServer_Connection_AddressPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "address"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Counters (container): Operational data for gRPC counters.
+//
+//	Defining module:      "openconfig-system-grpc"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/counters"
+//	Path from root:       "/system/grpc-servers/grpc-server/connections/connection/state/counters"
+func (n *System_GrpcServer_ConnectionPath) Counters() *System_GrpcServer_Connection_CountersPath {
+	ps := &System_GrpcServer_Connection_CountersPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "counters"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// Counters (container): Operational data for gRPC counters.
+//
+//	Defining module:      "openconfig-system-grpc"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/counters"
+//	Path from root:       "/system/grpc-servers/grpc-server/connections/connection/state/counters"
+func (n *System_GrpcServer_ConnectionPathAny) Counters() *System_GrpcServer_Connection_CountersPathAny {
+	ps := &System_GrpcServer_Connection_CountersPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "counters"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// Port (leaf): TCP/UDP port number for the gRPC server connection.
+//
+//	Defining module:      "openconfig-system-grpc"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/port"
+//	Path from root:       "/system/grpc-servers/grpc-server/connections/connection/*/port"
+func (n *System_GrpcServer_ConnectionPath) Port() *System_GrpcServer_Connection_PortPath {
+	ps := &System_GrpcServer_Connection_PortPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "port"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Port (leaf): TCP/UDP port number for the gRPC server connection.
+//
+//	Defining module:      "openconfig-system-grpc"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/port"
+//	Path from root:       "/system/grpc-servers/grpc-server/connections/connection/*/port"
+func (n *System_GrpcServer_ConnectionPathAny) Port() *System_GrpcServer_Connection_PortPathAny {
+	ps := &System_GrpcServer_Connection_PortPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "port"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_GrpcServer_ConnectionPath) State() ygnmi.SingletonQuery[*oc.System_GrpcServer_Connection] {
+	return ygnmi.NewSingletonQuery[*oc.System_GrpcServer_Connection](
+		"System_GrpcServer_Connection",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_GrpcServer_ConnectionPathAny) State() ygnmi.WildcardQuery[*oc.System_GrpcServer_Connection] {
+	return ygnmi.NewWildcardQuery[*oc.System_GrpcServer_Connection](
+		"System_GrpcServer_Connection",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_GrpcServer_ConnectionPathMap) State() ygnmi.SingletonQuery[map[oc.System_GrpcServer_Connection_Key]*oc.System_GrpcServer_Connection] {
+	return ygnmi.NewSingletonQuery[map[oc.System_GrpcServer_Connection_Key]*oc.System_GrpcServer_Connection](
+		"System_GrpcServer",
+		true,
+		false,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[oc.System_GrpcServer_Connection_Key]*oc.System_GrpcServer_Connection, bool) {
+			ret := gs.(*oc.System_GrpcServer).Connection
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_GrpcServer) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-system-grpc:connections"},
+			PostRelPath: []string{"openconfig-system-grpc:connection"},
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_GrpcServer_ConnectionPathMapAny) State() ygnmi.WildcardQuery[map[oc.System_GrpcServer_Connection_Key]*oc.System_GrpcServer_Connection] {
+	return ygnmi.NewWildcardQuery[map[oc.System_GrpcServer_Connection_Key]*oc.System_GrpcServer_Connection](
+		"System_GrpcServer",
+		true,
+		false,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[oc.System_GrpcServer_Connection_Key]*oc.System_GrpcServer_Connection, bool) {
+			ret := gs.(*oc.System_GrpcServer).Connection
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_GrpcServer) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-system-grpc:connections"},
+			PostRelPath: []string{"openconfig-system-grpc:connection"},
+		},
+	)
+}
+
+// System_GrpcServer_Connection_Counters_BytesSentPath represents the /openconfig-system/system/grpc-servers/grpc-server/connections/connection/state/counters/bytes-sent YANG schema element.
+type System_GrpcServer_Connection_Counters_BytesSentPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_GrpcServer_Connection_Counters_BytesSentPathAny represents the wildcard version of the /openconfig-system/system/grpc-servers/grpc-server/connections/connection/state/counters/bytes-sent YANG schema element.
+type System_GrpcServer_Connection_Counters_BytesSentPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-grpc"
+//	Instantiating module: "openconfig-system-grpc"
+//	Path from parent:     "bytes-sent"
+//	Path from root:       "/system/grpc-servers/grpc-server/connections/connection/state/counters/bytes-sent"
+func (n *System_GrpcServer_Connection_Counters_BytesSentPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"System_GrpcServer_Connection_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"bytes-sent"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.System_GrpcServer_Connection_Counters).BytesSent
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_GrpcServer_Connection_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-grpc"
+//	Instantiating module: "openconfig-system-grpc"
+//	Path from parent:     "bytes-sent"
+//	Path from root:       "/system/grpc-servers/grpc-server/connections/connection/state/counters/bytes-sent"
+func (n *System_GrpcServer_Connection_Counters_BytesSentPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"System_GrpcServer_Connection_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"bytes-sent"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.System_GrpcServer_Connection_Counters).BytesSent
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_GrpcServer_Connection_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// System_GrpcServer_Connection_Counters_DataSendErrorPath represents the /openconfig-system/system/grpc-servers/grpc-server/connections/connection/state/counters/data-send-error YANG schema element.
+type System_GrpcServer_Connection_Counters_DataSendErrorPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_GrpcServer_Connection_Counters_DataSendErrorPathAny represents the wildcard version of the /openconfig-system/system/grpc-servers/grpc-server/connections/connection/state/counters/data-send-error YANG schema element.
+type System_GrpcServer_Connection_Counters_DataSendErrorPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-grpc"
+//	Instantiating module: "openconfig-system-grpc"
+//	Path from parent:     "data-send-error"
+//	Path from root:       "/system/grpc-servers/grpc-server/connections/connection/state/counters/data-send-error"
+func (n *System_GrpcServer_Connection_Counters_DataSendErrorPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"System_GrpcServer_Connection_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"data-send-error"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.System_GrpcServer_Connection_Counters).DataSendError
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_GrpcServer_Connection_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-grpc"
+//	Instantiating module: "openconfig-system-grpc"
+//	Path from parent:     "data-send-error"
+//	Path from root:       "/system/grpc-servers/grpc-server/connections/connection/state/counters/data-send-error"
+func (n *System_GrpcServer_Connection_Counters_DataSendErrorPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"System_GrpcServer_Connection_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"data-send-error"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.System_GrpcServer_Connection_Counters).DataSendError
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_GrpcServer_Connection_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// System_GrpcServer_Connection_Counters_PacketsSentPath represents the /openconfig-system/system/grpc-servers/grpc-server/connections/connection/state/counters/packets-sent YANG schema element.
+type System_GrpcServer_Connection_Counters_PacketsSentPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_GrpcServer_Connection_Counters_PacketsSentPathAny represents the wildcard version of the /openconfig-system/system/grpc-servers/grpc-server/connections/connection/state/counters/packets-sent YANG schema element.
+type System_GrpcServer_Connection_Counters_PacketsSentPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-grpc"
+//	Instantiating module: "openconfig-system-grpc"
+//	Path from parent:     "packets-sent"
+//	Path from root:       "/system/grpc-servers/grpc-server/connections/connection/state/counters/packets-sent"
+func (n *System_GrpcServer_Connection_Counters_PacketsSentPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"System_GrpcServer_Connection_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"packets-sent"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.System_GrpcServer_Connection_Counters).PacketsSent
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_GrpcServer_Connection_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-grpc"
+//	Instantiating module: "openconfig-system-grpc"
+//	Path from parent:     "packets-sent"
+//	Path from root:       "/system/grpc-servers/grpc-server/connections/connection/state/counters/packets-sent"
+func (n *System_GrpcServer_Connection_Counters_PacketsSentPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"System_GrpcServer_Connection_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"packets-sent"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.System_GrpcServer_Connection_Counters).PacketsSent
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_GrpcServer_Connection_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// System_GrpcServer_Connection_CountersPath represents the /openconfig-system/system/grpc-servers/grpc-server/connections/connection/state/counters YANG schema element.
+type System_GrpcServer_Connection_CountersPath struct {
+	*ygnmi.NodePath
+}
+
+// System_GrpcServer_Connection_CountersPathAny represents the wildcard version of the /openconfig-system/system/grpc-servers/grpc-server/connections/connection/state/counters YANG schema element.
+type System_GrpcServer_Connection_CountersPathAny struct {
+	*ygnmi.NodePath
+}
+
+// BytesSent (leaf): The total number of bytes sent to the client.
+//
+//	Defining module:      "openconfig-system-grpc"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "bytes-sent"
+//	Path from root:       "/system/grpc-servers/grpc-server/connections/connection/state/counters/bytes-sent"
+func (n *System_GrpcServer_Connection_CountersPath) BytesSent() *System_GrpcServer_Connection_Counters_BytesSentPath {
+	ps := &System_GrpcServer_Connection_Counters_BytesSentPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"bytes-sent"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// BytesSent (leaf): The total number of bytes sent to the client.
+//
+//	Defining module:      "openconfig-system-grpc"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "bytes-sent"
+//	Path from root:       "/system/grpc-servers/grpc-server/connections/connection/state/counters/bytes-sent"
+func (n *System_GrpcServer_Connection_CountersPathAny) BytesSent() *System_GrpcServer_Connection_Counters_BytesSentPathAny {
+	ps := &System_GrpcServer_Connection_Counters_BytesSentPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"bytes-sent"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// DataSendError (leaf): A count of errors the gRPC server encountered when
+// sending data to a grpc client.
+//
+//	Defining module:      "openconfig-system-grpc"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "data-send-error"
+//	Path from root:       "/system/grpc-servers/grpc-server/connections/connection/state/counters/data-send-error"
+func (n *System_GrpcServer_Connection_CountersPath) DataSendError() *System_GrpcServer_Connection_Counters_DataSendErrorPath {
+	ps := &System_GrpcServer_Connection_Counters_DataSendErrorPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"data-send-error"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// DataSendError (leaf): A count of errors the gRPC server encountered when
+// sending data to a grpc client.
+//
+//	Defining module:      "openconfig-system-grpc"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "data-send-error"
+//	Path from root:       "/system/grpc-servers/grpc-server/connections/connection/state/counters/data-send-error"
+func (n *System_GrpcServer_Connection_CountersPathAny) DataSendError() *System_GrpcServer_Connection_Counters_DataSendErrorPathAny {
+	ps := &System_GrpcServer_Connection_Counters_DataSendErrorPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"data-send-error"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// PacketsSent (leaf): The total number of packets sent to the client.
+//
+//	Defining module:      "openconfig-system-grpc"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "packets-sent"
+//	Path from root:       "/system/grpc-servers/grpc-server/connections/connection/state/counters/packets-sent"
+func (n *System_GrpcServer_Connection_CountersPath) PacketsSent() *System_GrpcServer_Connection_Counters_PacketsSentPath {
+	ps := &System_GrpcServer_Connection_Counters_PacketsSentPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"packets-sent"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// PacketsSent (leaf): The total number of packets sent to the client.
+//
+//	Defining module:      "openconfig-system-grpc"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "packets-sent"
+//	Path from root:       "/system/grpc-servers/grpc-server/connections/connection/state/counters/packets-sent"
+func (n *System_GrpcServer_Connection_CountersPathAny) PacketsSent() *System_GrpcServer_Connection_Counters_PacketsSentPathAny {
+	ps := &System_GrpcServer_Connection_Counters_PacketsSentPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"packets-sent"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_GrpcServer_Connection_CountersPath) State() ygnmi.SingletonQuery[*oc.System_GrpcServer_Connection_Counters] {
+	return ygnmi.NewSingletonQuery[*oc.System_GrpcServer_Connection_Counters](
+		"System_GrpcServer_Connection_Counters",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_GrpcServer_Connection_CountersPathAny) State() ygnmi.WildcardQuery[*oc.System_GrpcServer_Connection_Counters] {
+	return ygnmi.NewWildcardQuery[*oc.System_GrpcServer_Connection_Counters](
+		"System_GrpcServer_Connection_Counters",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
 	)
 }
 

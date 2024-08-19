@@ -17,6 +17,8 @@ using the following YANG input files:
   - models-yang/models/dhcp/v4client/open-traffic-generator-dhcpv4client.yang
   - models-yang/models/dhcp/v4server/open-traffic-generator-dhcpv4server.yang
   - models-yang/models/platform/open-traffic-generator-platform.yang
+  - models-yang/models/dhcp/v6client/open-traffic-generator-dhcpv6client.yang
+  - models-yang/models/dhcp/v6server/open-traffic-generator-dhcpv6server.yang
 
 Imported modules were sourced from:
   - models-yang/models/...
@@ -296,7 +298,7 @@ func (n *LldpInterfacePathAny) LldpNeighborDatabase() *LldpInterface_LldpNeighbo
 	return ps
 }
 
-// Name (leaf): An arbitary name of the LLDP interface determined by the ATE
+// Name (leaf): An arbitrary name of the LLDP interface determined by the ATE
 // configuration.
 //
 //	Defining module:      "open-traffic-generator-lldp"
@@ -315,7 +317,7 @@ func (n *LldpInterfacePath) Name() *LldpInterface_NamePath {
 	return ps
 }
 
-// Name (leaf): An arbitary name of the LLDP interface determined by the ATE
+// Name (leaf): An arbitrary name of the LLDP interface determined by the ATE
 // configuration.
 //
 //	Defining module:      "open-traffic-generator-lldp"

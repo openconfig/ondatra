@@ -17,6 +17,8 @@ using the following YANG input files:
   - models-yang/models/dhcp/v4client/open-traffic-generator-dhcpv4client.yang
   - models-yang/models/dhcp/v4server/open-traffic-generator-dhcpv4server.yang
   - models-yang/models/platform/open-traffic-generator-platform.yang
+  - models-yang/models/dhcp/v6client/open-traffic-generator-dhcpv6client.yang
+  - models-yang/models/dhcp/v6server/open-traffic-generator-dhcpv6server.yang
 
 Imported modules were sourced from:
   - models-yang/models/...
@@ -28,6 +30,8 @@ import (
 	"github.com/openconfig/ondatra/gnmi/otg/bgp"
 	"github.com/openconfig/ondatra/gnmi/otg/dhcpv4client"
 	"github.com/openconfig/ondatra/gnmi/otg/dhcpv4server"
+	"github.com/openconfig/ondatra/gnmi/otg/dhcpv6client"
+	"github.com/openconfig/ondatra/gnmi/otg/dhcpv6server"
 	"github.com/openconfig/ondatra/gnmi/otg/discovery"
 	"github.com/openconfig/ondatra/gnmi/otg/flow"
 	"github.com/openconfig/ondatra/gnmi/otg/isis"
@@ -195,6 +199,82 @@ func (n *RootPath) Dhcpv4Server(Name string) *dhcpv4server.Dhcpv4ServerPath {
 	ps := &dhcpv4server.Dhcpv4ServerPath{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"dhcpv4-servers", "dhcpv4-server"},
+			map[string]interface{}{"name": Name},
+			n,
+		),
+	}
+	return ps
+}
+
+// Dhcpv6ClientAny (list): Each DHCPv6 Client is identified by an arbitrary string
+// identifier.
+//
+//	Defining module:      "open-traffic-generator-dhcpv6client"
+//	Instantiating module: "open-traffic-generator-dhcpv6client"
+//	Path from parent:     "dhcpv6-clients/dhcpv6-client"
+//	Path from root:       "/dhcpv6-clients/dhcpv6-client"
+func (n *RootPath) Dhcpv6ClientAny() *dhcpv6client.Dhcpv6ClientPathAny {
+	ps := &dhcpv6client.Dhcpv6ClientPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"dhcpv6-clients", "dhcpv6-client"},
+			map[string]interface{}{"name": "*"},
+			n,
+		),
+	}
+	return ps
+}
+
+// Dhcpv6Client (list): Each DHCPv6 Client is identified by an arbitrary string
+// identifier.
+//
+//	Defining module:      "open-traffic-generator-dhcpv6client"
+//	Instantiating module: "open-traffic-generator-dhcpv6client"
+//	Path from parent:     "dhcpv6-clients/dhcpv6-client"
+//	Path from root:       "/dhcpv6-clients/dhcpv6-client"
+//
+//	Name: string
+func (n *RootPath) Dhcpv6Client(Name string) *dhcpv6client.Dhcpv6ClientPath {
+	ps := &dhcpv6client.Dhcpv6ClientPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"dhcpv6-clients", "dhcpv6-client"},
+			map[string]interface{}{"name": Name},
+			n,
+		),
+	}
+	return ps
+}
+
+// Dhcpv6ServerAny (list): Each DHCPv6 Server is identified by an arbitrary string
+// identifier.
+//
+//	Defining module:      "open-traffic-generator-dhcpv6server"
+//	Instantiating module: "open-traffic-generator-dhcpv6server"
+//	Path from parent:     "dhcpv6-servers/dhcpv6-server"
+//	Path from root:       "/dhcpv6-servers/dhcpv6-server"
+func (n *RootPath) Dhcpv6ServerAny() *dhcpv6server.Dhcpv6ServerPathAny {
+	ps := &dhcpv6server.Dhcpv6ServerPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"dhcpv6-servers", "dhcpv6-server"},
+			map[string]interface{}{"name": "*"},
+			n,
+		),
+	}
+	return ps
+}
+
+// Dhcpv6Server (list): Each DHCPv6 Server is identified by an arbitrary string
+// identifier.
+//
+//	Defining module:      "open-traffic-generator-dhcpv6server"
+//	Instantiating module: "open-traffic-generator-dhcpv6server"
+//	Path from parent:     "dhcpv6-servers/dhcpv6-server"
+//	Path from root:       "/dhcpv6-servers/dhcpv6-server"
+//
+//	Name: string
+func (n *RootPath) Dhcpv6Server(Name string) *dhcpv6server.Dhcpv6ServerPath {
+	ps := &dhcpv6server.Dhcpv6ServerPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"dhcpv6-servers", "dhcpv6-server"},
 			map[string]interface{}{"name": Name},
 			n,
 		),

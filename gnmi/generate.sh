@@ -18,7 +18,9 @@
 
 set -e
 
-git clone https://github.com/openconfig/public.git
+OC_VERSION="v4.2.0"
+
+git clone https://github.com/openconfig/public.git --branch $OC_VERSION
 wget https://raw.githubusercontent.com/openconfig/gnmi/master/metadata/yang/gnmi-collector-metadata.yang
 git clone https://github.com/open-traffic-generator/models-yang.git
 
@@ -116,6 +118,8 @@ OTG_YANG_FILES=(
   models-yang/models/dhcp/v4client/open-traffic-generator-dhcpv4client.yang
   models-yang/models/dhcp/v4server/open-traffic-generator-dhcpv4server.yang
   models-yang/models/platform/open-traffic-generator-platform.yang
+  models-yang/models/dhcp/v6client/open-traffic-generator-dhcpv6client.yang
+  models-yang/models/dhcp/v6server/open-traffic-generator-dhcpv6server.yang
 )
 
 go run github.com/openconfig/ygnmi/app/ygnmi generator \

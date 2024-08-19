@@ -30,6 +30,7 @@ import (
 	attestzpb "github.com/openconfig/attestz/proto/tpm_attestz"
 	enrollzpb "github.com/openconfig/attestz/proto/tpm_enrollz"
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
+	gnpsipb "github.com/openconfig/gnpsi/proto/gnpsi"
 	acctzpb "github.com/openconfig/gnsi/acctz"
 	authzpb "github.com/openconfig/gnsi/authz"
 	certzpb "github.com/openconfig/gnsi/certz"
@@ -154,6 +155,10 @@ type DUT interface {
 	// DialP4RT creates a client connection to the DUT's P4RT endpoint.
 	// See the interface comment for proper handling of dial options.
 	DialP4RT(context.Context, ...grpc.DialOption) (p4pb.P4RuntimeClient, error)
+
+	// DialGNPSI creates a client connection to the DUT's gNPSI endpoint.
+	// See the interface comment for proper handling of dial options.
+	DialGNPSI(context.Context, ...grpc.DialOption) (gnpsipb.GNPSIClient, error)
 
 	mustEmbedAbstractDUT()
 }

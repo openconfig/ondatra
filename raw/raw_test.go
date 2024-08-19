@@ -29,6 +29,7 @@ import (
 	"google.golang.org/grpc"
 
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
+	gnpsipb "github.com/openconfig/gnpsi/proto/gnpsi"
 	grpb "github.com/openconfig/gribi/v1/proto/service"
 	p4pb "github.com/p4lang/p4runtime/go/p4/v1"
 )
@@ -261,6 +262,31 @@ func TestOTG(t *testing.T) {
 		}
 		if got := ateAPIs.OTG(t); got != want {
 			t.Errorf("OTG(t) got %v, want %v", got, want)
+		}
+	})
+}
+
+func TestGNPSI(t *testing.T) {
+	t.Run("error", func(t *testing.T) {
+		wantErr := "bad GNPSI"
+		dut.DialGNPSIFn = func(context.Context, ...grpc.DialOption) (gnpsipb.GNPSIClient, error) {
+			return nil, errors.New(wantErr)
+		}
+		gotErr := testt.ExpectFatal(t, func(t testing.TB) {
+			dutAPIs.GNPSI(t)
+		})
+		if !strings.Contains(gotErr, wantErr) {
+			t.Errorf("GNPSI(t) got err %v, want %v", gotErr, wantErr)
+		}
+	})
+
+	t.Run("success", func(t *testing.T) {
+		want := struct{ gnpsipb.GNPSIClient }{}
+		dut.DialGNPSIFn = func(context.Context, ...grpc.DialOption) (gnpsipb.GNPSIClient, error) {
+			return want, nil
+		}
+		if got := dutAPIs.GNPSI(t); got != want {
+			t.Errorf("GNPSI(t) got %v, want %v", got, want)
 		}
 	})
 }
