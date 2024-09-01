@@ -555,7 +555,7 @@ func (n *LagPathAny) InRate() *Lag_InRatePathAny {
 	return ps
 }
 
-// Name (leaf): An arbitary name of an OTG LAG determined by the OTG
+// Name (leaf): An arbitrary name of an OTG LAG determined by the OTG
 // configuration.
 //
 //	Defining module:      "open-traffic-generator-lag"
@@ -574,7 +574,7 @@ func (n *LagPath) Name() *Lag_NamePath {
 	return ps
 }
 
-// Name (leaf): An arbitary name of an OTG LAG determined by the OTG
+// Name (leaf): An arbitrary name of an OTG LAG determined by the OTG
 // configuration.
 //
 //	Defining module:      "open-traffic-generator-lag"

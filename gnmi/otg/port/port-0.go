@@ -591,7 +591,7 @@ func (n *PortPathAny) Link() *Port_LinkPathAny {
 	return ps
 }
 
-// Name (leaf): An arbitary name of an OTG port determined by the OTG
+// Name (leaf): An arbitrary name of an OTG port determined by the OTG
 // configuration.
 //
 //	Defining module:      "open-traffic-generator-port"
@@ -610,7 +610,7 @@ func (n *PortPath) Name() *Port_NamePath {
 	return ps
 }
 
-// Name (leaf): An arbitary name of an OTG port determined by the OTG
+// Name (leaf): An arbitrary name of an OTG port determined by the OTG
 // configuration.
 //
 //	Defining module:      "open-traffic-generator-port"
