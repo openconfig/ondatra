@@ -129,7 +129,16 @@ func (o *OTG) StartProtocols(t testing.TB) {
 	t = events.ActionStarted(t, "Starting protocols on %s", o.ate)
 	warns, err := o.setProtocolState(context.Background(), gosnappi.StateProtocolAllState.START)
 	if err != nil {
-		t.Fatalf("StartProtocols(t) on %s: %v", o.ate, err)
+		time.Sleep(1 * time.Minute)
+		t.Helper()
+		t = events.ActionStarted(t, "Retry Starting protocols on %s", o.ate)
+		warnsRetry, errRetry := o.setProtocolState(context.Background(), gosnappi.StateProtocolAllState.START)
+		if errRetry != nil {
+			t.Fatalf("Retry StartProtocols(t) on %s: %v", o.ate, errRetry)
+		}
+		if len(warnsRetry) > 0 {
+			t.Logf("StartProtocols(t) on %s non-fatal warnings on retry: %v", o.ate, warnsRetry)
+		}
 	}
 	if len(warns) > 0 {
 		t.Logf("StartProtocols(t) on %s non-fatal warnings: %v", o.ate, warns)
