@@ -28,6 +28,7 @@ import (
 	"time"
 
 	"golang.org/x/net/context"
+	"google.golang.org/grpc"
 
 	"github.com/open-traffic-generator/snappi/gosnappi"
 	"github.com/openconfig/ondatra/binding"
@@ -126,19 +127,11 @@ func getConfig(ctx context.Context, ate binding.ATE) (gosnappi.Config, error) {
 // StartProtocols starts protocols on the ATE.
 func (o *OTG) StartProtocols(t testing.TB) {
 	t.Helper()
+	rawapis.CommonDialOpts = append(rawapis.CommonDialOpts, grpc.Timeout(2*time.Minute))
 	t = events.ActionStarted(t, "Starting protocols on %s", o.ate)
 	warns, err := o.setProtocolState(context.Background(), gosnappi.StateProtocolAllState.START)
 	if err != nil {
-		time.Sleep(1 * time.Minute)
-		t.Helper()
-		t = events.ActionStarted(t, "Retry Starting protocols on %s", o.ate)
-		warnsRetry, errRetry := o.setProtocolState(context.Background(), gosnappi.StateProtocolAllState.START)
-		if errRetry != nil {
-			t.Fatalf("Retry StartProtocols(t) on %s: %v", o.ate, errRetry)
-		}
-		if len(warnsRetry) > 0 {
-			t.Logf("StartProtocols(t) on %s non-fatal warnings on retry: %v", o.ate, warnsRetry)
-		}
+		t.Fatalf("StartProtocols(t) on %s: %v", o.ate, err)
 	}
 	if len(warns) > 0 {
 		t.Logf("StartProtocols(t) on %s non-fatal warnings: %v", o.ate, warns)
