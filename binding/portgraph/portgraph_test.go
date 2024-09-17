@@ -379,8 +379,8 @@ var superGraph = &ConcreteGraph{
 
 // Setup abstract Nodes and Ports for testing.
 var (
-	// One Node
-	abs1 = &AbstractNode{Desc: "abs1", Constraints: map[string]NodeConstraint{"attr": Equal("")}}
+	// One Node with one valid constraint and one nil constraint (which should be ignored).
+	abs1 = &AbstractNode{Desc: "abs1", Constraints: map[string]NodeConstraint{"attr": Equal(""), "nil": nil}}
 
 	// One Node, one Port
 	abs2      = &AbstractNode{Desc: "abs2", Ports: []*AbstractPort{abs2port1}, Constraints: map[string]NodeConstraint{"vendor": Equal("UNIQUE9")}}

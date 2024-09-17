@@ -73,6 +73,19 @@ func confOffsetVal(cpb opb.MacSec_MKA_ConfidentialityOffset) (string, error) {
 	}
 }
 
+func keyDerivationFunction(cpb opb.MacSec_MKA_KeyDerivationFunction) (string, error) {
+	switch cpb {
+	case opb.MacSec_MKA_KEY_DERIVATION_UNSPECIFIED:
+		return "", fmt.Errorf("derivation function not specified")
+	case opb.MacSec_MKA_AES_128_CMAC:
+		return "aescmac128", nil
+	case opb.MacSec_MKA_AES_256_CMAC:
+		return "aescmac256", nil
+	default:
+		return "", fmt.Errorf("unrecognized derivation function %v", cpb)
+	}
+}
+
 func mka(mkapb *opb.MacSec_MKA) (*ixconfig.TopologyMka, error) {
 	cipherSuite, keyLen, err := cipherSuiteStrAndLen(mkapb.GetCipherSuite())
 	if err != nil {
@@ -134,6 +147,74 @@ func mka(mkapb *opb.MacSec_MKA) (*ixconfig.TopologyMka, error) {
 		ConfidentialityOffset: ixconfig.MultivalueStr(confOffset),
 		MacsecCapability:      ixconfig.MultivalueStr(capability),
 		CakCache:              cakCache,
+	}, nil
+}
+
+// MKA configuration for port-level MACsec configuration
+func mkaLAG(mkapb *opb.MacSec_MKA) (*ixconfig.LagMka, error) {
+	cipherSuite, keyLen, err := cipherSuiteStrAndLen(mkapb.GetCipherSuite())
+	if err != nil {
+		return nil, err
+	}
+
+	confOffset, err := confOffsetVal(mkapb.GetConfidentialityOffset())
+	if err != nil {
+		return nil, err
+	}
+
+	derivationFunction, err := keyDerivationFunction(mkapb.GetKeyDerivationFunction())
+	if err != nil {
+		return nil, err
+	}
+
+	var capability string
+	switch mkapb.GetCapability() {
+	case opb.MacSec_MKA_CAPABILITY_UNSPECIFIED:
+		return nil, fmt.Errorf("capability not specified")
+	case opb.MacSec_MKA_NOT_IMPLEMENTED:
+		capability = "macsecnotimplemented"
+	case opb.MacSec_MKA_INTEGRITY_WITHOUT_CONFIDENTIALITY:
+		capability = "macsecintegritywithoutconfidentiality"
+	case opb.MacSec_MKA_INTEGRITY_WITH_NO_CONFIDENTIALITY_OFFSET:
+		capability = "macsecintegritywithnoconfidentialityoffset"
+	case opb.MacSec_MKA_INTEGRITY_WITH_CONFIDENTIALITY_OFFSET:
+		capability = "macsecintegritywithconfidentialityoffset"
+	default:
+		return nil, fmt.Errorf("unrecognized capability %v", mkapb.GetCapability())
+	}
+
+	cakCache := &ixconfig.LagCakCache{}
+	if capb := mkapb.GetConnectivityAssociation(); capb != nil {
+		checkHex := func(s string, maxLen uint32) error {
+			if _, err := hex.DecodeString(s); err != nil {
+				return fmt.Errorf("could not parse %q as hex string: %w", s, err)
+			}
+			if len(s) > int(maxLen) {
+				return fmt.Errorf("hex string %q exceeds limit of %d characters", s, maxLen)
+			}
+			return nil
+		}
+		if err := checkHex(capb.GetCak(), keyLen/4); err != nil {
+			return nil, err
+		}
+		cakCache.CakName = ixconfig.MultivalueStr(capb.GetCkn())
+		switch keyLen {
+		case 128:
+			cakCache.CakValue128 = ixconfig.MultivalueStr(capb.GetCak())
+		case 256:
+			cakCache.CakValue256 = ixconfig.MultivalueStr(capb.GetCak())
+		default:
+			return nil, fmt.Errorf("invalid key length %d for CAK value", keyLen)
+		}
+	}
+
+	return &ixconfig.LagMka{
+		MkaVersion:            ixconfig.MultivalueUint32(mkapb.GetVersion()),
+		CipherSuite:           ixconfig.MultivalueStr(cipherSuite),
+		ConfidentialityOffset: ixconfig.MultivalueStr(confOffset),
+		MacsecCapability:      ixconfig.MultivalueStr(capability),
+		CakCache:              cakCache,
+		KeyDerivationFunction: ixconfig.MultivalueStr(derivationFunction),
 	}, nil
 }
 

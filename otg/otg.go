@@ -162,7 +162,7 @@ func (o *OTG) setProtocolState(ctx context.Context, state gosnappi.StateProtocol
 // StartTraffic starts traffic on the ATE.
 func (o *OTG) StartTraffic(t testing.TB) {
 	t.Helper()
-	// TODO(greg-dennis): Remove sleep when Keysight fixes a MAC resolution bug.
+	// TODO(team): Remove sleep when Keysight fixes a MAC resolution bug.
 	time.Sleep(2 * time.Second)
 	t = events.ActionStarted(t, "Starting traffic on %s", o.ate)
 	warns, err := o.setTransmitState(context.Background(), gosnappi.StateTrafficFlowTransmitState.START)

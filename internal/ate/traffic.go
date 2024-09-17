@@ -44,9 +44,10 @@ var imixPreset = map[opb.FrameSize_ImixPreset]string{
 }
 
 type headers struct {
-	eth  *opb.EthernetHeader
-	ipv4 *opb.Ipv4Header
-	ipv6 *opb.Ipv6Header
+	eth    *opb.EthernetHeader
+	macsec *opb.MacsecHeader
+	ipv4   *opb.Ipv4Header
+	ipv6   *opb.Ipv6Header
 }
 
 func (h *headers) String() string {
@@ -90,10 +91,19 @@ func (ix *ixATE) addTrafficItem(f *opb.Flow) error {
 		return fmt.Errorf("could not determine traffic type for flow %q: %w", f.GetName(), err)
 	}
 
-	epFn := devOrGeneratedEPs
-	if trafType == rawTraffic {
+	var epFn func([]*opb.Flow_Endpoint, map[string]*intf, bool) ([]ixconfig.IxiaCfgNode, error)
+	switch trafType {
+	case rawTraffic:
 		inferAddresses(hdrs, srcEPs, dstEPs, ix.intfs)
 		epFn = portOrLagEPs
+	case ethTraffic:
+		if hdrs.macsec != nil {
+			epFn = macsecEPs
+		} else {
+			epFn = devOrGeneratedEPs
+		}
+	default:
+		epFn = devOrGeneratedEPs
 	}
 	srcs, err := epFn(srcEPs, ix.intfs, true)
 	if err != nil {
@@ -173,8 +183,10 @@ func (ix *ixATE) addTrafficItem(f *opb.Flow) error {
 	}
 
 	var hasSrcVLAN bool
-	for _, ep := range srcEPs {
-		hasSrcVLAN = hasSrcVLAN || ix.intfs[ep.GetInterfaceName()].hasVLAN
+	if hdrs.macsec == nil { // MACSec traffic stacks will configure their own VLANs.
+		for _, ep := range srcEPs {
+			hasSrcVLAN = hasSrcVLAN || ix.intfs[ep.GetInterfaceName()].hasVLAN
+		}
 	}
 	stacks := make([]*ixconfig.TrafficTrafficItemConfigElementStack, 0)
 	for _, hdr := range f.GetHeaders() {
@@ -201,7 +213,8 @@ func resolveHeaders(flowHdrs []*opb.Header) (*headers, error) {
 	}
 	if len(flowHdrs) > 1 {
 		h := flowHdrs[1]
-		if (h.GetMpls() != nil || h.GetMacsec() != nil) && len(flowHdrs) > 2 {
+		hdrs.macsec = h.GetMacsec()
+		if (h.GetMpls() != nil || hdrs.macsec != nil) && len(flowHdrs) > 2 {
 			h = flowHdrs[2]
 		}
 		hdrs.ipv4 = h.GetIpv4()
@@ -211,6 +224,12 @@ func resolveHeaders(flowHdrs []*opb.Header) (*headers, error) {
 }
 
 func resolveTrafficType(hdrs *headers, srcEPs, dstEPs []*opb.Flow_Endpoint) (trafficType, error) {
+	// MACSec flows must use MACSec endpoints.
+	if hdrs.macsec != nil {
+		// return macsecTraffic, nil
+		return ethTraffic, nil
+	}
+
 	ethAddrsSet := hdrs.eth.GetVlanId() != 0 || hdrs.eth.GetSrcAddr() != nil || hdrs.eth.GetDstAddr() != nil
 
 	// For IP traffic with no header addresses set, use an IP traffic flow.
@@ -227,7 +246,7 @@ func resolveTrafficType(hdrs *headers, srcEPs, dstEPs []*opb.Flow_Endpoint) (tra
 		return "", fmt.Errorf("cannot use RSVP endpoint for non-IP traffic")
 	}
 
-	// Traffic with a Network endpoint cannot not have any addresses set.
+	// Traffic with a Network endpoint cannot have any addresses set.
 	if hasNetworkEP(srcEPs) || hasNetworkEP(dstEPs) {
 		if ethAddrsSet {
 			return "", fmt.Errorf("addresses of the initial Ethernet header should not be set when using generated endpoints")
@@ -367,6 +386,27 @@ func devOrGeneratedEPs(eps []*opb.Flow_Endpoint, intfs map[string]*intf, isSrcEP
 			}
 		default:
 			return nil, fmt.Errorf("unrecognized endpoint type %T", ept)
+		}
+		if !visited[n] {
+			nodes = append(nodes, n)
+			visited[n] = true
+		}
+	}
+	return nodes, nil
+}
+
+func macsecEPs(eps []*opb.Flow_Endpoint, intfs map[string]*intf, _ bool) ([]ixconfig.IxiaCfgNode, error) {
+	visited := make(map[ixconfig.IxiaCfgNode]bool)
+	var nodes []ixconfig.IxiaCfgNode
+	for _, ep := range eps {
+		var n ixconfig.IxiaCfgNode
+		intf, _ := intfs[ep.GetInterfaceName()]
+		macsec := intf.deviceGroup.Ethernet[0].Macsec
+		if len(macsec) == 0 {
+			// Assume MACSec configured at the port level.
+			n = intf.deviceGroup
+		} else {
+			n = macsec[0]
 		}
 		if !visited[n] {
 			nodes = append(nodes, n)

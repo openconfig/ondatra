@@ -1661,7 +1661,7 @@ func (n *Lacp_LagMemberPathAny) Distributing() *Lacp_LagMember_DistributingPathA
 	return ps
 }
 
-// Name (leaf): An arbitary name of the LACP peer determined by the ATE
+// Name (leaf): An arbitrary name of the LACP peer determined by the ATE
 // configuration.
 //
 //	Defining module:      "open-traffic-generator-lacp"
@@ -1680,7 +1680,7 @@ func (n *Lacp_LagMemberPath) Name() *Lacp_LagMember_NamePath {
 	return ps
 }
 
-// Name (leaf): An arbitary name of the LACP peer determined by the ATE
+// Name (leaf): An arbitrary name of the LACP peer determined by the ATE
 // configuration.
 //
 //	Defining module:      "open-traffic-generator-lacp"

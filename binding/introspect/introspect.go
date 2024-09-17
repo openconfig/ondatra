@@ -34,6 +34,7 @@ type Service string
 const (
 	GNMI  Service = "gNMI"
 	GNOI  Service = "gNOI"
+	GNPSI Service = "gNPSI"
 	GNSI  Service = "gNSI"
 	GRIBI Service = "gRIBI"
 	OTG   Service = "OTG"

@@ -123,6 +123,100 @@ func (n *Flow_AverageLatencyPathAny) State() ygnmi.WildcardQuery[uint64] {
 	)
 }
 
+// Flow_FirstTimestampPath represents the /open-traffic-generator-flow/flows/flow/state/first-timestamp YANG schema element.
+type Flow_FirstTimestampPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Flow_FirstTimestampPathAny represents the wildcard version of the /open-traffic-generator-flow/flows/flow/state/first-timestamp YANG schema element.
+type Flow_FirstTimestampPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "state/first-timestamp"
+//	Path from root:       "/flows/flow/state/first-timestamp"
+func (n *Flow_FirstTimestampPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewSingletonQuery[float64](
+		"Flow",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "first-timestamp"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Flow).FirstTimestamp
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Flow) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "state/first-timestamp"
+//	Path from root:       "/flows/flow/state/first-timestamp"
+func (n *Flow_FirstTimestampPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewWildcardQuery[float64](
+		"Flow",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "first-timestamp"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Flow).FirstTimestamp
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Flow) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
 // Flow_InFrameRatePath represents the /open-traffic-generator-flow/flows/flow/state/in-frame-rate YANG schema element.
 type Flow_InFrameRatePath struct {
 	*ygnmi.NodePath
@@ -281,6 +375,100 @@ func (n *Flow_InRatePathAny) State() ygnmi.WildcardQuery[float32] {
 		func(gs ygot.ValidatedGoStruct) (float32, bool) {
 			ret := gs.(*oc.Flow).InRate
 			return ygot.BinaryToFloat32(ret), !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Flow) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Flow_LastTimestampPath represents the /open-traffic-generator-flow/flows/flow/state/last-timestamp YANG schema element.
+type Flow_LastTimestampPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Flow_LastTimestampPathAny represents the wildcard version of the /open-traffic-generator-flow/flows/flow/state/last-timestamp YANG schema element.
+type Flow_LastTimestampPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "state/last-timestamp"
+//	Path from root:       "/flows/flow/state/last-timestamp"
+func (n *Flow_LastTimestampPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewSingletonQuery[float64](
+		"Flow",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "last-timestamp"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Flow).LastTimestamp
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Flow) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "state/last-timestamp"
+//	Path from root:       "/flows/flow/state/last-timestamp"
+func (n *Flow_LastTimestampPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewWildcardQuery[float64](
+		"Flow",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "last-timestamp"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Flow).LastTimestamp
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
 		},
 		func() ygot.ValidatedGoStruct { return new(oc.Flow) },
 		func() *ytypes.Schema {
@@ -1103,6 +1291,42 @@ func (n *FlowPathAny) Counters() *Flow_CountersPathAny {
 	return ps
 }
 
+// FirstTimestamp (leaf): The received timestamp for the first incoming packet, measured in nanoseconds. Timestamp will be reset every time a flow is started.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "state/first-timestamp"
+//	Path from root:       "/flows/flow/state/first-timestamp"
+func (n *FlowPath) FirstTimestamp() *Flow_FirstTimestampPath {
+	ps := &Flow_FirstTimestampPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "first-timestamp"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// FirstTimestamp (leaf): The received timestamp for the first incoming packet, measured in nanoseconds. Timestamp will be reset every time a flow is started.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "state/first-timestamp"
+//	Path from root:       "/flows/flow/state/first-timestamp"
+func (n *FlowPathAny) FirstTimestamp() *Flow_FirstTimestampPathAny {
+	ps := &Flow_FirstTimestampPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "first-timestamp"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
 // InFrameRate (leaf): The rate, measured in frames per second, at which frames are being
 // received for the flow.
 //
@@ -1171,6 +1395,42 @@ func (n *FlowPathAny) InRate() *Flow_InRatePathAny {
 	ps := &Flow_InRatePathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"state", "in-rate"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// LastTimestamp (leaf): The received timestamp for the last incoming packet, measured in nanoseconds. Timestamp will be reset every time a flow is started.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "state/last-timestamp"
+//	Path from root:       "/flows/flow/state/last-timestamp"
+func (n *FlowPath) LastTimestamp() *Flow_LastTimestampPath {
+	ps := &Flow_LastTimestampPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "last-timestamp"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// LastTimestamp (leaf): The received timestamp for the last incoming packet, measured in nanoseconds. Timestamp will be reset every time a flow is started.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "state/last-timestamp"
+//	Path from root:       "/flows/flow/state/last-timestamp"
+func (n *FlowPathAny) LastTimestamp() *Flow_LastTimestampPathAny {
+	ps := &Flow_LastTimestampPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "last-timestamp"},
 			map[string]interface{}{},
 			n,
 		),

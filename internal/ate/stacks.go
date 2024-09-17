@@ -121,7 +121,16 @@ func headerStacks(hdr *opb.Header, idx int, hasSrcVLAN bool) ([]*ixconfig.Traffi
 		if err != nil {
 			return nil, err
 		}
-		return []*ixconfig.TrafficTrafficItemConfigElementStack{s, ppts}, nil
+		stacks := []*ixconfig.TrafficTrafficItemConfigElementStack{s, ppts}
+
+		if v.Macsec.GetVlanId() != 0 {
+			s, err := vlanStackMACSec(v.Macsec, idx+2)
+			if err != nil {
+				return nil, err
+			}
+			stacks = append(stacks, s)
+		}
+		return stacks, nil
 	case *opb.Header_Esp:
 		s, err := espStack(v.Esp, idx)
 		if err != nil {
@@ -173,6 +182,14 @@ func vlanStack(eth *opb.EthernetHeader, idx int) (*ixconfig.TrafficTrafficItemCo
 	}
 	if eth.GetProtocolId() > 0 {
 		setSingleValue(stack.ProtocolID(), uintToHexStr(eth.GetProtocolId()))
+	}
+	return stack.TrafficTrafficItemConfigElementStack(), nil
+}
+
+func vlanStackMACSec(macsec *opb.MacsecHeader, idx int) (*ixconfig.TrafficTrafficItemConfigElementStack, error) {
+	stack := ixconfig.NewVlanStack(idx)
+	if macsec.GetVlanId() > 0 {
+		setSingleValue(stack.VlanTagVlanID(), uintToStr(macsec.GetVlanId()))
 	}
 	return stack.TrafficTrafficItemConfigElementStack(), nil
 }
@@ -692,7 +709,7 @@ func ldpStack(ldp *opb.LdpHeader, idx int) (*ixconfig.TrafficTrafficItemConfigEl
 }
 
 func macsecStack(macsec *opb.MacsecHeader, idx int) (*ixconfig.TrafficTrafficItemConfigElementStack, error) {
-	return ixconfig.NewMacsecStack(idx).TrafficTrafficItemConfigElementStack(), nil
+	return ixconfig.NewMacsecHwStack(idx).TrafficTrafficItemConfigElementStack(), nil
 }
 
 func pwMplscontrolWordStack(cw *opb.PwMplsControlWordHeader, idx int) (*ixconfig.TrafficTrafficItemConfigElementStack, error) {

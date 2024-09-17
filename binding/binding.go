@@ -223,6 +223,7 @@ type GNSIClients interface {
 	Certz() certzpb.CertzClient
 	Credentialz() credzpb.CredentialzClient
 	Acctz() acctzpb.AcctzClient
+	AcctzStream() acctzpb.AcctzStreamClient
 	Attestz() attestzpb.TpmAttestzServiceClient
 	Enrollz() enrollzpb.TpmEnrollzServiceClient
 	mustEmbedAbstractGNSIClients()

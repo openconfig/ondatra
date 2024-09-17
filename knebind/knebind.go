@@ -160,7 +160,7 @@ func (d *kneDUT) Dialer(svc introspect.Service) (*introspect.Dialer, error) {
 }
 
 func (d *kneDUT) resetConfig(ctx context.Context) error {
-	// TODO(alexmasi): Reduce duplication between this and CLI reset implementation.
+	// TODO(team): Reduce duplication between this and CLI reset implementation.
 	name := d.Name()
 	switch err := d.bind.tm.ResetCfg(ctx, name); {
 	case status.Code(err) == codes.Unimplemented:
@@ -264,6 +264,10 @@ func (c *gnsiConn) Credentialz() credzpb.CredentialzClient {
 
 func (c *gnsiConn) Acctz() acctzpb.AcctzClient {
 	return acctzpb.NewAcctzClient(c.conn)
+}
+
+func (c *gnsiConn) AcctzStream() acctzpb.AcctzStreamClient {
+	return acctzpb.NewAcctzStreamClient(c.conn)
 }
 
 func (c *gnsiConn) Attestz() attestzpb.TpmAttestzServiceClient {

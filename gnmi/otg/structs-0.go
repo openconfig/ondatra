@@ -5174,8 +5174,10 @@ func (*BgpPeer_UnicastIpv6Prefix_ExtendedCommunity_Structured_Transitive_4OctetA
 type Flow struct {
 	AverageLatency *uint64                       `path:"state/average-latency" module:"open-traffic-generator-flow/open-traffic-generator-flow"`
 	Counters       *Flow_Counters                `path:"state/counters" module:"open-traffic-generator-flow/open-traffic-generator-flow"`
+	FirstTimestamp *float64                      `path:"state/first-timestamp" module:"open-traffic-generator-flow/open-traffic-generator-flow"`
 	InFrameRate    Binary                        `path:"state/in-frame-rate" module:"open-traffic-generator-flow/open-traffic-generator-flow"`
 	InRate         Binary                        `path:"state/in-rate" module:"open-traffic-generator-flow/open-traffic-generator-flow"`
+	LastTimestamp  *float64                      `path:"state/last-timestamp" module:"open-traffic-generator-flow/open-traffic-generator-flow"`
 	LossPct        Binary                        `path:"state/loss-pct" module:"open-traffic-generator-flow/open-traffic-generator-flow"`
 	MaximumLatency *uint64                       `path:"state/maximum-latency" module:"open-traffic-generator-flow/open-traffic-generator-flow"`
 	MinimumLatency *uint64                       `path:"state/minimum-latency" module:"open-traffic-generator-flow/open-traffic-generator-flow"`
@@ -5344,6 +5346,22 @@ func (t *Flow) GetAverageLatency() uint64 {
 	return *t.AverageLatency
 }
 
+// GetFirstTimestamp retrieves the value of the leaf FirstTimestamp from the Flow
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if FirstTimestamp is set, it can
+// safely use t.GetFirstTimestamp() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.FirstTimestamp == nil' before retrieving the leaf's value.
+func (t *Flow) GetFirstTimestamp() float64 {
+	if t == nil || t.FirstTimestamp == nil {
+		return 0.0
+	}
+	return *t.FirstTimestamp
+}
+
 // GetInFrameRate retrieves the value of the leaf InFrameRate from the Flow
 // struct. If the field is unset but has a default value in the YANG schema,
 // then the default value will be returned.
@@ -5374,6 +5392,22 @@ func (t *Flow) GetInRate() Binary {
 		return nil
 	}
 	return t.InRate
+}
+
+// GetLastTimestamp retrieves the value of the leaf LastTimestamp from the Flow
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if LastTimestamp is set, it can
+// safely use t.GetLastTimestamp() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.LastTimestamp == nil' before retrieving the leaf's value.
+func (t *Flow) GetLastTimestamp() float64 {
+	if t == nil || t.LastTimestamp == nil {
+		return 0.0
+	}
+	return *t.LastTimestamp
 }
 
 // GetLossPct retrieves the value of the leaf LossPct from the Flow
@@ -5494,6 +5528,12 @@ func (t *Flow) SetAverageLatency(v uint64) {
 	t.AverageLatency = &v
 }
 
+// SetFirstTimestamp sets the value of the leaf FirstTimestamp in the Flow
+// struct.
+func (t *Flow) SetFirstTimestamp(v float64) {
+	t.FirstTimestamp = &v
+}
+
 // SetInFrameRate sets the value of the leaf InFrameRate in the Flow
 // struct.
 func (t *Flow) SetInFrameRate(v Binary) {
@@ -5504,6 +5544,12 @@ func (t *Flow) SetInFrameRate(v Binary) {
 // struct.
 func (t *Flow) SetInRate(v Binary) {
 	t.InRate = v
+}
+
+// SetLastTimestamp sets the value of the leaf LastTimestamp in the Flow
+// struct.
+func (t *Flow) SetLastTimestamp(v float64) {
+	t.LastTimestamp = &v
 }
 
 // SetLossPct sets the value of the leaf LossPct in the Flow

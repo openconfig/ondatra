@@ -27,6 +27,7 @@ import (
 	"golang.org/x/net/context"
 
 	log "github.com/golang/glog"
+	lru "github.com/hashicorp/golang-lru"
 	"go.opencensus.io/stats"
 	"go.opencensus.io/tag"
 	"go.opencensus.io/trace"
@@ -79,6 +80,10 @@ type proxy struct {
 	destProvider   DestProviderFn
 	serverProvider ServerProviderFn
 	grpcDialer     GRPCDialer
+	cacheKeyFn     CacheKeyFn
+	cacheEvictFn   CacheEvictFn
+	cacheSize      int
+	cache          *lru.Cache
 }
 
 // Option configures the proxy server.
@@ -88,6 +93,15 @@ type Option func(p *proxy)
 func WithDialer(d GRPCDialer) Option {
 	return func(p *proxy) {
 		p.grpcDialer = d
+	}
+}
+
+// WithLRUCache sets the cache size and the keyFunction for caching GRPC client connections.
+func WithLRUCache(keyFn CacheKeyFn, evictFn CacheEvictFn, cacheSize int) Option {
+	return func(p *proxy) {
+		p.cacheKeyFn = keyFn
+		p.cacheEvictFn = evictFn
+		p.cacheSize = cacheSize
 	}
 }
 
@@ -114,34 +128,51 @@ func NewServer(dp DestProviderFn, opts ...Option) (GRPCServer, error) {
 	if p.serverProvider == nil {
 		p.serverProvider = defaultServerProviderFn
 	}
+	if err := p.initCache(); err != nil {
+		return nil, err
+	}
 	return p.serverProvider(
 		grpc.ForceServerCodec(codec()),
 		grpc.UnknownServiceHandler(p.instrumentedStreamHandler),
 	)
 }
 
-func (p *proxy) dialTarget(ctx context.Context, method string) (context.Context, *grpc.ClientConn, error) {
+// dialTarget returns the outgoing context, the grpc client connection,
+// a boolean suggesting whether the client connection was cached, and an error if any.
+func (p *proxy) dialTarget(ctx context.Context, method string) (context.Context, *grpc.ClientConn, bool, error) {
 	// Intercept header.
 	name := fmt.Sprintf("dialTarget(%s)", method)
 	log.Info(name)
 	hd, ok := metadata.FromIncomingContext(ctx)
 	if !ok {
 		log.Infof("%s proxy_error: missing metadata", name)
-		return nil, nil, status.Errorf(codes.InvalidArgument, "proxy_error: missing metadata")
+		return nil, nil, false, status.Errorf(codes.InvalidArgument, "proxy_error: missing metadata")
 	}
 	dest, destHd, err := p.destProvider(hd, method)
 	if err != nil {
 		log.Infof("%s destProvider: %v", name, err)
-		return nil, nil, err
+		return nil, nil, false, err
 	}
 	destCtx := metadata.NewOutgoingContext(ctx, destHd)
-	c, err := p.grpcDialer.DialGRPC(ctx, dest, grpc.WithDefaultCallOptions(grpc.ForceCodec(codec())))
+	c, ck, err := p.connFromCache(hd, dest)
+	if err != nil {
+		return nil, nil, false, err
+	}
+	if c != nil {
+		log.InfoContextf(ctx, "%s %s connection from cache", name, dest)
+		return destCtx, c, true, nil
+	}
+	c, err = p.grpcDialer.DialGRPC(ctx, dest, grpc.WithDefaultCallOptions(grpc.ForceCodec(codec())))
 	if err != nil {
 		log.Infof("%s proxy_error: cannot connect to target backend %s: %v", name, dest, err)
-		return nil, nil, status.Errorf(codes.Unavailable, fmt.Sprintf("proxy_error: cannot connect to target backend: %v", err))
+		return nil, nil, false, status.Errorf(codes.Unavailable, fmt.Sprintf("proxy_error: cannot connect to target backend: %v", err))
 	}
-	log.Infof("%s %s succeeded", name, dest)
-	return destCtx, c, nil
+	log.InfoContextf(ctx, "%s %s dial successful", name, dest)
+	if added := p.addToCache(c, ck); added {
+		log.InfoContextf(ctx, "%s %s added to cache", name, dest)
+		return destCtx, c, true, nil
+	}
+	return destCtx, c, false, nil
 }
 
 func (p *proxy) instrumentedStreamHandler(srv any, stream grpc.ServerStream) error {
@@ -178,11 +209,13 @@ func (p *proxy) instrumentedStreamHandler(srv any, stream grpc.ServerStream) err
 
 func (p *proxy) streamHandler(ctx context.Context, method string, stream grpc.ServerStream) error {
 	// Establish connection to dest server.
-	destCtx, destConn, err := p.dialTarget(ctx, method)
+	destCtx, destConn, fromCache, err := p.dialTarget(ctx, method)
 	if err != nil {
 		return err
 	}
-	defer destConn.Close()
+	if !fromCache {
+		defer destConn.Close()
+	}
 
 	// Establish a stream to target server.
 	destCtx, clientCancel := context.WithCancel(destCtx)

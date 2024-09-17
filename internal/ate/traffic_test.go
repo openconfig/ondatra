@@ -374,7 +374,7 @@ func TestAddTraffic(t *testing.T) {
 				Type: &opb.Header_Ipv4{&opb.Ipv4Header{}},
 			}},
 		},
-		wantTrafficType: ipv4Traffic,
+		wantTrafficType: ethTraffic,
 		wantSrcEPs:      devGrpEPs,
 		wantDstEPs:      devGrpEPs,
 		wantStackCount:  4,
@@ -611,6 +611,22 @@ func TestAddTraffic(t *testing.T) {
 		wantDstEPs:      vportEPs,
 		wantCRC:         "badCrc",
 		wantStackCount:  1,
+	}, {
+		desc: "Macsec traffic flow",
+		flow: &opb.Flow{
+			Name:         flowName,
+			SrcEndpoints: intfEPs,
+			DstEndpoints: intfEPs,
+			Headers: []*opb.Header{{
+				Type: &opb.Header_Eth{&opb.EthernetHeader{}},
+			}, {
+				Type: &opb.Header_Macsec{&opb.MacsecHeader{}},
+			}},
+		},
+		wantTrafficType: ethTraffic,
+		wantSrcEPs:      devGrpEPs,
+		wantDstEPs:      devGrpEPs,
+		wantStackCount:  3,
 	}}
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {

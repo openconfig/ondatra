@@ -293,7 +293,7 @@ func (n *RsvpteRouterPathAny) LabelSwitchedPathDatabase() *RsvpteRouter_LabelSwi
 	return ps
 }
 
-// Name (leaf): An arbitary name of the RSVP-TE router determined by the ATE
+// Name (leaf): An arbitrary name of the RSVP-TE router determined by the ATE
 // configuration.
 //
 //	Defining module:      "open-traffic-generator-rsvp"
@@ -312,7 +312,7 @@ func (n *RsvpteRouterPath) Name() *RsvpteRouter_NamePath {
 	return ps
 }
 
-// Name (leaf): An arbitary name of the RSVP-TE router determined by the ATE
+// Name (leaf): An arbitrary name of the RSVP-TE router determined by the ATE
 // configuration.
 //
 //	Defining module:      "open-traffic-generator-rsvp"
