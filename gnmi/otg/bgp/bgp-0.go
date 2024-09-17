@@ -345,7 +345,7 @@ func (n *BgpPeerPathAny) Counters() *BgpPeer_CountersPathAny {
 	return ps
 }
 
-// Name (leaf): An arbitary name of the BGP peer determined by the ATE
+// Name (leaf): An arbitrary name of the BGP peer determined by the ATE
 // configuration.
 //
 //	Defining module:      "open-traffic-generator-bgp"
@@ -364,7 +364,7 @@ func (n *BgpPeerPath) Name() *BgpPeer_NamePath {
 	return ps
 }
 
-// Name (leaf): An arbitary name of the BGP peer determined by the ATE
+// Name (leaf): An arbitrary name of the BGP peer determined by the ATE
 // configuration.
 //
 //	Defining module:      "open-traffic-generator-bgp"

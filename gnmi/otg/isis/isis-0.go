@@ -295,7 +295,7 @@ func (n *IsisRouterPathAny) LinkStateDatabase() *IsisRouter_LinkStateDatabasePat
 	return ps
 }
 
-// Name (leaf): An arbitary name of the ISIS router determined by the OTG
+// Name (leaf): An arbitrary name of the ISIS router determined by the OTG
 // configuration.
 //
 //	Defining module:      "open-traffic-generator-isis"
@@ -314,7 +314,7 @@ func (n *IsisRouterPath) Name() *IsisRouter_NamePath {
 	return ps
 }
 
-// Name (leaf): An arbitary name of the ISIS router determined by the OTG
+// Name (leaf): An arbitrary name of the ISIS router determined by the OTG
 // configuration.
 //
 //	Defining module:      "open-traffic-generator-isis"

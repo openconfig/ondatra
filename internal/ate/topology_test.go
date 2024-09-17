@@ -184,6 +184,44 @@ func TestAddLAGs(t *testing.T) {
 			return cfg
 		}(),
 	}, {
+		desc: "macsec",
+		lags: []*opb.Lag{{
+			Name:  "macsecLAG",
+			Ports: []string{"1/1", "2/2"},
+			Macsec: &opb.MacSec{
+				CipherSuite:           opb.MacSec_AES_128,
+				EncryptedVlansEnabled: false,
+			},
+		}},
+		wantCfg: func() *ixconfig.Ixnetwork {
+			cfg := &ixconfig.Ixnetwork{
+				Vport: []*ixconfig.Vport{vport1, vport2},
+				Lag: []*ixconfig.Lag{{
+					Name: ixconfig.String("macsecLAG"),
+					LagMode: &ixconfig.LagLagMode{
+						LagL23Protocol: ixconfig.MultivalueStr("macsec mka"),
+						LagProtocol:    ixconfig.MultivalueStr("staticlag"),
+					},
+					ProtocolStack: &ixconfig.LagProtocolStack{
+						Multiplier: ixconfig.NumberFloat64(1),
+						Enabled:    ixconfig.MultivalueBool(true),
+						Ethernet: []*ixconfig.LagEthernet{{
+							Multiplier: ixconfig.NumberFloat64(1),
+							Lagportstaticlag: []*ixconfig.LagLagportstaticlag{{
+								Multiplier: ixconfig.NumberFloat64(1),
+							}},
+							Macsec: []*ixconfig.LagMacsec{{
+								CipherSuite:          ixconfig.MultivalueStr("aes128"),
+								EnableClearTextVlans: ixconfig.Bool(false),
+							}},
+						}},
+					},
+				}},
+			}
+			cfg.Lag[0].SetVportsRefs([]ixconfig.IxiaCfgNode{vport1, vport2})
+			return cfg
+		}(),
+	}, {
 		desc: "lacp",
 		lags: []*opb.Lag{{
 			Name:  "lacpLAG",

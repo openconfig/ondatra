@@ -126,6 +126,23 @@ func (r *RxSAKPool) WithSAK256(sak string) *RxSAKPool {
 	return r
 }
 
+// NewMACsec creates a MACsec config or returns the existing config.
+func NewMACsec(pb *opb.MacSec) *MACsec {
+	return &MACsec{pb}
+}
+
+// WithKeyDerivationFunctionAES256CMAC sets the MKA key derivation function to AES-256-CMAC.
+func (m *MKA) WithKeyDerivationFunctionAES256CMAC() *MKA {
+	m.pb.KeyDerivationFunction = opb.MacSec_MKA_AES_256_CMAC
+	return m
+}
+
+// WithCleartextEthernetVlan sets whether the ethernet VLAN is cleartext.
+func (m *MACsec) WithCleartextEthernetVlan(enabled bool) *MACsec {
+	m.pb.CleartextEthernetVlan = enabled
+	return m
+}
+
 // MKA creates an MKA protocol for a MACsec configuration or returns the existing config.
 // The default config params are:
 //

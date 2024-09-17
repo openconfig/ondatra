@@ -1213,6 +1213,12 @@ func (h *MACsecHeader) asPB() *opb.Header {
 	return &opb.Header{Type: &opb.Header_Macsec{h.pb}}
 }
 
+// WithVLANID sets the 12-bit VLAN ID of the MACsec header to the specified value.
+func (h *MACsecHeader) WithVLANID(vid uint16) *MACsecHeader {
+	h.pb.VlanId = uint32(vid)
+	return h
+}
+
 // NewESP returns a new ESP header.
 func NewESP() *ESPHeader {
 	return &ESPHeader{&opb.EspHeader{}}

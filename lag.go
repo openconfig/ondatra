@@ -15,12 +15,23 @@
 package ondatra
 
 import (
+	"github.com/openconfig/ondatra/ixnet"
 	opb "github.com/openconfig/ondatra/proto"
 )
 
 // LAG is a link aggregation group.
 type LAG struct {
 	pb *opb.Lag
+}
+
+// MACsec creates a MACsec config or returns the existing config.
+func (l *LAG) MACsec() *ixnet.MACsec {
+	if l.pb.Macsec == nil {
+		l.pb.Macsec = &opb.MacSec{
+			CipherSuite: opb.MacSec_AES_256,
+		}
+	}
+	return ixnet.NewMACsec(l.pb.Macsec)
 }
 
 // WithPorts sets the LAG ports to the specified ports.

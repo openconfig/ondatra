@@ -64,6 +64,7 @@ using the following YANG input files:
   - public/release/models/qos/openconfig-qos-interfaces.yang
   - public/release/models/qos/openconfig-qos-types.yang
   - public/release/models/qos/openconfig-qos.yang
+  - public/release/models/relay-agent/openconfig-relay-agent.yang
   - public/release/models/rib/openconfig-rib-bgp.yang
   - public/release/models/sampling/openconfig-sampling-sflow.yang
   - public/release/models/segment-routing/openconfig-segment-routing-types.yang
@@ -99,6 +100,7 @@ import (
 	"github.com/openconfig/ondatra/gnmi/oc/networkinstance"
 	"github.com/openconfig/ondatra/gnmi/oc/platform"
 	"github.com/openconfig/ondatra/gnmi/oc/qos"
+	"github.com/openconfig/ondatra/gnmi/oc/relayagent"
 	"github.com/openconfig/ondatra/gnmi/oc/routingpolicy"
 	"github.com/openconfig/ondatra/gnmi/oc/sampling"
 	"github.com/openconfig/ondatra/gnmi/oc/system"
@@ -505,6 +507,24 @@ func (n *RootPath) Qos() *qos.QosPath {
 	ps := &qos.QosPath{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"qos"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// RelayAgent (container): Top level container for relay-agent configuration and
+// operational state data
+//
+//	Defining module:      "openconfig-relay-agent"
+//	Instantiating module: "openconfig-relay-agent"
+//	Path from parent:     "relay-agent"
+//	Path from root:       "/relay-agent"
+func (n *RootPath) RelayAgent() *relayagent.RelayAgentPath {
+	ps := &relayagent.RelayAgentPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"relay-agent"},
 			map[string]interface{}{},
 			n,
 		),

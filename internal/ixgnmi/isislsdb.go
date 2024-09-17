@@ -104,7 +104,7 @@ func populateISIS(netInst *oc.NetworkInstance, learnedISIS []isisLearnedInfo) er
 			info.SystemID[6:8], info.SystemID[9:11], info.SystemID[12:14], info.SystemID[15:17],
 			info.PseudoNodeIndex, info.LSPIndex)
 		var flags []oc.E_Lsp_Flags
-		// TODO(greg-dennis): Infer the flags when we learn what they look like in learned info.
+		// TODO(team): Infer the flags when we learn what they look like in learned info.
 		lsp := isis.GetOrCreateLevel(levelNum).GetOrCreateLsp(lspID)
 		lsp.SetIsType(levelNum)
 		lsp.SetFlags(flags)

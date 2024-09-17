@@ -425,7 +425,7 @@ func (pa *portAssigner) assign(ctx context.Context) bool {
 	select {
 	case <-ctx.Done():
 		// The context is done. Stop work.
-		log.Warningf("Timeout occurred before solve was finished, error: %v", ctx.Err())
+		log.WarningContextf(ctx, "Timeout occurred before solve was finished, error: %v", ctx.Err())
 		return false
 	default:
 	}
@@ -694,6 +694,9 @@ func (s *solver) processConstraints() {
 				nc.Set(k, reAny)
 			case LeafConstraint:
 				nc.Set(k, v)
+			case nil:
+				// The constraint is nil; this usually should not happen and indicates an input error.
+				log.Warningf("Node %q has a nil constraint", n.Desc)
 			default:
 				log.Fatalf("Unrecognized constraint type %T for node matching", v)
 			}

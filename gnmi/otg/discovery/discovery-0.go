@@ -367,7 +367,7 @@ func (n *InterfacePathAny) Ipv6Neighbor(Ipv6Address string) *Interface_Ipv6Neigh
 	return ps
 }
 
-// Name (leaf): An arbitary name of an OTG interface determined by the OTG
+// Name (leaf): An arbitrary name of an OTG interface determined by the OTG
 // configuration.
 //
 //	Defining module:      "open-traffic-generator-discovery-interfaces"
@@ -386,7 +386,7 @@ func (n *InterfacePath) Name() *Interface_NamePath {
 	return ps
 }
 
-// Name (leaf): An arbitary name of an OTG interface determined by the OTG
+// Name (leaf): An arbitrary name of an OTG interface determined by the OTG
 // configuration.
 //
 //	Defining module:      "open-traffic-generator-discovery-interfaces"

@@ -79,6 +79,8 @@ const (
 	NOKIA = Vendor(opb.Device_NOKIA)
 	// ARUBA vendor.
 	ARUBA = Vendor(opb.Device_ARUBA)
+	// ALPINE vendor.
+	ALPINE = Vendor(opb.Device_ALPINE)
 )
 
 // String returns the name of the vendor.
@@ -174,6 +176,8 @@ const (
 	Speed5Gb = Speed(opb.Port_S_5GB)
 	// Speed10Gb is a port speed of 10Gbps.
 	Speed10Gb = Speed(opb.Port_S_10GB)
+	// Speed25Gb is a port speed of 25Gbps.
+	Speed25Gb = Speed(opb.Port_S_25GB)
 	// Speed40Gb is a port speed of 40Gbps.
 	Speed40Gb = Speed(opb.Port_S_40GB)
 	// Speed100Gb is a port speed of 100Gbps.

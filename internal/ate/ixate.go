@@ -507,7 +507,7 @@ func (ix *ixATE) configureTopology(ics []*opb.InterfaceConfig) error {
 			return err
 		}
 		for _, ifc := range ifs {
-			// TODO(greg-dennis): Add MACsec to the 'golden' ixiajsoncfg PushTopology tests.
+			// TODO(team): Add MACsec to the 'golden' ixiajsoncfg PushTopology tests.
 			if err := ix.addMACsecProtocol(ifc); err != nil {
 				return err
 			}

@@ -88,6 +88,27 @@ func (ix *ixATE) addLAGs(lags []*opb.Lag) error {
 				Ethernet:   []*ixconfig.LagEthernet{{Multiplier: ixconfig.NumberFloat64(1)}},
 			},
 		}
+
+		Macsec := ol.GetMacsec()
+		if Macsec != nil {
+			lag.LagMode.LagL23Protocol = ixconfig.MultivalueStr("macsec mka")
+			cipherSuite, _, err := cipherSuiteStrAndLen(Macsec.GetCipherSuite())
+			if err != nil {
+				return err
+			}
+			lag.ProtocolStack.Ethernet[0].Macsec = []*ixconfig.LagMacsec{{
+				CipherSuite:          ixconfig.MultivalueStr(cipherSuite),
+				EnableClearTextVlans: ixconfig.Bool(Macsec.GetCleartextEthernetVlan()),
+			}}
+
+			if mkapb := Macsec.GetMka(); mkapb != nil {
+				m, err := mkaLAG(mkapb)
+				if err != nil {
+					return err
+				}
+				lag.ProtocolStack.Ethernet[0].Mka = []*ixconfig.LagMka{m}
+			}
+		}
 		if ol.GetLacp().GetEnabled() {
 			lag.LagMode.LagProtocol = ixconfig.MultivalueStr("lacp")
 			lag.ProtocolStack.Ethernet[0].Lagportlacp = []*ixconfig.LagLagportlacp{{

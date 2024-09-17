@@ -214,6 +214,12 @@ func (*AbstractGNSIClients) Acctz() acctzpb.AcctzClient {
 	return nil
 }
 
+// AcctzStream logs a fatal unimplemented error.
+func (*AbstractGNSIClients) AcctzStream() acctzpb.AcctzStreamClient {
+	log.Fatal("AcctzStream unimplemented")
+	return nil
+}
+
 // Attestz logs a fatal unimplemented error.
 func (*AbstractGNSIClients) Attestz() attestzpb.TpmAttestzServiceClient {
 	log.Fatal("Attestz unimplemented")

@@ -32,6 +32,7 @@ message Lag {
     bool enabled = 1;
   }
   Lacp lacp = 3;
+  MacSec macsec = 4;
 }
 
 message InterfaceConfig {
@@ -76,6 +77,7 @@ message MacSec {
   }
   CipherSuite cipher_suite = 1;
   bool encrypted_vlans_enabled = 2;
+  bool cleartext_ethernet_vlan = 5;
   RxSakPool rx_sak_pool = 3;
   message MKA {
     uint32 version = 1;
@@ -96,6 +98,12 @@ message MacSec {
     }
     ConfidentialityOffset confidentiality_offset = 3;
     CipherSuite cipher_suite = 4;
+    enum KeyDerivationFunction {
+      KEY_DERIVATION_UNSPECIFIED = 0;
+      AES_128_CMAC = 1;
+      AES_256_CMAC = 2;
+    }
+    KeyDerivationFunction key_derivation_function = 6;
     message ConnectivityAssociation {
       string ckn = 1;
       string cak = 2;
@@ -881,7 +889,9 @@ message EspOverMacSecHeader {
   UIntRange sequence_number = 2;
 }
 
-message MacsecHeader {}
+message MacsecHeader {
+  uint32 vlan_id = 1;
+}
 
 message IpAddressGenerator {
   oneof type {

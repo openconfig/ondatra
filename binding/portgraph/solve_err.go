@@ -19,12 +19,51 @@ import (
 	"strings"
 )
 
+// solveReport generates a report with all the events that happened during a solve.
+type solveReport struct {
+	report []string
+}
+
+func (s *solveReport) String() string {
+	report := &strings.Builder{}
+	fmt.Fprintln(report, "Solve report:")
+	for _, r := range s.report {
+		fmt.Fprintln(report, r)
+	}
+	return report.String()
+}
+
+func (s *solveReport) TryAssign(device string, node string) {
+	s.report = append(s.report, fmt.Sprintf("[TRY_ASSIGN]: Trying to assign %s to %s", device, node))
+}
+
+func (s *solveReport) Assigned(device string, node string, constraints map[string]string) {
+	desc := &strings.Builder{}
+	fmt.Fprintf(desc, "[ASSIGNED]: Assigned %s to %s", device, node)
+	if len(constraints) > 0 {
+		fmt.Fprintf(desc, " with constraints")
+		for k, v := range constraints {
+			fmt.Fprintf(desc, " %s: %s", k, v)
+		}
+	}
+	s.report = append(s.report, desc.String())
+}
+
+func (s *solveReport) Unassigned(device string, node string) {
+	s.report = append(s.report, fmt.Sprintf("[UNASSIGNED]: Unassigned %s from %s", device, node))
+}
+
+func (s *solveReport) ConstraintFailed(device string, node string, constraint string, got string, want string) {
+	s.report = append(s.report, fmt.Sprintf("[CONSTRAINT_FAIL]: %s does not match required constraint %s for %s got: %s want: %s", device, constraint, node, got, want))
+}
+
 // solveError implements error and contains information about a call to Solve.
 type solveError struct {
 	absGraphDesc string
 	conGraphDesc string
 	wrappedErr   error
 	maxAssign    *Assignment
+	report       *solveReport
 }
 
 func (s *solveError) Unwrap() error {

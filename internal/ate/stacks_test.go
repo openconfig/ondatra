@@ -950,6 +950,17 @@ func TestHeaderStacks(t *testing.T) {
 		},
 		wantFields: [][]wantField{{}, {}},
 	}, {
+		desc: "macsec header w/ vlan",
+		hdr: &opb.Header{
+			Type: &opb.Header_Macsec{
+				&opb.MacsecHeader{
+					VlanId: 1,
+				},
+			},
+		},
+		srcVLAN:    true,
+		wantFields: [][]wantField{{}, {}, {}},
+	}, {
 		desc: "PwMplsControlWord header",
 		hdr: &opb.Header{
 			Type: &opb.Header_PwMplsControlWord{
