@@ -48,6 +48,7 @@ message Device {
     OPENCONFIG = 10;
     ARUBA = 11;
     ALPINE = 12;
+    DRIVENETS = 13;
   }
   Vendor vendor = 2;
 
