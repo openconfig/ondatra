@@ -51,6 +51,7 @@ const (
 	Device_OPENCONFIG         Device_Vendor = 10
 	Device_ARUBA              Device_Vendor = 11
 	Device_ALPINE             Device_Vendor = 12
+	Device_DriveNets		  Device_Vendor = 13
 )
 
 // Enum value maps for Device_Vendor.

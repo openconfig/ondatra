@@ -1,0 +1,6 @@
+# proto-file: proto/testbed.proto
+# proto-message: ondatra.Testbed
+
+duts {
+  id: "dn_dut"
+}
