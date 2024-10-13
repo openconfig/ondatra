@@ -11,8 +11,8 @@ Imported modules were sourced from:
 package ocpath
 
 import (
+	"github.com/openconfig/ondatra/gnmi/dn/dntop"
 	oc "github.com/openconfig/ondatra/gnmi/oc"
-	"github.com/openconfig/ondatra/gnmi/oc/dntop"
 	"github.com/openconfig/ygnmi/ygnmi"
 	"github.com/openconfig/ygot/ygot"
 	"github.com/openconfig/ygot/ytypes"
