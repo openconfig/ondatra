@@ -16,6 +16,12 @@ using the following YANG input files:
   - models-yang/models/lldp/open-traffic-generator-lldp.yang
   - models-yang/models/rsvp/open-traffic-generator-rsvp.yang
   - models-yang/models/types/open-traffic-generator-types.yang
+  - models-yang/models/dhcp/v4client/open-traffic-generator-dhcpv4client.yang
+  - models-yang/models/dhcp/v4server/open-traffic-generator-dhcpv4server.yang
+  - models-yang/models/dhcp/v6client/open-traffic-generator-dhcpv6client.yang
+  - models-yang/models/dhcp/v6server/open-traffic-generator-dhcpv6server.yang
+  - models-yang/models/ospfv2/open-traffic-generator-ospfv2.yang
+  - models-yang/models/platform/open-traffic-generator-platform.yang
 
 Imported modules were sourced from:
   - models-yang/models/...
@@ -108,6 +114,33 @@ const (
 	Capabilities_Name_STATION_ONLY E_Capabilities_Name = 10
 	// Capabilities_Name_WLAN_ACCESS_POINT corresponds to the value WLAN_ACCESS_POINT of Capabilities_Name
 	Capabilities_Name_WLAN_ACCESS_POINT E_Capabilities_Name = 11
+)
+
+// E_Component_Name is a derived int64 type which is used to represent
+// the enumerated node Component_Name. An additional value named
+// Component_Name_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_Component_Name int64
+
+// IsYANGGoEnum ensures that Component_Name implements the yang.GoEnum
+// interface. This ensures that Component_Name can be identified as a
+// mapped type for a YANG enumeration.
+func (E_Component_Name) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  Component_Name.
+func (E_Component_Name) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_Component_Name.
+func (e E_Component_Name) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_Component_Name")
+}
+
+const (
+	// Component_Name_UNSET corresponds to the value UNSET of Component_Name
+	Component_Name_UNSET E_Component_Name = 0
+	// Component_Name_keng_controller corresponds to the value keng_controller of Component_Name
+	Component_Name_keng_controller E_Component_Name = 1
 )
 
 // E_Ero_Type is a derived int64 type which is used to represent
@@ -515,6 +548,39 @@ const (
 	Lag_OperStatus_DOWN E_Lag_OperStatus = 2
 )
 
+// E_Link_Type is a derived int64 type which is used to represent
+// the enumerated node Link_Type. An additional value named
+// Link_Type_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_Link_Type int64
+
+// IsYANGGoEnum ensures that Link_Type implements the yang.GoEnum
+// interface. This ensures that Link_Type can be identified as a
+// mapped type for a YANG enumeration.
+func (E_Link_Type) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  Link_Type.
+func (E_Link_Type) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_Link_Type.
+func (e E_Link_Type) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_Link_Type")
+}
+
+const (
+	// Link_Type_UNSET corresponds to the value UNSET of Link_Type
+	Link_Type_UNSET E_Link_Type = 0
+	// Link_Type_POINT_TO_POINT corresponds to the value POINT_TO_POINT of Link_Type
+	Link_Type_POINT_TO_POINT E_Link_Type = 1
+	// Link_Type_TRANSIT corresponds to the value TRANSIT of Link_Type
+	Link_Type_TRANSIT E_Link_Type = 2
+	// Link_Type_STUB corresponds to the value STUB of Link_Type
+	Link_Type_STUB E_Link_Type = 3
+	// Link_Type_VIRTUAL corresponds to the value VIRTUAL of Link_Type
+	Link_Type_VIRTUAL E_Link_Type = 4
+)
+
 // E_LldpNeighbor_ChassisIdType is a derived int64 type which is used to represent
 // the enumerated node LldpNeighbor_ChassisIdType. An additional value named
 // LldpNeighbor_ChassisIdType_UNSET is added to the enumeration which is used as
@@ -657,6 +723,37 @@ const (
 	Lsps_PduType_LEVEL_1 E_Lsps_PduType = 1
 	// Lsps_PduType_LEVEL_2 corresponds to the value LEVEL_2 of Lsps_PduType
 	Lsps_PduType_LEVEL_2 E_Lsps_PduType = 2
+)
+
+// E_OpaqueLsa_Type is a derived int64 type which is used to represent
+// the enumerated node OpaqueLsa_Type. An additional value named
+// OpaqueLsa_Type_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_OpaqueLsa_Type int64
+
+// IsYANGGoEnum ensures that OpaqueLsa_Type implements the yang.GoEnum
+// interface. This ensures that OpaqueLsa_Type can be identified as a
+// mapped type for a YANG enumeration.
+func (E_OpaqueLsa_Type) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  OpaqueLsa_Type.
+func (E_OpaqueLsa_Type) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_OpaqueLsa_Type.
+func (e E_OpaqueLsa_Type) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_OpaqueLsa_Type")
+}
+
+const (
+	// OpaqueLsa_Type_UNSET corresponds to the value UNSET of OpaqueLsa_Type
+	OpaqueLsa_Type_UNSET E_OpaqueLsa_Type = 0
+	// OpaqueLsa_Type_LOCAL corresponds to the value LOCAL of OpaqueLsa_Type
+	OpaqueLsa_Type_LOCAL E_OpaqueLsa_Type = 1
+	// OpaqueLsa_Type_AREA corresponds to the value AREA of OpaqueLsa_Type
+	OpaqueLsa_Type_AREA E_OpaqueLsa_Type = 2
+	// OpaqueLsa_Type_DOMAIN corresponds to the value DOMAIN of OpaqueLsa_Type
+	OpaqueLsa_Type_DOMAIN E_OpaqueLsa_Type = 3
 )
 
 // E_Port_Link is a derived int64 type which is used to represent

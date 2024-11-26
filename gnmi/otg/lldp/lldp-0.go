@@ -14,6 +14,12 @@ using the following YANG input files:
   - models-yang/models/lldp/open-traffic-generator-lldp.yang
   - models-yang/models/rsvp/open-traffic-generator-rsvp.yang
   - models-yang/models/types/open-traffic-generator-types.yang
+  - models-yang/models/dhcp/v4client/open-traffic-generator-dhcpv4client.yang
+  - models-yang/models/dhcp/v4server/open-traffic-generator-dhcpv4server.yang
+  - models-yang/models/dhcp/v6client/open-traffic-generator-dhcpv6client.yang
+  - models-yang/models/dhcp/v6server/open-traffic-generator-dhcpv6server.yang
+  - models-yang/models/ospfv2/open-traffic-generator-ospfv2.yang
+  - models-yang/models/platform/open-traffic-generator-platform.yang
 
 Imported modules were sourced from:
   - models-yang/models/...
@@ -2902,8 +2908,8 @@ func (n *LldpInterface_LldpNeighborDatabase_LldpNeighbor_CustomTlvPathAny) WithO
 }
 
 // WithOuiSubtype sets LldpInterface_LldpNeighborDatabase_LldpNeighbor_CustomTlvPathAny's key "oui-subtype" to the specified value.
-// OuiSubtype: string
-func (n *LldpInterface_LldpNeighborDatabase_LldpNeighbor_CustomTlvPathAny) WithOuiSubtype(OuiSubtype string) *LldpInterface_LldpNeighborDatabase_LldpNeighbor_CustomTlvPathAny {
+// OuiSubtype: uint32
+func (n *LldpInterface_LldpNeighborDatabase_LldpNeighbor_CustomTlvPathAny) WithOuiSubtype(OuiSubtype uint32) *LldpInterface_LldpNeighborDatabase_LldpNeighbor_CustomTlvPathAny {
 	ygnmi.ModifyKey(n.NodePath, "oui-subtype", OuiSubtype)
 	return n
 }
@@ -2917,8 +2923,8 @@ func (n *LldpInterface_LldpNeighborDatabase_LldpNeighbor_CustomTlvPathAny) WithO
 //
 //	CustomType: uint32
 //	Oui: string
-//	OuiSubtype: string
-func (n *LldpInterface_LldpNeighborDatabase_LldpNeighborPath) CustomTlv(CustomType uint32, Oui string, OuiSubtype string) *LldpInterface_LldpNeighborDatabase_LldpNeighbor_CustomTlvPath {
+//	OuiSubtype: uint32
+func (n *LldpInterface_LldpNeighborDatabase_LldpNeighborPath) CustomTlv(CustomType uint32, Oui string, OuiSubtype uint32) *LldpInterface_LldpNeighborDatabase_LldpNeighbor_CustomTlvPath {
 	ps := &LldpInterface_LldpNeighborDatabase_LldpNeighbor_CustomTlvPath{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"custom-tlv"},
@@ -2938,8 +2944,8 @@ func (n *LldpInterface_LldpNeighborDatabase_LldpNeighborPath) CustomTlv(CustomTy
 //
 //	CustomType: uint32
 //	Oui: string
-//	OuiSubtype: string
-func (n *LldpInterface_LldpNeighborDatabase_LldpNeighborPathAny) CustomTlv(CustomType uint32, Oui string, OuiSubtype string) *LldpInterface_LldpNeighborDatabase_LldpNeighbor_CustomTlvPathAny {
+//	OuiSubtype: uint32
+func (n *LldpInterface_LldpNeighborDatabase_LldpNeighborPathAny) CustomTlv(CustomType uint32, Oui string, OuiSubtype uint32) *LldpInterface_LldpNeighborDatabase_LldpNeighbor_CustomTlvPathAny {
 	ps := &LldpInterface_LldpNeighborDatabase_LldpNeighbor_CustomTlvPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"custom-tlv"},
@@ -4186,8 +4192,8 @@ type LldpInterface_LldpNeighborDatabase_LldpNeighbor_CustomTlv_OuiSubtypePathAny
 //	Instantiating module: "open-traffic-generator-lldp"
 //	Path from parent:     "state/oui-subtype"
 //	Path from root:       "/lldps/lldp-interface/state/lldp-neighbor-database/lldp-neighbors/lldp-neighbor/custom-tlv/state/oui-subtype"
-func (n *LldpInterface_LldpNeighborDatabase_LldpNeighbor_CustomTlv_OuiSubtypePath) State() ygnmi.SingletonQuery[string] {
-	return ygnmi.NewSingletonQuery[string](
+func (n *LldpInterface_LldpNeighborDatabase_LldpNeighbor_CustomTlv_OuiSubtypePath) State() ygnmi.SingletonQuery[uint32] {
+	return ygnmi.NewSingletonQuery[uint32](
 		"LldpInterface_LldpNeighborDatabase_LldpNeighbor_CustomTlv",
 		true,
 		false,
@@ -4200,10 +4206,10 @@ func (n *LldpInterface_LldpNeighborDatabase_LldpNeighbor_CustomTlv_OuiSubtypePat
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (string, bool) {
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
 			ret := gs.(*oc.LldpInterface_LldpNeighborDatabase_LldpNeighbor_CustomTlv).OuiSubtype
 			if ret == nil {
-				var zero string
+				var zero uint32
 				return zero, false
 			}
 			return *ret, true
@@ -4229,8 +4235,8 @@ func (n *LldpInterface_LldpNeighborDatabase_LldpNeighbor_CustomTlv_OuiSubtypePat
 //	Instantiating module: "open-traffic-generator-lldp"
 //	Path from parent:     "state/oui-subtype"
 //	Path from root:       "/lldps/lldp-interface/state/lldp-neighbor-database/lldp-neighbors/lldp-neighbor/custom-tlv/state/oui-subtype"
-func (n *LldpInterface_LldpNeighborDatabase_LldpNeighbor_CustomTlv_OuiSubtypePathAny) State() ygnmi.WildcardQuery[string] {
-	return ygnmi.NewWildcardQuery[string](
+func (n *LldpInterface_LldpNeighborDatabase_LldpNeighbor_CustomTlv_OuiSubtypePathAny) State() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewWildcardQuery[uint32](
 		"LldpInterface_LldpNeighborDatabase_LldpNeighbor_CustomTlv",
 		true,
 		false,
@@ -4243,10 +4249,10 @@ func (n *LldpInterface_LldpNeighborDatabase_LldpNeighbor_CustomTlv_OuiSubtypePat
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (string, bool) {
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
 			ret := gs.(*oc.LldpInterface_LldpNeighborDatabase_LldpNeighbor_CustomTlv).OuiSubtype
 			if ret == nil {
-				var zero string
+				var zero uint32
 				return zero, false
 			}
 			return *ret, true
@@ -4272,8 +4278,8 @@ func (n *LldpInterface_LldpNeighborDatabase_LldpNeighbor_CustomTlv_OuiSubtypePat
 //	Instantiating module: "open-traffic-generator-lldp"
 //	Path from parent:     "oui-subtype"
 //	Path from root:       ""
-func (n *LldpInterface_LldpNeighborDatabase_LldpNeighbor_CustomTlv_OuiSubtypePath) Config() ygnmi.ConfigQuery[string] {
-	return ygnmi.NewConfigQuery[string](
+func (n *LldpInterface_LldpNeighborDatabase_LldpNeighbor_CustomTlv_OuiSubtypePath) Config() ygnmi.ConfigQuery[uint32] {
+	return ygnmi.NewConfigQuery[uint32](
 		"LldpInterface_LldpNeighborDatabase_LldpNeighbor_CustomTlv",
 		false,
 		true,
@@ -4286,10 +4292,10 @@ func (n *LldpInterface_LldpNeighborDatabase_LldpNeighbor_CustomTlv_OuiSubtypePat
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (string, bool) {
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
 			ret := gs.(*oc.LldpInterface_LldpNeighborDatabase_LldpNeighbor_CustomTlv).OuiSubtype
 			if ret == nil {
-				var zero string
+				var zero uint32
 				return zero, false
 			}
 			return *ret, true
@@ -4315,8 +4321,8 @@ func (n *LldpInterface_LldpNeighborDatabase_LldpNeighbor_CustomTlv_OuiSubtypePat
 //	Instantiating module: "open-traffic-generator-lldp"
 //	Path from parent:     "oui-subtype"
 //	Path from root:       ""
-func (n *LldpInterface_LldpNeighborDatabase_LldpNeighbor_CustomTlv_OuiSubtypePathAny) Config() ygnmi.WildcardQuery[string] {
-	return ygnmi.NewWildcardQuery[string](
+func (n *LldpInterface_LldpNeighborDatabase_LldpNeighbor_CustomTlv_OuiSubtypePathAny) Config() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewWildcardQuery[uint32](
 		"LldpInterface_LldpNeighborDatabase_LldpNeighbor_CustomTlv",
 		false,
 		true,
@@ -4329,10 +4335,10 @@ func (n *LldpInterface_LldpNeighborDatabase_LldpNeighbor_CustomTlv_OuiSubtypePat
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (string, bool) {
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
 			ret := gs.(*oc.LldpInterface_LldpNeighborDatabase_LldpNeighbor_CustomTlv).OuiSubtype
 			if ret == nil {
-				var zero string
+				var zero uint32
 				return zero, false
 			}
 			return *ret, true
