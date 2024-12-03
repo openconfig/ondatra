@@ -141,6 +141,12 @@ func (c *VendorConfig) WithJuniperText(text string) *VendorConfig {
 	return c
 }
 
+// WithDrivenetsText sets the config to be pushed if the DUT vendor is Drivenets.
+func (c *VendorConfig) WithDrivenetsText(text string) *VendorConfig {
+	c.perVendor[opb.Device_DRIVENETS] = configText(text)
+	return c
+}
+
 // WithFile sets the config to be pushed regardless of the DUT vendor.
 // This should only be used when the DUT vendor was already taken into account
 // in the generation of the config and only when no per-vendor configs are set.
@@ -170,6 +176,12 @@ func (c *VendorConfig) WithCiscoFile(path string) *VendorConfig {
 // WithJuniperFile sets the config to be pushed if the DUT vendor is Juniper.
 func (c *VendorConfig) WithJuniperFile(path string) *VendorConfig {
 	c.perVendor[opb.Device_JUNIPER] = configFile(path)
+	return c
+}
+
+// WithDrivenetsFile sets the config to be pushed if the DUT vendor is Drivenets.
+func (c *VendorConfig) WithDrivenetsFile(path string) *VendorConfig {
+	c.perVendor[opb.Device_DRIVENETS] = configFile(path)
 	return c
 }
 

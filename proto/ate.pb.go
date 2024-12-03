@@ -21,13 +21,12 @@
 package proto
 
 import (
-	reflect "reflect"
-	sync "sync"
-
+	duration "github.com/golang/protobuf/ptypes/duration"
+	empty "github.com/golang/protobuf/ptypes/empty"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
-	durationpb "google.golang.org/protobuf/types/known/durationpb"
-	emptypb "google.golang.org/protobuf/types/known/emptypb"
+	reflect "reflect"
+	sync "sync"
 )
 
 const (
@@ -2562,8 +2561,8 @@ type BgpPeer struct {
 	Md5Key            string                     `protobuf:"bytes,7,opt,name=md5_key,json=md5Key,proto3" json:"md5_key,omitempty"`
 	Capabilities      *BgpPeer_Capabilities      `protobuf:"bytes,8,opt,name=capabilities,proto3" json:"capabilities,omitempty"`
 	SrtePolicyGroups  []*BgpPeer_SrtePolicyGroup `protobuf:"bytes,9,rep,name=srte_policy_groups,json=srtePolicyGroups,proto3" json:"srte_policy_groups,omitempty"`
-	RestartTime       *durationpb.Duration       `protobuf:"bytes,12,opt,name=restart_time,json=restartTime,proto3" json:"restart_time,omitempty"`
-	StaleTime         *durationpb.Duration       `protobuf:"bytes,13,opt,name=stale_time,json=staleTime,proto3" json:"stale_time,omitempty"`
+	RestartTime       *duration.Duration         `protobuf:"bytes,12,opt,name=restart_time,json=restartTime,proto3" json:"restart_time,omitempty"`
+	StaleTime         *duration.Duration         `protobuf:"bytes,13,opt,name=stale_time,json=staleTime,proto3" json:"stale_time,omitempty"`
 	AdvertiseEndOfRib bool                       `protobuf:"varint,14,opt,name=advertise_end_of_rib,json=advertiseEndOfRib,proto3" json:"advertise_end_of_rib,omitempty"`
 	ActAsRestarted    bool                       `protobuf:"varint,15,opt,name=act_as_restarted,json=actAsRestarted,proto3" json:"act_as_restarted,omitempty"` // NEXT ID: 16
 }
@@ -2677,14 +2676,14 @@ func (x *BgpPeer) GetSrtePolicyGroups() []*BgpPeer_SrtePolicyGroup {
 	return nil
 }
 
-func (x *BgpPeer) GetRestartTime() *durationpb.Duration {
+func (x *BgpPeer) GetRestartTime() *duration.Duration {
 	if x != nil {
 		return x.RestartTime
 	}
 	return nil
 }
 
-func (x *BgpPeer) GetStaleTime() *durationpb.Duration {
+func (x *BgpPeer) GetStaleTime() *duration.Duration {
 	if x != nil {
 		return x.StaleTime
 	}
@@ -6923,7 +6922,7 @@ func (m *BgpPeer_SrtePolicyGroup_Binding) GetType() isBgpPeer_SrtePolicyGroup_Bi
 	return nil
 }
 
-func (x *BgpPeer_SrtePolicyGroup_Binding) GetNoBinding() *emptypb.Empty {
+func (x *BgpPeer_SrtePolicyGroup_Binding) GetNoBinding() *empty.Empty {
 	if x, ok := x.GetType().(*BgpPeer_SrtePolicyGroup_Binding_NoBinding); ok {
 		return x.NoBinding
 	}
@@ -6956,7 +6955,7 @@ type isBgpPeer_SrtePolicyGroup_Binding_Type interface {
 }
 
 type BgpPeer_SrtePolicyGroup_Binding_NoBinding struct {
-	NoBinding *emptypb.Empty `protobuf:"bytes,1,opt,name=no_binding,json=noBinding,proto3,oneof"`
+	NoBinding *empty.Empty `protobuf:"bytes,1,opt,name=no_binding,json=noBinding,proto3,oneof"`
 }
 
 type BgpPeer_SrtePolicyGroup_Binding_FourOctetSid struct {
@@ -10719,8 +10718,8 @@ var file_ate_proto_goTypes = []any{
 	(*OspfHeader_LinkStateUpdate_Advertisement)(nil),            // 118: ondatra.OspfHeader.LinkStateUpdate.Advertisement
 	(*PimHeader_Hello)(nil),                                     // 119: ondatra.PimHeader.Hello
 	(*LdpHeader_Hello)(nil),                                     // 120: ondatra.LdpHeader.Hello
-	(*durationpb.Duration)(nil),                                 // 121: google.protobuf.Duration
-	(*emptypb.Empty)(nil),                                       // 122: google.protobuf.Empty
+	(*duration.Duration)(nil),                                   // 121: google.protobuf.Duration
+	(*empty.Empty)(nil),                                         // 122: google.protobuf.Empty
 }
 var file_ate_proto_depIdxs = []int32{
 	44,  // 0: ondatra.Traffic.flows:type_name -> ondatra.Flow

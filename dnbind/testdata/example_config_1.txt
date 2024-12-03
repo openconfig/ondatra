@@ -1,0 +1,7 @@
+interfaces
+  ge100-0/0/0.100
+    admin-state enabled
+    l2-service enabled
+    vlan-id 100
+  !
+!
