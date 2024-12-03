@@ -1,0 +1,7 @@
+nodes:
+  - id: dut
+    hostname:  yourhostname
+    vendor: DRIVENETS
+    credentials:
+      username: youruser
+      password: yourpass
