@@ -536,6 +536,182 @@ func (n *LacpPathAny) Config() ygnmi.WildcardQuery[*oc.Lacp] {
 	)
 }
 
+// Lacp_Interface_FallbackPath represents the /openconfig-lacp/lacp/interfaces/interface/state/fallback YANG schema element.
+type Lacp_Interface_FallbackPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Lacp_Interface_FallbackPathAny represents the wildcard version of the /openconfig-lacp/lacp/interfaces/interface/state/fallback YANG schema element.
+type Lacp_Interface_FallbackPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-lacp"
+//	Instantiating module: "openconfig-lacp"
+//	Path from parent:     "state/fallback"
+//	Path from root:       "/lacp/interfaces/interface/state/fallback"
+func (n *Lacp_Interface_FallbackPath) State() ygnmi.SingletonQuery[bool] {
+	return ygnmi.NewSingletonQuery[bool](
+		"Lacp_Interface",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "fallback"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Lacp_Interface).Fallback
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Lacp_Interface) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-lacp"
+//	Instantiating module: "openconfig-lacp"
+//	Path from parent:     "state/fallback"
+//	Path from root:       "/lacp/interfaces/interface/state/fallback"
+func (n *Lacp_Interface_FallbackPathAny) State() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewWildcardQuery[bool](
+		"Lacp_Interface",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "fallback"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Lacp_Interface).Fallback
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Lacp_Interface) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-lacp"
+//	Instantiating module: "openconfig-lacp"
+//	Path from parent:     "config/fallback"
+//	Path from root:       "/lacp/interfaces/interface/config/fallback"
+func (n *Lacp_Interface_FallbackPath) Config() ygnmi.ConfigQuery[bool] {
+	return ygnmi.NewConfigQuery[bool](
+		"Lacp_Interface",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "fallback"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Lacp_Interface).Fallback
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Lacp_Interface) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-lacp"
+//	Instantiating module: "openconfig-lacp"
+//	Path from parent:     "config/fallback"
+//	Path from root:       "/lacp/interfaces/interface/config/fallback"
+func (n *Lacp_Interface_FallbackPathAny) Config() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewWildcardQuery[bool](
+		"Lacp_Interface",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "fallback"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Lacp_Interface).Fallback
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Lacp_Interface) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
 // Lacp_Interface_IntervalPath represents the /openconfig-lacp/lacp/interfaces/interface/state/interval YANG schema element.
 type Lacp_Interface_IntervalPath struct {
 	*ygnmi.NodePath
@@ -1402,6 +1578,48 @@ type Lacp_InterfacePathMap struct {
 // Lacp_InterfacePathMapAny represents the wildcard version of the /openconfig-lacp/lacp/interfaces/interface YANG schema element.
 type Lacp_InterfacePathMapAny struct {
 	*ygnmi.NodePath
+}
+
+// Fallback (leaf): If the fallback is set to true, current LACP interface is
+// able to establish a Link Aggregation (LAG) before it receives
+// LACP PDUs from its peer, and fallback to a single port active
+// after the expiry of the timeout period.
+//
+//	Defining module:      "openconfig-lacp"
+//	Instantiating module: "openconfig-lacp"
+//	Path from parent:     "*/fallback"
+//	Path from root:       "/lacp/interfaces/interface/*/fallback"
+func (n *Lacp_InterfacePath) Fallback() *Lacp_Interface_FallbackPath {
+	ps := &Lacp_Interface_FallbackPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "fallback"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Fallback (leaf): If the fallback is set to true, current LACP interface is
+// able to establish a Link Aggregation (LAG) before it receives
+// LACP PDUs from its peer, and fallback to a single port active
+// after the expiry of the timeout period.
+//
+//	Defining module:      "openconfig-lacp"
+//	Instantiating module: "openconfig-lacp"
+//	Path from parent:     "*/fallback"
+//	Path from root:       "/lacp/interfaces/interface/*/fallback"
+func (n *Lacp_InterfacePathAny) Fallback() *Lacp_Interface_FallbackPathAny {
+	ps := &Lacp_Interface_FallbackPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "fallback"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
 }
 
 // Interval (leaf): Set the period between LACP messages -- uses

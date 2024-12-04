@@ -15,6 +15,7 @@
 package portgraph
 
 import (
+	"fmt"
 	"regexp"
 
 	log "github.com/golang/glog"
@@ -46,6 +47,7 @@ type LeafPortConstraint interface {
 type LeafConstraint interface {
 	universalLeafConstraint
 	match(string, bool) bool
+	string() string
 }
 
 type universalLeafConstraint interface {
@@ -57,6 +59,13 @@ type equal struct {
 	universalLeafConstraint
 	s   string
 	not bool
+}
+
+func (c *equal) string() string {
+	if c.not {
+		return fmt.Sprintf("not equal to %s", c.s)
+	}
+	return fmt.Sprintf("equal to %s", c.s)
 }
 
 func (c *equal) match(s string, ok bool) bool {
@@ -77,6 +86,13 @@ func (c *regex) match(s string, ok bool) bool {
 		return ok && !c.re.MatchString(s)
 	}
 	return ok && c.re.MatchString(s)
+}
+
+func (c *regex) string() string {
+	if c.not {
+		return fmt.Sprintf("does not contain regex:%s", c.re.String())
+	}
+	return fmt.Sprintf("matches regex:%s", c.re.String())
 }
 
 func attrsNodePair(k string, n1, n2 *AbstractNode, abs2ConNode map[*AbstractNode]*ConcreteNode) (string, string, bool) {

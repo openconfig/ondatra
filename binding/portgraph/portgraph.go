@@ -19,6 +19,7 @@ import (
 	"fmt"
 	"regexp"
 	"sort"
+	"time"
 
 	"golang.org/x/net/context"
 
@@ -30,6 +31,18 @@ import (
 var (
 	reAny = Regex(regexp.MustCompile(".*"))
 )
+
+func leafConstraintToStringMap(constraints *orderedmap.OrderedMap[string, LeafConstraint]) map[string]string {
+	ret := make(map[string]string)
+	for _, k := range constraints.Keys() {
+		c, ok := constraints.Get(k)
+		if !ok {
+			log.Fatalf("Impossible: key %q not present in orderedmap", k)
+		}
+		ret[k] = c.string()
+	}
+	return ret
+}
 
 // AbstractGraph is a representation of abstract nodes, ports, and edges.
 type AbstractGraph struct {
@@ -208,7 +221,8 @@ type solver struct {
 	conPort2Port2Edge     map[*ConcretePort]map[*ConcretePort]*ConcreteEdge // Cache the linked concrete ports to edge.
 	absPort2Port2Edge     map[*AbstractPort]map[*AbstractPort]*AbstractEdge // Cache the linked abstract ports to edge.
 
-	maxAssign *maxAssignment // The "best" Assignment for reporting if the solve failed.
+	maxAssign   *maxAssignment // The "best" Assignment for reporting if the solve failed.
+	solveReport *solveReport
 
 	// Constraint mappings. Deferred constraint can only be checked after all abstract elements are assigned.
 	// Constraints are ordered for deterministic iteration.
@@ -221,7 +235,8 @@ type solver struct {
 // Solve returns an assignment from superGraph that satisfies abstractGraph.
 // Solve accepts a context to handle termination if the solve takes too long.
 func Solve(ctx context.Context, abstractGraph *AbstractGraph, superGraph *ConcreteGraph) (*Assignment, error) {
-	solveErr := &solveError{absGraphDesc: abstractGraph.Desc, conGraphDesc: superGraph.Desc}
+	startTime := time.Now()
+	solveErr := &SolveError{absGraphDesc: abstractGraph.Desc, conGraphDesc: superGraph.Desc}
 	if len(abstractGraph.Nodes) > len(superGraph.Nodes) {
 		solveErr.wrappedErr = fmt.Errorf("%q has %d nodes, but %q has %d nodes",
 			abstractGraph.Desc, len(abstractGraph.Nodes), superGraph.Desc, len(superGraph.Nodes))
@@ -298,6 +313,7 @@ func Solve(ctx context.Context, abstractGraph *AbstractGraph, superGraph *Concre
 		absPort2Port2Edge:       absPort2Port2Edge,
 		conNode2Node2NumEdges:   conNode2Node2NumEdges,
 		maxAssign:               &maxAssignment{&Assignment{Node2Node: node2Node, Port2Port: port2Port}, 0, 0},
+		solveReport:             &solveReport{report: []*Event{}, startTime: startTime},
 		nodeConstraints:         orderedmap.NewOrderedMap[*AbstractNode, *orderedmap.OrderedMap[string, LeafConstraint]](),
 		deferredNodeConstraints: orderedmap.NewOrderedMap[*AbstractNode, []deferredNodeConstraint](),
 		portConstraints:         orderedmap.NewOrderedMap[*AbstractPort, *orderedmap.OrderedMap[string, LeafConstraint]](),
@@ -307,6 +323,8 @@ func Solve(ctx context.Context, abstractGraph *AbstractGraph, superGraph *Concre
 	a, ok := s.solve(ctx)
 	if !ok {
 		solveErr.maxAssign = s.maxAssign.assignment
+		s.solveReport.timeTaken = time.Since(startTime)
+		solveErr.report = s.solveReport
 		return nil, solveErr
 	}
 	return a, nil
@@ -320,8 +338,9 @@ func Solve(ctx context.Context, abstractGraph *AbstractGraph, superGraph *Concre
 func (s *solver) solve(ctx context.Context) (*Assignment, bool) {
 	abs2ConNodes := make(map[*AbstractNode][]*ConcreteNode)
 	s.processConstraints()
+	matchNodes := s.solveReport.AddPhase("Find all matching nodes")
 	for _, n := range s.abstractGraph.Nodes {
-		nodes := s.matchNodes(n, s.superGraph)
+		nodes := s.matchNodes(n, s.superGraph, matchNodes)
 		if len(nodes) == 0 {
 			return nil, false
 		}
@@ -335,6 +354,7 @@ func (s *solver) solve(ctx context.Context) (*Assignment, bool) {
 	// Generate all AbstractNode -> ConcreteNode mappings.
 	abs2ConNodeChan, stop := genNodeCombos(abs2ConNodes, s.absNode2Node2NumEdges, s.checkEdge)
 	defer stop()
+	evalCombo := s.solveReport.AddPhase("Evaluating all node combinations")
 	// Iterate through each mapping.
 	// For each mapping, evaluate deferred constraints and attempt to match edges and assign ports.
 	for abs2ConNode := range abs2ConNodeChan {
@@ -352,7 +372,8 @@ func (s *solver) solve(ctx context.Context) (*Assignment, bool) {
 		}
 
 		// Since the edges can be satisfied, try to assign matching ports.
-		abs2ConPort := s.assignEdges(ctx, abs2ConNode)
+		tryAssign := s.solveReport.AppendTryAssignGraph(abs2ConNode, evalCombo)
+		abs2ConPort := s.assignEdges(ctx, abs2ConNode, tryAssign)
 		if abs2ConPort == nil {
 			continue
 		}
@@ -568,7 +589,7 @@ func (pa *portAssigner) assign(ctx context.Context) bool {
 	return false
 }
 
-func (s *solver) assignEdges(ctx context.Context, abs2ConNode map[*AbstractNode]*ConcreteNode) map[*AbstractPort]*ConcretePort {
+func (s *solver) assignEdges(ctx context.Context, abs2ConNode map[*AbstractNode]*ConcreteNode, precedingEvent *Event) map[*AbstractPort]*ConcretePort {
 	if len(s.absPort2Node) == 0 {
 		return map[*AbstractPort]*ConcretePort{}
 	}
@@ -582,10 +603,17 @@ func (s *solver) assignEdges(ctx context.Context, abs2ConNode map[*AbstractNode]
 			return nil
 		}
 		for _, absSrcPort := range absSrcNode.Ports {
+			srcportConstraintMap := make(map[string]string)
+			srcportConstraint, ok := s.portConstraints.Get(absSrcPort)
+			if ok {
+				srcportConstraintMap = leafConstraintToStringMap(srcportConstraint)
+			}
+			evalNode := s.solveReport.AppendEvaluateNode(conSrcNode.Desc, absSrcPort.Desc, srcportConstraintMap, precedingEvent)
 			// Check attributes match, then check if matched ports link correctly.
-			matchedConPorts := s.matchPorts(absSrcPort, conSrcNode.Ports)
+			matchedConPorts := s.matchPorts(absSrcPort, conSrcNode.Ports, evalNode)
 			if len(matchedConPorts) == 0 {
 				// No possible assignments for this port.
+				s.solveReport.AppendConstraintFailedString(conSrcNode.Desc, absSrcNode.Desc, "there are no possible port assignments", precedingEvent)
 				return nil
 			}
 			absDstPort2Edge, ok := s.absPort2Port2Edge[absSrcPort]
@@ -610,10 +638,16 @@ func (s *solver) assignEdges(ctx context.Context, abs2ConNode map[*AbstractNode]
 				break
 			}
 			conDstNode := abs2ConNode[s.absPort2Node[absDstPort]]
+			dstportConstraintMap := make(map[string]string)
+			dstportConstraint, ok := s.portConstraints.Get(absDstPort)
+			if ok {
+				dstportConstraintMap = leafConstraintToStringMap(dstportConstraint)
+			}
+			evalDstPort := s.solveReport.AppendEvaluateNode(conDstNode.Desc, absDstPort.Desc, dstportConstraintMap, evalNode)
 			for _, conSrcPort := range matchedConPorts {
 				conDstPorts2Edge := s.conPort2Port2Edge[conSrcPort]
 				for p, conEdge := range conDstPorts2Edge {
-					if conDstNode.containsPort(p) && s.matchPort(absDstPort, p) {
+					if conDstNode.containsPort(p) && s.matchPort(absDstPort, p, evalDstPort) {
 						abs2ConEdgeCombos[absEdge] = append(abs2ConEdgeCombos[absEdge], conEdge)
 						absPort2Edge[absSrcPort] = absEdge
 						absPort2Edge[absDstPort] = absEdge
@@ -621,6 +655,7 @@ func (s *solver) assignEdges(ctx context.Context, abs2ConNode map[*AbstractNode]
 				}
 			}
 			if len(abs2ConEdgeCombos[absEdge]) == 0 {
+				s.solveReport.AppendConstraintFailedString(conSrcNode.Desc, absSrcNode.Desc, fmt.Sprintf("there are no edges to %s to satisfy connection between %s and %s", conDstNode.Desc, absSrcPort.Desc, absDstPort.Desc), precedingEvent)
 				return nil
 			}
 		}
@@ -764,10 +799,11 @@ func (s *solver) matchDeferredNodes(abs2ConNode map[*AbstractNode]*ConcreteNode)
 }
 
 // matchNodes returns all ConcreteNodes in the ConcreteGraph that match the AbstractNode.
-func (s *solver) matchNodes(abs *AbstractNode, superGraph *ConcreteGraph) []*ConcreteNode {
-	match := func(n *ConcreteNode) bool {
+func (s *solver) matchNodes(abs *AbstractNode, superGraph *ConcreteGraph, precedingEvent *Event) []*ConcreteNode {
+	match := func(n *ConcreteNode, parentNode *Event) bool {
 		// Check that there are at least enough Ports to satisfy potential Edges.
 		if len(abs.Ports) > len(n.Ports) {
+			s.solveReport.AppendConstraintFailedString(n.Desc, abs.Desc, fmt.Sprintf("there are %d ports but %d ports are required", len(n.Ports), len(abs.Ports)), parentNode)
 			return false
 		}
 		// Check that there are at least enough Edges to other Nodes.
@@ -784,17 +820,20 @@ func (s *solver) matchNodes(abs *AbstractNode, superGraph *ConcreteGraph) []*Con
 		sort.Slice(conEdges, func(i, j int) bool { return conEdges[i] > conEdges[j] })
 		// Check the ConcreteNode has Edges to enough other Nodes.
 		if len(conEdges) < len(absEdges) {
+			s.solveReport.AppendConstraintFailedString(n.Desc, abs.Desc, fmt.Sprintf("there are %d edges but %d edges are required", len(conEdges), len(absEdges)), parentNode)
 			return false
 		}
 		// Check if there are at least enough Edges other Nodes.
 		for i, num := range absEdges {
 			if conEdges[i] < num {
+				s.solveReport.AppendConstraintFailedString(n.Desc, abs.Desc, fmt.Sprintf("there are %d edges to other nodes but %d are required", conEdges[i], num), parentNode)
 				return false
 			}
 		}
 
 		constraints, ok := s.nodeConstraints.Get(abs)
 		if !ok {
+			s.solveReport.AppendMatch(n.Desc, abs.Desc, parentNode)
 			return true
 		}
 		for _, k := range constraints.Keys() {
@@ -802,17 +841,25 @@ func (s *solver) matchNodes(abs *AbstractNode, superGraph *ConcreteGraph) []*Con
 			if !ok {
 				continue
 			}
-			s, ok := n.Attrs[k]
-			if !c.match(s, ok) {
+			a, ok := n.Attrs[k]
+			if !c.match(a, ok) {
+				s.solveReport.AppendConstraintFailed(n.Desc, abs.Desc, k, a, c.string(), parentNode)
 				return false
 			}
 		}
+		s.solveReport.AppendMatch(n.Desc, abs.Desc, parentNode)
 		return true
 	}
 
+	constraintsMap := make(map[string]string)
+	constraints, ok := s.nodeConstraints.Get(abs)
+	if ok {
+		constraintsMap = leafConstraintToStringMap(constraints)
+	}
+	parentNode := s.solveReport.AppendEvaluateNode("device", abs.Desc, constraintsMap, precedingEvent)
 	var nodes []*ConcreteNode
 	for _, n := range superGraph.Nodes {
-		if match(n) {
+		if match(n, parentNode) {
 			nodes = append(nodes, n)
 		}
 	}
@@ -834,9 +881,10 @@ func (s *solver) matchDeferredPort(port *AbstractPort, abs2ConPort map[*Abstract
 
 }
 
-func (s *solver) matchPort(abs *AbstractPort, p *ConcretePort) bool {
+func (s *solver) matchPort(abs *AbstractPort, p *ConcretePort, precedingEvent *Event) bool {
 	constraints, ok := s.portConstraints.Get(abs)
 	if !ok {
+		s.solveReport.AppendMatch(p.Desc, abs.Desc, precedingEvent)
 		return true
 	}
 	for _, k := range constraints.Keys() {
@@ -844,19 +892,21 @@ func (s *solver) matchPort(abs *AbstractPort, p *ConcretePort) bool {
 		if !ok {
 			log.Fatalf("Impossible: key %q not present in orderedmap", k)
 		}
-		s, ok := p.Attrs[k]
-		if !c.match(s, ok) {
+		a, ok := p.Attrs[k]
+		if !c.match(a, ok) {
+			s.solveReport.AppendConstraintFailed(p.Desc, abs.Desc, k, a, c.string(), precedingEvent)
 			return false
 		}
 	}
+	s.solveReport.AppendMatch(p.Desc, abs.Desc, precedingEvent)
 	return true
 }
 
 // matchPorts returns all ConcretePorts that match the AbstractPort.
-func (s *solver) matchPorts(abs *AbstractPort, con []*ConcretePort) []*ConcretePort {
+func (s *solver) matchPorts(abs *AbstractPort, con []*ConcretePort, precedingEvent *Event) []*ConcretePort {
 	var ports []*ConcretePort
 	for _, p := range con {
-		if s.matchPort(abs, p) {
+		if s.matchPort(abs, p, precedingEvent) {
 			ports = append(ports, p)
 		}
 	}

@@ -770,6 +770,38 @@ func (t *NetworkInstance_Afts_NextHop) To_NetworkInstance_Afts_NextHop_PushedMpl
 	return nil, fmt.Errorf("cannot convert %v to NetworkInstance_Afts_NextHop_PushedMplsLabelStack_Union, unknown union type, got: %T, want any of [E_NextHop_PushedMplsLabelStack, uint32]", i, i)
 }
 
+// NetworkInstance_Afts_NextHop_EncapHeader_Mpls_MplsLabelStack_Union is an interface that is implemented by valid types for the union
+// for the leaf /openconfig-network-instance/network-instances/network-instance/afts/next-hops/next-hop/encap-headers/encap-header/mpls/state/mpls-label-stack within the YANG schema.
+// Union type can be one of [E_Mpls_MplsLabelStack, UnionUint32].
+type NetworkInstance_Afts_NextHop_EncapHeader_Mpls_MplsLabelStack_Union interface {
+	// Union type can be one of [E_Mpls_MplsLabelStack, UnionUint32]
+	Documentation_for_NetworkInstance_Afts_NextHop_EncapHeader_Mpls_MplsLabelStack_Union()
+}
+
+// Documentation_for_NetworkInstance_Afts_NextHop_EncapHeader_Mpls_MplsLabelStack_Union ensures that E_Mpls_MplsLabelStack
+// implements the NetworkInstance_Afts_NextHop_EncapHeader_Mpls_MplsLabelStack_Union interface.
+func (E_Mpls_MplsLabelStack) Documentation_for_NetworkInstance_Afts_NextHop_EncapHeader_Mpls_MplsLabelStack_Union() {
+}
+
+// Documentation_for_NetworkInstance_Afts_NextHop_EncapHeader_Mpls_MplsLabelStack_Union ensures that UnionUint32
+// implements the NetworkInstance_Afts_NextHop_EncapHeader_Mpls_MplsLabelStack_Union interface.
+func (UnionUint32) Documentation_for_NetworkInstance_Afts_NextHop_EncapHeader_Mpls_MplsLabelStack_Union() {
+}
+
+// To_NetworkInstance_Afts_NextHop_EncapHeader_Mpls_MplsLabelStack_Union takes an input interface{} and attempts to convert it to a struct
+// which implements the NetworkInstance_Afts_NextHop_EncapHeader_Mpls_MplsLabelStack_Union union. It returns an error if the interface{} supplied
+// cannot be converted to a type within the union.
+func (t *NetworkInstance_Afts_NextHop_EncapHeader_Mpls) To_NetworkInstance_Afts_NextHop_EncapHeader_Mpls_MplsLabelStack_Union(i interface{}) (NetworkInstance_Afts_NextHop_EncapHeader_Mpls_MplsLabelStack_Union, error) {
+	if v, ok := i.(NetworkInstance_Afts_NextHop_EncapHeader_Mpls_MplsLabelStack_Union); ok {
+		return v, nil
+	}
+	switch v := i.(type) {
+	case uint32:
+		return UnionUint32(v), nil
+	}
+	return nil, fmt.Errorf("cannot convert %v to NetworkInstance_Afts_NextHop_EncapHeader_Mpls_MplsLabelStack_Union, unknown union type, got: %T, want any of [E_Mpls_MplsLabelStack, uint32]", i, i)
+}
+
 // NetworkInstance_Afts_PolicyForwardingEntry_IpProtocol_Union is an interface that is implemented by valid types for the union
 // for the leaf /openconfig-network-instance/network-instances/network-instance/afts/policy-forwarding/policy-forwarding-entry/state/ip-protocol within the YANG schema.
 // Union type can be one of [E_PacketMatchTypes_IP_PROTOCOL, UnionUint8].
@@ -1150,6 +1182,38 @@ func (t *NetworkInstance_Mpls_Lsps_StaticLsp_Egress) To_NetworkInstance_Mpls_Lsp
 	return nil, fmt.Errorf("cannot convert %v to NetworkInstance_Mpls_Lsps_StaticLsp_Egress_PushLabel_Union, unknown union type, got: %T, want any of [E_Egress_PushLabel, uint32]", i, i)
 }
 
+// NetworkInstance_Mpls_Lsps_StaticLsp_Egress_LspNextHop_PushLabel_Union is an interface that is implemented by valid types for the union
+// for the leaf /openconfig-network-instance/network-instances/network-instance/mpls/lsps/static-lsps/static-lsp/egress/lsp-next-hops/lsp-next-hop/state/push-label within the YANG schema.
+// Union type can be one of [E_LspNextHop_PushLabel, UnionUint32].
+type NetworkInstance_Mpls_Lsps_StaticLsp_Egress_LspNextHop_PushLabel_Union interface {
+	// Union type can be one of [E_LspNextHop_PushLabel, UnionUint32]
+	Documentation_for_NetworkInstance_Mpls_Lsps_StaticLsp_Egress_LspNextHop_PushLabel_Union()
+}
+
+// Documentation_for_NetworkInstance_Mpls_Lsps_StaticLsp_Egress_LspNextHop_PushLabel_Union ensures that E_LspNextHop_PushLabel
+// implements the NetworkInstance_Mpls_Lsps_StaticLsp_Egress_LspNextHop_PushLabel_Union interface.
+func (E_LspNextHop_PushLabel) Documentation_for_NetworkInstance_Mpls_Lsps_StaticLsp_Egress_LspNextHop_PushLabel_Union() {
+}
+
+// Documentation_for_NetworkInstance_Mpls_Lsps_StaticLsp_Egress_LspNextHop_PushLabel_Union ensures that UnionUint32
+// implements the NetworkInstance_Mpls_Lsps_StaticLsp_Egress_LspNextHop_PushLabel_Union interface.
+func (UnionUint32) Documentation_for_NetworkInstance_Mpls_Lsps_StaticLsp_Egress_LspNextHop_PushLabel_Union() {
+}
+
+// To_NetworkInstance_Mpls_Lsps_StaticLsp_Egress_LspNextHop_PushLabel_Union takes an input interface{} and attempts to convert it to a struct
+// which implements the NetworkInstance_Mpls_Lsps_StaticLsp_Egress_LspNextHop_PushLabel_Union union. It returns an error if the interface{} supplied
+// cannot be converted to a type within the union.
+func (t *NetworkInstance_Mpls_Lsps_StaticLsp_Egress_LspNextHop) To_NetworkInstance_Mpls_Lsps_StaticLsp_Egress_LspNextHop_PushLabel_Union(i interface{}) (NetworkInstance_Mpls_Lsps_StaticLsp_Egress_LspNextHop_PushLabel_Union, error) {
+	if v, ok := i.(NetworkInstance_Mpls_Lsps_StaticLsp_Egress_LspNextHop_PushLabel_Union); ok {
+		return v, nil
+	}
+	switch v := i.(type) {
+	case uint32:
+		return UnionUint32(v), nil
+	}
+	return nil, fmt.Errorf("cannot convert %v to NetworkInstance_Mpls_Lsps_StaticLsp_Egress_LspNextHop_PushLabel_Union, unknown union type, got: %T, want any of [E_LspNextHop_PushLabel, uint32]", i, i)
+}
+
 // NetworkInstance_Mpls_Lsps_StaticLsp_Ingress_IncomingLabel_Union is an interface that is implemented by valid types for the union
 // for the leaf /openconfig-network-instance/network-instances/network-instance/mpls/lsps/static-lsps/static-lsp/ingress/state/incoming-label within the YANG schema.
 // Union type can be one of [E_Ingress_IncomingLabel, UnionUint32].
@@ -1213,6 +1277,38 @@ func (t *NetworkInstance_Mpls_Lsps_StaticLsp_Ingress) To_NetworkInstance_Mpls_Ls
 	return nil, fmt.Errorf("cannot convert %v to NetworkInstance_Mpls_Lsps_StaticLsp_Ingress_PushLabel_Union, unknown union type, got: %T, want any of [E_Ingress_PushLabel, uint32]", i, i)
 }
 
+// NetworkInstance_Mpls_Lsps_StaticLsp_Ingress_LspNextHop_PushLabel_Union is an interface that is implemented by valid types for the union
+// for the leaf /openconfig-network-instance/network-instances/network-instance/mpls/lsps/static-lsps/static-lsp/ingress/lsp-next-hops/lsp-next-hop/state/push-label within the YANG schema.
+// Union type can be one of [E_LspNextHop_PushLabel, UnionUint32].
+type NetworkInstance_Mpls_Lsps_StaticLsp_Ingress_LspNextHop_PushLabel_Union interface {
+	// Union type can be one of [E_LspNextHop_PushLabel, UnionUint32]
+	Documentation_for_NetworkInstance_Mpls_Lsps_StaticLsp_Ingress_LspNextHop_PushLabel_Union()
+}
+
+// Documentation_for_NetworkInstance_Mpls_Lsps_StaticLsp_Ingress_LspNextHop_PushLabel_Union ensures that E_LspNextHop_PushLabel
+// implements the NetworkInstance_Mpls_Lsps_StaticLsp_Ingress_LspNextHop_PushLabel_Union interface.
+func (E_LspNextHop_PushLabel) Documentation_for_NetworkInstance_Mpls_Lsps_StaticLsp_Ingress_LspNextHop_PushLabel_Union() {
+}
+
+// Documentation_for_NetworkInstance_Mpls_Lsps_StaticLsp_Ingress_LspNextHop_PushLabel_Union ensures that UnionUint32
+// implements the NetworkInstance_Mpls_Lsps_StaticLsp_Ingress_LspNextHop_PushLabel_Union interface.
+func (UnionUint32) Documentation_for_NetworkInstance_Mpls_Lsps_StaticLsp_Ingress_LspNextHop_PushLabel_Union() {
+}
+
+// To_NetworkInstance_Mpls_Lsps_StaticLsp_Ingress_LspNextHop_PushLabel_Union takes an input interface{} and attempts to convert it to a struct
+// which implements the NetworkInstance_Mpls_Lsps_StaticLsp_Ingress_LspNextHop_PushLabel_Union union. It returns an error if the interface{} supplied
+// cannot be converted to a type within the union.
+func (t *NetworkInstance_Mpls_Lsps_StaticLsp_Ingress_LspNextHop) To_NetworkInstance_Mpls_Lsps_StaticLsp_Ingress_LspNextHop_PushLabel_Union(i interface{}) (NetworkInstance_Mpls_Lsps_StaticLsp_Ingress_LspNextHop_PushLabel_Union, error) {
+	if v, ok := i.(NetworkInstance_Mpls_Lsps_StaticLsp_Ingress_LspNextHop_PushLabel_Union); ok {
+		return v, nil
+	}
+	switch v := i.(type) {
+	case uint32:
+		return UnionUint32(v), nil
+	}
+	return nil, fmt.Errorf("cannot convert %v to NetworkInstance_Mpls_Lsps_StaticLsp_Ingress_LspNextHop_PushLabel_Union, unknown union type, got: %T, want any of [E_LspNextHop_PushLabel, uint32]", i, i)
+}
+
 // NetworkInstance_Mpls_Lsps_StaticLsp_Transit_IncomingLabel_Union is an interface that is implemented by valid types for the union
 // for the leaf /openconfig-network-instance/network-instances/network-instance/mpls/lsps/static-lsps/static-lsp/transit/state/incoming-label within the YANG schema.
 // Union type can be one of [E_Transit_IncomingLabel, UnionUint32].
@@ -1274,6 +1370,38 @@ func (t *NetworkInstance_Mpls_Lsps_StaticLsp_Transit) To_NetworkInstance_Mpls_Ls
 		return UnionUint32(v), nil
 	}
 	return nil, fmt.Errorf("cannot convert %v to NetworkInstance_Mpls_Lsps_StaticLsp_Transit_PushLabel_Union, unknown union type, got: %T, want any of [E_Transit_PushLabel, uint32]", i, i)
+}
+
+// NetworkInstance_Mpls_Lsps_StaticLsp_Transit_LspNextHop_PushLabel_Union is an interface that is implemented by valid types for the union
+// for the leaf /openconfig-network-instance/network-instances/network-instance/mpls/lsps/static-lsps/static-lsp/transit/lsp-next-hops/lsp-next-hop/state/push-label within the YANG schema.
+// Union type can be one of [E_LspNextHop_PushLabel, UnionUint32].
+type NetworkInstance_Mpls_Lsps_StaticLsp_Transit_LspNextHop_PushLabel_Union interface {
+	// Union type can be one of [E_LspNextHop_PushLabel, UnionUint32]
+	Documentation_for_NetworkInstance_Mpls_Lsps_StaticLsp_Transit_LspNextHop_PushLabel_Union()
+}
+
+// Documentation_for_NetworkInstance_Mpls_Lsps_StaticLsp_Transit_LspNextHop_PushLabel_Union ensures that E_LspNextHop_PushLabel
+// implements the NetworkInstance_Mpls_Lsps_StaticLsp_Transit_LspNextHop_PushLabel_Union interface.
+func (E_LspNextHop_PushLabel) Documentation_for_NetworkInstance_Mpls_Lsps_StaticLsp_Transit_LspNextHop_PushLabel_Union() {
+}
+
+// Documentation_for_NetworkInstance_Mpls_Lsps_StaticLsp_Transit_LspNextHop_PushLabel_Union ensures that UnionUint32
+// implements the NetworkInstance_Mpls_Lsps_StaticLsp_Transit_LspNextHop_PushLabel_Union interface.
+func (UnionUint32) Documentation_for_NetworkInstance_Mpls_Lsps_StaticLsp_Transit_LspNextHop_PushLabel_Union() {
+}
+
+// To_NetworkInstance_Mpls_Lsps_StaticLsp_Transit_LspNextHop_PushLabel_Union takes an input interface{} and attempts to convert it to a struct
+// which implements the NetworkInstance_Mpls_Lsps_StaticLsp_Transit_LspNextHop_PushLabel_Union union. It returns an error if the interface{} supplied
+// cannot be converted to a type within the union.
+func (t *NetworkInstance_Mpls_Lsps_StaticLsp_Transit_LspNextHop) To_NetworkInstance_Mpls_Lsps_StaticLsp_Transit_LspNextHop_PushLabel_Union(i interface{}) (NetworkInstance_Mpls_Lsps_StaticLsp_Transit_LspNextHop_PushLabel_Union, error) {
+	if v, ok := i.(NetworkInstance_Mpls_Lsps_StaticLsp_Transit_LspNextHop_PushLabel_Union); ok {
+		return v, nil
+	}
+	switch v := i.(type) {
+	case uint32:
+		return UnionUint32(v), nil
+	}
+	return nil, fmt.Errorf("cannot convert %v to NetworkInstance_Mpls_Lsps_StaticLsp_Transit_LspNextHop_PushLabel_Union, unknown union type, got: %T, want any of [E_LspNextHop_PushLabel, uint32]", i, i)
 }
 
 // NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Interface_BandwidthReservation_Priority_Union is an interface that is implemented by valid types for the union
@@ -2940,20 +3068,15 @@ func (t *RoutingPolicy_DefinedSets_TagSet) To_RoutingPolicy_DefinedSets_TagSet_T
 
 // RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMed_Union is an interface that is implemented by valid types for the union
 // for the leaf /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/state/set-med within the YANG schema.
-// Union type can be one of [E_BgpActions_SetMed, UnionString, UnionUint32].
+// Union type can be one of [E_BgpActions_SetMed, UnionUint32].
 type RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMed_Union interface {
-	// Union type can be one of [E_BgpActions_SetMed, UnionString, UnionUint32]
+	// Union type can be one of [E_BgpActions_SetMed, UnionUint32]
 	Documentation_for_RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMed_Union()
 }
 
 // Documentation_for_RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMed_Union ensures that E_BgpActions_SetMed
 // implements the RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMed_Union interface.
 func (E_BgpActions_SetMed) Documentation_for_RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMed_Union() {
-}
-
-// Documentation_for_RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMed_Union ensures that UnionString
-// implements the RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMed_Union interface.
-func (UnionString) Documentation_for_RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMed_Union() {
 }
 
 // Documentation_for_RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMed_Union ensures that UnionUint32
@@ -2969,12 +3092,10 @@ func (t *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions) To_Routing
 		return v, nil
 	}
 	switch v := i.(type) {
-	case string:
-		return UnionString(v), nil
 	case uint32:
 		return UnionUint32(v), nil
 	}
-	return nil, fmt.Errorf("cannot convert %v to RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMed_Union, unknown union type, got: %T, want any of [E_BgpActions_SetMed, string, uint32]", i, i)
+	return nil, fmt.Errorf("cannot convert %v to RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMed_Union, unknown union type, got: %T, want any of [E_BgpActions_SetMed, uint32]", i, i)
 }
 
 // RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetNextHop_Union is an interface that is implemented by valid types for the union
@@ -3212,6 +3333,34 @@ func (t *System_Aaa_Accounting) To_System_Aaa_Accounting_AccountingMethod_Union(
 	return nil, fmt.Errorf("cannot convert %v to System_Aaa_Accounting_AccountingMethod_Union, unknown union type, got: %T, want any of [E_AaaTypes_AAA_METHOD_TYPE, string]", i, i)
 }
 
+// System_Aaa_Accounting_Acctz_SourceRecord_Type_Union is an interface that is implemented by valid types for the union
+// for the leaf /openconfig-system/system/aaa/accounting/acctz/source-records/source-record/state/type within the YANG schema.
+// Union type can be one of [E_GnsiAcctz_CmdService_Enum, E_GnsiAcctz_GrpcService_Enum].
+type System_Aaa_Accounting_Acctz_SourceRecord_Type_Union interface {
+	// Union type can be one of [E_GnsiAcctz_CmdService_Enum, E_GnsiAcctz_GrpcService_Enum]
+	Documentation_for_System_Aaa_Accounting_Acctz_SourceRecord_Type_Union()
+}
+
+// Documentation_for_System_Aaa_Accounting_Acctz_SourceRecord_Type_Union ensures that E_GnsiAcctz_CmdService_Enum
+// implements the System_Aaa_Accounting_Acctz_SourceRecord_Type_Union interface.
+func (E_GnsiAcctz_CmdService_Enum) Documentation_for_System_Aaa_Accounting_Acctz_SourceRecord_Type_Union() {
+}
+
+// Documentation_for_System_Aaa_Accounting_Acctz_SourceRecord_Type_Union ensures that E_GnsiAcctz_GrpcService_Enum
+// implements the System_Aaa_Accounting_Acctz_SourceRecord_Type_Union interface.
+func (E_GnsiAcctz_GrpcService_Enum) Documentation_for_System_Aaa_Accounting_Acctz_SourceRecord_Type_Union() {
+}
+
+// To_System_Aaa_Accounting_Acctz_SourceRecord_Type_Union takes an input interface{} and attempts to convert it to a struct
+// which implements the System_Aaa_Accounting_Acctz_SourceRecord_Type_Union union. It returns an error if the interface{} supplied
+// cannot be converted to a type within the union.
+func (t *System_Aaa_Accounting_Acctz_SourceRecord) To_System_Aaa_Accounting_Acctz_SourceRecord_Type_Union(i interface{}) (System_Aaa_Accounting_Acctz_SourceRecord_Type_Union, error) {
+	if v, ok := i.(System_Aaa_Accounting_Acctz_SourceRecord_Type_Union); ok {
+		return v, nil
+	}
+	return nil, fmt.Errorf("cannot convert %v to System_Aaa_Accounting_Acctz_SourceRecord_Type_Union, unknown union type, got: %T, want any of [E_GnsiAcctz_CmdService_Enum, E_GnsiAcctz_GrpcService_Enum]", i, i)
+}
+
 // System_Aaa_Authentication_AuthenticationMethod_Union is an interface that is implemented by valid types for the union
 // for the leaf /openconfig-system/system/aaa/authentication/state/authentication-method within the YANG schema.
 // Union type can be one of [E_AaaTypes_AAA_METHOD_TYPE, UnionString].
@@ -3393,34 +3542,6 @@ func (t *System_GrpcServer) To_System_GrpcServer_ListenAddresses_Union(i interfa
 		return UnionString(v), nil
 	}
 	return nil, fmt.Errorf("cannot convert %v to System_GrpcServer_ListenAddresses_Union, unknown union type, got: %T, want any of [E_GrpcServer_ListenAddresses, string]", i, i)
-}
-
-// System_GrpcServer_AcctzCounters_SourceRecords_Type_Union is an interface that is implemented by valid types for the union
-// for the leaf /openconfig-system/system/grpc-servers/grpc-server/acctz-counters/source-counters/source-records/state/type within the YANG schema.
-// Union type can be one of [E_GnsiAcctz_CmdService_Enum, E_GnsiAcctz_GrpcService_Enum].
-type System_GrpcServer_AcctzCounters_SourceRecords_Type_Union interface {
-	// Union type can be one of [E_GnsiAcctz_CmdService_Enum, E_GnsiAcctz_GrpcService_Enum]
-	Documentation_for_System_GrpcServer_AcctzCounters_SourceRecords_Type_Union()
-}
-
-// Documentation_for_System_GrpcServer_AcctzCounters_SourceRecords_Type_Union ensures that E_GnsiAcctz_CmdService_Enum
-// implements the System_GrpcServer_AcctzCounters_SourceRecords_Type_Union interface.
-func (E_GnsiAcctz_CmdService_Enum) Documentation_for_System_GrpcServer_AcctzCounters_SourceRecords_Type_Union() {
-}
-
-// Documentation_for_System_GrpcServer_AcctzCounters_SourceRecords_Type_Union ensures that E_GnsiAcctz_GrpcService_Enum
-// implements the System_GrpcServer_AcctzCounters_SourceRecords_Type_Union interface.
-func (E_GnsiAcctz_GrpcService_Enum) Documentation_for_System_GrpcServer_AcctzCounters_SourceRecords_Type_Union() {
-}
-
-// To_System_GrpcServer_AcctzCounters_SourceRecords_Type_Union takes an input interface{} and attempts to convert it to a struct
-// which implements the System_GrpcServer_AcctzCounters_SourceRecords_Type_Union union. It returns an error if the interface{} supplied
-// cannot be converted to a type within the union.
-func (t *System_GrpcServer_AcctzCounters_SourceRecords) To_System_GrpcServer_AcctzCounters_SourceRecords_Type_Union(i interface{}) (System_GrpcServer_AcctzCounters_SourceRecords_Type_Union, error) {
-	if v, ok := i.(System_GrpcServer_AcctzCounters_SourceRecords_Type_Union); ok {
-		return v, nil
-	}
-	return nil, fmt.Errorf("cannot convert %v to System_GrpcServer_AcctzCounters_SourceRecords_Type_Union, unknown union type, got: %T, want any of [E_GnsiAcctz_CmdService_Enum, E_GnsiAcctz_GrpcService_Enum]", i, i)
 }
 
 // System_License_License_LicenseData_Union is an interface that is implemented by valid types for the union

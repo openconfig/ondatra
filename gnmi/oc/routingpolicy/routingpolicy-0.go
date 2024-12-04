@@ -7908,6 +7908,174 @@ func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMedPathA
 	)
 }
 
+// RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMedActionPath represents the /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/state/set-med-action YANG schema element.
+type RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMedActionPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMedActionPathAny represents the wildcard version of the /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/state/set-med-action YANG schema element.
+type RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMedActionPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-bgp-policy"
+//	Instantiating module: "openconfig-bgp-policy"
+//	Path from parent:     "state/set-med-action"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/state/set-med-action"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMedActionPath) State() ygnmi.SingletonQuery[oc.E_BgpPolicy_BgpSetMedAction] {
+	return ygnmi.NewSingletonQuery[oc.E_BgpPolicy_BgpSetMedAction](
+		"RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "set-med-action"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_BgpPolicy_BgpSetMedAction, bool) {
+			ret := gs.(*oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions).SetMedAction
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-bgp-policy"
+//	Instantiating module: "openconfig-bgp-policy"
+//	Path from parent:     "state/set-med-action"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/state/set-med-action"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMedActionPathAny) State() ygnmi.WildcardQuery[oc.E_BgpPolicy_BgpSetMedAction] {
+	return ygnmi.NewWildcardQuery[oc.E_BgpPolicy_BgpSetMedAction](
+		"RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "set-med-action"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_BgpPolicy_BgpSetMedAction, bool) {
+			ret := gs.(*oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions).SetMedAction
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-bgp-policy"
+//	Instantiating module: "openconfig-bgp-policy"
+//	Path from parent:     "config/set-med-action"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/config/set-med-action"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMedActionPath) Config() ygnmi.ConfigQuery[oc.E_BgpPolicy_BgpSetMedAction] {
+	return ygnmi.NewConfigQuery[oc.E_BgpPolicy_BgpSetMedAction](
+		"RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions",
+		false,
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "set-med-action"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_BgpPolicy_BgpSetMedAction, bool) {
+			ret := gs.(*oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions).SetMedAction
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-bgp-policy"
+//	Instantiating module: "openconfig-bgp-policy"
+//	Path from parent:     "config/set-med-action"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/config/set-med-action"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMedActionPathAny) Config() ygnmi.WildcardQuery[oc.E_BgpPolicy_BgpSetMedAction] {
+	return ygnmi.NewWildcardQuery[oc.E_BgpPolicy_BgpSetMedAction](
+		"RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions",
+		false,
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "set-med-action"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_BgpPolicy_BgpSetMedAction, bool) {
+			ret := gs.(*oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions).SetMedAction
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
 // RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetNextHopPath represents the /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/state/set-next-hop YANG schema element.
 type RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetNextHopPath struct {
 	*ygnmi.NodePath
@@ -8410,8 +8578,8 @@ func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActionsPathAny) Set
 	return ps
 }
 
-// SetMed (leaf): set the med metric attribute in the route
-// update
+// SetMed (leaf): Set the MED metric attribute in the route update.  When set, a
+// valid `set-med-action` must be specified.
 //
 //	Defining module:      "openconfig-bgp-policy"
 //	Instantiating module: "openconfig-routing-policy"
@@ -8429,8 +8597,8 @@ func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActionsPath) SetMed
 	return ps
 }
 
-// SetMed (leaf): set the med metric attribute in the route
-// update
+// SetMed (leaf): Set the MED metric attribute in the route update.  When set, a
+// valid `set-med-action` must be specified.
 //
 //	Defining module:      "openconfig-bgp-policy"
 //	Instantiating module: "openconfig-routing-policy"
@@ -8440,6 +8608,44 @@ func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActionsPathAny) Set
 	ps := &RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMedPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"*", "set-med"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// SetMedAction (leaf): When set-med is specified, this leaf is mandatory to set the
+// appropriate action on the MED metric value.
+//
+//	Defining module:      "openconfig-bgp-policy"
+//	Instantiating module: "openconfig-routing-policy"
+//	Path from parent:     "*/set-med-action"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/*/set-med-action"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActionsPath) SetMedAction() *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMedActionPath {
+	ps := &RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMedActionPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "set-med-action"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// SetMedAction (leaf): When set-med is specified, this leaf is mandatory to set the
+// appropriate action on the MED metric value.
+//
+//	Defining module:      "openconfig-bgp-policy"
+//	Instantiating module: "openconfig-routing-policy"
+//	Path from parent:     "*/set-med-action"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/*/set-med-action"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActionsPathAny) SetMedAction() *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMedActionPathAny {
+	ps := &RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetMedActionPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "set-med-action"},
 			map[string]interface{}{},
 			n,
 		),
@@ -17261,7 +17467,7 @@ func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditionsPathAn
 }
 
 // CommunityCount (container): Value and comparison operations for conditions based on the
-// number of communities in the route update
+// number of regular communities in the route update.
 //
 //	Defining module:      "openconfig-bgp-policy"
 //	Instantiating module: "openconfig-routing-policy"
@@ -17279,7 +17485,7 @@ func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditionsPath) 
 }
 
 // CommunityCount (container): Value and comparison operations for conditions based on the
-// number of communities in the route update
+// number of regular communities in the route update.
 //
 //	Defining module:      "openconfig-bgp-policy"
 //	Instantiating module: "openconfig-routing-policy"
@@ -17328,6 +17534,42 @@ func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditionsPathAn
 			n,
 		),
 		parent: n,
+	}
+	return ps
+}
+
+// ExtCommunityCount (container): Value and comparison operations for conditions based on the
+// number of extended communities in the route update.
+//
+//	Defining module:      "openconfig-bgp-policy"
+//	Instantiating module: "openconfig-routing-policy"
+//	Path from parent:     "ext-community-count"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/bgp-conditions/ext-community-count"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditionsPath) ExtCommunityCount() *RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_ExtCommunityCountPath {
+	ps := &RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_ExtCommunityCountPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"ext-community-count"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// ExtCommunityCount (container): Value and comparison operations for conditions based on the
+// number of extended communities in the route update.
+//
+//	Defining module:      "openconfig-bgp-policy"
+//	Instantiating module: "openconfig-routing-policy"
+//	Path from parent:     "ext-community-count"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/bgp-conditions/ext-community-count"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditionsPathAny) ExtCommunityCount() *RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_ExtCommunityCountPathAny {
+	ps := &RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_ExtCommunityCountPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"ext-community-count"},
+			map[string]interface{}{},
+			n,
+		),
 	}
 	return ps
 }
@@ -18811,6 +19053,540 @@ func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_Commu
 func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_CommunityCountPathAny) Config() ygnmi.WildcardQuery[*oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_CommunityCount] {
 	return ygnmi.NewWildcardQuery[*oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_CommunityCount](
 		"RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_CommunityCount",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_ExtCommunityCount_OperatorPath represents the /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/bgp-conditions/ext-community-count/state/operator YANG schema element.
+type RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_ExtCommunityCount_OperatorPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_ExtCommunityCount_OperatorPathAny represents the wildcard version of the /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/bgp-conditions/ext-community-count/state/operator YANG schema element.
+type RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_ExtCommunityCount_OperatorPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-policy-types"
+//	Instantiating module: "openconfig-bgp-policy"
+//	Path from parent:     "state/operator"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/bgp-conditions/ext-community-count/state/operator"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_ExtCommunityCount_OperatorPath) State() ygnmi.SingletonQuery[oc.E_PolicyTypes_ATTRIBUTE_COMPARISON] {
+	return ygnmi.NewSingletonQuery[oc.E_PolicyTypes_ATTRIBUTE_COMPARISON](
+		"RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_ExtCommunityCount",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "operator"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_PolicyTypes_ATTRIBUTE_COMPARISON, bool) {
+			ret := gs.(*oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_ExtCommunityCount).Operator
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_ExtCommunityCount)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-policy-types"
+//	Instantiating module: "openconfig-bgp-policy"
+//	Path from parent:     "state/operator"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/bgp-conditions/ext-community-count/state/operator"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_ExtCommunityCount_OperatorPathAny) State() ygnmi.WildcardQuery[oc.E_PolicyTypes_ATTRIBUTE_COMPARISON] {
+	return ygnmi.NewWildcardQuery[oc.E_PolicyTypes_ATTRIBUTE_COMPARISON](
+		"RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_ExtCommunityCount",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "operator"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_PolicyTypes_ATTRIBUTE_COMPARISON, bool) {
+			ret := gs.(*oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_ExtCommunityCount).Operator
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_ExtCommunityCount)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-policy-types"
+//	Instantiating module: "openconfig-bgp-policy"
+//	Path from parent:     "config/operator"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/bgp-conditions/ext-community-count/config/operator"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_ExtCommunityCount_OperatorPath) Config() ygnmi.ConfigQuery[oc.E_PolicyTypes_ATTRIBUTE_COMPARISON] {
+	return ygnmi.NewConfigQuery[oc.E_PolicyTypes_ATTRIBUTE_COMPARISON](
+		"RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_ExtCommunityCount",
+		false,
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "operator"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_PolicyTypes_ATTRIBUTE_COMPARISON, bool) {
+			ret := gs.(*oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_ExtCommunityCount).Operator
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_ExtCommunityCount)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-policy-types"
+//	Instantiating module: "openconfig-bgp-policy"
+//	Path from parent:     "config/operator"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/bgp-conditions/ext-community-count/config/operator"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_ExtCommunityCount_OperatorPathAny) Config() ygnmi.WildcardQuery[oc.E_PolicyTypes_ATTRIBUTE_COMPARISON] {
+	return ygnmi.NewWildcardQuery[oc.E_PolicyTypes_ATTRIBUTE_COMPARISON](
+		"RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_ExtCommunityCount",
+		false,
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "operator"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_PolicyTypes_ATTRIBUTE_COMPARISON, bool) {
+			ret := gs.(*oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_ExtCommunityCount).Operator
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_ExtCommunityCount)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_ExtCommunityCount_ValuePath represents the /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/bgp-conditions/ext-community-count/state/value YANG schema element.
+type RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_ExtCommunityCount_ValuePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_ExtCommunityCount_ValuePathAny represents the wildcard version of the /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/bgp-conditions/ext-community-count/state/value YANG schema element.
+type RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_ExtCommunityCount_ValuePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-policy-types"
+//	Instantiating module: "openconfig-bgp-policy"
+//	Path from parent:     "state/value"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/bgp-conditions/ext-community-count/state/value"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_ExtCommunityCount_ValuePath) State() ygnmi.SingletonQuery[uint32] {
+	return ygnmi.NewSingletonQuery[uint32](
+		"RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_ExtCommunityCount",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "value"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_ExtCommunityCount).Value
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_ExtCommunityCount)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-policy-types"
+//	Instantiating module: "openconfig-bgp-policy"
+//	Path from parent:     "state/value"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/bgp-conditions/ext-community-count/state/value"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_ExtCommunityCount_ValuePathAny) State() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewWildcardQuery[uint32](
+		"RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_ExtCommunityCount",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "value"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_ExtCommunityCount).Value
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_ExtCommunityCount)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-policy-types"
+//	Instantiating module: "openconfig-bgp-policy"
+//	Path from parent:     "config/value"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/bgp-conditions/ext-community-count/config/value"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_ExtCommunityCount_ValuePath) Config() ygnmi.ConfigQuery[uint32] {
+	return ygnmi.NewConfigQuery[uint32](
+		"RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_ExtCommunityCount",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "value"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_ExtCommunityCount).Value
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_ExtCommunityCount)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-policy-types"
+//	Instantiating module: "openconfig-bgp-policy"
+//	Path from parent:     "config/value"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/bgp-conditions/ext-community-count/config/value"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_ExtCommunityCount_ValuePathAny) Config() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewWildcardQuery[uint32](
+		"RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_ExtCommunityCount",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "value"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_ExtCommunityCount).Value
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_ExtCommunityCount)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_ExtCommunityCountPath represents the /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/bgp-conditions/ext-community-count YANG schema element.
+type RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_ExtCommunityCountPath struct {
+	*ygnmi.NodePath
+}
+
+// RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_ExtCommunityCountPathAny represents the wildcard version of the /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/bgp-conditions/ext-community-count YANG schema element.
+type RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_ExtCommunityCountPathAny struct {
+	*ygnmi.NodePath
+}
+
+// Operator (leaf): type of comparison to be performed
+//
+//	Defining module:      "openconfig-policy-types"
+//	Instantiating module: "openconfig-routing-policy"
+//	Path from parent:     "*/operator"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/bgp-conditions/ext-community-count/*/operator"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_ExtCommunityCountPath) Operator() *RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_ExtCommunityCount_OperatorPath {
+	ps := &RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_ExtCommunityCount_OperatorPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "operator"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Operator (leaf): type of comparison to be performed
+//
+//	Defining module:      "openconfig-policy-types"
+//	Instantiating module: "openconfig-routing-policy"
+//	Path from parent:     "*/operator"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/bgp-conditions/ext-community-count/*/operator"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_ExtCommunityCountPathAny) Operator() *RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_ExtCommunityCount_OperatorPathAny {
+	ps := &RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_ExtCommunityCount_OperatorPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "operator"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Value (leaf): value to compare with the community count
+//
+//	Defining module:      "openconfig-policy-types"
+//	Instantiating module: "openconfig-routing-policy"
+//	Path from parent:     "*/value"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/bgp-conditions/ext-community-count/*/value"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_ExtCommunityCountPath) Value() *RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_ExtCommunityCount_ValuePath {
+	ps := &RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_ExtCommunityCount_ValuePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "value"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Value (leaf): value to compare with the community count
+//
+//	Defining module:      "openconfig-policy-types"
+//	Instantiating module: "openconfig-routing-policy"
+//	Path from parent:     "*/value"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/bgp-conditions/ext-community-count/*/value"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_ExtCommunityCountPathAny) Value() *RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_ExtCommunityCount_ValuePathAny {
+	ps := &RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_ExtCommunityCount_ValuePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "value"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_ExtCommunityCountPath) State() ygnmi.SingletonQuery[*oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_ExtCommunityCount] {
+	return ygnmi.NewSingletonQuery[*oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_ExtCommunityCount](
+		"RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_ExtCommunityCount",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_ExtCommunityCountPathAny) State() ygnmi.WildcardQuery[*oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_ExtCommunityCount] {
+	return ygnmi.NewWildcardQuery[*oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_ExtCommunityCount](
+		"RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_ExtCommunityCount",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_ExtCommunityCountPath) Config() ygnmi.ConfigQuery[*oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_ExtCommunityCount] {
+	return ygnmi.NewConfigQuery[*oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_ExtCommunityCount](
+		"RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_ExtCommunityCount",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_ExtCommunityCountPathAny) Config() ygnmi.WildcardQuery[*oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_ExtCommunityCount] {
+	return ygnmi.NewWildcardQuery[*oc.RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_ExtCommunityCount](
+		"RoutingPolicy_PolicyDefinition_Statement_Conditions_BgpConditions_ExtCommunityCount",
 		false,
 		true,
 		false,

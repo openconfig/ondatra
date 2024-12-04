@@ -80,7 +80,9 @@ import (
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/internal/events"
 	"github.com/openconfig/ondatra/internal/testbed"
+	"google.golang.org/protobuf/encoding/prototext"
 
+	gpb "github.com/openconfig/gnmi/proto/gnmi"
 	opb "github.com/openconfig/ondatra/proto"
 )
 
@@ -220,11 +222,60 @@ func (c *VendorConfig) pushConfig(ctx context.Context, reset bool) error {
 	if err != nil {
 		return fmt.Errorf("error getting config from provider %v: %w", prov, err)
 	}
-	config, err := c.interpolate(text)
+	if text == "" {
+		return c.dut.PushConfig(ctx, text, reset)
+	}
+	sr := &gpb.SetRequest{}
+	if err := prototext.Unmarshal([]byte(text), sr); err != nil {
+		config, err := c.interpolate(text)
+		if err != nil {
+			return err
+		}
+		return c.dut.PushConfig(ctx, config, reset)
+	}
+	if err := c.interpolateGNMI(sr); err != nil {
+		return err
+	}
+	cfg, err := prototext.Marshal(sr)
 	if err != nil {
 		return err
 	}
-	return c.dut.PushConfig(ctx, config, reset)
+	return c.dut.PushConfig(ctx, string(cfg), reset)
+}
+
+func (c *VendorConfig) interpolateGNMIUpdate(u *gpb.Update) error {
+	switch v := u.GetVal(); {
+	case len(v.GetAsciiVal()) > 0:
+		cfg, err := c.interpolate(v.GetAsciiVal())
+		if err != nil {
+			return err
+		}
+		u.Val = &gpb.TypedValue{
+			Value: &gpb.TypedValue_AsciiVal{
+				AsciiVal: cfg,
+			},
+		}
+	}
+	return nil
+}
+
+func (c *VendorConfig) interpolateGNMI(sr *gpb.SetRequest) error {
+	for _, u := range sr.GetUpdate() {
+		if err := c.interpolateGNMIUpdate(u); err != nil {
+			return err
+		}
+	}
+	for _, u := range sr.GetReplace() {
+		if err := c.interpolateGNMIUpdate(u); err != nil {
+			return err
+		}
+	}
+	for _, u := range sr.GetUnionReplace() {
+		if err := c.interpolateGNMIUpdate(u); err != nil {
+			return err
+		}
+	}
+	return nil
 }
 
 // interpolateConfig substitutes templated variables in device config text.

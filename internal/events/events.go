@@ -62,7 +62,7 @@ func runBeforeTestsCallbacks(res *binding.Reservation) []error {
 	var errs []error
 	for _, cb := range beforeTests {
 		if err := cb(res); err != nil {
-			errs = append(errs, callbackErr(err, cb))
+			errs = append(errs, err)
 		}
 	}
 	return errs
@@ -73,7 +73,7 @@ func runAfterTestsCallbacks(exitCode *int) []error {
 	var errs []error
 	for _, cb := range afterTests {
 		if err := cb(exitCode); err != nil {
-			errs = append(errs, callbackErr(err, cb))
+			errs = append(errs, err)
 		}
 	}
 	return errs
@@ -91,7 +91,8 @@ func checkNotRunning() {
 	}
 }
 
-func callbackErr(err error, cb any) error {
+// CallbackErr returns an error with the name of the callback that failed.
+func CallbackErr(err error, cb any) error {
 	name := runtime.FuncForPC(reflect.ValueOf(cb).Pointer()).Name()
 	if strings.HasSuffix(name, "-fm") {
 		name = name[:len(name)-3]

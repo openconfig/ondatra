@@ -1422,7 +1422,10 @@ func (n *Keychain_KeyPathAny) CryptoAlgorithm() *Keychain_Key_CryptoAlgorithmPat
 	return ps
 }
 
-// KeyId (leaf): Identifier for the key within the keychain.
+// KeyId (leaf): Identifier for the key within the keychain.  Note that the
+// hex-string type is deprecated and will be removed from a future
+// version of this model. Implementations should transition to using
+// the hex-string-prefixed type.
 //
 //	Defining module:      "openconfig-keychain"
 //	Instantiating module: "openconfig-keychain"
@@ -1440,7 +1443,10 @@ func (n *Keychain_KeyPath) KeyId() *Keychain_Key_KeyIdPath {
 	return ps
 }
 
-// KeyId (leaf): Identifier for the key within the keychain.
+// KeyId (leaf): Identifier for the key within the keychain.  Note that the
+// hex-string type is deprecated and will be removed from a future
+// version of this model. Implementations should transition to using
+// the hex-string-prefixed type.
 //
 //	Defining module:      "openconfig-keychain"
 //	Instantiating module: "openconfig-keychain"

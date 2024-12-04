@@ -18288,6 +18288,182 @@ func (n *Interface_RoutedVlan_Ipv4_EnabledPathAny) Config() ygnmi.WildcardQuery[
 	)
 }
 
+// Interface_RoutedVlan_Ipv4_GratuitousArpAcceptedPath represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv4/state/gratuitous-arp-accepted YANG schema element.
+type Interface_RoutedVlan_Ipv4_GratuitousArpAcceptedPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_RoutedVlan_Ipv4_GratuitousArpAcceptedPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv4/state/gratuitous-arp-accepted YANG schema element.
+type Interface_RoutedVlan_Ipv4_GratuitousArpAcceptedPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/gratuitous-arp-accepted"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv4/state/gratuitous-arp-accepted"
+func (n *Interface_RoutedVlan_Ipv4_GratuitousArpAcceptedPath) State() ygnmi.SingletonQuery[bool] {
+	return ygnmi.NewSingletonQuery[bool](
+		"Interface_RoutedVlan_Ipv4",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "gratuitous-arp-accepted"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv4).GratuitousArpAccepted
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv4) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/gratuitous-arp-accepted"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv4/state/gratuitous-arp-accepted"
+func (n *Interface_RoutedVlan_Ipv4_GratuitousArpAcceptedPathAny) State() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewWildcardQuery[bool](
+		"Interface_RoutedVlan_Ipv4",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "gratuitous-arp-accepted"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv4).GratuitousArpAccepted
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv4) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/gratuitous-arp-accepted"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv4/config/gratuitous-arp-accepted"
+func (n *Interface_RoutedVlan_Ipv4_GratuitousArpAcceptedPath) Config() ygnmi.ConfigQuery[bool] {
+	return ygnmi.NewConfigQuery[bool](
+		"Interface_RoutedVlan_Ipv4",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "gratuitous-arp-accepted"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv4).GratuitousArpAccepted
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv4) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/gratuitous-arp-accepted"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv4/config/gratuitous-arp-accepted"
+func (n *Interface_RoutedVlan_Ipv4_GratuitousArpAcceptedPathAny) Config() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewWildcardQuery[bool](
+		"Interface_RoutedVlan_Ipv4",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "gratuitous-arp-accepted"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv4).GratuitousArpAccepted
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv4) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
 // Interface_RoutedVlan_Ipv4_MtuPath represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv4/state/mtu YANG schema element.
 type Interface_RoutedVlan_Ipv4_MtuPath struct {
 	*ygnmi.NodePath
@@ -18688,6 +18864,44 @@ func (n *Interface_RoutedVlan_Ipv4PathAny) Enabled() *Interface_RoutedVlan_Ipv4_
 	ps := &Interface_RoutedVlan_Ipv4_EnabledPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"*", "enabled"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// GratuitousArpAccepted (leaf): When set to true, gratuitous ARPs will be accepted and
+// the ARP table will be updated.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/gratuitous-arp-accepted"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv4/*/gratuitous-arp-accepted"
+func (n *Interface_RoutedVlan_Ipv4Path) GratuitousArpAccepted() *Interface_RoutedVlan_Ipv4_GratuitousArpAcceptedPath {
+	ps := &Interface_RoutedVlan_Ipv4_GratuitousArpAcceptedPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "gratuitous-arp-accepted"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// GratuitousArpAccepted (leaf): When set to true, gratuitous ARPs will be accepted and
+// the ARP table will be updated.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/gratuitous-arp-accepted"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv4/*/gratuitous-arp-accepted"
+func (n *Interface_RoutedVlan_Ipv4PathAny) GratuitousArpAccepted() *Interface_RoutedVlan_Ipv4_GratuitousArpAcceptedPathAny {
+	ps := &Interface_RoutedVlan_Ipv4_GratuitousArpAcceptedPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "gratuitous-arp-accepted"},
 			map[string]interface{}{},
 			n,
 		),
@@ -27414,6 +27628,166 @@ func (n *Interface_RoutedVlan_Ipv6_EnabledPathAny) Config() ygnmi.WildcardQuery[
 	)
 }
 
+// Interface_RoutedVlan_Ipv6_LearnUnsolicitedPath represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/state/learn-unsolicited YANG schema element.
+type Interface_RoutedVlan_Ipv6_LearnUnsolicitedPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_RoutedVlan_Ipv6_LearnUnsolicitedPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/state/learn-unsolicited YANG schema element.
+type Interface_RoutedVlan_Ipv6_LearnUnsolicitedPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/learn-unsolicited"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/state/learn-unsolicited"
+func (n *Interface_RoutedVlan_Ipv6_LearnUnsolicitedPath) State() ygnmi.SingletonQuery[oc.E_Ipv6_LearnUnsolicited] {
+	return ygnmi.NewSingletonQuery[oc.E_Ipv6_LearnUnsolicited](
+		"Interface_RoutedVlan_Ipv6",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "learn-unsolicited"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Ipv6_LearnUnsolicited, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6).LearnUnsolicited
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/learn-unsolicited"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/state/learn-unsolicited"
+func (n *Interface_RoutedVlan_Ipv6_LearnUnsolicitedPathAny) State() ygnmi.WildcardQuery[oc.E_Ipv6_LearnUnsolicited] {
+	return ygnmi.NewWildcardQuery[oc.E_Ipv6_LearnUnsolicited](
+		"Interface_RoutedVlan_Ipv6",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "learn-unsolicited"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Ipv6_LearnUnsolicited, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6).LearnUnsolicited
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/learn-unsolicited"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/config/learn-unsolicited"
+func (n *Interface_RoutedVlan_Ipv6_LearnUnsolicitedPath) Config() ygnmi.ConfigQuery[oc.E_Ipv6_LearnUnsolicited] {
+	return ygnmi.NewConfigQuery[oc.E_Ipv6_LearnUnsolicited](
+		"Interface_RoutedVlan_Ipv6",
+		false,
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "learn-unsolicited"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Ipv6_LearnUnsolicited, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6).LearnUnsolicited
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/learn-unsolicited"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/config/learn-unsolicited"
+func (n *Interface_RoutedVlan_Ipv6_LearnUnsolicitedPathAny) Config() ygnmi.WildcardQuery[oc.E_Ipv6_LearnUnsolicited] {
+	return ygnmi.NewWildcardQuery[oc.E_Ipv6_LearnUnsolicited](
+		"Interface_RoutedVlan_Ipv6",
+		false,
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "learn-unsolicited"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Ipv6_LearnUnsolicited, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6).LearnUnsolicited
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
 // Interface_RoutedVlan_Ipv6_MtuPath represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/state/mtu YANG schema element.
 type Interface_RoutedVlan_Ipv6_MtuPath struct {
 	*ygnmi.NodePath
@@ -27860,6 +28234,44 @@ func (n *Interface_RoutedVlan_Ipv6PathAny) Enabled() *Interface_RoutedVlan_Ipv6_
 	ps := &Interface_RoutedVlan_Ipv6_EnabledPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"*", "enabled"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// LearnUnsolicited (leaf): Sets if neighbors should be learned from unsolicited neighbor
+// advertisements for global or link local addresses or both.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/learn-unsolicited"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/*/learn-unsolicited"
+func (n *Interface_RoutedVlan_Ipv6Path) LearnUnsolicited() *Interface_RoutedVlan_Ipv6_LearnUnsolicitedPath {
+	ps := &Interface_RoutedVlan_Ipv6_LearnUnsolicitedPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "learn-unsolicited"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// LearnUnsolicited (leaf): Sets if neighbors should be learned from unsolicited neighbor
+// advertisements for global or link local addresses or both.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/learn-unsolicited"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/*/learn-unsolicited"
+func (n *Interface_RoutedVlan_Ipv6PathAny) LearnUnsolicited() *Interface_RoutedVlan_Ipv6_LearnUnsolicitedPathAny {
+	ps := &Interface_RoutedVlan_Ipv6_LearnUnsolicitedPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "learn-unsolicited"},
 			map[string]interface{}{},
 			n,
 		),
@@ -44768,6 +45180,182 @@ func (n *Interface_Subinterface_Ipv4_EnabledPathAny) Config() ygnmi.WildcardQuer
 	)
 }
 
+// Interface_Subinterface_Ipv4_GratuitousArpAcceptedPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/state/gratuitous-arp-accepted YANG schema element.
+type Interface_Subinterface_Ipv4_GratuitousArpAcceptedPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Subinterface_Ipv4_GratuitousArpAcceptedPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/state/gratuitous-arp-accepted YANG schema element.
+type Interface_Subinterface_Ipv4_GratuitousArpAcceptedPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/gratuitous-arp-accepted"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv4/state/gratuitous-arp-accepted"
+func (n *Interface_Subinterface_Ipv4_GratuitousArpAcceptedPath) State() ygnmi.SingletonQuery[bool] {
+	return ygnmi.NewSingletonQuery[bool](
+		"Interface_Subinterface_Ipv4",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "gratuitous-arp-accepted"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv4).GratuitousArpAccepted
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv4) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/gratuitous-arp-accepted"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv4/state/gratuitous-arp-accepted"
+func (n *Interface_Subinterface_Ipv4_GratuitousArpAcceptedPathAny) State() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewWildcardQuery[bool](
+		"Interface_Subinterface_Ipv4",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "gratuitous-arp-accepted"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv4).GratuitousArpAccepted
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv4) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/gratuitous-arp-accepted"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv4/config/gratuitous-arp-accepted"
+func (n *Interface_Subinterface_Ipv4_GratuitousArpAcceptedPath) Config() ygnmi.ConfigQuery[bool] {
+	return ygnmi.NewConfigQuery[bool](
+		"Interface_Subinterface_Ipv4",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "gratuitous-arp-accepted"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv4).GratuitousArpAccepted
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv4) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/gratuitous-arp-accepted"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv4/config/gratuitous-arp-accepted"
+func (n *Interface_Subinterface_Ipv4_GratuitousArpAcceptedPathAny) Config() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewWildcardQuery[bool](
+		"Interface_Subinterface_Ipv4",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "gratuitous-arp-accepted"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv4).GratuitousArpAccepted
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv4) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
 // Interface_Subinterface_Ipv4_MtuPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/state/mtu YANG schema element.
 type Interface_Subinterface_Ipv4_MtuPath struct {
 	*ygnmi.NodePath
@@ -45168,6 +45756,44 @@ func (n *Interface_Subinterface_Ipv4PathAny) Enabled() *Interface_Subinterface_I
 	ps := &Interface_Subinterface_Ipv4_EnabledPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"*", "enabled"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// GratuitousArpAccepted (leaf): When set to true, gratuitous ARPs will be accepted and
+// the ARP table will be updated.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/gratuitous-arp-accepted"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv4/*/gratuitous-arp-accepted"
+func (n *Interface_Subinterface_Ipv4Path) GratuitousArpAccepted() *Interface_Subinterface_Ipv4_GratuitousArpAcceptedPath {
+	ps := &Interface_Subinterface_Ipv4_GratuitousArpAcceptedPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "gratuitous-arp-accepted"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// GratuitousArpAccepted (leaf): When set to true, gratuitous ARPs will be accepted and
+// the ARP table will be updated.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/gratuitous-arp-accepted"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv4/*/gratuitous-arp-accepted"
+func (n *Interface_Subinterface_Ipv4PathAny) GratuitousArpAccepted() *Interface_Subinterface_Ipv4_GratuitousArpAcceptedPathAny {
+	ps := &Interface_Subinterface_Ipv4_GratuitousArpAcceptedPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "gratuitous-arp-accepted"},
 			map[string]interface{}{},
 			n,
 		),
@@ -53894,6 +54520,166 @@ func (n *Interface_Subinterface_Ipv6_EnabledPathAny) Config() ygnmi.WildcardQuer
 	)
 }
 
+// Interface_Subinterface_Ipv6_LearnUnsolicitedPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/state/learn-unsolicited YANG schema element.
+type Interface_Subinterface_Ipv6_LearnUnsolicitedPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Subinterface_Ipv6_LearnUnsolicitedPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/state/learn-unsolicited YANG schema element.
+type Interface_Subinterface_Ipv6_LearnUnsolicitedPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/learn-unsolicited"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/state/learn-unsolicited"
+func (n *Interface_Subinterface_Ipv6_LearnUnsolicitedPath) State() ygnmi.SingletonQuery[oc.E_Ipv6_LearnUnsolicited] {
+	return ygnmi.NewSingletonQuery[oc.E_Ipv6_LearnUnsolicited](
+		"Interface_Subinterface_Ipv6",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "learn-unsolicited"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Ipv6_LearnUnsolicited, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6).LearnUnsolicited
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/learn-unsolicited"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/state/learn-unsolicited"
+func (n *Interface_Subinterface_Ipv6_LearnUnsolicitedPathAny) State() ygnmi.WildcardQuery[oc.E_Ipv6_LearnUnsolicited] {
+	return ygnmi.NewWildcardQuery[oc.E_Ipv6_LearnUnsolicited](
+		"Interface_Subinterface_Ipv6",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "learn-unsolicited"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Ipv6_LearnUnsolicited, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6).LearnUnsolicited
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/learn-unsolicited"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/config/learn-unsolicited"
+func (n *Interface_Subinterface_Ipv6_LearnUnsolicitedPath) Config() ygnmi.ConfigQuery[oc.E_Ipv6_LearnUnsolicited] {
+	return ygnmi.NewConfigQuery[oc.E_Ipv6_LearnUnsolicited](
+		"Interface_Subinterface_Ipv6",
+		false,
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "learn-unsolicited"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Ipv6_LearnUnsolicited, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6).LearnUnsolicited
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/learn-unsolicited"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/config/learn-unsolicited"
+func (n *Interface_Subinterface_Ipv6_LearnUnsolicitedPathAny) Config() ygnmi.WildcardQuery[oc.E_Ipv6_LearnUnsolicited] {
+	return ygnmi.NewWildcardQuery[oc.E_Ipv6_LearnUnsolicited](
+		"Interface_Subinterface_Ipv6",
+		false,
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "learn-unsolicited"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Ipv6_LearnUnsolicited, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6).LearnUnsolicited
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
 // Interface_Subinterface_Ipv6_MtuPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/state/mtu YANG schema element.
 type Interface_Subinterface_Ipv6_MtuPath struct {
 	*ygnmi.NodePath
@@ -54374,6 +55160,44 @@ func (n *Interface_Subinterface_Ipv6PathAny) Enabled() *Interface_Subinterface_I
 	ps := &Interface_Subinterface_Ipv6_EnabledPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"*", "enabled"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// LearnUnsolicited (leaf): Sets if neighbors should be learned from unsolicited neighbor
+// advertisements for global or link local addresses or both.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/learn-unsolicited"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/*/learn-unsolicited"
+func (n *Interface_Subinterface_Ipv6Path) LearnUnsolicited() *Interface_Subinterface_Ipv6_LearnUnsolicitedPath {
+	ps := &Interface_Subinterface_Ipv6_LearnUnsolicitedPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "learn-unsolicited"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// LearnUnsolicited (leaf): Sets if neighbors should be learned from unsolicited neighbor
+// advertisements for global or link local addresses or both.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/learn-unsolicited"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/*/learn-unsolicited"
+func (n *Interface_Subinterface_Ipv6PathAny) LearnUnsolicited() *Interface_Subinterface_Ipv6_LearnUnsolicitedPathAny {
+	ps := &Interface_Subinterface_Ipv6_LearnUnsolicitedPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "learn-unsolicited"},
 			map[string]interface{}{},
 			n,
 		),

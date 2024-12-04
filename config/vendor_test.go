@@ -25,12 +25,16 @@ import (
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/fakebind"
 	"github.com/openconfig/testt"
+	"google.golang.org/protobuf/encoding/prototext"
+	"google.golang.org/protobuf/testing/protocmp"
 
+	gpb "github.com/openconfig/gnmi/proto/gnmi"
 	opb "github.com/openconfig/ondatra/proto"
 )
 
 func TestPush(t *testing.T) {
 	var gotConfig string
+	var gotGNMI *gpb.SetRequest
 	var gotReset bool
 	dut := &fakebind.DUT{
 		AbstractDUT: &binding.AbstractDUT{&binding.Dims{
@@ -41,7 +45,12 @@ func TestPush(t *testing.T) {
 			},
 		}},
 		PushConfigFn: func(_ context.Context, config string, reset bool) error {
-			gotConfig = config
+			sr := &gpb.SetRequest{}
+			if err := prototext.Unmarshal([]byte(config), sr); err != nil {
+				gotConfig = config
+			} else {
+				gotGNMI = sr
+			}
 			gotReset = reset
 			return nil
 		},
@@ -51,6 +60,7 @@ func TestPush(t *testing.T) {
 		desc       string
 		config     *VendorConfig
 		wantConfig string
+		wantGNMI   *gpb.SetRequest
 		wantFatal  string
 	}{{
 		desc:       "correct text",
@@ -96,15 +106,58 @@ func TestPush(t *testing.T) {
 			WithAristaText(`hello {{ var "x" }} and {{ var "y" }}`).
 			WithVarMap(map[string]string{"x": "apple", "y": "orange"}),
 		wantConfig: `hello apple and orange`,
+	}, {
+		desc: "port template with gNMI SetRequest",
+		config: NewVendorConfig(dut).
+			WithAristaText(prototext.Format(&gpb.SetRequest{
+				Update: []*gpb.Update{
+					&gpb.Update{
+						Path: &gpb.Path{
+							Origin: "cli",
+						},
+						Val: &gpb.TypedValue{
+							Value: &gpb.TypedValue_AsciiVal{
+								AsciiVal: `reconfigure {{ port "port1" }} and {{ port "port2" }}`,
+							},
+						},
+					},
+				},
+			})),
+		wantGNMI: &gpb.SetRequest{
+			Update: []*gpb.Update{
+				&gpb.Update{
+					Path: &gpb.Path{
+						Origin: "cli",
+					},
+					Val: &gpb.TypedValue{
+						Value: &gpb.TypedValue_AsciiVal{
+							AsciiVal: `reconfigure Eth1/2/3 and Eth4/5/6`,
+						},
+					},
+				},
+			},
+		},
+	}, {
+		desc:       "empty text",
+		config:     NewVendorConfig(dut).WithText(""),
+		wantConfig: "",
 	}}
 
 	for _, tt := range testsPass {
 		t.Run(tt.desc, func(t *testing.T) {
 			gotConfig = ""
+			gotGNMI = nil
 			gotReset = false
 			tt.config.Push(t)
-			if diff := cmp.Diff(tt.wantConfig, gotConfig); diff != "" {
-				t.Errorf("Push(t) got unexpected config diff(-want,+got):\n %s", diff)
+			switch {
+			case tt.wantGNMI != nil:
+				if diff := cmp.Diff(tt.wantGNMI, gotGNMI, protocmp.Transform()); diff != "" {
+					t.Errorf("Push(t) got unexpected gNMI diff(-want,+got):\n %s", diff)
+				}
+			default:
+				if diff := cmp.Diff(tt.wantConfig, gotConfig); diff != "" {
+					t.Errorf("Push(t) got unexpected config diff(-want,+got):\n %s", diff)
+				}
 			}
 			if !gotReset {
 				t.Errorf("Push(t) got unexpected reset %v, want true", gotReset)
@@ -142,6 +195,23 @@ func TestPush(t *testing.T) {
 		desc:      "var has no value",
 		config:    NewVendorConfig(dut).WithAristaText(`{{ var "key1" }}`),
 		wantFatal: "no value for key",
+	}, {
+		desc: "template malformed GNMI",
+		config: NewVendorConfig(dut).WithAristaText(prototext.Format(&gpb.SetRequest{
+			Update: []*gpb.Update{
+				&gpb.Update{
+					Path: &gpb.Path{
+						Origin: "cli",
+					},
+					Val: &gpb.TypedValue{
+						Value: &gpb.TypedValue_AsciiVal{
+							AsciiVal: `{{ port"port10" }}`,
+						},
+					},
+				},
+			},
+		})),
+		wantFatal: "bad character",
 	}}
 
 	for _, tt := range testsFail {

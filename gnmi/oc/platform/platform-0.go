@@ -4426,9 +4426,9 @@ func (n *ComponentPathAny) MfgName() *Component_MfgNamePathAny {
 	return ps
 }
 
-// ModelName (leaf): A human readable string describing the model of a component.
-// This string is optional and should only be populated if part-no
-// is also populated.
+// ModelName (leaf): Model name that would be found in a catalog of stock keeping
+// units (SKU) and should be the orderable name of the
+// component.
 //
 //	Defining module:      "openconfig-platform"
 //	Instantiating module: "openconfig-platform"
@@ -4446,9 +4446,9 @@ func (n *ComponentPath) ModelName() *Component_ModelNamePath {
 	return ps
 }
 
-// ModelName (leaf): A human readable string describing the model of a component.
-// This string is optional and should only be populated if part-no
-// is also populated.
+// ModelName (leaf): Model name that would be found in a catalog of stock keeping
+// units (SKU) and should be the orderable name of the
+// component.
 //
 //	Defining module:      "openconfig-platform"
 //	Instantiating module: "openconfig-platform"
@@ -37442,6 +37442,100 @@ func (n *Component_OpticalChannel_LinePortPathAny) Config() ygnmi.WildcardQuery[
 	)
 }
 
+// Component_OpticalChannel_LogicalChannelAssignmentPath represents the /openconfig-platform/components/component/optical-channel/state/logical-channel-assignment YANG schema element.
+type Component_OpticalChannel_LogicalChannelAssignmentPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_OpticalChannel_LogicalChannelAssignmentPathAny represents the wildcard version of the /openconfig-platform/components/component/optical-channel/state/logical-channel-assignment YANG schema element.
+type Component_OpticalChannel_LogicalChannelAssignmentPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-terminal-device"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "state/logical-channel-assignment"
+//	Path from root:       "/components/component/optical-channel/state/logical-channel-assignment"
+func (n *Component_OpticalChannel_LogicalChannelAssignmentPath) State() ygnmi.SingletonQuery[uint32] {
+	return ygnmi.NewSingletonQuery[uint32](
+		"Component_OpticalChannel",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "logical-channel-assignment"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.Component_OpticalChannel).LogicalChannelAssignment
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-terminal-device"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "state/logical-channel-assignment"
+//	Path from root:       "/components/component/optical-channel/state/logical-channel-assignment"
+func (n *Component_OpticalChannel_LogicalChannelAssignmentPathAny) State() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewWildcardQuery[uint32](
+		"Component_OpticalChannel",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "logical-channel-assignment"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.Component_OpticalChannel).LogicalChannelAssignment
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_OpticalChannel) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
 // Component_OpticalChannel_OperationalModePath represents the /openconfig-platform/components/component/optical-channel/state/operational-mode YANG schema element.
 type Component_OpticalChannel_OperationalModePath struct {
 	*ygnmi.NodePath
@@ -38060,7 +38154,12 @@ func (n *Component_OpticalChannelPathAny) GroupId() *Component_OpticalChannel_Gr
 // Values include the instantaneous, average, minimum, and
 // maximum statistics. If avg/min/max statistics are not
 // supported, the target is expected to just supply the
-// instant value
+// instant value. When the physical channel has a leafref to
+// an optical channel component and the module-functional-type is
+// TYPE_DIGITAL_COHERENT_OPTIC this represents the aggregate
+// total optical power value (signal and noise) whereas
+// optical power value within the optical-channel represents
+// the signal power
 //
 //	Defining module:      "openconfig-platform-transceiver"
 //	Instantiating module: "openconfig-platform"
@@ -38087,7 +38186,12 @@ func (n *Component_OpticalChannelPath) InputPower() *Component_OpticalChannel_In
 // Values include the instantaneous, average, minimum, and
 // maximum statistics. If avg/min/max statistics are not
 // supported, the target is expected to just supply the
-// instant value
+// instant value. When the physical channel has a leafref to
+// an optical channel component and the module-functional-type is
+// TYPE_DIGITAL_COHERENT_OPTIC this represents the aggregate
+// total optical power value (signal and noise) whereas
+// optical power value within the optical-channel represents
+// the signal power
 //
 //	Defining module:      "openconfig-platform-transceiver"
 //	Instantiating module: "openconfig-platform"
@@ -38109,7 +38213,11 @@ func (n *Component_OpticalChannelPathAny) InputPower() *Component_OpticalChannel
 // with up to two decimal precision. Values include the
 // instantaneous, average, minimum, and maximum statistics.
 // If avg/min/max statistics are not supported, the target is
-// expected to just supply the instant value
+// expected to just supply the instant value. In some cases,
+// such as when the physical channel has a leafref to an optical
+// channel component and the module-functional-type is
+// TYPE_DIGITAL_COHERENT_OPTIC this grouping will NOT be used
+// as the data will be within the optical-channel
 //
 //	Defining module:      "openconfig-platform-transceiver"
 //	Instantiating module: "openconfig-platform"
@@ -38131,7 +38239,11 @@ func (n *Component_OpticalChannelPath) LaserBiasCurrent() *Component_OpticalChan
 // with up to two decimal precision. Values include the
 // instantaneous, average, minimum, and maximum statistics.
 // If avg/min/max statistics are not supported, the target is
-// expected to just supply the instant value
+// expected to just supply the instant value. In some cases,
+// such as when the physical channel has a leafref to an optical
+// channel component and the module-functional-type is
+// TYPE_DIGITAL_COHERENT_OPTIC this grouping will NOT be used
+// as the data will be within the optical-channel
 //
 //	Defining module:      "openconfig-platform-transceiver"
 //	Instantiating module: "openconfig-platform"
@@ -38180,6 +38292,48 @@ func (n *Component_OpticalChannelPathAny) LinePort() *Component_OpticalChannel_L
 	ps := &Component_OpticalChannel_LinePortPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"*", "line-port"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// LogicalChannelAssignment (leaf): Reference to the logical channel that is directly assigned
+// to this optical channel if it is assigned to a logical channel.
+// The logical channel must also reference this optical channel at
+// logical-channel-assignments/assignment/state/optical-channel
+//
+//	Defining module:      "openconfig-terminal-device"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/logical-channel-assignment"
+//	Path from root:       "/components/component/optical-channel/state/logical-channel-assignment"
+func (n *Component_OpticalChannelPath) LogicalChannelAssignment() *Component_OpticalChannel_LogicalChannelAssignmentPath {
+	ps := &Component_OpticalChannel_LogicalChannelAssignmentPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "logical-channel-assignment"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// LogicalChannelAssignment (leaf): Reference to the logical channel that is directly assigned
+// to this optical channel if it is assigned to a logical channel.
+// The logical channel must also reference this optical channel at
+// logical-channel-assignments/assignment/state/optical-channel
+//
+//	Defining module:      "openconfig-terminal-device"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/logical-channel-assignment"
+//	Path from root:       "/components/component/optical-channel/state/logical-channel-assignment"
+func (n *Component_OpticalChannelPathAny) LogicalChannelAssignment() *Component_OpticalChannel_LogicalChannelAssignmentPathAny {
+	ps := &Component_OpticalChannel_LogicalChannelAssignmentPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "logical-channel-assignment"},
 			map[string]interface{}{},
 			n,
 		),
@@ -38598,7 +38752,11 @@ func (n *Component_OpticalChannelPathAny) Osnr() *Component_OpticalChannel_OsnrP
 // Values include the instantaneous, average, minimum, and
 // maximum statistics. If avg/min/max statistics are not
 // supported, the target is expected to just supply the
-// instant value
+// instant value. In some cases, such as when the physical
+// channel has a leafref to an optical channel component and the
+// module-functional-type is TYPE_DIGITAL_COHERENT_OPTIC this
+// grouping will NOT be used as the data will be within the
+// optical-channel
 //
 //	Defining module:      "openconfig-platform-transceiver"
 //	Instantiating module: "openconfig-platform"
@@ -38625,7 +38783,11 @@ func (n *Component_OpticalChannelPath) OutputPower() *Component_OpticalChannel_O
 // Values include the instantaneous, average, minimum, and
 // maximum statistics. If avg/min/max statistics are not
 // supported, the target is expected to just supply the
-// instant value
+// instant value. In some cases, such as when the physical
+// channel has a leafref to an optical channel component and the
+// module-functional-type is TYPE_DIGITAL_COHERENT_OPTIC this
+// grouping will NOT be used as the data will be within the
+// optical-channel
 //
 //	Defining module:      "openconfig-platform-transceiver"
 //	Instantiating module: "openconfig-platform"
@@ -74640,7 +74802,12 @@ func (n *Component_TransceiverPathAny) FormFactorPreconf() *Component_Transceive
 // Values include the instantaneous, average, minimum, and
 // maximum statistics. If avg/min/max statistics are not
 // supported, the target is expected to just supply the
-// instant value
+// instant value. When the physical channel has a leafref to
+// an optical channel component and the module-functional-type is
+// TYPE_DIGITAL_COHERENT_OPTIC this represents the aggregate
+// total optical power value (signal and noise) whereas
+// optical power value within the optical-channel represents
+// the signal power
 //
 //	Defining module:      "openconfig-platform-transceiver"
 //	Instantiating module: "openconfig-platform"
@@ -74667,7 +74834,12 @@ func (n *Component_TransceiverPath) InputPower() *Component_Transceiver_InputPow
 // Values include the instantaneous, average, minimum, and
 // maximum statistics. If avg/min/max statistics are not
 // supported, the target is expected to just supply the
-// instant value
+// instant value. When the physical channel has a leafref to
+// an optical channel component and the module-functional-type is
+// TYPE_DIGITAL_COHERENT_OPTIC this represents the aggregate
+// total optical power value (signal and noise) whereas
+// optical power value within the optical-channel represents
+// the signal power
 //
 //	Defining module:      "openconfig-platform-transceiver"
 //	Instantiating module: "openconfig-platform"
@@ -74684,12 +74856,134 @@ func (n *Component_TransceiverPathAny) InputPower() *Component_Transceiver_Input
 	return ps
 }
 
+// LaneAny (list): List of electrical host lanes, keyed by lane number.
+// The host lanes of a transceiver constitute its electrical interface
+// with the host system.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "host-lanes/lane"
+//	Path from root:       "/components/component/transceiver/host-lanes/lane"
+func (n *Component_TransceiverPath) LaneAny() *Component_Transceiver_LanePathAny {
+	ps := &Component_Transceiver_LanePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"host-lanes", "lane"},
+			map[string]interface{}{"lane-number": "*"},
+			n,
+		),
+	}
+	return ps
+}
+
+// LaneAny (list): List of electrical host lanes, keyed by lane number.
+// The host lanes of a transceiver constitute its electrical interface
+// with the host system.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "host-lanes/lane"
+//	Path from root:       "/components/component/transceiver/host-lanes/lane"
+func (n *Component_TransceiverPathAny) LaneAny() *Component_Transceiver_LanePathAny {
+	ps := &Component_Transceiver_LanePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"host-lanes", "lane"},
+			map[string]interface{}{"lane-number": "*"},
+			n,
+		),
+	}
+	return ps
+}
+
+// Lane (list): List of electrical host lanes, keyed by lane number.
+// The host lanes of a transceiver constitute its electrical interface
+// with the host system.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "host-lanes/lane"
+//	Path from root:       "/components/component/transceiver/host-lanes/lane"
+//
+//	LaneNumber: uint8
+func (n *Component_TransceiverPath) Lane(LaneNumber uint8) *Component_Transceiver_LanePath {
+	ps := &Component_Transceiver_LanePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"host-lanes", "lane"},
+			map[string]interface{}{"lane-number": LaneNumber},
+			n,
+		),
+	}
+	return ps
+}
+
+// Lane (list): List of electrical host lanes, keyed by lane number.
+// The host lanes of a transceiver constitute its electrical interface
+// with the host system.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "host-lanes/lane"
+//	Path from root:       "/components/component/transceiver/host-lanes/lane"
+//
+//	LaneNumber: uint8
+func (n *Component_TransceiverPathAny) Lane(LaneNumber uint8) *Component_Transceiver_LanePathAny {
+	ps := &Component_Transceiver_LanePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"host-lanes", "lane"},
+			map[string]interface{}{"lane-number": LaneNumber},
+			n,
+		),
+	}
+	return ps
+}
+
+// LaneMap (list): List of electrical host lanes, keyed by lane number.
+// The host lanes of a transceiver constitute its electrical interface
+// with the host system.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "host-lanes/lane"
+//	Path from root:       "/components/component/transceiver/host-lanes/lane"
+func (n *Component_TransceiverPath) LaneMap() *Component_Transceiver_LanePathMap {
+	ps := &Component_Transceiver_LanePathMap{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"host-lanes"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// LaneMap (list): List of electrical host lanes, keyed by lane number.
+// The host lanes of a transceiver constitute its electrical interface
+// with the host system.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "host-lanes/lane"
+//	Path from root:       "/components/component/transceiver/host-lanes/lane"
+func (n *Component_TransceiverPathAny) LaneMap() *Component_Transceiver_LanePathMapAny {
+	ps := &Component_Transceiver_LanePathMapAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"host-lanes"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
 // LaserBiasCurrent (container): The current applied by the system to the transmit laser to
 // achieve the output power. The current is expressed in mA
 // with up to two decimal precision. Values include the
 // instantaneous, average, minimum, and maximum statistics.
 // If avg/min/max statistics are not supported, the target is
-// expected to just supply the instant value
+// expected to just supply the instant value. In some cases,
+// such as when the physical channel has a leafref to an optical
+// channel component and the module-functional-type is
+// TYPE_DIGITAL_COHERENT_OPTIC this grouping will NOT be used
+// as the data will be within the optical-channel
 //
 //	Defining module:      "openconfig-platform-transceiver"
 //	Instantiating module: "openconfig-platform"
@@ -74711,7 +75005,11 @@ func (n *Component_TransceiverPath) LaserBiasCurrent() *Component_Transceiver_La
 // with up to two decimal precision. Values include the
 // instantaneous, average, minimum, and maximum statistics.
 // If avg/min/max statistics are not supported, the target is
-// expected to just supply the instant value
+// expected to just supply the instant value. In some cases,
+// such as when the physical channel has a leafref to an optical
+// channel component and the module-functional-type is
+// TYPE_DIGITAL_COHERENT_OPTIC this grouping will NOT be used
+// as the data will be within the optical-channel
 //
 //	Defining module:      "openconfig-platform-transceiver"
 //	Instantiating module: "openconfig-platform"
@@ -74816,7 +75114,11 @@ func (n *Component_TransceiverPathAny) OtnComplianceCode() *Component_Transceive
 // Values include the instantaneous, average, minimum, and
 // maximum statistics. If avg/min/max statistics are not
 // supported, the target is expected to just supply the
-// instant value
+// instant value. In some cases, such as when the physical
+// channel has a leafref to an optical channel component and the
+// module-functional-type is TYPE_DIGITAL_COHERENT_OPTIC this
+// grouping will NOT be used as the data will be within the
+// optical-channel
 //
 //	Defining module:      "openconfig-platform-transceiver"
 //	Instantiating module: "openconfig-platform"
@@ -74843,7 +75145,11 @@ func (n *Component_TransceiverPath) OutputPower() *Component_Transceiver_OutputP
 // Values include the instantaneous, average, minimum, and
 // maximum statistics. If avg/min/max statistics are not
 // supported, the target is expected to just supply the
-// instant value
+// instant value. In some cases, such as when the physical
+// channel has a leafref to an optical channel component and the
+// module-functional-type is TYPE_DIGITAL_COHERENT_OPTIC this
+// grouping will NOT be used as the data will be within the
+// optical-channel
 //
 //	Defining module:      "openconfig-platform-transceiver"
 //	Instantiating module: "openconfig-platform"
@@ -76168,6 +76474,194 @@ func (n *Component_Transceiver_Channel_OutputFrequencyPathAny) State() ygnmi.Wil
 	)
 }
 
+// Component_Transceiver_Channel_RxCdrLolPath represents the /openconfig-platform/components/component/transceiver/physical-channels/channel/state/rx-cdr-lol YANG schema element.
+type Component_Transceiver_Channel_RxCdrLolPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Transceiver_Channel_RxCdrLolPathAny represents the wildcard version of the /openconfig-platform/components/component/transceiver/physical-channels/channel/state/rx-cdr-lol YANG schema element.
+type Component_Transceiver_Channel_RxCdrLolPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform-transceiver"
+//	Path from parent:     "state/rx-cdr-lol"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/rx-cdr-lol"
+func (n *Component_Transceiver_Channel_RxCdrLolPath) State() ygnmi.SingletonQuery[bool] {
+	return ygnmi.NewSingletonQuery[bool](
+		"Component_Transceiver_Channel",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "rx-cdr-lol"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Component_Transceiver_Channel).RxCdrLol
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Transceiver_Channel) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform-transceiver"
+//	Path from parent:     "state/rx-cdr-lol"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/rx-cdr-lol"
+func (n *Component_Transceiver_Channel_RxCdrLolPathAny) State() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewWildcardQuery[bool](
+		"Component_Transceiver_Channel",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "rx-cdr-lol"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Component_Transceiver_Channel).RxCdrLol
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Transceiver_Channel) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Component_Transceiver_Channel_RxLosPath represents the /openconfig-platform/components/component/transceiver/physical-channels/channel/state/rx-los YANG schema element.
+type Component_Transceiver_Channel_RxLosPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Transceiver_Channel_RxLosPathAny represents the wildcard version of the /openconfig-platform/components/component/transceiver/physical-channels/channel/state/rx-los YANG schema element.
+type Component_Transceiver_Channel_RxLosPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform-transceiver"
+//	Path from parent:     "state/rx-los"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/rx-los"
+func (n *Component_Transceiver_Channel_RxLosPath) State() ygnmi.SingletonQuery[bool] {
+	return ygnmi.NewSingletonQuery[bool](
+		"Component_Transceiver_Channel",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "rx-los"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Component_Transceiver_Channel).RxLos
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Transceiver_Channel) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform-transceiver"
+//	Path from parent:     "state/rx-los"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/rx-los"
+func (n *Component_Transceiver_Channel_RxLosPathAny) State() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewWildcardQuery[bool](
+		"Component_Transceiver_Channel",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "rx-los"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Component_Transceiver_Channel).RxLos
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Transceiver_Channel) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
 // Component_Transceiver_Channel_TargetOutputPowerPath represents the /openconfig-platform/components/component/transceiver/physical-channels/channel/state/target-output-power YANG schema element.
 type Component_Transceiver_Channel_TargetOutputPowerPath struct {
 	*ygnmi.NodePath
@@ -76327,6 +76821,100 @@ func (n *Component_Transceiver_Channel_TargetOutputPowerPathAny) Config() ygnmi.
 			ret := gs.(*oc.Component_Transceiver_Channel).TargetOutputPower
 			if ret == nil {
 				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Transceiver_Channel) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Component_Transceiver_Channel_TxFailurePath represents the /openconfig-platform/components/component/transceiver/physical-channels/channel/state/tx-failure YANG schema element.
+type Component_Transceiver_Channel_TxFailurePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Transceiver_Channel_TxFailurePathAny represents the wildcard version of the /openconfig-platform/components/component/transceiver/physical-channels/channel/state/tx-failure YANG schema element.
+type Component_Transceiver_Channel_TxFailurePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform-transceiver"
+//	Path from parent:     "state/tx-failure"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/tx-failure"
+func (n *Component_Transceiver_Channel_TxFailurePath) State() ygnmi.SingletonQuery[bool] {
+	return ygnmi.NewSingletonQuery[bool](
+		"Component_Transceiver_Channel",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "tx-failure"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Component_Transceiver_Channel).TxFailure
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Transceiver_Channel) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform-transceiver"
+//	Path from parent:     "state/tx-failure"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/tx-failure"
+func (n *Component_Transceiver_Channel_TxFailurePathAny) State() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewWildcardQuery[bool](
+		"Component_Transceiver_Channel",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "tx-failure"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Component_Transceiver_Channel).TxFailure
+			if ret == nil {
+				var zero bool
 				return zero, false
 			}
 			return *ret, true
@@ -76668,7 +77256,12 @@ func (n *Component_Transceiver_ChannelPathAny) Index() *Component_Transceiver_Ch
 // Values include the instantaneous, average, minimum, and
 // maximum statistics. If avg/min/max statistics are not
 // supported, the target is expected to just supply the
-// instant value
+// instant value. When the physical channel has a leafref to
+// an optical channel component and the module-functional-type is
+// TYPE_DIGITAL_COHERENT_OPTIC this represents the aggregate
+// total optical power value (signal and noise) whereas
+// optical power value within the optical-channel represents
+// the signal power
 //
 //	Defining module:      "openconfig-platform-transceiver"
 //	Instantiating module: "openconfig-platform"
@@ -76695,7 +77288,12 @@ func (n *Component_Transceiver_ChannelPath) InputPower() *Component_Transceiver_
 // Values include the instantaneous, average, minimum, and
 // maximum statistics. If avg/min/max statistics are not
 // supported, the target is expected to just supply the
-// instant value
+// instant value. When the physical channel has a leafref to
+// an optical channel component and the module-functional-type is
+// TYPE_DIGITAL_COHERENT_OPTIC this represents the aggregate
+// total optical power value (signal and noise) whereas
+// optical power value within the optical-channel represents
+// the signal power
 //
 //	Defining module:      "openconfig-platform-transceiver"
 //	Instantiating module: "openconfig-platform"
@@ -76757,7 +77355,11 @@ func (n *Component_Transceiver_ChannelPathAny) LaserAge() *Component_Transceiver
 // with up to two decimal precision. Values include the
 // instantaneous, average, minimum, and maximum statistics.
 // If avg/min/max statistics are not supported, the target is
-// expected to just supply the instant value
+// expected to just supply the instant value. In some cases,
+// such as when the physical channel has a leafref to an optical
+// channel component and the module-functional-type is
+// TYPE_DIGITAL_COHERENT_OPTIC this grouping will NOT be used
+// as the data will be within the optical-channel
 //
 //	Defining module:      "openconfig-platform-transceiver"
 //	Instantiating module: "openconfig-platform"
@@ -76779,7 +77381,11 @@ func (n *Component_Transceiver_ChannelPath) LaserBiasCurrent() *Component_Transc
 // with up to two decimal precision. Values include the
 // instantaneous, average, minimum, and maximum statistics.
 // If avg/min/max statistics are not supported, the target is
-// expected to just supply the instant value
+// expected to just supply the instant value. In some cases,
+// such as when the physical channel has a leafref to an optical
+// channel component and the module-functional-type is
+// TYPE_DIGITAL_COHERENT_OPTIC this grouping will NOT be used
+// as the data will be within the optical-channel
 //
 //	Defining module:      "openconfig-platform-transceiver"
 //	Instantiating module: "openconfig-platform"
@@ -76843,7 +77449,11 @@ func (n *Component_Transceiver_ChannelPathAny) LaserTemperature() *Component_Tra
 // OutputFrequency (leaf): The frequency in MHz of the individual physical channel
 // (e.g. ITU C50 - 195.0THz and would be reported as
 // 195,000,000 MHz in this model). This attribute is not
-// configurable on most client ports.
+// configurable on most client ports In some cases, such as when
+// the physical channel has a leafref to an optical channel
+// component and the module-functional-type is
+// TYPE_DIGITAL_COHERENT_OPTIC this grouping will NOT be used
+// as the data will be within the optical-channel.
 //
 //	Defining module:      "openconfig-platform-transceiver"
 //	Instantiating module: "openconfig-platform"
@@ -76864,7 +77474,11 @@ func (n *Component_Transceiver_ChannelPath) OutputFrequency() *Component_Transce
 // OutputFrequency (leaf): The frequency in MHz of the individual physical channel
 // (e.g. ITU C50 - 195.0THz and would be reported as
 // 195,000,000 MHz in this model). This attribute is not
-// configurable on most client ports.
+// configurable on most client ports In some cases, such as when
+// the physical channel has a leafref to an optical channel
+// component and the module-functional-type is
+// TYPE_DIGITAL_COHERENT_OPTIC this grouping will NOT be used
+// as the data will be within the optical-channel.
 //
 //	Defining module:      "openconfig-platform-transceiver"
 //	Instantiating module: "openconfig-platform"
@@ -76892,7 +77506,11 @@ func (n *Component_Transceiver_ChannelPathAny) OutputFrequency() *Component_Tran
 // Values include the instantaneous, average, minimum, and
 // maximum statistics. If avg/min/max statistics are not
 // supported, the target is expected to just supply the
-// instant value
+// instant value. In some cases, such as when the physical
+// channel has a leafref to an optical channel component and the
+// module-functional-type is TYPE_DIGITAL_COHERENT_OPTIC this
+// grouping will NOT be used as the data will be within the
+// optical-channel
 //
 //	Defining module:      "openconfig-platform-transceiver"
 //	Instantiating module: "openconfig-platform"
@@ -76919,7 +77537,11 @@ func (n *Component_Transceiver_ChannelPath) OutputPower() *Component_Transceiver
 // Values include the instantaneous, average, minimum, and
 // maximum statistics. If avg/min/max statistics are not
 // supported, the target is expected to just supply the
-// instant value
+// instant value. In some cases, such as when the physical
+// channel has a leafref to an optical channel component and the
+// module-functional-type is TYPE_DIGITAL_COHERENT_OPTIC this
+// grouping will NOT be used as the data will be within the
+// optical-channel
 //
 //	Defining module:      "openconfig-platform-transceiver"
 //	Instantiating module: "openconfig-platform"
@@ -76932,6 +77554,78 @@ func (n *Component_Transceiver_ChannelPathAny) OutputPower() *Component_Transcei
 			map[string]interface{}{},
 			n,
 		),
+	}
+	return ps
+}
+
+// RxCdrLol (leaf): Receiver clock-and-data-recovery loss-of-lock flag.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/rx-cdr-lol"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/rx-cdr-lol"
+func (n *Component_Transceiver_ChannelPath) RxCdrLol() *Component_Transceiver_Channel_RxCdrLolPath {
+	ps := &Component_Transceiver_Channel_RxCdrLolPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "rx-cdr-lol"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// RxCdrLol (leaf): Receiver clock-and-data-recovery loss-of-lock flag.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/rx-cdr-lol"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/rx-cdr-lol"
+func (n *Component_Transceiver_ChannelPathAny) RxCdrLol() *Component_Transceiver_Channel_RxCdrLolPathAny {
+	ps := &Component_Transceiver_Channel_RxCdrLolPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "rx-cdr-lol"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// RxLos (leaf): Receiver loss-of-signal flag.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/rx-los"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/rx-los"
+func (n *Component_Transceiver_ChannelPath) RxLos() *Component_Transceiver_Channel_RxLosPath {
+	ps := &Component_Transceiver_Channel_RxLosPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "rx-los"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// RxLos (leaf): Receiver loss-of-signal flag.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/rx-los"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/rx-los"
+func (n *Component_Transceiver_ChannelPathAny) RxLos() *Component_Transceiver_Channel_RxLosPathAny {
+	ps := &Component_Transceiver_Channel_RxLosPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "rx-los"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
 	}
 	return ps
 }
@@ -77060,6 +77754,46 @@ func (n *Component_Transceiver_ChannelPathAny) TecCurrent() *Component_Transceiv
 			map[string]interface{}{},
 			n,
 		),
+	}
+	return ps
+}
+
+// TxFailure (leaf): Transmitter failure flag.
+// In earlier standards, including SFF-8436, SFF-8472, and QSFP-DD CMIS 4.0,
+// this flag was named Tx Fault.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/tx-failure"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/tx-failure"
+func (n *Component_Transceiver_ChannelPath) TxFailure() *Component_Transceiver_Channel_TxFailurePath {
+	ps := &Component_Transceiver_Channel_TxFailurePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "tx-failure"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// TxFailure (leaf): Transmitter failure flag.
+// In earlier standards, including SFF-8436, SFF-8472, and QSFP-DD CMIS 4.0,
+// this flag was named Tx Fault.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/tx-failure"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/tx-failure"
+func (n *Component_Transceiver_ChannelPathAny) TxFailure() *Component_Transceiver_Channel_TxFailurePathAny {
+	ps := &Component_Transceiver_Channel_TxFailurePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "tx-failure"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
 	}
 	return ps
 }
@@ -84225,6 +84959,724 @@ func (n *Component_Transceiver_InputPowerPathAny) State() ygnmi.WildcardQuery[*o
 		},
 		nil,
 		nil,
+	)
+}
+
+// Component_Transceiver_Lane_LaneNumberPath represents the /openconfig-platform/components/component/transceiver/host-lanes/lane/state/lane-number YANG schema element.
+type Component_Transceiver_Lane_LaneNumberPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Transceiver_Lane_LaneNumberPathAny represents the wildcard version of the /openconfig-platform/components/component/transceiver/host-lanes/lane/state/lane-number YANG schema element.
+type Component_Transceiver_Lane_LaneNumberPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform-transceiver"
+//	Path from parent:     "state/lane-number"
+//	Path from root:       "/components/component/transceiver/host-lanes/lane/state/lane-number"
+func (n *Component_Transceiver_Lane_LaneNumberPath) State() ygnmi.SingletonQuery[uint8] {
+	return ygnmi.NewSingletonQuery[uint8](
+		"Component_Transceiver_Lane",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "lane-number"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
+			ret := gs.(*oc.Component_Transceiver_Lane).LaneNumber
+			if ret == nil {
+				var zero uint8
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Transceiver_Lane) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform-transceiver"
+//	Path from parent:     "state/lane-number"
+//	Path from root:       "/components/component/transceiver/host-lanes/lane/state/lane-number"
+func (n *Component_Transceiver_Lane_LaneNumberPathAny) State() ygnmi.WildcardQuery[uint8] {
+	return ygnmi.NewWildcardQuery[uint8](
+		"Component_Transceiver_Lane",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "lane-number"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
+			ret := gs.(*oc.Component_Transceiver_Lane).LaneNumber
+			if ret == nil {
+				var zero uint8
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Transceiver_Lane) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform-transceiver"
+//	Path from parent:     "config/lane-number"
+//	Path from root:       "/components/component/transceiver/host-lanes/lane/config/lane-number"
+func (n *Component_Transceiver_Lane_LaneNumberPath) Config() ygnmi.ConfigQuery[uint8] {
+	return ygnmi.NewConfigQuery[uint8](
+		"Component_Transceiver_Lane",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "lane-number"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
+			ret := gs.(*oc.Component_Transceiver_Lane).LaneNumber
+			if ret == nil {
+				var zero uint8
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Transceiver_Lane) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform-transceiver"
+//	Path from parent:     "config/lane-number"
+//	Path from root:       "/components/component/transceiver/host-lanes/lane/config/lane-number"
+func (n *Component_Transceiver_Lane_LaneNumberPathAny) Config() ygnmi.WildcardQuery[uint8] {
+	return ygnmi.NewWildcardQuery[uint8](
+		"Component_Transceiver_Lane",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "lane-number"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
+			ret := gs.(*oc.Component_Transceiver_Lane).LaneNumber
+			if ret == nil {
+				var zero uint8
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Transceiver_Lane) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Component_Transceiver_Lane_TxCdrLolPath represents the /openconfig-platform/components/component/transceiver/host-lanes/lane/state/tx-cdr-lol YANG schema element.
+type Component_Transceiver_Lane_TxCdrLolPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Transceiver_Lane_TxCdrLolPathAny represents the wildcard version of the /openconfig-platform/components/component/transceiver/host-lanes/lane/state/tx-cdr-lol YANG schema element.
+type Component_Transceiver_Lane_TxCdrLolPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform-transceiver"
+//	Path from parent:     "state/tx-cdr-lol"
+//	Path from root:       "/components/component/transceiver/host-lanes/lane/state/tx-cdr-lol"
+func (n *Component_Transceiver_Lane_TxCdrLolPath) State() ygnmi.SingletonQuery[bool] {
+	return ygnmi.NewSingletonQuery[bool](
+		"Component_Transceiver_Lane",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "tx-cdr-lol"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Component_Transceiver_Lane).TxCdrLol
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Transceiver_Lane) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform-transceiver"
+//	Path from parent:     "state/tx-cdr-lol"
+//	Path from root:       "/components/component/transceiver/host-lanes/lane/state/tx-cdr-lol"
+func (n *Component_Transceiver_Lane_TxCdrLolPathAny) State() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewWildcardQuery[bool](
+		"Component_Transceiver_Lane",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "tx-cdr-lol"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Component_Transceiver_Lane).TxCdrLol
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Transceiver_Lane) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Component_Transceiver_Lane_TxLosPath represents the /openconfig-platform/components/component/transceiver/host-lanes/lane/state/tx-los YANG schema element.
+type Component_Transceiver_Lane_TxLosPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Transceiver_Lane_TxLosPathAny represents the wildcard version of the /openconfig-platform/components/component/transceiver/host-lanes/lane/state/tx-los YANG schema element.
+type Component_Transceiver_Lane_TxLosPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform-transceiver"
+//	Path from parent:     "state/tx-los"
+//	Path from root:       "/components/component/transceiver/host-lanes/lane/state/tx-los"
+func (n *Component_Transceiver_Lane_TxLosPath) State() ygnmi.SingletonQuery[bool] {
+	return ygnmi.NewSingletonQuery[bool](
+		"Component_Transceiver_Lane",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "tx-los"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Component_Transceiver_Lane).TxLos
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Transceiver_Lane) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform-transceiver"
+//	Path from parent:     "state/tx-los"
+//	Path from root:       "/components/component/transceiver/host-lanes/lane/state/tx-los"
+func (n *Component_Transceiver_Lane_TxLosPathAny) State() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewWildcardQuery[bool](
+		"Component_Transceiver_Lane",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "tx-los"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Component_Transceiver_Lane).TxLos
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Transceiver_Lane) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Component_Transceiver_LanePath represents the /openconfig-platform/components/component/transceiver/host-lanes/lane YANG schema element.
+type Component_Transceiver_LanePath struct {
+	*ygnmi.NodePath
+}
+
+// Component_Transceiver_LanePathAny represents the wildcard version of the /openconfig-platform/components/component/transceiver/host-lanes/lane YANG schema element.
+type Component_Transceiver_LanePathAny struct {
+	*ygnmi.NodePath
+}
+
+// Component_Transceiver_LanePathMap represents the /openconfig-platform/components/component/transceiver/host-lanes/lane YANG schema element.
+type Component_Transceiver_LanePathMap struct {
+	*ygnmi.NodePath
+}
+
+// Component_Transceiver_LanePathMapAny represents the wildcard version of the /openconfig-platform/components/component/transceiver/host-lanes/lane YANG schema element.
+type Component_Transceiver_LanePathMapAny struct {
+	*ygnmi.NodePath
+}
+
+// LaneNumber (leaf): Number identifying an electrical host lane carrying one serial
+// signal.  Lanes are numbered starting with 1.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "*/lane-number"
+//	Path from root:       "/components/component/transceiver/host-lanes/lane/*/lane-number"
+func (n *Component_Transceiver_LanePath) LaneNumber() *Component_Transceiver_Lane_LaneNumberPath {
+	ps := &Component_Transceiver_Lane_LaneNumberPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "lane-number"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// LaneNumber (leaf): Number identifying an electrical host lane carrying one serial
+// signal.  Lanes are numbered starting with 1.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "*/lane-number"
+//	Path from root:       "/components/component/transceiver/host-lanes/lane/*/lane-number"
+func (n *Component_Transceiver_LanePathAny) LaneNumber() *Component_Transceiver_Lane_LaneNumberPathAny {
+	ps := &Component_Transceiver_Lane_LaneNumberPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "lane-number"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// TxCdrLol (leaf): Transmitter clock-and-data-recovery loss-of-lock flag.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/tx-cdr-lol"
+//	Path from root:       "/components/component/transceiver/host-lanes/lane/state/tx-cdr-lol"
+func (n *Component_Transceiver_LanePath) TxCdrLol() *Component_Transceiver_Lane_TxCdrLolPath {
+	ps := &Component_Transceiver_Lane_TxCdrLolPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "tx-cdr-lol"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// TxCdrLol (leaf): Transmitter clock-and-data-recovery loss-of-lock flag.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/tx-cdr-lol"
+//	Path from root:       "/components/component/transceiver/host-lanes/lane/state/tx-cdr-lol"
+func (n *Component_Transceiver_LanePathAny) TxCdrLol() *Component_Transceiver_Lane_TxCdrLolPathAny {
+	ps := &Component_Transceiver_Lane_TxCdrLolPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "tx-cdr-lol"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// TxLos (leaf): Transmitter loss-of-signal flag.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/tx-los"
+//	Path from root:       "/components/component/transceiver/host-lanes/lane/state/tx-los"
+func (n *Component_Transceiver_LanePath) TxLos() *Component_Transceiver_Lane_TxLosPath {
+	ps := &Component_Transceiver_Lane_TxLosPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "tx-los"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// TxLos (leaf): Transmitter loss-of-signal flag.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/tx-los"
+//	Path from root:       "/components/component/transceiver/host-lanes/lane/state/tx-los"
+func (n *Component_Transceiver_LanePathAny) TxLos() *Component_Transceiver_Lane_TxLosPathAny {
+	ps := &Component_Transceiver_Lane_TxLosPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "tx-los"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_Transceiver_LanePath) State() ygnmi.SingletonQuery[*oc.Component_Transceiver_Lane] {
+	return ygnmi.NewSingletonQuery[*oc.Component_Transceiver_Lane](
+		"Component_Transceiver_Lane",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_Transceiver_LanePathAny) State() ygnmi.WildcardQuery[*oc.Component_Transceiver_Lane] {
+	return ygnmi.NewWildcardQuery[*oc.Component_Transceiver_Lane](
+		"Component_Transceiver_Lane",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *Component_Transceiver_LanePath) Config() ygnmi.ConfigQuery[*oc.Component_Transceiver_Lane] {
+	return ygnmi.NewConfigQuery[*oc.Component_Transceiver_Lane](
+		"Component_Transceiver_Lane",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *Component_Transceiver_LanePathAny) Config() ygnmi.WildcardQuery[*oc.Component_Transceiver_Lane] {
+	return ygnmi.NewWildcardQuery[*oc.Component_Transceiver_Lane](
+		"Component_Transceiver_Lane",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_Transceiver_LanePathMap) State() ygnmi.SingletonQuery[map[uint8]*oc.Component_Transceiver_Lane] {
+	return ygnmi.NewSingletonQuery[map[uint8]*oc.Component_Transceiver_Lane](
+		"Component_Transceiver",
+		true,
+		false,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[uint8]*oc.Component_Transceiver_Lane, bool) {
+			ret := gs.(*oc.Component_Transceiver).Lane
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Transceiver) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-platform-transceiver:host-lanes"},
+			PostRelPath: []string{"openconfig-platform-transceiver:lane"},
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_Transceiver_LanePathMapAny) State() ygnmi.WildcardQuery[map[uint8]*oc.Component_Transceiver_Lane] {
+	return ygnmi.NewWildcardQuery[map[uint8]*oc.Component_Transceiver_Lane](
+		"Component_Transceiver",
+		true,
+		false,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[uint8]*oc.Component_Transceiver_Lane, bool) {
+			ret := gs.(*oc.Component_Transceiver).Lane
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Transceiver) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-platform-transceiver:host-lanes"},
+			PostRelPath: []string{"openconfig-platform-transceiver:lane"},
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *Component_Transceiver_LanePathMap) Config() ygnmi.ConfigQuery[map[uint8]*oc.Component_Transceiver_Lane] {
+	return ygnmi.NewConfigQuery[map[uint8]*oc.Component_Transceiver_Lane](
+		"Component_Transceiver",
+		false,
+		true,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[uint8]*oc.Component_Transceiver_Lane, bool) {
+			ret := gs.(*oc.Component_Transceiver).Lane
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Transceiver) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-platform-transceiver:host-lanes"},
+			PostRelPath: []string{"openconfig-platform-transceiver:lane"},
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *Component_Transceiver_LanePathMapAny) Config() ygnmi.WildcardQuery[map[uint8]*oc.Component_Transceiver_Lane] {
+	return ygnmi.NewWildcardQuery[map[uint8]*oc.Component_Transceiver_Lane](
+		"Component_Transceiver",
+		false,
+		true,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[uint8]*oc.Component_Transceiver_Lane, bool) {
+			ret := gs.(*oc.Component_Transceiver).Lane
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Transceiver) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-platform-transceiver:host-lanes"},
+			PostRelPath: []string{"openconfig-platform-transceiver:lane"},
+		},
 	)
 }
 

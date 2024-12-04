@@ -185,6 +185,7 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		3: {Name: "IPV6"},
 		4: {Name: "MPLS"},
 		5: {Name: "VXLAN"},
+		6: {Name: "UDP"},
 	},
 	"E_AggregateSidCounter_MplsLabel": {
 		1: {Name: "IPV4_EXPLICIT_NULL"},
@@ -242,6 +243,11 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		1: {Name: "ADD"},
 		2: {Name: "REMOVE"},
 		3: {Name: "REPLACE"},
+	},
+	"E_BgpPolicy_BgpSetMedAction": {
+		1: {Name: "SET"},
+		2: {Name: "ADD"},
+		3: {Name: "SUBTRACT"},
 	},
 	"E_BgpPolicy_MatchSetOptionsType": {
 		1: {Name: "ANY"},
@@ -1177,6 +1183,12 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 	"E_Ipv6Srlg_Flags": {
 		1: {Name: "NA"},
 	},
+	"E_Ipv6_LearnUnsolicited": {
+		1: {Name: "NONE"},
+		2: {Name: "GLOBAL"},
+		3: {Name: "LINK_LOCAL"},
+		4: {Name: "BOTH"},
+	},
 	"E_IsisLsdbTypes_ISIS_SUBTLV_TYPE": {
 		1:  {Name: "IP_REACHABILITY_IPV4_ROUTER_ID", DefiningModule: "openconfig-isis-lsdb-types"},
 		2:  {Name: "IP_REACHABILITY_IPV6_ROUTER_ID", DefiningModule: "openconfig-isis-lsdb-types"},
@@ -1311,16 +1323,18 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		2: {Name: "SIMPLE_KEY", DefiningModule: "openconfig-keychain-types"},
 	},
 	"E_KeychainTypes_CRYPTO_TYPE": {
-		1:  {Name: "AES_28_CMAC_96", DefiningModule: "openconfig-keychain-types"},
-		2:  {Name: "CRYPTO_NONE", DefiningModule: "openconfig-keychain-types"},
-		3:  {Name: "HMAC_MD5", DefiningModule: "openconfig-keychain-types"},
-		4:  {Name: "HMAC_SHA_1", DefiningModule: "openconfig-keychain-types"},
-		5:  {Name: "HMAC_SHA_1_12", DefiningModule: "openconfig-keychain-types"},
-		6:  {Name: "HMAC_SHA_1_20", DefiningModule: "openconfig-keychain-types"},
-		7:  {Name: "HMAC_SHA_1_96", DefiningModule: "openconfig-keychain-types"},
-		8:  {Name: "HMAC_SHA_256", DefiningModule: "openconfig-keychain-types"},
-		9:  {Name: "MD5", DefiningModule: "openconfig-keychain-types"},
-		10: {Name: "SHA_1", DefiningModule: "openconfig-keychain-types"},
+		1:  {Name: "AES_128_CMAC", DefiningModule: "openconfig-keychain-types"},
+		2:  {Name: "AES_128_CMAC_96", DefiningModule: "openconfig-keychain-types"},
+		3:  {Name: "AES_256_CMAC", DefiningModule: "openconfig-keychain-types"},
+		4:  {Name: "CRYPTO_NONE", DefiningModule: "openconfig-keychain-types"},
+		5:  {Name: "HMAC_MD5", DefiningModule: "openconfig-keychain-types"},
+		6:  {Name: "HMAC_SHA_1", DefiningModule: "openconfig-keychain-types"},
+		7:  {Name: "HMAC_SHA_1_12", DefiningModule: "openconfig-keychain-types"},
+		8:  {Name: "HMAC_SHA_1_20", DefiningModule: "openconfig-keychain-types"},
+		9:  {Name: "HMAC_SHA_1_96", DefiningModule: "openconfig-keychain-types"},
+		10: {Name: "HMAC_SHA_256", DefiningModule: "openconfig-keychain-types"},
+		11: {Name: "MD5", DefiningModule: "openconfig-keychain-types"},
+		12: {Name: "SHA_1", DefiningModule: "openconfig-keychain-types"},
 	},
 	"E_Keychain_Tolerance": {
 		1: {Name: "FOREVER"},
@@ -1426,6 +1440,14 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 	"E_LsaGeneration_TimerType": {
 		1: {Name: "LINEAR_BACKOFF"},
 		2: {Name: "EXPONENTIAL_BACKOFF"},
+	},
+	"E_LspNextHop_PushLabel": {
+		1: {Name: "IPV4_EXPLICIT_NULL"},
+		2: {Name: "ROUTER_ALERT"},
+		3: {Name: "IPV6_EXPLICIT_NULL"},
+		4: {Name: "IMPLICIT_NULL"},
+		8: {Name: "ENTROPY_LABEL_INDICATOR"},
+		9: {Name: "NO_LABEL"},
 	},
 	"E_Lsp_Flags": {
 		1: {Name: "PARTITION_REPAIR"},
@@ -1544,6 +1566,14 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 	"E_Mpls_MplsHopType": {
 		1: {Name: "LOOSE"},
 		2: {Name: "STRICT"},
+	},
+	"E_Mpls_MplsLabelStack": {
+		1: {Name: "IPV4_EXPLICIT_NULL"},
+		2: {Name: "ROUTER_ALERT"},
+		3: {Name: "IPV6_EXPLICIT_NULL"},
+		4: {Name: "IMPLICIT_NULL"},
+		8: {Name: "ENTROPY_LABEL_INDICATOR"},
+		9: {Name: "NO_LABEL"},
 	},
 	"E_Mpls_MplsSrlgFloodingType": {
 		1: {Name: "FLOODED_SRLG"},
@@ -1778,8 +1808,9 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		3: {Name: "STATEFUL_ACTIVE"},
 	},
 	"E_PimTypes_PIM_MODE": {
-		1: {Name: "PIM_MODE_DENSE", DefiningModule: "openconfig-pim-types"},
-		2: {Name: "PIM_MODE_SPARSE", DefiningModule: "openconfig-pim-types"},
+		1: {Name: "PIM_MODE_BIDIR", DefiningModule: "openconfig-pim-types"},
+		2: {Name: "PIM_MODE_DENSE", DefiningModule: "openconfig-pim-types"},
+		3: {Name: "PIM_MODE_SPARSE", DefiningModule: "openconfig-pim-types"},
 	},
 	"E_PlatformSoftware_SOFTWARE_MODULE_TYPE": {
 		1: {Name: "USERSPACE_PACKAGE", DefiningModule: "openconfig-platform-software"},
@@ -1821,16 +1852,17 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		5:  {Name: "FABRIC", DefiningModule: "openconfig-platform-types"},
 		6:  {Name: "FAN", DefiningModule: "openconfig-platform-types"},
 		7:  {Name: "FAN_TRAY", DefiningModule: "openconfig-platform-types"},
-		8:  {Name: "FRU", DefiningModule: "openconfig-platform-types"},
-		9:  {Name: "INTEGRATED_CIRCUIT", DefiningModule: "openconfig-platform-types"},
-		10: {Name: "LINECARD", DefiningModule: "openconfig-platform-types"},
-		11: {Name: "OPTICAL_CHANNEL", DefiningModule: "openconfig-transport-types"},
-		12: {Name: "PORT", DefiningModule: "openconfig-platform-types"},
-		13: {Name: "POWER_SUPPLY", DefiningModule: "openconfig-platform-types"},
-		14: {Name: "SENSOR", DefiningModule: "openconfig-platform-types"},
-		15: {Name: "STORAGE", DefiningModule: "openconfig-platform-types"},
-		16: {Name: "TRANSCEIVER", DefiningModule: "openconfig-platform-types"},
-		17: {Name: "WIFI_ACCESS_POINT", DefiningModule: "openconfig-platform-types"},
+		8:  {Name: "FAN_TRAY_CONTROLLER", DefiningModule: "openconfig-platform-types"},
+		9:  {Name: "FRU", DefiningModule: "openconfig-platform-types"},
+		10: {Name: "INTEGRATED_CIRCUIT", DefiningModule: "openconfig-platform-types"},
+		11: {Name: "LINECARD", DefiningModule: "openconfig-platform-types"},
+		12: {Name: "OPTICAL_CHANNEL", DefiningModule: "openconfig-transport-types"},
+		13: {Name: "PORT", DefiningModule: "openconfig-platform-types"},
+		14: {Name: "POWER_SUPPLY", DefiningModule: "openconfig-platform-types"},
+		15: {Name: "SENSOR", DefiningModule: "openconfig-platform-types"},
+		16: {Name: "STORAGE", DefiningModule: "openconfig-platform-types"},
+		17: {Name: "TRANSCEIVER", DefiningModule: "openconfig-platform-types"},
+		18: {Name: "WIFI_ACCESS_POINT", DefiningModule: "openconfig-platform-types"},
 	},
 	"E_PlatformTypes_OPENCONFIG_SOFTWARE_COMPONENT": {
 		1: {Name: "BIOS", DefiningModule: "openconfig-platform-types"},
@@ -2203,7 +2235,13 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		8: {Name: "DEBUG"},
 	},
 	"E_System_NTP_AUTH_TYPE": {
-		1: {Name: "NTP_AUTH_MD5", DefiningModule: "openconfig-system"},
+		1: {Name: "NTP_AUTH_AES_CBC_128", DefiningModule: "openconfig-system"},
+		2: {Name: "NTP_AUTH_AES_CBC_256", DefiningModule: "openconfig-system"},
+		3: {Name: "NTP_AUTH_MD5", DefiningModule: "openconfig-system"},
+		4: {Name: "NTP_AUTH_SHA1", DefiningModule: "openconfig-system"},
+		5: {Name: "NTP_AUTH_SHA256", DefiningModule: "openconfig-system"},
+		6: {Name: "NTP_AUTH_SHA384", DefiningModule: "openconfig-system"},
+		7: {Name: "NTP_AUTH_SHA512", DefiningModule: "openconfig-system"},
 	},
 	"E_TePolicy_Bsid": {
 		1: {Name: "IPV4_EXPLICIT_NULL"},
@@ -2286,20 +2324,22 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		17: {Name: "ETH_10GBASE_LRM", DefiningModule: "openconfig-transport-types"},
 		18: {Name: "ETH_10GBASE_SR", DefiningModule: "openconfig-transport-types"},
 		19: {Name: "ETH_10GBASE_ZR", DefiningModule: "openconfig-transport-types"},
-		20: {Name: "ETH_400GBASE_DR4", DefiningModule: "openconfig-transport-types"},
-		21: {Name: "ETH_400GBASE_FR4", DefiningModule: "openconfig-transport-types"},
-		22: {Name: "ETH_400GBASE_LR4", DefiningModule: "openconfig-transport-types"},
-		23: {Name: "ETH_400GBASE_LR8", DefiningModule: "openconfig-transport-types"},
-		24: {Name: "ETH_400GBASE_ZR", DefiningModule: "openconfig-transport-types"},
-		25: {Name: "ETH_400GMSA_PSM4", DefiningModule: "openconfig-transport-types"},
-		26: {Name: "ETH_40GBASE_CR4", DefiningModule: "openconfig-transport-types"},
-		27: {Name: "ETH_40GBASE_ER4", DefiningModule: "openconfig-transport-types"},
-		28: {Name: "ETH_40GBASE_LR4", DefiningModule: "openconfig-transport-types"},
-		29: {Name: "ETH_40GBASE_PSM4", DefiningModule: "openconfig-transport-types"},
-		30: {Name: "ETH_40GBASE_SR4", DefiningModule: "openconfig-transport-types"},
-		31: {Name: "ETH_4X10GBASE_LR", DefiningModule: "openconfig-transport-types"},
-		32: {Name: "ETH_4X10GBASE_SR", DefiningModule: "openconfig-transport-types"},
-		33: {Name: "ETH_UNDEFINED", DefiningModule: "openconfig-transport-types"},
+		20: {Name: "ETH_25GBASE_LR", DefiningModule: "openconfig-transport-types"},
+		21: {Name: "ETH_25GBASE_SR", DefiningModule: "openconfig-transport-types"},
+		22: {Name: "ETH_400GBASE_DR4", DefiningModule: "openconfig-transport-types"},
+		23: {Name: "ETH_400GBASE_FR4", DefiningModule: "openconfig-transport-types"},
+		24: {Name: "ETH_400GBASE_LR4", DefiningModule: "openconfig-transport-types"},
+		25: {Name: "ETH_400GBASE_LR8", DefiningModule: "openconfig-transport-types"},
+		26: {Name: "ETH_400GBASE_ZR", DefiningModule: "openconfig-transport-types"},
+		27: {Name: "ETH_400GMSA_PSM4", DefiningModule: "openconfig-transport-types"},
+		28: {Name: "ETH_40GBASE_CR4", DefiningModule: "openconfig-transport-types"},
+		29: {Name: "ETH_40GBASE_ER4", DefiningModule: "openconfig-transport-types"},
+		30: {Name: "ETH_40GBASE_LR4", DefiningModule: "openconfig-transport-types"},
+		31: {Name: "ETH_40GBASE_PSM4", DefiningModule: "openconfig-transport-types"},
+		32: {Name: "ETH_40GBASE_SR4", DefiningModule: "openconfig-transport-types"},
+		33: {Name: "ETH_4X10GBASE_LR", DefiningModule: "openconfig-transport-types"},
+		34: {Name: "ETH_4X10GBASE_SR", DefiningModule: "openconfig-transport-types"},
+		35: {Name: "ETH_UNDEFINED", DefiningModule: "openconfig-transport-types"},
 	},
 	"E_TransportTypes_FIBER_CONNECTOR_TYPE": {
 		1: {Name: "AOC_CONNECTOR", DefiningModule: "openconfig-transport-types"},
@@ -2384,15 +2424,16 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		18: {Name: "PROT_ODUFLEX_CBR", DefiningModule: "openconfig-transport-types"},
 		19: {Name: "PROT_ODUFLEX_GFP", DefiningModule: "openconfig-transport-types"},
 		20: {Name: "PROT_OTSIG", DefiningModule: "openconfig-transport-types"},
-		21: {Name: "PROT_OTU1E", DefiningModule: "openconfig-transport-types"},
-		22: {Name: "PROT_OTU2", DefiningModule: "openconfig-transport-types"},
-		23: {Name: "PROT_OTU2E", DefiningModule: "openconfig-transport-types"},
-		24: {Name: "PROT_OTU3", DefiningModule: "openconfig-transport-types"},
-		25: {Name: "PROT_OTU4", DefiningModule: "openconfig-transport-types"},
-		26: {Name: "PROT_OTUCN", DefiningModule: "openconfig-transport-types"},
-		27: {Name: "PROT_STM16", DefiningModule: "openconfig-transport-types"},
-		28: {Name: "PROT_STM256", DefiningModule: "openconfig-transport-types"},
-		29: {Name: "PROT_STM64", DefiningModule: "openconfig-transport-types"},
+		21: {Name: "PROT_OTSI_A", DefiningModule: "openconfig-transport-types"},
+		22: {Name: "PROT_OTU1E", DefiningModule: "openconfig-transport-types"},
+		23: {Name: "PROT_OTU2", DefiningModule: "openconfig-transport-types"},
+		24: {Name: "PROT_OTU2E", DefiningModule: "openconfig-transport-types"},
+		25: {Name: "PROT_OTU3", DefiningModule: "openconfig-transport-types"},
+		26: {Name: "PROT_OTU4", DefiningModule: "openconfig-transport-types"},
+		27: {Name: "PROT_OTUCN", DefiningModule: "openconfig-transport-types"},
+		28: {Name: "PROT_STM16", DefiningModule: "openconfig-transport-types"},
+		29: {Name: "PROT_STM256", DefiningModule: "openconfig-transport-types"},
+		30: {Name: "PROT_STM64", DefiningModule: "openconfig-transport-types"},
 	},
 	"E_TransportTypes_TRIBUTARY_RATE_CLASS_TYPE": {
 		1:  {Name: "TRIB_RATE_1000G", DefiningModule: "openconfig-transport-types"},
@@ -2867,6 +2908,9 @@ func initΛEnumTypes() {
 		"/interfaces/interface/routed-vlan/ipv6/addresses/address/state/type": {
 			reflect.TypeOf((E_IfIp_Ipv6AddressType)(0)),
 		},
+		"/interfaces/interface/routed-vlan/ipv6/config/learn-unsolicited": {
+			reflect.TypeOf((E_Ipv6_LearnUnsolicited)(0)),
+		},
 		"/interfaces/interface/routed-vlan/ipv6/neighbors/neighbor/state/neighbor-state": {
 			reflect.TypeOf((E_Neighbor_NeighborState)(0)),
 		},
@@ -2878,6 +2922,9 @@ func initΛEnumTypes() {
 		},
 		"/interfaces/interface/routed-vlan/ipv6/router-advertisement/state/mode": {
 			reflect.TypeOf((E_RouterAdvertisement_Mode)(0)),
+		},
+		"/interfaces/interface/routed-vlan/ipv6/state/learn-unsolicited": {
+			reflect.TypeOf((E_Ipv6_LearnUnsolicited)(0)),
 		},
 		"/interfaces/interface/state/admin-status": {
 			reflect.TypeOf((E_Interface_AdminStatus)(0)),
@@ -2924,6 +2971,9 @@ func initΛEnumTypes() {
 		"/interfaces/interface/subinterfaces/subinterface/ipv6/addresses/address/state/type": {
 			reflect.TypeOf((E_IfIp_Ipv6AddressType)(0)),
 		},
+		"/interfaces/interface/subinterfaces/subinterface/ipv6/config/learn-unsolicited": {
+			reflect.TypeOf((E_Ipv6_LearnUnsolicited)(0)),
+		},
 		"/interfaces/interface/subinterfaces/subinterface/ipv6/neighbors/neighbor/state/neighbor-state": {
 			reflect.TypeOf((E_Neighbor_NeighborState)(0)),
 		},
@@ -2935,6 +2985,9 @@ func initΛEnumTypes() {
 		},
 		"/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/state/mode": {
 			reflect.TypeOf((E_RouterAdvertisement_Mode)(0)),
+		},
+		"/interfaces/interface/subinterfaces/subinterface/ipv6/state/learn-unsolicited": {
+			reflect.TypeOf((E_Ipv6_LearnUnsolicited)(0)),
 		},
 		"/interfaces/interface/subinterfaces/subinterface/state/admin-status": {
 			reflect.TypeOf((E_Interface_AdminStatus)(0)),
@@ -3044,6 +3097,12 @@ func initΛEnumTypes() {
 		"/network-instances/network-instance/afts/mpls/label-entry/state/popped-mpls-label-stack": {
 			reflect.TypeOf((E_LabelEntry_PoppedMplsLabelStack)(0)),
 		},
+		"/network-instances/network-instance/afts/next-hops/next-hop/encap-headers/encap-header/mpls/state/mpls-label-stack": {
+			reflect.TypeOf((E_Mpls_MplsLabelStack)(0)),
+		},
+		"/network-instances/network-instance/afts/next-hops/next-hop/encap-headers/encap-header/state/type": {
+			reflect.TypeOf((E_Aft_EncapsulationHeaderType)(0)),
+		},
 		"/network-instances/network-instance/afts/next-hops/next-hop/state/decapsulate-header": {
 			reflect.TypeOf((E_Aft_EncapsulationHeaderType)(0)),
 		},
@@ -3087,6 +3146,12 @@ func initΛEnumTypes() {
 			reflect.TypeOf((E_EndpointVni_VniState)(0)),
 		},
 		"/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-vnis/endpoint-vni/state/vni-type": {
+			reflect.TypeOf((E_EndpointVni_VniType)(0)),
+		},
+		"/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/local-endpoint-vnis/local-endpoint-vni/config/vni-type": {
+			reflect.TypeOf((E_EndpointVni_VniType)(0)),
+		},
+		"/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/local-endpoint-vnis/local-endpoint-vni/state/vni-type": {
 			reflect.TypeOf((E_EndpointVni_VniType)(0)),
 		},
 		"/network-instances/network-instance/encapsulation/config/encapsulation-type": {
@@ -3326,6 +3391,12 @@ func initΛEnumTypes() {
 		"/network-instances/network-instance/mpls/lsps/static-lsps/static-lsp/egress/config/push-label": {
 			reflect.TypeOf((E_Egress_PushLabel)(0)),
 		},
+		"/network-instances/network-instance/mpls/lsps/static-lsps/static-lsp/egress/lsp-next-hops/lsp-next-hop/config/push-label": {
+			reflect.TypeOf((E_LspNextHop_PushLabel)(0)),
+		},
+		"/network-instances/network-instance/mpls/lsps/static-lsps/static-lsp/egress/lsp-next-hops/lsp-next-hop/state/push-label": {
+			reflect.TypeOf((E_LspNextHop_PushLabel)(0)),
+		},
 		"/network-instances/network-instance/mpls/lsps/static-lsps/static-lsp/egress/state/incoming-label": {
 			reflect.TypeOf((E_Egress_IncomingLabel)(0)),
 		},
@@ -3338,6 +3409,12 @@ func initΛEnumTypes() {
 		"/network-instances/network-instance/mpls/lsps/static-lsps/static-lsp/ingress/config/push-label": {
 			reflect.TypeOf((E_Ingress_PushLabel)(0)),
 		},
+		"/network-instances/network-instance/mpls/lsps/static-lsps/static-lsp/ingress/lsp-next-hops/lsp-next-hop/config/push-label": {
+			reflect.TypeOf((E_LspNextHop_PushLabel)(0)),
+		},
+		"/network-instances/network-instance/mpls/lsps/static-lsps/static-lsp/ingress/lsp-next-hops/lsp-next-hop/state/push-label": {
+			reflect.TypeOf((E_LspNextHop_PushLabel)(0)),
+		},
 		"/network-instances/network-instance/mpls/lsps/static-lsps/static-lsp/ingress/state/incoming-label": {
 			reflect.TypeOf((E_Ingress_IncomingLabel)(0)),
 		},
@@ -3349,6 +3426,12 @@ func initΛEnumTypes() {
 		},
 		"/network-instances/network-instance/mpls/lsps/static-lsps/static-lsp/transit/config/push-label": {
 			reflect.TypeOf((E_Transit_PushLabel)(0)),
+		},
+		"/network-instances/network-instance/mpls/lsps/static-lsps/static-lsp/transit/lsp-next-hops/lsp-next-hop/config/push-label": {
+			reflect.TypeOf((E_LspNextHop_PushLabel)(0)),
+		},
+		"/network-instances/network-instance/mpls/lsps/static-lsps/static-lsp/transit/lsp-next-hops/lsp-next-hop/state/push-label": {
+			reflect.TypeOf((E_LspNextHop_PushLabel)(0)),
 		},
 		"/network-instances/network-instance/mpls/lsps/static-lsps/static-lsp/transit/state/incoming-label": {
 			reflect.TypeOf((E_Transit_IncomingLabel)(0)),
@@ -4698,6 +4781,9 @@ func initΛEnumTypes() {
 		"/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/config/set-med": {
 			reflect.TypeOf((E_BgpActions_SetMed)(0)),
 		},
+		"/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/config/set-med-action": {
+			reflect.TypeOf((E_BgpPolicy_BgpSetMedAction)(0)),
+		},
 		"/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/config/set-next-hop": {
 			reflect.TypeOf((E_BgpActions_SetNextHop)(0)),
 		},
@@ -4742,6 +4828,9 @@ func initΛEnumTypes() {
 		},
 		"/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/state/set-med": {
 			reflect.TypeOf((E_BgpActions_SetMed)(0)),
+		},
+		"/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/state/set-med-action": {
+			reflect.TypeOf((E_BgpPolicy_BgpSetMedAction)(0)),
 		},
 		"/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/state/set-next-hop": {
 			reflect.TypeOf((E_BgpActions_SetNextHop)(0)),
@@ -4800,6 +4889,12 @@ func initΛEnumTypes() {
 		"/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/bgp-conditions/config/route-type": {
 			reflect.TypeOf((E_BgpConditions_RouteType)(0)),
 		},
+		"/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/bgp-conditions/ext-community-count/config/operator": {
+			reflect.TypeOf((E_PolicyTypes_ATTRIBUTE_COMPARISON)(0)),
+		},
+		"/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/bgp-conditions/ext-community-count/state/operator": {
+			reflect.TypeOf((E_PolicyTypes_ATTRIBUTE_COMPARISON)(0)),
+		},
 		"/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/bgp-conditions/match-as-path-set/config/match-set-options": {
 			reflect.TypeOf((E_RoutingPolicy_MatchSetOptionsType)(0)),
 		},
@@ -4856,6 +4951,13 @@ func initΛEnumTypes() {
 		},
 		"/routing-policy/policy-definitions/policy-definition/statements/statement/conditions/state/install-protocol-eq": {
 			reflect.TypeOf((E_PolicyTypes_INSTALL_PROTOCOL_TYPE)(0)),
+		},
+		"/system/aaa/accounting/acctz/source-records/source-record/state/service": {
+			reflect.TypeOf((E_GnsiAcctz_ServiceRequest)(0)),
+		},
+		"/system/aaa/accounting/acctz/source-records/source-record/state/type": {
+			reflect.TypeOf((E_GnsiAcctz_CmdService_Enum)(0)),
+			reflect.TypeOf((E_GnsiAcctz_GrpcService_Enum)(0)),
 		},
 		"/system/aaa/accounting/config/accounting-method": {
 			reflect.TypeOf((E_AaaTypes_AAA_METHOD_TYPE)(0)),
@@ -4931,13 +5033,6 @@ func initΛEnumTypes() {
 		},
 		"/system/gnmi-pathz-policies/policies/policy/state/instance": {
 			reflect.TypeOf((E_Policy_Instance)(0)),
-		},
-		"/system/grpc-servers/grpc-server/acctz-counters/source-counters/source-records/state/service": {
-			reflect.TypeOf((E_GnsiAcctz_ServiceRequest)(0)),
-		},
-		"/system/grpc-servers/grpc-server/acctz-counters/source-counters/source-records/state/type": {
-			reflect.TypeOf((E_GnsiAcctz_CmdService_Enum)(0)),
-			reflect.TypeOf((E_GnsiAcctz_GrpcService_Enum)(0)),
 		},
 		"/system/grpc-servers/grpc-server/config/listen-addresses": {
 			reflect.TypeOf((E_GrpcServer_ListenAddresses)(0)),

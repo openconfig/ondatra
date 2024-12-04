@@ -3426,6 +3426,40 @@ func (n *System_Aaa_AccountingPathAny) AccountingMethod() *System_Aaa_Accounting
 	return ps
 }
 
+// Acctz (container): A collection of counters regarding the creation of gNSI.acctz records.
+//
+//	Defining module:      "openconfig-gnsi-acctz"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "acctz"
+//	Path from root:       "/system/aaa/accounting/acctz"
+func (n *System_Aaa_AccountingPath) Acctz() *System_Aaa_Accounting_AcctzPath {
+	ps := &System_Aaa_Accounting_AcctzPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"acctz"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// Acctz (container): A collection of counters regarding the creation of gNSI.acctz records.
+//
+//	Defining module:      "openconfig-gnsi-acctz"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "acctz"
+//	Path from root:       "/system/aaa/accounting/acctz"
+func (n *System_Aaa_AccountingPathAny) Acctz() *System_Aaa_Accounting_AcctzPathAny {
+	ps := &System_Aaa_Accounting_AcctzPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"acctz"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
 // EventAny (list): List of events subject to accounting
 //
 //	Defining module:      "openconfig-aaa"
@@ -3613,6 +3647,938 @@ func (n *System_Aaa_AccountingPathAny) Config() ygnmi.WildcardQuery[*oc.System_A
 		"System_Aaa_Accounting",
 		false,
 		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// System_Aaa_Accounting_AcctzPath represents the /openconfig-system/system/aaa/accounting/acctz YANG schema element.
+type System_Aaa_Accounting_AcctzPath struct {
+	*ygnmi.NodePath
+}
+
+// System_Aaa_Accounting_AcctzPathAny represents the wildcard version of the /openconfig-system/system/aaa/accounting/acctz YANG schema element.
+type System_Aaa_Accounting_AcctzPathAny struct {
+	*ygnmi.NodePath
+}
+
+// SourceRecordAny (list): A collection of counters for each service request type.
+//
+//	Defining module:      "openconfig-gnsi-acctz"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "source-records/source-record"
+//	Path from root:       "/system/aaa/accounting/acctz/source-records/source-record"
+func (n *System_Aaa_Accounting_AcctzPath) SourceRecordAny() *System_Aaa_Accounting_Acctz_SourceRecordPathAny {
+	ps := &System_Aaa_Accounting_Acctz_SourceRecordPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"source-records", "source-record"},
+			map[string]interface{}{"service": "*", "type": "*"},
+			n,
+		),
+	}
+	return ps
+}
+
+// SourceRecordAny (list): A collection of counters for each service request type.
+//
+//	Defining module:      "openconfig-gnsi-acctz"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "source-records/source-record"
+//	Path from root:       "/system/aaa/accounting/acctz/source-records/source-record"
+func (n *System_Aaa_Accounting_AcctzPathAny) SourceRecordAny() *System_Aaa_Accounting_Acctz_SourceRecordPathAny {
+	ps := &System_Aaa_Accounting_Acctz_SourceRecordPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"source-records", "source-record"},
+			map[string]interface{}{"service": "*", "type": "*"},
+			n,
+		),
+	}
+	return ps
+}
+
+// WithService sets System_Aaa_Accounting_Acctz_SourceRecordPathAny's key "service" to the specified value.
+// Service: oc.E_GnsiAcctz_ServiceRequest
+func (n *System_Aaa_Accounting_Acctz_SourceRecordPathAny) WithService(Service oc.E_GnsiAcctz_ServiceRequest) *System_Aaa_Accounting_Acctz_SourceRecordPathAny {
+	ygnmi.ModifyKey(n.NodePath, "service", Service)
+	return n
+}
+
+// WithType sets System_Aaa_Accounting_Acctz_SourceRecordPathAny's key "type" to the specified value.
+// Type: [oc.E_GnsiAcctz_CmdService_Enum, oc.E_GnsiAcctz_GrpcService_Enum]
+func (n *System_Aaa_Accounting_Acctz_SourceRecordPathAny) WithType(Type oc.System_Aaa_Accounting_Acctz_SourceRecord_Type_Union) *System_Aaa_Accounting_Acctz_SourceRecordPathAny {
+	ygnmi.ModifyKey(n.NodePath, "type", Type)
+	return n
+}
+
+// SourceRecord (list): A collection of counters for each service request type.
+//
+//	Defining module:      "openconfig-gnsi-acctz"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "source-records/source-record"
+//	Path from root:       "/system/aaa/accounting/acctz/source-records/source-record"
+//
+//	Service: oc.E_GnsiAcctz_ServiceRequest
+//	Type: [oc.E_GnsiAcctz_CmdService_Enum, oc.E_GnsiAcctz_GrpcService_Enum]
+func (n *System_Aaa_Accounting_AcctzPath) SourceRecord(Service oc.E_GnsiAcctz_ServiceRequest, Type oc.System_Aaa_Accounting_Acctz_SourceRecord_Type_Union) *System_Aaa_Accounting_Acctz_SourceRecordPath {
+	ps := &System_Aaa_Accounting_Acctz_SourceRecordPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"source-records", "source-record"},
+			map[string]interface{}{"service": Service, "type": Type},
+			n,
+		),
+	}
+	return ps
+}
+
+// SourceRecord (list): A collection of counters for each service request type.
+//
+//	Defining module:      "openconfig-gnsi-acctz"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "source-records/source-record"
+//	Path from root:       "/system/aaa/accounting/acctz/source-records/source-record"
+//
+//	Service: oc.E_GnsiAcctz_ServiceRequest
+//	Type: [oc.E_GnsiAcctz_CmdService_Enum, oc.E_GnsiAcctz_GrpcService_Enum]
+func (n *System_Aaa_Accounting_AcctzPathAny) SourceRecord(Service oc.E_GnsiAcctz_ServiceRequest, Type oc.System_Aaa_Accounting_Acctz_SourceRecord_Type_Union) *System_Aaa_Accounting_Acctz_SourceRecordPathAny {
+	ps := &System_Aaa_Accounting_Acctz_SourceRecordPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"source-records", "source-record"},
+			map[string]interface{}{"service": Service, "type": Type},
+			n,
+		),
+	}
+	return ps
+}
+
+// SourceRecordMap (list): A collection of counters for each service request type.
+//
+//	Defining module:      "openconfig-gnsi-acctz"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "source-records/source-record"
+//	Path from root:       "/system/aaa/accounting/acctz/source-records/source-record"
+func (n *System_Aaa_Accounting_AcctzPath) SourceRecordMap() *System_Aaa_Accounting_Acctz_SourceRecordPathMap {
+	ps := &System_Aaa_Accounting_Acctz_SourceRecordPathMap{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"source-records"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// SourceRecordMap (list): A collection of counters for each service request type.
+//
+//	Defining module:      "openconfig-gnsi-acctz"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "source-records/source-record"
+//	Path from root:       "/system/aaa/accounting/acctz/source-records/source-record"
+func (n *System_Aaa_Accounting_AcctzPathAny) SourceRecordMap() *System_Aaa_Accounting_Acctz_SourceRecordPathMapAny {
+	ps := &System_Aaa_Accounting_Acctz_SourceRecordPathMapAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"source-records"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_Aaa_Accounting_AcctzPath) State() ygnmi.SingletonQuery[*oc.System_Aaa_Accounting_Acctz] {
+	return ygnmi.NewSingletonQuery[*oc.System_Aaa_Accounting_Acctz](
+		"System_Aaa_Accounting_Acctz",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_Aaa_Accounting_AcctzPathAny) State() ygnmi.WildcardQuery[*oc.System_Aaa_Accounting_Acctz] {
+	return ygnmi.NewWildcardQuery[*oc.System_Aaa_Accounting_Acctz](
+		"System_Aaa_Accounting_Acctz",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// System_Aaa_Accounting_Acctz_SourceRecord_ServicePath represents the /openconfig-system/system/aaa/accounting/acctz/source-records/source-record/state/service YANG schema element.
+type System_Aaa_Accounting_Acctz_SourceRecord_ServicePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_Aaa_Accounting_Acctz_SourceRecord_ServicePathAny represents the wildcard version of the /openconfig-system/system/aaa/accounting/acctz/source-records/source-record/state/service YANG schema element.
+type System_Aaa_Accounting_Acctz_SourceRecord_ServicePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-gnsi-acctz"
+//	Instantiating module: "openconfig-gnsi-acctz"
+//	Path from parent:     "state/service"
+//	Path from root:       "/system/aaa/accounting/acctz/source-records/source-record/state/service"
+func (n *System_Aaa_Accounting_Acctz_SourceRecord_ServicePath) State() ygnmi.SingletonQuery[oc.E_GnsiAcctz_ServiceRequest] {
+	return ygnmi.NewSingletonQuery[oc.E_GnsiAcctz_ServiceRequest](
+		"System_Aaa_Accounting_Acctz_SourceRecord",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "service"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_GnsiAcctz_ServiceRequest, bool) {
+			ret := gs.(*oc.System_Aaa_Accounting_Acctz_SourceRecord).Service
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Aaa_Accounting_Acctz_SourceRecord) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-gnsi-acctz"
+//	Instantiating module: "openconfig-gnsi-acctz"
+//	Path from parent:     "state/service"
+//	Path from root:       "/system/aaa/accounting/acctz/source-records/source-record/state/service"
+func (n *System_Aaa_Accounting_Acctz_SourceRecord_ServicePathAny) State() ygnmi.WildcardQuery[oc.E_GnsiAcctz_ServiceRequest] {
+	return ygnmi.NewWildcardQuery[oc.E_GnsiAcctz_ServiceRequest](
+		"System_Aaa_Accounting_Acctz_SourceRecord",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "service"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_GnsiAcctz_ServiceRequest, bool) {
+			ret := gs.(*oc.System_Aaa_Accounting_Acctz_SourceRecord).Service
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Aaa_Accounting_Acctz_SourceRecord) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-gnsi-acctz"
+//	Instantiating module: "openconfig-gnsi-acctz"
+//	Path from parent:     "service"
+//	Path from root:       ""
+func (n *System_Aaa_Accounting_Acctz_SourceRecord_ServicePath) Config() ygnmi.ConfigQuery[oc.E_GnsiAcctz_ServiceRequest] {
+	return ygnmi.NewConfigQuery[oc.E_GnsiAcctz_ServiceRequest](
+		"System_Aaa_Accounting_Acctz_SourceRecord",
+		false,
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"service"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_GnsiAcctz_ServiceRequest, bool) {
+			ret := gs.(*oc.System_Aaa_Accounting_Acctz_SourceRecord).Service
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Aaa_Accounting_Acctz_SourceRecord) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-gnsi-acctz"
+//	Instantiating module: "openconfig-gnsi-acctz"
+//	Path from parent:     "service"
+//	Path from root:       ""
+func (n *System_Aaa_Accounting_Acctz_SourceRecord_ServicePathAny) Config() ygnmi.WildcardQuery[oc.E_GnsiAcctz_ServiceRequest] {
+	return ygnmi.NewWildcardQuery[oc.E_GnsiAcctz_ServiceRequest](
+		"System_Aaa_Accounting_Acctz_SourceRecord",
+		false,
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"service"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_GnsiAcctz_ServiceRequest, bool) {
+			ret := gs.(*oc.System_Aaa_Accounting_Acctz_SourceRecord).Service
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Aaa_Accounting_Acctz_SourceRecord) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// System_Aaa_Accounting_Acctz_SourceRecord_TypePath represents the /openconfig-system/system/aaa/accounting/acctz/source-records/source-record/state/type YANG schema element.
+type System_Aaa_Accounting_Acctz_SourceRecord_TypePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_Aaa_Accounting_Acctz_SourceRecord_TypePathAny represents the wildcard version of the /openconfig-system/system/aaa/accounting/acctz/source-records/source-record/state/type YANG schema element.
+type System_Aaa_Accounting_Acctz_SourceRecord_TypePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-gnsi-acctz"
+//	Instantiating module: "openconfig-gnsi-acctz"
+//	Path from parent:     "state/type"
+//	Path from root:       "/system/aaa/accounting/acctz/source-records/source-record/state/type"
+func (n *System_Aaa_Accounting_Acctz_SourceRecord_TypePath) State() ygnmi.SingletonQuery[oc.System_Aaa_Accounting_Acctz_SourceRecord_Type_Union] {
+	return ygnmi.NewSingletonQuery[oc.System_Aaa_Accounting_Acctz_SourceRecord_Type_Union](
+		"System_Aaa_Accounting_Acctz_SourceRecord",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.System_Aaa_Accounting_Acctz_SourceRecord_Type_Union, bool) {
+			ret := gs.(*oc.System_Aaa_Accounting_Acctz_SourceRecord).Type
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Aaa_Accounting_Acctz_SourceRecord) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-gnsi-acctz"
+//	Instantiating module: "openconfig-gnsi-acctz"
+//	Path from parent:     "state/type"
+//	Path from root:       "/system/aaa/accounting/acctz/source-records/source-record/state/type"
+func (n *System_Aaa_Accounting_Acctz_SourceRecord_TypePathAny) State() ygnmi.WildcardQuery[oc.System_Aaa_Accounting_Acctz_SourceRecord_Type_Union] {
+	return ygnmi.NewWildcardQuery[oc.System_Aaa_Accounting_Acctz_SourceRecord_Type_Union](
+		"System_Aaa_Accounting_Acctz_SourceRecord",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.System_Aaa_Accounting_Acctz_SourceRecord_Type_Union, bool) {
+			ret := gs.(*oc.System_Aaa_Accounting_Acctz_SourceRecord).Type
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Aaa_Accounting_Acctz_SourceRecord) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-gnsi-acctz"
+//	Instantiating module: "openconfig-gnsi-acctz"
+//	Path from parent:     "type"
+//	Path from root:       ""
+func (n *System_Aaa_Accounting_Acctz_SourceRecord_TypePath) Config() ygnmi.ConfigQuery[oc.System_Aaa_Accounting_Acctz_SourceRecord_Type_Union] {
+	return ygnmi.NewConfigQuery[oc.System_Aaa_Accounting_Acctz_SourceRecord_Type_Union](
+		"System_Aaa_Accounting_Acctz_SourceRecord",
+		false,
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.System_Aaa_Accounting_Acctz_SourceRecord_Type_Union, bool) {
+			ret := gs.(*oc.System_Aaa_Accounting_Acctz_SourceRecord).Type
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Aaa_Accounting_Acctz_SourceRecord) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-gnsi-acctz"
+//	Instantiating module: "openconfig-gnsi-acctz"
+//	Path from parent:     "type"
+//	Path from root:       ""
+func (n *System_Aaa_Accounting_Acctz_SourceRecord_TypePathAny) Config() ygnmi.WildcardQuery[oc.System_Aaa_Accounting_Acctz_SourceRecord_Type_Union] {
+	return ygnmi.NewWildcardQuery[oc.System_Aaa_Accounting_Acctz_SourceRecord_Type_Union](
+		"System_Aaa_Accounting_Acctz_SourceRecord",
+		false,
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.System_Aaa_Accounting_Acctz_SourceRecord_Type_Union, bool) {
+			ret := gs.(*oc.System_Aaa_Accounting_Acctz_SourceRecord).Type
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Aaa_Accounting_Acctz_SourceRecord) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// System_Aaa_Accounting_Acctz_SourceRecordPath represents the /openconfig-system/system/aaa/accounting/acctz/source-records/source-record YANG schema element.
+type System_Aaa_Accounting_Acctz_SourceRecordPath struct {
+	*ygnmi.NodePath
+}
+
+// System_Aaa_Accounting_Acctz_SourceRecordPathAny represents the wildcard version of the /openconfig-system/system/aaa/accounting/acctz/source-records/source-record YANG schema element.
+type System_Aaa_Accounting_Acctz_SourceRecordPathAny struct {
+	*ygnmi.NodePath
+}
+
+// System_Aaa_Accounting_Acctz_SourceRecordPathMap represents the /openconfig-system/system/aaa/accounting/acctz/source-records/source-record YANG schema element.
+type System_Aaa_Accounting_Acctz_SourceRecordPathMap struct {
+	*ygnmi.NodePath
+}
+
+// System_Aaa_Accounting_Acctz_SourceRecordPathMapAny represents the wildcard version of the /openconfig-system/system/aaa/accounting/acctz/source-records/source-record YANG schema element.
+type System_Aaa_Accounting_Acctz_SourceRecordPathMapAny struct {
+	*ygnmi.NodePath
+}
+
+// Counters (container): A collection of counters for gNSI.acctz record production per
+// service-type.
+//
+//	Defining module:      "openconfig-gnsi-acctz"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/counters"
+//	Path from root:       "/system/aaa/accounting/acctz/source-records/source-record/state/counters"
+func (n *System_Aaa_Accounting_Acctz_SourceRecordPath) Counters() *System_Aaa_Accounting_Acctz_SourceRecord_CountersPath {
+	ps := &System_Aaa_Accounting_Acctz_SourceRecord_CountersPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "counters"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// Counters (container): A collection of counters for gNSI.acctz record production per
+// service-type.
+//
+//	Defining module:      "openconfig-gnsi-acctz"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/counters"
+//	Path from root:       "/system/aaa/accounting/acctz/source-records/source-record/state/counters"
+func (n *System_Aaa_Accounting_Acctz_SourceRecordPathAny) Counters() *System_Aaa_Accounting_Acctz_SourceRecord_CountersPathAny {
+	ps := &System_Aaa_Accounting_Acctz_SourceRecord_CountersPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "counters"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// Service (leaf): service request type for the gNSI.acctz record.
+//
+//	Defining module:      "openconfig-gnsi-acctz"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/service"
+//	Path from root:       "/system/aaa/accounting/acctz/source-records/source-record/*/service"
+func (n *System_Aaa_Accounting_Acctz_SourceRecordPath) Service() *System_Aaa_Accounting_Acctz_SourceRecord_ServicePath {
+	ps := &System_Aaa_Accounting_Acctz_SourceRecord_ServicePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "service"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Service (leaf): service request type for the gNSI.acctz record.
+//
+//	Defining module:      "openconfig-gnsi-acctz"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/service"
+//	Path from root:       "/system/aaa/accounting/acctz/source-records/source-record/*/service"
+func (n *System_Aaa_Accounting_Acctz_SourceRecordPathAny) Service() *System_Aaa_Accounting_Acctz_SourceRecord_ServicePathAny {
+	ps := &System_Aaa_Accounting_Acctz_SourceRecord_ServicePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "service"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Type (leaf): service request application enum for the gNSI.acctz record.
+//
+//	Defining module:      "openconfig-gnsi-acctz"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/type"
+//	Path from root:       "/system/aaa/accounting/acctz/source-records/source-record/*/type"
+func (n *System_Aaa_Accounting_Acctz_SourceRecordPath) Type() *System_Aaa_Accounting_Acctz_SourceRecord_TypePath {
+	ps := &System_Aaa_Accounting_Acctz_SourceRecord_TypePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "type"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Type (leaf): service request application enum for the gNSI.acctz record.
+//
+//	Defining module:      "openconfig-gnsi-acctz"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/type"
+//	Path from root:       "/system/aaa/accounting/acctz/source-records/source-record/*/type"
+func (n *System_Aaa_Accounting_Acctz_SourceRecordPathAny) Type() *System_Aaa_Accounting_Acctz_SourceRecord_TypePathAny {
+	ps := &System_Aaa_Accounting_Acctz_SourceRecord_TypePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "type"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_Aaa_Accounting_Acctz_SourceRecordPath) State() ygnmi.SingletonQuery[*oc.System_Aaa_Accounting_Acctz_SourceRecord] {
+	return ygnmi.NewSingletonQuery[*oc.System_Aaa_Accounting_Acctz_SourceRecord](
+		"System_Aaa_Accounting_Acctz_SourceRecord",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_Aaa_Accounting_Acctz_SourceRecordPathAny) State() ygnmi.WildcardQuery[*oc.System_Aaa_Accounting_Acctz_SourceRecord] {
+	return ygnmi.NewWildcardQuery[*oc.System_Aaa_Accounting_Acctz_SourceRecord](
+		"System_Aaa_Accounting_Acctz_SourceRecord",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_Aaa_Accounting_Acctz_SourceRecordPathMap) State() ygnmi.SingletonQuery[map[oc.System_Aaa_Accounting_Acctz_SourceRecord_Key]*oc.System_Aaa_Accounting_Acctz_SourceRecord] {
+	return ygnmi.NewSingletonQuery[map[oc.System_Aaa_Accounting_Acctz_SourceRecord_Key]*oc.System_Aaa_Accounting_Acctz_SourceRecord](
+		"System_Aaa_Accounting_Acctz",
+		true,
+		false,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[oc.System_Aaa_Accounting_Acctz_SourceRecord_Key]*oc.System_Aaa_Accounting_Acctz_SourceRecord, bool) {
+			ret := gs.(*oc.System_Aaa_Accounting_Acctz).SourceRecord
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Aaa_Accounting_Acctz) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-gnsi-acctz:source-records"},
+			PostRelPath: []string{"openconfig-gnsi-acctz:source-record"},
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_Aaa_Accounting_Acctz_SourceRecordPathMapAny) State() ygnmi.WildcardQuery[map[oc.System_Aaa_Accounting_Acctz_SourceRecord_Key]*oc.System_Aaa_Accounting_Acctz_SourceRecord] {
+	return ygnmi.NewWildcardQuery[map[oc.System_Aaa_Accounting_Acctz_SourceRecord_Key]*oc.System_Aaa_Accounting_Acctz_SourceRecord](
+		"System_Aaa_Accounting_Acctz",
+		true,
+		false,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[oc.System_Aaa_Accounting_Acctz_SourceRecord_Key]*oc.System_Aaa_Accounting_Acctz_SourceRecord, bool) {
+			ret := gs.(*oc.System_Aaa_Accounting_Acctz).SourceRecord
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Aaa_Accounting_Acctz) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-gnsi-acctz:source-records"},
+			PostRelPath: []string{"openconfig-gnsi-acctz:source-record"},
+		},
+	)
+}
+
+// System_Aaa_Accounting_Acctz_SourceRecord_Counters_RecordsPath represents the /openconfig-system/system/aaa/accounting/acctz/source-records/source-record/state/counters/records YANG schema element.
+type System_Aaa_Accounting_Acctz_SourceRecord_Counters_RecordsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_Aaa_Accounting_Acctz_SourceRecord_Counters_RecordsPathAny represents the wildcard version of the /openconfig-system/system/aaa/accounting/acctz/source-records/source-record/state/counters/records YANG schema element.
+type System_Aaa_Accounting_Acctz_SourceRecord_Counters_RecordsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-gnsi-acctz"
+//	Instantiating module: "openconfig-gnsi-acctz"
+//	Path from parent:     "records"
+//	Path from root:       "/system/aaa/accounting/acctz/source-records/source-record/state/counters/records"
+func (n *System_Aaa_Accounting_Acctz_SourceRecord_Counters_RecordsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"System_Aaa_Accounting_Acctz_SourceRecord_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"records"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.System_Aaa_Accounting_Acctz_SourceRecord_Counters).Records
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Aaa_Accounting_Acctz_SourceRecord_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-gnsi-acctz"
+//	Instantiating module: "openconfig-gnsi-acctz"
+//	Path from parent:     "records"
+//	Path from root:       "/system/aaa/accounting/acctz/source-records/source-record/state/counters/records"
+func (n *System_Aaa_Accounting_Acctz_SourceRecord_Counters_RecordsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"System_Aaa_Accounting_Acctz_SourceRecord_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"records"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.System_Aaa_Accounting_Acctz_SourceRecord_Counters).Records
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Aaa_Accounting_Acctz_SourceRecord_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// System_Aaa_Accounting_Acctz_SourceRecord_CountersPath represents the /openconfig-system/system/aaa/accounting/acctz/source-records/source-record/state/counters YANG schema element.
+type System_Aaa_Accounting_Acctz_SourceRecord_CountersPath struct {
+	*ygnmi.NodePath
+}
+
+// System_Aaa_Accounting_Acctz_SourceRecord_CountersPathAny represents the wildcard version of the /openconfig-system/system/aaa/accounting/acctz/source-records/source-record/state/counters YANG schema element.
+type System_Aaa_Accounting_Acctz_SourceRecord_CountersPathAny struct {
+	*ygnmi.NodePath
+}
+
+// Records (leaf): The total number of records produced for the service-type.
+//
+//	Defining module:      "openconfig-gnsi-acctz"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "records"
+//	Path from root:       "/system/aaa/accounting/acctz/source-records/source-record/state/counters/records"
+func (n *System_Aaa_Accounting_Acctz_SourceRecord_CountersPath) Records() *System_Aaa_Accounting_Acctz_SourceRecord_Counters_RecordsPath {
+	ps := &System_Aaa_Accounting_Acctz_SourceRecord_Counters_RecordsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"records"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Records (leaf): The total number of records produced for the service-type.
+//
+//	Defining module:      "openconfig-gnsi-acctz"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "records"
+//	Path from root:       "/system/aaa/accounting/acctz/source-records/source-record/state/counters/records"
+func (n *System_Aaa_Accounting_Acctz_SourceRecord_CountersPathAny) Records() *System_Aaa_Accounting_Acctz_SourceRecord_Counters_RecordsPathAny {
+	ps := &System_Aaa_Accounting_Acctz_SourceRecord_Counters_RecordsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"records"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_Aaa_Accounting_Acctz_SourceRecord_CountersPath) State() ygnmi.SingletonQuery[*oc.System_Aaa_Accounting_Acctz_SourceRecord_Counters] {
+	return ygnmi.NewSingletonQuery[*oc.System_Aaa_Accounting_Acctz_SourceRecord_Counters](
+		"System_Aaa_Accounting_Acctz_SourceRecord_Counters",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_Aaa_Accounting_Acctz_SourceRecord_CountersPathAny) State() ygnmi.WildcardQuery[*oc.System_Aaa_Accounting_Acctz_SourceRecord_Counters] {
+	return ygnmi.NewWildcardQuery[*oc.System_Aaa_Accounting_Acctz_SourceRecord_Counters](
+		"System_Aaa_Accounting_Acctz_SourceRecord_Counters",
+		true,
+		false,
 		false,
 		false,
 		true,
@@ -17134,6 +18100,100 @@ func (n *System_ClockPathAny) Config() ygnmi.WildcardQuery[*oc.System_Clock] {
 	)
 }
 
+// System_Console_EnabledPath represents the /openconfig-system/system/console/state/enabled YANG schema element.
+type System_Console_EnabledPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_Console_EnabledPathAny represents the wildcard version of the /openconfig-system/system/console/state/enabled YANG schema element.
+type System_Console_EnabledPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-gnsi-credentialz"
+//	Instantiating module: "openconfig-gnsi-credentialz"
+//	Path from parent:     "state/enabled"
+//	Path from root:       "/system/console/state/enabled"
+func (n *System_Console_EnabledPath) State() ygnmi.SingletonQuery[bool] {
+	return ygnmi.NewSingletonQuery[bool](
+		"System_Console",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "enabled"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.System_Console).Enabled
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Console) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-gnsi-credentialz"
+//	Instantiating module: "openconfig-gnsi-credentialz"
+//	Path from parent:     "state/enabled"
+//	Path from root:       "/system/console/state/enabled"
+func (n *System_Console_EnabledPathAny) State() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewWildcardQuery[bool](
+		"System_Console",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "enabled"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.System_Console).Enabled
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Console) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
 // System_ConsolePath represents the /openconfig-system/system/console YANG schema element.
 type System_ConsolePath struct {
 	*ygnmi.NodePath
@@ -17176,6 +18236,42 @@ func (n *System_ConsolePathAny) Counters() *System_Console_CountersPathAny {
 			map[string]interface{}{},
 			n,
 		),
+	}
+	return ps
+}
+
+// Enabled (leaf): Whether GLOME is enabled or not.
+//
+//	Defining module:      "openconfig-gnsi-credentialz"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/enabled"
+//	Path from root:       "/system/console/state/enabled"
+func (n *System_ConsolePath) Enabled() *System_Console_EnabledPath {
+	ps := &System_Console_EnabledPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "enabled"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Enabled (leaf): Whether GLOME is enabled or not.
+//
+//	Defining module:      "openconfig-gnsi-credentialz"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/enabled"
+//	Path from root:       "/system/console/state/enabled"
+func (n *System_ConsolePathAny) Enabled() *System_Console_EnabledPathAny {
+	ps := &System_Console_EnabledPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "enabled"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
 	}
 	return ps
 }
@@ -37836,17 +38932,17 @@ type System_GrpcServerPathMapAny struct {
 	*ygnmi.NodePath
 }
 
-// AcctzCounters (container): A collection of counters from the gNSI.acctz module
-// for acctz clients and sources.
+// Acctz (container): A collection of counters from the gNSI.acctz module that exist
+// per grpc server.
 //
 //	Defining module:      "openconfig-gnsi-acctz"
 //	Instantiating module: "openconfig-system"
-//	Path from parent:     "acctz-counters"
-//	Path from root:       "/system/grpc-servers/grpc-server/acctz-counters"
-func (n *System_GrpcServerPath) AcctzCounters() *System_GrpcServer_AcctzCountersPath {
-	ps := &System_GrpcServer_AcctzCountersPath{
+//	Path from parent:     "acctz"
+//	Path from root:       "/system/grpc-servers/grpc-server/acctz"
+func (n *System_GrpcServerPath) Acctz() *System_GrpcServer_AcctzPath {
+	ps := &System_GrpcServer_AcctzPath{
 		NodePath: ygnmi.NewNodePath(
-			[]string{"acctz-counters"},
+			[]string{"acctz"},
 			map[string]interface{}{},
 			n,
 		),
@@ -37854,17 +38950,17 @@ func (n *System_GrpcServerPath) AcctzCounters() *System_GrpcServer_AcctzCounters
 	return ps
 }
 
-// AcctzCounters (container): A collection of counters from the gNSI.acctz module
-// for acctz clients and sources.
+// Acctz (container): A collection of counters from the gNSI.acctz module that exist
+// per grpc server.
 //
 //	Defining module:      "openconfig-gnsi-acctz"
 //	Instantiating module: "openconfig-system"
-//	Path from parent:     "acctz-counters"
-//	Path from root:       "/system/grpc-servers/grpc-server/acctz-counters"
-func (n *System_GrpcServerPathAny) AcctzCounters() *System_GrpcServer_AcctzCountersPathAny {
-	ps := &System_GrpcServer_AcctzCountersPathAny{
+//	Path from parent:     "acctz"
+//	Path from root:       "/system/grpc-servers/grpc-server/acctz"
+func (n *System_GrpcServerPathAny) Acctz() *System_GrpcServer_AcctzPathAny {
+	ps := &System_GrpcServer_AcctzPathAny{
 		NodePath: ygnmi.NewNodePath(
-			[]string{"acctz-counters"},
+			[]string{"acctz"},
 			map[string]interface{}{},
 			n,
 		),
@@ -39124,121 +40220,27 @@ func (n *System_GrpcServerPathMapAny) Config() ygnmi.WildcardQuery[map[string]*o
 	)
 }
 
-// System_GrpcServer_AcctzCounters_CountersLastClearedPath represents the /openconfig-system/system/grpc-servers/grpc-server/acctz-counters/state/counters-last-cleared YANG schema element.
-type System_GrpcServer_AcctzCounters_CountersLastClearedPath struct {
-	*ygnmi.NodePath
-	parent ygnmi.PathStruct
-}
-
-// System_GrpcServer_AcctzCounters_CountersLastClearedPathAny represents the wildcard version of the /openconfig-system/system/grpc-servers/grpc-server/acctz-counters/state/counters-last-cleared YANG schema element.
-type System_GrpcServer_AcctzCounters_CountersLastClearedPathAny struct {
-	*ygnmi.NodePath
-	parent ygnmi.PathStruct
-}
-
-// State returns a Query that can be used in gNMI operations.
-//
-//	Defining module:      "openconfig-gnsi-acctz"
-//	Instantiating module: "openconfig-gnsi-acctz"
-//	Path from parent:     "state/counters-last-cleared"
-//	Path from root:       "/system/grpc-servers/grpc-server/acctz-counters/state/counters-last-cleared"
-func (n *System_GrpcServer_AcctzCounters_CountersLastClearedPath) State() ygnmi.SingletonQuery[uint64] {
-	return ygnmi.NewSingletonQuery[uint64](
-		"System_GrpcServer_AcctzCounters",
-		true,
-		false,
-		true,
-		true,
-		true,
-		false,
-		ygnmi.NewNodePath(
-			[]string{"state", "counters-last-cleared"},
-			nil,
-			n.parent,
-		),
-		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
-			ret := gs.(*oc.System_GrpcServer_AcctzCounters).CountersLastCleared
-			if ret == nil {
-				var zero uint64
-				return zero, false
-			}
-			return *ret, true
-		},
-		func() ygot.ValidatedGoStruct { return new(oc.System_GrpcServer_AcctzCounters) },
-		func() *ytypes.Schema {
-			return &ytypes.Schema{
-				Root:       &oc.Root{},
-				SchemaTree: oc.SchemaTree,
-				Unmarshal:  oc.Unmarshal,
-			}
-		},
-		nil,
-		nil,
-	)
-}
-
-// State returns a Query that can be used in gNMI operations.
-//
-//	Defining module:      "openconfig-gnsi-acctz"
-//	Instantiating module: "openconfig-gnsi-acctz"
-//	Path from parent:     "state/counters-last-cleared"
-//	Path from root:       "/system/grpc-servers/grpc-server/acctz-counters/state/counters-last-cleared"
-func (n *System_GrpcServer_AcctzCounters_CountersLastClearedPathAny) State() ygnmi.WildcardQuery[uint64] {
-	return ygnmi.NewWildcardQuery[uint64](
-		"System_GrpcServer_AcctzCounters",
-		true,
-		false,
-		true,
-		true,
-		true,
-		false,
-		ygnmi.NewNodePath(
-			[]string{"state", "counters-last-cleared"},
-			nil,
-			n.parent,
-		),
-		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
-			ret := gs.(*oc.System_GrpcServer_AcctzCounters).CountersLastCleared
-			if ret == nil {
-				var zero uint64
-				return zero, false
-			}
-			return *ret, true
-		},
-		func() ygot.ValidatedGoStruct { return new(oc.System_GrpcServer_AcctzCounters) },
-		func() *ytypes.Schema {
-			return &ytypes.Schema{
-				Root:       &oc.Root{},
-				SchemaTree: oc.SchemaTree,
-				Unmarshal:  oc.Unmarshal,
-			}
-		},
-		nil,
-		nil,
-	)
-}
-
-// System_GrpcServer_AcctzCountersPath represents the /openconfig-system/system/grpc-servers/grpc-server/acctz-counters YANG schema element.
-type System_GrpcServer_AcctzCountersPath struct {
+// System_GrpcServer_AcctzPath represents the /openconfig-system/system/grpc-servers/grpc-server/acctz YANG schema element.
+type System_GrpcServer_AcctzPath struct {
 	*ygnmi.NodePath
 }
 
-// System_GrpcServer_AcctzCountersPathAny represents the wildcard version of the /openconfig-system/system/grpc-servers/grpc-server/acctz-counters YANG schema element.
-type System_GrpcServer_AcctzCountersPathAny struct {
+// System_GrpcServer_AcctzPathAny represents the wildcard version of the /openconfig-system/system/grpc-servers/grpc-server/acctz YANG schema element.
+type System_GrpcServer_AcctzPathAny struct {
 	*ygnmi.NodePath
 }
 
-// ClientCounters (container): A collection of counters that were collected by the gNSI.acctz
+// Counters (container): A collection of counters that were collected by the gNSI.acctz
 // module while servicing acctz clients.
 //
 //	Defining module:      "openconfig-gnsi-acctz"
 //	Instantiating module: "openconfig-system"
-//	Path from parent:     "state/client-counters"
-//	Path from root:       "/system/grpc-servers/grpc-server/acctz-counters/state/client-counters"
-func (n *System_GrpcServer_AcctzCountersPath) ClientCounters() *System_GrpcServer_AcctzCounters_ClientCountersPath {
-	ps := &System_GrpcServer_AcctzCounters_ClientCountersPath{
+//	Path from parent:     "state/counters"
+//	Path from root:       "/system/grpc-servers/grpc-server/acctz/state/counters"
+func (n *System_GrpcServer_AcctzPath) Counters() *System_GrpcServer_Acctz_CountersPath {
+	ps := &System_GrpcServer_Acctz_CountersPath{
 		NodePath: ygnmi.NewNodePath(
-			[]string{"state", "client-counters"},
+			[]string{"state", "counters"},
 			map[string]interface{}{},
 			n,
 		),
@@ -39246,185 +40248,17 @@ func (n *System_GrpcServer_AcctzCountersPath) ClientCounters() *System_GrpcServe
 	return ps
 }
 
-// ClientCounters (container): A collection of counters that were collected by the gNSI.acctz
+// Counters (container): A collection of counters that were collected by the gNSI.acctz
 // module while servicing acctz clients.
 //
 //	Defining module:      "openconfig-gnsi-acctz"
 //	Instantiating module: "openconfig-system"
-//	Path from parent:     "state/client-counters"
-//	Path from root:       "/system/grpc-servers/grpc-server/acctz-counters/state/client-counters"
-func (n *System_GrpcServer_AcctzCountersPathAny) ClientCounters() *System_GrpcServer_AcctzCounters_ClientCountersPathAny {
-	ps := &System_GrpcServer_AcctzCounters_ClientCountersPathAny{
+//	Path from parent:     "state/counters"
+//	Path from root:       "/system/grpc-servers/grpc-server/acctz/state/counters"
+func (n *System_GrpcServer_AcctzPathAny) Counters() *System_GrpcServer_Acctz_CountersPathAny {
+	ps := &System_GrpcServer_Acctz_CountersPathAny{
 		NodePath: ygnmi.NewNodePath(
-			[]string{"state", "client-counters"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-	return ps
-}
-
-// CountersLastCleared (leaf): The last time that the counters were cleared (reset to
-// zero). This value is reported as nanoseconds since epoch
-// (January 1st, 1970 00:00:00 GMT).
-//
-//	Defining module:      "openconfig-gnsi-acctz"
-//	Instantiating module: "openconfig-system"
-//	Path from parent:     "state/counters-last-cleared"
-//	Path from root:       "/system/grpc-servers/grpc-server/acctz-counters/state/counters-last-cleared"
-func (n *System_GrpcServer_AcctzCountersPath) CountersLastCleared() *System_GrpcServer_AcctzCounters_CountersLastClearedPath {
-	ps := &System_GrpcServer_AcctzCounters_CountersLastClearedPath{
-		NodePath: ygnmi.NewNodePath(
-			[]string{"state", "counters-last-cleared"},
-			map[string]interface{}{},
-			n,
-		),
-		parent: n,
-	}
-	return ps
-}
-
-// CountersLastCleared (leaf): The last time that the counters were cleared (reset to
-// zero). This value is reported as nanoseconds since epoch
-// (January 1st, 1970 00:00:00 GMT).
-//
-//	Defining module:      "openconfig-gnsi-acctz"
-//	Instantiating module: "openconfig-system"
-//	Path from parent:     "state/counters-last-cleared"
-//	Path from root:       "/system/grpc-servers/grpc-server/acctz-counters/state/counters-last-cleared"
-func (n *System_GrpcServer_AcctzCountersPathAny) CountersLastCleared() *System_GrpcServer_AcctzCounters_CountersLastClearedPathAny {
-	ps := &System_GrpcServer_AcctzCounters_CountersLastClearedPathAny{
-		NodePath: ygnmi.NewNodePath(
-			[]string{"state", "counters-last-cleared"},
-			map[string]interface{}{},
-			n,
-		),
-		parent: n,
-	}
-	return ps
-}
-
-// SourceRecordsAny (list): The total number of times the gNSI.authz module denied access
-// to a RPC.
-//
-//	Defining module:      "openconfig-gnsi-acctz"
-//	Instantiating module: "openconfig-system"
-//	Path from parent:     "source-counters/source-records"
-//	Path from root:       "/system/grpc-servers/grpc-server/acctz-counters/source-counters/source-records"
-func (n *System_GrpcServer_AcctzCountersPath) SourceRecordsAny() *System_GrpcServer_AcctzCounters_SourceRecordsPathAny {
-	ps := &System_GrpcServer_AcctzCounters_SourceRecordsPathAny{
-		NodePath: ygnmi.NewNodePath(
-			[]string{"source-counters", "source-records"},
-			map[string]interface{}{"service": "*", "type": "*"},
-			n,
-		),
-	}
-	return ps
-}
-
-// SourceRecordsAny (list): The total number of times the gNSI.authz module denied access
-// to a RPC.
-//
-//	Defining module:      "openconfig-gnsi-acctz"
-//	Instantiating module: "openconfig-system"
-//	Path from parent:     "source-counters/source-records"
-//	Path from root:       "/system/grpc-servers/grpc-server/acctz-counters/source-counters/source-records"
-func (n *System_GrpcServer_AcctzCountersPathAny) SourceRecordsAny() *System_GrpcServer_AcctzCounters_SourceRecordsPathAny {
-	ps := &System_GrpcServer_AcctzCounters_SourceRecordsPathAny{
-		NodePath: ygnmi.NewNodePath(
-			[]string{"source-counters", "source-records"},
-			map[string]interface{}{"service": "*", "type": "*"},
-			n,
-		),
-	}
-	return ps
-}
-
-// WithService sets System_GrpcServer_AcctzCounters_SourceRecordsPathAny's key "service" to the specified value.
-// Service: oc.E_GnsiAcctz_ServiceRequest
-func (n *System_GrpcServer_AcctzCounters_SourceRecordsPathAny) WithService(Service oc.E_GnsiAcctz_ServiceRequest) *System_GrpcServer_AcctzCounters_SourceRecordsPathAny {
-	ygnmi.ModifyKey(n.NodePath, "service", Service)
-	return n
-}
-
-// WithType sets System_GrpcServer_AcctzCounters_SourceRecordsPathAny's key "type" to the specified value.
-// Type: [oc.E_GnsiAcctz_CmdService_Enum, oc.E_GnsiAcctz_GrpcService_Enum]
-func (n *System_GrpcServer_AcctzCounters_SourceRecordsPathAny) WithType(Type oc.System_GrpcServer_AcctzCounters_SourceRecords_Type_Union) *System_GrpcServer_AcctzCounters_SourceRecordsPathAny {
-	ygnmi.ModifyKey(n.NodePath, "type", Type)
-	return n
-}
-
-// SourceRecords (list): The total number of times the gNSI.authz module denied access
-// to a RPC.
-//
-//	Defining module:      "openconfig-gnsi-acctz"
-//	Instantiating module: "openconfig-system"
-//	Path from parent:     "source-counters/source-records"
-//	Path from root:       "/system/grpc-servers/grpc-server/acctz-counters/source-counters/source-records"
-//
-//	Service: oc.E_GnsiAcctz_ServiceRequest
-//	Type: [oc.E_GnsiAcctz_CmdService_Enum, oc.E_GnsiAcctz_GrpcService_Enum]
-func (n *System_GrpcServer_AcctzCountersPath) SourceRecords(Service oc.E_GnsiAcctz_ServiceRequest, Type oc.System_GrpcServer_AcctzCounters_SourceRecords_Type_Union) *System_GrpcServer_AcctzCounters_SourceRecordsPath {
-	ps := &System_GrpcServer_AcctzCounters_SourceRecordsPath{
-		NodePath: ygnmi.NewNodePath(
-			[]string{"source-counters", "source-records"},
-			map[string]interface{}{"service": Service, "type": Type},
-			n,
-		),
-	}
-	return ps
-}
-
-// SourceRecords (list): The total number of times the gNSI.authz module denied access
-// to a RPC.
-//
-//	Defining module:      "openconfig-gnsi-acctz"
-//	Instantiating module: "openconfig-system"
-//	Path from parent:     "source-counters/source-records"
-//	Path from root:       "/system/grpc-servers/grpc-server/acctz-counters/source-counters/source-records"
-//
-//	Service: oc.E_GnsiAcctz_ServiceRequest
-//	Type: [oc.E_GnsiAcctz_CmdService_Enum, oc.E_GnsiAcctz_GrpcService_Enum]
-func (n *System_GrpcServer_AcctzCountersPathAny) SourceRecords(Service oc.E_GnsiAcctz_ServiceRequest, Type oc.System_GrpcServer_AcctzCounters_SourceRecords_Type_Union) *System_GrpcServer_AcctzCounters_SourceRecordsPathAny {
-	ps := &System_GrpcServer_AcctzCounters_SourceRecordsPathAny{
-		NodePath: ygnmi.NewNodePath(
-			[]string{"source-counters", "source-records"},
-			map[string]interface{}{"service": Service, "type": Type},
-			n,
-		),
-	}
-	return ps
-}
-
-// SourceRecordsMap (list): The total number of times the gNSI.authz module denied access
-// to a RPC.
-//
-//	Defining module:      "openconfig-gnsi-acctz"
-//	Instantiating module: "openconfig-system"
-//	Path from parent:     "source-counters/source-records"
-//	Path from root:       "/system/grpc-servers/grpc-server/acctz-counters/source-counters/source-records"
-func (n *System_GrpcServer_AcctzCountersPath) SourceRecordsMap() *System_GrpcServer_AcctzCounters_SourceRecordsPathMap {
-	ps := &System_GrpcServer_AcctzCounters_SourceRecordsPathMap{
-		NodePath: ygnmi.NewNodePath(
-			[]string{"source-counters"},
-			map[string]interface{}{},
-			n,
-		),
-	}
-	return ps
-}
-
-// SourceRecordsMap (list): The total number of times the gNSI.authz module denied access
-// to a RPC.
-//
-//	Defining module:      "openconfig-gnsi-acctz"
-//	Instantiating module: "openconfig-system"
-//	Path from parent:     "source-counters/source-records"
-//	Path from root:       "/system/grpc-servers/grpc-server/acctz-counters/source-counters/source-records"
-func (n *System_GrpcServer_AcctzCountersPathAny) SourceRecordsMap() *System_GrpcServer_AcctzCounters_SourceRecordsPathMapAny {
-	ps := &System_GrpcServer_AcctzCounters_SourceRecordsPathMapAny{
-		NodePath: ygnmi.NewNodePath(
-			[]string{"source-counters"},
+			[]string{"state", "counters"},
 			map[string]interface{}{},
 			n,
 		),
@@ -39433,9 +40267,9 @@ func (n *System_GrpcServer_AcctzCountersPathAny) SourceRecordsMap() *System_Grpc
 }
 
 // State returns a Query that can be used in gNMI operations.
-func (n *System_GrpcServer_AcctzCountersPath) State() ygnmi.SingletonQuery[*oc.System_GrpcServer_AcctzCounters] {
-	return ygnmi.NewSingletonQuery[*oc.System_GrpcServer_AcctzCounters](
-		"System_GrpcServer_AcctzCounters",
+func (n *System_GrpcServer_AcctzPath) State() ygnmi.SingletonQuery[*oc.System_GrpcServer_Acctz] {
+	return ygnmi.NewSingletonQuery[*oc.System_GrpcServer_Acctz](
+		"System_GrpcServer_Acctz",
 		true,
 		false,
 		false,
@@ -39458,9 +40292,9 @@ func (n *System_GrpcServer_AcctzCountersPath) State() ygnmi.SingletonQuery[*oc.S
 }
 
 // State returns a Query that can be used in gNMI operations.
-func (n *System_GrpcServer_AcctzCountersPathAny) State() ygnmi.WildcardQuery[*oc.System_GrpcServer_AcctzCounters] {
-	return ygnmi.NewWildcardQuery[*oc.System_GrpcServer_AcctzCounters](
-		"System_GrpcServer_AcctzCounters",
+func (n *System_GrpcServer_AcctzPathAny) State() ygnmi.WildcardQuery[*oc.System_GrpcServer_Acctz] {
+	return ygnmi.NewWildcardQuery[*oc.System_GrpcServer_Acctz](
+		"System_GrpcServer_Acctz",
 		true,
 		false,
 		false,
@@ -39482,14 +40316,14 @@ func (n *System_GrpcServer_AcctzCountersPathAny) State() ygnmi.WildcardQuery[*oc
 	)
 }
 
-// System_GrpcServer_AcctzCounters_ClientCounters_HistoryIstruncatedPath represents the /openconfig-system/system/grpc-servers/grpc-server/acctz-counters/state/client-counters/history-istruncated YANG schema element.
-type System_GrpcServer_AcctzCounters_ClientCounters_HistoryIstruncatedPath struct {
+// System_GrpcServer_Acctz_Counters_HistoryIstruncatedPath represents the /openconfig-system/system/grpc-servers/grpc-server/acctz/state/counters/history-istruncated YANG schema element.
+type System_GrpcServer_Acctz_Counters_HistoryIstruncatedPath struct {
 	*ygnmi.NodePath
 	parent ygnmi.PathStruct
 }
 
-// System_GrpcServer_AcctzCounters_ClientCounters_HistoryIstruncatedPathAny represents the wildcard version of the /openconfig-system/system/grpc-servers/grpc-server/acctz-counters/state/client-counters/history-istruncated YANG schema element.
-type System_GrpcServer_AcctzCounters_ClientCounters_HistoryIstruncatedPathAny struct {
+// System_GrpcServer_Acctz_Counters_HistoryIstruncatedPathAny represents the wildcard version of the /openconfig-system/system/grpc-servers/grpc-server/acctz/state/counters/history-istruncated YANG schema element.
+type System_GrpcServer_Acctz_Counters_HistoryIstruncatedPathAny struct {
 	*ygnmi.NodePath
 	parent ygnmi.PathStruct
 }
@@ -39499,10 +40333,10 @@ type System_GrpcServer_AcctzCounters_ClientCounters_HistoryIstruncatedPathAny st
 //	Defining module:      "openconfig-gnsi-acctz"
 //	Instantiating module: "openconfig-gnsi-acctz"
 //	Path from parent:     "history-istruncated"
-//	Path from root:       "/system/grpc-servers/grpc-server/acctz-counters/state/client-counters/history-istruncated"
-func (n *System_GrpcServer_AcctzCounters_ClientCounters_HistoryIstruncatedPath) State() ygnmi.SingletonQuery[uint64] {
+//	Path from root:       "/system/grpc-servers/grpc-server/acctz/state/counters/history-istruncated"
+func (n *System_GrpcServer_Acctz_Counters_HistoryIstruncatedPath) State() ygnmi.SingletonQuery[uint64] {
 	return ygnmi.NewSingletonQuery[uint64](
-		"System_GrpcServer_AcctzCounters_ClientCounters",
+		"System_GrpcServer_Acctz_Counters",
 		true,
 		false,
 		true,
@@ -39515,14 +40349,14 @@ func (n *System_GrpcServer_AcctzCounters_ClientCounters_HistoryIstruncatedPath) 
 			n.parent,
 		),
 		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
-			ret := gs.(*oc.System_GrpcServer_AcctzCounters_ClientCounters).HistoryIstruncated
+			ret := gs.(*oc.System_GrpcServer_Acctz_Counters).HistoryIstruncated
 			if ret == nil {
 				var zero uint64
 				return zero, false
 			}
 			return *ret, true
 		},
-		func() ygot.ValidatedGoStruct { return new(oc.System_GrpcServer_AcctzCounters_ClientCounters) },
+		func() ygot.ValidatedGoStruct { return new(oc.System_GrpcServer_Acctz_Counters) },
 		func() *ytypes.Schema {
 			return &ytypes.Schema{
 				Root:       &oc.Root{},
@@ -39540,10 +40374,10 @@ func (n *System_GrpcServer_AcctzCounters_ClientCounters_HistoryIstruncatedPath) 
 //	Defining module:      "openconfig-gnsi-acctz"
 //	Instantiating module: "openconfig-gnsi-acctz"
 //	Path from parent:     "history-istruncated"
-//	Path from root:       "/system/grpc-servers/grpc-server/acctz-counters/state/client-counters/history-istruncated"
-func (n *System_GrpcServer_AcctzCounters_ClientCounters_HistoryIstruncatedPathAny) State() ygnmi.WildcardQuery[uint64] {
+//	Path from root:       "/system/grpc-servers/grpc-server/acctz/state/counters/history-istruncated"
+func (n *System_GrpcServer_Acctz_Counters_HistoryIstruncatedPathAny) State() ygnmi.WildcardQuery[uint64] {
 	return ygnmi.NewWildcardQuery[uint64](
-		"System_GrpcServer_AcctzCounters_ClientCounters",
+		"System_GrpcServer_Acctz_Counters",
 		true,
 		false,
 		true,
@@ -39556,14 +40390,14 @@ func (n *System_GrpcServer_AcctzCounters_ClientCounters_HistoryIstruncatedPathAn
 			n.parent,
 		),
 		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
-			ret := gs.(*oc.System_GrpcServer_AcctzCounters_ClientCounters).HistoryIstruncated
+			ret := gs.(*oc.System_GrpcServer_Acctz_Counters).HistoryIstruncated
 			if ret == nil {
 				var zero uint64
 				return zero, false
 			}
 			return *ret, true
 		},
-		func() ygot.ValidatedGoStruct { return new(oc.System_GrpcServer_AcctzCounters_ClientCounters) },
+		func() ygot.ValidatedGoStruct { return new(oc.System_GrpcServer_Acctz_Counters) },
 		func() *ytypes.Schema {
 			return &ytypes.Schema{
 				Root:       &oc.Root{},
@@ -39576,108 +40410,14 @@ func (n *System_GrpcServer_AcctzCounters_ClientCounters_HistoryIstruncatedPathAn
 	)
 }
 
-// System_GrpcServer_AcctzCounters_ClientCounters_IdleTimeoutsPath represents the /openconfig-system/system/grpc-servers/grpc-server/acctz-counters/state/client-counters/idle-timeouts YANG schema element.
-type System_GrpcServer_AcctzCounters_ClientCounters_IdleTimeoutsPath struct {
+// System_GrpcServer_Acctz_Counters_RecordRequestsPath represents the /openconfig-system/system/grpc-servers/grpc-server/acctz/state/counters/record-requests YANG schema element.
+type System_GrpcServer_Acctz_Counters_RecordRequestsPath struct {
 	*ygnmi.NodePath
 	parent ygnmi.PathStruct
 }
 
-// System_GrpcServer_AcctzCounters_ClientCounters_IdleTimeoutsPathAny represents the wildcard version of the /openconfig-system/system/grpc-servers/grpc-server/acctz-counters/state/client-counters/idle-timeouts YANG schema element.
-type System_GrpcServer_AcctzCounters_ClientCounters_IdleTimeoutsPathAny struct {
-	*ygnmi.NodePath
-	parent ygnmi.PathStruct
-}
-
-// State returns a Query that can be used in gNMI operations.
-//
-//	Defining module:      "openconfig-gnsi-acctz"
-//	Instantiating module: "openconfig-gnsi-acctz"
-//	Path from parent:     "idle-timeouts"
-//	Path from root:       "/system/grpc-servers/grpc-server/acctz-counters/state/client-counters/idle-timeouts"
-func (n *System_GrpcServer_AcctzCounters_ClientCounters_IdleTimeoutsPath) State() ygnmi.SingletonQuery[uint64] {
-	return ygnmi.NewSingletonQuery[uint64](
-		"System_GrpcServer_AcctzCounters_ClientCounters",
-		true,
-		false,
-		true,
-		true,
-		true,
-		false,
-		ygnmi.NewNodePath(
-			[]string{"idle-timeouts"},
-			nil,
-			n.parent,
-		),
-		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
-			ret := gs.(*oc.System_GrpcServer_AcctzCounters_ClientCounters).IdleTimeouts
-			if ret == nil {
-				var zero uint64
-				return zero, false
-			}
-			return *ret, true
-		},
-		func() ygot.ValidatedGoStruct { return new(oc.System_GrpcServer_AcctzCounters_ClientCounters) },
-		func() *ytypes.Schema {
-			return &ytypes.Schema{
-				Root:       &oc.Root{},
-				SchemaTree: oc.SchemaTree,
-				Unmarshal:  oc.Unmarshal,
-			}
-		},
-		nil,
-		nil,
-	)
-}
-
-// State returns a Query that can be used in gNMI operations.
-//
-//	Defining module:      "openconfig-gnsi-acctz"
-//	Instantiating module: "openconfig-gnsi-acctz"
-//	Path from parent:     "idle-timeouts"
-//	Path from root:       "/system/grpc-servers/grpc-server/acctz-counters/state/client-counters/idle-timeouts"
-func (n *System_GrpcServer_AcctzCounters_ClientCounters_IdleTimeoutsPathAny) State() ygnmi.WildcardQuery[uint64] {
-	return ygnmi.NewWildcardQuery[uint64](
-		"System_GrpcServer_AcctzCounters_ClientCounters",
-		true,
-		false,
-		true,
-		true,
-		true,
-		false,
-		ygnmi.NewNodePath(
-			[]string{"idle-timeouts"},
-			nil,
-			n.parent,
-		),
-		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
-			ret := gs.(*oc.System_GrpcServer_AcctzCounters_ClientCounters).IdleTimeouts
-			if ret == nil {
-				var zero uint64
-				return zero, false
-			}
-			return *ret, true
-		},
-		func() ygot.ValidatedGoStruct { return new(oc.System_GrpcServer_AcctzCounters_ClientCounters) },
-		func() *ytypes.Schema {
-			return &ytypes.Schema{
-				Root:       &oc.Root{},
-				SchemaTree: oc.SchemaTree,
-				Unmarshal:  oc.Unmarshal,
-			}
-		},
-		nil,
-		nil,
-	)
-}
-
-// System_GrpcServer_AcctzCounters_ClientCounters_RecordRequestsPath represents the /openconfig-system/system/grpc-servers/grpc-server/acctz-counters/state/client-counters/record-requests YANG schema element.
-type System_GrpcServer_AcctzCounters_ClientCounters_RecordRequestsPath struct {
-	*ygnmi.NodePath
-	parent ygnmi.PathStruct
-}
-
-// System_GrpcServer_AcctzCounters_ClientCounters_RecordRequestsPathAny represents the wildcard version of the /openconfig-system/system/grpc-servers/grpc-server/acctz-counters/state/client-counters/record-requests YANG schema element.
-type System_GrpcServer_AcctzCounters_ClientCounters_RecordRequestsPathAny struct {
+// System_GrpcServer_Acctz_Counters_RecordRequestsPathAny represents the wildcard version of the /openconfig-system/system/grpc-servers/grpc-server/acctz/state/counters/record-requests YANG schema element.
+type System_GrpcServer_Acctz_Counters_RecordRequestsPathAny struct {
 	*ygnmi.NodePath
 	parent ygnmi.PathStruct
 }
@@ -39687,10 +40427,10 @@ type System_GrpcServer_AcctzCounters_ClientCounters_RecordRequestsPathAny struct
 //	Defining module:      "openconfig-gnsi-acctz"
 //	Instantiating module: "openconfig-gnsi-acctz"
 //	Path from parent:     "record-requests"
-//	Path from root:       "/system/grpc-servers/grpc-server/acctz-counters/state/client-counters/record-requests"
-func (n *System_GrpcServer_AcctzCounters_ClientCounters_RecordRequestsPath) State() ygnmi.SingletonQuery[uint64] {
+//	Path from root:       "/system/grpc-servers/grpc-server/acctz/state/counters/record-requests"
+func (n *System_GrpcServer_Acctz_Counters_RecordRequestsPath) State() ygnmi.SingletonQuery[uint64] {
 	return ygnmi.NewSingletonQuery[uint64](
-		"System_GrpcServer_AcctzCounters_ClientCounters",
+		"System_GrpcServer_Acctz_Counters",
 		true,
 		false,
 		true,
@@ -39703,14 +40443,14 @@ func (n *System_GrpcServer_AcctzCounters_ClientCounters_RecordRequestsPath) Stat
 			n.parent,
 		),
 		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
-			ret := gs.(*oc.System_GrpcServer_AcctzCounters_ClientCounters).RecordRequests
+			ret := gs.(*oc.System_GrpcServer_Acctz_Counters).RecordRequests
 			if ret == nil {
 				var zero uint64
 				return zero, false
 			}
 			return *ret, true
 		},
-		func() ygot.ValidatedGoStruct { return new(oc.System_GrpcServer_AcctzCounters_ClientCounters) },
+		func() ygot.ValidatedGoStruct { return new(oc.System_GrpcServer_Acctz_Counters) },
 		func() *ytypes.Schema {
 			return &ytypes.Schema{
 				Root:       &oc.Root{},
@@ -39728,10 +40468,10 @@ func (n *System_GrpcServer_AcctzCounters_ClientCounters_RecordRequestsPath) Stat
 //	Defining module:      "openconfig-gnsi-acctz"
 //	Instantiating module: "openconfig-gnsi-acctz"
 //	Path from parent:     "record-requests"
-//	Path from root:       "/system/grpc-servers/grpc-server/acctz-counters/state/client-counters/record-requests"
-func (n *System_GrpcServer_AcctzCounters_ClientCounters_RecordRequestsPathAny) State() ygnmi.WildcardQuery[uint64] {
+//	Path from root:       "/system/grpc-servers/grpc-server/acctz/state/counters/record-requests"
+func (n *System_GrpcServer_Acctz_Counters_RecordRequestsPathAny) State() ygnmi.WildcardQuery[uint64] {
 	return ygnmi.NewWildcardQuery[uint64](
-		"System_GrpcServer_AcctzCounters_ClientCounters",
+		"System_GrpcServer_Acctz_Counters",
 		true,
 		false,
 		true,
@@ -39744,14 +40484,14 @@ func (n *System_GrpcServer_AcctzCounters_ClientCounters_RecordRequestsPathAny) S
 			n.parent,
 		),
 		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
-			ret := gs.(*oc.System_GrpcServer_AcctzCounters_ClientCounters).RecordRequests
+			ret := gs.(*oc.System_GrpcServer_Acctz_Counters).RecordRequests
 			if ret == nil {
 				var zero uint64
 				return zero, false
 			}
 			return *ret, true
 		},
-		func() ygot.ValidatedGoStruct { return new(oc.System_GrpcServer_AcctzCounters_ClientCounters) },
+		func() ygot.ValidatedGoStruct { return new(oc.System_GrpcServer_Acctz_Counters) },
 		func() *ytypes.Schema {
 			return &ytypes.Schema{
 				Root:       &oc.Root{},
@@ -39764,14 +40504,14 @@ func (n *System_GrpcServer_AcctzCounters_ClientCounters_RecordRequestsPathAny) S
 	)
 }
 
-// System_GrpcServer_AcctzCounters_ClientCounters_RecordResponsesPath represents the /openconfig-system/system/grpc-servers/grpc-server/acctz-counters/state/client-counters/record-responses YANG schema element.
-type System_GrpcServer_AcctzCounters_ClientCounters_RecordResponsesPath struct {
+// System_GrpcServer_Acctz_Counters_RecordResponsesPath represents the /openconfig-system/system/grpc-servers/grpc-server/acctz/state/counters/record-responses YANG schema element.
+type System_GrpcServer_Acctz_Counters_RecordResponsesPath struct {
 	*ygnmi.NodePath
 	parent ygnmi.PathStruct
 }
 
-// System_GrpcServer_AcctzCounters_ClientCounters_RecordResponsesPathAny represents the wildcard version of the /openconfig-system/system/grpc-servers/grpc-server/acctz-counters/state/client-counters/record-responses YANG schema element.
-type System_GrpcServer_AcctzCounters_ClientCounters_RecordResponsesPathAny struct {
+// System_GrpcServer_Acctz_Counters_RecordResponsesPathAny represents the wildcard version of the /openconfig-system/system/grpc-servers/grpc-server/acctz/state/counters/record-responses YANG schema element.
+type System_GrpcServer_Acctz_Counters_RecordResponsesPathAny struct {
 	*ygnmi.NodePath
 	parent ygnmi.PathStruct
 }
@@ -39781,10 +40521,10 @@ type System_GrpcServer_AcctzCounters_ClientCounters_RecordResponsesPathAny struc
 //	Defining module:      "openconfig-gnsi-acctz"
 //	Instantiating module: "openconfig-gnsi-acctz"
 //	Path from parent:     "record-responses"
-//	Path from root:       "/system/grpc-servers/grpc-server/acctz-counters/state/client-counters/record-responses"
-func (n *System_GrpcServer_AcctzCounters_ClientCounters_RecordResponsesPath) State() ygnmi.SingletonQuery[uint64] {
+//	Path from root:       "/system/grpc-servers/grpc-server/acctz/state/counters/record-responses"
+func (n *System_GrpcServer_Acctz_Counters_RecordResponsesPath) State() ygnmi.SingletonQuery[uint64] {
 	return ygnmi.NewSingletonQuery[uint64](
-		"System_GrpcServer_AcctzCounters_ClientCounters",
+		"System_GrpcServer_Acctz_Counters",
 		true,
 		false,
 		true,
@@ -39797,14 +40537,14 @@ func (n *System_GrpcServer_AcctzCounters_ClientCounters_RecordResponsesPath) Sta
 			n.parent,
 		),
 		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
-			ret := gs.(*oc.System_GrpcServer_AcctzCounters_ClientCounters).RecordResponses
+			ret := gs.(*oc.System_GrpcServer_Acctz_Counters).RecordResponses
 			if ret == nil {
 				var zero uint64
 				return zero, false
 			}
 			return *ret, true
 		},
-		func() ygot.ValidatedGoStruct { return new(oc.System_GrpcServer_AcctzCounters_ClientCounters) },
+		func() ygot.ValidatedGoStruct { return new(oc.System_GrpcServer_Acctz_Counters) },
 		func() *ytypes.Schema {
 			return &ytypes.Schema{
 				Root:       &oc.Root{},
@@ -39822,10 +40562,10 @@ func (n *System_GrpcServer_AcctzCounters_ClientCounters_RecordResponsesPath) Sta
 //	Defining module:      "openconfig-gnsi-acctz"
 //	Instantiating module: "openconfig-gnsi-acctz"
 //	Path from parent:     "record-responses"
-//	Path from root:       "/system/grpc-servers/grpc-server/acctz-counters/state/client-counters/record-responses"
-func (n *System_GrpcServer_AcctzCounters_ClientCounters_RecordResponsesPathAny) State() ygnmi.WildcardQuery[uint64] {
+//	Path from root:       "/system/grpc-servers/grpc-server/acctz/state/counters/record-responses"
+func (n *System_GrpcServer_Acctz_Counters_RecordResponsesPathAny) State() ygnmi.WildcardQuery[uint64] {
 	return ygnmi.NewWildcardQuery[uint64](
-		"System_GrpcServer_AcctzCounters_ClientCounters",
+		"System_GrpcServer_Acctz_Counters",
 		true,
 		false,
 		true,
@@ -39838,14 +40578,14 @@ func (n *System_GrpcServer_AcctzCounters_ClientCounters_RecordResponsesPathAny) 
 			n.parent,
 		),
 		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
-			ret := gs.(*oc.System_GrpcServer_AcctzCounters_ClientCounters).RecordResponses
+			ret := gs.(*oc.System_GrpcServer_Acctz_Counters).RecordResponses
 			if ret == nil {
 				var zero uint64
 				return zero, false
 			}
 			return *ret, true
 		},
-		func() ygot.ValidatedGoStruct { return new(oc.System_GrpcServer_AcctzCounters_ClientCounters) },
+		func() ygot.ValidatedGoStruct { return new(oc.System_GrpcServer_Acctz_Counters) },
 		func() *ytypes.Schema {
 			return &ytypes.Schema{
 				Root:       &oc.Root{},
@@ -39858,27 +40598,27 @@ func (n *System_GrpcServer_AcctzCounters_ClientCounters_RecordResponsesPathAny) 
 	)
 }
 
-// System_GrpcServer_AcctzCounters_ClientCountersPath represents the /openconfig-system/system/grpc-servers/grpc-server/acctz-counters/state/client-counters YANG schema element.
-type System_GrpcServer_AcctzCounters_ClientCountersPath struct {
+// System_GrpcServer_Acctz_CountersPath represents the /openconfig-system/system/grpc-servers/grpc-server/acctz/state/counters YANG schema element.
+type System_GrpcServer_Acctz_CountersPath struct {
 	*ygnmi.NodePath
 }
 
-// System_GrpcServer_AcctzCounters_ClientCountersPathAny represents the wildcard version of the /openconfig-system/system/grpc-servers/grpc-server/acctz-counters/state/client-counters YANG schema element.
-type System_GrpcServer_AcctzCounters_ClientCountersPathAny struct {
+// System_GrpcServer_Acctz_CountersPathAny represents the wildcard version of the /openconfig-system/system/grpc-servers/grpc-server/acctz/state/counters YANG schema element.
+type System_GrpcServer_Acctz_CountersPathAny struct {
 	*ygnmi.NodePath
 }
 
 // HistoryIstruncated (leaf): The total number of times that a RecordRequest resulted in
-// a RecordResponse being marked history-istruncated.  ie: a
+// a RecordResponse being marked history-istruncated. ie: a
 // request was made for a timestamp that did not exist in the
 // history.
 //
 //	Defining module:      "openconfig-gnsi-acctz"
 //	Instantiating module: "openconfig-system"
 //	Path from parent:     "history-istruncated"
-//	Path from root:       "/system/grpc-servers/grpc-server/acctz-counters/state/client-counters/history-istruncated"
-func (n *System_GrpcServer_AcctzCounters_ClientCountersPath) HistoryIstruncated() *System_GrpcServer_AcctzCounters_ClientCounters_HistoryIstruncatedPath {
-	ps := &System_GrpcServer_AcctzCounters_ClientCounters_HistoryIstruncatedPath{
+//	Path from root:       "/system/grpc-servers/grpc-server/acctz/state/counters/history-istruncated"
+func (n *System_GrpcServer_Acctz_CountersPath) HistoryIstruncated() *System_GrpcServer_Acctz_Counters_HistoryIstruncatedPath {
+	ps := &System_GrpcServer_Acctz_Counters_HistoryIstruncatedPath{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"history-istruncated"},
 			map[string]interface{}{},
@@ -39890,16 +40630,16 @@ func (n *System_GrpcServer_AcctzCounters_ClientCountersPath) HistoryIstruncated(
 }
 
 // HistoryIstruncated (leaf): The total number of times that a RecordRequest resulted in
-// a RecordResponse being marked history-istruncated.  ie: a
+// a RecordResponse being marked history-istruncated. ie: a
 // request was made for a timestamp that did not exist in the
 // history.
 //
 //	Defining module:      "openconfig-gnsi-acctz"
 //	Instantiating module: "openconfig-system"
 //	Path from parent:     "history-istruncated"
-//	Path from root:       "/system/grpc-servers/grpc-server/acctz-counters/state/client-counters/history-istruncated"
-func (n *System_GrpcServer_AcctzCounters_ClientCountersPathAny) HistoryIstruncated() *System_GrpcServer_AcctzCounters_ClientCounters_HistoryIstruncatedPathAny {
-	ps := &System_GrpcServer_AcctzCounters_ClientCounters_HistoryIstruncatedPathAny{
+//	Path from root:       "/system/grpc-servers/grpc-server/acctz/state/counters/history-istruncated"
+func (n *System_GrpcServer_Acctz_CountersPathAny) HistoryIstruncated() *System_GrpcServer_Acctz_Counters_HistoryIstruncatedPathAny {
+	ps := &System_GrpcServer_Acctz_Counters_HistoryIstruncatedPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"history-istruncated"},
 			map[string]interface{}{},
@@ -39910,52 +40650,14 @@ func (n *System_GrpcServer_AcctzCounters_ClientCountersPathAny) HistoryIstruncat
 	return ps
 }
 
-// IdleTimeouts (leaf): The total number of times that a client was disconnected
-// due to missing keepalives (ie: RecordRequests).
-//
-//	Defining module:      "openconfig-gnsi-acctz"
-//	Instantiating module: "openconfig-system"
-//	Path from parent:     "idle-timeouts"
-//	Path from root:       "/system/grpc-servers/grpc-server/acctz-counters/state/client-counters/idle-timeouts"
-func (n *System_GrpcServer_AcctzCounters_ClientCountersPath) IdleTimeouts() *System_GrpcServer_AcctzCounters_ClientCounters_IdleTimeoutsPath {
-	ps := &System_GrpcServer_AcctzCounters_ClientCounters_IdleTimeoutsPath{
-		NodePath: ygnmi.NewNodePath(
-			[]string{"idle-timeouts"},
-			map[string]interface{}{},
-			n,
-		),
-		parent: n,
-	}
-	return ps
-}
-
-// IdleTimeouts (leaf): The total number of times that a client was disconnected
-// due to missing keepalives (ie: RecordRequests).
-//
-//	Defining module:      "openconfig-gnsi-acctz"
-//	Instantiating module: "openconfig-system"
-//	Path from parent:     "idle-timeouts"
-//	Path from root:       "/system/grpc-servers/grpc-server/acctz-counters/state/client-counters/idle-timeouts"
-func (n *System_GrpcServer_AcctzCounters_ClientCountersPathAny) IdleTimeouts() *System_GrpcServer_AcctzCounters_ClientCounters_IdleTimeoutsPathAny {
-	ps := &System_GrpcServer_AcctzCounters_ClientCounters_IdleTimeoutsPathAny{
-		NodePath: ygnmi.NewNodePath(
-			[]string{"idle-timeouts"},
-			map[string]interface{}{},
-			n,
-		),
-		parent: n,
-	}
-	return ps
-}
-
-// RecordRequests (leaf): The total number of RecordRequest RPCs that have been received.
+// RecordRequests (leaf): The total number of RecordRequest messages that have been received.
 //
 //	Defining module:      "openconfig-gnsi-acctz"
 //	Instantiating module: "openconfig-system"
 //	Path from parent:     "record-requests"
-//	Path from root:       "/system/grpc-servers/grpc-server/acctz-counters/state/client-counters/record-requests"
-func (n *System_GrpcServer_AcctzCounters_ClientCountersPath) RecordRequests() *System_GrpcServer_AcctzCounters_ClientCounters_RecordRequestsPath {
-	ps := &System_GrpcServer_AcctzCounters_ClientCounters_RecordRequestsPath{
+//	Path from root:       "/system/grpc-servers/grpc-server/acctz/state/counters/record-requests"
+func (n *System_GrpcServer_Acctz_CountersPath) RecordRequests() *System_GrpcServer_Acctz_Counters_RecordRequestsPath {
+	ps := &System_GrpcServer_Acctz_Counters_RecordRequestsPath{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"record-requests"},
 			map[string]interface{}{},
@@ -39966,14 +40668,14 @@ func (n *System_GrpcServer_AcctzCounters_ClientCountersPath) RecordRequests() *S
 	return ps
 }
 
-// RecordRequests (leaf): The total number of RecordRequest RPCs that have been received.
+// RecordRequests (leaf): The total number of RecordRequest messages that have been received.
 //
 //	Defining module:      "openconfig-gnsi-acctz"
 //	Instantiating module: "openconfig-system"
 //	Path from parent:     "record-requests"
-//	Path from root:       "/system/grpc-servers/grpc-server/acctz-counters/state/client-counters/record-requests"
-func (n *System_GrpcServer_AcctzCounters_ClientCountersPathAny) RecordRequests() *System_GrpcServer_AcctzCounters_ClientCounters_RecordRequestsPathAny {
-	ps := &System_GrpcServer_AcctzCounters_ClientCounters_RecordRequestsPathAny{
+//	Path from root:       "/system/grpc-servers/grpc-server/acctz/state/counters/record-requests"
+func (n *System_GrpcServer_Acctz_CountersPathAny) RecordRequests() *System_GrpcServer_Acctz_Counters_RecordRequestsPathAny {
+	ps := &System_GrpcServer_Acctz_Counters_RecordRequestsPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"record-requests"},
 			map[string]interface{}{},
@@ -39984,14 +40686,14 @@ func (n *System_GrpcServer_AcctzCounters_ClientCountersPathAny) RecordRequests()
 	return ps
 }
 
-// RecordResponses (leaf): The total number of RecordResponse RPCs that have been sent.
+// RecordResponses (leaf): The total number of RecordResponse messages that have been sent.
 //
 //	Defining module:      "openconfig-gnsi-acctz"
 //	Instantiating module: "openconfig-system"
 //	Path from parent:     "record-responses"
-//	Path from root:       "/system/grpc-servers/grpc-server/acctz-counters/state/client-counters/record-responses"
-func (n *System_GrpcServer_AcctzCounters_ClientCountersPath) RecordResponses() *System_GrpcServer_AcctzCounters_ClientCounters_RecordResponsesPath {
-	ps := &System_GrpcServer_AcctzCounters_ClientCounters_RecordResponsesPath{
+//	Path from root:       "/system/grpc-servers/grpc-server/acctz/state/counters/record-responses"
+func (n *System_GrpcServer_Acctz_CountersPath) RecordResponses() *System_GrpcServer_Acctz_Counters_RecordResponsesPath {
+	ps := &System_GrpcServer_Acctz_Counters_RecordResponsesPath{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"record-responses"},
 			map[string]interface{}{},
@@ -40002,14 +40704,14 @@ func (n *System_GrpcServer_AcctzCounters_ClientCountersPath) RecordResponses() *
 	return ps
 }
 
-// RecordResponses (leaf): The total number of RecordResponse RPCs that have been sent.
+// RecordResponses (leaf): The total number of RecordResponse messages that have been sent.
 //
 //	Defining module:      "openconfig-gnsi-acctz"
 //	Instantiating module: "openconfig-system"
 //	Path from parent:     "record-responses"
-//	Path from root:       "/system/grpc-servers/grpc-server/acctz-counters/state/client-counters/record-responses"
-func (n *System_GrpcServer_AcctzCounters_ClientCountersPathAny) RecordResponses() *System_GrpcServer_AcctzCounters_ClientCounters_RecordResponsesPathAny {
-	ps := &System_GrpcServer_AcctzCounters_ClientCounters_RecordResponsesPathAny{
+//	Path from root:       "/system/grpc-servers/grpc-server/acctz/state/counters/record-responses"
+func (n *System_GrpcServer_Acctz_CountersPathAny) RecordResponses() *System_GrpcServer_Acctz_Counters_RecordResponsesPathAny {
+	ps := &System_GrpcServer_Acctz_Counters_RecordResponsesPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"record-responses"},
 			map[string]interface{}{},
@@ -40021,9 +40723,9 @@ func (n *System_GrpcServer_AcctzCounters_ClientCountersPathAny) RecordResponses(
 }
 
 // State returns a Query that can be used in gNMI operations.
-func (n *System_GrpcServer_AcctzCounters_ClientCountersPath) State() ygnmi.SingletonQuery[*oc.System_GrpcServer_AcctzCounters_ClientCounters] {
-	return ygnmi.NewSingletonQuery[*oc.System_GrpcServer_AcctzCounters_ClientCounters](
-		"System_GrpcServer_AcctzCounters_ClientCounters",
+func (n *System_GrpcServer_Acctz_CountersPath) State() ygnmi.SingletonQuery[*oc.System_GrpcServer_Acctz_Counters] {
+	return ygnmi.NewSingletonQuery[*oc.System_GrpcServer_Acctz_Counters](
+		"System_GrpcServer_Acctz_Counters",
 		true,
 		false,
 		false,
@@ -40046,9 +40748,9 @@ func (n *System_GrpcServer_AcctzCounters_ClientCountersPath) State() ygnmi.Singl
 }
 
 // State returns a Query that can be used in gNMI operations.
-func (n *System_GrpcServer_AcctzCounters_ClientCountersPathAny) State() ygnmi.WildcardQuery[*oc.System_GrpcServer_AcctzCounters_ClientCounters] {
-	return ygnmi.NewWildcardQuery[*oc.System_GrpcServer_AcctzCounters_ClientCounters](
-		"System_GrpcServer_AcctzCounters_ClientCounters",
+func (n *System_GrpcServer_Acctz_CountersPathAny) State() ygnmi.WildcardQuery[*oc.System_GrpcServer_Acctz_Counters] {
+	return ygnmi.NewWildcardQuery[*oc.System_GrpcServer_Acctz_Counters](
+		"System_GrpcServer_Acctz_Counters",
 		true,
 		false,
 		false,
@@ -40067,662 +40769,6 @@ func (n *System_GrpcServer_AcctzCounters_ClientCountersPathAny) State() ygnmi.Wi
 		},
 		nil,
 		nil,
-	)
-}
-
-// System_GrpcServer_AcctzCounters_SourceRecords_RecordsPath represents the /openconfig-system/system/grpc-servers/grpc-server/acctz-counters/source-counters/source-records/state/records YANG schema element.
-type System_GrpcServer_AcctzCounters_SourceRecords_RecordsPath struct {
-	*ygnmi.NodePath
-	parent ygnmi.PathStruct
-}
-
-// System_GrpcServer_AcctzCounters_SourceRecords_RecordsPathAny represents the wildcard version of the /openconfig-system/system/grpc-servers/grpc-server/acctz-counters/source-counters/source-records/state/records YANG schema element.
-type System_GrpcServer_AcctzCounters_SourceRecords_RecordsPathAny struct {
-	*ygnmi.NodePath
-	parent ygnmi.PathStruct
-}
-
-// State returns a Query that can be used in gNMI operations.
-//
-//	Defining module:      "openconfig-gnsi-acctz"
-//	Instantiating module: "openconfig-gnsi-acctz"
-//	Path from parent:     "state/records"
-//	Path from root:       "/system/grpc-servers/grpc-server/acctz-counters/source-counters/source-records/state/records"
-func (n *System_GrpcServer_AcctzCounters_SourceRecords_RecordsPath) State() ygnmi.SingletonQuery[uint64] {
-	return ygnmi.NewSingletonQuery[uint64](
-		"System_GrpcServer_AcctzCounters_SourceRecords",
-		true,
-		false,
-		true,
-		true,
-		true,
-		false,
-		ygnmi.NewNodePath(
-			[]string{"state", "records"},
-			nil,
-			n.parent,
-		),
-		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
-			ret := gs.(*oc.System_GrpcServer_AcctzCounters_SourceRecords).Records
-			if ret == nil {
-				var zero uint64
-				return zero, false
-			}
-			return *ret, true
-		},
-		func() ygot.ValidatedGoStruct { return new(oc.System_GrpcServer_AcctzCounters_SourceRecords) },
-		func() *ytypes.Schema {
-			return &ytypes.Schema{
-				Root:       &oc.Root{},
-				SchemaTree: oc.SchemaTree,
-				Unmarshal:  oc.Unmarshal,
-			}
-		},
-		nil,
-		nil,
-	)
-}
-
-// State returns a Query that can be used in gNMI operations.
-//
-//	Defining module:      "openconfig-gnsi-acctz"
-//	Instantiating module: "openconfig-gnsi-acctz"
-//	Path from parent:     "state/records"
-//	Path from root:       "/system/grpc-servers/grpc-server/acctz-counters/source-counters/source-records/state/records"
-func (n *System_GrpcServer_AcctzCounters_SourceRecords_RecordsPathAny) State() ygnmi.WildcardQuery[uint64] {
-	return ygnmi.NewWildcardQuery[uint64](
-		"System_GrpcServer_AcctzCounters_SourceRecords",
-		true,
-		false,
-		true,
-		true,
-		true,
-		false,
-		ygnmi.NewNodePath(
-			[]string{"state", "records"},
-			nil,
-			n.parent,
-		),
-		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
-			ret := gs.(*oc.System_GrpcServer_AcctzCounters_SourceRecords).Records
-			if ret == nil {
-				var zero uint64
-				return zero, false
-			}
-			return *ret, true
-		},
-		func() ygot.ValidatedGoStruct { return new(oc.System_GrpcServer_AcctzCounters_SourceRecords) },
-		func() *ytypes.Schema {
-			return &ytypes.Schema{
-				Root:       &oc.Root{},
-				SchemaTree: oc.SchemaTree,
-				Unmarshal:  oc.Unmarshal,
-			}
-		},
-		nil,
-		nil,
-	)
-}
-
-// System_GrpcServer_AcctzCounters_SourceRecords_ServicePath represents the /openconfig-system/system/grpc-servers/grpc-server/acctz-counters/source-counters/source-records/state/service YANG schema element.
-type System_GrpcServer_AcctzCounters_SourceRecords_ServicePath struct {
-	*ygnmi.NodePath
-	parent ygnmi.PathStruct
-}
-
-// System_GrpcServer_AcctzCounters_SourceRecords_ServicePathAny represents the wildcard version of the /openconfig-system/system/grpc-servers/grpc-server/acctz-counters/source-counters/source-records/state/service YANG schema element.
-type System_GrpcServer_AcctzCounters_SourceRecords_ServicePathAny struct {
-	*ygnmi.NodePath
-	parent ygnmi.PathStruct
-}
-
-// State returns a Query that can be used in gNMI operations.
-//
-//	Defining module:      "openconfig-gnsi-acctz"
-//	Instantiating module: "openconfig-gnsi-acctz"
-//	Path from parent:     "state/service"
-//	Path from root:       "/system/grpc-servers/grpc-server/acctz-counters/source-counters/source-records/state/service"
-func (n *System_GrpcServer_AcctzCounters_SourceRecords_ServicePath) State() ygnmi.SingletonQuery[oc.E_GnsiAcctz_ServiceRequest] {
-	return ygnmi.NewSingletonQuery[oc.E_GnsiAcctz_ServiceRequest](
-		"System_GrpcServer_AcctzCounters_SourceRecords",
-		true,
-		false,
-		true,
-		false,
-		true,
-		false,
-		ygnmi.NewNodePath(
-			[]string{"state", "service"},
-			nil,
-			n.parent,
-		),
-		func(gs ygot.ValidatedGoStruct) (oc.E_GnsiAcctz_ServiceRequest, bool) {
-			ret := gs.(*oc.System_GrpcServer_AcctzCounters_SourceRecords).Service
-			return ret, !reflect.ValueOf(ret).IsZero()
-		},
-		func() ygot.ValidatedGoStruct { return new(oc.System_GrpcServer_AcctzCounters_SourceRecords) },
-		func() *ytypes.Schema {
-			return &ytypes.Schema{
-				Root:       &oc.Root{},
-				SchemaTree: oc.SchemaTree,
-				Unmarshal:  oc.Unmarshal,
-			}
-		},
-		nil,
-		nil,
-	)
-}
-
-// State returns a Query that can be used in gNMI operations.
-//
-//	Defining module:      "openconfig-gnsi-acctz"
-//	Instantiating module: "openconfig-gnsi-acctz"
-//	Path from parent:     "state/service"
-//	Path from root:       "/system/grpc-servers/grpc-server/acctz-counters/source-counters/source-records/state/service"
-func (n *System_GrpcServer_AcctzCounters_SourceRecords_ServicePathAny) State() ygnmi.WildcardQuery[oc.E_GnsiAcctz_ServiceRequest] {
-	return ygnmi.NewWildcardQuery[oc.E_GnsiAcctz_ServiceRequest](
-		"System_GrpcServer_AcctzCounters_SourceRecords",
-		true,
-		false,
-		true,
-		false,
-		true,
-		false,
-		ygnmi.NewNodePath(
-			[]string{"state", "service"},
-			nil,
-			n.parent,
-		),
-		func(gs ygot.ValidatedGoStruct) (oc.E_GnsiAcctz_ServiceRequest, bool) {
-			ret := gs.(*oc.System_GrpcServer_AcctzCounters_SourceRecords).Service
-			return ret, !reflect.ValueOf(ret).IsZero()
-		},
-		func() ygot.ValidatedGoStruct { return new(oc.System_GrpcServer_AcctzCounters_SourceRecords) },
-		func() *ytypes.Schema {
-			return &ytypes.Schema{
-				Root:       &oc.Root{},
-				SchemaTree: oc.SchemaTree,
-				Unmarshal:  oc.Unmarshal,
-			}
-		},
-		nil,
-		nil,
-	)
-}
-
-// Config returns a Query that can be used in gNMI operations.
-//
-//	Defining module:      "openconfig-gnsi-acctz"
-//	Instantiating module: "openconfig-gnsi-acctz"
-//	Path from parent:     "service"
-//	Path from root:       ""
-func (n *System_GrpcServer_AcctzCounters_SourceRecords_ServicePath) Config() ygnmi.ConfigQuery[oc.E_GnsiAcctz_ServiceRequest] {
-	return ygnmi.NewConfigQuery[oc.E_GnsiAcctz_ServiceRequest](
-		"System_GrpcServer_AcctzCounters_SourceRecords",
-		false,
-		true,
-		true,
-		false,
-		true,
-		false,
-		ygnmi.NewNodePath(
-			[]string{"service"},
-			nil,
-			n.parent,
-		),
-		func(gs ygot.ValidatedGoStruct) (oc.E_GnsiAcctz_ServiceRequest, bool) {
-			ret := gs.(*oc.System_GrpcServer_AcctzCounters_SourceRecords).Service
-			return ret, !reflect.ValueOf(ret).IsZero()
-		},
-		func() ygot.ValidatedGoStruct { return new(oc.System_GrpcServer_AcctzCounters_SourceRecords) },
-		func() *ytypes.Schema {
-			return &ytypes.Schema{
-				Root:       &oc.Root{},
-				SchemaTree: oc.SchemaTree,
-				Unmarshal:  oc.Unmarshal,
-			}
-		},
-		nil,
-		nil,
-	)
-}
-
-// Config returns a Query that can be used in gNMI operations.
-//
-//	Defining module:      "openconfig-gnsi-acctz"
-//	Instantiating module: "openconfig-gnsi-acctz"
-//	Path from parent:     "service"
-//	Path from root:       ""
-func (n *System_GrpcServer_AcctzCounters_SourceRecords_ServicePathAny) Config() ygnmi.WildcardQuery[oc.E_GnsiAcctz_ServiceRequest] {
-	return ygnmi.NewWildcardQuery[oc.E_GnsiAcctz_ServiceRequest](
-		"System_GrpcServer_AcctzCounters_SourceRecords",
-		false,
-		true,
-		true,
-		false,
-		true,
-		false,
-		ygnmi.NewNodePath(
-			[]string{"service"},
-			nil,
-			n.parent,
-		),
-		func(gs ygot.ValidatedGoStruct) (oc.E_GnsiAcctz_ServiceRequest, bool) {
-			ret := gs.(*oc.System_GrpcServer_AcctzCounters_SourceRecords).Service
-			return ret, !reflect.ValueOf(ret).IsZero()
-		},
-		func() ygot.ValidatedGoStruct { return new(oc.System_GrpcServer_AcctzCounters_SourceRecords) },
-		func() *ytypes.Schema {
-			return &ytypes.Schema{
-				Root:       &oc.Root{},
-				SchemaTree: oc.SchemaTree,
-				Unmarshal:  oc.Unmarshal,
-			}
-		},
-		nil,
-		nil,
-	)
-}
-
-// System_GrpcServer_AcctzCounters_SourceRecords_TypePath represents the /openconfig-system/system/grpc-servers/grpc-server/acctz-counters/source-counters/source-records/state/type YANG schema element.
-type System_GrpcServer_AcctzCounters_SourceRecords_TypePath struct {
-	*ygnmi.NodePath
-	parent ygnmi.PathStruct
-}
-
-// System_GrpcServer_AcctzCounters_SourceRecords_TypePathAny represents the wildcard version of the /openconfig-system/system/grpc-servers/grpc-server/acctz-counters/source-counters/source-records/state/type YANG schema element.
-type System_GrpcServer_AcctzCounters_SourceRecords_TypePathAny struct {
-	*ygnmi.NodePath
-	parent ygnmi.PathStruct
-}
-
-// State returns a Query that can be used in gNMI operations.
-//
-//	Defining module:      "openconfig-gnsi-acctz"
-//	Instantiating module: "openconfig-gnsi-acctz"
-//	Path from parent:     "state/type"
-//	Path from root:       "/system/grpc-servers/grpc-server/acctz-counters/source-counters/source-records/state/type"
-func (n *System_GrpcServer_AcctzCounters_SourceRecords_TypePath) State() ygnmi.SingletonQuery[oc.System_GrpcServer_AcctzCounters_SourceRecords_Type_Union] {
-	return ygnmi.NewSingletonQuery[oc.System_GrpcServer_AcctzCounters_SourceRecords_Type_Union](
-		"System_GrpcServer_AcctzCounters_SourceRecords",
-		true,
-		false,
-		true,
-		false,
-		true,
-		false,
-		ygnmi.NewNodePath(
-			[]string{"state", "type"},
-			nil,
-			n.parent,
-		),
-		func(gs ygot.ValidatedGoStruct) (oc.System_GrpcServer_AcctzCounters_SourceRecords_Type_Union, bool) {
-			ret := gs.(*oc.System_GrpcServer_AcctzCounters_SourceRecords).Type
-			return ret, !reflect.ValueOf(ret).IsZero()
-		},
-		func() ygot.ValidatedGoStruct { return new(oc.System_GrpcServer_AcctzCounters_SourceRecords) },
-		func() *ytypes.Schema {
-			return &ytypes.Schema{
-				Root:       &oc.Root{},
-				SchemaTree: oc.SchemaTree,
-				Unmarshal:  oc.Unmarshal,
-			}
-		},
-		nil,
-		nil,
-	)
-}
-
-// State returns a Query that can be used in gNMI operations.
-//
-//	Defining module:      "openconfig-gnsi-acctz"
-//	Instantiating module: "openconfig-gnsi-acctz"
-//	Path from parent:     "state/type"
-//	Path from root:       "/system/grpc-servers/grpc-server/acctz-counters/source-counters/source-records/state/type"
-func (n *System_GrpcServer_AcctzCounters_SourceRecords_TypePathAny) State() ygnmi.WildcardQuery[oc.System_GrpcServer_AcctzCounters_SourceRecords_Type_Union] {
-	return ygnmi.NewWildcardQuery[oc.System_GrpcServer_AcctzCounters_SourceRecords_Type_Union](
-		"System_GrpcServer_AcctzCounters_SourceRecords",
-		true,
-		false,
-		true,
-		false,
-		true,
-		false,
-		ygnmi.NewNodePath(
-			[]string{"state", "type"},
-			nil,
-			n.parent,
-		),
-		func(gs ygot.ValidatedGoStruct) (oc.System_GrpcServer_AcctzCounters_SourceRecords_Type_Union, bool) {
-			ret := gs.(*oc.System_GrpcServer_AcctzCounters_SourceRecords).Type
-			return ret, !reflect.ValueOf(ret).IsZero()
-		},
-		func() ygot.ValidatedGoStruct { return new(oc.System_GrpcServer_AcctzCounters_SourceRecords) },
-		func() *ytypes.Schema {
-			return &ytypes.Schema{
-				Root:       &oc.Root{},
-				SchemaTree: oc.SchemaTree,
-				Unmarshal:  oc.Unmarshal,
-			}
-		},
-		nil,
-		nil,
-	)
-}
-
-// Config returns a Query that can be used in gNMI operations.
-//
-//	Defining module:      "openconfig-gnsi-acctz"
-//	Instantiating module: "openconfig-gnsi-acctz"
-//	Path from parent:     "type"
-//	Path from root:       ""
-func (n *System_GrpcServer_AcctzCounters_SourceRecords_TypePath) Config() ygnmi.ConfigQuery[oc.System_GrpcServer_AcctzCounters_SourceRecords_Type_Union] {
-	return ygnmi.NewConfigQuery[oc.System_GrpcServer_AcctzCounters_SourceRecords_Type_Union](
-		"System_GrpcServer_AcctzCounters_SourceRecords",
-		false,
-		true,
-		true,
-		false,
-		true,
-		false,
-		ygnmi.NewNodePath(
-			[]string{"type"},
-			nil,
-			n.parent,
-		),
-		func(gs ygot.ValidatedGoStruct) (oc.System_GrpcServer_AcctzCounters_SourceRecords_Type_Union, bool) {
-			ret := gs.(*oc.System_GrpcServer_AcctzCounters_SourceRecords).Type
-			return ret, !reflect.ValueOf(ret).IsZero()
-		},
-		func() ygot.ValidatedGoStruct { return new(oc.System_GrpcServer_AcctzCounters_SourceRecords) },
-		func() *ytypes.Schema {
-			return &ytypes.Schema{
-				Root:       &oc.Root{},
-				SchemaTree: oc.SchemaTree,
-				Unmarshal:  oc.Unmarshal,
-			}
-		},
-		nil,
-		nil,
-	)
-}
-
-// Config returns a Query that can be used in gNMI operations.
-//
-//	Defining module:      "openconfig-gnsi-acctz"
-//	Instantiating module: "openconfig-gnsi-acctz"
-//	Path from parent:     "type"
-//	Path from root:       ""
-func (n *System_GrpcServer_AcctzCounters_SourceRecords_TypePathAny) Config() ygnmi.WildcardQuery[oc.System_GrpcServer_AcctzCounters_SourceRecords_Type_Union] {
-	return ygnmi.NewWildcardQuery[oc.System_GrpcServer_AcctzCounters_SourceRecords_Type_Union](
-		"System_GrpcServer_AcctzCounters_SourceRecords",
-		false,
-		true,
-		true,
-		false,
-		true,
-		false,
-		ygnmi.NewNodePath(
-			[]string{"type"},
-			nil,
-			n.parent,
-		),
-		func(gs ygot.ValidatedGoStruct) (oc.System_GrpcServer_AcctzCounters_SourceRecords_Type_Union, bool) {
-			ret := gs.(*oc.System_GrpcServer_AcctzCounters_SourceRecords).Type
-			return ret, !reflect.ValueOf(ret).IsZero()
-		},
-		func() ygot.ValidatedGoStruct { return new(oc.System_GrpcServer_AcctzCounters_SourceRecords) },
-		func() *ytypes.Schema {
-			return &ytypes.Schema{
-				Root:       &oc.Root{},
-				SchemaTree: oc.SchemaTree,
-				Unmarshal:  oc.Unmarshal,
-			}
-		},
-		nil,
-		nil,
-	)
-}
-
-// System_GrpcServer_AcctzCounters_SourceRecordsPath represents the /openconfig-system/system/grpc-servers/grpc-server/acctz-counters/source-counters/source-records YANG schema element.
-type System_GrpcServer_AcctzCounters_SourceRecordsPath struct {
-	*ygnmi.NodePath
-}
-
-// System_GrpcServer_AcctzCounters_SourceRecordsPathAny represents the wildcard version of the /openconfig-system/system/grpc-servers/grpc-server/acctz-counters/source-counters/source-records YANG schema element.
-type System_GrpcServer_AcctzCounters_SourceRecordsPathAny struct {
-	*ygnmi.NodePath
-}
-
-// System_GrpcServer_AcctzCounters_SourceRecordsPathMap represents the /openconfig-system/system/grpc-servers/grpc-server/acctz-counters/source-counters/source-records YANG schema element.
-type System_GrpcServer_AcctzCounters_SourceRecordsPathMap struct {
-	*ygnmi.NodePath
-}
-
-// System_GrpcServer_AcctzCounters_SourceRecordsPathMapAny represents the wildcard version of the /openconfig-system/system/grpc-servers/grpc-server/acctz-counters/source-counters/source-records YANG schema element.
-type System_GrpcServer_AcctzCounters_SourceRecordsPathMapAny struct {
-	*ygnmi.NodePath
-}
-
-// Records (leaf): The total number of records produced for the service-request
-// type.
-//
-//	Defining module:      "openconfig-gnsi-acctz"
-//	Instantiating module: "openconfig-system"
-//	Path from parent:     "state/records"
-//	Path from root:       "/system/grpc-servers/grpc-server/acctz-counters/source-counters/source-records/state/records"
-func (n *System_GrpcServer_AcctzCounters_SourceRecordsPath) Records() *System_GrpcServer_AcctzCounters_SourceRecords_RecordsPath {
-	ps := &System_GrpcServer_AcctzCounters_SourceRecords_RecordsPath{
-		NodePath: ygnmi.NewNodePath(
-			[]string{"state", "records"},
-			map[string]interface{}{},
-			n,
-		),
-		parent: n,
-	}
-	return ps
-}
-
-// Records (leaf): The total number of records produced for the service-request
-// type.
-//
-//	Defining module:      "openconfig-gnsi-acctz"
-//	Instantiating module: "openconfig-system"
-//	Path from parent:     "state/records"
-//	Path from root:       "/system/grpc-servers/grpc-server/acctz-counters/source-counters/source-records/state/records"
-func (n *System_GrpcServer_AcctzCounters_SourceRecordsPathAny) Records() *System_GrpcServer_AcctzCounters_SourceRecords_RecordsPathAny {
-	ps := &System_GrpcServer_AcctzCounters_SourceRecords_RecordsPathAny{
-		NodePath: ygnmi.NewNodePath(
-			[]string{"state", "records"},
-			map[string]interface{}{},
-			n,
-		),
-		parent: n,
-	}
-	return ps
-}
-
-// Service (leaf): service request type for the gNSI.acctz record.
-//
-//	Defining module:      "openconfig-gnsi-acctz"
-//	Instantiating module: "openconfig-system"
-//	Path from parent:     "*/service"
-//	Path from root:       "/system/grpc-servers/grpc-server/acctz-counters/source-counters/source-records/*/service"
-func (n *System_GrpcServer_AcctzCounters_SourceRecordsPath) Service() *System_GrpcServer_AcctzCounters_SourceRecords_ServicePath {
-	ps := &System_GrpcServer_AcctzCounters_SourceRecords_ServicePath{
-		NodePath: ygnmi.NewNodePath(
-			[]string{"*", "service"},
-			map[string]interface{}{},
-			n,
-		),
-		parent: n,
-	}
-	return ps
-}
-
-// Service (leaf): service request type for the gNSI.acctz record.
-//
-//	Defining module:      "openconfig-gnsi-acctz"
-//	Instantiating module: "openconfig-system"
-//	Path from parent:     "*/service"
-//	Path from root:       "/system/grpc-servers/grpc-server/acctz-counters/source-counters/source-records/*/service"
-func (n *System_GrpcServer_AcctzCounters_SourceRecordsPathAny) Service() *System_GrpcServer_AcctzCounters_SourceRecords_ServicePathAny {
-	ps := &System_GrpcServer_AcctzCounters_SourceRecords_ServicePathAny{
-		NodePath: ygnmi.NewNodePath(
-			[]string{"*", "service"},
-			map[string]interface{}{},
-			n,
-		),
-		parent: n,
-	}
-	return ps
-}
-
-// Type (leaf): service request application enum for the gNSI.acctz record.
-//
-//	Defining module:      "openconfig-gnsi-acctz"
-//	Instantiating module: "openconfig-system"
-//	Path from parent:     "*/type"
-//	Path from root:       "/system/grpc-servers/grpc-server/acctz-counters/source-counters/source-records/*/type"
-func (n *System_GrpcServer_AcctzCounters_SourceRecordsPath) Type() *System_GrpcServer_AcctzCounters_SourceRecords_TypePath {
-	ps := &System_GrpcServer_AcctzCounters_SourceRecords_TypePath{
-		NodePath: ygnmi.NewNodePath(
-			[]string{"*", "type"},
-			map[string]interface{}{},
-			n,
-		),
-		parent: n,
-	}
-	return ps
-}
-
-// Type (leaf): service request application enum for the gNSI.acctz record.
-//
-//	Defining module:      "openconfig-gnsi-acctz"
-//	Instantiating module: "openconfig-system"
-//	Path from parent:     "*/type"
-//	Path from root:       "/system/grpc-servers/grpc-server/acctz-counters/source-counters/source-records/*/type"
-func (n *System_GrpcServer_AcctzCounters_SourceRecordsPathAny) Type() *System_GrpcServer_AcctzCounters_SourceRecords_TypePathAny {
-	ps := &System_GrpcServer_AcctzCounters_SourceRecords_TypePathAny{
-		NodePath: ygnmi.NewNodePath(
-			[]string{"*", "type"},
-			map[string]interface{}{},
-			n,
-		),
-		parent: n,
-	}
-	return ps
-}
-
-// State returns a Query that can be used in gNMI operations.
-func (n *System_GrpcServer_AcctzCounters_SourceRecordsPath) State() ygnmi.SingletonQuery[*oc.System_GrpcServer_AcctzCounters_SourceRecords] {
-	return ygnmi.NewSingletonQuery[*oc.System_GrpcServer_AcctzCounters_SourceRecords](
-		"System_GrpcServer_AcctzCounters_SourceRecords",
-		true,
-		false,
-		false,
-		false,
-		true,
-		false,
-		n,
-		nil,
-		nil,
-		func() *ytypes.Schema {
-			return &ytypes.Schema{
-				Root:       &oc.Root{},
-				SchemaTree: oc.SchemaTree,
-				Unmarshal:  oc.Unmarshal,
-			}
-		},
-		nil,
-		nil,
-	)
-}
-
-// State returns a Query that can be used in gNMI operations.
-func (n *System_GrpcServer_AcctzCounters_SourceRecordsPathAny) State() ygnmi.WildcardQuery[*oc.System_GrpcServer_AcctzCounters_SourceRecords] {
-	return ygnmi.NewWildcardQuery[*oc.System_GrpcServer_AcctzCounters_SourceRecords](
-		"System_GrpcServer_AcctzCounters_SourceRecords",
-		true,
-		false,
-		false,
-		false,
-		true,
-		false,
-		n,
-		nil,
-		nil,
-		func() *ytypes.Schema {
-			return &ytypes.Schema{
-				Root:       &oc.Root{},
-				SchemaTree: oc.SchemaTree,
-				Unmarshal:  oc.Unmarshal,
-			}
-		},
-		nil,
-		nil,
-	)
-}
-
-// State returns a Query that can be used in gNMI operations.
-func (n *System_GrpcServer_AcctzCounters_SourceRecordsPathMap) State() ygnmi.SingletonQuery[map[oc.System_GrpcServer_AcctzCounters_SourceRecords_Key]*oc.System_GrpcServer_AcctzCounters_SourceRecords] {
-	return ygnmi.NewSingletonQuery[map[oc.System_GrpcServer_AcctzCounters_SourceRecords_Key]*oc.System_GrpcServer_AcctzCounters_SourceRecords](
-		"System_GrpcServer_AcctzCounters",
-		true,
-		false,
-		false,
-		false,
-		true,
-		true,
-		n,
-		func(gs ygot.ValidatedGoStruct) (map[oc.System_GrpcServer_AcctzCounters_SourceRecords_Key]*oc.System_GrpcServer_AcctzCounters_SourceRecords, bool) {
-			ret := gs.(*oc.System_GrpcServer_AcctzCounters).SourceRecords
-			return ret, ret != nil
-		},
-		func() ygot.ValidatedGoStruct { return new(oc.System_GrpcServer_AcctzCounters) },
-		func() *ytypes.Schema {
-			return &ytypes.Schema{
-				Root:       &oc.Root{},
-				SchemaTree: oc.SchemaTree,
-				Unmarshal:  oc.Unmarshal,
-			}
-		},
-		nil,
-		&ygnmi.CompressionInfo{
-			PreRelPath:  []string{"openconfig-gnsi-acctz:source-counters"},
-			PostRelPath: []string{"openconfig-gnsi-acctz:source-records"},
-		},
-	)
-}
-
-// State returns a Query that can be used in gNMI operations.
-func (n *System_GrpcServer_AcctzCounters_SourceRecordsPathMapAny) State() ygnmi.WildcardQuery[map[oc.System_GrpcServer_AcctzCounters_SourceRecords_Key]*oc.System_GrpcServer_AcctzCounters_SourceRecords] {
-	return ygnmi.NewWildcardQuery[map[oc.System_GrpcServer_AcctzCounters_SourceRecords_Key]*oc.System_GrpcServer_AcctzCounters_SourceRecords](
-		"System_GrpcServer_AcctzCounters",
-		true,
-		false,
-		false,
-		false,
-		true,
-		true,
-		n,
-		func(gs ygot.ValidatedGoStruct) (map[oc.System_GrpcServer_AcctzCounters_SourceRecords_Key]*oc.System_GrpcServer_AcctzCounters_SourceRecords, bool) {
-			ret := gs.(*oc.System_GrpcServer_AcctzCounters).SourceRecords
-			return ret, ret != nil
-		},
-		func() ygot.ValidatedGoStruct { return new(oc.System_GrpcServer_AcctzCounters) },
-		func() *ytypes.Schema {
-			return &ytypes.Schema{
-				Root:       &oc.Root{},
-				SchemaTree: oc.SchemaTree,
-				Unmarshal:  oc.Unmarshal,
-			}
-		},
-		nil,
-		&ygnmi.CompressionInfo{
-			PreRelPath:  []string{"openconfig-gnsi-acctz:source-counters"},
-			PostRelPath: []string{"openconfig-gnsi-acctz:source-records"},
-		},
 	)
 }
 
@@ -51282,6 +51328,358 @@ func (n *System_Logging_RemoteServer_SourceAddressPathAny) Config() ygnmi.Wildca
 	)
 }
 
+// System_Logging_RemoteServer_TlsProfileIdPath represents the /openconfig-system/system/logging/remote-servers/remote-server/state/tls-profile-id YANG schema element.
+type System_Logging_RemoteServer_TlsProfileIdPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_Logging_RemoteServer_TlsProfileIdPathAny represents the wildcard version of the /openconfig-system/system/logging/remote-servers/remote-server/state/tls-profile-id YANG schema element.
+type System_Logging_RemoteServer_TlsProfileIdPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/tls-profile-id"
+//	Path from root:       "/system/logging/remote-servers/remote-server/state/tls-profile-id"
+func (n *System_Logging_RemoteServer_TlsProfileIdPath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewSingletonQuery[string](
+		"System_Logging_RemoteServer",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "tls-profile-id"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_Logging_RemoteServer).TlsProfileId
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Logging_RemoteServer) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/tls-profile-id"
+//	Path from root:       "/system/logging/remote-servers/remote-server/state/tls-profile-id"
+func (n *System_Logging_RemoteServer_TlsProfileIdPathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"System_Logging_RemoteServer",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "tls-profile-id"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_Logging_RemoteServer).TlsProfileId
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Logging_RemoteServer) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "config/tls-profile-id"
+//	Path from root:       "/system/logging/remote-servers/remote-server/config/tls-profile-id"
+func (n *System_Logging_RemoteServer_TlsProfileIdPath) Config() ygnmi.ConfigQuery[string] {
+	return ygnmi.NewConfigQuery[string](
+		"System_Logging_RemoteServer",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "tls-profile-id"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_Logging_RemoteServer).TlsProfileId
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Logging_RemoteServer) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "config/tls-profile-id"
+//	Path from root:       "/system/logging/remote-servers/remote-server/config/tls-profile-id"
+func (n *System_Logging_RemoteServer_TlsProfileIdPathAny) Config() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"System_Logging_RemoteServer",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "tls-profile-id"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_Logging_RemoteServer).TlsProfileId
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Logging_RemoteServer) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// System_Logging_RemoteServer_TransportSecurityPath represents the /openconfig-system/system/logging/remote-servers/remote-server/state/transport-security YANG schema element.
+type System_Logging_RemoteServer_TransportSecurityPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_Logging_RemoteServer_TransportSecurityPathAny represents the wildcard version of the /openconfig-system/system/logging/remote-servers/remote-server/state/transport-security YANG schema element.
+type System_Logging_RemoteServer_TransportSecurityPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/transport-security"
+//	Path from root:       "/system/logging/remote-servers/remote-server/state/transport-security"
+func (n *System_Logging_RemoteServer_TransportSecurityPath) State() ygnmi.SingletonQuery[bool] {
+	return ygnmi.NewSingletonQuery[bool](
+		"System_Logging_RemoteServer",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "transport-security"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.System_Logging_RemoteServer).TransportSecurity
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Logging_RemoteServer) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/transport-security"
+//	Path from root:       "/system/logging/remote-servers/remote-server/state/transport-security"
+func (n *System_Logging_RemoteServer_TransportSecurityPathAny) State() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewWildcardQuery[bool](
+		"System_Logging_RemoteServer",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "transport-security"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.System_Logging_RemoteServer).TransportSecurity
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Logging_RemoteServer) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "config/transport-security"
+//	Path from root:       "/system/logging/remote-servers/remote-server/config/transport-security"
+func (n *System_Logging_RemoteServer_TransportSecurityPath) Config() ygnmi.ConfigQuery[bool] {
+	return ygnmi.NewConfigQuery[bool](
+		"System_Logging_RemoteServer",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "transport-security"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.System_Logging_RemoteServer).TransportSecurity
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Logging_RemoteServer) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "config/transport-security"
+//	Path from root:       "/system/logging/remote-servers/remote-server/config/transport-security"
+func (n *System_Logging_RemoteServer_TransportSecurityPathAny) Config() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewWildcardQuery[bool](
+		"System_Logging_RemoteServer",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "transport-security"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.System_Logging_RemoteServer).TransportSecurity
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Logging_RemoteServer) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
 // System_Logging_RemoteServerPath represents the /openconfig-system/system/logging/remote-servers/remote-server YANG schema element.
 type System_Logging_RemoteServerPath struct {
 	*ygnmi.NodePath
@@ -51564,6 +51962,82 @@ func (n *System_Logging_RemoteServerPathAny) SourceAddress() *System_Logging_Rem
 	ps := &System_Logging_RemoteServer_SourceAddressPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"*", "source-address"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// TlsProfileId (leaf): The ID of this syslog client's TLS profile.  TLS profiles are managed
+// using the gNSI Certz service or other certificate management service
+// provided by the system.
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/tls-profile-id"
+//	Path from root:       "/system/logging/remote-servers/remote-server/*/tls-profile-id"
+func (n *System_Logging_RemoteServerPath) TlsProfileId() *System_Logging_RemoteServer_TlsProfileIdPath {
+	ps := &System_Logging_RemoteServer_TlsProfileIdPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "tls-profile-id"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// TlsProfileId (leaf): The ID of this syslog client's TLS profile.  TLS profiles are managed
+// using the gNSI Certz service or other certificate management service
+// provided by the system.
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/tls-profile-id"
+//	Path from root:       "/system/logging/remote-servers/remote-server/*/tls-profile-id"
+func (n *System_Logging_RemoteServerPathAny) TlsProfileId() *System_Logging_RemoteServer_TlsProfileIdPathAny {
+	ps := &System_Logging_RemoteServer_TlsProfileIdPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "tls-profile-id"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// TransportSecurity (leaf): Indicates if syslog transport layer security (TLS) is enabled.
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/transport-security"
+//	Path from root:       "/system/logging/remote-servers/remote-server/*/transport-security"
+func (n *System_Logging_RemoteServerPath) TransportSecurity() *System_Logging_RemoteServer_TransportSecurityPath {
+	ps := &System_Logging_RemoteServer_TransportSecurityPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "transport-security"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// TransportSecurity (leaf): Indicates if syslog transport layer security (TLS) is enabled.
+//
+//	Defining module:      "openconfig-system-logging"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/transport-security"
+//	Path from root:       "/system/logging/remote-servers/remote-server/*/transport-security"
+func (n *System_Logging_RemoteServerPathAny) TransportSecurity() *System_Logging_RemoteServer_TransportSecurityPathAny {
+	ps := &System_Logging_RemoteServer_TransportSecurityPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "transport-security"},
 			map[string]interface{}{},
 			n,
 		),
@@ -56404,6 +56878,100 @@ func (n *System_MountPoint_StorageComponentPathAny) State() ygnmi.WildcardQuery[
 	)
 }
 
+// System_MountPoint_TypePath represents the /openconfig-system/system/mount-points/mount-point/state/type YANG schema element.
+type System_MountPoint_TypePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_MountPoint_TypePathAny represents the wildcard version of the /openconfig-system/system/mount-points/mount-point/state/type YANG schema element.
+type System_MountPoint_TypePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/type"
+//	Path from root:       "/system/mount-points/mount-point/state/type"
+func (n *System_MountPoint_TypePath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewSingletonQuery[string](
+		"System_MountPoint",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_MountPoint).Type
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_MountPoint) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/type"
+//	Path from root:       "/system/mount-points/mount-point/state/type"
+func (n *System_MountPoint_TypePathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"System_MountPoint",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_MountPoint).Type
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_MountPoint) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
 // System_MountPoint_UtilizedPath represents the /openconfig-system/system/mount-points/mount-point/state/utilized YANG schema element.
 type System_MountPoint_UtilizedPath struct {
 	*ygnmi.NodePath
@@ -56668,6 +57236,46 @@ func (n *System_MountPointPathAny) StorageComponent() *System_MountPoint_Storage
 	ps := &System_MountPoint_StorageComponentPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"state", "storage-component"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Type (leaf): A human readable string indicating the filesystem type used
+// for storage.  Examples might include flash, hard disk, tmpfs/ramdisk
+// or remote/network based storage.
+//
+//	Defining module:      "openconfig-system"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/type"
+//	Path from root:       "/system/mount-points/mount-point/state/type"
+func (n *System_MountPointPath) Type() *System_MountPoint_TypePath {
+	ps := &System_MountPoint_TypePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "type"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Type (leaf): A human readable string indicating the filesystem type used
+// for storage.  Examples might include flash, hard disk, tmpfs/ramdisk
+// or remote/network based storage.
+//
+//	Defining module:      "openconfig-system"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/type"
+//	Path from root:       "/system/mount-points/mount-point/state/type"
+func (n *System_MountPointPathAny) Type() *System_MountPoint_TypePathAny {
+	ps := &System_MountPoint_TypePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "type"},
 			map[string]interface{}{},
 			n,
 		),
@@ -59108,6 +59716,182 @@ func (n *System_Ntp_Server_IburstPathAny) Config() ygnmi.WildcardQuery[bool] {
 	)
 }
 
+// System_Ntp_Server_KeyIdPath represents the /openconfig-system/system/ntp/servers/server/state/key-id YANG schema element.
+type System_Ntp_Server_KeyIdPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_Ntp_Server_KeyIdPathAny represents the wildcard version of the /openconfig-system/system/ntp/servers/server/state/key-id YANG schema element.
+type System_Ntp_Server_KeyIdPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/key-id"
+//	Path from root:       "/system/ntp/servers/server/state/key-id"
+func (n *System_Ntp_Server_KeyIdPath) State() ygnmi.SingletonQuery[uint16] {
+	return ygnmi.NewSingletonQuery[uint16](
+		"System_Ntp_Server",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "key-id"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.System_Ntp_Server).KeyId
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Ntp_Server) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/key-id"
+//	Path from root:       "/system/ntp/servers/server/state/key-id"
+func (n *System_Ntp_Server_KeyIdPathAny) State() ygnmi.WildcardQuery[uint16] {
+	return ygnmi.NewWildcardQuery[uint16](
+		"System_Ntp_Server",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "key-id"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.System_Ntp_Server).KeyId
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Ntp_Server) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "config/key-id"
+//	Path from root:       "/system/ntp/servers/server/config/key-id"
+func (n *System_Ntp_Server_KeyIdPath) Config() ygnmi.ConfigQuery[uint16] {
+	return ygnmi.NewConfigQuery[uint16](
+		"System_Ntp_Server",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "key-id"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.System_Ntp_Server).KeyId
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Ntp_Server) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "config/key-id"
+//	Path from root:       "/system/ntp/servers/server/config/key-id"
+func (n *System_Ntp_Server_KeyIdPathAny) Config() ygnmi.WildcardQuery[uint16] {
+	return ygnmi.NewWildcardQuery[uint16](
+		"System_Ntp_Server",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "key-id"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.System_Ntp_Server).KeyId
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Ntp_Server) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
 // System_Ntp_Server_NetworkInstancePath represents the /openconfig-system/system/ntp/servers/server/state/network-instance YANG schema element.
 type System_Ntp_Server_NetworkInstancePath struct {
 	*ygnmi.NodePath
@@ -60580,6 +61364,42 @@ func (n *System_Ntp_ServerPathAny) Iburst() *System_Ntp_Server_IburstPathAny {
 	ps := &System_Ntp_Server_IburstPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"*", "iburst"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// KeyId (leaf): Reference to NTP authentication key for this server.
+//
+//	Defining module:      "openconfig-system"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/key-id"
+//	Path from root:       "/system/ntp/servers/server/*/key-id"
+func (n *System_Ntp_ServerPath) KeyId() *System_Ntp_Server_KeyIdPath {
+	ps := &System_Ntp_Server_KeyIdPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "key-id"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// KeyId (leaf): Reference to NTP authentication key for this server.
+//
+//	Defining module:      "openconfig-system"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/key-id"
+//	Path from root:       "/system/ntp/servers/server/*/key-id"
+func (n *System_Ntp_ServerPathAny) KeyId() *System_Ntp_Server_KeyIdPathAny {
+	ps := &System_Ntp_Server_KeyIdPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "key-id"},
 			map[string]interface{}{},
 			n,
 		),

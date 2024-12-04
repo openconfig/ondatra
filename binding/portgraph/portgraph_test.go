@@ -17,7 +17,9 @@ package portgraph
 import (
 	"fmt"
 	"regexp"
+	"strings"
 	"testing"
+	"time"
 
 	"golang.org/x/net/context"
 )
@@ -901,15 +903,28 @@ func TestSolveNotSolvable(t *testing.T) {
 			if err == nil {
 				t.Errorf("Solve got nil error, want error")
 			}
-			solveErr, ok := err.(*solveError)
+			solveErr, ok := err.(*SolveError)
 			if !ok {
 				t.Fatal("Solve got not *SolveErr type err, want *SolveErr type")
 			}
 			errString := solveErr.String()
+			solveReport := solveErr.Report()
 			for abs, con := range tc.wantAssigned {
 				re := regexp.MustCompile(fmt.Sprintf("%s.*%s.*%s", abs, "assigned", con))
 				if !re.MatchString(errString) {
 					t.Errorf("Solve got error %q, want error to report %q is assigned to %q", errString, abs, con)
+				}
+				reportRe := regexp.MustCompile(fmt.Sprintf(".*\\[MATCH\\]\\: Matched.*%s.*%s.*", con, abs))
+				if !reportRe.MatchString(solveReport) {
+					t.Errorf("Solve got SolveReport error %q, want error to contain \"[MATCH]: Matched %s to %s\"", solveReport, con, abs)
+				}
+				startTimeString := fmt.Sprintf(".*Solve started at %s.*", time.Now().Format(time.DateOnly))
+				timeRe := regexp.MustCompile(startTimeString)
+				if !timeRe.MatchString(solveReport) {
+					t.Errorf("Solve got SolveReport error %q, want error to contain %q", solveReport, startTimeString)
+				}
+				if !strings.Contains(solveReport, "Solve completed in") {
+					t.Errorf("Solve got SolveReport error %q, want error to contain \"Solve completed in\"", solveReport)
 				}
 			}
 			for _, unassigned := range tc.wantUnassigned {
@@ -917,6 +932,10 @@ func TestSolveNotSolvable(t *testing.T) {
 				if !re.MatchString(errString) {
 					t.Errorf("Solve got error %q, want error to report %q is not assigned", errString, unassigned)
 				}
+			}
+			reUnassigned := regexp.MustCompile(fmt.Sprintf(".*\\[CONSTRAINT_FAIL\\]\\:.*cannot be assigned to %s.*", tc.wantUnassigned[0]))
+			if !reUnassigned.MatchString(solveReport) {
+				t.Errorf("SolveReport error %q, want report to contain string \"[CONSTRAINT_FAIL]: cannot be assigned to %s\"", solveReport, tc.wantUnassigned[0])
 			}
 		})
 	}

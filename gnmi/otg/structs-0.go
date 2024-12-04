@@ -11905,7 +11905,7 @@ func (*LldpInterface_LldpNeighborDatabase_LldpNeighbor) IsYANGGoStruct() {}
 type LldpInterface_LldpNeighborDatabase_LldpNeighbor_CustomTlv_Key struct {
 	CustomType uint32 `path:"custom-type"`
 	Oui        string `path:"oui"`
-	OuiSubtype string `path:"oui-subtype"`
+	OuiSubtype uint32 `path:"oui-subtype"`
 }
 
 // IsYANGGoKeyStruct ensures that LldpInterface_LldpNeighborDatabase_LldpNeighbor_CustomTlv_Key partially implements the
@@ -12038,7 +12038,7 @@ func (t *LldpInterface_LldpNeighborDatabase_LldpNeighbor) AppendCapabilities(v *
 // NewCustomTlv creates a new entry in the CustomTlv list of the
 // LldpInterface_LldpNeighborDatabase_LldpNeighbor struct. The keys of the list are populated from the input
 // arguments.
-func (t *LldpInterface_LldpNeighborDatabase_LldpNeighbor) NewCustomTlv(CustomType uint32, Oui string, OuiSubtype string) (*LldpInterface_LldpNeighborDatabase_LldpNeighbor_CustomTlv, error) {
+func (t *LldpInterface_LldpNeighborDatabase_LldpNeighbor) NewCustomTlv(CustomType uint32, Oui string, OuiSubtype uint32) (*LldpInterface_LldpNeighborDatabase_LldpNeighbor_CustomTlv, error) {
 
 	// Initialise the list within the receiver struct if it has not already been
 	// created.
@@ -12092,7 +12092,7 @@ func (t *LldpInterface_LldpNeighborDatabase_LldpNeighbor) RenameCustomTlv(oldK, 
 // GetOrCreateCustomTlv retrieves the value with the specified keys from
 // the receiver LldpInterface_LldpNeighborDatabase_LldpNeighbor. If the entry does not exist, then it is created.
 // It returns the existing or new list member.
-func (t *LldpInterface_LldpNeighborDatabase_LldpNeighbor) GetOrCreateCustomTlv(CustomType uint32, Oui string, OuiSubtype string) *LldpInterface_LldpNeighborDatabase_LldpNeighbor_CustomTlv {
+func (t *LldpInterface_LldpNeighborDatabase_LldpNeighbor) GetOrCreateCustomTlv(CustomType uint32, Oui string, OuiSubtype uint32) *LldpInterface_LldpNeighborDatabase_LldpNeighbor_CustomTlv {
 
 	key := LldpInterface_LldpNeighborDatabase_LldpNeighbor_CustomTlv_Key{
 		CustomType: CustomType,
@@ -12116,7 +12116,7 @@ func (t *LldpInterface_LldpNeighborDatabase_LldpNeighbor) GetOrCreateCustomTlv(C
 // the CustomTlv map field of LldpInterface_LldpNeighborDatabase_LldpNeighbor. If the receiver is nil, or
 // the specified key is not present in the list, nil is returned such that Get*
 // methods may be safely chained.
-func (t *LldpInterface_LldpNeighborDatabase_LldpNeighbor) GetCustomTlv(CustomType uint32, Oui string, OuiSubtype string) *LldpInterface_LldpNeighborDatabase_LldpNeighbor_CustomTlv {
+func (t *LldpInterface_LldpNeighborDatabase_LldpNeighbor) GetCustomTlv(CustomType uint32, Oui string, OuiSubtype uint32) *LldpInterface_LldpNeighborDatabase_LldpNeighbor_CustomTlv {
 
 	if t == nil {
 		return nil
@@ -12137,7 +12137,7 @@ func (t *LldpInterface_LldpNeighborDatabase_LldpNeighbor) GetCustomTlv(CustomTyp
 // DeleteCustomTlv deletes the value with the specified keys from
 // the receiver LldpInterface_LldpNeighborDatabase_LldpNeighbor. If there is no such element, the function
 // is a no-op.
-func (t *LldpInterface_LldpNeighborDatabase_LldpNeighbor) DeleteCustomTlv(CustomType uint32, Oui string, OuiSubtype string) {
+func (t *LldpInterface_LldpNeighborDatabase_LldpNeighbor) DeleteCustomTlv(CustomType uint32, Oui string, OuiSubtype uint32) {
 	key := LldpInterface_LldpNeighborDatabase_LldpNeighbor_CustomTlv_Key{
 		CustomType: CustomType,
 		Oui:        Oui,
@@ -12636,7 +12636,7 @@ func (*LldpInterface_LldpNeighborDatabase_LldpNeighbor_Capabilities) ΛBelonging
 type LldpInterface_LldpNeighborDatabase_LldpNeighbor_CustomTlv struct {
 	CustomType *uint32 `path:"state/custom-type|custom-type" module:"open-traffic-generator-lldp/open-traffic-generator-lldp|open-traffic-generator-lldp" shadow-path:"custom-type" shadow-module:"open-traffic-generator-lldp"`
 	Oui        *string `path:"state/oui|oui" module:"open-traffic-generator-lldp/open-traffic-generator-lldp|open-traffic-generator-lldp" shadow-path:"oui" shadow-module:"open-traffic-generator-lldp"`
-	OuiSubtype *string `path:"state/oui-subtype|oui-subtype" module:"open-traffic-generator-lldp/open-traffic-generator-lldp|open-traffic-generator-lldp" shadow-path:"oui-subtype" shadow-module:"open-traffic-generator-lldp"`
+	OuiSubtype *uint32 `path:"state/oui-subtype|oui-subtype" module:"open-traffic-generator-lldp/open-traffic-generator-lldp|open-traffic-generator-lldp" shadow-path:"oui-subtype" shadow-module:"open-traffic-generator-lldp"`
 }
 
 // IsYANGGoStruct ensures that LldpInterface_LldpNeighborDatabase_LldpNeighbor_CustomTlv implements the yang.GoStruct
@@ -12685,9 +12685,9 @@ func (t *LldpInterface_LldpNeighborDatabase_LldpNeighbor_CustomTlv) GetOui() str
 // safely use t.GetOuiSubtype() to retrieve the value. In the case that the
 // caller has different actions based on whether the leaf is set or unset, it
 // should use 'if t.OuiSubtype == nil' before retrieving the leaf's value.
-func (t *LldpInterface_LldpNeighborDatabase_LldpNeighbor_CustomTlv) GetOuiSubtype() string {
+func (t *LldpInterface_LldpNeighborDatabase_LldpNeighbor_CustomTlv) GetOuiSubtype() uint32 {
 	if t == nil || t.OuiSubtype == nil {
-		return ""
+		return 0
 	}
 	return *t.OuiSubtype
 }
@@ -12706,7 +12706,7 @@ func (t *LldpInterface_LldpNeighborDatabase_LldpNeighbor_CustomTlv) SetOui(v str
 
 // SetOuiSubtype sets the value of the leaf OuiSubtype in the LldpInterface_LldpNeighborDatabase_LldpNeighbor_CustomTlv
 // struct.
-func (t *LldpInterface_LldpNeighborDatabase_LldpNeighbor_CustomTlv) SetOuiSubtype(v string) {
+func (t *LldpInterface_LldpNeighborDatabase_LldpNeighbor_CustomTlv) SetOuiSubtype(v uint32) {
 	t.OuiSubtype = &v
 }
 

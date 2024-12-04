@@ -59,7 +59,10 @@ type AfterTestsEvent struct {
 // complete and before tests start executing.
 func (el *EventListener) AddBeforeTestsCallback(cb func(*BeforeTestsEvent) error) {
 	events.AddBeforeTests(func(res *binding.Reservation) error {
-		return cb(&BeforeTestsEvent{Reservation: res})
+		if err := cb(&BeforeTestsEvent{Reservation: res}); err != nil {
+			return events.CallbackErr(err, cb)
+		}
+		return nil
 	})
 }
 
@@ -67,6 +70,9 @@ func (el *EventListener) AddBeforeTestsCallback(cb func(*BeforeTestsEvent) error
 // executing and before the reservation is released.
 func (el *EventListener) AddAfterTestsCallback(cb func(*AfterTestsEvent) error) {
 	events.AddAfterTests(func(exitCode *int) error {
-		return cb(&AfterTestsEvent{ExitCode: exitCode})
+		if err := cb(&AfterTestsEvent{ExitCode: exitCode}); err != nil {
+			return events.CallbackErr(err, cb)
+		}
+		return nil
 	})
 }

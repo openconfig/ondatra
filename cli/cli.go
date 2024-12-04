@@ -44,10 +44,10 @@ func (c *CLI) Run(t testing.TB, cmd string) string {
 	t = events.ActionStarted(t, "Running CLI command on %s", c.dut)
 	res, err := c.run(context.Background(), cmd)
 	if err != nil {
-		t.Fatalf("Run(t, %q) on %s: %v", cmd, c.dut, err)
+		t.Fatalf("Run(t, %q) on %s: %v", cmd, c.dut.Name(), err)
 	}
 	if res.Error() != "" {
-		t.Fatalf("Run(t, %q) on %s: %v", cmd, c.dut, res.Error())
+		t.Fatalf("Run(t, %q) on %s: %v", cmd, c.dut.Name(), res.Error())
 	}
 	return res.Output()
 }
@@ -61,7 +61,7 @@ func (c *CLI) RunResult(t testing.TB, cmd string) binding.CommandResult {
 	t = events.ActionStarted(t, "Running CLI command on %s", c.dut)
 	res, err := c.run(context.Background(), cmd)
 	if err != nil {
-		t.Fatalf("RunResult(t, %q) on %s: %v", cmd, c.dut, err)
+		t.Fatalf("RunResult(t, %q) on %s: %v", cmd, c.dut.Name(), err)
 	}
 	return res
 }
