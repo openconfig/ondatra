@@ -49,7 +49,10 @@ func DnDialGNMISecure(ctx context.Context, opts ...grpc.DialOption) (gpb.GNMICli
 	/* Connects to the gNMI server using the TLS credentials and the login credentials.
 	 * The TLS certificate and user/pass are read from the .ini file
 	 */
-	display.Action(display.MainT, "DnDialGNMISecure2")
+	display.Banner(display.MainT, "DnDevice.DialGNMI")
+	display.Action(display.MainT, "Setting a 5 second timeout for log in ")
+	ctx, cancel := context.WithTimeout(ctx, 5*time.Second)
+	defer cancel()
 	cfg, err := GetDnConfig()
 	if err != nil {
 		fmt.Println("Failed to get DnConfig: ", err)
@@ -68,12 +71,12 @@ func DnDialGNMISecure(ctx context.Context, opts ...grpc.DialOption) (gpb.GNMICli
 		fmt.Println("Failed to create TLS credentials: ", err)
 		panic(err)
 	}
+	display.Action(display.MainT, "Using TLS credentials")
 	opts = append(opts, grpc.WithTransportCredentials(credentials.NewTLS(tls_config)))
+	display.Action(display.MainT, "Using User/pass credentials")
 	opts = append(opts, grpc.WithPerRPCCredentials(userpass))
 
 	// 5 second timeout:
-	ctx, cancel := context.WithTimeout(ctx, 3*time.Second)
-	defer cancel()
 
 	conn, err := grpc.DialContext(ctx, addr, opts...)
 	if err != nil {
@@ -89,7 +92,7 @@ func (b *DnBinding) Reserve(ctx context.Context, tb *opb.Testbed, runTime, waitT
 	dev := &fakebind.DUT{
 		AbstractDUT: &binding.AbstractDUT{
 			Dims: &binding.Dims{
-				Name:   "fakeDUT",
+				Name:   "DriveNets device",
 				Vendor: opb.Device_DriveNets,
 			},
 		},
@@ -128,7 +131,6 @@ func TestDnGnmiGet(t *testing.T) {
 	_, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 	dut := ondatra.DUT(t, "dn_dut")
-	fmt.Printf("DUT: %v\n", dut)
 
 	ds := gnmi.Get(t, dut, gnmi.OC().Interface("bundle-1").OperStatus().State())
 	fmt.Println("Got status: ", ds)
@@ -139,9 +141,8 @@ func TestDnGnmiBasicSet(t *testing.T) {
 	_, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 	dut := ondatra.DUT(t, "dn_dut")
-	fmt.Printf("DUT: %v\n", dut)
 
-	cofig_container := gnmi.OC().Interface("bundle-2").Config()
+	config_container := gnmi.OC().Interface("bundle-2").Config()
 	// val3 := "3"
 	// val2 := oc.Interface_Ethernet{
 	// 	AggregateId: &val3,
@@ -150,7 +151,7 @@ func TestDnGnmiBasicSet(t *testing.T) {
 		AdminStatus: oc.Interface_AdminStatus_UP,
 		//Ethernet:    &val2,
 	}
-	gnmi.Update(t, dut, cofig_container, &val)
+	gnmi.Update(t, dut, config_container, &val)
 
 	ds := gnmi.Get(t, dut, gnmi.OC().Interface("bundle-2").Config())
 	fmt.Printf("Read status from server: \n%+v\n", ds)
@@ -169,26 +170,22 @@ func TestDnGnmiIdentityRefSet(t *testing.T) {
 	_, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 	dut := ondatra.DUT(t, "dn_dut")
-	fmt.Printf("DUT: %v\n", dut)
-
-	cofig_container := gnmi.OC().Interface("bundle-3").Config()
+	display.Action(display.MainT, "Creating bundle-3")
+	config_container := gnmi.OC().Interface("bundle-3").Config()
 	val := oc.Interface{
 		Tpid: oc.VlanTypes_TPID_TYPES_TPID_0X8100,
 		Type: oc.IETFInterfaces_InterfaceType_ieee8023adLag,
 	}
-	gnmi.Update(t, dut, cofig_container, &val)
-
+	gnmi.Update(t, dut, config_container, &val)
 }
 
 func TestDnGnmiMultiSet(t *testing.T) {
-	// /oc-if:interfaces/oc-if:interface/oc-if:state/oc-vlan:tpid
 	display.Action(display.MainT, "TestDnGnmiIdentityRefSet")
 	_, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 	dut := ondatra.DUT(t, "dn_dut")
-	fmt.Printf("DUT: %v\n", dut)
 
-	cofig_container := gnmi.OC().Interface("bundle-4").Config()
+	config_container := gnmi.OC().Interface("bundle-4").Config()
 	// p1 := "port-1"
 	// mtu := uint16(70)
 	access_vlan := uint16(71)
@@ -222,7 +219,7 @@ func TestDnGnmiMultiSet(t *testing.T) {
 		Aggregation: &agg_container,
 	}
 	fmt.Printf("val: %v\n", val)
-	gnmi.Update(t, dut, cofig_container, &val)
+	gnmi.Update(t, dut, config_container, &val)
 
 }
 
@@ -232,9 +229,8 @@ func TestDnGnmiLeafListSet(t *testing.T) {
 	_, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 	dut := ondatra.DUT(t, "dn_dut")
-	fmt.Printf("DUT: %v\n", dut)
 
-	cofig_container := gnmi.OC().Interface("bundle-5").Config()
+	config_container := gnmi.OC().Interface("bundle-5").Config()
 	// p1 := "port-1"
 	// mtu := uint16(70)
 	access_vlan := uint16(71)
@@ -267,7 +263,7 @@ func TestDnGnmiLeafListSet(t *testing.T) {
 		// Type:        oc.IETFInterfaces_InterfaceType_aal5,
 		Aggregation: &agg_container,
 	}
-	gnmi.Update(t, dut, cofig_container, &val)
+	gnmi.Update(t, dut, config_container, &val)
 
 }
 
@@ -405,6 +401,8 @@ func TestDnGnmiSetAndSubscribe(t *testing.T) {
 	dut := ondatra.DUT(t, "dn_dut")
 	intfPath := gnmi.OC().Interface("eth1")
 
+	_, cancel := context.WithTimeout(context.Background(), 60*time.Second)
+	defer cancel()
 	// Start subscription
 	watch := gnmi.Watch(t, dut, intfPath.Description().State(), 30*time.Second, func(val *ygnmi.Value[string]) bool {
 		return val.IsPresent()

@@ -127,7 +127,7 @@ func GetDnConfig() (DnConfig, error) {
 	if err != nil {
 		panic(err)
 	}
-	fmt.Printf("Read config: %v\n", cfg)
+	// fmt.Printf("Read config: %v\n", cfg)
 	return cfg, nil
 
 }
