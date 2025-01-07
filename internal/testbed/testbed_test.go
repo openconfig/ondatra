@@ -15,7 +15,7 @@
 package testbed_test
 
 import (
-	"fmt"
+	"errors"
 	"os"
 	"strings"
 	"testing"
@@ -57,14 +57,14 @@ func TestReserve(t *testing.T) {
 	})
 
 	t.Run("error", func(t *testing.T) {
-		wantErr := "reserve error"
+		wantErr := errors.New("reserve error")
 		bind := fakebind.Setup()
 		bind.ReserveFn = func(context.Context, *opb.Testbed, time.Duration, time.Duration, map[string]string) (*binding.Reservation, error) {
-			return nil, fmt.Errorf(wantErr)
+			return nil, wantErr
 		}
 		gotErr := testbed.Reserve(context.Background(), tbFlags)
-		if gotErr == nil || !strings.Contains(gotErr.Error(), wantErr) {
-			t.Errorf("Reserve() got error %v, want %q", gotErr, wantErr)
+		if !errors.Is(gotErr, wantErr) {
+			t.Errorf("Reserve() got error %v, want %v", gotErr, wantErr)
 		}
 	})
 
@@ -99,14 +99,14 @@ func TestReserve(t *testing.T) {
 	})
 
 	t.Run("fetch error", func(t *testing.T) {
-		wantErr := "fetch error"
+		wantErr := errors.New("fetch error")
 		bind := fakebind.Setup()
 		bind.FetchReservationFn = func(context.Context, string) (*binding.Reservation, error) {
-			return nil, fmt.Errorf(wantErr)
+			return nil, wantErr
 		}
 		gotErr := testbed.Reserve(context.Background(), tbAndIDFlags)
-		if gotErr == nil || !strings.Contains(gotErr.Error(), wantErr) {
-			t.Errorf("Reserve() got error %v, want %q", gotErr, wantErr)
+		if !errors.Is(gotErr, wantErr) {
+			t.Errorf("Reserve() got error %v, want %v", gotErr, wantErr)
 		}
 	})
 }
@@ -225,14 +225,14 @@ func TestRelease(t *testing.T) {
 	})
 
 	t.Run("error", func(t *testing.T) {
-		wantErr := "release error"
+		wantErr := errors.New("release error")
 		bind := fakebind.Setup().WithReservation(new(binding.Reservation))
 		bind.ReleaseFn = func(context.Context) error {
-			return fmt.Errorf(wantErr)
+			return wantErr
 		}
 		gotErr := testbed.Release(context.Background())
-		if gotErr == nil || !strings.Contains(gotErr.Error(), wantErr) {
-			t.Errorf("Release() got error %v, want %q", gotErr, wantErr)
+		if !errors.Is(gotErr, wantErr) {
+			t.Errorf("Release() got error %v, want %v", gotErr, wantErr)
 		}
 	})
 }

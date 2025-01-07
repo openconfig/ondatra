@@ -146,7 +146,7 @@ func (p *proxy) dialTarget(ctx context.Context, method string) (context.Context,
 	hd, ok := metadata.FromIncomingContext(ctx)
 	if !ok {
 		log.Infof("%s proxy_error: missing metadata", name)
-		return nil, nil, false, status.Errorf(codes.InvalidArgument, "proxy_error: missing metadata")
+		return nil, nil, false, status.Error(codes.InvalidArgument, "proxy_error: missing metadata")
 	}
 	dest, destHd, err := p.destProvider(hd, method)
 	if err != nil {
@@ -165,7 +165,7 @@ func (p *proxy) dialTarget(ctx context.Context, method string) (context.Context,
 	c, err = p.grpcDialer.DialGRPC(ctx, dest, grpc.WithDefaultCallOptions(grpc.ForceCodec(codec())))
 	if err != nil {
 		log.Infof("%s proxy_error: cannot connect to target backend %s: %v", name, dest, err)
-		return nil, nil, false, status.Errorf(codes.Unavailable, fmt.Sprintf("proxy_error: cannot connect to target backend: %v", err))
+		return nil, nil, false, status.Errorf(codes.Unavailable, "proxy_error: cannot connect to target backend: %v", err)
 	}
 	log.InfoContextf(ctx, "%s %s dial successful", name, dest)
 	if added := p.addToCache(c, ck); added {
@@ -183,7 +183,7 @@ func (p *proxy) instrumentedStreamHandler(srv any, stream grpc.ServerStream) err
 		method = "/" + method
 	}
 	if !ok {
-		err := status.Errorf(codes.Internal, "proxy_error: no method name on ServerStream Context")
+		err := status.Error(codes.Internal, "proxy_error: no method name on ServerStream Context")
 		mut := []tag.Mutator{tag.Upsert(errorKey, err.Error())}
 		stats.RecordWithTags(ctx, mut, mProxyErrors.M(1))
 		return err
@@ -222,7 +222,7 @@ func (p *proxy) streamHandler(ctx context.Context, method string, stream grpc.Se
 	defer clientCancel()
 	clientStream, err := grpc.NewClientStream(destCtx, clientStreamDesc, destConn, method, grpc.WaitForReady(true))
 	if err != nil {
-		return status.Errorf(codes.Internal, fmt.Sprintf("proxy_error: %v", err))
+		return status.Errorf(codes.Internal, "proxy_error: %v", err)
 	}
 	return p.bidiStream(clientStream, stream)
 }
@@ -257,14 +257,14 @@ func forwardServerToClient(dst grpc.ClientStream, src grpc.ServerStream) error {
 		if err := src.RecvMsg(p); err != nil {
 			if err == io.EOF {
 				if dErr := dst.CloseSend(); dErr != nil {
-					return status.Errorf(codes.Internal, fmt.Sprintf("proxy_error: %v", dErr))
+					return status.Errorf(codes.Internal, "proxy_error: %v", dErr)
 				}
 				return nil
 			}
-			return status.Errorf(codes.Internal, fmt.Sprintf("proxy_error: %v", err))
+			return status.Errorf(codes.Internal, "proxy_error: %v", err)
 		}
 		if err := dst.SendMsg(p); err != nil {
-			return status.Errorf(codes.Internal, fmt.Sprintf("proxy_error: %v", err))
+			return status.Errorf(codes.Internal, "proxy_error: %v", err)
 		}
 	}
 }
@@ -274,10 +274,10 @@ func forwardClientToServer(dst grpc.ServerStream, src grpc.ClientStream) error {
 	// Transfer Headers.
 	md, err := src.Header()
 	if err != nil {
-		return status.Errorf(codes.Internal, fmt.Sprintf("proxy_error: %v", err))
+		return status.Errorf(codes.Internal, "proxy_error: %v", err)
 	}
 	if err := dst.SendHeader(md); err != nil {
-		return status.Errorf(codes.Internal, fmt.Sprintf("proxy_error: %v", err))
+		return status.Errorf(codes.Internal, "proxy_error: %v", err)
 	}
 
 	// Transfer body.

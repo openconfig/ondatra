@@ -143,6 +143,7 @@ message Port {
     PMD_400GBASE_DR4 = 28;
     PMD_100GBASE_DR = 29;
     PMD_100GBASE_CGR4 = 30;
+    PMD_400GBASE_ZR_PLUS = 31;
   }
   oneof pmd_value {
     Pmd pmd = 4;

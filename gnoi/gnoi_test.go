@@ -15,7 +15,7 @@
 package gnoi
 
 import (
-	"fmt"
+	"errors"
 	"strings"
 	"testing"
 
@@ -67,7 +67,7 @@ func TestExecute(t *testing.T) {
 				if tt.wantErr == "" {
 					return tt.want, nil
 				}
-				return tt.want, fmt.Errorf(tt.wantErr)
+				return tt.want, errors.New(tt.wantErr)
 			}
 			var got fakeResult
 			gotErr := testt.CaptureFatal(t, func(t testing.TB) {
