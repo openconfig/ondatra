@@ -11,6 +11,7 @@ import (
 	"google.golang.org/grpc/credentials/insecure"
 
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
+	"github.com/openconfig/gnoigo"
 	"github.com/openconfig/ondatra"
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/fakebind"
@@ -20,6 +21,8 @@ import (
 	opb "github.com/openconfig/ondatra/proto"
 	"github.com/openconfig/ygnmi/ygnmi"
 	"github.com/openconfig/ygot/ygot"
+
+	spb "github.com/openconfig/gnoi/system"
 )
 
 type DnBinding struct {
@@ -97,7 +100,9 @@ func (b *DnBinding) Reserve(ctx context.Context, tb *opb.Testbed, runTime, waitT
 			},
 		},
 		DialGNMIFn: DnDialGNMISecure,
+		DialGNOIFn: DnDialGNOISecure,
 		//DialGNMIFn: DnDialGNMIInsecure,
+		//DialGNOIFn: DnDialGNOIInsecure,
 	}
 	return &binding.Reservation{
 		ID: "DrivenetsReserveId",
@@ -443,4 +448,98 @@ func aTestDnGnmiSetDuplicatePaths(t *testing.T) {
 	if desc != "Second Update" {
 		t.Fatalf("Expected description 'Second Update', got '%s'", desc)
 	}
+}
+
+// GNOI tests
+
+func DnDialGNOIInsecure(ctx context.Context, opts ...grpc.DialOption) (gnoigo.Clients, error) {
+	display.Action(display.MainT, "DnDevice.DialGNOIInsecure")
+	addr := "10.1.1.103:50051" // in cluster setup change to target
+
+	opts = append(opts, grpc.WithTransportCredentials(insecure.NewCredentials()))
+	ctx, cancel := context.WithTimeout(ctx, 3*time.Second)
+	defer cancel()
+
+	conn, err := grpc.DialContext(ctx, addr, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return gnoigo.NewClients(conn), nil
+}
+
+func DnDialGNOISecure(ctx context.Context, opts ...grpc.DialOption) (gnoigo.Clients, error) {
+	display.Action(display.MainT, "DnDevice.DialGNOISecure")
+	ctx, cancel := context.WithTimeout(ctx, 5*time.Second)
+	defer cancel()
+
+	cfg, err := GetDnConfig()
+	if err != nil {
+		fmt.Println("Failed to get DnConfig: ", err)
+		panic(err)
+	}
+
+	certFile := cfg.TLS.Certificate
+	addr := cfg.Cluster.Host + ":" + cfg.Cluster.Port
+	var userpass = loginCreds{
+		Username: cfg.Cluster.Username,
+		Password: cfg.Cluster.Password,
+	}
+	tlsConfig, err := NewTLSConfig("", certFile, "", "", false, false)
+	if err != nil {
+		fmt.Println("Failed to create TLS credentials: ", err)
+		panic(err)
+	}
+
+	display.Action(display.MainT, "Using TLS credentials for GNOI")
+	opts = append(opts, grpc.WithTransportCredentials(credentials.NewTLS(tlsConfig)))
+	display.Action(display.MainT, "Using User/pass credentials for GNOI")
+	opts = append(opts, grpc.WithPerRPCCredentials(userpass))
+
+	conn, err := grpc.DialContext(ctx, addr, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return gnoigo.NewClients(conn), nil
+}
+
+// Example GNOI test for system time
+
+func TestDnGnoiSystemTime(t *testing.T) {
+	display.Action(display.MainT, "TestDnGnoiSystemTime")
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+
+	dut := ondatra.DUT(t, "dn_dut")
+
+	gnoic, err := dut.RawAPIs().BindingDUT().DialGNOI(context.Background())
+	if err != nil {
+		t.Fatalf("Failed to dial GNOI: %v", err)
+	}
+
+	// Simple GNOI System RPC call:
+	timeResp, err := gnoic.System().Time(ctx, &spb.TimeRequest{})
+	if err != nil {
+		t.Fatalf("GNOI Time request failed: %v", err)
+	}
+	t.Logf("GNOI Time response: %v", timeResp)
+}
+
+func TestDnGnoiPing(t *testing.T) {
+	display.Action(display.MainT, "TestDnGnoiPing")
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+
+	dut := ondatra.DUT(t, "dn_dut")
+
+	gnoic, err := dut.RawAPIs().BindingDUT().DialGNOI(context.Background())
+	if err != nil {
+		t.Fatalf("Failed to dial GNOI: %v", err)
+	}
+
+	// Simple GNOI System RPC call:
+	pingResp, err := gnoic.System().Ping(ctx, &spb.PingRequest{})
+	if err != nil {
+		t.Fatalf("GNOI Time request failed: %v", err)
+	}
+	t.Logf("GNOI Ping response: %v", pingResp)
 }
