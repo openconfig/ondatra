@@ -49,6 +49,7 @@ message Device {
     ARUBA = 11;
     ALPINE = 12;
     ALCATELLUCENT = 13;
+    DRIVENETS = 14;
   }
   Vendor vendor = 2;
 

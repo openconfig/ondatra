@@ -52,6 +52,7 @@ var (
 		tpb.Vendor_OPENCONFIG: opb.Device_OPENCONFIG,
 		tpb.Vendor_HOST:       opb.Device_VENDOR_UNSPECIFIED,
 		tpb.Vendor_ALPINE:     opb.Device_ALPINE,
+		tpb.Vendor_DRIVENETS:  opb.Device_DRIVENETS,
 	}
 )
 
