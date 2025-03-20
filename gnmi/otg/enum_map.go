@@ -40,6 +40,18 @@ import (
 // in the YANG schema. The map is named ΛEnum in order to avoid clash with any
 // valid YANG identifier.
 var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
+	"E_AdjacencySid_AdjacencyType": {
+		1: {Name: "ADJ-SID"},
+		2: {Name: "LAN-ADJ-SID"},
+	},
+	"E_AdjacencySid_Flags": {
+		1: {Name: "ADDRESS_FAMILY"},
+		2: {Name: "BACKUP"},
+		3: {Name: "VALUE"},
+		4: {Name: "LOCAL"},
+		5: {Name: "SET"},
+		6: {Name: "PERSISTENT"},
+	},
 	"E_BgpPeer_SessionState": {
 		1: {Name: "IDLE"},
 		2: {Name: "CONNECT"},
@@ -60,6 +72,10 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		9:  {Name: "C_VLAN"},
 		10: {Name: "STATION_ONLY"},
 		11: {Name: "WLAN_ACCESS_POINT"},
+	},
+	"E_Capability_Flags": {
+		1: {Name: "FLOOD"},
+		2: {Name: "DOWN"},
 	},
 	"E_Component_Name": {
 		1: {Name: "keng-controller"},
@@ -168,6 +184,18 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 	"E_Port_Link": {
 		1: {Name: "UP"},
 		2: {Name: "DOWN"},
+	},
+	"E_PrefixSid_Flags": {
+		1: {Name: "READVERTISEMENT"},
+		2: {Name: "NODE"},
+		3: {Name: "NO_PHP"},
+		4: {Name: "EXPLICIT_NULL"},
+		5: {Name: "VALUE"},
+		6: {Name: "LOCAL"},
+	},
+	"E_SegmentRoutingCapability_Flags": {
+		1: {Name: "IPV4_MPLS"},
+		2: {Name: "IPV6_MPLS"},
 	},
 	"E_State_CommunityType": {
 		1: {Name: "MANUAL_AS_NUMBER"},
@@ -314,8 +342,17 @@ func initΛEnumTypes() {
 		"/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability/prefixes/prefix/state/prefix-attributes/flags": {
 			reflect.TypeOf((E_State_Flags)(0)),
 		},
+		"/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability/prefixes/prefix/state/prefix-sid/state/flags": {
+			reflect.TypeOf((E_PrefixSid_Flags)(0)),
+		},
 		"/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-ipv4-reachability/prefixes/prefix/state/redistribution-type": {
 			reflect.TypeOf((E_ExtendedIpv4Reachability_Prefix_RedistributionType)(0)),
+		},
+		"/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-is-reachability/neighbors/neighbor/state/adjacency-sid/state/adjacency-type": {
+			reflect.TypeOf((E_AdjacencySid_AdjacencyType)(0)),
+		},
+		"/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/extended-is-reachability/neighbors/neighbor/state/adjacency-sid/state/flags": {
+			reflect.TypeOf((E_AdjacencySid_Flags)(0)),
 		},
 		"/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv4-external-reachability/prefixes/prefix/state/origin-type": {
 			reflect.TypeOf((E_Ipv4ExternalReachability_Prefix_OriginType)(0)),
@@ -335,8 +372,17 @@ func initΛEnumTypes() {
 		"/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix/state/prefix-attributes/flags": {
 			reflect.TypeOf((E_State_Flags)(0)),
 		},
+		"/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix/state/prefix-sid/state/flags": {
+			reflect.TypeOf((E_PrefixSid_Flags)(0)),
+		},
 		"/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/ipv6-reachability/prefixes/prefix/state/redistribution-type": {
 			reflect.TypeOf((E_Ipv6Reachability_Prefix_RedistributionType)(0)),
+		},
+		"/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/router-capabilities/capability/state/flags": {
+			reflect.TypeOf((E_Capability_Flags)(0)),
+		},
+		"/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/tlvs/router-capabilities/capability/state/segment-routing-capability/state/flags": {
+			reflect.TypeOf((E_SegmentRoutingCapability_Flags)(0)),
 		},
 		"/lacp/lag-members/lag-member/state/activity": {
 			reflect.TypeOf((E_Lacp_LacpActivityType)(0)),
