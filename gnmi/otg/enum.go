@@ -32,6 +32,72 @@ import (
 	"github.com/openconfig/ygot/ygot"
 )
 
+// E_AdjacencySid_AdjacencyType is a derived int64 type which is used to represent
+// the enumerated node AdjacencySid_AdjacencyType. An additional value named
+// AdjacencySid_AdjacencyType_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_AdjacencySid_AdjacencyType int64
+
+// IsYANGGoEnum ensures that AdjacencySid_AdjacencyType implements the yang.GoEnum
+// interface. This ensures that AdjacencySid_AdjacencyType can be identified as a
+// mapped type for a YANG enumeration.
+func (E_AdjacencySid_AdjacencyType) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  AdjacencySid_AdjacencyType.
+func (E_AdjacencySid_AdjacencyType) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_AdjacencySid_AdjacencyType.
+func (e E_AdjacencySid_AdjacencyType) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_AdjacencySid_AdjacencyType")
+}
+
+const (
+	// AdjacencySid_AdjacencyType_UNSET corresponds to the value UNSET of AdjacencySid_AdjacencyType
+	AdjacencySid_AdjacencyType_UNSET E_AdjacencySid_AdjacencyType = 0
+	// AdjacencySid_AdjacencyType_ADJ_SID corresponds to the value ADJ_SID of AdjacencySid_AdjacencyType
+	AdjacencySid_AdjacencyType_ADJ_SID E_AdjacencySid_AdjacencyType = 1
+	// AdjacencySid_AdjacencyType_LAN_ADJ_SID corresponds to the value LAN_ADJ_SID of AdjacencySid_AdjacencyType
+	AdjacencySid_AdjacencyType_LAN_ADJ_SID E_AdjacencySid_AdjacencyType = 2
+)
+
+// E_AdjacencySid_Flags is a derived int64 type which is used to represent
+// the enumerated node AdjacencySid_Flags. An additional value named
+// AdjacencySid_Flags_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_AdjacencySid_Flags int64
+
+// IsYANGGoEnum ensures that AdjacencySid_Flags implements the yang.GoEnum
+// interface. This ensures that AdjacencySid_Flags can be identified as a
+// mapped type for a YANG enumeration.
+func (E_AdjacencySid_Flags) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  AdjacencySid_Flags.
+func (E_AdjacencySid_Flags) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_AdjacencySid_Flags.
+func (e E_AdjacencySid_Flags) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_AdjacencySid_Flags")
+}
+
+const (
+	// AdjacencySid_Flags_UNSET corresponds to the value UNSET of AdjacencySid_Flags
+	AdjacencySid_Flags_UNSET E_AdjacencySid_Flags = 0
+	// AdjacencySid_Flags_ADDRESS_FAMILY corresponds to the value ADDRESS_FAMILY of AdjacencySid_Flags
+	AdjacencySid_Flags_ADDRESS_FAMILY E_AdjacencySid_Flags = 1
+	// AdjacencySid_Flags_BACKUP corresponds to the value BACKUP of AdjacencySid_Flags
+	AdjacencySid_Flags_BACKUP E_AdjacencySid_Flags = 2
+	// AdjacencySid_Flags_VALUE corresponds to the value VALUE of AdjacencySid_Flags
+	AdjacencySid_Flags_VALUE E_AdjacencySid_Flags = 3
+	// AdjacencySid_Flags_LOCAL corresponds to the value LOCAL of AdjacencySid_Flags
+	AdjacencySid_Flags_LOCAL E_AdjacencySid_Flags = 4
+	// AdjacencySid_Flags_SET corresponds to the value SET of AdjacencySid_Flags
+	AdjacencySid_Flags_SET E_AdjacencySid_Flags = 5
+	// AdjacencySid_Flags_PERSISTENT corresponds to the value PERSISTENT of AdjacencySid_Flags
+	AdjacencySid_Flags_PERSISTENT E_AdjacencySid_Flags = 6
+)
+
 // E_BgpPeer_SessionState is a derived int64 type which is used to represent
 // the enumerated node BgpPeer_SessionState. An additional value named
 // BgpPeer_SessionState_UNSET is added to the enumeration which is used as
@@ -114,6 +180,35 @@ const (
 	Capabilities_Name_STATION_ONLY E_Capabilities_Name = 10
 	// Capabilities_Name_WLAN_ACCESS_POINT corresponds to the value WLAN_ACCESS_POINT of Capabilities_Name
 	Capabilities_Name_WLAN_ACCESS_POINT E_Capabilities_Name = 11
+)
+
+// E_Capability_Flags is a derived int64 type which is used to represent
+// the enumerated node Capability_Flags. An additional value named
+// Capability_Flags_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_Capability_Flags int64
+
+// IsYANGGoEnum ensures that Capability_Flags implements the yang.GoEnum
+// interface. This ensures that Capability_Flags can be identified as a
+// mapped type for a YANG enumeration.
+func (E_Capability_Flags) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  Capability_Flags.
+func (E_Capability_Flags) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_Capability_Flags.
+func (e E_Capability_Flags) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_Capability_Flags")
+}
+
+const (
+	// Capability_Flags_UNSET corresponds to the value UNSET of Capability_Flags
+	Capability_Flags_UNSET E_Capability_Flags = 0
+	// Capability_Flags_FLOOD corresponds to the value FLOOD of Capability_Flags
+	Capability_Flags_FLOOD E_Capability_Flags = 1
+	// Capability_Flags_DOWN corresponds to the value DOWN of Capability_Flags
+	Capability_Flags_DOWN E_Capability_Flags = 2
 )
 
 // E_Component_Name is a derived int64 type which is used to represent
@@ -783,6 +878,74 @@ const (
 	Port_Link_UP E_Port_Link = 1
 	// Port_Link_DOWN corresponds to the value DOWN of Port_Link
 	Port_Link_DOWN E_Port_Link = 2
+)
+
+// E_PrefixSid_Flags is a derived int64 type which is used to represent
+// the enumerated node PrefixSid_Flags. An additional value named
+// PrefixSid_Flags_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_PrefixSid_Flags int64
+
+// IsYANGGoEnum ensures that PrefixSid_Flags implements the yang.GoEnum
+// interface. This ensures that PrefixSid_Flags can be identified as a
+// mapped type for a YANG enumeration.
+func (E_PrefixSid_Flags) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  PrefixSid_Flags.
+func (E_PrefixSid_Flags) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_PrefixSid_Flags.
+func (e E_PrefixSid_Flags) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_PrefixSid_Flags")
+}
+
+const (
+	// PrefixSid_Flags_UNSET corresponds to the value UNSET of PrefixSid_Flags
+	PrefixSid_Flags_UNSET E_PrefixSid_Flags = 0
+	// PrefixSid_Flags_READVERTISEMENT corresponds to the value READVERTISEMENT of PrefixSid_Flags
+	PrefixSid_Flags_READVERTISEMENT E_PrefixSid_Flags = 1
+	// PrefixSid_Flags_NODE corresponds to the value NODE of PrefixSid_Flags
+	PrefixSid_Flags_NODE E_PrefixSid_Flags = 2
+	// PrefixSid_Flags_NO_PHP corresponds to the value NO_PHP of PrefixSid_Flags
+	PrefixSid_Flags_NO_PHP E_PrefixSid_Flags = 3
+	// PrefixSid_Flags_EXPLICIT_NULL corresponds to the value EXPLICIT_NULL of PrefixSid_Flags
+	PrefixSid_Flags_EXPLICIT_NULL E_PrefixSid_Flags = 4
+	// PrefixSid_Flags_VALUE corresponds to the value VALUE of PrefixSid_Flags
+	PrefixSid_Flags_VALUE E_PrefixSid_Flags = 5
+	// PrefixSid_Flags_LOCAL corresponds to the value LOCAL of PrefixSid_Flags
+	PrefixSid_Flags_LOCAL E_PrefixSid_Flags = 6
+)
+
+// E_SegmentRoutingCapability_Flags is a derived int64 type which is used to represent
+// the enumerated node SegmentRoutingCapability_Flags. An additional value named
+// SegmentRoutingCapability_Flags_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_SegmentRoutingCapability_Flags int64
+
+// IsYANGGoEnum ensures that SegmentRoutingCapability_Flags implements the yang.GoEnum
+// interface. This ensures that SegmentRoutingCapability_Flags can be identified as a
+// mapped type for a YANG enumeration.
+func (E_SegmentRoutingCapability_Flags) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  SegmentRoutingCapability_Flags.
+func (E_SegmentRoutingCapability_Flags) ΛMap() map[string]map[int64]ygot.EnumDefinition {
+	return ΛEnum
+}
+
+// String returns a logging-friendly string for E_SegmentRoutingCapability_Flags.
+func (e E_SegmentRoutingCapability_Flags) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_SegmentRoutingCapability_Flags")
+}
+
+const (
+	// SegmentRoutingCapability_Flags_UNSET corresponds to the value UNSET of SegmentRoutingCapability_Flags
+	SegmentRoutingCapability_Flags_UNSET E_SegmentRoutingCapability_Flags = 0
+	// SegmentRoutingCapability_Flags_IPV4_MPLS corresponds to the value IPV4_MPLS of SegmentRoutingCapability_Flags
+	SegmentRoutingCapability_Flags_IPV4_MPLS E_SegmentRoutingCapability_Flags = 1
+	// SegmentRoutingCapability_Flags_IPV6_MPLS corresponds to the value IPV6_MPLS of SegmentRoutingCapability_Flags
+	SegmentRoutingCapability_Flags_IPV6_MPLS E_SegmentRoutingCapability_Flags = 2
 )
 
 // E_State_CommunityType is a derived int64 type which is used to represent

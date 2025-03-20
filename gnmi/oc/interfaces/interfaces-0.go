@@ -30,6 +30,7 @@ using the following YANG input files:
   - public/release/models/interfaces/openconfig-if-ip.yang
   - public/release/models/interfaces/openconfig-if-sdn-ext.yang
   - public/release/models/interfaces/openconfig-interfaces.yang
+  - public/release/models/interfaces/openconfig-if-rates.yang
   - public/release/models/isis/openconfig-isis-policy.yang
   - public/release/models/isis/openconfig-isis.yang
   - public/release/models/lacp/openconfig-lacp.yang
@@ -3888,6 +3889,40 @@ func (n *InterfacePathAny) PhysicalChannel() *Interface_PhysicalChannelPathAny {
 			n,
 		),
 		parent: n,
+	}
+	return ps
+}
+
+// Rates (container): Enclosing container for interface rates.
+//
+//	Defining module:      "openconfig-if-rates"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "rates"
+//	Path from root:       "/interfaces/interface/rates"
+func (n *InterfacePath) Rates() *Interface_RatesPath {
+	ps := &Interface_RatesPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"rates"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// Rates (container): Enclosing container for interface rates.
+//
+//	Defining module:      "openconfig-if-rates"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "rates"
+//	Path from root:       "/interfaces/interface/rates"
+func (n *InterfacePathAny) Rates() *Interface_RatesPathAny {
+	ps := &Interface_RatesPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"rates"},
+			map[string]interface{}{},
+			n,
+		),
 	}
 	return ps
 }
@@ -17535,6 +17570,856 @@ func (n *Interface_PenaltyBasedAiedPath) Config() ygnmi.ConfigQuery[*oc.Interfac
 func (n *Interface_PenaltyBasedAiedPathAny) Config() ygnmi.WildcardQuery[*oc.Interface_PenaltyBasedAied] {
 	return ygnmi.NewWildcardQuery[*oc.Interface_PenaltyBasedAied](
 		"Interface_PenaltyBasedAied",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_Rates_InBitsRatePath represents the /openconfig-interfaces/interfaces/interface/rates/state/in-bits-rate YANG schema element.
+type Interface_Rates_InBitsRatePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Rates_InBitsRatePathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/rates/state/in-bits-rate YANG schema element.
+type Interface_Rates_InBitsRatePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-rates"
+//	Instantiating module: "openconfig-if-rates"
+//	Path from parent:     "state/in-bits-rate"
+//	Path from root:       "/interfaces/interface/rates/state/in-bits-rate"
+func (n *Interface_Rates_InBitsRatePath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Interface_Rates",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "in-bits-rate"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Rates).InBitsRate
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Rates) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-rates"
+//	Instantiating module: "openconfig-if-rates"
+//	Path from parent:     "state/in-bits-rate"
+//	Path from root:       "/interfaces/interface/rates/state/in-bits-rate"
+func (n *Interface_Rates_InBitsRatePathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Interface_Rates",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "in-bits-rate"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Rates).InBitsRate
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Rates) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_Rates_InPktsRatePath represents the /openconfig-interfaces/interfaces/interface/rates/state/in-pkts-rate YANG schema element.
+type Interface_Rates_InPktsRatePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Rates_InPktsRatePathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/rates/state/in-pkts-rate YANG schema element.
+type Interface_Rates_InPktsRatePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-rates"
+//	Instantiating module: "openconfig-if-rates"
+//	Path from parent:     "state/in-pkts-rate"
+//	Path from root:       "/interfaces/interface/rates/state/in-pkts-rate"
+func (n *Interface_Rates_InPktsRatePath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Interface_Rates",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "in-pkts-rate"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Rates).InPktsRate
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Rates) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-rates"
+//	Instantiating module: "openconfig-if-rates"
+//	Path from parent:     "state/in-pkts-rate"
+//	Path from root:       "/interfaces/interface/rates/state/in-pkts-rate"
+func (n *Interface_Rates_InPktsRatePathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Interface_Rates",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "in-pkts-rate"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Rates).InPktsRate
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Rates) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_Rates_LoadIntervalPath represents the /openconfig-interfaces/interfaces/interface/rates/state/load-interval YANG schema element.
+type Interface_Rates_LoadIntervalPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Rates_LoadIntervalPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/rates/state/load-interval YANG schema element.
+type Interface_Rates_LoadIntervalPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-rates"
+//	Instantiating module: "openconfig-if-rates"
+//	Path from parent:     "state/load-interval"
+//	Path from root:       "/interfaces/interface/rates/state/load-interval"
+func (n *Interface_Rates_LoadIntervalPath) State() ygnmi.SingletonQuery[uint16] {
+	return ygnmi.NewSingletonQuery[uint16](
+		"Interface_Rates",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "load-interval"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.Interface_Rates).LoadInterval
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Rates) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-rates"
+//	Instantiating module: "openconfig-if-rates"
+//	Path from parent:     "state/load-interval"
+//	Path from root:       "/interfaces/interface/rates/state/load-interval"
+func (n *Interface_Rates_LoadIntervalPathAny) State() ygnmi.WildcardQuery[uint16] {
+	return ygnmi.NewWildcardQuery[uint16](
+		"Interface_Rates",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "load-interval"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.Interface_Rates).LoadInterval
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Rates) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-rates"
+//	Instantiating module: "openconfig-if-rates"
+//	Path from parent:     "config/load-interval"
+//	Path from root:       "/interfaces/interface/rates/config/load-interval"
+func (n *Interface_Rates_LoadIntervalPath) Config() ygnmi.ConfigQuery[uint16] {
+	return ygnmi.NewConfigQuery[uint16](
+		"Interface_Rates",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "load-interval"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.Interface_Rates).LoadInterval
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Rates) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-rates"
+//	Instantiating module: "openconfig-if-rates"
+//	Path from parent:     "config/load-interval"
+//	Path from root:       "/interfaces/interface/rates/config/load-interval"
+func (n *Interface_Rates_LoadIntervalPathAny) Config() ygnmi.WildcardQuery[uint16] {
+	return ygnmi.NewWildcardQuery[uint16](
+		"Interface_Rates",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "load-interval"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.Interface_Rates).LoadInterval
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Rates) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_Rates_OutBitsRatePath represents the /openconfig-interfaces/interfaces/interface/rates/state/out-bits-rate YANG schema element.
+type Interface_Rates_OutBitsRatePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Rates_OutBitsRatePathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/rates/state/out-bits-rate YANG schema element.
+type Interface_Rates_OutBitsRatePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-rates"
+//	Instantiating module: "openconfig-if-rates"
+//	Path from parent:     "state/out-bits-rate"
+//	Path from root:       "/interfaces/interface/rates/state/out-bits-rate"
+func (n *Interface_Rates_OutBitsRatePath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Interface_Rates",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "out-bits-rate"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Rates).OutBitsRate
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Rates) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-rates"
+//	Instantiating module: "openconfig-if-rates"
+//	Path from parent:     "state/out-bits-rate"
+//	Path from root:       "/interfaces/interface/rates/state/out-bits-rate"
+func (n *Interface_Rates_OutBitsRatePathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Interface_Rates",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "out-bits-rate"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Rates).OutBitsRate
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Rates) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_Rates_OutPktsRatePath represents the /openconfig-interfaces/interfaces/interface/rates/state/out-pkts-rate YANG schema element.
+type Interface_Rates_OutPktsRatePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Rates_OutPktsRatePathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/rates/state/out-pkts-rate YANG schema element.
+type Interface_Rates_OutPktsRatePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-rates"
+//	Instantiating module: "openconfig-if-rates"
+//	Path from parent:     "state/out-pkts-rate"
+//	Path from root:       "/interfaces/interface/rates/state/out-pkts-rate"
+func (n *Interface_Rates_OutPktsRatePath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Interface_Rates",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "out-pkts-rate"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Rates).OutPktsRate
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Rates) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-rates"
+//	Instantiating module: "openconfig-if-rates"
+//	Path from parent:     "state/out-pkts-rate"
+//	Path from root:       "/interfaces/interface/rates/state/out-pkts-rate"
+func (n *Interface_Rates_OutPktsRatePathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Interface_Rates",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "out-pkts-rate"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Rates).OutPktsRate
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Rates) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_RatesPath represents the /openconfig-interfaces/interfaces/interface/rates YANG schema element.
+type Interface_RatesPath struct {
+	*ygnmi.NodePath
+}
+
+// Interface_RatesPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/rates YANG schema element.
+type Interface_RatesPathAny struct {
+	*ygnmi.NodePath
+}
+
+// InBitsRate (leaf): The calculated received rate of the interface, measured in bits
+// per second.
+//
+//	Defining module:      "openconfig-if-rates"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "state/in-bits-rate"
+//	Path from root:       "/interfaces/interface/rates/state/in-bits-rate"
+func (n *Interface_RatesPath) InBitsRate() *Interface_Rates_InBitsRatePath {
+	ps := &Interface_Rates_InBitsRatePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "in-bits-rate"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// InBitsRate (leaf): The calculated received rate of the interface, measured in bits
+// per second.
+//
+//	Defining module:      "openconfig-if-rates"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "state/in-bits-rate"
+//	Path from root:       "/interfaces/interface/rates/state/in-bits-rate"
+func (n *Interface_RatesPathAny) InBitsRate() *Interface_Rates_InBitsRatePathAny {
+	ps := &Interface_Rates_InBitsRatePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "in-bits-rate"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// InPktsRate (leaf): The calculated received rate of the interface, measured in packets
+// per second.
+//
+//	Defining module:      "openconfig-if-rates"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "state/in-pkts-rate"
+//	Path from root:       "/interfaces/interface/rates/state/in-pkts-rate"
+func (n *Interface_RatesPath) InPktsRate() *Interface_Rates_InPktsRatePath {
+	ps := &Interface_Rates_InPktsRatePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "in-pkts-rate"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// InPktsRate (leaf): The calculated received rate of the interface, measured in packets
+// per second.
+//
+//	Defining module:      "openconfig-if-rates"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "state/in-pkts-rate"
+//	Path from root:       "/interfaces/interface/rates/state/in-pkts-rate"
+func (n *Interface_RatesPathAny) InPktsRate() *Interface_Rates_InPktsRatePathAny {
+	ps := &Interface_Rates_InPktsRatePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "in-pkts-rate"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// LoadInterval (leaf): The interval of interface rates calculation in seconds
+//
+//	Defining module:      "openconfig-if-rates"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/load-interval"
+//	Path from root:       "/interfaces/interface/rates/*/load-interval"
+func (n *Interface_RatesPath) LoadInterval() *Interface_Rates_LoadIntervalPath {
+	ps := &Interface_Rates_LoadIntervalPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "load-interval"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// LoadInterval (leaf): The interval of interface rates calculation in seconds
+//
+//	Defining module:      "openconfig-if-rates"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/load-interval"
+//	Path from root:       "/interfaces/interface/rates/*/load-interval"
+func (n *Interface_RatesPathAny) LoadInterval() *Interface_Rates_LoadIntervalPathAny {
+	ps := &Interface_Rates_LoadIntervalPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "load-interval"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// OutBitsRate (leaf): The calculated transmitted rate of the interface, measured in bits
+// per second.
+//
+//	Defining module:      "openconfig-if-rates"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "state/out-bits-rate"
+//	Path from root:       "/interfaces/interface/rates/state/out-bits-rate"
+func (n *Interface_RatesPath) OutBitsRate() *Interface_Rates_OutBitsRatePath {
+	ps := &Interface_Rates_OutBitsRatePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "out-bits-rate"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// OutBitsRate (leaf): The calculated transmitted rate of the interface, measured in bits
+// per second.
+//
+//	Defining module:      "openconfig-if-rates"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "state/out-bits-rate"
+//	Path from root:       "/interfaces/interface/rates/state/out-bits-rate"
+func (n *Interface_RatesPathAny) OutBitsRate() *Interface_Rates_OutBitsRatePathAny {
+	ps := &Interface_Rates_OutBitsRatePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "out-bits-rate"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// OutPktsRate (leaf): The calculated transmitted rate of the interface, measured in packets
+// per second.
+//
+//	Defining module:      "openconfig-if-rates"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "state/out-pkts-rate"
+//	Path from root:       "/interfaces/interface/rates/state/out-pkts-rate"
+func (n *Interface_RatesPath) OutPktsRate() *Interface_Rates_OutPktsRatePath {
+	ps := &Interface_Rates_OutPktsRatePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "out-pkts-rate"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// OutPktsRate (leaf): The calculated transmitted rate of the interface, measured in packets
+// per second.
+//
+//	Defining module:      "openconfig-if-rates"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "state/out-pkts-rate"
+//	Path from root:       "/interfaces/interface/rates/state/out-pkts-rate"
+func (n *Interface_RatesPathAny) OutPktsRate() *Interface_Rates_OutPktsRatePathAny {
+	ps := &Interface_Rates_OutPktsRatePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "out-pkts-rate"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Interface_RatesPath) State() ygnmi.SingletonQuery[*oc.Interface_Rates] {
+	return ygnmi.NewSingletonQuery[*oc.Interface_Rates](
+		"Interface_Rates",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Interface_RatesPathAny) State() ygnmi.WildcardQuery[*oc.Interface_Rates] {
+	return ygnmi.NewWildcardQuery[*oc.Interface_Rates](
+		"Interface_Rates",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *Interface_RatesPath) Config() ygnmi.ConfigQuery[*oc.Interface_Rates] {
+	return ygnmi.NewConfigQuery[*oc.Interface_Rates](
+		"Interface_Rates",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *Interface_RatesPathAny) Config() ygnmi.WildcardQuery[*oc.Interface_Rates] {
+	return ygnmi.NewWildcardQuery[*oc.Interface_Rates](
+		"Interface_Rates",
 		false,
 		true,
 		false,

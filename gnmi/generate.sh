@@ -53,6 +53,7 @@ YANG_FILES=(
   public/release/models/interfaces/openconfig-if-ip.yang
   public/release/models/interfaces/openconfig-if-sdn-ext.yang
   public/release/models/interfaces/openconfig-interfaces.yang
+  public/release/models/interfaces/openconfig-if-rates.yang
   public/release/models/isis/openconfig-isis-policy.yang
   public/release/models/isis/openconfig-isis.yang
   public/release/models/lacp/openconfig-lacp.yang
