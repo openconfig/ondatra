@@ -4,7 +4,7 @@ go 1.23.4
 
 require (
 	bitbucket.org/creachadair/stringset v0.0.14
-	github.com/golang/glog v1.2.3
+	github.com/golang/glog v1.2.4
 	github.com/google/go-cmp v0.6.0
 	github.com/hashicorp/golang-lru v0.5.4
 	github.com/jstemmer/go-junit-report/v2 v2.1.0
