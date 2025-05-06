@@ -19,6 +19,7 @@ import (
 	"fmt"
 	"regexp"
 	"sort"
+	"strings"
 	"time"
 
 	"golang.org/x/net/context"
@@ -204,11 +205,6 @@ type Assignment struct {
 	Port2Port map[*AbstractPort]*ConcretePort
 }
 
-type maxAssignment struct {
-	assignment         *Assignment
-	numNodes, numPorts int
-}
-
 type deferredNodeConstraint func(map[*AbstractNode]*ConcreteNode) bool
 type deferredPortConstraint func(map[*AbstractPort]*ConcretePort) (bool, *AbstractPort, error)
 
@@ -221,7 +217,6 @@ type solver struct {
 	conPort2Port2Edge     map[*ConcretePort]map[*ConcretePort]*ConcreteEdge // Cache the linked concrete ports to edge.
 	absPort2Port2Edge     map[*AbstractPort]map[*AbstractPort]*AbstractEdge // Cache the linked abstract ports to edge.
 
-	maxAssign   *maxAssignment // The "best" Assignment for reporting if the solve failed.
 	solveReport *solveReport
 
 	// Constraint mappings. Deferred constraint can only be checked after all abstract elements are assigned.
@@ -312,7 +307,6 @@ func Solve(ctx context.Context, abstractGraph *AbstractGraph, superGraph *Concre
 		absPort2Node:            absPort2Node,
 		absPort2Port2Edge:       absPort2Port2Edge,
 		conNode2Node2NumEdges:   conNode2Node2NumEdges,
-		maxAssign:               &maxAssignment{&Assignment{Node2Node: node2Node, Port2Port: port2Port}, 0, 0},
 		solveReport:             &solveReport{report: []*Event{}, startTime: startTime},
 		nodeConstraints:         orderedmap.NewOrderedMap[*AbstractNode, *orderedmap.OrderedMap[string, LeafConstraint]](),
 		deferredNodeConstraints: orderedmap.NewOrderedMap[*AbstractNode, []deferredNodeConstraint](),
@@ -322,7 +316,6 @@ func Solve(ctx context.Context, abstractGraph *AbstractGraph, superGraph *Concre
 
 	a, ok := s.solve(ctx)
 	if !ok {
-		solveErr.maxAssign = s.maxAssign.assignment
 		s.solveReport.timeTaken = time.Since(startTime)
 		solveErr.report = s.solveReport
 		return nil, solveErr
@@ -352,7 +345,12 @@ func (s *solver) solve(ctx context.Context) (*Assignment, bool) {
 	s.conPort2Port2Edge = s.superGraph.fetchPort2Port2EdgeMap()
 
 	// Generate all AbstractNode -> ConcreteNode mappings.
-	abs2ConNodeChan, stop := genNodeCombos(abs2ConNodes, s.absNode2Node2NumEdges, s.checkEdge)
+	abs2ConNodeChan, stop := genNodeCombos(genCombosOptions{
+		m:                     abs2ConNodes,
+		absNode2Node2NumEdges: s.absNode2Node2NumEdges,
+		checkEdge:             s.checkEdge,
+		solveReport:           s.solveReport,
+	})
 	defer stop()
 	evalCombo := s.solveReport.AddPhase("Evaluating all node combinations")
 	// Iterate through each mapping.
@@ -363,12 +361,8 @@ func (s *solver) solve(ctx context.Context) (*Assignment, bool) {
 			return nil, false
 		default:
 		}
-		if !s.matchDeferredNodes(abs2ConNode) {
+		if !s.matchDeferredNodes(abs2ConNode, evalCombo) {
 			continue
-		}
-		if len(abs2ConNode) > s.maxAssign.numNodes {
-			s.maxAssign.assignment.Node2Node = abs2ConNode
-			s.maxAssign.numNodes = len(abs2ConNode)
 		}
 
 		// Since the edges can be satisfied, try to assign matching ports.
@@ -442,7 +436,7 @@ func (pa *portAssigner) nextEdge() *AbstractEdge {
 	return nil
 }
 
-func (pa *portAssigner) assign(ctx context.Context) bool {
+func (pa *portAssigner) assign(ctx context.Context, solveReport *solveReport, precedingEvent *Event) bool {
 	select {
 	case <-ctx.Done():
 		// The context is done. Stop work.
@@ -532,6 +526,7 @@ func (pa *portAssigner) assign(ctx context.Context) bool {
 							log.Fatalf("could not solve: %v", err)
 						} else if !ok {
 							// This ConcreteEdge does not work with previous assignments.
+							solveReport.AppendConstraintFailedString(conSrcPort.Desc, absSrcPort.Desc, "this ConcreteEdge does not work with previous assignments", precedingEvent)
 							return false
 						}
 					}
@@ -547,6 +542,7 @@ func (pa *portAssigner) assign(ctx context.Context) bool {
 							queue.queue = append(queue.queue, pa.absPort2Edge[p])
 							numEnqueuedPortConstraints[p]++
 						} else if !ok {
+							solveReport.AppendConstraintFailedString(conSrcPort.Desc, absSrcPort.Desc, "constraint depends on another port that has not been assigned yet", precedingEvent)
 							return false
 						}
 					}
@@ -572,7 +568,7 @@ func (pa *portAssigner) assign(ctx context.Context) bool {
 		}
 		// This edge assignment works; recurse for the next edge.
 		pa.assignQueue = queue
-		if pa.assign(ctx) {
+		if pa.assign(ctx, solveReport, precedingEvent) {
 			return true
 		}
 		pa.assignQueue = pa.assignQueue.prev
@@ -655,7 +651,7 @@ func (s *solver) assignEdges(ctx context.Context, abs2ConNode map[*AbstractNode]
 				}
 			}
 			if len(abs2ConEdgeCombos[absEdge]) == 0 {
-				s.solveReport.AppendConstraintFailedString(conSrcNode.Desc, absSrcNode.Desc, fmt.Sprintf("there are no edges to %s to satisfy connection between %s and %s", conDstNode.Desc, absSrcPort.Desc, absDstPort.Desc), precedingEvent)
+				s.solveReport.AppendConstraintFailedString(conSrcNode.Desc, absSrcNode.Desc, fmt.Sprintf("there are no edges to %s to satisfy connection between %s and %s with above port constraints", conDstNode.Desc, absSrcPort.Desc, absDstPort.Desc), precedingEvent)
 				return nil
 			}
 		}
@@ -694,20 +690,12 @@ func (s *solver) assignEdges(ctx context.Context, abs2ConNode map[*AbstractNode]
 		assignQueue:                  aq,
 		maxAbs2ConPorts:              make(map[*AbstractPort]*ConcretePort, len(s.absPort2Node)),
 	}
-	if ok := pa.assign(ctx); !ok {
-		if len(pa.maxAbs2ConPorts) > s.maxAssign.numPorts {
-			s.maxAssign.assignment.Node2Node = abs2ConNode
-			maxPorts := make(map[*AbstractPort]*ConcretePort, len(s.absPort2Node))
-			for p := range s.absPort2Node {
-				if cp, ok := pa.maxAbs2ConPorts[p]; ok {
-					maxPorts[p] = cp
-				} else {
-					maxPorts[p] = nil
-				}
-			}
-			s.maxAssign.assignment.Port2Port = maxPorts
-			s.maxAssign.numPorts = len(pa.maxAbs2ConPorts)
+	if ok := pa.assign(ctx, s.solveReport, precedingEvent); !ok {
+		maxAbs2ConPortsString := &strings.Builder{}
+		for absPort, conPort := range pa.maxAbs2ConPorts {
+			maxAbs2ConPortsString.WriteString(conPort.Desc + " assigned to " + absPort.Desc + " ")
 		}
+		s.solveReport.AppendConstraintFailedString("Ports", "all requested ports", fmt.Sprintf(" needed %d unique ports but could only assign the following: %s", len(s.absPort2Node), maxAbs2ConPortsString.String()), precedingEvent)
 		return nil
 	}
 	return pa.abs2ConPorts
@@ -783,7 +771,7 @@ func (s *solver) processConstraints() {
 }
 
 // matchDeferredNodes checks whether the proposed node mapping fulfills constraints.
-func (s *solver) matchDeferredNodes(abs2ConNode map[*AbstractNode]*ConcreteNode) bool {
+func (s *solver) matchDeferredNodes(abs2ConNode map[*AbstractNode]*ConcreteNode, precedingEvent *Event) bool {
 	for _, n := range s.deferredNodeConstraints.Keys() {
 		dncs, ok := s.deferredNodeConstraints.Get(n)
 		if !ok {
@@ -791,6 +779,7 @@ func (s *solver) matchDeferredNodes(abs2ConNode map[*AbstractNode]*ConcreteNode)
 		}
 		for _, dnc := range dncs {
 			if !dnc(abs2ConNode) {
+				s.solveReport.AppendConstraintFailedString(abs2ConNode[n].Desc, n.Desc, "deferred node constraint failed", precedingEvent)
 				return false
 			}
 		}

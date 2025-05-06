@@ -101,6 +101,12 @@ func (m *MACsec) WithEncryptedVLANsEnabled(enabled bool) *MACsec {
 	return m
 }
 
+// WithRxSecTagOffset sets the Rx Sec Tag offset.
+func (m *MACsec) WithRxSecTagOffset(offset uint32) *MACsec {
+	m.pb.RxSecTagOffset = offset
+	return m
+}
+
 // RxSAKPool create an Rx SAK Pool or returns the existing pool.
 func (m *MACsec) RxSAKPool() *RxSAKPool {
 	if m.pb.RxSakPool == nil {

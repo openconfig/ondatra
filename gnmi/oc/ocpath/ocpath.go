@@ -7,8 +7,16 @@ using the following YANG input files:
   - gnmi-collector-metadata.yang
   - public/release/models/acl/openconfig-acl.yang
   - public/release/models/acl/openconfig-packet-match.yang
+  - public/release/models/aft/openconfig-aft-common.yang
+  - public/release/models/aft/openconfig-aft-ethernet.yang
+  - public/release/models/aft/openconfig-aft-ipv4.yang
+  - public/release/models/aft/openconfig-aft-ipv6.yang
+  - public/release/models/aft/openconfig-aft-mpls.yang
   - public/release/models/aft/openconfig-aft-network-instance.yang
+  - public/release/models/aft/openconfig-aft-pf.yang
+  - public/release/models/aft/openconfig-aft-state-synced.yang
   - public/release/models/aft/openconfig-aft-summary.yang
+  - public/release/models/aft/openconfig-aft-types.yang
   - public/release/models/aft/openconfig-aft.yang
   - public/release/models/ate/openconfig-ate-flow.yang
   - public/release/models/ate/openconfig-ate-intf.yang
@@ -37,12 +45,22 @@ using the following YANG input files:
   - public/release/models/lldp/openconfig-lldp-types.yang
   - public/release/models/lldp/openconfig-lldp.yang
   - public/release/models/local-routing/openconfig-local-routing.yang
+  - public/release/models/macsec/openconfig-macsec.yang
   - public/release/models/mpls/openconfig-mpls-types.yang
   - public/release/models/multicast/openconfig-pim.yang
   - public/release/models/network-instance/openconfig-network-instance.yang
+  - public/release/models/network-instance/openconfig-network-instance-l2.yang
+  - public/release/models/network-instance/openconfig-network-instance-static.yang
   - public/release/models/openconfig-extensions.yang
   - public/release/models/optical-transport/openconfig-terminal-device.yang
   - public/release/models/optical-transport/openconfig-transport-types.yang
+  - public/release/models/ospf/openconfig-ospf-area-interface.yang
+  - public/release/models/ospf/openconfig-ospf-area.yang
+  - public/release/models/ospf/openconfig-ospf-common.yang
+  - public/release/models/ospf/openconfig-ospf-global.yang
+  - public/release/models/ospf/openconfig-ospf-types.yang
+  - public/release/models/ospf/openconfig-ospf.yang
+  - public/release/models/ospf/openconfig-ospfv3-area-interface.yang
   - public/release/models/ospf/openconfig-ospf-policy.yang
   - public/release/models/ospf/openconfig-ospfv2.yang
   - public/release/models/p4rt/openconfig-p4rt.yang
@@ -59,7 +77,11 @@ using the following YANG input files:
   - public/release/models/platform/openconfig-platform-software.yang
   - public/release/models/platform/openconfig-platform-transceiver.yang
   - public/release/models/platform/openconfig-platform.yang
+  - public/release/models/policy-forwarding/openconfig-pf-forwarding-policies.yang
+  - public/release/models/policy-forwarding/openconfig-pf-interfaces.yang
+  - public/release/models/policy-forwarding/openconfig-pf-path-groups.yang
   - public/release/models/policy-forwarding/openconfig-policy-forwarding.yang
+  - public/release/models/policy/openconfig-routing-policy.yang
   - public/release/models/policy/openconfig-policy-types.yang
   - public/release/models/qos/openconfig-qos-elements.yang
   - public/release/models/qos/openconfig-qos-interfaces.yang
@@ -98,6 +120,7 @@ import (
 	"github.com/openconfig/ondatra/gnmi/oc/keychain"
 	"github.com/openconfig/ondatra/gnmi/oc/lacp"
 	"github.com/openconfig/ondatra/gnmi/oc/lldp"
+	"github.com/openconfig/ondatra/gnmi/oc/macsec"
 	"github.com/openconfig/ondatra/gnmi/oc/networkinstance"
 	"github.com/openconfig/ondatra/gnmi/oc/platform"
 	"github.com/openconfig/ondatra/gnmi/oc/qos"
@@ -406,6 +429,23 @@ func (n *RootPath) Lldp() *lldp.LldpPath {
 	ps := &lldp.LldpPath{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"lldp"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// Macsec (container): The MACsec
+//
+//	Defining module:      "openconfig-macsec"
+//	Instantiating module: "openconfig-macsec"
+//	Path from parent:     "macsec"
+//	Path from root:       "/macsec"
+func (n *RootPath) Macsec() *macsec.MacsecPath {
+	ps := &macsec.MacsecPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"macsec"},
 			map[string]interface{}{},
 			n,
 		),

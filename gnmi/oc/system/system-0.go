@@ -7,8 +7,16 @@ using the following YANG input files:
   - gnmi-collector-metadata.yang
   - public/release/models/acl/openconfig-acl.yang
   - public/release/models/acl/openconfig-packet-match.yang
+  - public/release/models/aft/openconfig-aft-common.yang
+  - public/release/models/aft/openconfig-aft-ethernet.yang
+  - public/release/models/aft/openconfig-aft-ipv4.yang
+  - public/release/models/aft/openconfig-aft-ipv6.yang
+  - public/release/models/aft/openconfig-aft-mpls.yang
   - public/release/models/aft/openconfig-aft-network-instance.yang
+  - public/release/models/aft/openconfig-aft-pf.yang
+  - public/release/models/aft/openconfig-aft-state-synced.yang
   - public/release/models/aft/openconfig-aft-summary.yang
+  - public/release/models/aft/openconfig-aft-types.yang
   - public/release/models/aft/openconfig-aft.yang
   - public/release/models/ate/openconfig-ate-flow.yang
   - public/release/models/ate/openconfig-ate-intf.yang
@@ -37,12 +45,22 @@ using the following YANG input files:
   - public/release/models/lldp/openconfig-lldp-types.yang
   - public/release/models/lldp/openconfig-lldp.yang
   - public/release/models/local-routing/openconfig-local-routing.yang
+  - public/release/models/macsec/openconfig-macsec.yang
   - public/release/models/mpls/openconfig-mpls-types.yang
   - public/release/models/multicast/openconfig-pim.yang
   - public/release/models/network-instance/openconfig-network-instance.yang
+  - public/release/models/network-instance/openconfig-network-instance-l2.yang
+  - public/release/models/network-instance/openconfig-network-instance-static.yang
   - public/release/models/openconfig-extensions.yang
   - public/release/models/optical-transport/openconfig-terminal-device.yang
   - public/release/models/optical-transport/openconfig-transport-types.yang
+  - public/release/models/ospf/openconfig-ospf-area-interface.yang
+  - public/release/models/ospf/openconfig-ospf-area.yang
+  - public/release/models/ospf/openconfig-ospf-common.yang
+  - public/release/models/ospf/openconfig-ospf-global.yang
+  - public/release/models/ospf/openconfig-ospf-types.yang
+  - public/release/models/ospf/openconfig-ospf.yang
+  - public/release/models/ospf/openconfig-ospfv3-area-interface.yang
   - public/release/models/ospf/openconfig-ospf-policy.yang
   - public/release/models/ospf/openconfig-ospfv2.yang
   - public/release/models/p4rt/openconfig-p4rt.yang
@@ -59,7 +77,11 @@ using the following YANG input files:
   - public/release/models/platform/openconfig-platform-software.yang
   - public/release/models/platform/openconfig-platform-transceiver.yang
   - public/release/models/platform/openconfig-platform.yang
+  - public/release/models/policy-forwarding/openconfig-pf-forwarding-policies.yang
+  - public/release/models/policy-forwarding/openconfig-pf-interfaces.yang
+  - public/release/models/policy-forwarding/openconfig-pf-path-groups.yang
   - public/release/models/policy-forwarding/openconfig-policy-forwarding.yang
+  - public/release/models/policy/openconfig-routing-policy.yang
   - public/release/models/policy/openconfig-policy-types.yang
   - public/release/models/qos/openconfig-qos-elements.yang
   - public/release/models/qos/openconfig-qos-interfaces.yang
@@ -3719,7 +3741,7 @@ func (n *System_Aaa_Accounting_Acctz_SourceRecordPathAny) WithService(Service oc
 }
 
 // WithType sets System_Aaa_Accounting_Acctz_SourceRecordPathAny's key "type" to the specified value.
-// Type: [oc.E_GnsiAcctz_CmdService_Enum, oc.E_GnsiAcctz_GrpcService_Enum]
+// Type: [oc.E_GnsiAcctz_CmdService_Enum, oc.E_GnsiAcctz_GrpcService_Enum, oc.E_GnsiAcctz_SessionService_Enum]
 func (n *System_Aaa_Accounting_Acctz_SourceRecordPathAny) WithType(Type oc.System_Aaa_Accounting_Acctz_SourceRecord_Type_Union) *System_Aaa_Accounting_Acctz_SourceRecordPathAny {
 	ygnmi.ModifyKey(n.NodePath, "type", Type)
 	return n
@@ -3733,7 +3755,7 @@ func (n *System_Aaa_Accounting_Acctz_SourceRecordPathAny) WithType(Type oc.Syste
 //	Path from root:       "/system/aaa/accounting/acctz/source-records/source-record"
 //
 //	Service: oc.E_GnsiAcctz_ServiceRequest
-//	Type: [oc.E_GnsiAcctz_CmdService_Enum, oc.E_GnsiAcctz_GrpcService_Enum]
+//	Type: [oc.E_GnsiAcctz_CmdService_Enum, oc.E_GnsiAcctz_GrpcService_Enum, oc.E_GnsiAcctz_SessionService_Enum]
 func (n *System_Aaa_Accounting_AcctzPath) SourceRecord(Service oc.E_GnsiAcctz_ServiceRequest, Type oc.System_Aaa_Accounting_Acctz_SourceRecord_Type_Union) *System_Aaa_Accounting_Acctz_SourceRecordPath {
 	ps := &System_Aaa_Accounting_Acctz_SourceRecordPath{
 		NodePath: ygnmi.NewNodePath(
@@ -3753,7 +3775,7 @@ func (n *System_Aaa_Accounting_AcctzPath) SourceRecord(Service oc.E_GnsiAcctz_Se
 //	Path from root:       "/system/aaa/accounting/acctz/source-records/source-record"
 //
 //	Service: oc.E_GnsiAcctz_ServiceRequest
-//	Type: [oc.E_GnsiAcctz_CmdService_Enum, oc.E_GnsiAcctz_GrpcService_Enum]
+//	Type: [oc.E_GnsiAcctz_CmdService_Enum, oc.E_GnsiAcctz_GrpcService_Enum, oc.E_GnsiAcctz_SessionService_Enum]
 func (n *System_Aaa_Accounting_AcctzPathAny) SourceRecord(Service oc.E_GnsiAcctz_ServiceRequest, Type oc.System_Aaa_Accounting_Acctz_SourceRecord_Type_Union) *System_Aaa_Accounting_Acctz_SourceRecordPathAny {
 	ps := &System_Aaa_Accounting_Acctz_SourceRecordPathAny{
 		NodePath: ygnmi.NewNodePath(

@@ -9,8 +9,16 @@ using the following YANG input files:
   - gnmi-collector-metadata.yang
   - public/release/models/acl/openconfig-acl.yang
   - public/release/models/acl/openconfig-packet-match.yang
+  - public/release/models/aft/openconfig-aft-common.yang
+  - public/release/models/aft/openconfig-aft-ethernet.yang
+  - public/release/models/aft/openconfig-aft-ipv4.yang
+  - public/release/models/aft/openconfig-aft-ipv6.yang
+  - public/release/models/aft/openconfig-aft-mpls.yang
   - public/release/models/aft/openconfig-aft-network-instance.yang
+  - public/release/models/aft/openconfig-aft-pf.yang
+  - public/release/models/aft/openconfig-aft-state-synced.yang
   - public/release/models/aft/openconfig-aft-summary.yang
+  - public/release/models/aft/openconfig-aft-types.yang
   - public/release/models/aft/openconfig-aft.yang
   - public/release/models/ate/openconfig-ate-flow.yang
   - public/release/models/ate/openconfig-ate-intf.yang
@@ -39,12 +47,22 @@ using the following YANG input files:
   - public/release/models/lldp/openconfig-lldp-types.yang
   - public/release/models/lldp/openconfig-lldp.yang
   - public/release/models/local-routing/openconfig-local-routing.yang
+  - public/release/models/macsec/openconfig-macsec.yang
   - public/release/models/mpls/openconfig-mpls-types.yang
   - public/release/models/multicast/openconfig-pim.yang
   - public/release/models/network-instance/openconfig-network-instance.yang
+  - public/release/models/network-instance/openconfig-network-instance-l2.yang
+  - public/release/models/network-instance/openconfig-network-instance-static.yang
   - public/release/models/openconfig-extensions.yang
   - public/release/models/optical-transport/openconfig-terminal-device.yang
   - public/release/models/optical-transport/openconfig-transport-types.yang
+  - public/release/models/ospf/openconfig-ospf-area-interface.yang
+  - public/release/models/ospf/openconfig-ospf-area.yang
+  - public/release/models/ospf/openconfig-ospf-common.yang
+  - public/release/models/ospf/openconfig-ospf-global.yang
+  - public/release/models/ospf/openconfig-ospf-types.yang
+  - public/release/models/ospf/openconfig-ospf.yang
+  - public/release/models/ospf/openconfig-ospfv3-area-interface.yang
   - public/release/models/ospf/openconfig-ospf-policy.yang
   - public/release/models/ospf/openconfig-ospfv2.yang
   - public/release/models/p4rt/openconfig-p4rt.yang
@@ -61,7 +79,11 @@ using the following YANG input files:
   - public/release/models/platform/openconfig-platform-software.yang
   - public/release/models/platform/openconfig-platform-transceiver.yang
   - public/release/models/platform/openconfig-platform.yang
+  - public/release/models/policy-forwarding/openconfig-pf-forwarding-policies.yang
+  - public/release/models/policy-forwarding/openconfig-pf-interfaces.yang
+  - public/release/models/policy-forwarding/openconfig-pf-path-groups.yang
   - public/release/models/policy-forwarding/openconfig-policy-forwarding.yang
+  - public/release/models/policy/openconfig-routing-policy.yang
   - public/release/models/policy/openconfig-policy-types.yang
   - public/release/models/qos/openconfig-qos-elements.yang
   - public/release/models/qos/openconfig-qos-interfaces.yang
@@ -2595,6 +2617,54 @@ func (t *NetworkInstance_Protocol_Ospfv2_Global_InterAreaPropagationPolicy) To_N
 	return nil, fmt.Errorf("cannot convert %v to NetworkInstance_Protocol_Ospfv2_Area_Identifier_Union, unknown union type, got: %T, want any of [string, uint32]", i, i)
 }
 
+// NetworkInstance_Protocol_Ospfv3_Area_Identifier_Union is an interface that is implemented by valid types for the union
+// for the leaf /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv3/areas/area/state/identifier within the YANG schema.
+// Union type can be one of [UnionString, UnionUint32].
+type NetworkInstance_Protocol_Ospfv3_Area_Identifier_Union interface {
+	// Union type can be one of [UnionString, UnionUint32]
+	Documentation_for_NetworkInstance_Protocol_Ospfv3_Area_Identifier_Union()
+}
+
+// Documentation_for_NetworkInstance_Protocol_Ospfv3_Area_Identifier_Union ensures that UnionString
+// implements the NetworkInstance_Protocol_Ospfv3_Area_Identifier_Union interface.
+func (UnionString) Documentation_for_NetworkInstance_Protocol_Ospfv3_Area_Identifier_Union() {}
+
+// Documentation_for_NetworkInstance_Protocol_Ospfv3_Area_Identifier_Union ensures that UnionUint32
+// implements the NetworkInstance_Protocol_Ospfv3_Area_Identifier_Union interface.
+func (UnionUint32) Documentation_for_NetworkInstance_Protocol_Ospfv3_Area_Identifier_Union() {}
+
+// To_NetworkInstance_Protocol_Ospfv3_Area_Identifier_Union takes an input interface{} and attempts to convert it to a struct
+// which implements the NetworkInstance_Protocol_Ospfv3_Area_Identifier_Union union. It returns an error if the interface{} supplied
+// cannot be converted to a type within the union.
+func (t *NetworkInstance_Protocol_Ospfv3_Area) To_NetworkInstance_Protocol_Ospfv3_Area_Identifier_Union(i interface{}) (NetworkInstance_Protocol_Ospfv3_Area_Identifier_Union, error) {
+	if v, ok := i.(NetworkInstance_Protocol_Ospfv3_Area_Identifier_Union); ok {
+		return v, nil
+	}
+	switch v := i.(type) {
+	case string:
+		return UnionString(v), nil
+	case uint32:
+		return UnionUint32(v), nil
+	}
+	return nil, fmt.Errorf("cannot convert %v to NetworkInstance_Protocol_Ospfv3_Area_Identifier_Union, unknown union type, got: %T, want any of [string, uint32]", i, i)
+}
+
+// To_NetworkInstance_Protocol_Ospfv3_Area_Identifier_Union takes an input interface{} and attempts to convert it to a struct
+// which implements the NetworkInstance_Protocol_Ospfv3_Area_Identifier_Union union. It returns an error if the interface{} supplied
+// cannot be converted to a type within the union.
+func (t *NetworkInstance_Protocol_Ospfv3_Global_InterAreaPropagationPolicy) To_NetworkInstance_Protocol_Ospfv3_Area_Identifier_Union(i interface{}) (NetworkInstance_Protocol_Ospfv3_Area_Identifier_Union, error) {
+	if v, ok := i.(NetworkInstance_Protocol_Ospfv3_Area_Identifier_Union); ok {
+		return v, nil
+	}
+	switch v := i.(type) {
+	case string:
+		return UnionString(v), nil
+	case uint32:
+		return UnionUint32(v), nil
+	}
+	return nil, fmt.Errorf("cannot convert %v to NetworkInstance_Protocol_Ospfv3_Area_Identifier_Union, unknown union type, got: %T, want any of [string, uint32]", i, i)
+}
+
 // NetworkInstance_Protocol_Static_SetTag_Union is an interface that is implemented by valid types for the union
 // for the leaf /openconfig-network-instance/network-instances/network-instance/protocols/protocol/static-routes/static/state/set-tag within the YANG schema.
 // Union type can be one of [UnionString, UnionUint32].
@@ -2763,6 +2833,37 @@ func (t *NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_Sid) 
 		return UnionUint32(v), nil
 	}
 	return nil, fmt.Errorf("cannot convert %v to NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_Sid_Value_Union, unknown union type, got: %T, want any of [E_Sid_Value, string, uint32]", i, i)
+}
+
+// NetworkInstance_Static_NextHop_NextHop_Union is an interface that is implemented by valid types for the union
+// for the leaf /openconfig-network-instance/network-instances/network-instance/static/next-hops/next-hop/state/next-hop within the YANG schema.
+// Union type can be one of [E_LocalRouting_LOCAL_DEFINED_NEXT_HOP, UnionString].
+type NetworkInstance_Static_NextHop_NextHop_Union interface {
+	// Union type can be one of [E_LocalRouting_LOCAL_DEFINED_NEXT_HOP, UnionString]
+	Documentation_for_NetworkInstance_Static_NextHop_NextHop_Union()
+}
+
+// Documentation_for_NetworkInstance_Static_NextHop_NextHop_Union ensures that E_LocalRouting_LOCAL_DEFINED_NEXT_HOP
+// implements the NetworkInstance_Static_NextHop_NextHop_Union interface.
+func (E_LocalRouting_LOCAL_DEFINED_NEXT_HOP) Documentation_for_NetworkInstance_Static_NextHop_NextHop_Union() {
+}
+
+// Documentation_for_NetworkInstance_Static_NextHop_NextHop_Union ensures that UnionString
+// implements the NetworkInstance_Static_NextHop_NextHop_Union interface.
+func (UnionString) Documentation_for_NetworkInstance_Static_NextHop_NextHop_Union() {}
+
+// To_NetworkInstance_Static_NextHop_NextHop_Union takes an input interface{} and attempts to convert it to a struct
+// which implements the NetworkInstance_Static_NextHop_NextHop_Union union. It returns an error if the interface{} supplied
+// cannot be converted to a type within the union.
+func (t *NetworkInstance_Static_NextHop) To_NetworkInstance_Static_NextHop_NextHop_Union(i interface{}) (NetworkInstance_Static_NextHop_NextHop_Union, error) {
+	if v, ok := i.(NetworkInstance_Static_NextHop_NextHop_Union); ok {
+		return v, nil
+	}
+	switch v := i.(type) {
+	case string:
+		return UnionString(v), nil
+	}
+	return nil, fmt.Errorf("cannot convert %v to NetworkInstance_Static_NextHop_NextHop_Union, unknown union type, got: %T, want any of [E_LocalRouting_LOCAL_DEFINED_NEXT_HOP, string]", i, i)
 }
 
 // Qos_Classifier_Term_Conditions_Ipv4_Protocol_Union is an interface that is implemented by valid types for the union
@@ -3336,9 +3437,9 @@ func (t *System_Aaa_Accounting) To_System_Aaa_Accounting_AccountingMethod_Union(
 
 // System_Aaa_Accounting_Acctz_SourceRecord_Type_Union is an interface that is implemented by valid types for the union
 // for the leaf /openconfig-system/system/aaa/accounting/acctz/source-records/source-record/state/type within the YANG schema.
-// Union type can be one of [E_GnsiAcctz_CmdService_Enum, E_GnsiAcctz_GrpcService_Enum].
+// Union type can be one of [E_GnsiAcctz_CmdService_Enum, E_GnsiAcctz_GrpcService_Enum, E_GnsiAcctz_SessionService_Enum].
 type System_Aaa_Accounting_Acctz_SourceRecord_Type_Union interface {
-	// Union type can be one of [E_GnsiAcctz_CmdService_Enum, E_GnsiAcctz_GrpcService_Enum]
+	// Union type can be one of [E_GnsiAcctz_CmdService_Enum, E_GnsiAcctz_GrpcService_Enum, E_GnsiAcctz_SessionService_Enum]
 	Documentation_for_System_Aaa_Accounting_Acctz_SourceRecord_Type_Union()
 }
 
@@ -3352,6 +3453,11 @@ func (E_GnsiAcctz_CmdService_Enum) Documentation_for_System_Aaa_Accounting_Acctz
 func (E_GnsiAcctz_GrpcService_Enum) Documentation_for_System_Aaa_Accounting_Acctz_SourceRecord_Type_Union() {
 }
 
+// Documentation_for_System_Aaa_Accounting_Acctz_SourceRecord_Type_Union ensures that E_GnsiAcctz_SessionService_Enum
+// implements the System_Aaa_Accounting_Acctz_SourceRecord_Type_Union interface.
+func (E_GnsiAcctz_SessionService_Enum) Documentation_for_System_Aaa_Accounting_Acctz_SourceRecord_Type_Union() {
+}
+
 // To_System_Aaa_Accounting_Acctz_SourceRecord_Type_Union takes an input interface{} and attempts to convert it to a struct
 // which implements the System_Aaa_Accounting_Acctz_SourceRecord_Type_Union union. It returns an error if the interface{} supplied
 // cannot be converted to a type within the union.
@@ -3359,7 +3465,7 @@ func (t *System_Aaa_Accounting_Acctz_SourceRecord) To_System_Aaa_Accounting_Acct
 	if v, ok := i.(System_Aaa_Accounting_Acctz_SourceRecord_Type_Union); ok {
 		return v, nil
 	}
-	return nil, fmt.Errorf("cannot convert %v to System_Aaa_Accounting_Acctz_SourceRecord_Type_Union, unknown union type, got: %T, want any of [E_GnsiAcctz_CmdService_Enum, E_GnsiAcctz_GrpcService_Enum]", i, i)
+	return nil, fmt.Errorf("cannot convert %v to System_Aaa_Accounting_Acctz_SourceRecord_Type_Union, unknown union type, got: %T, want any of [E_GnsiAcctz_CmdService_Enum, E_GnsiAcctz_GrpcService_Enum, E_GnsiAcctz_SessionService_Enum]", i, i)
 }
 
 // System_Aaa_Authentication_AuthenticationMethod_Union is an interface that is implemented by valid types for the union

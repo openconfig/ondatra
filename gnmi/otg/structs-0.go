@@ -8211,6 +8211,7 @@ type Flow struct {
 	Counters       *Flow_Counters                `path:"state/counters" module:"open-traffic-generator-flow/open-traffic-generator-flow"`
 	FirstTimestamp *float64                      `path:"state/first-timestamp" module:"open-traffic-generator-flow/open-traffic-generator-flow"`
 	InFrameRate    Binary                        `path:"state/in-frame-rate" module:"open-traffic-generator-flow/open-traffic-generator-flow"`
+	InL1Rate       Binary                        `path:"state/in-l1-rate" module:"open-traffic-generator-flow/open-traffic-generator-flow"`
 	InRate         Binary                        `path:"state/in-rate" module:"open-traffic-generator-flow/open-traffic-generator-flow"`
 	LastTimestamp  *float64                      `path:"state/last-timestamp" module:"open-traffic-generator-flow/open-traffic-generator-flow"`
 	LossPct        Binary                        `path:"state/loss-pct" module:"open-traffic-generator-flow/open-traffic-generator-flow"`
@@ -8218,6 +8219,7 @@ type Flow struct {
 	MinimumLatency *uint64                       `path:"state/minimum-latency" module:"open-traffic-generator-flow/open-traffic-generator-flow"`
 	Name           *string                       `path:"state/name|name" module:"open-traffic-generator-flow/open-traffic-generator-flow|open-traffic-generator-flow" shadow-path:"name" shadow-module:"open-traffic-generator-flow"`
 	OutFrameRate   Binary                        `path:"state/out-frame-rate" module:"open-traffic-generator-flow/open-traffic-generator-flow"`
+	OutL1Rate      Binary                        `path:"state/out-l1-rate" module:"open-traffic-generator-flow/open-traffic-generator-flow"`
 	OutRate        Binary                        `path:"state/out-rate" module:"open-traffic-generator-flow/open-traffic-generator-flow"`
 	TaggedMetric   map[string]*Flow_TaggedMetric `path:"tagged-metrics/tagged-metric" module:"open-traffic-generator-flow/open-traffic-generator-flow"`
 	Transmit       *bool                         `path:"state/transmit" module:"open-traffic-generator-flow/open-traffic-generator-flow"`
@@ -8423,6 +8425,22 @@ func (t *Flow) GetInFrameRate() Binary {
 	return t.InFrameRate
 }
 
+// GetInL1Rate retrieves the value of the leaf InL1Rate from the Flow
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if InL1Rate is set, it can
+// safely use t.GetInL1Rate() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.InL1Rate == nil' before retrieving the leaf's value.
+func (t *Flow) GetInL1Rate() Binary {
+	if t == nil || t.InL1Rate == nil {
+		return nil
+	}
+	return t.InL1Rate
+}
+
 // GetInRate retrieves the value of the leaf InRate from the Flow
 // struct. If the field is unset but has a default value in the YANG schema,
 // then the default value will be returned.
@@ -8535,6 +8553,22 @@ func (t *Flow) GetOutFrameRate() Binary {
 	return t.OutFrameRate
 }
 
+// GetOutL1Rate retrieves the value of the leaf OutL1Rate from the Flow
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if OutL1Rate is set, it can
+// safely use t.GetOutL1Rate() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.OutL1Rate == nil' before retrieving the leaf's value.
+func (t *Flow) GetOutL1Rate() Binary {
+	if t == nil || t.OutL1Rate == nil {
+		return nil
+	}
+	return t.OutL1Rate
+}
+
 // GetOutRate retrieves the value of the leaf OutRate from the Flow
 // struct. If the field is unset but has a default value in the YANG schema,
 // then the default value will be returned.
@@ -8585,6 +8619,12 @@ func (t *Flow) SetInFrameRate(v Binary) {
 	t.InFrameRate = v
 }
 
+// SetInL1Rate sets the value of the leaf InL1Rate in the Flow
+// struct.
+func (t *Flow) SetInL1Rate(v Binary) {
+	t.InL1Rate = v
+}
+
 // SetInRate sets the value of the leaf InRate in the Flow
 // struct.
 func (t *Flow) SetInRate(v Binary) {
@@ -8625,6 +8665,12 @@ func (t *Flow) SetName(v string) {
 // struct.
 func (t *Flow) SetOutFrameRate(v Binary) {
 	t.OutFrameRate = v
+}
+
+// SetOutL1Rate sets the value of the leaf OutL1Rate in the Flow
+// struct.
+func (t *Flow) SetOutL1Rate(v Binary) {
+	t.OutL1Rate = v
 }
 
 // SetOutRate sets the value of the leaf OutRate in the Flow

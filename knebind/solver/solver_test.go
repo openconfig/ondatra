@@ -1016,7 +1016,7 @@ func TestSolveErrors(t *testing.T) {
 			  name: "node1"
 			  vendor: CISCO
 			}`,
-		wantErr: "Node \"dut1\" was not assigned",
+		wantErr: "could not solve for specified testbed",
 	}, {
 		desc: "no match for DUT - wrong hardware model",
 		tb: &opb.Testbed{
@@ -1033,7 +1033,7 @@ func TestSolveErrors(t *testing.T) {
 					model: "bad"
 					os: "eos"
 				}`,
-		wantErr: "Node \"dut1\" was not assigned",
+		wantErr: "could not solve for specified testbed",
 	}, {
 		desc: "no match for DUT - wrong software model",
 		tb: &opb.Testbed{
@@ -1050,7 +1050,7 @@ func TestSolveErrors(t *testing.T) {
 						model: "ceos"
 						os: "bad"
 					}`,
-		wantErr: "Node \"dut1\" was not assigned",
+		wantErr: "could not solve for specified testbed",
 	}, {
 		desc: "no match for DUT - role label override",
 		tb: &opb.Testbed{
@@ -1067,7 +1067,7 @@ func TestSolveErrors(t *testing.T) {
 						value: "ATE"
 					}
 				}`,
-		wantErr: "Node \"dut1\" was not assigned",
+		wantErr: "could not solve for specified testbed",
 	}, {
 		desc: "no match for ATE",
 		tb: &opb.Testbed{
@@ -1080,7 +1080,7 @@ func TestSolveErrors(t *testing.T) {
 			  name: "node1"
 			  vendor: CISCO
 			}`,
-		wantErr: "Node \"ate1\" was not assigned",
+		wantErr: "could not solve for specified testbed",
 	}, {
 		desc: "no match for ATE - role label override",
 		tb: &opb.Testbed{
@@ -1097,7 +1097,7 @@ func TestSolveErrors(t *testing.T) {
 						value: "DUT"
 					}
 				}`,
-		wantErr: "Node \"ate1\" was not assigned",
+		wantErr: "could not solve for specified testbed",
 	}, {
 		desc: "no node combination",
 		tb: &opb.Testbed{

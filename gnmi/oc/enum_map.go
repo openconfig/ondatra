@@ -9,8 +9,16 @@ using the following YANG input files:
   - gnmi-collector-metadata.yang
   - public/release/models/acl/openconfig-acl.yang
   - public/release/models/acl/openconfig-packet-match.yang
+  - public/release/models/aft/openconfig-aft-common.yang
+  - public/release/models/aft/openconfig-aft-ethernet.yang
+  - public/release/models/aft/openconfig-aft-ipv4.yang
+  - public/release/models/aft/openconfig-aft-ipv6.yang
+  - public/release/models/aft/openconfig-aft-mpls.yang
   - public/release/models/aft/openconfig-aft-network-instance.yang
+  - public/release/models/aft/openconfig-aft-pf.yang
+  - public/release/models/aft/openconfig-aft-state-synced.yang
   - public/release/models/aft/openconfig-aft-summary.yang
+  - public/release/models/aft/openconfig-aft-types.yang
   - public/release/models/aft/openconfig-aft.yang
   - public/release/models/ate/openconfig-ate-flow.yang
   - public/release/models/ate/openconfig-ate-intf.yang
@@ -39,12 +47,22 @@ using the following YANG input files:
   - public/release/models/lldp/openconfig-lldp-types.yang
   - public/release/models/lldp/openconfig-lldp.yang
   - public/release/models/local-routing/openconfig-local-routing.yang
+  - public/release/models/macsec/openconfig-macsec.yang
   - public/release/models/mpls/openconfig-mpls-types.yang
   - public/release/models/multicast/openconfig-pim.yang
   - public/release/models/network-instance/openconfig-network-instance.yang
+  - public/release/models/network-instance/openconfig-network-instance-l2.yang
+  - public/release/models/network-instance/openconfig-network-instance-static.yang
   - public/release/models/openconfig-extensions.yang
   - public/release/models/optical-transport/openconfig-terminal-device.yang
   - public/release/models/optical-transport/openconfig-transport-types.yang
+  - public/release/models/ospf/openconfig-ospf-area-interface.yang
+  - public/release/models/ospf/openconfig-ospf-area.yang
+  - public/release/models/ospf/openconfig-ospf-common.yang
+  - public/release/models/ospf/openconfig-ospf-global.yang
+  - public/release/models/ospf/openconfig-ospf-types.yang
+  - public/release/models/ospf/openconfig-ospf.yang
+  - public/release/models/ospf/openconfig-ospfv3-area-interface.yang
   - public/release/models/ospf/openconfig-ospf-policy.yang
   - public/release/models/ospf/openconfig-ospfv2.yang
   - public/release/models/p4rt/openconfig-p4rt.yang
@@ -61,7 +79,11 @@ using the following YANG input files:
   - public/release/models/platform/openconfig-platform-software.yang
   - public/release/models/platform/openconfig-platform-transceiver.yang
   - public/release/models/platform/openconfig-platform.yang
+  - public/release/models/policy-forwarding/openconfig-pf-forwarding-policies.yang
+  - public/release/models/policy-forwarding/openconfig-pf-interfaces.yang
+  - public/release/models/policy-forwarding/openconfig-pf-path-groups.yang
   - public/release/models/policy-forwarding/openconfig-policy-forwarding.yang
+  - public/release/models/policy/openconfig-routing-policy.yang
   - public/release/models/policy/openconfig-policy-types.yang
   - public/release/models/qos/openconfig-qos-elements.yang
   - public/release/models/qos/openconfig-qos-interfaces.yang
@@ -143,6 +165,10 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		1: {Name: "LOG_NONE", DefiningModule: "openconfig-acl"},
 		2: {Name: "LOG_SYSLOG", DefiningModule: "openconfig-acl"},
 	},
+	"E_AddressRange_Status": {
+		1: {Name: "ADVERTISE"},
+		2: {Name: "DONOTADVERTISE"},
+	},
 	"E_Address_Status": {
 		1: {Name: "PREFERRED"},
 		2: {Name: "DEPRECATED"},
@@ -187,6 +213,8 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		4: {Name: "MPLS"},
 		5: {Name: "VXLAN"},
 		6: {Name: "UDP"},
+		7: {Name: "UDPV4"},
+		8: {Name: "UDPV6"},
 	},
 	"E_AggregateSidCounter_MplsLabel": {
 		1: {Name: "IPV4_EXPLICIT_NULL"},
@@ -547,6 +575,12 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 	"E_GnsiAcctz_ServiceRequest": {
 		5: {Name: "CMD_SERVICE"},
 		6: {Name: "GRPC_SERVICE"},
+		7: {Name: "SESSION_SERVICE"},
+	},
+	"E_GnsiAcctz_SessionService_Enum": {
+		1: {Name: "UNSPECIFIED"},
+		2: {Name: "LOGIN"},
+		3: {Name: "LOGOUT"},
 	},
 	"E_GracefulRestart_Mode": {
 		1: {Name: "HELPER_ONLY"},
@@ -1438,10 +1472,6 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		1: {Name: "DROP", DefiningModule: "openconfig-local-routing"},
 		2: {Name: "LOCAL_LINK", DefiningModule: "openconfig-local-routing"},
 	},
-	"E_LsaGeneration_TimerType": {
-		1: {Name: "LINEAR_BACKOFF"},
-		2: {Name: "EXPONENTIAL_BACKOFF"},
-	},
 	"E_LspNextHop_PushLabel": {
 		1: {Name: "IPV4_EXPLICIT_NULL"},
 		2: {Name: "ROUTER_ALERT"},
@@ -1461,6 +1491,17 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 	"E_Lsp_PduType": {
 		1: {Name: "LEVEL_1"},
 		2: {Name: "LEVEL_2"},
+	},
+	"E_Macsec_ConfidentialityOffset": {
+		1: {Name: "0_BYTES"},
+		2: {Name: "30_BYTES"},
+		3: {Name: "50_BYTES"},
+	},
+	"E_Macsec_MacsecCipherSuite": {
+		1: {Name: "GCM_AES_128"},
+		2: {Name: "GCM_AES_256"},
+		3: {Name: "GCM_AES_XPN_128"},
+		4: {Name: "GCM_AES_XPN_256"},
 	},
 	"E_Messages_DEBUG_SERVICE": {},
 	"E_Messages_SyslogSeverity": {
@@ -1687,6 +1728,15 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		3: {Name: "TRANSIT_NETWORK_LINK", DefiningModule: "openconfig-ospf-types"},
 		4: {Name: "VIRTUAL_LINK", DefiningModule: "openconfig-ospf-types"},
 	},
+	"E_OspfTypes_OSPF_ABR_TYPE": {
+		1: {Name: "RFC2328_ABR", DefiningModule: "openconfig-ospf-types"},
+		2: {Name: "RFC3509_ABR", DefiningModule: "openconfig-ospf-types"},
+	},
+	"E_OspfTypes_OSPF_AREA_TYPE": {
+		1: {Name: "NORMAL", DefiningModule: "openconfig-ospf-types"},
+		2: {Name: "NSSA", DefiningModule: "openconfig-ospf-types"},
+		3: {Name: "STUB", DefiningModule: "openconfig-ospf-types"},
+	},
 	"E_OspfTypes_OSPF_LSA_TYPE": {
 		1: {Name: "AS_EXTERNAL_LSA", DefiningModule: "openconfig-ospf-types"},
 		2: {Name: "NETWORK_LSA", DefiningModule: "openconfig-ospf-types"},
@@ -1762,6 +1812,14 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 	"E_OspfTypes_TE_NODE_ATTRIBUTE_TLV_TYPE": {
 		1: {Name: "NODE_IPV4_LOCAL_ADDRESS", DefiningModule: "openconfig-ospf-types"},
 		2: {Name: "NODE_IPV6_LOCAL_ADDRESS", DefiningModule: "openconfig-ospf-types"},
+	},
+	"E_Ospf_LsaGeneration_TimerType": {
+		1: {Name: "LINEAR_BACKOFF"},
+		2: {Name: "EXPONENTIAL_BACKOFF"},
+	},
+	"E_Ospfv2_LsaGeneration_TimerType": {
+		1: {Name: "LINEAR_BACKOFF"},
+		2: {Name: "EXPONENTIAL_BACKOFF"},
 	},
 	"E_Ospfv2_SrSidType": {
 		1: {Name: "LABEL"},
@@ -3073,6 +3131,18 @@ func initΛEnumTypes() {
 		},
 		"/lldp/state/suppress-tlv-advertisement": {
 			reflect.TypeOf((E_LldpTypes_LLDP_TLV)(0)),
+		},
+		"/macsec/mka/policies/policy/config/confidentiality-offset": {
+			reflect.TypeOf((E_Macsec_ConfidentialityOffset)(0)),
+		},
+		"/macsec/mka/policies/policy/config/macsec-cipher-suite": {
+			reflect.TypeOf((E_Macsec_MacsecCipherSuite)(0)),
+		},
+		"/macsec/mka/policies/policy/state/confidentiality-offset": {
+			reflect.TypeOf((E_Macsec_ConfidentialityOffset)(0)),
+		},
+		"/macsec/mka/policies/policy/state/macsec-cipher-suite": {
+			reflect.TypeOf((E_Macsec_MacsecCipherSuite)(0)),
 		},
 		"/network-instances/network-instance/afts/aft-summaries/ipv4-unicast/protocols/protocol/state/origin-protocol": {
 			reflect.TypeOf((E_PolicyTypes_INSTALL_PROTOCOL_TYPE)(0)),
@@ -4480,7 +4550,7 @@ func initΛEnumTypes() {
 			reflect.TypeOf((E_Global_SummaryRouteCostMode)(0)),
 		},
 		"/network-instances/network-instance/protocols/protocol/ospfv2/global/timers/lsa-generation/state/timer-type": {
-			reflect.TypeOf((E_LsaGeneration_TimerType)(0)),
+			reflect.TypeOf((E_Ospfv2_LsaGeneration_TimerType)(0)),
 		},
 		"/network-instances/network-instance/protocols/protocol/ospfv2/global/timers/max-metric/config/include": {
 			reflect.TypeOf((E_OspfTypes_MAX_METRIC_INCLUDE)(0)),
@@ -4495,7 +4565,61 @@ func initΛEnumTypes() {
 			reflect.TypeOf((E_OspfTypes_MAX_METRIC_TRIGGER)(0)),
 		},
 		"/network-instances/network-instance/protocols/protocol/ospfv2/global/timers/spf/state/timer-type": {
-			reflect.TypeOf((E_LsaGeneration_TimerType)(0)),
+			reflect.TypeOf((E_Ospfv2_LsaGeneration_TimerType)(0)),
+		},
+		"/network-instances/network-instance/protocols/protocol/ospfv3/areas/area/address-ranges/address-range/config/status": {
+			reflect.TypeOf((E_AddressRange_Status)(0)),
+		},
+		"/network-instances/network-instance/protocols/protocol/ospfv3/areas/area/address-ranges/address-range/state/status": {
+			reflect.TypeOf((E_AddressRange_Status)(0)),
+		},
+		"/network-instances/network-instance/protocols/protocol/ospfv3/areas/area/config/type": {
+			reflect.TypeOf((E_OspfTypes_OSPF_AREA_TYPE)(0)),
+		},
+		"/network-instances/network-instance/protocols/protocol/ospfv3/areas/area/interfaces/interface/config/network-type": {
+			reflect.TypeOf((E_OspfTypes_OSPF_NETWORK_TYPE)(0)),
+		},
+		"/network-instances/network-instance/protocols/protocol/ospfv3/areas/area/interfaces/interface/neighbors/neighbor/state/adjacency-state": {
+			reflect.TypeOf((E_OspfTypes_OSPF_NEIGHBOR_STATE)(0)),
+		},
+		"/network-instances/network-instance/protocols/protocol/ospfv3/areas/area/interfaces/interface/state/network-type": {
+			reflect.TypeOf((E_OspfTypes_OSPF_NETWORK_TYPE)(0)),
+		},
+		"/network-instances/network-instance/protocols/protocol/ospfv3/areas/area/state/type": {
+			reflect.TypeOf((E_OspfTypes_OSPF_AREA_TYPE)(0)),
+		},
+		"/network-instances/network-instance/protocols/protocol/ospfv3/areas/area/virtual-links/virtual-link/state/adjacency-state": {
+			reflect.TypeOf((E_OspfTypes_OSPF_NEIGHBOR_STATE)(0)),
+		},
+		"/network-instances/network-instance/protocols/protocol/ospfv3/global/config/abr-capability": {
+			reflect.TypeOf((E_OspfTypes_OSPF_ABR_TYPE)(0)),
+		},
+		"/network-instances/network-instance/protocols/protocol/ospfv3/global/inter-area-propagation-policies/inter-area-propagation-policy/config/default-import-policy": {
+			reflect.TypeOf((E_RoutingPolicy_DefaultPolicyType)(0)),
+		},
+		"/network-instances/network-instance/protocols/protocol/ospfv3/global/inter-area-propagation-policies/inter-area-propagation-policy/state/default-import-policy": {
+			reflect.TypeOf((E_RoutingPolicy_DefaultPolicyType)(0)),
+		},
+		"/network-instances/network-instance/protocols/protocol/ospfv3/global/state/abr-capability": {
+			reflect.TypeOf((E_OspfTypes_OSPF_ABR_TYPE)(0)),
+		},
+		"/network-instances/network-instance/protocols/protocol/ospfv3/global/timers/lsa-generation/state/timer-type": {
+			reflect.TypeOf((E_Ospf_LsaGeneration_TimerType)(0)),
+		},
+		"/network-instances/network-instance/protocols/protocol/ospfv3/global/timers/max-metric/config/include": {
+			reflect.TypeOf((E_OspfTypes_MAX_METRIC_INCLUDE)(0)),
+		},
+		"/network-instances/network-instance/protocols/protocol/ospfv3/global/timers/max-metric/config/trigger": {
+			reflect.TypeOf((E_OspfTypes_MAX_METRIC_TRIGGER)(0)),
+		},
+		"/network-instances/network-instance/protocols/protocol/ospfv3/global/timers/max-metric/state/include": {
+			reflect.TypeOf((E_OspfTypes_MAX_METRIC_INCLUDE)(0)),
+		},
+		"/network-instances/network-instance/protocols/protocol/ospfv3/global/timers/max-metric/state/trigger": {
+			reflect.TypeOf((E_OspfTypes_MAX_METRIC_TRIGGER)(0)),
+		},
+		"/network-instances/network-instance/protocols/protocol/ospfv3/global/timers/spf/state/timer-type": {
+			reflect.TypeOf((E_Ospf_LsaGeneration_TimerType)(0)),
 		},
 		"/network-instances/network-instance/protocols/protocol/pcep/path-computation-servers/path-computation-server/config/pce-type": {
 			reflect.TypeOf((E_Pcep_PceModeType)(0)),
@@ -4568,6 +4692,18 @@ func initΛEnumTypes() {
 		},
 		"/network-instances/network-instance/state/type": {
 			reflect.TypeOf((E_NetworkInstanceTypes_NETWORK_INSTANCE_TYPE)(0)),
+		},
+		"/network-instances/network-instance/static/next-hops/next-hop/config/next-hop": {
+			reflect.TypeOf((E_LocalRouting_LOCAL_DEFINED_NEXT_HOP)(0)),
+		},
+		"/network-instances/network-instance/static/next-hops/next-hop/encap-headers/encap-header/config/type": {
+			reflect.TypeOf((E_Aft_EncapsulationHeaderType)(0)),
+		},
+		"/network-instances/network-instance/static/next-hops/next-hop/encap-headers/encap-header/state/type": {
+			reflect.TypeOf((E_Aft_EncapsulationHeaderType)(0)),
+		},
+		"/network-instances/network-instance/static/next-hops/next-hop/state/next-hop": {
+			reflect.TypeOf((E_LocalRouting_LOCAL_DEFINED_NEXT_HOP)(0)),
 		},
 		"/network-instances/network-instance/table-connections/table-connection/config/address-family": {
 			reflect.TypeOf((E_Types_ADDRESS_FAMILY)(0)),
@@ -4959,6 +5095,7 @@ func initΛEnumTypes() {
 		"/system/aaa/accounting/acctz/source-records/source-record/state/type": {
 			reflect.TypeOf((E_GnsiAcctz_CmdService_Enum)(0)),
 			reflect.TypeOf((E_GnsiAcctz_GrpcService_Enum)(0)),
+			reflect.TypeOf((E_GnsiAcctz_SessionService_Enum)(0)),
 		},
 		"/system/aaa/accounting/config/accounting-method": {
 			reflect.TypeOf((E_AaaTypes_AAA_METHOD_TYPE)(0)),

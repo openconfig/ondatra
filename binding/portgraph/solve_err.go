@@ -18,6 +18,7 @@ import (
 	"fmt"
 	"sort"
 	"strings"
+	"sync"
 	"time"
 )
 
@@ -52,7 +53,9 @@ type Event struct {
 
 // solveReport generates a report with all the events that happened during a solve.
 type solveReport struct {
-	report    []*Event
+	mu     sync.Mutex
+	report []*Event
+
 	startTime time.Time
 	timeTaken time.Duration
 }
@@ -60,9 +63,11 @@ type solveReport struct {
 // appendEvent creates a process event.
 func (s *solveReport) appendEvent(description string, precedingEvent *Event) *Event {
 	event := &Event{
-		description:    description,
+		description:    time.Now().Format(time.RFC3339Nano) + ": " + description,
 		PrecedingEvent: precedingEvent,
 	}
+	s.mu.Lock()
+	defer s.mu.Unlock()
 	s.report = append(s.report, event)
 	return event
 }
@@ -98,7 +103,7 @@ func (s *solveReport) printEvent(report *strings.Builder, event *Event, indentLe
 // AddPhase adds a new phase to the solve report.
 func (s *solveReport) AddPhase(phaseString string) *Event {
 	var desc strings.Builder
-	desc.WriteString("\n[PHASE] " + phaseString + "\n")
+	desc.WriteString("[PHASE] " + phaseString + "\n")
 	return s.appendEvent(desc.String(), nil)
 }
 
@@ -137,6 +142,20 @@ func (s *solveReport) AppendConstraintFailed(device string, node string, constra
 	return s.appendEvent(desc.String(), precedingEvent)
 }
 
+// AppendComboFailed appends an event for a src/dst combo that failed a constraint.
+func (s *solveReport) AppendComboFailed(absSrc string, conSrc string, absDst string, conDst string, reason string, precedingEvent *Event) *Event {
+	var desc strings.Builder
+	desc.WriteString("[COMBINATION_FAIL]: Node combination " + absSrc + ": " + conSrc + " to " + absDst + ": " + conDst + " failed; " + reason)
+	return s.appendEvent(desc.String(), precedingEvent)
+}
+
+// AppendValidCombo appends an event for a src/dst combo that fulfils edge constraints.
+func (s *solveReport) AppendValidCombo(absSrc string, conSrc string, absDst string, conDst string, precedingEvent *Event) *Event {
+	var desc strings.Builder
+	desc.WriteString("[VALID_COMBINATION]: Node combination " + absSrc + ": " + conSrc + " to " + absDst + ": " + conDst + " fulfills edge connections")
+	return s.appendEvent(desc.String(), precedingEvent)
+}
+
 // AppendConstraintFailedString appends an event for a node that failed a constraint.
 func (s *solveReport) AppendConstraintFailedString(device string, node string, reason string, precedingEvent *Event) *Event {
 	var desc strings.Builder
@@ -149,7 +168,6 @@ type SolveError struct {
 	absGraphDesc string
 	conGraphDesc string
 	wrappedErr   error
-	maxAssign    *Assignment
 	report       *solveReport
 }
 
@@ -166,23 +184,6 @@ func (s *SolveError) String() string {
 	fmt.Fprintf(ret, "Could not satisfy %q from %q", s.absGraphDesc, s.conGraphDesc)
 	if s.wrappedErr != nil {
 		fmt.Fprintf(ret, ": %v", s.wrappedErr)
-	}
-	if s.maxAssign != nil {
-		fmt.Fprintf(ret, "\nMax assignment:\n")
-		for a, c := range s.maxAssign.Node2Node {
-			if c != nil {
-				fmt.Fprintf(ret, "Node %q is assigned to %q\n", a.Desc, c.Desc)
-			} else {
-				fmt.Fprintf(ret, "Node %q was not assigned\n", a.Desc)
-			}
-		}
-		for a, c := range s.maxAssign.Port2Port {
-			if c != nil {
-				fmt.Fprintf(ret, "Port %q is assigned to %q\n", a.Desc, c.Desc)
-			} else {
-				fmt.Fprintf(ret, "Port %q was not assigned\n", a.Desc)
-			}
-		}
 	}
 	return ret.String()
 }

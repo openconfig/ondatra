@@ -21,23 +21,28 @@ import (
 func TestCheckEnoughPorts(t *testing.T) {
 	port := &ConcretePort{}
 	tests := []struct {
-		desc string
-		np   []*needPorts
-		want bool
+		desc, reason string
+		np           []*needPorts
+		want         bool
 	}{{
-		desc: "ok",
-		np:   []*needPorts{{1, []*ConcretePort{&ConcretePort{}, &ConcretePort{}}}, {2, []*ConcretePort{&ConcretePort{}, &ConcretePort{}}}},
-		want: true,
+		desc:   "ok",
+		reason: "",
+		np:     []*needPorts{{1, []*ConcretePort{&ConcretePort{}, &ConcretePort{}}}, {2, []*ConcretePort{&ConcretePort{}, &ConcretePort{}}}},
+		want:   true,
 	}, {
-		desc: "not enough unique ports",
-		np:   []*needPorts{{1, []*ConcretePort{port}}, {2, []*ConcretePort{port, &ConcretePort{}}}},
-		want: false,
+		desc:   "not enough unique ports",
+		reason: "got 2 unique ports, want 3 unique ports",
+		np:     []*needPorts{{1, []*ConcretePort{port}}, {2, []*ConcretePort{port, &ConcretePort{}}}},
+		want:   false,
 	}}
 	for _, tc := range tests {
 		t.Run(tc.desc, func(t *testing.T) {
-			got := checkEnoughPorts(tc.np)
+			got, reason := checkEnoughPorts(tc.np)
 			if got != tc.want {
 				t.Errorf("checkEnoughPorts got %t, want %t", got, tc.want)
+			}
+			if reason != tc.reason {
+				t.Errorf("checkEnoughPorts got reason %q, want %q", reason, tc.reason)
 			}
 		})
 	}

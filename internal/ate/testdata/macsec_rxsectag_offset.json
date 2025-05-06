@@ -1,0 +1,143 @@
+{
+  "globals": {
+    "topology": {
+      "macsec": {
+        "rxSecTagOffset": {
+          "singleValue": {
+            "value": "16",
+            "xpath": "/multivalue[@source = '/globals/topology/macsec rxSecTagOffset']/singleValue"
+          },
+          "xpath": "/multivalue[@source = '/globals/topology/macsec rxSecTagOffset']"
+        },
+        "xpath": "/globals/topology/macsec"
+      },
+      "xpath": "/globals/topology"
+    },
+    "xpath": "/globals"
+  },
+  "topology": [
+    {
+      "deviceGroup": [
+        {
+          "enabled": {
+            "singleValue": {
+              "value": "true",
+              "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1] enabled']/singleValue"
+            },
+            "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1] enabled']"
+          },
+          "ethernet": [
+            {
+              "enableVlans": {
+                "singleValue": {
+                  "value": "false",
+                  "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/ethernet[1] enableVlans']/singleValue"
+                },
+                "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/ethernet[1] enableVlans']"
+              },
+              "mac": {
+                "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/ethernet[1] mac']"
+              },
+              "macsec": [
+                {
+                  "cipherSuite": {
+                    "singleValue": {
+                      "value": "aes128",
+                      "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/ethernet[1]/macsec[1] cipherSuite']/singleValue"
+                    },
+                    "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/ethernet[1]/macsec[1] cipherSuite']"
+                  },
+                  "enableEncryptedVlans": {
+                    "singleValue": {
+                      "value": "false",
+                      "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/ethernet[1]/macsec[1] enableEncryptedVlans']/singleValue"
+                    },
+                    "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/ethernet[1]/macsec[1] enableEncryptedVlans']"
+                  },
+                  "name": "MACsec on intf",
+                  "xpath": "/topology[1]/deviceGroup[1]/ethernet[1]/macsec[1]"
+                }
+              ],
+              "mtu": {
+                "singleValue": {
+                  "value": "1500",
+                  "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/ethernet[1] mtu']/singleValue"
+                },
+                "xpath": "/multivalue[@source = '/topology[1]/deviceGroup[1]/ethernet[1] mtu']"
+              },
+              "name": "Ethernet on 12/1",
+              "xpath": "/topology[1]/deviceGroup[1]/ethernet[1]"
+            }
+          ],
+          "multiplier": 1,
+          "name": "Device Group on intf",
+          "xpath": "/topology[1]/deviceGroup[1]"
+        }
+      ],
+      "name": "Topology on 12/1",
+      "vports": [
+        "/vport[1]"
+      ],
+      "xpath": "/topology[1]"
+    }
+  ],
+  "vport": [
+    {
+      "l1Config": {
+        "aresOneFourHundredGigLan": {
+          "autoInstrumentation": "floating",
+          "enableRsFec": false,
+          "enableRsFecStats": false,
+          "forceDisableFEC": true,
+          "xpath": "/vport[1]/l1Config/aresOneFourHundredGigLan"
+        },
+        "atlasFourHundredGigLan": {
+          "enableRsFec": false,
+          "enableRsFecStats": false,
+          "forceDisableFEC": true,
+          "xpath": "/vport[1]/l1Config/atlasFourHundredGigLan"
+        },
+        "krakenFourHundredGigLan": {
+          "enableRsFec": false,
+          "enableRsFecStats": false,
+          "forceDisableFEC": true,
+          "xpath": "/vport[1]/l1Config/krakenFourHundredGigLan"
+        },
+        "novusHundredGigLan": {
+          "autoInstrumentation": "floating",
+          "enableRsFec": false,
+          "enableRsFecStats": false,
+          "forceDisableFEC": true,
+          "ieeeL1Defaults": false,
+          "xpath": "/vport[1]/l1Config/novusHundredGigLan"
+        },
+        "novusTenGigLan": {
+          "autoInstrumentation": "floating",
+          "xpath": "/vport[1]/l1Config/novusTenGigLan"
+        },
+        "uhdOneHundredGigLan": {
+          "enableRsFec": false,
+          "forceDisableFEC": true,
+          "ieeeL1Defaults": false,
+          "xpath": "/vport[1]/l1Config/uhdOneHundredGigLan"
+        },
+        "xpath": "/vport[1]/l1Config"
+      },
+      "location": "192.168.1.1;12;1",
+      "name": "12/1",
+      "protocolStack": {
+        "options": {
+          "mcast_solicit": 8,
+          "retransTime": 7000,
+          "xpath": "/vport[1]/protocolStack/options"
+        },
+        "xpath": "/vport[1]/protocolStack"
+      },
+      "protocols": {
+        "xpath": "/vport[1]/protocols"
+      },
+      "xpath": "/vport[1]"
+    }
+  ],
+  "xpath": "/"
+}

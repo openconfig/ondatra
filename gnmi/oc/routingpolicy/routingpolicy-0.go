@@ -7,8 +7,16 @@ using the following YANG input files:
   - gnmi-collector-metadata.yang
   - public/release/models/acl/openconfig-acl.yang
   - public/release/models/acl/openconfig-packet-match.yang
+  - public/release/models/aft/openconfig-aft-common.yang
+  - public/release/models/aft/openconfig-aft-ethernet.yang
+  - public/release/models/aft/openconfig-aft-ipv4.yang
+  - public/release/models/aft/openconfig-aft-ipv6.yang
+  - public/release/models/aft/openconfig-aft-mpls.yang
   - public/release/models/aft/openconfig-aft-network-instance.yang
+  - public/release/models/aft/openconfig-aft-pf.yang
+  - public/release/models/aft/openconfig-aft-state-synced.yang
   - public/release/models/aft/openconfig-aft-summary.yang
+  - public/release/models/aft/openconfig-aft-types.yang
   - public/release/models/aft/openconfig-aft.yang
   - public/release/models/ate/openconfig-ate-flow.yang
   - public/release/models/ate/openconfig-ate-intf.yang
@@ -37,12 +45,22 @@ using the following YANG input files:
   - public/release/models/lldp/openconfig-lldp-types.yang
   - public/release/models/lldp/openconfig-lldp.yang
   - public/release/models/local-routing/openconfig-local-routing.yang
+  - public/release/models/macsec/openconfig-macsec.yang
   - public/release/models/mpls/openconfig-mpls-types.yang
   - public/release/models/multicast/openconfig-pim.yang
   - public/release/models/network-instance/openconfig-network-instance.yang
+  - public/release/models/network-instance/openconfig-network-instance-l2.yang
+  - public/release/models/network-instance/openconfig-network-instance-static.yang
   - public/release/models/openconfig-extensions.yang
   - public/release/models/optical-transport/openconfig-terminal-device.yang
   - public/release/models/optical-transport/openconfig-transport-types.yang
+  - public/release/models/ospf/openconfig-ospf-area-interface.yang
+  - public/release/models/ospf/openconfig-ospf-area.yang
+  - public/release/models/ospf/openconfig-ospf-common.yang
+  - public/release/models/ospf/openconfig-ospf-global.yang
+  - public/release/models/ospf/openconfig-ospf-types.yang
+  - public/release/models/ospf/openconfig-ospf.yang
+  - public/release/models/ospf/openconfig-ospfv3-area-interface.yang
   - public/release/models/ospf/openconfig-ospf-policy.yang
   - public/release/models/ospf/openconfig-ospfv2.yang
   - public/release/models/p4rt/openconfig-p4rt.yang
@@ -59,7 +77,11 @@ using the following YANG input files:
   - public/release/models/platform/openconfig-platform-software.yang
   - public/release/models/platform/openconfig-platform-transceiver.yang
   - public/release/models/platform/openconfig-platform.yang
+  - public/release/models/policy-forwarding/openconfig-pf-forwarding-policies.yang
+  - public/release/models/policy-forwarding/openconfig-pf-interfaces.yang
+  - public/release/models/policy-forwarding/openconfig-pf-path-groups.yang
   - public/release/models/policy-forwarding/openconfig-policy-forwarding.yang
+  - public/release/models/policy/openconfig-routing-policy.yang
   - public/release/models/policy/openconfig-policy-types.yang
   - public/release/models/qos/openconfig-qos-elements.yang
   - public/release/models/qos/openconfig-qos-interfaces.yang
@@ -9197,6 +9219,190 @@ func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetAsPathPr
 	)
 }
 
+// RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetAsPathPrepend_UseLastAsPath represents the /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-as-path-prepend/state/use-last-as YANG schema element.
+type RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetAsPathPrepend_UseLastAsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetAsPathPrepend_UseLastAsPathAny represents the wildcard version of the /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-as-path-prepend/state/use-last-as YANG schema element.
+type RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetAsPathPrepend_UseLastAsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-bgp-policy"
+//	Instantiating module: "openconfig-bgp-policy"
+//	Path from parent:     "state/use-last-as"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-as-path-prepend/state/use-last-as"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetAsPathPrepend_UseLastAsPath) State() ygnmi.SingletonQuery[bool] {
+	return ygnmi.NewSingletonQuery[bool](
+		"RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetAsPathPrepend",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "use-last-as"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetAsPathPrepend).UseLastAs
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetAsPathPrepend)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-bgp-policy"
+//	Instantiating module: "openconfig-bgp-policy"
+//	Path from parent:     "state/use-last-as"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-as-path-prepend/state/use-last-as"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetAsPathPrepend_UseLastAsPathAny) State() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewWildcardQuery[bool](
+		"RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetAsPathPrepend",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "use-last-as"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetAsPathPrepend).UseLastAs
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetAsPathPrepend)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-bgp-policy"
+//	Instantiating module: "openconfig-bgp-policy"
+//	Path from parent:     "config/use-last-as"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-as-path-prepend/config/use-last-as"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetAsPathPrepend_UseLastAsPath) Config() ygnmi.ConfigQuery[bool] {
+	return ygnmi.NewConfigQuery[bool](
+		"RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetAsPathPrepend",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "use-last-as"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetAsPathPrepend).UseLastAs
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetAsPathPrepend)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-bgp-policy"
+//	Instantiating module: "openconfig-bgp-policy"
+//	Path from parent:     "config/use-last-as"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-as-path-prepend/config/use-last-as"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetAsPathPrepend_UseLastAsPathAny) Config() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewWildcardQuery[bool](
+		"RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetAsPathPrepend",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "use-last-as"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetAsPathPrepend).UseLastAs
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetAsPathPrepend)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
 // RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetAsPathPrependPath represents the /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-as-path-prepend YANG schema element.
 type RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetAsPathPrependPath struct {
 	*ygnmi.NodePath
@@ -9207,9 +9413,9 @@ type RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetAsPathPrepen
 	*ygnmi.NodePath
 }
 
-// Asn (leaf): The AS number to prepend to the AS path. If this leaf is
-// not specified and repeat-n is set, then the local AS
-// number will be used for prepending.
+// Asn (leaf): The AS number to prepend to the AS path. If neither this
+// leaf nor use-last-as leaf is specified but repeat-n is set, then
+// the local AS number will be used for prepending.
 //
 //	Defining module:      "openconfig-bgp-policy"
 //	Instantiating module: "openconfig-routing-policy"
@@ -9227,9 +9433,9 @@ func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetAsPathPr
 	return ps
 }
 
-// Asn (leaf): The AS number to prepend to the AS path. If this leaf is
-// not specified and repeat-n is set, then the local AS
-// number will be used for prepending.
+// Asn (leaf): The AS number to prepend to the AS path. If neither this
+// leaf nor use-last-as leaf is specified but repeat-n is set, then
+// the local AS number will be used for prepending.
 //
 //	Defining module:      "openconfig-bgp-policy"
 //	Instantiating module: "openconfig-routing-policy"
@@ -9283,6 +9489,50 @@ func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetAsPathPr
 	ps := &RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetAsPathPrepend_RepeatNPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"*", "repeat-n"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// UseLastAs (leaf): Indicates whether to use the last AS number, which is also the
+// most recent AS number, to prepend to the AS path.
+// If neither this leaf nor asn leaf is specified
+// but repeat-n is set, then the local AS number will be
+// used for prepending.
+//
+//	Defining module:      "openconfig-bgp-policy"
+//	Instantiating module: "openconfig-routing-policy"
+//	Path from parent:     "*/use-last-as"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-as-path-prepend/*/use-last-as"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetAsPathPrependPath) UseLastAs() *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetAsPathPrepend_UseLastAsPath {
+	ps := &RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetAsPathPrepend_UseLastAsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "use-last-as"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// UseLastAs (leaf): Indicates whether to use the last AS number, which is also the
+// most recent AS number, to prepend to the AS path.
+// If neither this leaf nor asn leaf is specified
+// but repeat-n is set, then the local AS number will be
+// used for prepending.
+//
+//	Defining module:      "openconfig-bgp-policy"
+//	Instantiating module: "openconfig-routing-policy"
+//	Path from parent:     "*/use-last-as"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-as-path-prepend/*/use-last-as"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetAsPathPrependPathAny) UseLastAs() *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetAsPathPrepend_UseLastAsPathAny {
+	ps := &RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetAsPathPrepend_UseLastAsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "use-last-as"},
 			map[string]interface{}{},
 			n,
 		),
@@ -22178,7 +22428,7 @@ func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_MatchInterfacePathA
 // Subinterface (leaf): Reference to a subinterface -- this requires the base
 // interface to be specified using the interface leaf in
 // this container.  If only a reference to a base interface
-// is requuired, this leaf should not be set.
+// is required, this leaf should not be set.
 //
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-routing-policy"
@@ -22199,7 +22449,7 @@ func (n *RoutingPolicy_PolicyDefinition_Statement_Conditions_MatchInterfacePath)
 // Subinterface (leaf): Reference to a subinterface -- this requires the base
 // interface to be specified using the interface leaf in
 // this container.  If only a reference to a base interface
-// is requuired, this leaf should not be set.
+// is required, this leaf should not be set.
 //
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-routing-policy"

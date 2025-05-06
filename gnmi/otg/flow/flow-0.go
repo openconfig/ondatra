@@ -309,6 +309,92 @@ func (n *Flow_InFrameRatePathAny) State() ygnmi.WildcardQuery[float32] {
 	)
 }
 
+// Flow_InL1RatePath represents the /open-traffic-generator-flow/flows/flow/state/in-l1-rate YANG schema element.
+type Flow_InL1RatePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Flow_InL1RatePathAny represents the wildcard version of the /open-traffic-generator-flow/flows/flow/state/in-l1-rate YANG schema element.
+type Flow_InL1RatePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "state/in-l1-rate"
+//	Path from root:       "/flows/flow/state/in-l1-rate"
+func (n *Flow_InL1RatePath) State() ygnmi.SingletonQuery[float32] {
+	return ygnmi.NewSingletonQuery[float32](
+		"Flow",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "in-l1-rate"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float32, bool) {
+			ret := gs.(*oc.Flow).InL1Rate
+			return ygot.BinaryToFloat32(ret), !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Flow) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "state/in-l1-rate"
+//	Path from root:       "/flows/flow/state/in-l1-rate"
+func (n *Flow_InL1RatePathAny) State() ygnmi.WildcardQuery[float32] {
+	return ygnmi.NewWildcardQuery[float32](
+		"Flow",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "in-l1-rate"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float32, bool) {
+			ret := gs.(*oc.Flow).InL1Rate
+			return ygot.BinaryToFloat32(ret), !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Flow) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
 // Flow_InRatePath represents the /open-traffic-generator-flow/flows/flow/state/in-rate YANG schema element.
 type Flow_InRatePath struct {
 	*ygnmi.NodePath
@@ -1025,6 +1111,92 @@ func (n *Flow_OutFrameRatePathAny) State() ygnmi.WildcardQuery[float32] {
 	)
 }
 
+// Flow_OutL1RatePath represents the /open-traffic-generator-flow/flows/flow/state/out-l1-rate YANG schema element.
+type Flow_OutL1RatePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Flow_OutL1RatePathAny represents the wildcard version of the /open-traffic-generator-flow/flows/flow/state/out-l1-rate YANG schema element.
+type Flow_OutL1RatePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "state/out-l1-rate"
+//	Path from root:       "/flows/flow/state/out-l1-rate"
+func (n *Flow_OutL1RatePath) State() ygnmi.SingletonQuery[float32] {
+	return ygnmi.NewSingletonQuery[float32](
+		"Flow",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "out-l1-rate"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float32, bool) {
+			ret := gs.(*oc.Flow).OutL1Rate
+			return ygot.BinaryToFloat32(ret), !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Flow) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "state/out-l1-rate"
+//	Path from root:       "/flows/flow/state/out-l1-rate"
+func (n *Flow_OutL1RatePathAny) State() ygnmi.WildcardQuery[float32] {
+	return ygnmi.NewWildcardQuery[float32](
+		"Flow",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "out-l1-rate"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float32, bool) {
+			ret := gs.(*oc.Flow).OutL1Rate
+			return ygot.BinaryToFloat32(ret), !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Flow) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
 // Flow_OutRatePath represents the /open-traffic-generator-flow/flows/flow/state/out-rate YANG schema element.
 type Flow_OutRatePath struct {
 	*ygnmi.NodePath
@@ -1371,6 +1543,44 @@ func (n *FlowPathAny) InFrameRate() *Flow_InFrameRatePathAny {
 	return ps
 }
 
+// InL1Rate (leaf): The rate, measured in bits per second, at which the flow is being
+// received in the Layer 1.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "state/in-l1-rate"
+//	Path from root:       "/flows/flow/state/in-l1-rate"
+func (n *FlowPath) InL1Rate() *Flow_InL1RatePath {
+	ps := &Flow_InL1RatePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "in-l1-rate"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// InL1Rate (leaf): The rate, measured in bits per second, at which the flow is being
+// received in the Layer 1.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "state/in-l1-rate"
+//	Path from root:       "/flows/flow/state/in-l1-rate"
+func (n *FlowPathAny) InL1Rate() *Flow_InL1RatePathAny {
+	ps := &Flow_InL1RatePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "in-l1-rate"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
 // InRate (leaf): The rate, measured in bits per second, at which the flow is being
 // received.
 //
@@ -1627,6 +1837,44 @@ func (n *FlowPathAny) OutFrameRate() *Flow_OutFrameRatePathAny {
 	ps := &Flow_OutFrameRatePathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"state", "out-frame-rate"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// OutL1Rate (leaf): The rate, measured in bits per second, at which the flow is being
+// transmitted from the Layer 1.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "state/out-l1-rate"
+//	Path from root:       "/flows/flow/state/out-l1-rate"
+func (n *FlowPath) OutL1Rate() *Flow_OutL1RatePath {
+	ps := &Flow_OutL1RatePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "out-l1-rate"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// OutL1Rate (leaf): The rate, measured in bits per second, at which the flow is being
+// transmitted from the Layer 1.
+//
+//	Defining module:      "open-traffic-generator-flow"
+//	Instantiating module: "open-traffic-generator-flow"
+//	Path from parent:     "state/out-l1-rate"
+//	Path from root:       "/flows/flow/state/out-l1-rate"
+func (n *FlowPathAny) OutL1Rate() *Flow_OutL1RatePathAny {
+	ps := &Flow_OutL1RatePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "out-l1-rate"},
 			map[string]interface{}{},
 			n,
 		),

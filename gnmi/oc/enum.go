@@ -9,8 +9,16 @@ using the following YANG input files:
   - gnmi-collector-metadata.yang
   - public/release/models/acl/openconfig-acl.yang
   - public/release/models/acl/openconfig-packet-match.yang
+  - public/release/models/aft/openconfig-aft-common.yang
+  - public/release/models/aft/openconfig-aft-ethernet.yang
+  - public/release/models/aft/openconfig-aft-ipv4.yang
+  - public/release/models/aft/openconfig-aft-ipv6.yang
+  - public/release/models/aft/openconfig-aft-mpls.yang
   - public/release/models/aft/openconfig-aft-network-instance.yang
+  - public/release/models/aft/openconfig-aft-pf.yang
+  - public/release/models/aft/openconfig-aft-state-synced.yang
   - public/release/models/aft/openconfig-aft-summary.yang
+  - public/release/models/aft/openconfig-aft-types.yang
   - public/release/models/aft/openconfig-aft.yang
   - public/release/models/ate/openconfig-ate-flow.yang
   - public/release/models/ate/openconfig-ate-intf.yang
@@ -39,12 +47,22 @@ using the following YANG input files:
   - public/release/models/lldp/openconfig-lldp-types.yang
   - public/release/models/lldp/openconfig-lldp.yang
   - public/release/models/local-routing/openconfig-local-routing.yang
+  - public/release/models/macsec/openconfig-macsec.yang
   - public/release/models/mpls/openconfig-mpls-types.yang
   - public/release/models/multicast/openconfig-pim.yang
   - public/release/models/network-instance/openconfig-network-instance.yang
+  - public/release/models/network-instance/openconfig-network-instance-l2.yang
+  - public/release/models/network-instance/openconfig-network-instance-static.yang
   - public/release/models/openconfig-extensions.yang
   - public/release/models/optical-transport/openconfig-terminal-device.yang
   - public/release/models/optical-transport/openconfig-transport-types.yang
+  - public/release/models/ospf/openconfig-ospf-area-interface.yang
+  - public/release/models/ospf/openconfig-ospf-area.yang
+  - public/release/models/ospf/openconfig-ospf-common.yang
+  - public/release/models/ospf/openconfig-ospf-global.yang
+  - public/release/models/ospf/openconfig-ospf-types.yang
+  - public/release/models/ospf/openconfig-ospf.yang
+  - public/release/models/ospf/openconfig-ospfv3-area-interface.yang
   - public/release/models/ospf/openconfig-ospf-policy.yang
   - public/release/models/ospf/openconfig-ospfv2.yang
   - public/release/models/p4rt/openconfig-p4rt.yang
@@ -61,7 +79,11 @@ using the following YANG input files:
   - public/release/models/platform/openconfig-platform-software.yang
   - public/release/models/platform/openconfig-platform-transceiver.yang
   - public/release/models/platform/openconfig-platform.yang
+  - public/release/models/policy-forwarding/openconfig-pf-forwarding-policies.yang
+  - public/release/models/policy-forwarding/openconfig-pf-interfaces.yang
+  - public/release/models/policy-forwarding/openconfig-pf-path-groups.yang
   - public/release/models/policy-forwarding/openconfig-policy-forwarding.yang
+  - public/release/models/policy/openconfig-routing-policy.yang
   - public/release/models/policy/openconfig-policy-types.yang
   - public/release/models/qos/openconfig-qos-elements.yang
   - public/release/models/qos/openconfig-qos-interfaces.yang
@@ -371,6 +393,35 @@ const (
 	Acl_LOG_ACTION_LOG_SYSLOG E_Acl_LOG_ACTION = 2
 )
 
+// E_AddressRange_Status is a derived int64 type which is used to represent
+// the enumerated node AddressRange_Status. An additional value named
+// AddressRange_Status_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_AddressRange_Status int64
+
+// IsYANGGoEnum ensures that AddressRange_Status implements the yang.GoEnum
+// interface. This ensures that AddressRange_Status can be identified as a
+// mapped type for a YANG enumeration.
+func (E_AddressRange_Status) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  AddressRange_Status.
+func (E_AddressRange_Status) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_AddressRange_Status.
+func (e E_AddressRange_Status) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_AddressRange_Status")
+}
+
+const (
+	// AddressRange_Status_UNSET corresponds to the value UNSET of AddressRange_Status
+	AddressRange_Status_UNSET E_AddressRange_Status = 0
+	// AddressRange_Status_ADVERTISE corresponds to the value ADVERTISE of AddressRange_Status
+	AddressRange_Status_ADVERTISE E_AddressRange_Status = 1
+	// AddressRange_Status_DONOTADVERTISE corresponds to the value DONOTADVERTISE of AddressRange_Status
+	AddressRange_Status_DONOTADVERTISE E_AddressRange_Status = 2
+)
+
 // E_Address_Status is a derived int64 type which is used to represent
 // the enumerated node Address_Status. An additional value named
 // Address_Status_UNSET is added to the enumeration which is used as
@@ -587,6 +638,10 @@ const (
 	Aft_EncapsulationHeaderType_VXLAN E_Aft_EncapsulationHeaderType = 5
 	// Aft_EncapsulationHeaderType_UDP corresponds to the value UDP of Aft_EncapsulationHeaderType
 	Aft_EncapsulationHeaderType_UDP E_Aft_EncapsulationHeaderType = 6
+	// Aft_EncapsulationHeaderType_UDPV4 corresponds to the value UDPV4 of Aft_EncapsulationHeaderType
+	Aft_EncapsulationHeaderType_UDPV4 E_Aft_EncapsulationHeaderType = 7
+	// Aft_EncapsulationHeaderType_UDPV6 corresponds to the value UDPV6 of Aft_EncapsulationHeaderType
+	Aft_EncapsulationHeaderType_UDPV6 E_Aft_EncapsulationHeaderType = 8
 )
 
 // E_AggregateSidCounter_MplsLabel is a derived int64 type which is used to represent
@@ -2524,6 +2579,41 @@ const (
 	GnsiAcctz_ServiceRequest_CMD_SERVICE E_GnsiAcctz_ServiceRequest = 5
 	// GnsiAcctz_ServiceRequest_GRPC_SERVICE corresponds to the value GRPC_SERVICE of GnsiAcctz_ServiceRequest
 	GnsiAcctz_ServiceRequest_GRPC_SERVICE E_GnsiAcctz_ServiceRequest = 6
+	// GnsiAcctz_ServiceRequest_SESSION_SERVICE corresponds to the value SESSION_SERVICE of GnsiAcctz_ServiceRequest
+	GnsiAcctz_ServiceRequest_SESSION_SERVICE E_GnsiAcctz_ServiceRequest = 7
+)
+
+// E_GnsiAcctz_SessionService_Enum is a derived int64 type which is used to represent
+// the enumerated node GnsiAcctz_SessionService_Enum. An additional value named
+// GnsiAcctz_SessionService_Enum_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_GnsiAcctz_SessionService_Enum int64
+
+// IsYANGGoEnum ensures that GnsiAcctz_SessionService_Enum implements the yang.GoEnum
+// interface. This ensures that GnsiAcctz_SessionService_Enum can be identified as a
+// mapped type for a YANG enumeration.
+func (E_GnsiAcctz_SessionService_Enum) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  GnsiAcctz_SessionService_Enum.
+func (E_GnsiAcctz_SessionService_Enum) ΛMap() map[string]map[int64]ygot.EnumDefinition {
+	return ΛEnum
+}
+
+// String returns a logging-friendly string for E_GnsiAcctz_SessionService_Enum.
+func (e E_GnsiAcctz_SessionService_Enum) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_GnsiAcctz_SessionService_Enum")
+}
+
+const (
+	// GnsiAcctz_SessionService_Enum_UNSET corresponds to the value UNSET of GnsiAcctz_SessionService_Enum
+	GnsiAcctz_SessionService_Enum_UNSET E_GnsiAcctz_SessionService_Enum = 0
+	// GnsiAcctz_SessionService_Enum_UNSPECIFIED corresponds to the value UNSPECIFIED of GnsiAcctz_SessionService_Enum
+	GnsiAcctz_SessionService_Enum_UNSPECIFIED E_GnsiAcctz_SessionService_Enum = 1
+	// GnsiAcctz_SessionService_Enum_LOGIN corresponds to the value LOGIN of GnsiAcctz_SessionService_Enum
+	GnsiAcctz_SessionService_Enum_LOGIN E_GnsiAcctz_SessionService_Enum = 2
+	// GnsiAcctz_SessionService_Enum_LOGOUT corresponds to the value LOGOUT of GnsiAcctz_SessionService_Enum
+	GnsiAcctz_SessionService_Enum_LOGOUT E_GnsiAcctz_SessionService_Enum = 3
 )
 
 // E_GracefulRestart_Mode is a derived int64 type which is used to represent
@@ -5670,35 +5760,6 @@ const (
 	LocalRouting_LOCAL_DEFINED_NEXT_HOP_LOCAL_LINK E_LocalRouting_LOCAL_DEFINED_NEXT_HOP = 2
 )
 
-// E_LsaGeneration_TimerType is a derived int64 type which is used to represent
-// the enumerated node LsaGeneration_TimerType. An additional value named
-// LsaGeneration_TimerType_UNSET is added to the enumeration which is used as
-// the nil value, indicating that the enumeration was not explicitly set by
-// the program importing the generated structures.
-type E_LsaGeneration_TimerType int64
-
-// IsYANGGoEnum ensures that LsaGeneration_TimerType implements the yang.GoEnum
-// interface. This ensures that LsaGeneration_TimerType can be identified as a
-// mapped type for a YANG enumeration.
-func (E_LsaGeneration_TimerType) IsYANGGoEnum() {}
-
-// ΛMap returns the value lookup map associated with  LsaGeneration_TimerType.
-func (E_LsaGeneration_TimerType) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
-
-// String returns a logging-friendly string for E_LsaGeneration_TimerType.
-func (e E_LsaGeneration_TimerType) String() string {
-	return ygot.EnumLogString(e, int64(e), "E_LsaGeneration_TimerType")
-}
-
-const (
-	// LsaGeneration_TimerType_UNSET corresponds to the value UNSET of LsaGeneration_TimerType
-	LsaGeneration_TimerType_UNSET E_LsaGeneration_TimerType = 0
-	// LsaGeneration_TimerType_LINEAR_BACKOFF corresponds to the value LINEAR_BACKOFF of LsaGeneration_TimerType
-	LsaGeneration_TimerType_LINEAR_BACKOFF E_LsaGeneration_TimerType = 1
-	// LsaGeneration_TimerType_EXPONENTIAL_BACKOFF corresponds to the value EXPONENTIAL_BACKOFF of LsaGeneration_TimerType
-	LsaGeneration_TimerType_EXPONENTIAL_BACKOFF E_LsaGeneration_TimerType = 2
-)
-
 // E_LspNextHop_PushLabel is a derived int64 type which is used to represent
 // the enumerated node LspNextHop_PushLabel. An additional value named
 // LspNextHop_PushLabel_UNSET is added to the enumeration which is used as
@@ -5800,6 +5861,70 @@ const (
 	Lsp_PduType_LEVEL_1 E_Lsp_PduType = 1
 	// Lsp_PduType_LEVEL_2 corresponds to the value LEVEL_2 of Lsp_PduType
 	Lsp_PduType_LEVEL_2 E_Lsp_PduType = 2
+)
+
+// E_Macsec_ConfidentialityOffset is a derived int64 type which is used to represent
+// the enumerated node Macsec_ConfidentialityOffset. An additional value named
+// Macsec_ConfidentialityOffset_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_Macsec_ConfidentialityOffset int64
+
+// IsYANGGoEnum ensures that Macsec_ConfidentialityOffset implements the yang.GoEnum
+// interface. This ensures that Macsec_ConfidentialityOffset can be identified as a
+// mapped type for a YANG enumeration.
+func (E_Macsec_ConfidentialityOffset) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  Macsec_ConfidentialityOffset.
+func (E_Macsec_ConfidentialityOffset) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_Macsec_ConfidentialityOffset.
+func (e E_Macsec_ConfidentialityOffset) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_Macsec_ConfidentialityOffset")
+}
+
+const (
+	// Macsec_ConfidentialityOffset_UNSET corresponds to the value UNSET of Macsec_ConfidentialityOffset
+	Macsec_ConfidentialityOffset_UNSET E_Macsec_ConfidentialityOffset = 0
+	// Macsec_ConfidentialityOffset_0_BYTES corresponds to the value 0_BYTES of Macsec_ConfidentialityOffset
+	Macsec_ConfidentialityOffset_0_BYTES E_Macsec_ConfidentialityOffset = 1
+	// Macsec_ConfidentialityOffset_30_BYTES corresponds to the value 30_BYTES of Macsec_ConfidentialityOffset
+	Macsec_ConfidentialityOffset_30_BYTES E_Macsec_ConfidentialityOffset = 2
+	// Macsec_ConfidentialityOffset_50_BYTES corresponds to the value 50_BYTES of Macsec_ConfidentialityOffset
+	Macsec_ConfidentialityOffset_50_BYTES E_Macsec_ConfidentialityOffset = 3
+)
+
+// E_Macsec_MacsecCipherSuite is a derived int64 type which is used to represent
+// the enumerated node Macsec_MacsecCipherSuite. An additional value named
+// Macsec_MacsecCipherSuite_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_Macsec_MacsecCipherSuite int64
+
+// IsYANGGoEnum ensures that Macsec_MacsecCipherSuite implements the yang.GoEnum
+// interface. This ensures that Macsec_MacsecCipherSuite can be identified as a
+// mapped type for a YANG enumeration.
+func (E_Macsec_MacsecCipherSuite) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  Macsec_MacsecCipherSuite.
+func (E_Macsec_MacsecCipherSuite) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_Macsec_MacsecCipherSuite.
+func (e E_Macsec_MacsecCipherSuite) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_Macsec_MacsecCipherSuite")
+}
+
+const (
+	// Macsec_MacsecCipherSuite_UNSET corresponds to the value UNSET of Macsec_MacsecCipherSuite
+	Macsec_MacsecCipherSuite_UNSET E_Macsec_MacsecCipherSuite = 0
+	// Macsec_MacsecCipherSuite_GCM_AES_128 corresponds to the value GCM_AES_128 of Macsec_MacsecCipherSuite
+	Macsec_MacsecCipherSuite_GCM_AES_128 E_Macsec_MacsecCipherSuite = 1
+	// Macsec_MacsecCipherSuite_GCM_AES_256 corresponds to the value GCM_AES_256 of Macsec_MacsecCipherSuite
+	Macsec_MacsecCipherSuite_GCM_AES_256 E_Macsec_MacsecCipherSuite = 2
+	// Macsec_MacsecCipherSuite_GCM_AES_XPN_128 corresponds to the value GCM_AES_XPN_128 of Macsec_MacsecCipherSuite
+	Macsec_MacsecCipherSuite_GCM_AES_XPN_128 E_Macsec_MacsecCipherSuite = 3
+	// Macsec_MacsecCipherSuite_GCM_AES_XPN_256 corresponds to the value GCM_AES_XPN_256 of Macsec_MacsecCipherSuite
+	Macsec_MacsecCipherSuite_GCM_AES_XPN_256 E_Macsec_MacsecCipherSuite = 4
 )
 
 // E_Messages_DEBUG_SERVICE is a derived int64 type which is used to represent
@@ -7254,6 +7379,66 @@ const (
 	OspfTypes_OSPFV2_ROUTER_LINK_TYPE_VIRTUAL_LINK E_OspfTypes_OSPFV2_ROUTER_LINK_TYPE = 4
 )
 
+// E_OspfTypes_OSPF_ABR_TYPE is a derived int64 type which is used to represent
+// the enumerated node OspfTypes_OSPF_ABR_TYPE. An additional value named
+// OspfTypes_OSPF_ABR_TYPE_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_OspfTypes_OSPF_ABR_TYPE int64
+
+// IsYANGGoEnum ensures that OspfTypes_OSPF_ABR_TYPE implements the yang.GoEnum
+// interface. This ensures that OspfTypes_OSPF_ABR_TYPE can be identified as a
+// mapped type for a YANG enumeration.
+func (E_OspfTypes_OSPF_ABR_TYPE) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  OspfTypes_OSPF_ABR_TYPE.
+func (E_OspfTypes_OSPF_ABR_TYPE) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_OspfTypes_OSPF_ABR_TYPE.
+func (e E_OspfTypes_OSPF_ABR_TYPE) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_OspfTypes_OSPF_ABR_TYPE")
+}
+
+const (
+	// OspfTypes_OSPF_ABR_TYPE_UNSET corresponds to the value UNSET of OspfTypes_OSPF_ABR_TYPE
+	OspfTypes_OSPF_ABR_TYPE_UNSET E_OspfTypes_OSPF_ABR_TYPE = 0
+	// OspfTypes_OSPF_ABR_TYPE_RFC2328_ABR corresponds to the value RFC2328_ABR of OspfTypes_OSPF_ABR_TYPE
+	OspfTypes_OSPF_ABR_TYPE_RFC2328_ABR E_OspfTypes_OSPF_ABR_TYPE = 1
+	// OspfTypes_OSPF_ABR_TYPE_RFC3509_ABR corresponds to the value RFC3509_ABR of OspfTypes_OSPF_ABR_TYPE
+	OspfTypes_OSPF_ABR_TYPE_RFC3509_ABR E_OspfTypes_OSPF_ABR_TYPE = 2
+)
+
+// E_OspfTypes_OSPF_AREA_TYPE is a derived int64 type which is used to represent
+// the enumerated node OspfTypes_OSPF_AREA_TYPE. An additional value named
+// OspfTypes_OSPF_AREA_TYPE_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_OspfTypes_OSPF_AREA_TYPE int64
+
+// IsYANGGoEnum ensures that OspfTypes_OSPF_AREA_TYPE implements the yang.GoEnum
+// interface. This ensures that OspfTypes_OSPF_AREA_TYPE can be identified as a
+// mapped type for a YANG enumeration.
+func (E_OspfTypes_OSPF_AREA_TYPE) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  OspfTypes_OSPF_AREA_TYPE.
+func (E_OspfTypes_OSPF_AREA_TYPE) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_OspfTypes_OSPF_AREA_TYPE.
+func (e E_OspfTypes_OSPF_AREA_TYPE) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_OspfTypes_OSPF_AREA_TYPE")
+}
+
+const (
+	// OspfTypes_OSPF_AREA_TYPE_UNSET corresponds to the value UNSET of OspfTypes_OSPF_AREA_TYPE
+	OspfTypes_OSPF_AREA_TYPE_UNSET E_OspfTypes_OSPF_AREA_TYPE = 0
+	// OspfTypes_OSPF_AREA_TYPE_NORMAL corresponds to the value NORMAL of OspfTypes_OSPF_AREA_TYPE
+	OspfTypes_OSPF_AREA_TYPE_NORMAL E_OspfTypes_OSPF_AREA_TYPE = 1
+	// OspfTypes_OSPF_AREA_TYPE_NSSA corresponds to the value NSSA of OspfTypes_OSPF_AREA_TYPE
+	OspfTypes_OSPF_AREA_TYPE_NSSA E_OspfTypes_OSPF_AREA_TYPE = 2
+	// OspfTypes_OSPF_AREA_TYPE_STUB corresponds to the value STUB of OspfTypes_OSPF_AREA_TYPE
+	OspfTypes_OSPF_AREA_TYPE_STUB E_OspfTypes_OSPF_AREA_TYPE = 3
+)
+
 // E_OspfTypes_OSPF_LSA_TYPE is a derived int64 type which is used to represent
 // the enumerated node OspfTypes_OSPF_LSA_TYPE. An additional value named
 // OspfTypes_OSPF_LSA_TYPE_UNSET is added to the enumeration which is used as
@@ -7647,6 +7832,66 @@ const (
 	OspfTypes_TE_NODE_ATTRIBUTE_TLV_TYPE_NODE_IPV4_LOCAL_ADDRESS E_OspfTypes_TE_NODE_ATTRIBUTE_TLV_TYPE = 1
 	// OspfTypes_TE_NODE_ATTRIBUTE_TLV_TYPE_NODE_IPV6_LOCAL_ADDRESS corresponds to the value NODE_IPV6_LOCAL_ADDRESS of OspfTypes_TE_NODE_ATTRIBUTE_TLV_TYPE
 	OspfTypes_TE_NODE_ATTRIBUTE_TLV_TYPE_NODE_IPV6_LOCAL_ADDRESS E_OspfTypes_TE_NODE_ATTRIBUTE_TLV_TYPE = 2
+)
+
+// E_Ospf_LsaGeneration_TimerType is a derived int64 type which is used to represent
+// the enumerated node Ospf_LsaGeneration_TimerType. An additional value named
+// Ospf_LsaGeneration_TimerType_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_Ospf_LsaGeneration_TimerType int64
+
+// IsYANGGoEnum ensures that Ospf_LsaGeneration_TimerType implements the yang.GoEnum
+// interface. This ensures that Ospf_LsaGeneration_TimerType can be identified as a
+// mapped type for a YANG enumeration.
+func (E_Ospf_LsaGeneration_TimerType) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  Ospf_LsaGeneration_TimerType.
+func (E_Ospf_LsaGeneration_TimerType) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_Ospf_LsaGeneration_TimerType.
+func (e E_Ospf_LsaGeneration_TimerType) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_Ospf_LsaGeneration_TimerType")
+}
+
+const (
+	// Ospf_LsaGeneration_TimerType_UNSET corresponds to the value UNSET of Ospf_LsaGeneration_TimerType
+	Ospf_LsaGeneration_TimerType_UNSET E_Ospf_LsaGeneration_TimerType = 0
+	// Ospf_LsaGeneration_TimerType_LINEAR_BACKOFF corresponds to the value LINEAR_BACKOFF of Ospf_LsaGeneration_TimerType
+	Ospf_LsaGeneration_TimerType_LINEAR_BACKOFF E_Ospf_LsaGeneration_TimerType = 1
+	// Ospf_LsaGeneration_TimerType_EXPONENTIAL_BACKOFF corresponds to the value EXPONENTIAL_BACKOFF of Ospf_LsaGeneration_TimerType
+	Ospf_LsaGeneration_TimerType_EXPONENTIAL_BACKOFF E_Ospf_LsaGeneration_TimerType = 2
+)
+
+// E_Ospfv2_LsaGeneration_TimerType is a derived int64 type which is used to represent
+// the enumerated node Ospfv2_LsaGeneration_TimerType. An additional value named
+// Ospfv2_LsaGeneration_TimerType_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_Ospfv2_LsaGeneration_TimerType int64
+
+// IsYANGGoEnum ensures that Ospfv2_LsaGeneration_TimerType implements the yang.GoEnum
+// interface. This ensures that Ospfv2_LsaGeneration_TimerType can be identified as a
+// mapped type for a YANG enumeration.
+func (E_Ospfv2_LsaGeneration_TimerType) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  Ospfv2_LsaGeneration_TimerType.
+func (E_Ospfv2_LsaGeneration_TimerType) ΛMap() map[string]map[int64]ygot.EnumDefinition {
+	return ΛEnum
+}
+
+// String returns a logging-friendly string for E_Ospfv2_LsaGeneration_TimerType.
+func (e E_Ospfv2_LsaGeneration_TimerType) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_Ospfv2_LsaGeneration_TimerType")
+}
+
+const (
+	// Ospfv2_LsaGeneration_TimerType_UNSET corresponds to the value UNSET of Ospfv2_LsaGeneration_TimerType
+	Ospfv2_LsaGeneration_TimerType_UNSET E_Ospfv2_LsaGeneration_TimerType = 0
+	// Ospfv2_LsaGeneration_TimerType_LINEAR_BACKOFF corresponds to the value LINEAR_BACKOFF of Ospfv2_LsaGeneration_TimerType
+	Ospfv2_LsaGeneration_TimerType_LINEAR_BACKOFF E_Ospfv2_LsaGeneration_TimerType = 1
+	// Ospfv2_LsaGeneration_TimerType_EXPONENTIAL_BACKOFF corresponds to the value EXPONENTIAL_BACKOFF of Ospfv2_LsaGeneration_TimerType
+	Ospfv2_LsaGeneration_TimerType_EXPONENTIAL_BACKOFF E_Ospfv2_LsaGeneration_TimerType = 2
 )
 
 // E_Ospfv2_SrSidType is a derived int64 type which is used to represent

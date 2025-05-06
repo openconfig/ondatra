@@ -78,6 +78,7 @@ message MacSec {
   CipherSuite cipher_suite = 1;
   bool encrypted_vlans_enabled = 2;
   bool cleartext_ethernet_vlan = 5;
+  uint32 rx_sec_tag_offset = 6;
   RxSakPool rx_sak_pool = 3;
   message MKA {
     uint32 version = 1;

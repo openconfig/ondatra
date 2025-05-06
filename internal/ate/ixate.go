@@ -501,6 +501,35 @@ func (ix *ixATE) configureTopology(ics []*opb.InterfaceConfig) error {
 		return errors.New("no ports configured for topology, check if (*Topology).Update called before (*Topology).Push")
 	}
 	ix.cfg.Topology = nil
+
+	// Configure global MACSec settings if required
+	var rxSecTagOffsetSeen bool
+	var rxSecTagOffset uint32
+	for _, intf := range ics {
+		macsec := intf.GetEthernet().GetMacsec()
+		if macsec == nil {
+			continue
+		}
+		if rxSecTagOffsetSeen {
+			if rxSecTagOffset != macsec.GetRxSecTagOffset() {
+				return errors.New("all interfaces configured with MACSec must have the same RxSecTagOffstValue")
+			}
+		} else {
+			rxSecTagOffset = macsec.GetRxSecTagOffset()
+			rxSecTagOffsetSeen = true
+		}
+	}
+	if rxSecTagOffset != 0 {
+		if ix.cfg.Globals == nil {
+			ix.cfg.Globals = &ixconfig.Globals{}
+		}
+		ix.cfg.Globals.Topology = &ixconfig.GlobalsTopology{
+			Macsec: &ixconfig.GlobalsMacsec{
+				RxSecTagOffset: ixconfig.MultivalueUint32(rxSecTagOffset),
+			},
+		}
+	}
+
 	ifsByLink := groupByLink(ics)
 	for _, ifs := range ifsByLink {
 		if err := ix.addTopology(ifs); err != nil {

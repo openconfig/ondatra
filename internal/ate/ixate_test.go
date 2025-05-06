@@ -515,6 +515,23 @@ func TestPushTopology(t *testing.T) {
 		},
 		importErrs:  []error{nil, nil},
 		wantCfgFile: "fec_disabled.json",
+	}, {
+		desc: "MACSec Rx Sec Tag offset",
+		top: &Topology{
+			Interfaces: []*opb.InterfaceConfig{{
+				Name: "intf",
+				Link: &opb.InterfaceConfig_Port{"12/1"},
+				Ethernet: &opb.EthernetConfig{
+					Mtu: 1500,
+					Macsec: &opb.MacSec{
+						CipherSuite:    opb.MacSec_AES_128,
+						RxSecTagOffset: 16,
+					},
+				},
+			}},
+		},
+		importErrs:  []error{nil, nil},
+		wantCfgFile: "macsec_rxsectag_offset.json",
 	}}
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {

@@ -7,8 +7,16 @@ using the following YANG input files:
   - gnmi-collector-metadata.yang
   - public/release/models/acl/openconfig-acl.yang
   - public/release/models/acl/openconfig-packet-match.yang
+  - public/release/models/aft/openconfig-aft-common.yang
+  - public/release/models/aft/openconfig-aft-ethernet.yang
+  - public/release/models/aft/openconfig-aft-ipv4.yang
+  - public/release/models/aft/openconfig-aft-ipv6.yang
+  - public/release/models/aft/openconfig-aft-mpls.yang
   - public/release/models/aft/openconfig-aft-network-instance.yang
+  - public/release/models/aft/openconfig-aft-pf.yang
+  - public/release/models/aft/openconfig-aft-state-synced.yang
   - public/release/models/aft/openconfig-aft-summary.yang
+  - public/release/models/aft/openconfig-aft-types.yang
   - public/release/models/aft/openconfig-aft.yang
   - public/release/models/ate/openconfig-ate-flow.yang
   - public/release/models/ate/openconfig-ate-intf.yang
@@ -37,12 +45,22 @@ using the following YANG input files:
   - public/release/models/lldp/openconfig-lldp-types.yang
   - public/release/models/lldp/openconfig-lldp.yang
   - public/release/models/local-routing/openconfig-local-routing.yang
+  - public/release/models/macsec/openconfig-macsec.yang
   - public/release/models/mpls/openconfig-mpls-types.yang
   - public/release/models/multicast/openconfig-pim.yang
   - public/release/models/network-instance/openconfig-network-instance.yang
+  - public/release/models/network-instance/openconfig-network-instance-l2.yang
+  - public/release/models/network-instance/openconfig-network-instance-static.yang
   - public/release/models/openconfig-extensions.yang
   - public/release/models/optical-transport/openconfig-terminal-device.yang
   - public/release/models/optical-transport/openconfig-transport-types.yang
+  - public/release/models/ospf/openconfig-ospf-area-interface.yang
+  - public/release/models/ospf/openconfig-ospf-area.yang
+  - public/release/models/ospf/openconfig-ospf-common.yang
+  - public/release/models/ospf/openconfig-ospf-global.yang
+  - public/release/models/ospf/openconfig-ospf-types.yang
+  - public/release/models/ospf/openconfig-ospf.yang
+  - public/release/models/ospf/openconfig-ospfv3-area-interface.yang
   - public/release/models/ospf/openconfig-ospf-policy.yang
   - public/release/models/ospf/openconfig-ospfv2.yang
   - public/release/models/p4rt/openconfig-p4rt.yang
@@ -59,7 +77,11 @@ using the following YANG input files:
   - public/release/models/platform/openconfig-platform-software.yang
   - public/release/models/platform/openconfig-platform-transceiver.yang
   - public/release/models/platform/openconfig-platform.yang
+  - public/release/models/policy-forwarding/openconfig-pf-forwarding-policies.yang
+  - public/release/models/policy-forwarding/openconfig-pf-interfaces.yang
+  - public/release/models/policy-forwarding/openconfig-pf-path-groups.yang
   - public/release/models/policy-forwarding/openconfig-policy-forwarding.yang
+  - public/release/models/policy/openconfig-routing-policy.yang
   - public/release/models/policy/openconfig-policy-types.yang
   - public/release/models/qos/openconfig-qos-elements.yang
   - public/release/models/qos/openconfig-qos-interfaces.yang
@@ -268,6 +290,100 @@ func (n *Component_BaseMacAddressPathAny) State() ygnmi.WildcardQuery[string] {
 			ret := gs.(*oc.Component).BaseMacAddress
 			if ret == nil {
 				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Component_BootTimePath represents the /openconfig-platform/components/component/state/boot-time YANG schema element.
+type Component_BootTimePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_BootTimePathAny represents the wildcard version of the /openconfig-platform/components/component/state/boot-time YANG schema element.
+type Component_BootTimePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/boot-time"
+//	Path from root:       "/components/component/state/boot-time"
+func (n *Component_BootTimePath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Component",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "boot-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component).BootTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/boot-time"
+//	Path from root:       "/components/component/state/boot-time"
+func (n *Component_BootTimePathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Component",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "boot-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component).BootTime
+			if ret == nil {
+				var zero uint64
 				return zero, false
 			}
 			return *ret, true
@@ -3289,6 +3405,46 @@ func (n *ComponentPathAny) BaseMacAddress() *Component_BaseMacAddressPathAny {
 	return ps
 }
 
+// BootTime (leaf): This timestamp indicates the time that the component was started.
+// The value is the timestamp in nanoseconds relative to the Unix
+// Epoch (Jan 1, 1970 00:00:00 UTC).
+//
+//	Defining module:      "openconfig-platform"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/boot-time"
+//	Path from root:       "/components/component/state/boot-time"
+func (n *ComponentPath) BootTime() *Component_BootTimePath {
+	ps := &Component_BootTimePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "boot-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// BootTime (leaf): This timestamp indicates the time that the component was started.
+// The value is the timestamp in nanoseconds relative to the Unix
+// Epoch (Jan 1, 1970 00:00:00 UTC).
+//
+//	Defining module:      "openconfig-platform"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/boot-time"
+//	Path from root:       "/components/component/state/boot-time"
+func (n *ComponentPathAny) BootTime() *Component_BootTimePathAny {
+	ps := &Component_BootTimePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "boot-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
 // Chassis (container): Data for chassis components
 //
 //	Defining module:      "openconfig-platform"
@@ -4021,8 +4177,9 @@ func (n *ComponentPathAny) LastPoweroffReason() *Component_LastPoweroffReasonPat
 // - USER_INITIATED
 // - SYSTEM_INITIATED
 // - POWER_FAILURE
-// This field is not updated during reboots; those are tracked
-// in the 'last-reboot-time' leaf.
+// This field is only updated when power is shut off.  It is not
+// updated during reboots; those are tracked in the 'boot-time'
+// leaf.
 //
 //	Defining module:      "openconfig-platform"
 //	Instantiating module: "openconfig-platform"
@@ -4046,8 +4203,9 @@ func (n *ComponentPath) LastPoweroffTime() *Component_LastPoweroffTimePath {
 // - USER_INITIATED
 // - SYSTEM_INITIATED
 // - POWER_FAILURE
-// This field is not updated during reboots; those are tracked
-// in the 'last-reboot-time' leaf.
+// This field is only updated when power is shut off.  It is not
+// updated during reboots; those are tracked in the 'boot-time'
+// leaf.
 //
 //	Defining module:      "openconfig-platform"
 //	Instantiating module: "openconfig-platform"
@@ -4103,8 +4261,12 @@ func (n *ComponentPathAny) LastRebootReason() *Component_LastRebootReasonPathAny
 
 // LastRebootTime (leaf): This reports the time of the last reboot of the component. The
 // value is the timestamp in nanoseconds relative to the Unix Epoch
-// (Jan 1, 1970 00:00:00 UTC). This timer is not updated during
-// power shutdowns; those are tracked in 'last-poweroff-time' leaf.
+// (Jan 1, 1970 00:00:00 UTC). This timer is updated when the component
+// starts up, either due to a power-on event or a reboot.  This timer
+// is not updated during power shutdowns; those are tracked in
+// the 'last-poweroff-time' leaf.
+// This leaf is deprecated and the boot-time leaf should be used
+// instead.
 //
 //	Defining module:      "openconfig-platform"
 //	Instantiating module: "openconfig-platform"
@@ -4124,8 +4286,12 @@ func (n *ComponentPath) LastRebootTime() *Component_LastRebootTimePath {
 
 // LastRebootTime (leaf): This reports the time of the last reboot of the component. The
 // value is the timestamp in nanoseconds relative to the Unix Epoch
-// (Jan 1, 1970 00:00:00 UTC). This timer is not updated during
-// power shutdowns; those are tracked in 'last-poweroff-time' leaf.
+// (Jan 1, 1970 00:00:00 UTC). This timer is updated when the component
+// starts up, either due to a power-on event or a reboot.  This timer
+// is not updated during power shutdowns; those are tracked in
+// the 'last-poweroff-time' leaf.
+// This leaf is deprecated and the boot-time leaf should be used
+// instead.
 //
 //	Defining module:      "openconfig-platform"
 //	Instantiating module: "openconfig-platform"
