@@ -18,7 +18,7 @@
 
 set -e
 
-OC_VERSION="v5.0.0"
+OC_VERSION="v5.2.0"
 
 git clone https://github.com/openconfig/public.git --branch $OC_VERSION
 wget https://raw.githubusercontent.com/openconfig/gnmi/master/metadata/yang/gnmi-collector-metadata.yang
@@ -30,8 +30,16 @@ YANG_FILES=(
   gnmi-collector-metadata.yang
   public/release/models/acl/openconfig-acl.yang
   public/release/models/acl/openconfig-packet-match.yang
+  public/release/models/aft/openconfig-aft-common.yang
+  public/release/models/aft/openconfig-aft-ethernet.yang
+  public/release/models/aft/openconfig-aft-ipv4.yang
+  public/release/models/aft/openconfig-aft-ipv6.yang
+  public/release/models/aft/openconfig-aft-mpls.yang
   public/release/models/aft/openconfig-aft-network-instance.yang
+  public/release/models/aft/openconfig-aft-pf.yang
+  public/release/models/aft/openconfig-aft-state-synced.yang
   public/release/models/aft/openconfig-aft-summary.yang
+  public/release/models/aft/openconfig-aft-types.yang
   public/release/models/aft/openconfig-aft.yang
   public/release/models/ate/openconfig-ate-flow.yang
   public/release/models/ate/openconfig-ate-intf.yang
@@ -82,7 +90,11 @@ YANG_FILES=(
   public/release/models/platform/openconfig-platform-software.yang
   public/release/models/platform/openconfig-platform-transceiver.yang
   public/release/models/platform/openconfig-platform.yang
+  public/release/models/policy-forwarding/openconfig-pf-forwarding-policies.yang
+  public/release/models/policy-forwarding/openconfig-pf-interfaces.yang
+  public/release/models/policy-forwarding/openconfig-pf-path-groups.yang
   public/release/models/policy-forwarding/openconfig-policy-forwarding.yang
+  public/release/models/policy/openconfig-routing-policy.yang
   public/release/models/policy/openconfig-policy-types.yang
   public/release/models/qos/openconfig-qos-elements.yang
   public/release/models/qos/openconfig-qos-interfaces.yang
