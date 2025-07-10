@@ -2203,8 +2203,8 @@ func (n *Sampling_SflowPathAny) PollingInterval() *Sampling_Sflow_PollingInterva
 	return ps
 }
 
-// SampleSize (leaf): Sets the maximum number of bytes to be copied from a
-// sampled packet.
+// SampleSize (leaf): Sets the maximum number of bytes to be copied from a sampled
+// packet (content within one specific sample of a packet).
 //
 //	Defining module:      "openconfig-sampling-sflow"
 //	Instantiating module: "openconfig-sampling"
@@ -2222,8 +2222,8 @@ func (n *Sampling_SflowPath) SampleSize() *Sampling_Sflow_SampleSizePath {
 	return ps
 }
 
-// SampleSize (leaf): Sets the maximum number of bytes to be copied from a
-// sampled packet.
+// SampleSize (leaf): Sets the maximum number of bytes to be copied from a sampled
+// packet (content within one specific sample of a packet).
 //
 //	Defining module:      "openconfig-sampling-sflow"
 //	Instantiating module: "openconfig-sampling"
@@ -2500,6 +2500,182 @@ func (n *Sampling_Sflow_Collector_AddressPathAny) Config() ygnmi.WildcardQuery[s
 			ret := gs.(*oc.Sampling_Sflow_Collector).Address
 			if ret == nil {
 				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Sampling_Sflow_Collector) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Sampling_Sflow_Collector_MaxDatagramSizePath represents the /openconfig-sampling/sampling/sflow/collectors/collector/state/max-datagram-size YANG schema element.
+type Sampling_Sflow_Collector_MaxDatagramSizePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Sampling_Sflow_Collector_MaxDatagramSizePathAny represents the wildcard version of the /openconfig-sampling/sampling/sflow/collectors/collector/state/max-datagram-size YANG schema element.
+type Sampling_Sflow_Collector_MaxDatagramSizePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-sampling-sflow"
+//	Instantiating module: "openconfig-sampling-sflow"
+//	Path from parent:     "state/max-datagram-size"
+//	Path from root:       "/sampling/sflow/collectors/collector/state/max-datagram-size"
+func (n *Sampling_Sflow_Collector_MaxDatagramSizePath) State() ygnmi.SingletonQuery[uint16] {
+	return ygnmi.NewSingletonQuery[uint16](
+		"Sampling_Sflow_Collector",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "max-datagram-size"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.Sampling_Sflow_Collector).MaxDatagramSize
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Sampling_Sflow_Collector) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-sampling-sflow"
+//	Instantiating module: "openconfig-sampling-sflow"
+//	Path from parent:     "state/max-datagram-size"
+//	Path from root:       "/sampling/sflow/collectors/collector/state/max-datagram-size"
+func (n *Sampling_Sflow_Collector_MaxDatagramSizePathAny) State() ygnmi.WildcardQuery[uint16] {
+	return ygnmi.NewWildcardQuery[uint16](
+		"Sampling_Sflow_Collector",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "max-datagram-size"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.Sampling_Sflow_Collector).MaxDatagramSize
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Sampling_Sflow_Collector) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-sampling-sflow"
+//	Instantiating module: "openconfig-sampling-sflow"
+//	Path from parent:     "config/max-datagram-size"
+//	Path from root:       "/sampling/sflow/collectors/collector/config/max-datagram-size"
+func (n *Sampling_Sflow_Collector_MaxDatagramSizePath) Config() ygnmi.ConfigQuery[uint16] {
+	return ygnmi.NewConfigQuery[uint16](
+		"Sampling_Sflow_Collector",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "max-datagram-size"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.Sampling_Sflow_Collector).MaxDatagramSize
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Sampling_Sflow_Collector) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-sampling-sflow"
+//	Instantiating module: "openconfig-sampling-sflow"
+//	Path from parent:     "config/max-datagram-size"
+//	Path from root:       "/sampling/sflow/collectors/collector/config/max-datagram-size"
+func (n *Sampling_Sflow_Collector_MaxDatagramSizePathAny) Config() ygnmi.WildcardQuery[uint16] {
+	return ygnmi.NewWildcardQuery[uint16](
+		"Sampling_Sflow_Collector",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "max-datagram-size"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.Sampling_Sflow_Collector).MaxDatagramSize
+			if ret == nil {
+				var zero uint16
 				return zero, false
 			}
 			return *ret, true
@@ -3187,6 +3363,46 @@ func (n *Sampling_Sflow_CollectorPathAny) Address() *Sampling_Sflow_Collector_Ad
 	ps := &Sampling_Sflow_Collector_AddressPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"*", "address"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// MaxDatagramSize (leaf): Sets the maximum size (in bytes) of the sFlow payload itself,
+// before it's encapsulated in a UDP packet sent to this collector.
+// This value does not include UDP or IP headers.
+//
+//	Defining module:      "openconfig-sampling-sflow"
+//	Instantiating module: "openconfig-sampling"
+//	Path from parent:     "*/max-datagram-size"
+//	Path from root:       "/sampling/sflow/collectors/collector/*/max-datagram-size"
+func (n *Sampling_Sflow_CollectorPath) MaxDatagramSize() *Sampling_Sflow_Collector_MaxDatagramSizePath {
+	ps := &Sampling_Sflow_Collector_MaxDatagramSizePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "max-datagram-size"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// MaxDatagramSize (leaf): Sets the maximum size (in bytes) of the sFlow payload itself,
+// before it's encapsulated in a UDP packet sent to this collector.
+// This value does not include UDP or IP headers.
+//
+//	Defining module:      "openconfig-sampling-sflow"
+//	Instantiating module: "openconfig-sampling"
+//	Path from parent:     "*/max-datagram-size"
+//	Path from root:       "/sampling/sflow/collectors/collector/*/max-datagram-size"
+func (n *Sampling_Sflow_CollectorPathAny) MaxDatagramSize() *Sampling_Sflow_Collector_MaxDatagramSizePathAny {
+	ps := &Sampling_Sflow_Collector_MaxDatagramSizePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "max-datagram-size"},
 			map[string]interface{}{},
 			n,
 		),

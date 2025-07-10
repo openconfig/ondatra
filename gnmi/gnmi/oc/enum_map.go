@@ -1133,6 +1133,10 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		2: {Name: "STATIC"},
 		3: {Name: "DYNAMIC"},
 	},
+	"E_IfIp_UrpfMode": {
+		1: {Name: "LOOSE"},
+		2: {Name: "STRICT"},
+	},
 	"E_IgpFloodingBandwidth_ThresholdSpecification": {
 		1: {Name: "MIRRORED_UP_DOWN"},
 		2: {Name: "SEPARATE_UP_DOWN"},
@@ -2402,10 +2406,11 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 	},
 	"E_TransportTypes_FIBER_CONNECTOR_TYPE": {
 		1: {Name: "AOC_CONNECTOR", DefiningModule: "openconfig-transport-types"},
-		2: {Name: "DAC_CONNECTOR", DefiningModule: "openconfig-transport-types"},
-		3: {Name: "LC_CONNECTOR", DefiningModule: "openconfig-transport-types"},
-		4: {Name: "MPO_CONNECTOR", DefiningModule: "openconfig-transport-types"},
-		5: {Name: "SC_CONNECTOR", DefiningModule: "openconfig-transport-types"},
+		2: {Name: "CS_CONNECTOR", DefiningModule: "openconfig-transport-types"},
+		3: {Name: "DAC_CONNECTOR", DefiningModule: "openconfig-transport-types"},
+		4: {Name: "LC_CONNECTOR", DefiningModule: "openconfig-transport-types"},
+		5: {Name: "MPO_CONNECTOR", DefiningModule: "openconfig-transport-types"},
+		6: {Name: "SC_CONNECTOR", DefiningModule: "openconfig-transport-types"},
 	},
 	"E_TransportTypes_FRAME_MAPPING_PROTOCOL": {
 		1: {Name: "AMP", DefiningModule: "openconfig-transport-types"},
@@ -2955,6 +2960,12 @@ func initΛEnumTypes() {
 		"/interfaces/interface/routed-vlan/ipv4/proxy-arp/state/mode": {
 			reflect.TypeOf((E_ProxyArp_Mode)(0)),
 		},
+		"/interfaces/interface/routed-vlan/ipv4/urpf/config/mode": {
+			reflect.TypeOf((E_IfIp_UrpfMode)(0)),
+		},
+		"/interfaces/interface/routed-vlan/ipv4/urpf/state/mode": {
+			reflect.TypeOf((E_IfIp_UrpfMode)(0)),
+		},
 		"/interfaces/interface/routed-vlan/ipv6/addresses/address/config/type": {
 			reflect.TypeOf((E_IfIp_Ipv6AddressType)(0)),
 		},
@@ -2984,6 +2995,12 @@ func initΛEnumTypes() {
 		},
 		"/interfaces/interface/routed-vlan/ipv6/state/learn-unsolicited": {
 			reflect.TypeOf((E_Ipv6_LearnUnsolicited)(0)),
+		},
+		"/interfaces/interface/routed-vlan/ipv6/urpf/config/mode": {
+			reflect.TypeOf((E_IfIp_UrpfMode)(0)),
+		},
+		"/interfaces/interface/routed-vlan/ipv6/urpf/state/mode": {
+			reflect.TypeOf((E_IfIp_UrpfMode)(0)),
 		},
 		"/interfaces/interface/state/admin-status": {
 			reflect.TypeOf((E_Interface_AdminStatus)(0)),
@@ -3018,6 +3035,12 @@ func initΛEnumTypes() {
 		"/interfaces/interface/subinterfaces/subinterface/ipv4/proxy-arp/state/mode": {
 			reflect.TypeOf((E_ProxyArp_Mode)(0)),
 		},
+		"/interfaces/interface/subinterfaces/subinterface/ipv4/urpf/config/mode": {
+			reflect.TypeOf((E_IfIp_UrpfMode)(0)),
+		},
+		"/interfaces/interface/subinterfaces/subinterface/ipv4/urpf/state/mode": {
+			reflect.TypeOf((E_IfIp_UrpfMode)(0)),
+		},
 		"/interfaces/interface/subinterfaces/subinterface/ipv6/addresses/address/config/type": {
 			reflect.TypeOf((E_IfIp_Ipv6AddressType)(0)),
 		},
@@ -3047,6 +3070,12 @@ func initΛEnumTypes() {
 		},
 		"/interfaces/interface/subinterfaces/subinterface/ipv6/state/learn-unsolicited": {
 			reflect.TypeOf((E_Ipv6_LearnUnsolicited)(0)),
+		},
+		"/interfaces/interface/subinterfaces/subinterface/ipv6/urpf/config/mode": {
+			reflect.TypeOf((E_IfIp_UrpfMode)(0)),
+		},
+		"/interfaces/interface/subinterfaces/subinterface/ipv6/urpf/state/mode": {
+			reflect.TypeOf((E_IfIp_UrpfMode)(0)),
 		},
 		"/interfaces/interface/subinterfaces/subinterface/state/admin-status": {
 			reflect.TypeOf((E_Interface_AdminStatus)(0)),

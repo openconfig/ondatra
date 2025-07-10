@@ -4012,6 +4012,35 @@ const (
 	IfIp_NeighborOrigin_DYNAMIC E_IfIp_NeighborOrigin = 3
 )
 
+// E_IfIp_UrpfMode is a derived int64 type which is used to represent
+// the enumerated node IfIp_UrpfMode. An additional value named
+// IfIp_UrpfMode_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_IfIp_UrpfMode int64
+
+// IsYANGGoEnum ensures that IfIp_UrpfMode implements the yang.GoEnum
+// interface. This ensures that IfIp_UrpfMode can be identified as a
+// mapped type for a YANG enumeration.
+func (E_IfIp_UrpfMode) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  IfIp_UrpfMode.
+func (E_IfIp_UrpfMode) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_IfIp_UrpfMode.
+func (e E_IfIp_UrpfMode) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_IfIp_UrpfMode")
+}
+
+const (
+	// IfIp_UrpfMode_UNSET corresponds to the value UNSET of IfIp_UrpfMode
+	IfIp_UrpfMode_UNSET E_IfIp_UrpfMode = 0
+	// IfIp_UrpfMode_LOOSE corresponds to the value LOOSE of IfIp_UrpfMode
+	IfIp_UrpfMode_LOOSE E_IfIp_UrpfMode = 1
+	// IfIp_UrpfMode_STRICT corresponds to the value STRICT of IfIp_UrpfMode
+	IfIp_UrpfMode_STRICT E_IfIp_UrpfMode = 2
+)
+
 // E_IgpFloodingBandwidth_ThresholdSpecification is a derived int64 type which is used to represent
 // the enumerated node IgpFloodingBandwidth_ThresholdSpecification. An additional value named
 // IgpFloodingBandwidth_ThresholdSpecification_UNSET is added to the enumeration which is used as
@@ -11012,14 +11041,16 @@ const (
 	TransportTypes_FIBER_CONNECTOR_TYPE_UNSET E_TransportTypes_FIBER_CONNECTOR_TYPE = 0
 	// TransportTypes_FIBER_CONNECTOR_TYPE_AOC_CONNECTOR corresponds to the value AOC_CONNECTOR of TransportTypes_FIBER_CONNECTOR_TYPE
 	TransportTypes_FIBER_CONNECTOR_TYPE_AOC_CONNECTOR E_TransportTypes_FIBER_CONNECTOR_TYPE = 1
+	// TransportTypes_FIBER_CONNECTOR_TYPE_CS_CONNECTOR corresponds to the value CS_CONNECTOR of TransportTypes_FIBER_CONNECTOR_TYPE
+	TransportTypes_FIBER_CONNECTOR_TYPE_CS_CONNECTOR E_TransportTypes_FIBER_CONNECTOR_TYPE = 2
 	// TransportTypes_FIBER_CONNECTOR_TYPE_DAC_CONNECTOR corresponds to the value DAC_CONNECTOR of TransportTypes_FIBER_CONNECTOR_TYPE
-	TransportTypes_FIBER_CONNECTOR_TYPE_DAC_CONNECTOR E_TransportTypes_FIBER_CONNECTOR_TYPE = 2
+	TransportTypes_FIBER_CONNECTOR_TYPE_DAC_CONNECTOR E_TransportTypes_FIBER_CONNECTOR_TYPE = 3
 	// TransportTypes_FIBER_CONNECTOR_TYPE_LC_CONNECTOR corresponds to the value LC_CONNECTOR of TransportTypes_FIBER_CONNECTOR_TYPE
-	TransportTypes_FIBER_CONNECTOR_TYPE_LC_CONNECTOR E_TransportTypes_FIBER_CONNECTOR_TYPE = 3
+	TransportTypes_FIBER_CONNECTOR_TYPE_LC_CONNECTOR E_TransportTypes_FIBER_CONNECTOR_TYPE = 4
 	// TransportTypes_FIBER_CONNECTOR_TYPE_MPO_CONNECTOR corresponds to the value MPO_CONNECTOR of TransportTypes_FIBER_CONNECTOR_TYPE
-	TransportTypes_FIBER_CONNECTOR_TYPE_MPO_CONNECTOR E_TransportTypes_FIBER_CONNECTOR_TYPE = 4
+	TransportTypes_FIBER_CONNECTOR_TYPE_MPO_CONNECTOR E_TransportTypes_FIBER_CONNECTOR_TYPE = 5
 	// TransportTypes_FIBER_CONNECTOR_TYPE_SC_CONNECTOR corresponds to the value SC_CONNECTOR of TransportTypes_FIBER_CONNECTOR_TYPE
-	TransportTypes_FIBER_CONNECTOR_TYPE_SC_CONNECTOR E_TransportTypes_FIBER_CONNECTOR_TYPE = 5
+	TransportTypes_FIBER_CONNECTOR_TYPE_SC_CONNECTOR E_TransportTypes_FIBER_CONNECTOR_TYPE = 6
 )
 
 // E_TransportTypes_FRAME_MAPPING_PROTOCOL is a derived int64 type which is used to represent

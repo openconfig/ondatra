@@ -7179,6 +7179,100 @@ func (n *Interface_Counters_InUnknownProtosPathAny) State() ygnmi.WildcardQuery[
 	)
 }
 
+// Interface_Counters_InterfaceTransitionsPath represents the /openconfig-interfaces/interfaces/interface/state/counters/interface-transitions YANG schema element.
+type Interface_Counters_InterfaceTransitionsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Counters_InterfaceTransitionsPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/state/counters/interface-transitions YANG schema element.
+type Interface_Counters_InterfaceTransitionsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-interfaces"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "interface-transitions"
+//	Path from root:       "/interfaces/interface/state/counters/interface-transitions"
+func (n *Interface_Counters_InterfaceTransitionsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Interface_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"interface-transitions"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Counters).InterfaceTransitions
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-interfaces"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "interface-transitions"
+//	Path from root:       "/interfaces/interface/state/counters/interface-transitions"
+func (n *Interface_Counters_InterfaceTransitionsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Interface_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"interface-transitions"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Counters).InterfaceTransitions
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
 // Interface_Counters_LastClearPath represents the /openconfig-interfaces/interfaces/interface/state/counters/last-clear YANG schema element.
 type Interface_Counters_LastClearPath struct {
 	*ygnmi.NodePath
@@ -7254,6 +7348,100 @@ func (n *Interface_Counters_LastClearPathAny) State() ygnmi.WildcardQuery[uint64
 		),
 		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
 			ret := gs.(*oc.Interface_Counters).LastClear
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_Counters_LinkTransitionsPath represents the /openconfig-interfaces/interfaces/interface/state/counters/link-transitions YANG schema element.
+type Interface_Counters_LinkTransitionsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Counters_LinkTransitionsPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/state/counters/link-transitions YANG schema element.
+type Interface_Counters_LinkTransitionsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-interfaces"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "link-transitions"
+//	Path from root:       "/interfaces/interface/state/counters/link-transitions"
+func (n *Interface_Counters_LinkTransitionsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Interface_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"link-transitions"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Counters).LinkTransitions
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-interfaces"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "link-transitions"
+//	Path from root:       "/interfaces/interface/state/counters/link-transitions"
+func (n *Interface_Counters_LinkTransitionsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Interface_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"link-transitions"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Counters).LinkTransitions
 			if ret == nil {
 				var zero uint64
 				return zero, false
@@ -8039,6 +8227,10 @@ type Interface_CountersPathAny struct {
 // between up and down since the time the device restarted
 // or the last-clear time, whichever is most recent.
 //
+// Please use interface-transitions instead, which has
+// similar, but more precisely specified, semantics and a
+// clearer name.
+//
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-interfaces"
 //	Path from parent:     "carrier-transitions"
@@ -8058,6 +8250,10 @@ func (n *Interface_CountersPath) CarrierTransitions() *Interface_Counters_Carrie
 // CarrierTransitions (leaf): Number of times the interface state has transitioned
 // between up and down since the time the device restarted
 // or the last-clear time, whichever is most recent.
+//
+// Please use interface-transitions instead, which has
+// similar, but more precisely specified, semantics and a
+// clearer name.
 //
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-interfaces"
@@ -8081,8 +8277,7 @@ func (n *Interface_CountersPathAny) CarrierTransitions() *Interface_Counters_Car
 //
 // Discontinuities in the value of this counter can occur
 // at re-initialization of the management system, and at
-// other times as indicated by the value of
-// 'last-clear'.
+// other times as indicated by the value of 'last-clear'.
 //
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-interfaces"
@@ -8106,8 +8301,7 @@ func (n *Interface_CountersPath) InBroadcastPkts() *Interface_Counters_InBroadca
 //
 // Discontinuities in the value of this counter can occur
 // at re-initialization of the management system, and at
-// other times as indicated by the value of
-// 'last-clear'.
+// other times as indicated by the value of 'last-clear'.
 //
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-interfaces"
@@ -8133,8 +8327,7 @@ func (n *Interface_CountersPathAny) InBroadcastPkts() *Interface_Counters_InBroa
 //
 // Discontinuities in the value of this counter can occur
 // at re-initialization of the management system, and at
-// other times as indicated by the value of
-// 'last-clear'.
+// other times as indicated by the value of 'last-clear'.
 //
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-interfaces"
@@ -8160,8 +8353,7 @@ func (n *Interface_CountersPath) InDiscards() *Interface_Counters_InDiscardsPath
 //
 // Discontinuities in the value of this counter can occur
 // at re-initialization of the management system, and at
-// other times as indicated by the value of
-// 'last-clear'.
+// other times as indicated by the value of 'last-clear'.
 //
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-interfaces"
@@ -8189,8 +8381,7 @@ func (n *Interface_CountersPathAny) InDiscards() *Interface_Counters_InDiscardsP
 //
 // Discontinuities in the value of this counter can occur
 // at re-initialization of the management system, and at
-// other times as indicated by the value of
-// 'last-clear'.
+// other times as indicated by the value of 'last-clear'.
 //
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-interfaces"
@@ -8218,8 +8409,7 @@ func (n *Interface_CountersPath) InErrors() *Interface_Counters_InErrorsPath {
 //
 // Discontinuities in the value of this counter can occur
 // at re-initialization of the management system, and at
-// other times as indicated by the value of
-// 'last-clear'.
+// other times as indicated by the value of 'last-clear'.
 //
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-interfaces"
@@ -8241,8 +8431,8 @@ func (n *Interface_CountersPathAny) InErrors() *Interface_Counters_InErrorsPathA
 // frame check sequence (FCS), i.e., framing errors.
 //
 // Discontinuities in the value of this counter can occur
-// when the device is re-initialization as indicated by the
-// value of 'last-clear'.
+// at re-initialization of the management system, and at
+// other times as indicated by the value of 'last-clear'.
 //
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-interfaces"
@@ -8264,8 +8454,8 @@ func (n *Interface_CountersPath) InFcsErrors() *Interface_Counters_InFcsErrorsPa
 // frame check sequence (FCS), i.e., framing errors.
 //
 // Discontinuities in the value of this counter can occur
-// when the device is re-initialization as indicated by the
-// value of 'last-clear'.
+// at re-initialization of the management system, and at
+// other times as indicated by the value of 'last-clear'.
 //
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-interfaces"
@@ -8290,8 +8480,7 @@ func (n *Interface_CountersPathAny) InFcsErrors() *Interface_Counters_InFcsError
 //
 // Discontinuities in the value of this counter can occur
 // at re-initialization of the management system, and at
-// other times as indicated by the value of
-// 'last-clear'.
+// other times as indicated by the value of 'last-clear'.
 //
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-interfaces"
@@ -8316,8 +8505,7 @@ func (n *Interface_CountersPath) InMulticastPkts() *Interface_Counters_InMultica
 //
 // Discontinuities in the value of this counter can occur
 // at re-initialization of the management system, and at
-// other times as indicated by the value of
-// 'last-clear'.
+// other times as indicated by the value of 'last-clear'.
 //
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-interfaces"
@@ -8340,8 +8528,7 @@ func (n *Interface_CountersPathAny) InMulticastPkts() *Interface_Counters_InMult
 //
 // Discontinuities in the value of this counter can occur
 // at re-initialization of the management system, and at
-// other times as indicated by the value of
-// 'last-clear'.
+// other times as indicated by the value of 'last-clear'.
 //
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-interfaces"
@@ -8364,8 +8551,7 @@ func (n *Interface_CountersPath) InOctets() *Interface_Counters_InOctetsPath {
 //
 // Discontinuities in the value of this counter can occur
 // at re-initialization of the management system, and at
-// other times as indicated by the value of
-// 'last-clear'.
+// other times as indicated by the value of 'last-clear'.
 //
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-interfaces"
@@ -8429,8 +8615,7 @@ func (n *Interface_CountersPathAny) InPkts() *Interface_Counters_InPktsPathAny {
 //
 // Discontinuities in the value of this counter can occur
 // at re-initialization of the management system, and at
-// other times as indicated by the value of
-// 'last-clear'.
+// other times as indicated by the value of 'last-clear'.
 //
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-interfaces"
@@ -8454,8 +8639,7 @@ func (n *Interface_CountersPath) InUnicastPkts() *Interface_Counters_InUnicastPk
 //
 // Discontinuities in the value of this counter can occur
 // at re-initialization of the management system, and at
-// other times as indicated by the value of
-// 'last-clear'.
+// other times as indicated by the value of 'last-clear'.
 //
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-interfaces"
@@ -8485,8 +8669,7 @@ func (n *Interface_CountersPathAny) InUnicastPkts() *Interface_Counters_InUnicas
 //
 // Discontinuities in the value of this counter can occur
 // at re-initialization of the management system, and at
-// other times as indicated by the value of
-// 'last-clear'.
+// other times as indicated by the value of 'last-clear'.
 //
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-interfaces"
@@ -8516,8 +8699,7 @@ func (n *Interface_CountersPath) InUnknownProtos() *Interface_Counters_InUnknown
 //
 // Discontinuities in the value of this counter can occur
 // at re-initialization of the management system, and at
-// other times as indicated by the value of
-// 'last-clear'.
+// other times as indicated by the value of 'last-clear'.
 //
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-interfaces"
@@ -8527,6 +8709,60 @@ func (n *Interface_CountersPathAny) InUnknownProtos() *Interface_Counters_InUnkn
 	ps := &Interface_Counters_InUnknownProtosPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"in-unknown-protos"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// InterfaceTransitions (leaf): The total number of times the interface state (oper-status)
+// has either transitioned to 'UP' state from any other state, or
+// from state 'UP' to any other state.  I.e., an interface flap
+// from UP to DOWN back to UP increments the counter by 2.
+// Transitions between any other interface states other than to
+// or from 'UP' state are not included in the counter.
+//
+// Discontinuities in the value of this counter can occur
+// at re-initialization of the management system, and at
+// other times as indicated by the value of 'last-clear'.
+//
+//	Defining module:      "openconfig-interfaces"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "interface-transitions"
+//	Path from root:       "/interfaces/interface/state/counters/interface-transitions"
+func (n *Interface_CountersPath) InterfaceTransitions() *Interface_Counters_InterfaceTransitionsPath {
+	ps := &Interface_Counters_InterfaceTransitionsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"interface-transitions"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// InterfaceTransitions (leaf): The total number of times the interface state (oper-status)
+// has either transitioned to 'UP' state from any other state, or
+// from state 'UP' to any other state.  I.e., an interface flap
+// from UP to DOWN back to UP increments the counter by 2.
+// Transitions between any other interface states other than to
+// or from 'UP' state are not included in the counter.
+//
+// Discontinuities in the value of this counter can occur
+// at re-initialization of the management system, and at
+// other times as indicated by the value of 'last-clear'.
+//
+//	Defining module:      "openconfig-interfaces"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "interface-transitions"
+//	Path from root:       "/interfaces/interface/state/counters/interface-transitions"
+func (n *Interface_CountersPathAny) InterfaceTransitions() *Interface_Counters_InterfaceTransitionsPathAny {
+	ps := &Interface_Counters_InterfaceTransitionsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"interface-transitions"},
 			map[string]interface{}{},
 			n,
 		),
@@ -8579,6 +8815,80 @@ func (n *Interface_CountersPathAny) LastClear() *Interface_Counters_LastClearPat
 	return ps
 }
 
+// LinkTransitions (leaf): This is the number of times that the underlying link state
+// (e.g., at the optical receiver) has transitioned to or from
+// 'UP' state before any holdtime, dampening, or other processing
+// has been applied that could suppress an update to the interface
+// 'oper-status' and corresponding interface-transitions counter.
+//
+// The counter is incremented both when the link transitions
+// to 'UP' state from any other link state and also when the link
+// transitions from 'UP' state to any other link state, i.e., an
+// interface flap from UP to DOWN back to UP increments the
+// counter by 2.
+//
+// Implementations are not required to count all transitions,
+// e.g., if they are below the level of granularity monitored by
+// the system, and hence may not tally with the equivalent counter
+// on the remote end of the link.
+//
+// Discontinuities in the value of this counter can occur
+// at re-initialization of the management system, and at
+// other times as indicated by the value of 'last-clear'.
+//
+//	Defining module:      "openconfig-interfaces"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "link-transitions"
+//	Path from root:       "/interfaces/interface/state/counters/link-transitions"
+func (n *Interface_CountersPath) LinkTransitions() *Interface_Counters_LinkTransitionsPath {
+	ps := &Interface_Counters_LinkTransitionsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"link-transitions"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// LinkTransitions (leaf): This is the number of times that the underlying link state
+// (e.g., at the optical receiver) has transitioned to or from
+// 'UP' state before any holdtime, dampening, or other processing
+// has been applied that could suppress an update to the interface
+// 'oper-status' and corresponding interface-transitions counter.
+//
+// The counter is incremented both when the link transitions
+// to 'UP' state from any other link state and also when the link
+// transitions from 'UP' state to any other link state, i.e., an
+// interface flap from UP to DOWN back to UP increments the
+// counter by 2.
+//
+// Implementations are not required to count all transitions,
+// e.g., if they are below the level of granularity monitored by
+// the system, and hence may not tally with the equivalent counter
+// on the remote end of the link.
+//
+// Discontinuities in the value of this counter can occur
+// at re-initialization of the management system, and at
+// other times as indicated by the value of 'last-clear'.
+//
+//	Defining module:      "openconfig-interfaces"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "link-transitions"
+//	Path from root:       "/interfaces/interface/state/counters/link-transitions"
+func (n *Interface_CountersPathAny) LinkTransitions() *Interface_Counters_LinkTransitionsPathAny {
+	ps := &Interface_Counters_LinkTransitionsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"link-transitions"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
 // OutBroadcastPkts (leaf): The total number of packets that higher-level protocols
 // requested be transmitted, and that were addressed to a
 // broadcast address at this sub-layer, including those
@@ -8586,8 +8896,7 @@ func (n *Interface_CountersPathAny) LastClear() *Interface_Counters_LastClearPat
 //
 // Discontinuities in the value of this counter can occur
 // at re-initialization of the management system, and at
-// other times as indicated by the value of
-// 'last-clear'.
+// other times as indicated by the value of 'last-clear'.
 //
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-interfaces"
@@ -8612,8 +8921,7 @@ func (n *Interface_CountersPath) OutBroadcastPkts() *Interface_Counters_OutBroad
 //
 // Discontinuities in the value of this counter can occur
 // at re-initialization of the management system, and at
-// other times as indicated by the value of
-// 'last-clear'.
+// other times as indicated by the value of 'last-clear'.
 //
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-interfaces"
@@ -8639,8 +8947,7 @@ func (n *Interface_CountersPathAny) OutBroadcastPkts() *Interface_Counters_OutBr
 //
 // Discontinuities in the value of this counter can occur
 // at re-initialization of the management system, and at
-// other times as indicated by the value of
-// 'last-clear'.
+// other times as indicated by the value of 'last-clear'.
 //
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-interfaces"
@@ -8666,8 +8973,7 @@ func (n *Interface_CountersPath) OutDiscards() *Interface_Counters_OutDiscardsPa
 //
 // Discontinuities in the value of this counter can occur
 // at re-initialization of the management system, and at
-// other times as indicated by the value of
-// 'last-clear'.
+// other times as indicated by the value of 'last-clear'.
 //
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-interfaces"
@@ -8693,8 +8999,7 @@ func (n *Interface_CountersPathAny) OutDiscards() *Interface_Counters_OutDiscard
 //
 // Discontinuities in the value of this counter can occur
 // at re-initialization of the management system, and at
-// other times as indicated by the value of
-// 'last-clear'.
+// other times as indicated by the value of 'last-clear'.
 //
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-interfaces"
@@ -8720,8 +9025,7 @@ func (n *Interface_CountersPath) OutErrors() *Interface_Counters_OutErrorsPath {
 //
 // Discontinuities in the value of this counter can occur
 // at re-initialization of the management system, and at
-// other times as indicated by the value of
-// 'last-clear'.
+// other times as indicated by the value of 'last-clear'.
 //
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-interfaces"
@@ -8748,8 +9052,7 @@ func (n *Interface_CountersPathAny) OutErrors() *Interface_Counters_OutErrorsPat
 //
 // Discontinuities in the value of this counter can occur
 // at re-initialization of the management system, and at
-// other times as indicated by the value of
-// 'last-clear'.
+// other times as indicated by the value of 'last-clear'.
 //
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-interfaces"
@@ -8776,8 +9079,7 @@ func (n *Interface_CountersPath) OutMulticastPkts() *Interface_Counters_OutMulti
 //
 // Discontinuities in the value of this counter can occur
 // at re-initialization of the management system, and at
-// other times as indicated by the value of
-// 'last-clear'.
+// other times as indicated by the value of 'last-clear'.
 //
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-interfaces"
@@ -8800,8 +9102,7 @@ func (n *Interface_CountersPathAny) OutMulticastPkts() *Interface_Counters_OutMu
 //
 // Discontinuities in the value of this counter can occur
 // at re-initialization of the management system, and at
-// other times as indicated by the value of
-// 'last-clear'.
+// other times as indicated by the value of 'last-clear'.
 //
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-interfaces"
@@ -8824,8 +9125,7 @@ func (n *Interface_CountersPath) OutOctets() *Interface_Counters_OutOctetsPath {
 //
 // Discontinuities in the value of this counter can occur
 // at re-initialization of the management system, and at
-// other times as indicated by the value of
-// 'last-clear'.
+// other times as indicated by the value of 'last-clear'.
 //
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-interfaces"
@@ -8890,8 +9190,7 @@ func (n *Interface_CountersPathAny) OutPkts() *Interface_Counters_OutPktsPathAny
 //
 // Discontinuities in the value of this counter can occur
 // at re-initialization of the management system, and at
-// other times as indicated by the value of
-// 'last-clear'.
+// other times as indicated by the value of 'last-clear'.
 //
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-interfaces"
@@ -8916,8 +9215,7 @@ func (n *Interface_CountersPath) OutUnicastPkts() *Interface_Counters_OutUnicast
 //
 // Discontinuities in the value of this counter can occur
 // at re-initialization of the management system, and at
-// other times as indicated by the value of
-// 'last-clear'.
+// other times as indicated by the value of 'last-clear'.
 //
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-interfaces"
@@ -20079,6 +20377,40 @@ func (n *Interface_RoutedVlan_Ipv4PathAny) Unnumbered() *Interface_RoutedVlan_Ip
 	return ps
 }
 
+// Urpf (container): URPF container.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "urpf"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv4/urpf"
+func (n *Interface_RoutedVlan_Ipv4Path) Urpf() *Interface_RoutedVlan_Ipv4_UrpfPath {
+	ps := &Interface_RoutedVlan_Ipv4_UrpfPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"urpf"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// Urpf (container): URPF container.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "urpf"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv4/urpf"
+func (n *Interface_RoutedVlan_Ipv4PathAny) Urpf() *Interface_RoutedVlan_Ipv4_UrpfPathAny {
+	ps := &Interface_RoutedVlan_Ipv4_UrpfPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"urpf"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
 // State returns a Query that can be used in gNMI operations.
 func (n *Interface_RoutedVlan_Ipv4Path) State() ygnmi.SingletonQuery[*oc.Interface_RoutedVlan_Ipv4] {
 	return ygnmi.NewSingletonQuery[*oc.Interface_RoutedVlan_Ipv4](
@@ -25237,6 +25569,194 @@ func (n *Interface_RoutedVlan_Ipv4_Counters_OutPktsPathAny) State() ygnmi.Wildca
 	)
 }
 
+// Interface_RoutedVlan_Ipv4_Counters_UrpfDropBytesPath represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv4/state/counters/urpf-drop-bytes YANG schema element.
+type Interface_RoutedVlan_Ipv4_Counters_UrpfDropBytesPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_RoutedVlan_Ipv4_Counters_UrpfDropBytesPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv4/state/counters/urpf-drop-bytes YANG schema element.
+type Interface_RoutedVlan_Ipv4_Counters_UrpfDropBytesPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "urpf-drop-bytes"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv4/state/counters/urpf-drop-bytes"
+func (n *Interface_RoutedVlan_Ipv4_Counters_UrpfDropBytesPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Interface_RoutedVlan_Ipv4_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"urpf-drop-bytes"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv4_Counters).UrpfDropBytes
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv4_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "urpf-drop-bytes"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv4/state/counters/urpf-drop-bytes"
+func (n *Interface_RoutedVlan_Ipv4_Counters_UrpfDropBytesPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Interface_RoutedVlan_Ipv4_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"urpf-drop-bytes"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv4_Counters).UrpfDropBytes
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv4_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_RoutedVlan_Ipv4_Counters_UrpfDropPktsPath represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv4/state/counters/urpf-drop-pkts YANG schema element.
+type Interface_RoutedVlan_Ipv4_Counters_UrpfDropPktsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_RoutedVlan_Ipv4_Counters_UrpfDropPktsPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv4/state/counters/urpf-drop-pkts YANG schema element.
+type Interface_RoutedVlan_Ipv4_Counters_UrpfDropPktsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "urpf-drop-pkts"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv4/state/counters/urpf-drop-pkts"
+func (n *Interface_RoutedVlan_Ipv4_Counters_UrpfDropPktsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Interface_RoutedVlan_Ipv4_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"urpf-drop-pkts"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv4_Counters).UrpfDropPkts
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv4_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "urpf-drop-pkts"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv4/state/counters/urpf-drop-pkts"
+func (n *Interface_RoutedVlan_Ipv4_Counters_UrpfDropPktsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Interface_RoutedVlan_Ipv4_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"urpf-drop-pkts"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv4_Counters).UrpfDropPkts
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv4_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
 // Interface_RoutedVlan_Ipv4_CountersPath represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv4/state/counters YANG schema element.
 type Interface_RoutedVlan_Ipv4_CountersPath struct {
 	*ygnmi.NodePath
@@ -25915,6 +26435,82 @@ func (n *Interface_RoutedVlan_Ipv4_CountersPathAny) OutPkts() *Interface_RoutedV
 	ps := &Interface_RoutedVlan_Ipv4_Counters_OutPktsPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"out-pkts"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// UrpfDropBytes (leaf): This counter counts bytes/octets discarded as result of
+// Unicast Reverse Path Forwarding verification.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "urpf-drop-bytes"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv4/state/counters/urpf-drop-bytes"
+func (n *Interface_RoutedVlan_Ipv4_CountersPath) UrpfDropBytes() *Interface_RoutedVlan_Ipv4_Counters_UrpfDropBytesPath {
+	ps := &Interface_RoutedVlan_Ipv4_Counters_UrpfDropBytesPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"urpf-drop-bytes"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// UrpfDropBytes (leaf): This counter counts bytes/octets discarded as result of
+// Unicast Reverse Path Forwarding verification.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "urpf-drop-bytes"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv4/state/counters/urpf-drop-bytes"
+func (n *Interface_RoutedVlan_Ipv4_CountersPathAny) UrpfDropBytes() *Interface_RoutedVlan_Ipv4_Counters_UrpfDropBytesPathAny {
+	ps := &Interface_RoutedVlan_Ipv4_Counters_UrpfDropBytesPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"urpf-drop-bytes"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// UrpfDropPkts (leaf): This counter counts packet discarded as result of Unicast
+// Reverse Path Forwarding verification.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "urpf-drop-pkts"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv4/state/counters/urpf-drop-pkts"
+func (n *Interface_RoutedVlan_Ipv4_CountersPath) UrpfDropPkts() *Interface_RoutedVlan_Ipv4_Counters_UrpfDropPktsPath {
+	ps := &Interface_RoutedVlan_Ipv4_Counters_UrpfDropPktsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"urpf-drop-pkts"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// UrpfDropPkts (leaf): This counter counts packet discarded as result of Unicast
+// Reverse Path Forwarding verification.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "urpf-drop-pkts"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv4/state/counters/urpf-drop-pkts"
+func (n *Interface_RoutedVlan_Ipv4_CountersPathAny) UrpfDropPkts() *Interface_RoutedVlan_Ipv4_Counters_UrpfDropPktsPathAny {
+	ps := &Interface_RoutedVlan_Ipv4_Counters_UrpfDropPktsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"urpf-drop-pkts"},
 			map[string]interface{}{},
 			n,
 		),
@@ -28011,6 +28607,1188 @@ func (n *Interface_RoutedVlan_Ipv4_Unnumbered_InterfaceRefPathAny) Config() ygnm
 	)
 }
 
+// Interface_RoutedVlan_Ipv4_Urpf_AllowDefaultRoutePath represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv4/urpf/state/allow-default-route YANG schema element.
+type Interface_RoutedVlan_Ipv4_Urpf_AllowDefaultRoutePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_RoutedVlan_Ipv4_Urpf_AllowDefaultRoutePathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv4/urpf/state/allow-default-route YANG schema element.
+type Interface_RoutedVlan_Ipv4_Urpf_AllowDefaultRoutePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/allow-default-route"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv4/urpf/state/allow-default-route"
+func (n *Interface_RoutedVlan_Ipv4_Urpf_AllowDefaultRoutePath) State() ygnmi.SingletonQuery[bool] {
+	return ygnmi.NewSingletonQuery[bool](
+		"Interface_RoutedVlan_Ipv4_Urpf",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "allow-default-route"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv4_Urpf).AllowDefaultRoute
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv4_Urpf) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/allow-default-route"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv4/urpf/state/allow-default-route"
+func (n *Interface_RoutedVlan_Ipv4_Urpf_AllowDefaultRoutePathAny) State() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewWildcardQuery[bool](
+		"Interface_RoutedVlan_Ipv4_Urpf",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "allow-default-route"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv4_Urpf).AllowDefaultRoute
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv4_Urpf) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/allow-default-route"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv4/urpf/config/allow-default-route"
+func (n *Interface_RoutedVlan_Ipv4_Urpf_AllowDefaultRoutePath) Config() ygnmi.ConfigQuery[bool] {
+	return ygnmi.NewConfigQuery[bool](
+		"Interface_RoutedVlan_Ipv4_Urpf",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "allow-default-route"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv4_Urpf).AllowDefaultRoute
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv4_Urpf) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/allow-default-route"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv4/urpf/config/allow-default-route"
+func (n *Interface_RoutedVlan_Ipv4_Urpf_AllowDefaultRoutePathAny) Config() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewWildcardQuery[bool](
+		"Interface_RoutedVlan_Ipv4_Urpf",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "allow-default-route"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv4_Urpf).AllowDefaultRoute
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv4_Urpf) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_RoutedVlan_Ipv4_Urpf_AllowDropNextHopPath represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv4/urpf/state/allow-drop-next-hop YANG schema element.
+type Interface_RoutedVlan_Ipv4_Urpf_AllowDropNextHopPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_RoutedVlan_Ipv4_Urpf_AllowDropNextHopPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv4/urpf/state/allow-drop-next-hop YANG schema element.
+type Interface_RoutedVlan_Ipv4_Urpf_AllowDropNextHopPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/allow-drop-next-hop"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv4/urpf/state/allow-drop-next-hop"
+func (n *Interface_RoutedVlan_Ipv4_Urpf_AllowDropNextHopPath) State() ygnmi.SingletonQuery[bool] {
+	return ygnmi.NewSingletonQuery[bool](
+		"Interface_RoutedVlan_Ipv4_Urpf",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "allow-drop-next-hop"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv4_Urpf).AllowDropNextHop
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv4_Urpf) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/allow-drop-next-hop"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv4/urpf/state/allow-drop-next-hop"
+func (n *Interface_RoutedVlan_Ipv4_Urpf_AllowDropNextHopPathAny) State() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewWildcardQuery[bool](
+		"Interface_RoutedVlan_Ipv4_Urpf",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "allow-drop-next-hop"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv4_Urpf).AllowDropNextHop
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv4_Urpf) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/allow-drop-next-hop"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv4/urpf/config/allow-drop-next-hop"
+func (n *Interface_RoutedVlan_Ipv4_Urpf_AllowDropNextHopPath) Config() ygnmi.ConfigQuery[bool] {
+	return ygnmi.NewConfigQuery[bool](
+		"Interface_RoutedVlan_Ipv4_Urpf",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "allow-drop-next-hop"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv4_Urpf).AllowDropNextHop
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv4_Urpf) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/allow-drop-next-hop"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv4/urpf/config/allow-drop-next-hop"
+func (n *Interface_RoutedVlan_Ipv4_Urpf_AllowDropNextHopPathAny) Config() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewWildcardQuery[bool](
+		"Interface_RoutedVlan_Ipv4_Urpf",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "allow-drop-next-hop"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv4_Urpf).AllowDropNextHop
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv4_Urpf) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_RoutedVlan_Ipv4_Urpf_AllowFeasiblePathPath represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv4/urpf/state/allow-feasible-path YANG schema element.
+type Interface_RoutedVlan_Ipv4_Urpf_AllowFeasiblePathPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_RoutedVlan_Ipv4_Urpf_AllowFeasiblePathPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv4/urpf/state/allow-feasible-path YANG schema element.
+type Interface_RoutedVlan_Ipv4_Urpf_AllowFeasiblePathPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/allow-feasible-path"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv4/urpf/state/allow-feasible-path"
+func (n *Interface_RoutedVlan_Ipv4_Urpf_AllowFeasiblePathPath) State() ygnmi.SingletonQuery[bool] {
+	return ygnmi.NewSingletonQuery[bool](
+		"Interface_RoutedVlan_Ipv4_Urpf",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "allow-feasible-path"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv4_Urpf).AllowFeasiblePath
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv4_Urpf) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/allow-feasible-path"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv4/urpf/state/allow-feasible-path"
+func (n *Interface_RoutedVlan_Ipv4_Urpf_AllowFeasiblePathPathAny) State() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewWildcardQuery[bool](
+		"Interface_RoutedVlan_Ipv4_Urpf",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "allow-feasible-path"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv4_Urpf).AllowFeasiblePath
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv4_Urpf) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/allow-feasible-path"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv4/urpf/config/allow-feasible-path"
+func (n *Interface_RoutedVlan_Ipv4_Urpf_AllowFeasiblePathPath) Config() ygnmi.ConfigQuery[bool] {
+	return ygnmi.NewConfigQuery[bool](
+		"Interface_RoutedVlan_Ipv4_Urpf",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "allow-feasible-path"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv4_Urpf).AllowFeasiblePath
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv4_Urpf) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/allow-feasible-path"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv4/urpf/config/allow-feasible-path"
+func (n *Interface_RoutedVlan_Ipv4_Urpf_AllowFeasiblePathPathAny) Config() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewWildcardQuery[bool](
+		"Interface_RoutedVlan_Ipv4_Urpf",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "allow-feasible-path"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv4_Urpf).AllowFeasiblePath
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv4_Urpf) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_RoutedVlan_Ipv4_Urpf_EnabledPath represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv4/urpf/state/enabled YANG schema element.
+type Interface_RoutedVlan_Ipv4_Urpf_EnabledPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_RoutedVlan_Ipv4_Urpf_EnabledPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv4/urpf/state/enabled YANG schema element.
+type Interface_RoutedVlan_Ipv4_Urpf_EnabledPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/enabled"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv4/urpf/state/enabled"
+func (n *Interface_RoutedVlan_Ipv4_Urpf_EnabledPath) State() ygnmi.SingletonQuery[bool] {
+	return ygnmi.NewSingletonQuery[bool](
+		"Interface_RoutedVlan_Ipv4_Urpf",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "enabled"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv4_Urpf).Enabled
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv4_Urpf) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/enabled"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv4/urpf/state/enabled"
+func (n *Interface_RoutedVlan_Ipv4_Urpf_EnabledPathAny) State() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewWildcardQuery[bool](
+		"Interface_RoutedVlan_Ipv4_Urpf",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "enabled"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv4_Urpf).Enabled
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv4_Urpf) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/enabled"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv4/urpf/config/enabled"
+func (n *Interface_RoutedVlan_Ipv4_Urpf_EnabledPath) Config() ygnmi.ConfigQuery[bool] {
+	return ygnmi.NewConfigQuery[bool](
+		"Interface_RoutedVlan_Ipv4_Urpf",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "enabled"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv4_Urpf).Enabled
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv4_Urpf) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/enabled"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv4/urpf/config/enabled"
+func (n *Interface_RoutedVlan_Ipv4_Urpf_EnabledPathAny) Config() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewWildcardQuery[bool](
+		"Interface_RoutedVlan_Ipv4_Urpf",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "enabled"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv4_Urpf).Enabled
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv4_Urpf) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_RoutedVlan_Ipv4_Urpf_ModePath represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv4/urpf/state/mode YANG schema element.
+type Interface_RoutedVlan_Ipv4_Urpf_ModePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_RoutedVlan_Ipv4_Urpf_ModePathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv4/urpf/state/mode YANG schema element.
+type Interface_RoutedVlan_Ipv4_Urpf_ModePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/mode"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv4/urpf/state/mode"
+func (n *Interface_RoutedVlan_Ipv4_Urpf_ModePath) State() ygnmi.SingletonQuery[oc.E_IfIp_UrpfMode] {
+	return ygnmi.NewSingletonQuery[oc.E_IfIp_UrpfMode](
+		"Interface_RoutedVlan_Ipv4_Urpf",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "mode"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_IfIp_UrpfMode, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv4_Urpf).Mode
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv4_Urpf) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/mode"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv4/urpf/state/mode"
+func (n *Interface_RoutedVlan_Ipv4_Urpf_ModePathAny) State() ygnmi.WildcardQuery[oc.E_IfIp_UrpfMode] {
+	return ygnmi.NewWildcardQuery[oc.E_IfIp_UrpfMode](
+		"Interface_RoutedVlan_Ipv4_Urpf",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "mode"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_IfIp_UrpfMode, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv4_Urpf).Mode
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv4_Urpf) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/mode"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv4/urpf/config/mode"
+func (n *Interface_RoutedVlan_Ipv4_Urpf_ModePath) Config() ygnmi.ConfigQuery[oc.E_IfIp_UrpfMode] {
+	return ygnmi.NewConfigQuery[oc.E_IfIp_UrpfMode](
+		"Interface_RoutedVlan_Ipv4_Urpf",
+		false,
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "mode"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_IfIp_UrpfMode, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv4_Urpf).Mode
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv4_Urpf) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/mode"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv4/urpf/config/mode"
+func (n *Interface_RoutedVlan_Ipv4_Urpf_ModePathAny) Config() ygnmi.WildcardQuery[oc.E_IfIp_UrpfMode] {
+	return ygnmi.NewWildcardQuery[oc.E_IfIp_UrpfMode](
+		"Interface_RoutedVlan_Ipv4_Urpf",
+		false,
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "mode"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_IfIp_UrpfMode, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv4_Urpf).Mode
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv4_Urpf) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_RoutedVlan_Ipv4_UrpfPath represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv4/urpf YANG schema element.
+type Interface_RoutedVlan_Ipv4_UrpfPath struct {
+	*ygnmi.NodePath
+}
+
+// Interface_RoutedVlan_Ipv4_UrpfPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv4/urpf YANG schema element.
+type Interface_RoutedVlan_Ipv4_UrpfPathAny struct {
+	*ygnmi.NodePath
+}
+
+// AllowDefaultRoute (leaf): If set to false, and the packet's source address LPMs to the
+// default route (0.0.0.0/0 or ::/0) then the URPF check fails and the
+// packet is discarded.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/allow-default-route"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv4/urpf/*/allow-default-route"
+func (n *Interface_RoutedVlan_Ipv4_UrpfPath) AllowDefaultRoute() *Interface_RoutedVlan_Ipv4_Urpf_AllowDefaultRoutePath {
+	ps := &Interface_RoutedVlan_Ipv4_Urpf_AllowDefaultRoutePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "allow-default-route"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// AllowDefaultRoute (leaf): If set to false, and the packet's source address LPMs to the
+// default route (0.0.0.0/0 or ::/0) then the URPF check fails and the
+// packet is discarded.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/allow-default-route"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv4/urpf/*/allow-default-route"
+func (n *Interface_RoutedVlan_Ipv4_UrpfPathAny) AllowDefaultRoute() *Interface_RoutedVlan_Ipv4_Urpf_AllowDefaultRoutePathAny {
+	ps := &Interface_RoutedVlan_Ipv4_Urpf_AllowDefaultRoutePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "allow-default-route"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// AllowDropNextHop (leaf): If set to false, and the packet's source address LPMs to a route
+// with DROP as the next-hop, then the URPF check fails and the packet
+// is discarded.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/allow-drop-next-hop"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv4/urpf/*/allow-drop-next-hop"
+func (n *Interface_RoutedVlan_Ipv4_UrpfPath) AllowDropNextHop() *Interface_RoutedVlan_Ipv4_Urpf_AllowDropNextHopPath {
+	ps := &Interface_RoutedVlan_Ipv4_Urpf_AllowDropNextHopPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "allow-drop-next-hop"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// AllowDropNextHop (leaf): If set to false, and the packet's source address LPMs to a route
+// with DROP as the next-hop, then the URPF check fails and the packet
+// is discarded.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/allow-drop-next-hop"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv4/urpf/*/allow-drop-next-hop"
+func (n *Interface_RoutedVlan_Ipv4_UrpfPathAny) AllowDropNextHop() *Interface_RoutedVlan_Ipv4_Urpf_AllowDropNextHopPathAny {
+	ps := &Interface_RoutedVlan_Ipv4_Urpf_AllowDropNextHopPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "allow-drop-next-hop"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// AllowFeasiblePath (leaf): The routing system may select subset of all learned paths.  For example,
+// BGP without multi-path enabled will install only one of many possible ECMP
+// paths into the FIB or ECMP multipath limits may select only a subset of all
+// available paths. If set to true, the URPF check passes if the source address
+// LPMs to any path in the RIB, even if it is not selected for forwarding in the
+// FIB.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/allow-feasible-path"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv4/urpf/*/allow-feasible-path"
+func (n *Interface_RoutedVlan_Ipv4_UrpfPath) AllowFeasiblePath() *Interface_RoutedVlan_Ipv4_Urpf_AllowFeasiblePathPath {
+	ps := &Interface_RoutedVlan_Ipv4_Urpf_AllowFeasiblePathPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "allow-feasible-path"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// AllowFeasiblePath (leaf): The routing system may select subset of all learned paths.  For example,
+// BGP without multi-path enabled will install only one of many possible ECMP
+// paths into the FIB or ECMP multipath limits may select only a subset of all
+// available paths. If set to true, the URPF check passes if the source address
+// LPMs to any path in the RIB, even if it is not selected for forwarding in the
+// FIB.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/allow-feasible-path"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv4/urpf/*/allow-feasible-path"
+func (n *Interface_RoutedVlan_Ipv4_UrpfPathAny) AllowFeasiblePath() *Interface_RoutedVlan_Ipv4_Urpf_AllowFeasiblePathPathAny {
+	ps := &Interface_RoutedVlan_Ipv4_Urpf_AllowFeasiblePathPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "allow-feasible-path"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Enabled (leaf): Turns ON/OFF packet's source address verification against content of
+// FIB. This is one of anti-spoofing protection techniques.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/enabled"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv4/urpf/*/enabled"
+func (n *Interface_RoutedVlan_Ipv4_UrpfPath) Enabled() *Interface_RoutedVlan_Ipv4_Urpf_EnabledPath {
+	ps := &Interface_RoutedVlan_Ipv4_Urpf_EnabledPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "enabled"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Enabled (leaf): Turns ON/OFF packet's source address verification against content of
+// FIB. This is one of anti-spoofing protection techniques.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/enabled"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv4/urpf/*/enabled"
+func (n *Interface_RoutedVlan_Ipv4_UrpfPathAny) Enabled() *Interface_RoutedVlan_Ipv4_Urpf_EnabledPathAny {
+	ps := &Interface_RoutedVlan_Ipv4_Urpf_EnabledPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "enabled"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Mode (leaf): The URPF in STRICT mode requires the ingress packet source address
+// to have a longest prefix match (LPM) for a route in the forwarding table
+// with a next-hop of the interface the packet was received on.
+// The URPF in LOOSE mode requires the ingress packet source address to
+// LPM a route in the forwarding table, but may have any next-hop.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/mode"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv4/urpf/*/mode"
+func (n *Interface_RoutedVlan_Ipv4_UrpfPath) Mode() *Interface_RoutedVlan_Ipv4_Urpf_ModePath {
+	ps := &Interface_RoutedVlan_Ipv4_Urpf_ModePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "mode"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Mode (leaf): The URPF in STRICT mode requires the ingress packet source address
+// to have a longest prefix match (LPM) for a route in the forwarding table
+// with a next-hop of the interface the packet was received on.
+// The URPF in LOOSE mode requires the ingress packet source address to
+// LPM a route in the forwarding table, but may have any next-hop.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/mode"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv4/urpf/*/mode"
+func (n *Interface_RoutedVlan_Ipv4_UrpfPathAny) Mode() *Interface_RoutedVlan_Ipv4_Urpf_ModePathAny {
+	ps := &Interface_RoutedVlan_Ipv4_Urpf_ModePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "mode"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Interface_RoutedVlan_Ipv4_UrpfPath) State() ygnmi.SingletonQuery[*oc.Interface_RoutedVlan_Ipv4_Urpf] {
+	return ygnmi.NewSingletonQuery[*oc.Interface_RoutedVlan_Ipv4_Urpf](
+		"Interface_RoutedVlan_Ipv4_Urpf",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Interface_RoutedVlan_Ipv4_UrpfPathAny) State() ygnmi.WildcardQuery[*oc.Interface_RoutedVlan_Ipv4_Urpf] {
+	return ygnmi.NewWildcardQuery[*oc.Interface_RoutedVlan_Ipv4_Urpf](
+		"Interface_RoutedVlan_Ipv4_Urpf",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *Interface_RoutedVlan_Ipv4_UrpfPath) Config() ygnmi.ConfigQuery[*oc.Interface_RoutedVlan_Ipv4_Urpf] {
+	return ygnmi.NewConfigQuery[*oc.Interface_RoutedVlan_Ipv4_Urpf](
+		"Interface_RoutedVlan_Ipv4_Urpf",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *Interface_RoutedVlan_Ipv4_UrpfPathAny) Config() ygnmi.WildcardQuery[*oc.Interface_RoutedVlan_Ipv4_Urpf] {
+	return ygnmi.NewWildcardQuery[*oc.Interface_RoutedVlan_Ipv4_Urpf](
+		"Interface_RoutedVlan_Ipv4_Urpf",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
 // Interface_RoutedVlan_Ipv6_DhcpClientPath represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/state/dhcp-client YANG schema element.
 type Interface_RoutedVlan_Ipv6_DhcpClientPath struct {
 	*ygnmi.NodePath
@@ -29414,6 +31192,40 @@ func (n *Interface_RoutedVlan_Ipv6PathAny) Unnumbered() *Interface_RoutedVlan_Ip
 	ps := &Interface_RoutedVlan_Ipv6_UnnumberedPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"unnumbered"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// Urpf (container): URPF container
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "urpf"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/urpf"
+func (n *Interface_RoutedVlan_Ipv6Path) Urpf() *Interface_RoutedVlan_Ipv6_UrpfPath {
+	ps := &Interface_RoutedVlan_Ipv6_UrpfPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"urpf"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// Urpf (container): URPF container
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "urpf"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/urpf"
+func (n *Interface_RoutedVlan_Ipv6PathAny) Urpf() *Interface_RoutedVlan_Ipv6_UrpfPathAny {
+	ps := &Interface_RoutedVlan_Ipv6_UrpfPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"urpf"},
 			map[string]interface{}{},
 			n,
 		),
@@ -34917,6 +36729,194 @@ func (n *Interface_RoutedVlan_Ipv6_Counters_OutPktsPathAny) State() ygnmi.Wildca
 	)
 }
 
+// Interface_RoutedVlan_Ipv6_Counters_UrpfDropBytesPath represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/state/counters/urpf-drop-bytes YANG schema element.
+type Interface_RoutedVlan_Ipv6_Counters_UrpfDropBytesPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_RoutedVlan_Ipv6_Counters_UrpfDropBytesPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/state/counters/urpf-drop-bytes YANG schema element.
+type Interface_RoutedVlan_Ipv6_Counters_UrpfDropBytesPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "urpf-drop-bytes"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/state/counters/urpf-drop-bytes"
+func (n *Interface_RoutedVlan_Ipv6_Counters_UrpfDropBytesPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Interface_RoutedVlan_Ipv6_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"urpf-drop-bytes"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_Counters).UrpfDropBytes
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "urpf-drop-bytes"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/state/counters/urpf-drop-bytes"
+func (n *Interface_RoutedVlan_Ipv6_Counters_UrpfDropBytesPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Interface_RoutedVlan_Ipv6_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"urpf-drop-bytes"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_Counters).UrpfDropBytes
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_RoutedVlan_Ipv6_Counters_UrpfDropPktsPath represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/state/counters/urpf-drop-pkts YANG schema element.
+type Interface_RoutedVlan_Ipv6_Counters_UrpfDropPktsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_RoutedVlan_Ipv6_Counters_UrpfDropPktsPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/state/counters/urpf-drop-pkts YANG schema element.
+type Interface_RoutedVlan_Ipv6_Counters_UrpfDropPktsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "urpf-drop-pkts"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/state/counters/urpf-drop-pkts"
+func (n *Interface_RoutedVlan_Ipv6_Counters_UrpfDropPktsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Interface_RoutedVlan_Ipv6_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"urpf-drop-pkts"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_Counters).UrpfDropPkts
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "urpf-drop-pkts"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/state/counters/urpf-drop-pkts"
+func (n *Interface_RoutedVlan_Ipv6_Counters_UrpfDropPktsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Interface_RoutedVlan_Ipv6_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"urpf-drop-pkts"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_Counters).UrpfDropPkts
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
 // Interface_RoutedVlan_Ipv6_CountersPath represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/state/counters YANG schema element.
 type Interface_RoutedVlan_Ipv6_CountersPath struct {
 	*ygnmi.NodePath
@@ -35595,6 +37595,82 @@ func (n *Interface_RoutedVlan_Ipv6_CountersPathAny) OutPkts() *Interface_RoutedV
 	ps := &Interface_RoutedVlan_Ipv6_Counters_OutPktsPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"out-pkts"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// UrpfDropBytes (leaf): This counter counts bytes/octets discarded as result of
+// Unicast Reverse Path Forwarding verification.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "urpf-drop-bytes"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/state/counters/urpf-drop-bytes"
+func (n *Interface_RoutedVlan_Ipv6_CountersPath) UrpfDropBytes() *Interface_RoutedVlan_Ipv6_Counters_UrpfDropBytesPath {
+	ps := &Interface_RoutedVlan_Ipv6_Counters_UrpfDropBytesPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"urpf-drop-bytes"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// UrpfDropBytes (leaf): This counter counts bytes/octets discarded as result of
+// Unicast Reverse Path Forwarding verification.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "urpf-drop-bytes"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/state/counters/urpf-drop-bytes"
+func (n *Interface_RoutedVlan_Ipv6_CountersPathAny) UrpfDropBytes() *Interface_RoutedVlan_Ipv6_Counters_UrpfDropBytesPathAny {
+	ps := &Interface_RoutedVlan_Ipv6_Counters_UrpfDropBytesPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"urpf-drop-bytes"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// UrpfDropPkts (leaf): This counter counts packet discarded as result of Unicast
+// Reverse Path Forwarding verification.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "urpf-drop-pkts"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/state/counters/urpf-drop-pkts"
+func (n *Interface_RoutedVlan_Ipv6_CountersPath) UrpfDropPkts() *Interface_RoutedVlan_Ipv6_Counters_UrpfDropPktsPath {
+	ps := &Interface_RoutedVlan_Ipv6_Counters_UrpfDropPktsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"urpf-drop-pkts"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// UrpfDropPkts (leaf): This counter counts packet discarded as result of Unicast
+// Reverse Path Forwarding verification.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "urpf-drop-pkts"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/state/counters/urpf-drop-pkts"
+func (n *Interface_RoutedVlan_Ipv6_CountersPathAny) UrpfDropPkts() *Interface_RoutedVlan_Ipv6_Counters_UrpfDropPktsPathAny {
+	ps := &Interface_RoutedVlan_Ipv6_Counters_UrpfDropPktsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"urpf-drop-pkts"},
 			map[string]interface{}{},
 			n,
 		),
@@ -40915,6 +42991,1188 @@ func (n *Interface_RoutedVlan_Ipv6_Unnumbered_InterfaceRefPathAny) Config() ygnm
 	)
 }
 
+// Interface_RoutedVlan_Ipv6_Urpf_AllowDefaultRoutePath represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/urpf/state/allow-default-route YANG schema element.
+type Interface_RoutedVlan_Ipv6_Urpf_AllowDefaultRoutePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_RoutedVlan_Ipv6_Urpf_AllowDefaultRoutePathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/urpf/state/allow-default-route YANG schema element.
+type Interface_RoutedVlan_Ipv6_Urpf_AllowDefaultRoutePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/allow-default-route"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/urpf/state/allow-default-route"
+func (n *Interface_RoutedVlan_Ipv6_Urpf_AllowDefaultRoutePath) State() ygnmi.SingletonQuery[bool] {
+	return ygnmi.NewSingletonQuery[bool](
+		"Interface_RoutedVlan_Ipv6_Urpf",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "allow-default-route"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_Urpf).AllowDefaultRoute
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_Urpf) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/allow-default-route"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/urpf/state/allow-default-route"
+func (n *Interface_RoutedVlan_Ipv6_Urpf_AllowDefaultRoutePathAny) State() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewWildcardQuery[bool](
+		"Interface_RoutedVlan_Ipv6_Urpf",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "allow-default-route"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_Urpf).AllowDefaultRoute
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_Urpf) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/allow-default-route"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/urpf/config/allow-default-route"
+func (n *Interface_RoutedVlan_Ipv6_Urpf_AllowDefaultRoutePath) Config() ygnmi.ConfigQuery[bool] {
+	return ygnmi.NewConfigQuery[bool](
+		"Interface_RoutedVlan_Ipv6_Urpf",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "allow-default-route"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_Urpf).AllowDefaultRoute
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_Urpf) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/allow-default-route"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/urpf/config/allow-default-route"
+func (n *Interface_RoutedVlan_Ipv6_Urpf_AllowDefaultRoutePathAny) Config() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewWildcardQuery[bool](
+		"Interface_RoutedVlan_Ipv6_Urpf",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "allow-default-route"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_Urpf).AllowDefaultRoute
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_Urpf) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_RoutedVlan_Ipv6_Urpf_AllowDropNextHopPath represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/urpf/state/allow-drop-next-hop YANG schema element.
+type Interface_RoutedVlan_Ipv6_Urpf_AllowDropNextHopPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_RoutedVlan_Ipv6_Urpf_AllowDropNextHopPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/urpf/state/allow-drop-next-hop YANG schema element.
+type Interface_RoutedVlan_Ipv6_Urpf_AllowDropNextHopPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/allow-drop-next-hop"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/urpf/state/allow-drop-next-hop"
+func (n *Interface_RoutedVlan_Ipv6_Urpf_AllowDropNextHopPath) State() ygnmi.SingletonQuery[bool] {
+	return ygnmi.NewSingletonQuery[bool](
+		"Interface_RoutedVlan_Ipv6_Urpf",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "allow-drop-next-hop"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_Urpf).AllowDropNextHop
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_Urpf) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/allow-drop-next-hop"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/urpf/state/allow-drop-next-hop"
+func (n *Interface_RoutedVlan_Ipv6_Urpf_AllowDropNextHopPathAny) State() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewWildcardQuery[bool](
+		"Interface_RoutedVlan_Ipv6_Urpf",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "allow-drop-next-hop"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_Urpf).AllowDropNextHop
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_Urpf) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/allow-drop-next-hop"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/urpf/config/allow-drop-next-hop"
+func (n *Interface_RoutedVlan_Ipv6_Urpf_AllowDropNextHopPath) Config() ygnmi.ConfigQuery[bool] {
+	return ygnmi.NewConfigQuery[bool](
+		"Interface_RoutedVlan_Ipv6_Urpf",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "allow-drop-next-hop"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_Urpf).AllowDropNextHop
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_Urpf) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/allow-drop-next-hop"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/urpf/config/allow-drop-next-hop"
+func (n *Interface_RoutedVlan_Ipv6_Urpf_AllowDropNextHopPathAny) Config() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewWildcardQuery[bool](
+		"Interface_RoutedVlan_Ipv6_Urpf",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "allow-drop-next-hop"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_Urpf).AllowDropNextHop
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_Urpf) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_RoutedVlan_Ipv6_Urpf_AllowFeasiblePathPath represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/urpf/state/allow-feasible-path YANG schema element.
+type Interface_RoutedVlan_Ipv6_Urpf_AllowFeasiblePathPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_RoutedVlan_Ipv6_Urpf_AllowFeasiblePathPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/urpf/state/allow-feasible-path YANG schema element.
+type Interface_RoutedVlan_Ipv6_Urpf_AllowFeasiblePathPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/allow-feasible-path"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/urpf/state/allow-feasible-path"
+func (n *Interface_RoutedVlan_Ipv6_Urpf_AllowFeasiblePathPath) State() ygnmi.SingletonQuery[bool] {
+	return ygnmi.NewSingletonQuery[bool](
+		"Interface_RoutedVlan_Ipv6_Urpf",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "allow-feasible-path"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_Urpf).AllowFeasiblePath
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_Urpf) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/allow-feasible-path"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/urpf/state/allow-feasible-path"
+func (n *Interface_RoutedVlan_Ipv6_Urpf_AllowFeasiblePathPathAny) State() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewWildcardQuery[bool](
+		"Interface_RoutedVlan_Ipv6_Urpf",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "allow-feasible-path"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_Urpf).AllowFeasiblePath
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_Urpf) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/allow-feasible-path"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/urpf/config/allow-feasible-path"
+func (n *Interface_RoutedVlan_Ipv6_Urpf_AllowFeasiblePathPath) Config() ygnmi.ConfigQuery[bool] {
+	return ygnmi.NewConfigQuery[bool](
+		"Interface_RoutedVlan_Ipv6_Urpf",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "allow-feasible-path"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_Urpf).AllowFeasiblePath
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_Urpf) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/allow-feasible-path"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/urpf/config/allow-feasible-path"
+func (n *Interface_RoutedVlan_Ipv6_Urpf_AllowFeasiblePathPathAny) Config() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewWildcardQuery[bool](
+		"Interface_RoutedVlan_Ipv6_Urpf",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "allow-feasible-path"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_Urpf).AllowFeasiblePath
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_Urpf) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_RoutedVlan_Ipv6_Urpf_EnabledPath represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/urpf/state/enabled YANG schema element.
+type Interface_RoutedVlan_Ipv6_Urpf_EnabledPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_RoutedVlan_Ipv6_Urpf_EnabledPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/urpf/state/enabled YANG schema element.
+type Interface_RoutedVlan_Ipv6_Urpf_EnabledPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/enabled"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/urpf/state/enabled"
+func (n *Interface_RoutedVlan_Ipv6_Urpf_EnabledPath) State() ygnmi.SingletonQuery[bool] {
+	return ygnmi.NewSingletonQuery[bool](
+		"Interface_RoutedVlan_Ipv6_Urpf",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "enabled"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_Urpf).Enabled
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_Urpf) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/enabled"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/urpf/state/enabled"
+func (n *Interface_RoutedVlan_Ipv6_Urpf_EnabledPathAny) State() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewWildcardQuery[bool](
+		"Interface_RoutedVlan_Ipv6_Urpf",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "enabled"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_Urpf).Enabled
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_Urpf) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/enabled"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/urpf/config/enabled"
+func (n *Interface_RoutedVlan_Ipv6_Urpf_EnabledPath) Config() ygnmi.ConfigQuery[bool] {
+	return ygnmi.NewConfigQuery[bool](
+		"Interface_RoutedVlan_Ipv6_Urpf",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "enabled"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_Urpf).Enabled
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_Urpf) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/enabled"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/urpf/config/enabled"
+func (n *Interface_RoutedVlan_Ipv6_Urpf_EnabledPathAny) Config() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewWildcardQuery[bool](
+		"Interface_RoutedVlan_Ipv6_Urpf",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "enabled"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_Urpf).Enabled
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_Urpf) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_RoutedVlan_Ipv6_Urpf_ModePath represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/urpf/state/mode YANG schema element.
+type Interface_RoutedVlan_Ipv6_Urpf_ModePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_RoutedVlan_Ipv6_Urpf_ModePathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/urpf/state/mode YANG schema element.
+type Interface_RoutedVlan_Ipv6_Urpf_ModePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/mode"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/urpf/state/mode"
+func (n *Interface_RoutedVlan_Ipv6_Urpf_ModePath) State() ygnmi.SingletonQuery[oc.E_IfIp_UrpfMode] {
+	return ygnmi.NewSingletonQuery[oc.E_IfIp_UrpfMode](
+		"Interface_RoutedVlan_Ipv6_Urpf",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "mode"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_IfIp_UrpfMode, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_Urpf).Mode
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_Urpf) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/mode"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/urpf/state/mode"
+func (n *Interface_RoutedVlan_Ipv6_Urpf_ModePathAny) State() ygnmi.WildcardQuery[oc.E_IfIp_UrpfMode] {
+	return ygnmi.NewWildcardQuery[oc.E_IfIp_UrpfMode](
+		"Interface_RoutedVlan_Ipv6_Urpf",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "mode"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_IfIp_UrpfMode, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_Urpf).Mode
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_Urpf) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/mode"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/urpf/config/mode"
+func (n *Interface_RoutedVlan_Ipv6_Urpf_ModePath) Config() ygnmi.ConfigQuery[oc.E_IfIp_UrpfMode] {
+	return ygnmi.NewConfigQuery[oc.E_IfIp_UrpfMode](
+		"Interface_RoutedVlan_Ipv6_Urpf",
+		false,
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "mode"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_IfIp_UrpfMode, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_Urpf).Mode
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_Urpf) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/mode"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/urpf/config/mode"
+func (n *Interface_RoutedVlan_Ipv6_Urpf_ModePathAny) Config() ygnmi.WildcardQuery[oc.E_IfIp_UrpfMode] {
+	return ygnmi.NewWildcardQuery[oc.E_IfIp_UrpfMode](
+		"Interface_RoutedVlan_Ipv6_Urpf",
+		false,
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "mode"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_IfIp_UrpfMode, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_Urpf).Mode
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_Urpf) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_RoutedVlan_Ipv6_UrpfPath represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/urpf YANG schema element.
+type Interface_RoutedVlan_Ipv6_UrpfPath struct {
+	*ygnmi.NodePath
+}
+
+// Interface_RoutedVlan_Ipv6_UrpfPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/urpf YANG schema element.
+type Interface_RoutedVlan_Ipv6_UrpfPathAny struct {
+	*ygnmi.NodePath
+}
+
+// AllowDefaultRoute (leaf): If set to false, and the packet's source address LPMs to the
+// default route (0.0.0.0/0 or ::/0) then the URPF check fails and the
+// packet is discarded.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/allow-default-route"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/urpf/*/allow-default-route"
+func (n *Interface_RoutedVlan_Ipv6_UrpfPath) AllowDefaultRoute() *Interface_RoutedVlan_Ipv6_Urpf_AllowDefaultRoutePath {
+	ps := &Interface_RoutedVlan_Ipv6_Urpf_AllowDefaultRoutePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "allow-default-route"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// AllowDefaultRoute (leaf): If set to false, and the packet's source address LPMs to the
+// default route (0.0.0.0/0 or ::/0) then the URPF check fails and the
+// packet is discarded.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/allow-default-route"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/urpf/*/allow-default-route"
+func (n *Interface_RoutedVlan_Ipv6_UrpfPathAny) AllowDefaultRoute() *Interface_RoutedVlan_Ipv6_Urpf_AllowDefaultRoutePathAny {
+	ps := &Interface_RoutedVlan_Ipv6_Urpf_AllowDefaultRoutePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "allow-default-route"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// AllowDropNextHop (leaf): If set to false, and the packet's source address LPMs to a route
+// with DROP as the next-hop, then the URPF check fails and the packet
+// is discarded.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/allow-drop-next-hop"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/urpf/*/allow-drop-next-hop"
+func (n *Interface_RoutedVlan_Ipv6_UrpfPath) AllowDropNextHop() *Interface_RoutedVlan_Ipv6_Urpf_AllowDropNextHopPath {
+	ps := &Interface_RoutedVlan_Ipv6_Urpf_AllowDropNextHopPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "allow-drop-next-hop"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// AllowDropNextHop (leaf): If set to false, and the packet's source address LPMs to a route
+// with DROP as the next-hop, then the URPF check fails and the packet
+// is discarded.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/allow-drop-next-hop"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/urpf/*/allow-drop-next-hop"
+func (n *Interface_RoutedVlan_Ipv6_UrpfPathAny) AllowDropNextHop() *Interface_RoutedVlan_Ipv6_Urpf_AllowDropNextHopPathAny {
+	ps := &Interface_RoutedVlan_Ipv6_Urpf_AllowDropNextHopPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "allow-drop-next-hop"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// AllowFeasiblePath (leaf): The routing system may select subset of all learned paths.  For example,
+// BGP without multi-path enabled will install only one of many possible ECMP
+// paths into the FIB or ECMP multipath limits may select only a subset of all
+// available paths. If set to true, the URPF check passes if the source address
+// LPMs to any path in the RIB, even if it is not selected for forwarding in the
+// FIB.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/allow-feasible-path"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/urpf/*/allow-feasible-path"
+func (n *Interface_RoutedVlan_Ipv6_UrpfPath) AllowFeasiblePath() *Interface_RoutedVlan_Ipv6_Urpf_AllowFeasiblePathPath {
+	ps := &Interface_RoutedVlan_Ipv6_Urpf_AllowFeasiblePathPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "allow-feasible-path"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// AllowFeasiblePath (leaf): The routing system may select subset of all learned paths.  For example,
+// BGP without multi-path enabled will install only one of many possible ECMP
+// paths into the FIB or ECMP multipath limits may select only a subset of all
+// available paths. If set to true, the URPF check passes if the source address
+// LPMs to any path in the RIB, even if it is not selected for forwarding in the
+// FIB.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/allow-feasible-path"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/urpf/*/allow-feasible-path"
+func (n *Interface_RoutedVlan_Ipv6_UrpfPathAny) AllowFeasiblePath() *Interface_RoutedVlan_Ipv6_Urpf_AllowFeasiblePathPathAny {
+	ps := &Interface_RoutedVlan_Ipv6_Urpf_AllowFeasiblePathPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "allow-feasible-path"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Enabled (leaf): Turns ON/OFF packet's source address verification against content of
+// FIB. This is one of anti-spoofing protection techniques.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/enabled"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/urpf/*/enabled"
+func (n *Interface_RoutedVlan_Ipv6_UrpfPath) Enabled() *Interface_RoutedVlan_Ipv6_Urpf_EnabledPath {
+	ps := &Interface_RoutedVlan_Ipv6_Urpf_EnabledPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "enabled"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Enabled (leaf): Turns ON/OFF packet's source address verification against content of
+// FIB. This is one of anti-spoofing protection techniques.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/enabled"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/urpf/*/enabled"
+func (n *Interface_RoutedVlan_Ipv6_UrpfPathAny) Enabled() *Interface_RoutedVlan_Ipv6_Urpf_EnabledPathAny {
+	ps := &Interface_RoutedVlan_Ipv6_Urpf_EnabledPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "enabled"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Mode (leaf): The URPF in STRICT mode requires the ingress packet source address
+// to have a longest prefix match (LPM) for a route in the forwarding table
+// with a next-hop of the interface the packet was received on.
+// The URPF in LOOSE mode requires the ingress packet source address to
+// LPM a route in the forwarding table, but may have any next-hop.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/mode"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/urpf/*/mode"
+func (n *Interface_RoutedVlan_Ipv6_UrpfPath) Mode() *Interface_RoutedVlan_Ipv6_Urpf_ModePath {
+	ps := &Interface_RoutedVlan_Ipv6_Urpf_ModePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "mode"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Mode (leaf): The URPF in STRICT mode requires the ingress packet source address
+// to have a longest prefix match (LPM) for a route in the forwarding table
+// with a next-hop of the interface the packet was received on.
+// The URPF in LOOSE mode requires the ingress packet source address to
+// LPM a route in the forwarding table, but may have any next-hop.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/mode"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/urpf/*/mode"
+func (n *Interface_RoutedVlan_Ipv6_UrpfPathAny) Mode() *Interface_RoutedVlan_Ipv6_Urpf_ModePathAny {
+	ps := &Interface_RoutedVlan_Ipv6_Urpf_ModePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "mode"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Interface_RoutedVlan_Ipv6_UrpfPath) State() ygnmi.SingletonQuery[*oc.Interface_RoutedVlan_Ipv6_Urpf] {
+	return ygnmi.NewSingletonQuery[*oc.Interface_RoutedVlan_Ipv6_Urpf](
+		"Interface_RoutedVlan_Ipv6_Urpf",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Interface_RoutedVlan_Ipv6_UrpfPathAny) State() ygnmi.WildcardQuery[*oc.Interface_RoutedVlan_Ipv6_Urpf] {
+	return ygnmi.NewWildcardQuery[*oc.Interface_RoutedVlan_Ipv6_Urpf](
+		"Interface_RoutedVlan_Ipv6_Urpf",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *Interface_RoutedVlan_Ipv6_UrpfPath) Config() ygnmi.ConfigQuery[*oc.Interface_RoutedVlan_Ipv6_Urpf] {
+	return ygnmi.NewConfigQuery[*oc.Interface_RoutedVlan_Ipv6_Urpf](
+		"Interface_RoutedVlan_Ipv6_Urpf",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *Interface_RoutedVlan_Ipv6_UrpfPathAny) Config() ygnmi.WildcardQuery[*oc.Interface_RoutedVlan_Ipv6_Urpf] {
+	return ygnmi.NewWildcardQuery[*oc.Interface_RoutedVlan_Ipv6_Urpf](
+		"Interface_RoutedVlan_Ipv6_Urpf",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
 // Interface_Subinterface_AdminStatusPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/state/admin-status YANG schema element.
 type Interface_Subinterface_AdminStatusPath struct {
 	*ygnmi.NodePath
@@ -44835,8 +48093,7 @@ func (n *Interface_Subinterface_CountersPathAny) CarrierTransitions() *Interface
 //
 // Discontinuities in the value of this counter can occur
 // at re-initialization of the management system, and at
-// other times as indicated by the value of
-// 'last-clear'.
+// other times as indicated by the value of 'last-clear'.
 //
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-interfaces"
@@ -44860,8 +48117,7 @@ func (n *Interface_Subinterface_CountersPath) InBroadcastPkts() *Interface_Subin
 //
 // Discontinuities in the value of this counter can occur
 // at re-initialization of the management system, and at
-// other times as indicated by the value of
-// 'last-clear'.
+// other times as indicated by the value of 'last-clear'.
 //
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-interfaces"
@@ -44887,8 +48143,7 @@ func (n *Interface_Subinterface_CountersPathAny) InBroadcastPkts() *Interface_Su
 //
 // Discontinuities in the value of this counter can occur
 // at re-initialization of the management system, and at
-// other times as indicated by the value of
-// 'last-clear'.
+// other times as indicated by the value of 'last-clear'.
 //
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-interfaces"
@@ -44914,8 +48169,7 @@ func (n *Interface_Subinterface_CountersPath) InDiscards() *Interface_Subinterfa
 //
 // Discontinuities in the value of this counter can occur
 // at re-initialization of the management system, and at
-// other times as indicated by the value of
-// 'last-clear'.
+// other times as indicated by the value of 'last-clear'.
 //
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-interfaces"
@@ -44943,8 +48197,7 @@ func (n *Interface_Subinterface_CountersPathAny) InDiscards() *Interface_Subinte
 //
 // Discontinuities in the value of this counter can occur
 // at re-initialization of the management system, and at
-// other times as indicated by the value of
-// 'last-clear'.
+// other times as indicated by the value of 'last-clear'.
 //
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-interfaces"
@@ -44972,8 +48225,7 @@ func (n *Interface_Subinterface_CountersPath) InErrors() *Interface_Subinterface
 //
 // Discontinuities in the value of this counter can occur
 // at re-initialization of the management system, and at
-// other times as indicated by the value of
-// 'last-clear'.
+// other times as indicated by the value of 'last-clear'.
 //
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-interfaces"
@@ -44995,8 +48247,8 @@ func (n *Interface_Subinterface_CountersPathAny) InErrors() *Interface_Subinterf
 // frame check sequence (FCS), i.e., framing errors.
 //
 // Discontinuities in the value of this counter can occur
-// when the device is re-initialization as indicated by the
-// value of 'last-clear'.
+// at re-initialization of the management system, and at
+// other times as indicated by the value of 'last-clear'.
 //
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-interfaces"
@@ -45018,8 +48270,8 @@ func (n *Interface_Subinterface_CountersPath) InFcsErrors() *Interface_Subinterf
 // frame check sequence (FCS), i.e., framing errors.
 //
 // Discontinuities in the value of this counter can occur
-// when the device is re-initialization as indicated by the
-// value of 'last-clear'.
+// at re-initialization of the management system, and at
+// other times as indicated by the value of 'last-clear'.
 //
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-interfaces"
@@ -45044,8 +48296,7 @@ func (n *Interface_Subinterface_CountersPathAny) InFcsErrors() *Interface_Subint
 //
 // Discontinuities in the value of this counter can occur
 // at re-initialization of the management system, and at
-// other times as indicated by the value of
-// 'last-clear'.
+// other times as indicated by the value of 'last-clear'.
 //
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-interfaces"
@@ -45070,8 +48321,7 @@ func (n *Interface_Subinterface_CountersPath) InMulticastPkts() *Interface_Subin
 //
 // Discontinuities in the value of this counter can occur
 // at re-initialization of the management system, and at
-// other times as indicated by the value of
-// 'last-clear'.
+// other times as indicated by the value of 'last-clear'.
 //
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-interfaces"
@@ -45094,8 +48344,7 @@ func (n *Interface_Subinterface_CountersPathAny) InMulticastPkts() *Interface_Su
 //
 // Discontinuities in the value of this counter can occur
 // at re-initialization of the management system, and at
-// other times as indicated by the value of
-// 'last-clear'.
+// other times as indicated by the value of 'last-clear'.
 //
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-interfaces"
@@ -45118,8 +48367,7 @@ func (n *Interface_Subinterface_CountersPath) InOctets() *Interface_Subinterface
 //
 // Discontinuities in the value of this counter can occur
 // at re-initialization of the management system, and at
-// other times as indicated by the value of
-// 'last-clear'.
+// other times as indicated by the value of 'last-clear'.
 //
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-interfaces"
@@ -45183,8 +48431,7 @@ func (n *Interface_Subinterface_CountersPathAny) InPkts() *Interface_Subinterfac
 //
 // Discontinuities in the value of this counter can occur
 // at re-initialization of the management system, and at
-// other times as indicated by the value of
-// 'last-clear'.
+// other times as indicated by the value of 'last-clear'.
 //
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-interfaces"
@@ -45208,8 +48455,7 @@ func (n *Interface_Subinterface_CountersPath) InUnicastPkts() *Interface_Subinte
 //
 // Discontinuities in the value of this counter can occur
 // at re-initialization of the management system, and at
-// other times as indicated by the value of
-// 'last-clear'.
+// other times as indicated by the value of 'last-clear'.
 //
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-interfaces"
@@ -45239,8 +48485,7 @@ func (n *Interface_Subinterface_CountersPathAny) InUnicastPkts() *Interface_Subi
 //
 // Discontinuities in the value of this counter can occur
 // at re-initialization of the management system, and at
-// other times as indicated by the value of
-// 'last-clear'.
+// other times as indicated by the value of 'last-clear'.
 //
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-interfaces"
@@ -45270,8 +48515,7 @@ func (n *Interface_Subinterface_CountersPath) InUnknownProtos() *Interface_Subin
 //
 // Discontinuities in the value of this counter can occur
 // at re-initialization of the management system, and at
-// other times as indicated by the value of
-// 'last-clear'.
+// other times as indicated by the value of 'last-clear'.
 //
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-interfaces"
@@ -45340,8 +48584,7 @@ func (n *Interface_Subinterface_CountersPathAny) LastClear() *Interface_Subinter
 //
 // Discontinuities in the value of this counter can occur
 // at re-initialization of the management system, and at
-// other times as indicated by the value of
-// 'last-clear'.
+// other times as indicated by the value of 'last-clear'.
 //
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-interfaces"
@@ -45366,8 +48609,7 @@ func (n *Interface_Subinterface_CountersPath) OutBroadcastPkts() *Interface_Subi
 //
 // Discontinuities in the value of this counter can occur
 // at re-initialization of the management system, and at
-// other times as indicated by the value of
-// 'last-clear'.
+// other times as indicated by the value of 'last-clear'.
 //
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-interfaces"
@@ -45393,8 +48635,7 @@ func (n *Interface_Subinterface_CountersPathAny) OutBroadcastPkts() *Interface_S
 //
 // Discontinuities in the value of this counter can occur
 // at re-initialization of the management system, and at
-// other times as indicated by the value of
-// 'last-clear'.
+// other times as indicated by the value of 'last-clear'.
 //
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-interfaces"
@@ -45420,8 +48661,7 @@ func (n *Interface_Subinterface_CountersPath) OutDiscards() *Interface_Subinterf
 //
 // Discontinuities in the value of this counter can occur
 // at re-initialization of the management system, and at
-// other times as indicated by the value of
-// 'last-clear'.
+// other times as indicated by the value of 'last-clear'.
 //
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-interfaces"
@@ -45447,8 +48687,7 @@ func (n *Interface_Subinterface_CountersPathAny) OutDiscards() *Interface_Subint
 //
 // Discontinuities in the value of this counter can occur
 // at re-initialization of the management system, and at
-// other times as indicated by the value of
-// 'last-clear'.
+// other times as indicated by the value of 'last-clear'.
 //
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-interfaces"
@@ -45474,8 +48713,7 @@ func (n *Interface_Subinterface_CountersPath) OutErrors() *Interface_Subinterfac
 //
 // Discontinuities in the value of this counter can occur
 // at re-initialization of the management system, and at
-// other times as indicated by the value of
-// 'last-clear'.
+// other times as indicated by the value of 'last-clear'.
 //
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-interfaces"
@@ -45502,8 +48740,7 @@ func (n *Interface_Subinterface_CountersPathAny) OutErrors() *Interface_Subinter
 //
 // Discontinuities in the value of this counter can occur
 // at re-initialization of the management system, and at
-// other times as indicated by the value of
-// 'last-clear'.
+// other times as indicated by the value of 'last-clear'.
 //
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-interfaces"
@@ -45530,8 +48767,7 @@ func (n *Interface_Subinterface_CountersPath) OutMulticastPkts() *Interface_Subi
 //
 // Discontinuities in the value of this counter can occur
 // at re-initialization of the management system, and at
-// other times as indicated by the value of
-// 'last-clear'.
+// other times as indicated by the value of 'last-clear'.
 //
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-interfaces"
@@ -45554,8 +48790,7 @@ func (n *Interface_Subinterface_CountersPathAny) OutMulticastPkts() *Interface_S
 //
 // Discontinuities in the value of this counter can occur
 // at re-initialization of the management system, and at
-// other times as indicated by the value of
-// 'last-clear'.
+// other times as indicated by the value of 'last-clear'.
 //
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-interfaces"
@@ -45578,8 +48813,7 @@ func (n *Interface_Subinterface_CountersPath) OutOctets() *Interface_Subinterfac
 //
 // Discontinuities in the value of this counter can occur
 // at re-initialization of the management system, and at
-// other times as indicated by the value of
-// 'last-clear'.
+// other times as indicated by the value of 'last-clear'.
 //
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-interfaces"
@@ -45644,8 +48878,7 @@ func (n *Interface_Subinterface_CountersPathAny) OutPkts() *Interface_Subinterfa
 //
 // Discontinuities in the value of this counter can occur
 // at re-initialization of the management system, and at
-// other times as indicated by the value of
-// 'last-clear'.
+// other times as indicated by the value of 'last-clear'.
 //
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-interfaces"
@@ -45670,8 +48903,7 @@ func (n *Interface_Subinterface_CountersPath) OutUnicastPkts() *Interface_Subint
 //
 // Discontinuities in the value of this counter can occur
 // at re-initialization of the management system, and at
-// other times as indicated by the value of
-// 'last-clear'.
+// other times as indicated by the value of 'last-clear'.
 //
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-interfaces"
@@ -46964,6 +50196,40 @@ func (n *Interface_Subinterface_Ipv4PathAny) Unnumbered() *Interface_Subinterfac
 	ps := &Interface_Subinterface_Ipv4_UnnumberedPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"unnumbered"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// Urpf (container): URPF container.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "urpf"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv4/urpf"
+func (n *Interface_Subinterface_Ipv4Path) Urpf() *Interface_Subinterface_Ipv4_UrpfPath {
+	ps := &Interface_Subinterface_Ipv4_UrpfPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"urpf"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// Urpf (container): URPF container.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "urpf"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv4/urpf"
+func (n *Interface_Subinterface_Ipv4PathAny) Urpf() *Interface_Subinterface_Ipv4_UrpfPathAny {
+	ps := &Interface_Subinterface_Ipv4_UrpfPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"urpf"},
 			map[string]interface{}{},
 			n,
 		),
@@ -52129,6 +55395,194 @@ func (n *Interface_Subinterface_Ipv4_Counters_OutPktsPathAny) State() ygnmi.Wild
 	)
 }
 
+// Interface_Subinterface_Ipv4_Counters_UrpfDropBytesPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/state/counters/urpf-drop-bytes YANG schema element.
+type Interface_Subinterface_Ipv4_Counters_UrpfDropBytesPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Subinterface_Ipv4_Counters_UrpfDropBytesPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/state/counters/urpf-drop-bytes YANG schema element.
+type Interface_Subinterface_Ipv4_Counters_UrpfDropBytesPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "urpf-drop-bytes"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv4/state/counters/urpf-drop-bytes"
+func (n *Interface_Subinterface_Ipv4_Counters_UrpfDropBytesPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Interface_Subinterface_Ipv4_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"urpf-drop-bytes"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv4_Counters).UrpfDropBytes
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv4_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "urpf-drop-bytes"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv4/state/counters/urpf-drop-bytes"
+func (n *Interface_Subinterface_Ipv4_Counters_UrpfDropBytesPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Interface_Subinterface_Ipv4_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"urpf-drop-bytes"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv4_Counters).UrpfDropBytes
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv4_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_Subinterface_Ipv4_Counters_UrpfDropPktsPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/state/counters/urpf-drop-pkts YANG schema element.
+type Interface_Subinterface_Ipv4_Counters_UrpfDropPktsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Subinterface_Ipv4_Counters_UrpfDropPktsPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/state/counters/urpf-drop-pkts YANG schema element.
+type Interface_Subinterface_Ipv4_Counters_UrpfDropPktsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "urpf-drop-pkts"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv4/state/counters/urpf-drop-pkts"
+func (n *Interface_Subinterface_Ipv4_Counters_UrpfDropPktsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Interface_Subinterface_Ipv4_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"urpf-drop-pkts"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv4_Counters).UrpfDropPkts
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv4_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "urpf-drop-pkts"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv4/state/counters/urpf-drop-pkts"
+func (n *Interface_Subinterface_Ipv4_Counters_UrpfDropPktsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Interface_Subinterface_Ipv4_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"urpf-drop-pkts"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv4_Counters).UrpfDropPkts
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv4_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
 // Interface_Subinterface_Ipv4_CountersPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/state/counters YANG schema element.
 type Interface_Subinterface_Ipv4_CountersPath struct {
 	*ygnmi.NodePath
@@ -52807,6 +56261,82 @@ func (n *Interface_Subinterface_Ipv4_CountersPathAny) OutPkts() *Interface_Subin
 	ps := &Interface_Subinterface_Ipv4_Counters_OutPktsPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"out-pkts"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// UrpfDropBytes (leaf): This counter counts bytes/octets discarded as result of
+// Unicast Reverse Path Forwarding verification.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "urpf-drop-bytes"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv4/state/counters/urpf-drop-bytes"
+func (n *Interface_Subinterface_Ipv4_CountersPath) UrpfDropBytes() *Interface_Subinterface_Ipv4_Counters_UrpfDropBytesPath {
+	ps := &Interface_Subinterface_Ipv4_Counters_UrpfDropBytesPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"urpf-drop-bytes"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// UrpfDropBytes (leaf): This counter counts bytes/octets discarded as result of
+// Unicast Reverse Path Forwarding verification.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "urpf-drop-bytes"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv4/state/counters/urpf-drop-bytes"
+func (n *Interface_Subinterface_Ipv4_CountersPathAny) UrpfDropBytes() *Interface_Subinterface_Ipv4_Counters_UrpfDropBytesPathAny {
+	ps := &Interface_Subinterface_Ipv4_Counters_UrpfDropBytesPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"urpf-drop-bytes"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// UrpfDropPkts (leaf): This counter counts packet discarded as result of Unicast
+// Reverse Path Forwarding verification.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "urpf-drop-pkts"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv4/state/counters/urpf-drop-pkts"
+func (n *Interface_Subinterface_Ipv4_CountersPath) UrpfDropPkts() *Interface_Subinterface_Ipv4_Counters_UrpfDropPktsPath {
+	ps := &Interface_Subinterface_Ipv4_Counters_UrpfDropPktsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"urpf-drop-pkts"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// UrpfDropPkts (leaf): This counter counts packet discarded as result of Unicast
+// Reverse Path Forwarding verification.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "urpf-drop-pkts"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv4/state/counters/urpf-drop-pkts"
+func (n *Interface_Subinterface_Ipv4_CountersPathAny) UrpfDropPkts() *Interface_Subinterface_Ipv4_Counters_UrpfDropPktsPathAny {
+	ps := &Interface_Subinterface_Ipv4_Counters_UrpfDropPktsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"urpf-drop-pkts"},
 			map[string]interface{}{},
 			n,
 		),
@@ -54903,6 +58433,1188 @@ func (n *Interface_Subinterface_Ipv4_Unnumbered_InterfaceRefPathAny) Config() yg
 	)
 }
 
+// Interface_Subinterface_Ipv4_Urpf_AllowDefaultRoutePath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/urpf/state/allow-default-route YANG schema element.
+type Interface_Subinterface_Ipv4_Urpf_AllowDefaultRoutePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Subinterface_Ipv4_Urpf_AllowDefaultRoutePathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/urpf/state/allow-default-route YANG schema element.
+type Interface_Subinterface_Ipv4_Urpf_AllowDefaultRoutePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/allow-default-route"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv4/urpf/state/allow-default-route"
+func (n *Interface_Subinterface_Ipv4_Urpf_AllowDefaultRoutePath) State() ygnmi.SingletonQuery[bool] {
+	return ygnmi.NewSingletonQuery[bool](
+		"Interface_Subinterface_Ipv4_Urpf",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "allow-default-route"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv4_Urpf).AllowDefaultRoute
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv4_Urpf) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/allow-default-route"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv4/urpf/state/allow-default-route"
+func (n *Interface_Subinterface_Ipv4_Urpf_AllowDefaultRoutePathAny) State() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewWildcardQuery[bool](
+		"Interface_Subinterface_Ipv4_Urpf",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "allow-default-route"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv4_Urpf).AllowDefaultRoute
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv4_Urpf) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/allow-default-route"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv4/urpf/config/allow-default-route"
+func (n *Interface_Subinterface_Ipv4_Urpf_AllowDefaultRoutePath) Config() ygnmi.ConfigQuery[bool] {
+	return ygnmi.NewConfigQuery[bool](
+		"Interface_Subinterface_Ipv4_Urpf",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "allow-default-route"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv4_Urpf).AllowDefaultRoute
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv4_Urpf) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/allow-default-route"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv4/urpf/config/allow-default-route"
+func (n *Interface_Subinterface_Ipv4_Urpf_AllowDefaultRoutePathAny) Config() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewWildcardQuery[bool](
+		"Interface_Subinterface_Ipv4_Urpf",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "allow-default-route"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv4_Urpf).AllowDefaultRoute
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv4_Urpf) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_Subinterface_Ipv4_Urpf_AllowDropNextHopPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/urpf/state/allow-drop-next-hop YANG schema element.
+type Interface_Subinterface_Ipv4_Urpf_AllowDropNextHopPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Subinterface_Ipv4_Urpf_AllowDropNextHopPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/urpf/state/allow-drop-next-hop YANG schema element.
+type Interface_Subinterface_Ipv4_Urpf_AllowDropNextHopPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/allow-drop-next-hop"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv4/urpf/state/allow-drop-next-hop"
+func (n *Interface_Subinterface_Ipv4_Urpf_AllowDropNextHopPath) State() ygnmi.SingletonQuery[bool] {
+	return ygnmi.NewSingletonQuery[bool](
+		"Interface_Subinterface_Ipv4_Urpf",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "allow-drop-next-hop"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv4_Urpf).AllowDropNextHop
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv4_Urpf) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/allow-drop-next-hop"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv4/urpf/state/allow-drop-next-hop"
+func (n *Interface_Subinterface_Ipv4_Urpf_AllowDropNextHopPathAny) State() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewWildcardQuery[bool](
+		"Interface_Subinterface_Ipv4_Urpf",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "allow-drop-next-hop"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv4_Urpf).AllowDropNextHop
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv4_Urpf) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/allow-drop-next-hop"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv4/urpf/config/allow-drop-next-hop"
+func (n *Interface_Subinterface_Ipv4_Urpf_AllowDropNextHopPath) Config() ygnmi.ConfigQuery[bool] {
+	return ygnmi.NewConfigQuery[bool](
+		"Interface_Subinterface_Ipv4_Urpf",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "allow-drop-next-hop"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv4_Urpf).AllowDropNextHop
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv4_Urpf) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/allow-drop-next-hop"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv4/urpf/config/allow-drop-next-hop"
+func (n *Interface_Subinterface_Ipv4_Urpf_AllowDropNextHopPathAny) Config() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewWildcardQuery[bool](
+		"Interface_Subinterface_Ipv4_Urpf",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "allow-drop-next-hop"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv4_Urpf).AllowDropNextHop
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv4_Urpf) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_Subinterface_Ipv4_Urpf_AllowFeasiblePathPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/urpf/state/allow-feasible-path YANG schema element.
+type Interface_Subinterface_Ipv4_Urpf_AllowFeasiblePathPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Subinterface_Ipv4_Urpf_AllowFeasiblePathPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/urpf/state/allow-feasible-path YANG schema element.
+type Interface_Subinterface_Ipv4_Urpf_AllowFeasiblePathPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/allow-feasible-path"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv4/urpf/state/allow-feasible-path"
+func (n *Interface_Subinterface_Ipv4_Urpf_AllowFeasiblePathPath) State() ygnmi.SingletonQuery[bool] {
+	return ygnmi.NewSingletonQuery[bool](
+		"Interface_Subinterface_Ipv4_Urpf",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "allow-feasible-path"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv4_Urpf).AllowFeasiblePath
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv4_Urpf) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/allow-feasible-path"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv4/urpf/state/allow-feasible-path"
+func (n *Interface_Subinterface_Ipv4_Urpf_AllowFeasiblePathPathAny) State() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewWildcardQuery[bool](
+		"Interface_Subinterface_Ipv4_Urpf",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "allow-feasible-path"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv4_Urpf).AllowFeasiblePath
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv4_Urpf) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/allow-feasible-path"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv4/urpf/config/allow-feasible-path"
+func (n *Interface_Subinterface_Ipv4_Urpf_AllowFeasiblePathPath) Config() ygnmi.ConfigQuery[bool] {
+	return ygnmi.NewConfigQuery[bool](
+		"Interface_Subinterface_Ipv4_Urpf",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "allow-feasible-path"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv4_Urpf).AllowFeasiblePath
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv4_Urpf) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/allow-feasible-path"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv4/urpf/config/allow-feasible-path"
+func (n *Interface_Subinterface_Ipv4_Urpf_AllowFeasiblePathPathAny) Config() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewWildcardQuery[bool](
+		"Interface_Subinterface_Ipv4_Urpf",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "allow-feasible-path"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv4_Urpf).AllowFeasiblePath
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv4_Urpf) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_Subinterface_Ipv4_Urpf_EnabledPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/urpf/state/enabled YANG schema element.
+type Interface_Subinterface_Ipv4_Urpf_EnabledPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Subinterface_Ipv4_Urpf_EnabledPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/urpf/state/enabled YANG schema element.
+type Interface_Subinterface_Ipv4_Urpf_EnabledPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/enabled"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv4/urpf/state/enabled"
+func (n *Interface_Subinterface_Ipv4_Urpf_EnabledPath) State() ygnmi.SingletonQuery[bool] {
+	return ygnmi.NewSingletonQuery[bool](
+		"Interface_Subinterface_Ipv4_Urpf",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "enabled"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv4_Urpf).Enabled
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv4_Urpf) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/enabled"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv4/urpf/state/enabled"
+func (n *Interface_Subinterface_Ipv4_Urpf_EnabledPathAny) State() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewWildcardQuery[bool](
+		"Interface_Subinterface_Ipv4_Urpf",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "enabled"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv4_Urpf).Enabled
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv4_Urpf) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/enabled"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv4/urpf/config/enabled"
+func (n *Interface_Subinterface_Ipv4_Urpf_EnabledPath) Config() ygnmi.ConfigQuery[bool] {
+	return ygnmi.NewConfigQuery[bool](
+		"Interface_Subinterface_Ipv4_Urpf",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "enabled"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv4_Urpf).Enabled
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv4_Urpf) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/enabled"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv4/urpf/config/enabled"
+func (n *Interface_Subinterface_Ipv4_Urpf_EnabledPathAny) Config() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewWildcardQuery[bool](
+		"Interface_Subinterface_Ipv4_Urpf",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "enabled"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv4_Urpf).Enabled
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv4_Urpf) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_Subinterface_Ipv4_Urpf_ModePath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/urpf/state/mode YANG schema element.
+type Interface_Subinterface_Ipv4_Urpf_ModePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Subinterface_Ipv4_Urpf_ModePathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/urpf/state/mode YANG schema element.
+type Interface_Subinterface_Ipv4_Urpf_ModePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/mode"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv4/urpf/state/mode"
+func (n *Interface_Subinterface_Ipv4_Urpf_ModePath) State() ygnmi.SingletonQuery[oc.E_IfIp_UrpfMode] {
+	return ygnmi.NewSingletonQuery[oc.E_IfIp_UrpfMode](
+		"Interface_Subinterface_Ipv4_Urpf",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "mode"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_IfIp_UrpfMode, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv4_Urpf).Mode
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv4_Urpf) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/mode"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv4/urpf/state/mode"
+func (n *Interface_Subinterface_Ipv4_Urpf_ModePathAny) State() ygnmi.WildcardQuery[oc.E_IfIp_UrpfMode] {
+	return ygnmi.NewWildcardQuery[oc.E_IfIp_UrpfMode](
+		"Interface_Subinterface_Ipv4_Urpf",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "mode"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_IfIp_UrpfMode, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv4_Urpf).Mode
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv4_Urpf) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/mode"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv4/urpf/config/mode"
+func (n *Interface_Subinterface_Ipv4_Urpf_ModePath) Config() ygnmi.ConfigQuery[oc.E_IfIp_UrpfMode] {
+	return ygnmi.NewConfigQuery[oc.E_IfIp_UrpfMode](
+		"Interface_Subinterface_Ipv4_Urpf",
+		false,
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "mode"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_IfIp_UrpfMode, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv4_Urpf).Mode
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv4_Urpf) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/mode"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv4/urpf/config/mode"
+func (n *Interface_Subinterface_Ipv4_Urpf_ModePathAny) Config() ygnmi.WildcardQuery[oc.E_IfIp_UrpfMode] {
+	return ygnmi.NewWildcardQuery[oc.E_IfIp_UrpfMode](
+		"Interface_Subinterface_Ipv4_Urpf",
+		false,
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "mode"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_IfIp_UrpfMode, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv4_Urpf).Mode
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv4_Urpf) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_Subinterface_Ipv4_UrpfPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/urpf YANG schema element.
+type Interface_Subinterface_Ipv4_UrpfPath struct {
+	*ygnmi.NodePath
+}
+
+// Interface_Subinterface_Ipv4_UrpfPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/urpf YANG schema element.
+type Interface_Subinterface_Ipv4_UrpfPathAny struct {
+	*ygnmi.NodePath
+}
+
+// AllowDefaultRoute (leaf): If set to false, and the packet's source address LPMs to the
+// default route (0.0.0.0/0 or ::/0) then the URPF check fails and the
+// packet is discarded.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/allow-default-route"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv4/urpf/*/allow-default-route"
+func (n *Interface_Subinterface_Ipv4_UrpfPath) AllowDefaultRoute() *Interface_Subinterface_Ipv4_Urpf_AllowDefaultRoutePath {
+	ps := &Interface_Subinterface_Ipv4_Urpf_AllowDefaultRoutePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "allow-default-route"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// AllowDefaultRoute (leaf): If set to false, and the packet's source address LPMs to the
+// default route (0.0.0.0/0 or ::/0) then the URPF check fails and the
+// packet is discarded.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/allow-default-route"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv4/urpf/*/allow-default-route"
+func (n *Interface_Subinterface_Ipv4_UrpfPathAny) AllowDefaultRoute() *Interface_Subinterface_Ipv4_Urpf_AllowDefaultRoutePathAny {
+	ps := &Interface_Subinterface_Ipv4_Urpf_AllowDefaultRoutePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "allow-default-route"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// AllowDropNextHop (leaf): If set to false, and the packet's source address LPMs to a route
+// with DROP as the next-hop, then the URPF check fails and the packet
+// is discarded.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/allow-drop-next-hop"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv4/urpf/*/allow-drop-next-hop"
+func (n *Interface_Subinterface_Ipv4_UrpfPath) AllowDropNextHop() *Interface_Subinterface_Ipv4_Urpf_AllowDropNextHopPath {
+	ps := &Interface_Subinterface_Ipv4_Urpf_AllowDropNextHopPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "allow-drop-next-hop"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// AllowDropNextHop (leaf): If set to false, and the packet's source address LPMs to a route
+// with DROP as the next-hop, then the URPF check fails and the packet
+// is discarded.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/allow-drop-next-hop"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv4/urpf/*/allow-drop-next-hop"
+func (n *Interface_Subinterface_Ipv4_UrpfPathAny) AllowDropNextHop() *Interface_Subinterface_Ipv4_Urpf_AllowDropNextHopPathAny {
+	ps := &Interface_Subinterface_Ipv4_Urpf_AllowDropNextHopPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "allow-drop-next-hop"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// AllowFeasiblePath (leaf): The routing system may select subset of all learned paths.  For example,
+// BGP without multi-path enabled will install only one of many possible ECMP
+// paths into the FIB or ECMP multipath limits may select only a subset of all
+// available paths. If set to true, the URPF check passes if the source address
+// LPMs to any path in the RIB, even if it is not selected for forwarding in the
+// FIB.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/allow-feasible-path"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv4/urpf/*/allow-feasible-path"
+func (n *Interface_Subinterface_Ipv4_UrpfPath) AllowFeasiblePath() *Interface_Subinterface_Ipv4_Urpf_AllowFeasiblePathPath {
+	ps := &Interface_Subinterface_Ipv4_Urpf_AllowFeasiblePathPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "allow-feasible-path"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// AllowFeasiblePath (leaf): The routing system may select subset of all learned paths.  For example,
+// BGP without multi-path enabled will install only one of many possible ECMP
+// paths into the FIB or ECMP multipath limits may select only a subset of all
+// available paths. If set to true, the URPF check passes if the source address
+// LPMs to any path in the RIB, even if it is not selected for forwarding in the
+// FIB.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/allow-feasible-path"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv4/urpf/*/allow-feasible-path"
+func (n *Interface_Subinterface_Ipv4_UrpfPathAny) AllowFeasiblePath() *Interface_Subinterface_Ipv4_Urpf_AllowFeasiblePathPathAny {
+	ps := &Interface_Subinterface_Ipv4_Urpf_AllowFeasiblePathPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "allow-feasible-path"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Enabled (leaf): Turns ON/OFF packet's source address verification against content of
+// FIB. This is one of anti-spoofing protection techniques.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/enabled"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv4/urpf/*/enabled"
+func (n *Interface_Subinterface_Ipv4_UrpfPath) Enabled() *Interface_Subinterface_Ipv4_Urpf_EnabledPath {
+	ps := &Interface_Subinterface_Ipv4_Urpf_EnabledPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "enabled"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Enabled (leaf): Turns ON/OFF packet's source address verification against content of
+// FIB. This is one of anti-spoofing protection techniques.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/enabled"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv4/urpf/*/enabled"
+func (n *Interface_Subinterface_Ipv4_UrpfPathAny) Enabled() *Interface_Subinterface_Ipv4_Urpf_EnabledPathAny {
+	ps := &Interface_Subinterface_Ipv4_Urpf_EnabledPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "enabled"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Mode (leaf): The URPF in STRICT mode requires the ingress packet source address
+// to have a longest prefix match (LPM) for a route in the forwarding table
+// with a next-hop of the interface the packet was received on.
+// The URPF in LOOSE mode requires the ingress packet source address to
+// LPM a route in the forwarding table, but may have any next-hop.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/mode"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv4/urpf/*/mode"
+func (n *Interface_Subinterface_Ipv4_UrpfPath) Mode() *Interface_Subinterface_Ipv4_Urpf_ModePath {
+	ps := &Interface_Subinterface_Ipv4_Urpf_ModePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "mode"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Mode (leaf): The URPF in STRICT mode requires the ingress packet source address
+// to have a longest prefix match (LPM) for a route in the forwarding table
+// with a next-hop of the interface the packet was received on.
+// The URPF in LOOSE mode requires the ingress packet source address to
+// LPM a route in the forwarding table, but may have any next-hop.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/mode"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv4/urpf/*/mode"
+func (n *Interface_Subinterface_Ipv4_UrpfPathAny) Mode() *Interface_Subinterface_Ipv4_Urpf_ModePathAny {
+	ps := &Interface_Subinterface_Ipv4_Urpf_ModePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "mode"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Interface_Subinterface_Ipv4_UrpfPath) State() ygnmi.SingletonQuery[*oc.Interface_Subinterface_Ipv4_Urpf] {
+	return ygnmi.NewSingletonQuery[*oc.Interface_Subinterface_Ipv4_Urpf](
+		"Interface_Subinterface_Ipv4_Urpf",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Interface_Subinterface_Ipv4_UrpfPathAny) State() ygnmi.WildcardQuery[*oc.Interface_Subinterface_Ipv4_Urpf] {
+	return ygnmi.NewWildcardQuery[*oc.Interface_Subinterface_Ipv4_Urpf](
+		"Interface_Subinterface_Ipv4_Urpf",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *Interface_Subinterface_Ipv4_UrpfPath) Config() ygnmi.ConfigQuery[*oc.Interface_Subinterface_Ipv4_Urpf] {
+	return ygnmi.NewConfigQuery[*oc.Interface_Subinterface_Ipv4_Urpf](
+		"Interface_Subinterface_Ipv4_Urpf",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *Interface_Subinterface_Ipv4_UrpfPathAny) Config() ygnmi.WildcardQuery[*oc.Interface_Subinterface_Ipv4_Urpf] {
+	return ygnmi.NewWildcardQuery[*oc.Interface_Subinterface_Ipv4_Urpf](
+		"Interface_Subinterface_Ipv4_Urpf",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
 // Interface_Subinterface_Ipv6_DhcpClientPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/state/dhcp-client YANG schema element.
 type Interface_Subinterface_Ipv6_DhcpClientPath struct {
 	*ygnmi.NodePath
@@ -56340,6 +61052,40 @@ func (n *Interface_Subinterface_Ipv6PathAny) Unnumbered() *Interface_Subinterfac
 	ps := &Interface_Subinterface_Ipv6_UnnumberedPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"unnumbered"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// Urpf (container): URPF container
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "urpf"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/urpf"
+func (n *Interface_Subinterface_Ipv6Path) Urpf() *Interface_Subinterface_Ipv6_UrpfPath {
+	ps := &Interface_Subinterface_Ipv6_UrpfPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"urpf"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// Urpf (container): URPF container
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "urpf"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/urpf"
+func (n *Interface_Subinterface_Ipv6PathAny) Urpf() *Interface_Subinterface_Ipv6_UrpfPathAny {
+	ps := &Interface_Subinterface_Ipv6_UrpfPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"urpf"},
 			map[string]interface{}{},
 			n,
 		),
@@ -62825,6 +67571,194 @@ func (n *Interface_Subinterface_Ipv6_Counters_OutPktsPathAny) State() ygnmi.Wild
 	)
 }
 
+// Interface_Subinterface_Ipv6_Counters_UrpfDropBytesPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/state/counters/urpf-drop-bytes YANG schema element.
+type Interface_Subinterface_Ipv6_Counters_UrpfDropBytesPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Subinterface_Ipv6_Counters_UrpfDropBytesPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/state/counters/urpf-drop-bytes YANG schema element.
+type Interface_Subinterface_Ipv6_Counters_UrpfDropBytesPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "urpf-drop-bytes"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/state/counters/urpf-drop-bytes"
+func (n *Interface_Subinterface_Ipv6_Counters_UrpfDropBytesPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Interface_Subinterface_Ipv6_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"urpf-drop-bytes"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_Counters).UrpfDropBytes
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "urpf-drop-bytes"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/state/counters/urpf-drop-bytes"
+func (n *Interface_Subinterface_Ipv6_Counters_UrpfDropBytesPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Interface_Subinterface_Ipv6_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"urpf-drop-bytes"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_Counters).UrpfDropBytes
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_Subinterface_Ipv6_Counters_UrpfDropPktsPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/state/counters/urpf-drop-pkts YANG schema element.
+type Interface_Subinterface_Ipv6_Counters_UrpfDropPktsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Subinterface_Ipv6_Counters_UrpfDropPktsPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/state/counters/urpf-drop-pkts YANG schema element.
+type Interface_Subinterface_Ipv6_Counters_UrpfDropPktsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "urpf-drop-pkts"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/state/counters/urpf-drop-pkts"
+func (n *Interface_Subinterface_Ipv6_Counters_UrpfDropPktsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Interface_Subinterface_Ipv6_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"urpf-drop-pkts"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_Counters).UrpfDropPkts
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "urpf-drop-pkts"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/state/counters/urpf-drop-pkts"
+func (n *Interface_Subinterface_Ipv6_Counters_UrpfDropPktsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Interface_Subinterface_Ipv6_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"urpf-drop-pkts"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_Counters).UrpfDropPkts
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
 // Interface_Subinterface_Ipv6_CountersPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/state/counters YANG schema element.
 type Interface_Subinterface_Ipv6_CountersPath struct {
 	*ygnmi.NodePath
@@ -63503,6 +68437,82 @@ func (n *Interface_Subinterface_Ipv6_CountersPathAny) OutPkts() *Interface_Subin
 	ps := &Interface_Subinterface_Ipv6_Counters_OutPktsPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"out-pkts"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// UrpfDropBytes (leaf): This counter counts bytes/octets discarded as result of
+// Unicast Reverse Path Forwarding verification.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "urpf-drop-bytes"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/state/counters/urpf-drop-bytes"
+func (n *Interface_Subinterface_Ipv6_CountersPath) UrpfDropBytes() *Interface_Subinterface_Ipv6_Counters_UrpfDropBytesPath {
+	ps := &Interface_Subinterface_Ipv6_Counters_UrpfDropBytesPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"urpf-drop-bytes"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// UrpfDropBytes (leaf): This counter counts bytes/octets discarded as result of
+// Unicast Reverse Path Forwarding verification.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "urpf-drop-bytes"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/state/counters/urpf-drop-bytes"
+func (n *Interface_Subinterface_Ipv6_CountersPathAny) UrpfDropBytes() *Interface_Subinterface_Ipv6_Counters_UrpfDropBytesPathAny {
+	ps := &Interface_Subinterface_Ipv6_Counters_UrpfDropBytesPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"urpf-drop-bytes"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// UrpfDropPkts (leaf): This counter counts packet discarded as result of Unicast
+// Reverse Path Forwarding verification.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "urpf-drop-pkts"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/state/counters/urpf-drop-pkts"
+func (n *Interface_Subinterface_Ipv6_CountersPath) UrpfDropPkts() *Interface_Subinterface_Ipv6_Counters_UrpfDropPktsPath {
+	ps := &Interface_Subinterface_Ipv6_Counters_UrpfDropPktsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"urpf-drop-pkts"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// UrpfDropPkts (leaf): This counter counts packet discarded as result of Unicast
+// Reverse Path Forwarding verification.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "urpf-drop-pkts"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/state/counters/urpf-drop-pkts"
+func (n *Interface_Subinterface_Ipv6_CountersPathAny) UrpfDropPkts() *Interface_Subinterface_Ipv6_Counters_UrpfDropPktsPathAny {
+	ps := &Interface_Subinterface_Ipv6_Counters_UrpfDropPktsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"urpf-drop-pkts"},
 			map[string]interface{}{},
 			n,
 		),
@@ -68802,6 +73812,1188 @@ func (n *Interface_Subinterface_Ipv6_Unnumbered_InterfaceRefPath) Config() ygnmi
 func (n *Interface_Subinterface_Ipv6_Unnumbered_InterfaceRefPathAny) Config() ygnmi.WildcardQuery[*oc.Interface_Subinterface_Ipv6_Unnumbered_InterfaceRef] {
 	return ygnmi.NewWildcardQuery[*oc.Interface_Subinterface_Ipv6_Unnumbered_InterfaceRef](
 		"Interface_Subinterface_Ipv6_Unnumbered_InterfaceRef",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_Subinterface_Ipv6_Urpf_AllowDefaultRoutePath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/urpf/state/allow-default-route YANG schema element.
+type Interface_Subinterface_Ipv6_Urpf_AllowDefaultRoutePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Subinterface_Ipv6_Urpf_AllowDefaultRoutePathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/urpf/state/allow-default-route YANG schema element.
+type Interface_Subinterface_Ipv6_Urpf_AllowDefaultRoutePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/allow-default-route"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/urpf/state/allow-default-route"
+func (n *Interface_Subinterface_Ipv6_Urpf_AllowDefaultRoutePath) State() ygnmi.SingletonQuery[bool] {
+	return ygnmi.NewSingletonQuery[bool](
+		"Interface_Subinterface_Ipv6_Urpf",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "allow-default-route"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_Urpf).AllowDefaultRoute
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_Urpf) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/allow-default-route"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/urpf/state/allow-default-route"
+func (n *Interface_Subinterface_Ipv6_Urpf_AllowDefaultRoutePathAny) State() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewWildcardQuery[bool](
+		"Interface_Subinterface_Ipv6_Urpf",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "allow-default-route"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_Urpf).AllowDefaultRoute
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_Urpf) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/allow-default-route"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/urpf/config/allow-default-route"
+func (n *Interface_Subinterface_Ipv6_Urpf_AllowDefaultRoutePath) Config() ygnmi.ConfigQuery[bool] {
+	return ygnmi.NewConfigQuery[bool](
+		"Interface_Subinterface_Ipv6_Urpf",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "allow-default-route"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_Urpf).AllowDefaultRoute
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_Urpf) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/allow-default-route"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/urpf/config/allow-default-route"
+func (n *Interface_Subinterface_Ipv6_Urpf_AllowDefaultRoutePathAny) Config() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewWildcardQuery[bool](
+		"Interface_Subinterface_Ipv6_Urpf",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "allow-default-route"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_Urpf).AllowDefaultRoute
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_Urpf) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_Subinterface_Ipv6_Urpf_AllowDropNextHopPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/urpf/state/allow-drop-next-hop YANG schema element.
+type Interface_Subinterface_Ipv6_Urpf_AllowDropNextHopPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Subinterface_Ipv6_Urpf_AllowDropNextHopPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/urpf/state/allow-drop-next-hop YANG schema element.
+type Interface_Subinterface_Ipv6_Urpf_AllowDropNextHopPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/allow-drop-next-hop"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/urpf/state/allow-drop-next-hop"
+func (n *Interface_Subinterface_Ipv6_Urpf_AllowDropNextHopPath) State() ygnmi.SingletonQuery[bool] {
+	return ygnmi.NewSingletonQuery[bool](
+		"Interface_Subinterface_Ipv6_Urpf",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "allow-drop-next-hop"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_Urpf).AllowDropNextHop
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_Urpf) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/allow-drop-next-hop"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/urpf/state/allow-drop-next-hop"
+func (n *Interface_Subinterface_Ipv6_Urpf_AllowDropNextHopPathAny) State() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewWildcardQuery[bool](
+		"Interface_Subinterface_Ipv6_Urpf",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "allow-drop-next-hop"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_Urpf).AllowDropNextHop
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_Urpf) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/allow-drop-next-hop"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/urpf/config/allow-drop-next-hop"
+func (n *Interface_Subinterface_Ipv6_Urpf_AllowDropNextHopPath) Config() ygnmi.ConfigQuery[bool] {
+	return ygnmi.NewConfigQuery[bool](
+		"Interface_Subinterface_Ipv6_Urpf",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "allow-drop-next-hop"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_Urpf).AllowDropNextHop
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_Urpf) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/allow-drop-next-hop"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/urpf/config/allow-drop-next-hop"
+func (n *Interface_Subinterface_Ipv6_Urpf_AllowDropNextHopPathAny) Config() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewWildcardQuery[bool](
+		"Interface_Subinterface_Ipv6_Urpf",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "allow-drop-next-hop"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_Urpf).AllowDropNextHop
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_Urpf) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_Subinterface_Ipv6_Urpf_AllowFeasiblePathPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/urpf/state/allow-feasible-path YANG schema element.
+type Interface_Subinterface_Ipv6_Urpf_AllowFeasiblePathPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Subinterface_Ipv6_Urpf_AllowFeasiblePathPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/urpf/state/allow-feasible-path YANG schema element.
+type Interface_Subinterface_Ipv6_Urpf_AllowFeasiblePathPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/allow-feasible-path"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/urpf/state/allow-feasible-path"
+func (n *Interface_Subinterface_Ipv6_Urpf_AllowFeasiblePathPath) State() ygnmi.SingletonQuery[bool] {
+	return ygnmi.NewSingletonQuery[bool](
+		"Interface_Subinterface_Ipv6_Urpf",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "allow-feasible-path"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_Urpf).AllowFeasiblePath
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_Urpf) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/allow-feasible-path"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/urpf/state/allow-feasible-path"
+func (n *Interface_Subinterface_Ipv6_Urpf_AllowFeasiblePathPathAny) State() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewWildcardQuery[bool](
+		"Interface_Subinterface_Ipv6_Urpf",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "allow-feasible-path"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_Urpf).AllowFeasiblePath
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_Urpf) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/allow-feasible-path"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/urpf/config/allow-feasible-path"
+func (n *Interface_Subinterface_Ipv6_Urpf_AllowFeasiblePathPath) Config() ygnmi.ConfigQuery[bool] {
+	return ygnmi.NewConfigQuery[bool](
+		"Interface_Subinterface_Ipv6_Urpf",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "allow-feasible-path"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_Urpf).AllowFeasiblePath
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_Urpf) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/allow-feasible-path"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/urpf/config/allow-feasible-path"
+func (n *Interface_Subinterface_Ipv6_Urpf_AllowFeasiblePathPathAny) Config() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewWildcardQuery[bool](
+		"Interface_Subinterface_Ipv6_Urpf",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "allow-feasible-path"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_Urpf).AllowFeasiblePath
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_Urpf) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_Subinterface_Ipv6_Urpf_EnabledPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/urpf/state/enabled YANG schema element.
+type Interface_Subinterface_Ipv6_Urpf_EnabledPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Subinterface_Ipv6_Urpf_EnabledPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/urpf/state/enabled YANG schema element.
+type Interface_Subinterface_Ipv6_Urpf_EnabledPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/enabled"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/urpf/state/enabled"
+func (n *Interface_Subinterface_Ipv6_Urpf_EnabledPath) State() ygnmi.SingletonQuery[bool] {
+	return ygnmi.NewSingletonQuery[bool](
+		"Interface_Subinterface_Ipv6_Urpf",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "enabled"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_Urpf).Enabled
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_Urpf) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/enabled"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/urpf/state/enabled"
+func (n *Interface_Subinterface_Ipv6_Urpf_EnabledPathAny) State() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewWildcardQuery[bool](
+		"Interface_Subinterface_Ipv6_Urpf",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "enabled"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_Urpf).Enabled
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_Urpf) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/enabled"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/urpf/config/enabled"
+func (n *Interface_Subinterface_Ipv6_Urpf_EnabledPath) Config() ygnmi.ConfigQuery[bool] {
+	return ygnmi.NewConfigQuery[bool](
+		"Interface_Subinterface_Ipv6_Urpf",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "enabled"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_Urpf).Enabled
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_Urpf) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/enabled"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/urpf/config/enabled"
+func (n *Interface_Subinterface_Ipv6_Urpf_EnabledPathAny) Config() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewWildcardQuery[bool](
+		"Interface_Subinterface_Ipv6_Urpf",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "enabled"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_Urpf).Enabled
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_Urpf) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_Subinterface_Ipv6_Urpf_ModePath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/urpf/state/mode YANG schema element.
+type Interface_Subinterface_Ipv6_Urpf_ModePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Subinterface_Ipv6_Urpf_ModePathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/urpf/state/mode YANG schema element.
+type Interface_Subinterface_Ipv6_Urpf_ModePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/mode"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/urpf/state/mode"
+func (n *Interface_Subinterface_Ipv6_Urpf_ModePath) State() ygnmi.SingletonQuery[oc.E_IfIp_UrpfMode] {
+	return ygnmi.NewSingletonQuery[oc.E_IfIp_UrpfMode](
+		"Interface_Subinterface_Ipv6_Urpf",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "mode"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_IfIp_UrpfMode, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_Urpf).Mode
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_Urpf) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/mode"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/urpf/state/mode"
+func (n *Interface_Subinterface_Ipv6_Urpf_ModePathAny) State() ygnmi.WildcardQuery[oc.E_IfIp_UrpfMode] {
+	return ygnmi.NewWildcardQuery[oc.E_IfIp_UrpfMode](
+		"Interface_Subinterface_Ipv6_Urpf",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "mode"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_IfIp_UrpfMode, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_Urpf).Mode
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_Urpf) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/mode"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/urpf/config/mode"
+func (n *Interface_Subinterface_Ipv6_Urpf_ModePath) Config() ygnmi.ConfigQuery[oc.E_IfIp_UrpfMode] {
+	return ygnmi.NewConfigQuery[oc.E_IfIp_UrpfMode](
+		"Interface_Subinterface_Ipv6_Urpf",
+		false,
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "mode"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_IfIp_UrpfMode, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_Urpf).Mode
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_Urpf) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/mode"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/urpf/config/mode"
+func (n *Interface_Subinterface_Ipv6_Urpf_ModePathAny) Config() ygnmi.WildcardQuery[oc.E_IfIp_UrpfMode] {
+	return ygnmi.NewWildcardQuery[oc.E_IfIp_UrpfMode](
+		"Interface_Subinterface_Ipv6_Urpf",
+		false,
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "mode"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_IfIp_UrpfMode, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_Urpf).Mode
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_Urpf) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_Subinterface_Ipv6_UrpfPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/urpf YANG schema element.
+type Interface_Subinterface_Ipv6_UrpfPath struct {
+	*ygnmi.NodePath
+}
+
+// Interface_Subinterface_Ipv6_UrpfPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/urpf YANG schema element.
+type Interface_Subinterface_Ipv6_UrpfPathAny struct {
+	*ygnmi.NodePath
+}
+
+// AllowDefaultRoute (leaf): If set to false, and the packet's source address LPMs to the
+// default route (0.0.0.0/0 or ::/0) then the URPF check fails and the
+// packet is discarded.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/allow-default-route"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/urpf/*/allow-default-route"
+func (n *Interface_Subinterface_Ipv6_UrpfPath) AllowDefaultRoute() *Interface_Subinterface_Ipv6_Urpf_AllowDefaultRoutePath {
+	ps := &Interface_Subinterface_Ipv6_Urpf_AllowDefaultRoutePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "allow-default-route"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// AllowDefaultRoute (leaf): If set to false, and the packet's source address LPMs to the
+// default route (0.0.0.0/0 or ::/0) then the URPF check fails and the
+// packet is discarded.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/allow-default-route"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/urpf/*/allow-default-route"
+func (n *Interface_Subinterface_Ipv6_UrpfPathAny) AllowDefaultRoute() *Interface_Subinterface_Ipv6_Urpf_AllowDefaultRoutePathAny {
+	ps := &Interface_Subinterface_Ipv6_Urpf_AllowDefaultRoutePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "allow-default-route"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// AllowDropNextHop (leaf): If set to false, and the packet's source address LPMs to a route
+// with DROP as the next-hop, then the URPF check fails and the packet
+// is discarded.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/allow-drop-next-hop"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/urpf/*/allow-drop-next-hop"
+func (n *Interface_Subinterface_Ipv6_UrpfPath) AllowDropNextHop() *Interface_Subinterface_Ipv6_Urpf_AllowDropNextHopPath {
+	ps := &Interface_Subinterface_Ipv6_Urpf_AllowDropNextHopPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "allow-drop-next-hop"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// AllowDropNextHop (leaf): If set to false, and the packet's source address LPMs to a route
+// with DROP as the next-hop, then the URPF check fails and the packet
+// is discarded.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/allow-drop-next-hop"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/urpf/*/allow-drop-next-hop"
+func (n *Interface_Subinterface_Ipv6_UrpfPathAny) AllowDropNextHop() *Interface_Subinterface_Ipv6_Urpf_AllowDropNextHopPathAny {
+	ps := &Interface_Subinterface_Ipv6_Urpf_AllowDropNextHopPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "allow-drop-next-hop"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// AllowFeasiblePath (leaf): The routing system may select subset of all learned paths.  For example,
+// BGP without multi-path enabled will install only one of many possible ECMP
+// paths into the FIB or ECMP multipath limits may select only a subset of all
+// available paths. If set to true, the URPF check passes if the source address
+// LPMs to any path in the RIB, even if it is not selected for forwarding in the
+// FIB.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/allow-feasible-path"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/urpf/*/allow-feasible-path"
+func (n *Interface_Subinterface_Ipv6_UrpfPath) AllowFeasiblePath() *Interface_Subinterface_Ipv6_Urpf_AllowFeasiblePathPath {
+	ps := &Interface_Subinterface_Ipv6_Urpf_AllowFeasiblePathPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "allow-feasible-path"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// AllowFeasiblePath (leaf): The routing system may select subset of all learned paths.  For example,
+// BGP without multi-path enabled will install only one of many possible ECMP
+// paths into the FIB or ECMP multipath limits may select only a subset of all
+// available paths. If set to true, the URPF check passes if the source address
+// LPMs to any path in the RIB, even if it is not selected for forwarding in the
+// FIB.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/allow-feasible-path"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/urpf/*/allow-feasible-path"
+func (n *Interface_Subinterface_Ipv6_UrpfPathAny) AllowFeasiblePath() *Interface_Subinterface_Ipv6_Urpf_AllowFeasiblePathPathAny {
+	ps := &Interface_Subinterface_Ipv6_Urpf_AllowFeasiblePathPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "allow-feasible-path"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Enabled (leaf): Turns ON/OFF packet's source address verification against content of
+// FIB. This is one of anti-spoofing protection techniques.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/enabled"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/urpf/*/enabled"
+func (n *Interface_Subinterface_Ipv6_UrpfPath) Enabled() *Interface_Subinterface_Ipv6_Urpf_EnabledPath {
+	ps := &Interface_Subinterface_Ipv6_Urpf_EnabledPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "enabled"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Enabled (leaf): Turns ON/OFF packet's source address verification against content of
+// FIB. This is one of anti-spoofing protection techniques.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/enabled"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/urpf/*/enabled"
+func (n *Interface_Subinterface_Ipv6_UrpfPathAny) Enabled() *Interface_Subinterface_Ipv6_Urpf_EnabledPathAny {
+	ps := &Interface_Subinterface_Ipv6_Urpf_EnabledPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "enabled"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Mode (leaf): The URPF in STRICT mode requires the ingress packet source address
+// to have a longest prefix match (LPM) for a route in the forwarding table
+// with a next-hop of the interface the packet was received on.
+// The URPF in LOOSE mode requires the ingress packet source address to
+// LPM a route in the forwarding table, but may have any next-hop.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/mode"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/urpf/*/mode"
+func (n *Interface_Subinterface_Ipv6_UrpfPath) Mode() *Interface_Subinterface_Ipv6_Urpf_ModePath {
+	ps := &Interface_Subinterface_Ipv6_Urpf_ModePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "mode"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Mode (leaf): The URPF in STRICT mode requires the ingress packet source address
+// to have a longest prefix match (LPM) for a route in the forwarding table
+// with a next-hop of the interface the packet was received on.
+// The URPF in LOOSE mode requires the ingress packet source address to
+// LPM a route in the forwarding table, but may have any next-hop.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/mode"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/urpf/*/mode"
+func (n *Interface_Subinterface_Ipv6_UrpfPathAny) Mode() *Interface_Subinterface_Ipv6_Urpf_ModePathAny {
+	ps := &Interface_Subinterface_Ipv6_Urpf_ModePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "mode"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Interface_Subinterface_Ipv6_UrpfPath) State() ygnmi.SingletonQuery[*oc.Interface_Subinterface_Ipv6_Urpf] {
+	return ygnmi.NewSingletonQuery[*oc.Interface_Subinterface_Ipv6_Urpf](
+		"Interface_Subinterface_Ipv6_Urpf",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Interface_Subinterface_Ipv6_UrpfPathAny) State() ygnmi.WildcardQuery[*oc.Interface_Subinterface_Ipv6_Urpf] {
+	return ygnmi.NewWildcardQuery[*oc.Interface_Subinterface_Ipv6_Urpf](
+		"Interface_Subinterface_Ipv6_Urpf",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *Interface_Subinterface_Ipv6_UrpfPath) Config() ygnmi.ConfigQuery[*oc.Interface_Subinterface_Ipv6_Urpf] {
+	return ygnmi.NewConfigQuery[*oc.Interface_Subinterface_Ipv6_Urpf](
+		"Interface_Subinterface_Ipv6_Urpf",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *Interface_Subinterface_Ipv6_UrpfPathAny) Config() ygnmi.WildcardQuery[*oc.Interface_Subinterface_Ipv6_Urpf] {
+	return ygnmi.NewWildcardQuery[*oc.Interface_Subinterface_Ipv6_Urpf](
+		"Interface_Subinterface_Ipv6_Urpf",
 		false,
 		true,
 		false,
