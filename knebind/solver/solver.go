@@ -158,6 +158,7 @@ func topoToConcreteGraph(topo *tpb.Topology) (*portgraph.ConcreteGraph, map[*por
 		var ports []*portgraph.ConcretePort
 		for intfName, nodeIntf := range node.GetInterfaces() {
 			portAttrs := make(map[string]string)
+			portAttrs[portgraph.PMDAttr] = opb.Port_PMD_UNSPECIFIED.String()
 			if mtu := nodeIntf.GetMtu(); mtu != 0 {
 				portAttrs[mtuAttr] = strconv.FormatInt(int64(mtu), 10)
 			}
