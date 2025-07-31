@@ -264,3 +264,31 @@ func (o *OTG) GNMIOpts() *gnmi.Opts {
 		return rawapis.FetchOTGGNMI(ctx, o.ate)
 	})
 }
+
+
+func (o *OTG) AppendConfig(t testing.TB, cfg gosnappi.ConfigAppend) {
+        t.Helper()
+        t = events.ActionStarted(t, "Appending config to %s", o.ate)
+        warns, err := appendConfig(context.Background(), o.ate, cfg)
+        if err != nil {
+                t.Fatalf("AppendConfig(t) on %s: %v", o.ate, err)
+        }
+
+        if len(warns) > 0 {
+                t.Logf("AppendConfig(t) on %s non-fatal warnings: %v", o.ate, warns)
+        }
+}
+
+func appendConfig(ctx context.Context, ate binding.ATE, cfg gosnappi.ConfigAppend) ([]string, error) {
+        api, err := rawapis.FetchOTG(ctx, ate)
+        if err != nil {
+                return nil, err
+        }
+
+        resp, err := api.AppendConfig(cfg)
+        if err != nil {
+                return nil, err
+        }
+        return resp.Warnings(), nil
+}
+
