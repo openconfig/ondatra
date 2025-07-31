@@ -18,7 +18,7 @@
 
 set -e
 
-OC_VERSION="v5.3.0"
+OC_VERSION="v5.2.0"
 
 git clone https://github.com/openconfig/public.git --branch $OC_VERSION
 wget https://raw.githubusercontent.com/openconfig/gnmi/master/metadata/yang/gnmi-collector-metadata.yang
@@ -68,7 +68,6 @@ YANG_FILES=(
   public/release/models/lldp/openconfig-lldp-types.yang
   public/release/models/lldp/openconfig-lldp.yang
   public/release/models/local-routing/openconfig-local-routing.yang
-  public/release/models/local-routing/openconfig-local-routing-network-instance.yang
   public/release/models/macsec/openconfig-macsec.yang
   public/release/models/mpls/openconfig-mpls-types.yang
   public/release/models/multicast/openconfig-pim.yang

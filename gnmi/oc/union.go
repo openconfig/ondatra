@@ -47,7 +47,6 @@ using the following YANG input files:
   - public/release/models/lldp/openconfig-lldp-types.yang
   - public/release/models/lldp/openconfig-lldp.yang
   - public/release/models/local-routing/openconfig-local-routing.yang
-  - public/release/models/local-routing/openconfig-local-routing-network-instance.yang
   - public/release/models/macsec/openconfig-macsec.yang
   - public/release/models/mpls/openconfig-mpls-types.yang
   - public/release/models/multicast/openconfig-pim.yang

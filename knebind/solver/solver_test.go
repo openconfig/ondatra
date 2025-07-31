@@ -152,7 +152,7 @@ func TestSolve(t *testing.T) {
 		Id:                   "dut3",
 		Vendor:               opb.Device_JUNIPER,
 		SoftwareVersionValue: &opb.Device_SoftwareVersionRegex{SoftwareVersionRegex: "^evo$"},
-		Ports:                []*opb.Port{{Id: "port1", PmdValue: &opb.Port_PmdRegex{PmdRegex: ".*"}}},
+		Ports:                []*opb.Port{{Id: "port1"}},
 	}
 	ate1 := &opb.Device{
 		Id:    "ate1",
