@@ -166,6 +166,22 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		6: {Name: "LOCAL"},
 		7: {Name: "INTERFACE_ALIAS"},
 	},
+	"E_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptStatusType": {
+		1: {Name: "SUCCEEDED"},
+		2: {Name: "FAILED"},
+		3: {Name: "INPROGRESS"},
+		4: {Name: "UNAVAILABLE"},
+	},
+	"E_LocalRestartingStatus_CurrentState": {
+		1: {Name: "RUNNING"},
+		2: {Name: "RESTARTING"},
+		3: {Name: "STARTING"},
+	},
+	"E_LocalState_LevelType": {
+		1: {Name: "LEVEL_1"},
+		2: {Name: "LEVEL_2"},
+		3: {Name: "LEVEL_1_2"},
+	},
 	"E_Lsps_Flags": {
 		1: {Name: "PARTITION_REPAIR"},
 		2: {Name: "ATTACHED_ERROR"},
@@ -177,6 +193,22 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 	"E_Lsps_PduType": {
 		1: {Name: "LEVEL_1"},
 		2: {Name: "LEVEL_2"},
+	},
+	"E_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptStatusType": {
+		1: {Name: "SUCCEEDED"},
+		2: {Name: "FAILED"},
+		3: {Name: "INPROGRESS"},
+		4: {Name: "UNAVAILABLE"},
+	},
+	"E_NeighRestartingStatus_CurrentState": {
+		1: {Name: "RUNNING"},
+		2: {Name: "RESTARTING"},
+		3: {Name: "STARTING"},
+	},
+	"E_NeighborState_LevelType": {
+		1: {Name: "LEVEL_1"},
+		2: {Name: "LEVEL_2"},
+		3: {Name: "LEVEL_1_2"},
 	},
 	"E_OpaqueLsa_Type": {
 		1: {Name: "LOCAL"},
@@ -194,6 +226,13 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		4: {Name: "EXPLICIT_NULL"},
 		5: {Name: "VALUE"},
 		6: {Name: "LOCAL"},
+	},
+	"E_RestartTlv_Flags": {
+		1: {Name: "RR_BIT"},
+		2: {Name: "RA_BIT"},
+		3: {Name: "SA_BIT"},
+		4: {Name: "PR_BIT"},
+		5: {Name: "PA_BIT"},
 	},
 	"E_SegmentRoutingCapability_Flags": {
 		1: {Name: "IPV4_MPLS"},
@@ -340,6 +379,27 @@ func initΛEnumTypes() {
 		},
 		"/flows/flow/tagged-metrics/tagged-metric/state/tags/tag-value/value-type": {
 			reflect.TypeOf((E_Tags_ValueType)(0)),
+		},
+		"/isis-routers/isis-router/state/adjacencies/state/adjacency/state/local-state/state/level-type": {
+			reflect.TypeOf((E_LocalState_LevelType)(0)),
+		},
+		"/isis-routers/isis-router/state/adjacencies/state/adjacency/state/local-state/state/local-restarting-status/state/current-state": {
+			reflect.TypeOf((E_LocalRestartingStatus_CurrentState)(0)),
+		},
+		"/isis-routers/isis-router/state/adjacencies/state/adjacency/state/local-state/state/local-restarting-status/state/local-last-restarting-attempt-status/state/local-last-restarting-attempt-status-type": {
+			reflect.TypeOf((E_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptStatusType)(0)),
+		},
+		"/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state/state/level-type": {
+			reflect.TypeOf((E_NeighborState_LevelType)(0)),
+		},
+		"/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state/state/neigh-restarting-status/state/current-state": {
+			reflect.TypeOf((E_NeighRestartingStatus_CurrentState)(0)),
+		},
+		"/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state/state/neigh-restarting-status/state/neigh-last-restarting-attempt-status/state/neigh-last-restarting-attempt-status-type": {
+			reflect.TypeOf((E_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptStatusType)(0)),
+		},
+		"/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state/state/tlvs/restart_tlv/state/flags": {
+			reflect.TypeOf((E_RestartTlv_Flags)(0)),
 		},
 		"/isis-routers/isis-router/state/link-state-database/lsp-states/lsps/state/flags": {
 			reflect.TypeOf((E_Lsps_Flags)(0)),

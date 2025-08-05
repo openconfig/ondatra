@@ -233,6 +233,40 @@ type IsisRouterPathMapAny struct {
 	*ygnmi.NodePath
 }
 
+// Adjacencies (container): This sub-module describes a YANG model for the IS-IS IIH information exchanged between the IS-IS routers.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/adjacencies"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies"
+func (n *IsisRouterPath) Adjacencies() *IsisRouter_AdjacenciesPath {
+	ps := &IsisRouter_AdjacenciesPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "adjacencies"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// Adjacencies (container): This sub-module describes a YANG model for the IS-IS IIH information exchanged between the IS-IS routers.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/adjacencies"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies"
+func (n *IsisRouterPathAny) Adjacencies() *IsisRouter_AdjacenciesPathAny {
+	ps := &IsisRouter_AdjacenciesPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "adjacencies"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
 // Counters (container): Level counters of the ISIS router.
 //
 //	Defining module:      "open-traffic-generator-isis"
@@ -399,6 +433,4230 @@ func (n *IsisRouterPathAny) State() ygnmi.WildcardQuery[*oc.IsisRouter] {
 	)
 }
 
+// IsisRouter_AdjacenciesPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/adjacencies YANG schema element.
+type IsisRouter_AdjacenciesPath struct {
+	*ygnmi.NodePath
+}
+
+// IsisRouter_AdjacenciesPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/adjacencies YANG schema element.
+type IsisRouter_AdjacenciesPathAny struct {
+	*ygnmi.NodePath
+}
+
+// AdjacencyAny (list): System ID of a neighbor and Interface name on which neighbor is established.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/adjacency"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency"
+func (n *IsisRouter_AdjacenciesPath) AdjacencyAny() *IsisRouter_Adjacencies_AdjacencyPathAny {
+	ps := &IsisRouter_Adjacencies_AdjacencyPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "adjacency"},
+			map[string]interface{}{"neighbor-system-id": "*", "interface-name": "*"},
+			n,
+		),
+	}
+	return ps
+}
+
+// AdjacencyAny (list): System ID of a neighbor and Interface name on which neighbor is established.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/adjacency"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency"
+func (n *IsisRouter_AdjacenciesPathAny) AdjacencyAny() *IsisRouter_Adjacencies_AdjacencyPathAny {
+	ps := &IsisRouter_Adjacencies_AdjacencyPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "adjacency"},
+			map[string]interface{}{"neighbor-system-id": "*", "interface-name": "*"},
+			n,
+		),
+	}
+	return ps
+}
+
+// WithNeighborSystemId sets IsisRouter_Adjacencies_AdjacencyPathAny's key "neighbor-system-id" to the specified value.
+// NeighborSystemId: string
+func (n *IsisRouter_Adjacencies_AdjacencyPathAny) WithNeighborSystemId(NeighborSystemId string) *IsisRouter_Adjacencies_AdjacencyPathAny {
+	ygnmi.ModifyKey(n.NodePath, "neighbor-system-id", NeighborSystemId)
+	return n
+}
+
+// WithInterfaceName sets IsisRouter_Adjacencies_AdjacencyPathAny's key "interface-name" to the specified value.
+// InterfaceName: string
+func (n *IsisRouter_Adjacencies_AdjacencyPathAny) WithInterfaceName(InterfaceName string) *IsisRouter_Adjacencies_AdjacencyPathAny {
+	ygnmi.ModifyKey(n.NodePath, "interface-name", InterfaceName)
+	return n
+}
+
+// Adjacency (list): System ID of a neighbor and Interface name on which neighbor is established.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/adjacency"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency"
+//
+//	NeighborSystemId: string
+//	InterfaceName: string
+func (n *IsisRouter_AdjacenciesPath) Adjacency(NeighborSystemId string, InterfaceName string) *IsisRouter_Adjacencies_AdjacencyPath {
+	ps := &IsisRouter_Adjacencies_AdjacencyPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "adjacency"},
+			map[string]interface{}{"neighbor-system-id": NeighborSystemId, "interface-name": InterfaceName},
+			n,
+		),
+	}
+	return ps
+}
+
+// Adjacency (list): System ID of a neighbor and Interface name on which neighbor is established.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/adjacency"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency"
+//
+//	NeighborSystemId: string
+//	InterfaceName: string
+func (n *IsisRouter_AdjacenciesPathAny) Adjacency(NeighborSystemId string, InterfaceName string) *IsisRouter_Adjacencies_AdjacencyPathAny {
+	ps := &IsisRouter_Adjacencies_AdjacencyPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "adjacency"},
+			map[string]interface{}{"neighbor-system-id": NeighborSystemId, "interface-name": InterfaceName},
+			n,
+		),
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *IsisRouter_AdjacenciesPath) State() ygnmi.SingletonQuery[*oc.IsisRouter_Adjacencies] {
+	return ygnmi.NewSingletonQuery[*oc.IsisRouter_Adjacencies](
+		"IsisRouter_Adjacencies",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *IsisRouter_AdjacenciesPathAny) State() ygnmi.WildcardQuery[*oc.IsisRouter_Adjacencies] {
+	return ygnmi.NewWildcardQuery[*oc.IsisRouter_Adjacencies](
+		"IsisRouter_Adjacencies",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// IsisRouter_Adjacencies_Adjacency_InterfaceNamePath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/adjacencies/state/adjacency/state/interface-name YANG schema element.
+type IsisRouter_Adjacencies_Adjacency_InterfaceNamePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// IsisRouter_Adjacencies_Adjacency_InterfaceNamePathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/adjacencies/state/adjacency/state/interface-name YANG schema element.
+type IsisRouter_Adjacencies_Adjacency_InterfaceNamePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/interface-name"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/interface-name"
+func (n *IsisRouter_Adjacencies_Adjacency_InterfaceNamePath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewSingletonQuery[string](
+		"IsisRouter_Adjacencies_Adjacency",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "interface-name"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.IsisRouter_Adjacencies_Adjacency).InterfaceName
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.IsisRouter_Adjacencies_Adjacency) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/interface-name"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/interface-name"
+func (n *IsisRouter_Adjacencies_Adjacency_InterfaceNamePathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"IsisRouter_Adjacencies_Adjacency",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "interface-name"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.IsisRouter_Adjacencies_Adjacency).InterfaceName
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.IsisRouter_Adjacencies_Adjacency) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "interface-name"
+//	Path from root:       ""
+func (n *IsisRouter_Adjacencies_Adjacency_InterfaceNamePath) Config() ygnmi.ConfigQuery[string] {
+	return ygnmi.NewConfigQuery[string](
+		"IsisRouter_Adjacencies_Adjacency",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"interface-name"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.IsisRouter_Adjacencies_Adjacency).InterfaceName
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.IsisRouter_Adjacencies_Adjacency) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "interface-name"
+//	Path from root:       ""
+func (n *IsisRouter_Adjacencies_Adjacency_InterfaceNamePathAny) Config() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"IsisRouter_Adjacencies_Adjacency",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"interface-name"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.IsisRouter_Adjacencies_Adjacency).InterfaceName
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.IsisRouter_Adjacencies_Adjacency) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// IsisRouter_Adjacencies_Adjacency_NeighborSystemIdPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-system-id YANG schema element.
+type IsisRouter_Adjacencies_Adjacency_NeighborSystemIdPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// IsisRouter_Adjacencies_Adjacency_NeighborSystemIdPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-system-id YANG schema element.
+type IsisRouter_Adjacencies_Adjacency_NeighborSystemIdPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/neighbor-system-id"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-system-id"
+func (n *IsisRouter_Adjacencies_Adjacency_NeighborSystemIdPath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewSingletonQuery[string](
+		"IsisRouter_Adjacencies_Adjacency",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "neighbor-system-id"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.IsisRouter_Adjacencies_Adjacency).NeighborSystemId
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.IsisRouter_Adjacencies_Adjacency) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/neighbor-system-id"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-system-id"
+func (n *IsisRouter_Adjacencies_Adjacency_NeighborSystemIdPathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"IsisRouter_Adjacencies_Adjacency",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "neighbor-system-id"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.IsisRouter_Adjacencies_Adjacency).NeighborSystemId
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.IsisRouter_Adjacencies_Adjacency) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "neighbor-system-id"
+//	Path from root:       ""
+func (n *IsisRouter_Adjacencies_Adjacency_NeighborSystemIdPath) Config() ygnmi.ConfigQuery[string] {
+	return ygnmi.NewConfigQuery[string](
+		"IsisRouter_Adjacencies_Adjacency",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"neighbor-system-id"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.IsisRouter_Adjacencies_Adjacency).NeighborSystemId
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.IsisRouter_Adjacencies_Adjacency) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "neighbor-system-id"
+//	Path from root:       ""
+func (n *IsisRouter_Adjacencies_Adjacency_NeighborSystemIdPathAny) Config() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"IsisRouter_Adjacencies_Adjacency",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"neighbor-system-id"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.IsisRouter_Adjacencies_Adjacency).NeighborSystemId
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.IsisRouter_Adjacencies_Adjacency) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// IsisRouter_Adjacencies_AdjacencyPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/adjacencies/state/adjacency YANG schema element.
+type IsisRouter_Adjacencies_AdjacencyPath struct {
+	*ygnmi.NodePath
+}
+
+// IsisRouter_Adjacencies_AdjacencyPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/adjacencies/state/adjacency YANG schema element.
+type IsisRouter_Adjacencies_AdjacencyPathAny struct {
+	*ygnmi.NodePath
+}
+
+// IsisRouter_Adjacencies_AdjacencyPathMap represents the /open-traffic-generator-isis/isis-routers/isis-router/state/adjacencies/state/adjacency YANG schema element.
+type IsisRouter_Adjacencies_AdjacencyPathMap struct {
+	*ygnmi.NodePath
+}
+
+// IsisRouter_Adjacencies_AdjacencyPathMapAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/adjacencies/state/adjacency YANG schema element.
+type IsisRouter_Adjacencies_AdjacencyPathMapAny struct {
+	*ygnmi.NodePath
+}
+
+// InterfaceName (leaf): ISIS Interface name as defined in set_config
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "*/interface-name"
+//	Path from root:       "/isis-routers/isis-router/*/adjacencies/*/adjacency/*/interface-name"
+func (n *IsisRouter_Adjacencies_AdjacencyPath) InterfaceName() *IsisRouter_Adjacencies_Adjacency_InterfaceNamePath {
+	ps := &IsisRouter_Adjacencies_Adjacency_InterfaceNamePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "interface-name"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// InterfaceName (leaf): ISIS Interface name as defined in set_config
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "*/interface-name"
+//	Path from root:       "/isis-routers/isis-router/*/adjacencies/*/adjacency/*/interface-name"
+func (n *IsisRouter_Adjacencies_AdjacencyPathAny) InterfaceName() *IsisRouter_Adjacencies_Adjacency_InterfaceNamePathAny {
+	ps := &IsisRouter_Adjacencies_Adjacency_InterfaceNamePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "interface-name"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// LocalState (container): Local State parameter.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/local-state"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/local-state"
+func (n *IsisRouter_Adjacencies_AdjacencyPath) LocalState() *IsisRouter_Adjacencies_Adjacency_LocalStatePath {
+	ps := &IsisRouter_Adjacencies_Adjacency_LocalStatePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "local-state"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// LocalState (container): Local State parameter.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/local-state"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/local-state"
+func (n *IsisRouter_Adjacencies_AdjacencyPathAny) LocalState() *IsisRouter_Adjacencies_Adjacency_LocalStatePathAny {
+	ps := &IsisRouter_Adjacencies_Adjacency_LocalStatePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "local-state"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// NeighborState (container): Neighbor Adjacency .
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/neighbor-state"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state"
+func (n *IsisRouter_Adjacencies_AdjacencyPath) NeighborState() *IsisRouter_Adjacencies_Adjacency_NeighborStatePath {
+	ps := &IsisRouter_Adjacencies_Adjacency_NeighborStatePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "neighbor-state"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// NeighborState (container): Neighbor Adjacency .
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/neighbor-state"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state"
+func (n *IsisRouter_Adjacencies_AdjacencyPathAny) NeighborState() *IsisRouter_Adjacencies_Adjacency_NeighborStatePathAny {
+	ps := &IsisRouter_Adjacencies_Adjacency_NeighborStatePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "neighbor-state"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// NeighborSystemId (leaf): Neighbor System ID e.g. '650000000001'.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "*/neighbor-system-id"
+//	Path from root:       "/isis-routers/isis-router/*/adjacencies/*/adjacency/*/neighbor-system-id"
+func (n *IsisRouter_Adjacencies_AdjacencyPath) NeighborSystemId() *IsisRouter_Adjacencies_Adjacency_NeighborSystemIdPath {
+	ps := &IsisRouter_Adjacencies_Adjacency_NeighborSystemIdPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "neighbor-system-id"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// NeighborSystemId (leaf): Neighbor System ID e.g. '650000000001'.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "*/neighbor-system-id"
+//	Path from root:       "/isis-routers/isis-router/*/adjacencies/*/adjacency/*/neighbor-system-id"
+func (n *IsisRouter_Adjacencies_AdjacencyPathAny) NeighborSystemId() *IsisRouter_Adjacencies_Adjacency_NeighborSystemIdPathAny {
+	ps := &IsisRouter_Adjacencies_Adjacency_NeighborSystemIdPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "neighbor-system-id"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *IsisRouter_Adjacencies_AdjacencyPath) State() ygnmi.SingletonQuery[*oc.IsisRouter_Adjacencies_Adjacency] {
+	return ygnmi.NewSingletonQuery[*oc.IsisRouter_Adjacencies_Adjacency](
+		"IsisRouter_Adjacencies_Adjacency",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *IsisRouter_Adjacencies_AdjacencyPathAny) State() ygnmi.WildcardQuery[*oc.IsisRouter_Adjacencies_Adjacency] {
+	return ygnmi.NewWildcardQuery[*oc.IsisRouter_Adjacencies_Adjacency](
+		"IsisRouter_Adjacencies_Adjacency",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// IsisRouter_Adjacencies_Adjacency_LocalState_HoldTimerPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/adjacencies/state/adjacency/state/local-state/state/hold-timer YANG schema element.
+type IsisRouter_Adjacencies_Adjacency_LocalState_HoldTimerPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// IsisRouter_Adjacencies_Adjacency_LocalState_HoldTimerPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/adjacencies/state/adjacency/state/local-state/state/hold-timer YANG schema element.
+type IsisRouter_Adjacencies_Adjacency_LocalState_HoldTimerPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/hold-timer"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/local-state/state/hold-timer"
+func (n *IsisRouter_Adjacencies_Adjacency_LocalState_HoldTimerPath) State() ygnmi.SingletonQuery[uint32] {
+	return ygnmi.NewSingletonQuery[uint32](
+		"IsisRouter_Adjacencies_Adjacency_LocalState",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "hold-timer"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.IsisRouter_Adjacencies_Adjacency_LocalState).HoldTimer
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.IsisRouter_Adjacencies_Adjacency_LocalState) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/hold-timer"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/local-state/state/hold-timer"
+func (n *IsisRouter_Adjacencies_Adjacency_LocalState_HoldTimerPathAny) State() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewWildcardQuery[uint32](
+		"IsisRouter_Adjacencies_Adjacency_LocalState",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "hold-timer"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.IsisRouter_Adjacencies_Adjacency_LocalState).HoldTimer
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.IsisRouter_Adjacencies_Adjacency_LocalState) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// IsisRouter_Adjacencies_Adjacency_LocalState_LevelTypePath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/adjacencies/state/adjacency/state/local-state/state/level-type YANG schema element.
+type IsisRouter_Adjacencies_Adjacency_LocalState_LevelTypePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// IsisRouter_Adjacencies_Adjacency_LocalState_LevelTypePathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/adjacencies/state/adjacency/state/local-state/state/level-type YANG schema element.
+type IsisRouter_Adjacencies_Adjacency_LocalState_LevelTypePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/level-type"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/local-state/state/level-type"
+func (n *IsisRouter_Adjacencies_Adjacency_LocalState_LevelTypePath) State() ygnmi.SingletonQuery[oc.E_LocalState_LevelType] {
+	return ygnmi.NewSingletonQuery[oc.E_LocalState_LevelType](
+		"IsisRouter_Adjacencies_Adjacency_LocalState",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "level-type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_LocalState_LevelType, bool) {
+			ret := gs.(*oc.IsisRouter_Adjacencies_Adjacency_LocalState).LevelType
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.IsisRouter_Adjacencies_Adjacency_LocalState) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/level-type"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/local-state/state/level-type"
+func (n *IsisRouter_Adjacencies_Adjacency_LocalState_LevelTypePathAny) State() ygnmi.WildcardQuery[oc.E_LocalState_LevelType] {
+	return ygnmi.NewWildcardQuery[oc.E_LocalState_LevelType](
+		"IsisRouter_Adjacencies_Adjacency_LocalState",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "level-type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_LocalState_LevelType, bool) {
+			ret := gs.(*oc.IsisRouter_Adjacencies_Adjacency_LocalState).LevelType
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.IsisRouter_Adjacencies_Adjacency_LocalState) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// IsisRouter_Adjacencies_Adjacency_LocalStatePath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/adjacencies/state/adjacency/state/local-state YANG schema element.
+type IsisRouter_Adjacencies_Adjacency_LocalStatePath struct {
+	*ygnmi.NodePath
+}
+
+// IsisRouter_Adjacencies_Adjacency_LocalStatePathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/adjacencies/state/adjacency/state/local-state YANG schema element.
+type IsisRouter_Adjacencies_Adjacency_LocalStatePathAny struct {
+	*ygnmi.NodePath
+}
+
+// HoldTimer (leaf): Hold timer being sent in the IIH PDU.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/hold-timer"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/local-state/state/hold-timer"
+func (n *IsisRouter_Adjacencies_Adjacency_LocalStatePath) HoldTimer() *IsisRouter_Adjacencies_Adjacency_LocalState_HoldTimerPath {
+	ps := &IsisRouter_Adjacencies_Adjacency_LocalState_HoldTimerPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "hold-timer"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// HoldTimer (leaf): Hold timer being sent in the IIH PDU.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/hold-timer"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/local-state/state/hold-timer"
+func (n *IsisRouter_Adjacencies_Adjacency_LocalStatePathAny) HoldTimer() *IsisRouter_Adjacencies_Adjacency_LocalState_HoldTimerPathAny {
+	ps := &IsisRouter_Adjacencies_Adjacency_LocalState_HoldTimerPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "hold-timer"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// LevelType (leaf): IIH Level type.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/level-type"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/local-state/state/level-type"
+func (n *IsisRouter_Adjacencies_Adjacency_LocalStatePath) LevelType() *IsisRouter_Adjacencies_Adjacency_LocalState_LevelTypePath {
+	ps := &IsisRouter_Adjacencies_Adjacency_LocalState_LevelTypePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "level-type"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// LevelType (leaf): IIH Level type.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/level-type"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/local-state/state/level-type"
+func (n *IsisRouter_Adjacencies_Adjacency_LocalStatePathAny) LevelType() *IsisRouter_Adjacencies_Adjacency_LocalState_LevelTypePathAny {
+	ps := &IsisRouter_Adjacencies_Adjacency_LocalState_LevelTypePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "level-type"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// LocalRestartingStatus (container): Container for Restarting Status.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/local-restarting-status"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/local-state/state/local-restarting-status"
+func (n *IsisRouter_Adjacencies_Adjacency_LocalStatePath) LocalRestartingStatus() *IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatusPath {
+	ps := &IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatusPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "local-restarting-status"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// LocalRestartingStatus (container): Container for Restarting Status.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/local-restarting-status"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/local-state/state/local-restarting-status"
+func (n *IsisRouter_Adjacencies_Adjacency_LocalStatePathAny) LocalRestartingStatus() *IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatusPathAny {
+	ps := &IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatusPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "local-restarting-status"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *IsisRouter_Adjacencies_Adjacency_LocalStatePath) State() ygnmi.SingletonQuery[*oc.IsisRouter_Adjacencies_Adjacency_LocalState] {
+	return ygnmi.NewSingletonQuery[*oc.IsisRouter_Adjacencies_Adjacency_LocalState](
+		"IsisRouter_Adjacencies_Adjacency_LocalState",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *IsisRouter_Adjacencies_Adjacency_LocalStatePathAny) State() ygnmi.WildcardQuery[*oc.IsisRouter_Adjacencies_Adjacency_LocalState] {
+	return ygnmi.NewWildcardQuery[*oc.IsisRouter_Adjacencies_Adjacency_LocalState](
+		"IsisRouter_Adjacencies_Adjacency_LocalState",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_CurrentStatePath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/adjacencies/state/adjacency/state/local-state/state/local-restarting-status/state/current-state YANG schema element.
+type IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_CurrentStatePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_CurrentStatePathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/adjacencies/state/adjacency/state/local-state/state/local-restarting-status/state/current-state YANG schema element.
+type IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_CurrentStatePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/current-state"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/local-state/state/local-restarting-status/state/current-state"
+func (n *IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_CurrentStatePath) State() ygnmi.SingletonQuery[oc.E_LocalRestartingStatus_CurrentState] {
+	return ygnmi.NewSingletonQuery[oc.E_LocalRestartingStatus_CurrentState](
+		"IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "current-state"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_LocalRestartingStatus_CurrentState, bool) {
+			ret := gs.(*oc.IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus).CurrentState
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/current-state"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/local-state/state/local-restarting-status/state/current-state"
+func (n *IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_CurrentStatePathAny) State() ygnmi.WildcardQuery[oc.E_LocalRestartingStatus_CurrentState] {
+	return ygnmi.NewWildcardQuery[oc.E_LocalRestartingStatus_CurrentState](
+		"IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "current-state"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_LocalRestartingStatus_CurrentState, bool) {
+			ret := gs.(*oc.IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus).CurrentState
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatusPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/adjacencies/state/adjacency/state/local-state/state/local-restarting-status YANG schema element.
+type IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatusPath struct {
+	*ygnmi.NodePath
+}
+
+// IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatusPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/adjacencies/state/adjacency/state/local-state/state/local-restarting-status YANG schema element.
+type IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatusPathAny struct {
+	*ygnmi.NodePath
+}
+
+// CurrentState (leaf): Restart State of this Router.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/current-state"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/local-state/state/local-restarting-status/state/current-state"
+func (n *IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatusPath) CurrentState() *IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_CurrentStatePath {
+	ps := &IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_CurrentStatePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "current-state"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// CurrentState (leaf): Restart State of this Router.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/current-state"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/local-state/state/local-restarting-status/state/current-state"
+func (n *IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatusPathAny) CurrentState() *IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_CurrentStatePathAny {
+	ps := &IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_CurrentStatePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "current-state"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// LocalLastRestartingAttemptStatus (container): Container for Restarting Attempt Status.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/local-last-restarting-attempt-status"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/local-state/state/local-restarting-status/state/local-last-restarting-attempt-status"
+func (n *IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatusPath) LocalLastRestartingAttemptStatus() *IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatusPath {
+	ps := &IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatusPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "local-last-restarting-attempt-status"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// LocalLastRestartingAttemptStatus (container): Container for Restarting Attempt Status.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/local-last-restarting-attempt-status"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/local-state/state/local-restarting-status/state/local-last-restarting-attempt-status"
+func (n *IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatusPathAny) LocalLastRestartingAttemptStatus() *IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatusPathAny {
+	ps := &IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatusPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "local-last-restarting-attempt-status"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatusPath) State() ygnmi.SingletonQuery[*oc.IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus] {
+	return ygnmi.NewSingletonQuery[*oc.IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus](
+		"IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatusPathAny) State() ygnmi.WildcardQuery[*oc.IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus] {
+	return ygnmi.NewWildcardQuery[*oc.IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus](
+		"IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptStatusTypePath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/adjacencies/state/adjacency/state/local-state/state/local-restarting-status/state/local-last-restarting-attempt-status/state/local-last-restarting-attempt-status-type YANG schema element.
+type IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptStatusTypePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptStatusTypePathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/adjacencies/state/adjacency/state/local-state/state/local-restarting-status/state/local-last-restarting-attempt-status/state/local-last-restarting-attempt-status-type YANG schema element.
+type IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptStatusTypePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/local-last-restarting-attempt-status-type"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/local-state/state/local-restarting-status/state/local-last-restarting-attempt-status/state/local-last-restarting-attempt-status-type"
+func (n *IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptStatusTypePath) State() ygnmi.SingletonQuery[oc.E_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptStatusType] {
+	return ygnmi.NewSingletonQuery[oc.E_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptStatusType](
+		"IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "local-last-restarting-attempt-status-type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptStatusType, bool) {
+			ret := gs.(*oc.IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus).LocalLastRestartingAttemptStatusType
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/local-last-restarting-attempt-status-type"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/local-state/state/local-restarting-status/state/local-last-restarting-attempt-status/state/local-last-restarting-attempt-status-type"
+func (n *IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptStatusTypePathAny) State() ygnmi.WildcardQuery[oc.E_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptStatusType] {
+	return ygnmi.NewWildcardQuery[oc.E_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptStatusType](
+		"IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "local-last-restarting-attempt-status-type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptStatusType, bool) {
+			ret := gs.(*oc.IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus).LocalLastRestartingAttemptStatusType
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatusPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/adjacencies/state/adjacency/state/local-state/state/local-restarting-status/state/local-last-restarting-attempt-status YANG schema element.
+type IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatusPath struct {
+	*ygnmi.NodePath
+}
+
+// IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatusPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/adjacencies/state/adjacency/state/local-state/state/local-restarting-status/state/local-last-restarting-attempt-status YANG schema element.
+type IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatusPathAny struct {
+	*ygnmi.NodePath
+}
+
+// LocalLastRestartingAttemptFailed (container): Container for Last Restarting Attempt that was succeeded.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/local-last-restarting-attempt-failed"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/local-state/state/local-restarting-status/state/local-last-restarting-attempt-status/state/local-last-restarting-attempt-failed"
+func (n *IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatusPath) LocalLastRestartingAttemptFailed() *IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptFailedPath {
+	ps := &IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptFailedPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "local-last-restarting-attempt-failed"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// LocalLastRestartingAttemptFailed (container): Container for Last Restarting Attempt that was succeeded.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/local-last-restarting-attempt-failed"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/local-state/state/local-restarting-status/state/local-last-restarting-attempt-status/state/local-last-restarting-attempt-failed"
+func (n *IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatusPathAny) LocalLastRestartingAttemptFailed() *IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptFailedPathAny {
+	ps := &IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptFailedPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "local-last-restarting-attempt-failed"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// LocalLastRestartingAttemptStatusType (leaf): The status of the last attempted Graceful Restart by the local ISIS router.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/local-last-restarting-attempt-status-type"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/local-state/state/local-restarting-status/state/local-last-restarting-attempt-status/state/local-last-restarting-attempt-status-type"
+func (n *IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatusPath) LocalLastRestartingAttemptStatusType() *IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptStatusTypePath {
+	ps := &IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptStatusTypePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "local-last-restarting-attempt-status-type"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// LocalLastRestartingAttemptStatusType (leaf): The status of the last attempted Graceful Restart by the local ISIS router.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/local-last-restarting-attempt-status-type"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/local-state/state/local-restarting-status/state/local-last-restarting-attempt-status/state/local-last-restarting-attempt-status-type"
+func (n *IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatusPathAny) LocalLastRestartingAttemptStatusType() *IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptStatusTypePathAny {
+	ps := &IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptStatusTypePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "local-last-restarting-attempt-status-type"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// LocalLastRestartingAttemptSucceeded (container): Container for for additional information related to the last Graceful Restart attempt initiated by the local ISIS Router if it succeeded.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/local-last-restarting-attempt-succeeded"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/local-state/state/local-restarting-status/state/local-last-restarting-attempt-status/state/local-last-restarting-attempt-succeeded"
+func (n *IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatusPath) LocalLastRestartingAttemptSucceeded() *IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptSucceededPath {
+	ps := &IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptSucceededPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "local-last-restarting-attempt-succeeded"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// LocalLastRestartingAttemptSucceeded (container): Container for for additional information related to the last Graceful Restart attempt initiated by the local ISIS Router if it succeeded.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/local-last-restarting-attempt-succeeded"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/local-state/state/local-restarting-status/state/local-last-restarting-attempt-status/state/local-last-restarting-attempt-succeeded"
+func (n *IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatusPathAny) LocalLastRestartingAttemptSucceeded() *IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptSucceededPathAny {
+	ps := &IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptSucceededPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "local-last-restarting-attempt-succeeded"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatusPath) State() ygnmi.SingletonQuery[*oc.IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus] {
+	return ygnmi.NewSingletonQuery[*oc.IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus](
+		"IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatusPathAny) State() ygnmi.WildcardQuery[*oc.IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus] {
+	return ygnmi.NewWildcardQuery[*oc.IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus](
+		"IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptFailed_ReasonPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/adjacencies/state/adjacency/state/local-state/state/local-restarting-status/state/local-last-restarting-attempt-status/state/local-last-restarting-attempt-failed/state/reason YANG schema element.
+type IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptFailed_ReasonPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptFailed_ReasonPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/adjacencies/state/adjacency/state/local-state/state/local-restarting-status/state/local-last-restarting-attempt-status/state/local-last-restarting-attempt-failed/state/reason YANG schema element.
+type IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptFailed_ReasonPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/reason"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/local-state/state/local-restarting-status/state/local-last-restarting-attempt-status/state/local-last-restarting-attempt-failed/state/reason"
+func (n *IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptFailed_ReasonPath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewSingletonQuery[string](
+		"IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptFailed",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "reason"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptFailed).Reason
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptFailed)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/reason"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/local-state/state/local-restarting-status/state/local-last-restarting-attempt-status/state/local-last-restarting-attempt-failed/state/reason"
+func (n *IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptFailed_ReasonPathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptFailed",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "reason"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptFailed).Reason
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptFailed)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptFailedPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/adjacencies/state/adjacency/state/local-state/state/local-restarting-status/state/local-last-restarting-attempt-status/state/local-last-restarting-attempt-failed YANG schema element.
+type IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptFailedPath struct {
+	*ygnmi.NodePath
+}
+
+// IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptFailedPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/adjacencies/state/adjacency/state/local-state/state/local-restarting-status/state/local-last-restarting-attempt-status/state/local-last-restarting-attempt-failed YANG schema element.
+type IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptFailedPathAny struct {
+	*ygnmi.NodePath
+}
+
+// Reason (leaf): Failure reason of last Graceful Restart.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/reason"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/local-state/state/local-restarting-status/state/local-last-restarting-attempt-status/state/local-last-restarting-attempt-failed/state/reason"
+func (n *IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptFailedPath) Reason() *IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptFailed_ReasonPath {
+	ps := &IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptFailed_ReasonPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "reason"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Reason (leaf): Failure reason of last Graceful Restart.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/reason"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/local-state/state/local-restarting-status/state/local-last-restarting-attempt-status/state/local-last-restarting-attempt-failed/state/reason"
+func (n *IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptFailedPathAny) Reason() *IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptFailed_ReasonPathAny {
+	ps := &IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptFailed_ReasonPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "reason"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptFailedPath) State() ygnmi.SingletonQuery[*oc.IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptFailed] {
+	return ygnmi.NewSingletonQuery[*oc.IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptFailed](
+		"IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptFailed",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptFailedPathAny) State() ygnmi.WildcardQuery[*oc.IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptFailed] {
+	return ygnmi.NewWildcardQuery[*oc.IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptFailed](
+		"IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptFailed",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptSucceeded_LocalAdjacencyBringUpTimePath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/adjacencies/state/adjacency/state/local-state/state/local-restarting-status/state/local-last-restarting-attempt-status/state/local-last-restarting-attempt-succeeded/state/local-adjacency-bring-up-time YANG schema element.
+type IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptSucceeded_LocalAdjacencyBringUpTimePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptSucceeded_LocalAdjacencyBringUpTimePathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/adjacencies/state/adjacency/state/local-state/state/local-restarting-status/state/local-last-restarting-attempt-status/state/local-last-restarting-attempt-succeeded/state/local-adjacency-bring-up-time YANG schema element.
+type IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptSucceeded_LocalAdjacencyBringUpTimePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/local-adjacency-bring-up-time"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/local-state/state/local-restarting-status/state/local-last-restarting-attempt-status/state/local-last-restarting-attempt-succeeded/state/local-adjacency-bring-up-time"
+func (n *IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptSucceeded_LocalAdjacencyBringUpTimePath) State() ygnmi.SingletonQuery[uint32] {
+	return ygnmi.NewSingletonQuery[uint32](
+		"IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptSucceeded",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "local-adjacency-bring-up-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptSucceeded).LocalAdjacencyBringUpTime
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptSucceeded)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/local-adjacency-bring-up-time"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/local-state/state/local-restarting-status/state/local-last-restarting-attempt-status/state/local-last-restarting-attempt-succeeded/state/local-adjacency-bring-up-time"
+func (n *IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptSucceeded_LocalAdjacencyBringUpTimePathAny) State() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewWildcardQuery[uint32](
+		"IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptSucceeded",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "local-adjacency-bring-up-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptSucceeded).LocalAdjacencyBringUpTime
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptSucceeded)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptSucceeded_LocalLsdbSyncupTimePath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/adjacencies/state/adjacency/state/local-state/state/local-restarting-status/state/local-last-restarting-attempt-status/state/local-last-restarting-attempt-succeeded/state/local-lsdb-syncup-time YANG schema element.
+type IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptSucceeded_LocalLsdbSyncupTimePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptSucceeded_LocalLsdbSyncupTimePathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/adjacencies/state/adjacency/state/local-state/state/local-restarting-status/state/local-last-restarting-attempt-status/state/local-last-restarting-attempt-succeeded/state/local-lsdb-syncup-time YANG schema element.
+type IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptSucceeded_LocalLsdbSyncupTimePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/local-lsdb-syncup-time"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/local-state/state/local-restarting-status/state/local-last-restarting-attempt-status/state/local-last-restarting-attempt-succeeded/state/local-lsdb-syncup-time"
+func (n *IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptSucceeded_LocalLsdbSyncupTimePath) State() ygnmi.SingletonQuery[uint32] {
+	return ygnmi.NewSingletonQuery[uint32](
+		"IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptSucceeded",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "local-lsdb-syncup-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptSucceeded).LocalLsdbSyncupTime
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptSucceeded)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/local-lsdb-syncup-time"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/local-state/state/local-restarting-status/state/local-last-restarting-attempt-status/state/local-last-restarting-attempt-succeeded/state/local-lsdb-syncup-time"
+func (n *IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptSucceeded_LocalLsdbSyncupTimePathAny) State() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewWildcardQuery[uint32](
+		"IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptSucceeded",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "local-lsdb-syncup-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptSucceeded).LocalLsdbSyncupTime
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptSucceeded)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptSucceededPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/adjacencies/state/adjacency/state/local-state/state/local-restarting-status/state/local-last-restarting-attempt-status/state/local-last-restarting-attempt-succeeded YANG schema element.
+type IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptSucceededPath struct {
+	*ygnmi.NodePath
+}
+
+// IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptSucceededPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/adjacencies/state/adjacency/state/local-state/state/local-restarting-status/state/local-last-restarting-attempt-status/state/local-last-restarting-attempt-succeeded YANG schema element.
+type IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptSucceededPathAny struct {
+	*ygnmi.NodePath
+}
+
+// LocalAdjacencyBringUpTime (leaf): The time (in seconds) is measured from when the Restart TLV with RR bit set is sent
+// in an IIH PDU upto the time when Restart TLV is sent with RR bit unset.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/local-adjacency-bring-up-time"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/local-state/state/local-restarting-status/state/local-last-restarting-attempt-status/state/local-last-restarting-attempt-succeeded/state/local-adjacency-bring-up-time"
+func (n *IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptSucceededPath) LocalAdjacencyBringUpTime() *IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptSucceeded_LocalAdjacencyBringUpTimePath {
+	ps := &IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptSucceeded_LocalAdjacencyBringUpTimePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "local-adjacency-bring-up-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// LocalAdjacencyBringUpTime (leaf): The time (in seconds) is measured from when the Restart TLV with RR bit set is sent
+// in an IIH PDU upto the time when Restart TLV is sent with RR bit unset.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/local-adjacency-bring-up-time"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/local-state/state/local-restarting-status/state/local-last-restarting-attempt-status/state/local-last-restarting-attempt-succeeded/state/local-adjacency-bring-up-time"
+func (n *IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptSucceededPathAny) LocalAdjacencyBringUpTime() *IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptSucceeded_LocalAdjacencyBringUpTimePathAny {
+	ps := &IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptSucceeded_LocalAdjacencyBringUpTimePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "local-adjacency-bring-up-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// LocalLsdbSyncupTime (leaf): The time (in seconds) is taken to synchronize the L1 and L2 LSDB by this Restarting router.
+// By this time, the CSNP list is cleared and all LSPs are collected by the neighbor(s)
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/local-lsdb-syncup-time"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/local-state/state/local-restarting-status/state/local-last-restarting-attempt-status/state/local-last-restarting-attempt-succeeded/state/local-lsdb-syncup-time"
+func (n *IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptSucceededPath) LocalLsdbSyncupTime() *IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptSucceeded_LocalLsdbSyncupTimePath {
+	ps := &IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptSucceeded_LocalLsdbSyncupTimePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "local-lsdb-syncup-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// LocalLsdbSyncupTime (leaf): The time (in seconds) is taken to synchronize the L1 and L2 LSDB by this Restarting router.
+// By this time, the CSNP list is cleared and all LSPs are collected by the neighbor(s)
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/local-lsdb-syncup-time"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/local-state/state/local-restarting-status/state/local-last-restarting-attempt-status/state/local-last-restarting-attempt-succeeded/state/local-lsdb-syncup-time"
+func (n *IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptSucceededPathAny) LocalLsdbSyncupTime() *IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptSucceeded_LocalLsdbSyncupTimePathAny {
+	ps := &IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptSucceeded_LocalLsdbSyncupTimePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "local-lsdb-syncup-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptSucceededPath) State() ygnmi.SingletonQuery[*oc.IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptSucceeded] {
+	return ygnmi.NewSingletonQuery[*oc.IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptSucceeded](
+		"IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptSucceeded",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptSucceededPathAny) State() ygnmi.WildcardQuery[*oc.IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptSucceeded] {
+	return ygnmi.NewWildcardQuery[*oc.IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptSucceeded](
+		"IsisRouter_Adjacencies_Adjacency_LocalState_LocalRestartingStatus_LocalLastRestartingAttemptStatus_LocalLastRestartingAttemptSucceeded",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// IsisRouter_Adjacencies_Adjacency_NeighborState_HoldTimerPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state/state/hold-timer YANG schema element.
+type IsisRouter_Adjacencies_Adjacency_NeighborState_HoldTimerPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// IsisRouter_Adjacencies_Adjacency_NeighborState_HoldTimerPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state/state/hold-timer YANG schema element.
+type IsisRouter_Adjacencies_Adjacency_NeighborState_HoldTimerPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/hold-timer"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state/state/hold-timer"
+func (n *IsisRouter_Adjacencies_Adjacency_NeighborState_HoldTimerPath) State() ygnmi.SingletonQuery[uint32] {
+	return ygnmi.NewSingletonQuery[uint32](
+		"IsisRouter_Adjacencies_Adjacency_NeighborState",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "hold-timer"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.IsisRouter_Adjacencies_Adjacency_NeighborState).HoldTimer
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.IsisRouter_Adjacencies_Adjacency_NeighborState) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/hold-timer"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state/state/hold-timer"
+func (n *IsisRouter_Adjacencies_Adjacency_NeighborState_HoldTimerPathAny) State() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewWildcardQuery[uint32](
+		"IsisRouter_Adjacencies_Adjacency_NeighborState",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "hold-timer"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.IsisRouter_Adjacencies_Adjacency_NeighborState).HoldTimer
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.IsisRouter_Adjacencies_Adjacency_NeighborState) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// IsisRouter_Adjacencies_Adjacency_NeighborState_LevelTypePath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state/state/level-type YANG schema element.
+type IsisRouter_Adjacencies_Adjacency_NeighborState_LevelTypePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// IsisRouter_Adjacencies_Adjacency_NeighborState_LevelTypePathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state/state/level-type YANG schema element.
+type IsisRouter_Adjacencies_Adjacency_NeighborState_LevelTypePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/level-type"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state/state/level-type"
+func (n *IsisRouter_Adjacencies_Adjacency_NeighborState_LevelTypePath) State() ygnmi.SingletonQuery[oc.E_NeighborState_LevelType] {
+	return ygnmi.NewSingletonQuery[oc.E_NeighborState_LevelType](
+		"IsisRouter_Adjacencies_Adjacency_NeighborState",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "level-type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_NeighborState_LevelType, bool) {
+			ret := gs.(*oc.IsisRouter_Adjacencies_Adjacency_NeighborState).LevelType
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.IsisRouter_Adjacencies_Adjacency_NeighborState) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/level-type"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state/state/level-type"
+func (n *IsisRouter_Adjacencies_Adjacency_NeighborState_LevelTypePathAny) State() ygnmi.WildcardQuery[oc.E_NeighborState_LevelType] {
+	return ygnmi.NewWildcardQuery[oc.E_NeighborState_LevelType](
+		"IsisRouter_Adjacencies_Adjacency_NeighborState",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "level-type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_NeighborState_LevelType, bool) {
+			ret := gs.(*oc.IsisRouter_Adjacencies_Adjacency_NeighborState).LevelType
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.IsisRouter_Adjacencies_Adjacency_NeighborState) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// IsisRouter_Adjacencies_Adjacency_NeighborStatePath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state YANG schema element.
+type IsisRouter_Adjacencies_Adjacency_NeighborStatePath struct {
+	*ygnmi.NodePath
+}
+
+// IsisRouter_Adjacencies_Adjacency_NeighborStatePathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state YANG schema element.
+type IsisRouter_Adjacencies_Adjacency_NeighborStatePathAny struct {
+	*ygnmi.NodePath
+}
+
+// HoldTimer (leaf): Hold timer being sent in the IIH PDU.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/hold-timer"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state/state/hold-timer"
+func (n *IsisRouter_Adjacencies_Adjacency_NeighborStatePath) HoldTimer() *IsisRouter_Adjacencies_Adjacency_NeighborState_HoldTimerPath {
+	ps := &IsisRouter_Adjacencies_Adjacency_NeighborState_HoldTimerPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "hold-timer"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// HoldTimer (leaf): Hold timer being sent in the IIH PDU.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/hold-timer"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state/state/hold-timer"
+func (n *IsisRouter_Adjacencies_Adjacency_NeighborStatePathAny) HoldTimer() *IsisRouter_Adjacencies_Adjacency_NeighborState_HoldTimerPathAny {
+	ps := &IsisRouter_Adjacencies_Adjacency_NeighborState_HoldTimerPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "hold-timer"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// LevelType (leaf): IIH Level type.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/level-type"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state/state/level-type"
+func (n *IsisRouter_Adjacencies_Adjacency_NeighborStatePath) LevelType() *IsisRouter_Adjacencies_Adjacency_NeighborState_LevelTypePath {
+	ps := &IsisRouter_Adjacencies_Adjacency_NeighborState_LevelTypePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "level-type"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// LevelType (leaf): IIH Level type.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/level-type"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state/state/level-type"
+func (n *IsisRouter_Adjacencies_Adjacency_NeighborStatePathAny) LevelType() *IsisRouter_Adjacencies_Adjacency_NeighborState_LevelTypePathAny {
+	ps := &IsisRouter_Adjacencies_Adjacency_NeighborState_LevelTypePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "level-type"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// NeighRestartingStatus (container): Container for Restarting Status.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/neigh-restarting-status"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state/state/neigh-restarting-status"
+func (n *IsisRouter_Adjacencies_Adjacency_NeighborStatePath) NeighRestartingStatus() *IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatusPath {
+	ps := &IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatusPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "neigh-restarting-status"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// NeighRestartingStatus (container): Container for Restarting Status.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/neigh-restarting-status"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state/state/neigh-restarting-status"
+func (n *IsisRouter_Adjacencies_Adjacency_NeighborStatePathAny) NeighRestartingStatus() *IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatusPathAny {
+	ps := &IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatusPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "neigh-restarting-status"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// Tlvs (container): This contains the list of TLVs present in a IIH PDU received from a neighbor IS-IS router.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/tlvs"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state/state/tlvs"
+func (n *IsisRouter_Adjacencies_Adjacency_NeighborStatePath) Tlvs() *IsisRouter_Adjacencies_Adjacency_NeighborState_TlvsPath {
+	ps := &IsisRouter_Adjacencies_Adjacency_NeighborState_TlvsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "tlvs"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// Tlvs (container): This contains the list of TLVs present in a IIH PDU received from a neighbor IS-IS router.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/tlvs"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state/state/tlvs"
+func (n *IsisRouter_Adjacencies_Adjacency_NeighborStatePathAny) Tlvs() *IsisRouter_Adjacencies_Adjacency_NeighborState_TlvsPathAny {
+	ps := &IsisRouter_Adjacencies_Adjacency_NeighborState_TlvsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "tlvs"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *IsisRouter_Adjacencies_Adjacency_NeighborStatePath) State() ygnmi.SingletonQuery[*oc.IsisRouter_Adjacencies_Adjacency_NeighborState] {
+	return ygnmi.NewSingletonQuery[*oc.IsisRouter_Adjacencies_Adjacency_NeighborState](
+		"IsisRouter_Adjacencies_Adjacency_NeighborState",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *IsisRouter_Adjacencies_Adjacency_NeighborStatePathAny) State() ygnmi.WildcardQuery[*oc.IsisRouter_Adjacencies_Adjacency_NeighborState] {
+	return ygnmi.NewWildcardQuery[*oc.IsisRouter_Adjacencies_Adjacency_NeighborState](
+		"IsisRouter_Adjacencies_Adjacency_NeighborState",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_CurrentStatePath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state/state/neigh-restarting-status/state/current-state YANG schema element.
+type IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_CurrentStatePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_CurrentStatePathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state/state/neigh-restarting-status/state/current-state YANG schema element.
+type IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_CurrentStatePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/current-state"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state/state/neigh-restarting-status/state/current-state"
+func (n *IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_CurrentStatePath) State() ygnmi.SingletonQuery[oc.E_NeighRestartingStatus_CurrentState] {
+	return ygnmi.NewSingletonQuery[oc.E_NeighRestartingStatus_CurrentState](
+		"IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "current-state"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_NeighRestartingStatus_CurrentState, bool) {
+			ret := gs.(*oc.IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus).CurrentState
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/current-state"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state/state/neigh-restarting-status/state/current-state"
+func (n *IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_CurrentStatePathAny) State() ygnmi.WildcardQuery[oc.E_NeighRestartingStatus_CurrentState] {
+	return ygnmi.NewWildcardQuery[oc.E_NeighRestartingStatus_CurrentState](
+		"IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "current-state"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_NeighRestartingStatus_CurrentState, bool) {
+			ret := gs.(*oc.IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus).CurrentState
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatusPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state/state/neigh-restarting-status YANG schema element.
+type IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatusPath struct {
+	*ygnmi.NodePath
+}
+
+// IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatusPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state/state/neigh-restarting-status YANG schema element.
+type IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatusPathAny struct {
+	*ygnmi.NodePath
+}
+
+// CurrentState (leaf): Restart State of the Neigbhor Router.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/current-state"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state/state/neigh-restarting-status/state/current-state"
+func (n *IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatusPath) CurrentState() *IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_CurrentStatePath {
+	ps := &IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_CurrentStatePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "current-state"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// CurrentState (leaf): Restart State of the Neigbhor Router.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/current-state"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state/state/neigh-restarting-status/state/current-state"
+func (n *IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatusPathAny) CurrentState() *IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_CurrentStatePathAny {
+	ps := &IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_CurrentStatePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "current-state"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// NeighLastRestartingAttemptStatus (container): Container for Restarting Attempt Status.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/neigh-last-restarting-attempt-status"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state/state/neigh-restarting-status/state/neigh-last-restarting-attempt-status"
+func (n *IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatusPath) NeighLastRestartingAttemptStatus() *IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatusPath {
+	ps := &IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatusPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "neigh-last-restarting-attempt-status"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// NeighLastRestartingAttemptStatus (container): Container for Restarting Attempt Status.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/neigh-last-restarting-attempt-status"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state/state/neigh-restarting-status/state/neigh-last-restarting-attempt-status"
+func (n *IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatusPathAny) NeighLastRestartingAttemptStatus() *IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatusPathAny {
+	ps := &IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatusPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "neigh-last-restarting-attempt-status"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatusPath) State() ygnmi.SingletonQuery[*oc.IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus] {
+	return ygnmi.NewSingletonQuery[*oc.IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus](
+		"IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatusPathAny) State() ygnmi.WildcardQuery[*oc.IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus] {
+	return ygnmi.NewWildcardQuery[*oc.IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus](
+		"IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptStatusTypePath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state/state/neigh-restarting-status/state/neigh-last-restarting-attempt-status/state/neigh-last-restarting-attempt-status-type YANG schema element.
+type IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptStatusTypePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptStatusTypePathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state/state/neigh-restarting-status/state/neigh-last-restarting-attempt-status/state/neigh-last-restarting-attempt-status-type YANG schema element.
+type IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptStatusTypePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/neigh-last-restarting-attempt-status-type"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state/state/neigh-restarting-status/state/neigh-last-restarting-attempt-status/state/neigh-last-restarting-attempt-status-type"
+func (n *IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptStatusTypePath) State() ygnmi.SingletonQuery[oc.E_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptStatusType] {
+	return ygnmi.NewSingletonQuery[oc.E_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptStatusType](
+		"IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "neigh-last-restarting-attempt-status-type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptStatusType, bool) {
+			ret := gs.(*oc.IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus).NeighLastRestartingAttemptStatusType
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/neigh-last-restarting-attempt-status-type"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state/state/neigh-restarting-status/state/neigh-last-restarting-attempt-status/state/neigh-last-restarting-attempt-status-type"
+func (n *IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptStatusTypePathAny) State() ygnmi.WildcardQuery[oc.E_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptStatusType] {
+	return ygnmi.NewWildcardQuery[oc.E_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptStatusType](
+		"IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "neigh-last-restarting-attempt-status-type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptStatusType, bool) {
+			ret := gs.(*oc.IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus).NeighLastRestartingAttemptStatusType
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatusPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state/state/neigh-restarting-status/state/neigh-last-restarting-attempt-status YANG schema element.
+type IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatusPath struct {
+	*ygnmi.NodePath
+}
+
+// IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatusPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state/state/neigh-restarting-status/state/neigh-last-restarting-attempt-status YANG schema element.
+type IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatusPathAny struct {
+	*ygnmi.NodePath
+}
+
+// NeighLastRestartingAttemptFailed (container): Container for Last Restarting Attempt that was succeeded.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/neigh-last-restarting-attempt-failed"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state/state/neigh-restarting-status/state/neigh-last-restarting-attempt-status/state/neigh-last-restarting-attempt-failed"
+func (n *IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatusPath) NeighLastRestartingAttemptFailed() *IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptFailedPath {
+	ps := &IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptFailedPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "neigh-last-restarting-attempt-failed"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// NeighLastRestartingAttemptFailed (container): Container for Last Restarting Attempt that was succeeded.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/neigh-last-restarting-attempt-failed"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state/state/neigh-restarting-status/state/neigh-last-restarting-attempt-status/state/neigh-last-restarting-attempt-failed"
+func (n *IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatusPathAny) NeighLastRestartingAttemptFailed() *IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptFailedPathAny {
+	ps := &IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptFailedPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "neigh-last-restarting-attempt-failed"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// NeighLastRestartingAttemptStatusType (leaf): The result type of Restarting Attempt Status of this neighbor
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/neigh-last-restarting-attempt-status-type"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state/state/neigh-restarting-status/state/neigh-last-restarting-attempt-status/state/neigh-last-restarting-attempt-status-type"
+func (n *IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatusPath) NeighLastRestartingAttemptStatusType() *IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptStatusTypePath {
+	ps := &IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptStatusTypePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "neigh-last-restarting-attempt-status-type"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// NeighLastRestartingAttemptStatusType (leaf): The result type of Restarting Attempt Status of this neighbor
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/neigh-last-restarting-attempt-status-type"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state/state/neigh-restarting-status/state/neigh-last-restarting-attempt-status/state/neigh-last-restarting-attempt-status-type"
+func (n *IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatusPathAny) NeighLastRestartingAttemptStatusType() *IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptStatusTypePathAny {
+	ps := &IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptStatusTypePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "neigh-last-restarting-attempt-status-type"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// NeighLastRestartingAttemptSucceeded (container): Container for Last Restarting Attempt that was succeeded.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/neigh-last-restarting-attempt-succeeded"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state/state/neigh-restarting-status/state/neigh-last-restarting-attempt-status/state/neigh-last-restarting-attempt-succeeded"
+func (n *IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatusPath) NeighLastRestartingAttemptSucceeded() *IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptSucceededPath {
+	ps := &IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptSucceededPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "neigh-last-restarting-attempt-succeeded"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// NeighLastRestartingAttemptSucceeded (container): Container for Last Restarting Attempt that was succeeded.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/neigh-last-restarting-attempt-succeeded"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state/state/neigh-restarting-status/state/neigh-last-restarting-attempt-status/state/neigh-last-restarting-attempt-succeeded"
+func (n *IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatusPathAny) NeighLastRestartingAttemptSucceeded() *IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptSucceededPathAny {
+	ps := &IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptSucceededPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "neigh-last-restarting-attempt-succeeded"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatusPath) State() ygnmi.SingletonQuery[*oc.IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus] {
+	return ygnmi.NewSingletonQuery[*oc.IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus](
+		"IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatusPathAny) State() ygnmi.WildcardQuery[*oc.IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus] {
+	return ygnmi.NewWildcardQuery[*oc.IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus](
+		"IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptFailed_ReasonPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state/state/neigh-restarting-status/state/neigh-last-restarting-attempt-status/state/neigh-last-restarting-attempt-failed/state/reason YANG schema element.
+type IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptFailed_ReasonPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptFailed_ReasonPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state/state/neigh-restarting-status/state/neigh-last-restarting-attempt-status/state/neigh-last-restarting-attempt-failed/state/reason YANG schema element.
+type IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptFailed_ReasonPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/reason"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state/state/neigh-restarting-status/state/neigh-last-restarting-attempt-status/state/neigh-last-restarting-attempt-failed/state/reason"
+func (n *IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptFailed_ReasonPath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewSingletonQuery[string](
+		"IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptFailed",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "reason"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptFailed).Reason
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptFailed)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/reason"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state/state/neigh-restarting-status/state/neigh-last-restarting-attempt-status/state/neigh-last-restarting-attempt-failed/state/reason"
+func (n *IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptFailed_ReasonPathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptFailed",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "reason"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptFailed).Reason
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptFailed)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptFailedPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state/state/neigh-restarting-status/state/neigh-last-restarting-attempt-status/state/neigh-last-restarting-attempt-failed YANG schema element.
+type IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptFailedPath struct {
+	*ygnmi.NodePath
+}
+
+// IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptFailedPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state/state/neigh-restarting-status/state/neigh-last-restarting-attempt-status/state/neigh-last-restarting-attempt-failed YANG schema element.
+type IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptFailedPathAny struct {
+	*ygnmi.NodePath
+}
+
+// Reason (leaf): Failure reason of last Graceful Restart.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/reason"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state/state/neigh-restarting-status/state/neigh-last-restarting-attempt-status/state/neigh-last-restarting-attempt-failed/state/reason"
+func (n *IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptFailedPath) Reason() *IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptFailed_ReasonPath {
+	ps := &IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptFailed_ReasonPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "reason"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Reason (leaf): Failure reason of last Graceful Restart.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/reason"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state/state/neigh-restarting-status/state/neigh-last-restarting-attempt-status/state/neigh-last-restarting-attempt-failed/state/reason"
+func (n *IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptFailedPathAny) Reason() *IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptFailed_ReasonPathAny {
+	ps := &IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptFailed_ReasonPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "reason"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptFailedPath) State() ygnmi.SingletonQuery[*oc.IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptFailed] {
+	return ygnmi.NewSingletonQuery[*oc.IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptFailed](
+		"IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptFailed",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptFailedPathAny) State() ygnmi.WildcardQuery[*oc.IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptFailed] {
+	return ygnmi.NewWildcardQuery[*oc.IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptFailed](
+		"IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptFailed",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptSucceeded_NeighAdjacencyBringUpTimePath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state/state/neigh-restarting-status/state/neigh-last-restarting-attempt-status/state/neigh-last-restarting-attempt-succeeded/state/neigh-adjacency-bring-up-time YANG schema element.
+type IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptSucceeded_NeighAdjacencyBringUpTimePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptSucceeded_NeighAdjacencyBringUpTimePathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state/state/neigh-restarting-status/state/neigh-last-restarting-attempt-status/state/neigh-last-restarting-attempt-succeeded/state/neigh-adjacency-bring-up-time YANG schema element.
+type IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptSucceeded_NeighAdjacencyBringUpTimePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/neigh-adjacency-bring-up-time"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state/state/neigh-restarting-status/state/neigh-last-restarting-attempt-status/state/neigh-last-restarting-attempt-succeeded/state/neigh-adjacency-bring-up-time"
+func (n *IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptSucceeded_NeighAdjacencyBringUpTimePath) State() ygnmi.SingletonQuery[uint32] {
+	return ygnmi.NewSingletonQuery[uint32](
+		"IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptSucceeded",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "neigh-adjacency-bring-up-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptSucceeded).NeighAdjacencyBringUpTime
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptSucceeded)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/neigh-adjacency-bring-up-time"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state/state/neigh-restarting-status/state/neigh-last-restarting-attempt-status/state/neigh-last-restarting-attempt-succeeded/state/neigh-adjacency-bring-up-time"
+func (n *IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptSucceeded_NeighAdjacencyBringUpTimePathAny) State() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewWildcardQuery[uint32](
+		"IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptSucceeded",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "neigh-adjacency-bring-up-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptSucceeded).NeighAdjacencyBringUpTime
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptSucceeded)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptSucceededPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state/state/neigh-restarting-status/state/neigh-last-restarting-attempt-status/state/neigh-last-restarting-attempt-succeeded YANG schema element.
+type IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptSucceededPath struct {
+	*ygnmi.NodePath
+}
+
+// IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptSucceededPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state/state/neigh-restarting-status/state/neigh-last-restarting-attempt-status/state/neigh-last-restarting-attempt-succeeded YANG schema element.
+type IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptSucceededPathAny struct {
+	*ygnmi.NodePath
+}
+
+// NeighAdjacencyBringUpTime (leaf): The time (in second) is measured from when the Restart TLV with RR bit set in a IIH PDU is received up to the time when it receives
+// the Restart TLV with RR bit and SA bit unset in a IIH PDU from the Neighbor Router.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/neigh-adjacency-bring-up-time"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state/state/neigh-restarting-status/state/neigh-last-restarting-attempt-status/state/neigh-last-restarting-attempt-succeeded/state/neigh-adjacency-bring-up-time"
+func (n *IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptSucceededPath) NeighAdjacencyBringUpTime() *IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptSucceeded_NeighAdjacencyBringUpTimePath {
+	ps := &IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptSucceeded_NeighAdjacencyBringUpTimePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "neigh-adjacency-bring-up-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// NeighAdjacencyBringUpTime (leaf): The time (in second) is measured from when the Restart TLV with RR bit set in a IIH PDU is received up to the time when it receives
+// the Restart TLV with RR bit and SA bit unset in a IIH PDU from the Neighbor Router.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/neigh-adjacency-bring-up-time"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state/state/neigh-restarting-status/state/neigh-last-restarting-attempt-status/state/neigh-last-restarting-attempt-succeeded/state/neigh-adjacency-bring-up-time"
+func (n *IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptSucceededPathAny) NeighAdjacencyBringUpTime() *IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptSucceeded_NeighAdjacencyBringUpTimePathAny {
+	ps := &IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptSucceeded_NeighAdjacencyBringUpTimePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "neigh-adjacency-bring-up-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptSucceededPath) State() ygnmi.SingletonQuery[*oc.IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptSucceeded] {
+	return ygnmi.NewSingletonQuery[*oc.IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptSucceeded](
+		"IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptSucceeded",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptSucceededPathAny) State() ygnmi.WildcardQuery[*oc.IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptSucceeded] {
+	return ygnmi.NewWildcardQuery[*oc.IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptSucceeded](
+		"IsisRouter_Adjacencies_Adjacency_NeighborState_NeighRestartingStatus_NeighLastRestartingAttemptStatus_NeighLastRestartingAttemptSucceeded",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// IsisRouter_Adjacencies_Adjacency_NeighborState_TlvsPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state/state/tlvs YANG schema element.
+type IsisRouter_Adjacencies_Adjacency_NeighborState_TlvsPath struct {
+	*ygnmi.NodePath
+}
+
+// IsisRouter_Adjacencies_Adjacency_NeighborState_TlvsPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state/state/tlvs YANG schema element.
+type IsisRouter_Adjacencies_Adjacency_NeighborState_TlvsPathAny struct {
+	*ygnmi.NodePath
+}
+
+// RestartTlv (container): Container of Restart TLV in IIH PDU. Reference: https://datatracker.ietf.org/doc/html/rfc8706#name-restart-tlv.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "restart_tlv"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state/state/tlvs/restart_tlv"
+func (n *IsisRouter_Adjacencies_Adjacency_NeighborState_TlvsPath) RestartTlv() *IsisRouter_Adjacencies_Adjacency_NeighborState_Tlvs_RestartTlvPath {
+	ps := &IsisRouter_Adjacencies_Adjacency_NeighborState_Tlvs_RestartTlvPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"restart_tlv"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// RestartTlv (container): Container of Restart TLV in IIH PDU. Reference: https://datatracker.ietf.org/doc/html/rfc8706#name-restart-tlv.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "restart_tlv"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state/state/tlvs/restart_tlv"
+func (n *IsisRouter_Adjacencies_Adjacency_NeighborState_TlvsPathAny) RestartTlv() *IsisRouter_Adjacencies_Adjacency_NeighborState_Tlvs_RestartTlvPathAny {
+	ps := &IsisRouter_Adjacencies_Adjacency_NeighborState_Tlvs_RestartTlvPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"restart_tlv"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *IsisRouter_Adjacencies_Adjacency_NeighborState_TlvsPath) State() ygnmi.SingletonQuery[*oc.IsisRouter_Adjacencies_Adjacency_NeighborState_Tlvs] {
+	return ygnmi.NewSingletonQuery[*oc.IsisRouter_Adjacencies_Adjacency_NeighborState_Tlvs](
+		"IsisRouter_Adjacencies_Adjacency_NeighborState_Tlvs",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *IsisRouter_Adjacencies_Adjacency_NeighborState_TlvsPathAny) State() ygnmi.WildcardQuery[*oc.IsisRouter_Adjacencies_Adjacency_NeighborState_Tlvs] {
+	return ygnmi.NewWildcardQuery[*oc.IsisRouter_Adjacencies_Adjacency_NeighborState_Tlvs](
+		"IsisRouter_Adjacencies_Adjacency_NeighborState_Tlvs",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// IsisRouter_Adjacencies_Adjacency_NeighborState_Tlvs_RestartTlv_FlagsPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state/state/tlvs/restart_tlv/state/flags YANG schema element.
+type IsisRouter_Adjacencies_Adjacency_NeighborState_Tlvs_RestartTlv_FlagsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// IsisRouter_Adjacencies_Adjacency_NeighborState_Tlvs_RestartTlv_FlagsPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state/state/tlvs/restart_tlv/state/flags YANG schema element.
+type IsisRouter_Adjacencies_Adjacency_NeighborState_Tlvs_RestartTlv_FlagsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/flags"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state/state/tlvs/restart_tlv/state/flags"
+func (n *IsisRouter_Adjacencies_Adjacency_NeighborState_Tlvs_RestartTlv_FlagsPath) State() ygnmi.SingletonQuery[[]oc.E_RestartTlv_Flags] {
+	return ygnmi.NewSingletonQuery[[]oc.E_RestartTlv_Flags](
+		"IsisRouter_Adjacencies_Adjacency_NeighborState_Tlvs_RestartTlv",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "flags"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) ([]oc.E_RestartTlv_Flags, bool) {
+			ret := gs.(*oc.IsisRouter_Adjacencies_Adjacency_NeighborState_Tlvs_RestartTlv).Flags
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.IsisRouter_Adjacencies_Adjacency_NeighborState_Tlvs_RestartTlv)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/flags"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state/state/tlvs/restart_tlv/state/flags"
+func (n *IsisRouter_Adjacencies_Adjacency_NeighborState_Tlvs_RestartTlv_FlagsPathAny) State() ygnmi.WildcardQuery[[]oc.E_RestartTlv_Flags] {
+	return ygnmi.NewWildcardQuery[[]oc.E_RestartTlv_Flags](
+		"IsisRouter_Adjacencies_Adjacency_NeighborState_Tlvs_RestartTlv",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "flags"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) ([]oc.E_RestartTlv_Flags, bool) {
+			ret := gs.(*oc.IsisRouter_Adjacencies_Adjacency_NeighborState_Tlvs_RestartTlv).Flags
+			return ret, !reflect.ValueOf(ret).IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.IsisRouter_Adjacencies_Adjacency_NeighborState_Tlvs_RestartTlv)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// IsisRouter_Adjacencies_Adjacency_NeighborState_Tlvs_RestartTlv_RemainingTimePath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state/state/tlvs/restart_tlv/state/remaining-time YANG schema element.
+type IsisRouter_Adjacencies_Adjacency_NeighborState_Tlvs_RestartTlv_RemainingTimePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// IsisRouter_Adjacencies_Adjacency_NeighborState_Tlvs_RestartTlv_RemainingTimePathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state/state/tlvs/restart_tlv/state/remaining-time YANG schema element.
+type IsisRouter_Adjacencies_Adjacency_NeighborState_Tlvs_RestartTlv_RemainingTimePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/remaining-time"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state/state/tlvs/restart_tlv/state/remaining-time"
+func (n *IsisRouter_Adjacencies_Adjacency_NeighborState_Tlvs_RestartTlv_RemainingTimePath) State() ygnmi.SingletonQuery[uint32] {
+	return ygnmi.NewSingletonQuery[uint32](
+		"IsisRouter_Adjacencies_Adjacency_NeighborState_Tlvs_RestartTlv",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "remaining-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.IsisRouter_Adjacencies_Adjacency_NeighborState_Tlvs_RestartTlv).RemainingTime
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.IsisRouter_Adjacencies_Adjacency_NeighborState_Tlvs_RestartTlv)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/remaining-time"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state/state/tlvs/restart_tlv/state/remaining-time"
+func (n *IsisRouter_Adjacencies_Adjacency_NeighborState_Tlvs_RestartTlv_RemainingTimePathAny) State() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewWildcardQuery[uint32](
+		"IsisRouter_Adjacencies_Adjacency_NeighborState_Tlvs_RestartTlv",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "remaining-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.IsisRouter_Adjacencies_Adjacency_NeighborState_Tlvs_RestartTlv).RemainingTime
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.IsisRouter_Adjacencies_Adjacency_NeighborState_Tlvs_RestartTlv)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// IsisRouter_Adjacencies_Adjacency_NeighborState_Tlvs_RestartTlv_RestartingNeighborIdPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state/state/tlvs/restart_tlv/state/restarting-neighbor-id YANG schema element.
+type IsisRouter_Adjacencies_Adjacency_NeighborState_Tlvs_RestartTlv_RestartingNeighborIdPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// IsisRouter_Adjacencies_Adjacency_NeighborState_Tlvs_RestartTlv_RestartingNeighborIdPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state/state/tlvs/restart_tlv/state/restarting-neighbor-id YANG schema element.
+type IsisRouter_Adjacencies_Adjacency_NeighborState_Tlvs_RestartTlv_RestartingNeighborIdPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/restarting-neighbor-id"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state/state/tlvs/restart_tlv/state/restarting-neighbor-id"
+func (n *IsisRouter_Adjacencies_Adjacency_NeighborState_Tlvs_RestartTlv_RestartingNeighborIdPath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewSingletonQuery[string](
+		"IsisRouter_Adjacencies_Adjacency_NeighborState_Tlvs_RestartTlv",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "restarting-neighbor-id"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.IsisRouter_Adjacencies_Adjacency_NeighborState_Tlvs_RestartTlv).RestartingNeighborId
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.IsisRouter_Adjacencies_Adjacency_NeighborState_Tlvs_RestartTlv)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/restarting-neighbor-id"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state/state/tlvs/restart_tlv/state/restarting-neighbor-id"
+func (n *IsisRouter_Adjacencies_Adjacency_NeighborState_Tlvs_RestartTlv_RestartingNeighborIdPathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"IsisRouter_Adjacencies_Adjacency_NeighborState_Tlvs_RestartTlv",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "restarting-neighbor-id"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.IsisRouter_Adjacencies_Adjacency_NeighborState_Tlvs_RestartTlv).RestartingNeighborId
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.IsisRouter_Adjacencies_Adjacency_NeighborState_Tlvs_RestartTlv)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// IsisRouter_Adjacencies_Adjacency_NeighborState_Tlvs_RestartTlvPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state/state/tlvs/restart_tlv YANG schema element.
+type IsisRouter_Adjacencies_Adjacency_NeighborState_Tlvs_RestartTlvPath struct {
+	*ygnmi.NodePath
+}
+
+// IsisRouter_Adjacencies_Adjacency_NeighborState_Tlvs_RestartTlvPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state/state/tlvs/restart_tlv YANG schema element.
+type IsisRouter_Adjacencies_Adjacency_NeighborState_Tlvs_RestartTlvPathAny struct {
+	*ygnmi.NodePath
+}
+
+// Flags (leaf-list): Flags associated with Restarting TLV
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/flags"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state/state/tlvs/restart_tlv/state/flags"
+func (n *IsisRouter_Adjacencies_Adjacency_NeighborState_Tlvs_RestartTlvPath) Flags() *IsisRouter_Adjacencies_Adjacency_NeighborState_Tlvs_RestartTlv_FlagsPath {
+	ps := &IsisRouter_Adjacencies_Adjacency_NeighborState_Tlvs_RestartTlv_FlagsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "flags"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Flags (leaf-list): Flags associated with Restarting TLV
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/flags"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state/state/tlvs/restart_tlv/state/flags"
+func (n *IsisRouter_Adjacencies_Adjacency_NeighborState_Tlvs_RestartTlvPathAny) Flags() *IsisRouter_Adjacencies_Adjacency_NeighborState_Tlvs_RestartTlv_FlagsPathAny {
+	ps := &IsisRouter_Adjacencies_Adjacency_NeighborState_Tlvs_RestartTlv_FlagsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "flags"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// RemainingTime (leaf): Remaining Holding Time (in seconds).
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/remaining-time"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state/state/tlvs/restart_tlv/state/remaining-time"
+func (n *IsisRouter_Adjacencies_Adjacency_NeighborState_Tlvs_RestartTlvPath) RemainingTime() *IsisRouter_Adjacencies_Adjacency_NeighborState_Tlvs_RestartTlv_RemainingTimePath {
+	ps := &IsisRouter_Adjacencies_Adjacency_NeighborState_Tlvs_RestartTlv_RemainingTimePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "remaining-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// RemainingTime (leaf): Remaining Holding Time (in seconds).
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/remaining-time"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state/state/tlvs/restart_tlv/state/remaining-time"
+func (n *IsisRouter_Adjacencies_Adjacency_NeighborState_Tlvs_RestartTlvPathAny) RemainingTime() *IsisRouter_Adjacencies_Adjacency_NeighborState_Tlvs_RestartTlv_RemainingTimePathAny {
+	ps := &IsisRouter_Adjacencies_Adjacency_NeighborState_Tlvs_RestartTlv_RemainingTimePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "remaining-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// RestartingNeighborId (leaf): Restarting Neighbor's System ID in hex format without '0x' at the beginning. e.g. '640000000001'.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/restarting-neighbor-id"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state/state/tlvs/restart_tlv/state/restarting-neighbor-id"
+func (n *IsisRouter_Adjacencies_Adjacency_NeighborState_Tlvs_RestartTlvPath) RestartingNeighborId() *IsisRouter_Adjacencies_Adjacency_NeighborState_Tlvs_RestartTlv_RestartingNeighborIdPath {
+	ps := &IsisRouter_Adjacencies_Adjacency_NeighborState_Tlvs_RestartTlv_RestartingNeighborIdPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "restarting-neighbor-id"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// RestartingNeighborId (leaf): Restarting Neighbor's System ID in hex format without '0x' at the beginning. e.g. '640000000001'.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "state/restarting-neighbor-id"
+//	Path from root:       "/isis-routers/isis-router/state/adjacencies/state/adjacency/state/neighbor-state/state/tlvs/restart_tlv/state/restarting-neighbor-id"
+func (n *IsisRouter_Adjacencies_Adjacency_NeighborState_Tlvs_RestartTlvPathAny) RestartingNeighborId() *IsisRouter_Adjacencies_Adjacency_NeighborState_Tlvs_RestartTlv_RestartingNeighborIdPathAny {
+	ps := &IsisRouter_Adjacencies_Adjacency_NeighborState_Tlvs_RestartTlv_RestartingNeighborIdPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "restarting-neighbor-id"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *IsisRouter_Adjacencies_Adjacency_NeighborState_Tlvs_RestartTlvPath) State() ygnmi.SingletonQuery[*oc.IsisRouter_Adjacencies_Adjacency_NeighborState_Tlvs_RestartTlv] {
+	return ygnmi.NewSingletonQuery[*oc.IsisRouter_Adjacencies_Adjacency_NeighborState_Tlvs_RestartTlv](
+		"IsisRouter_Adjacencies_Adjacency_NeighborState_Tlvs_RestartTlv",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *IsisRouter_Adjacencies_Adjacency_NeighborState_Tlvs_RestartTlvPathAny) State() ygnmi.WildcardQuery[*oc.IsisRouter_Adjacencies_Adjacency_NeighborState_Tlvs_RestartTlv] {
+	return ygnmi.NewWildcardQuery[*oc.IsisRouter_Adjacencies_Adjacency_NeighborState_Tlvs_RestartTlv](
+		"IsisRouter_Adjacencies_Adjacency_NeighborState_Tlvs_RestartTlv",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// IsisRouter_Counters_GrInitiatedPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/counters/gr-initiated YANG schema element.
+type IsisRouter_Counters_GrInitiatedPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// IsisRouter_Counters_GrInitiatedPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/counters/gr-initiated YANG schema element.
+type IsisRouter_Counters_GrInitiatedPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "gr-initiated"
+//	Path from root:       "/isis-routers/isis-router/state/counters/gr-initiated"
+func (n *IsisRouter_Counters_GrInitiatedPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"IsisRouter_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"gr-initiated"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.IsisRouter_Counters).GrInitiated
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.IsisRouter_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "gr-initiated"
+//	Path from root:       "/isis-routers/isis-router/state/counters/gr-initiated"
+func (n *IsisRouter_Counters_GrInitiatedPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"IsisRouter_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"gr-initiated"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.IsisRouter_Counters).GrInitiated
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.IsisRouter_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// IsisRouter_Counters_GrSucceededPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/counters/gr-succeeded YANG schema element.
+type IsisRouter_Counters_GrSucceededPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// IsisRouter_Counters_GrSucceededPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/counters/gr-succeeded YANG schema element.
+type IsisRouter_Counters_GrSucceededPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "gr-succeeded"
+//	Path from root:       "/isis-routers/isis-router/state/counters/gr-succeeded"
+func (n *IsisRouter_Counters_GrSucceededPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"IsisRouter_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"gr-succeeded"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.IsisRouter_Counters).GrSucceeded
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.IsisRouter_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "gr-succeeded"
+//	Path from root:       "/isis-routers/isis-router/state/counters/gr-succeeded"
+func (n *IsisRouter_Counters_GrSucceededPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"IsisRouter_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"gr-succeeded"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.IsisRouter_Counters).GrSucceeded
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.IsisRouter_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// IsisRouter_Counters_NeighborGrInitiatedPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/counters/neighbor-gr-initiated YANG schema element.
+type IsisRouter_Counters_NeighborGrInitiatedPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// IsisRouter_Counters_NeighborGrInitiatedPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/counters/neighbor-gr-initiated YANG schema element.
+type IsisRouter_Counters_NeighborGrInitiatedPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "neighbor-gr-initiated"
+//	Path from root:       "/isis-routers/isis-router/state/counters/neighbor-gr-initiated"
+func (n *IsisRouter_Counters_NeighborGrInitiatedPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"IsisRouter_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"neighbor-gr-initiated"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.IsisRouter_Counters).NeighborGrInitiated
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.IsisRouter_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "neighbor-gr-initiated"
+//	Path from root:       "/isis-routers/isis-router/state/counters/neighbor-gr-initiated"
+func (n *IsisRouter_Counters_NeighborGrInitiatedPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"IsisRouter_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"neighbor-gr-initiated"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.IsisRouter_Counters).NeighborGrInitiated
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.IsisRouter_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// IsisRouter_Counters_NeighborGrSucceededPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/counters/neighbor-gr-succeeded YANG schema element.
+type IsisRouter_Counters_NeighborGrSucceededPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// IsisRouter_Counters_NeighborGrSucceededPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/counters/neighbor-gr-succeeded YANG schema element.
+type IsisRouter_Counters_NeighborGrSucceededPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "neighbor-gr-succeeded"
+//	Path from root:       "/isis-routers/isis-router/state/counters/neighbor-gr-succeeded"
+func (n *IsisRouter_Counters_NeighborGrSucceededPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"IsisRouter_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"neighbor-gr-succeeded"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.IsisRouter_Counters).NeighborGrSucceeded
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.IsisRouter_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "neighbor-gr-succeeded"
+//	Path from root:       "/isis-routers/isis-router/state/counters/neighbor-gr-succeeded"
+func (n *IsisRouter_Counters_NeighborGrSucceededPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"IsisRouter_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"neighbor-gr-succeeded"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.IsisRouter_Counters).NeighborGrSucceeded
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.IsisRouter_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
 // IsisRouter_CountersPath represents the /open-traffic-generator-isis/isis-routers/isis-router/state/counters YANG schema element.
 type IsisRouter_CountersPath struct {
 	*ygnmi.NodePath
@@ -407,6 +4665,82 @@ type IsisRouter_CountersPath struct {
 // IsisRouter_CountersPathAny represents the wildcard version of the /open-traffic-generator-isis/isis-routers/isis-router/state/counters YANG schema element.
 type IsisRouter_CountersPathAny struct {
 	*ygnmi.NodePath
+}
+
+// GrInitiated (leaf): Number of Graceful Restarts that were initiated by this router.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "gr-initiated"
+//	Path from root:       "/isis-routers/isis-router/state/counters/gr-initiated"
+func (n *IsisRouter_CountersPath) GrInitiated() *IsisRouter_Counters_GrInitiatedPath {
+	ps := &IsisRouter_Counters_GrInitiatedPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"gr-initiated"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// GrInitiated (leaf): Number of Graceful Restarts that were initiated by this router.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "gr-initiated"
+//	Path from root:       "/isis-routers/isis-router/state/counters/gr-initiated"
+func (n *IsisRouter_CountersPathAny) GrInitiated() *IsisRouter_Counters_GrInitiatedPathAny {
+	ps := &IsisRouter_Counters_GrInitiatedPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"gr-initiated"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// GrSucceeded (leaf): Number of Graceful Restarts succeeded that were initiated by a this router.
+// This counter is incremented if the Graceful Restart completes successfully before the T3 timer expires.
+// Timer T3 is maintained for the entire system after which the router will declare that it has failed to achieve database synchronization.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "gr-succeeded"
+//	Path from root:       "/isis-routers/isis-router/state/counters/gr-succeeded"
+func (n *IsisRouter_CountersPath) GrSucceeded() *IsisRouter_Counters_GrSucceededPath {
+	ps := &IsisRouter_Counters_GrSucceededPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"gr-succeeded"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// GrSucceeded (leaf): Number of Graceful Restarts succeeded that were initiated by a this router.
+// This counter is incremented if the Graceful Restart completes successfully before the T3 timer expires.
+// Timer T3 is maintained for the entire system after which the router will declare that it has failed to achieve database synchronization.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "gr-succeeded"
+//	Path from root:       "/isis-routers/isis-router/state/counters/gr-succeeded"
+func (n *IsisRouter_CountersPathAny) GrSucceeded() *IsisRouter_Counters_GrSucceededPathAny {
+	ps := &IsisRouter_Counters_GrSucceededPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"gr-succeeded"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
 }
 
 // Level1 (container): Level1 counters of the ISIS router.
@@ -473,6 +4807,80 @@ func (n *IsisRouter_CountersPathAny) Level2() *IsisRouter_Counters_Level2PathAny
 			map[string]interface{}{},
 			n,
 		),
+	}
+	return ps
+}
+
+// NeighborGrInitiated (leaf): Number of Graceful Restarts that were initiated by a Neighbor. This counter is incremented for Restart TLV having RR bit is set present in the received IIH PDU.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "neighbor-gr-initiated"
+//	Path from root:       "/isis-routers/isis-router/state/counters/neighbor-gr-initiated"
+func (n *IsisRouter_CountersPath) NeighborGrInitiated() *IsisRouter_Counters_NeighborGrInitiatedPath {
+	ps := &IsisRouter_Counters_NeighborGrInitiatedPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"neighbor-gr-initiated"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// NeighborGrInitiated (leaf): Number of Graceful Restarts that were initiated by a Neighbor. This counter is incremented for Restart TLV having RR bit is set present in the received IIH PDU.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "neighbor-gr-initiated"
+//	Path from root:       "/isis-routers/isis-router/state/counters/neighbor-gr-initiated"
+func (n *IsisRouter_CountersPathAny) NeighborGrInitiated() *IsisRouter_Counters_NeighborGrInitiatedPathAny {
+	ps := &IsisRouter_Counters_NeighborGrInitiatedPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"neighbor-gr-initiated"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// NeighborGrSucceeded (leaf): Number of Graceful Restarts succeeded that were initiated by a Neighbor.
+// This counter is incremented when Restart TLV having RR bit is unset present in the received IIH PDU after the Graceful Restart was initiated by a Neighbor.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "neighbor-gr-succeeded"
+//	Path from root:       "/isis-routers/isis-router/state/counters/neighbor-gr-succeeded"
+func (n *IsisRouter_CountersPath) NeighborGrSucceeded() *IsisRouter_Counters_NeighborGrSucceededPath {
+	ps := &IsisRouter_Counters_NeighborGrSucceededPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"neighbor-gr-succeeded"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// NeighborGrSucceeded (leaf): Number of Graceful Restarts succeeded that were initiated by a Neighbor.
+// This counter is incremented when Restart TLV having RR bit is unset present in the received IIH PDU after the Graceful Restart was initiated by a Neighbor.
+//
+//	Defining module:      "open-traffic-generator-isis"
+//	Instantiating module: "open-traffic-generator-isis"
+//	Path from parent:     "neighbor-gr-succeeded"
+//	Path from root:       "/isis-routers/isis-router/state/counters/neighbor-gr-succeeded"
+func (n *IsisRouter_CountersPathAny) NeighborGrSucceeded() *IsisRouter_Counters_NeighborGrSucceededPathAny {
+	ps := &IsisRouter_Counters_NeighborGrSucceededPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"neighbor-gr-succeeded"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
 	}
 	return ps
 }
