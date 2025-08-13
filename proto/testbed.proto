@@ -1,3 +1,4 @@
+// LINT: LEGACY_NAMES
 // Copyright 2021 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -99,6 +100,7 @@ message Port {
     S_40GB = 40;
     S_100GB = 100;
     S_400GB = 400;
+    S_800GB = 800;
   }
   Speed speed = 2;
 
@@ -144,6 +146,8 @@ message Port {
     PMD_100GBASE_DR = 29;
     PMD_100GBASE_CGR4 = 30;
     PMD_400GBASE_ZR_PLUS = 31;
+    PMD_800GBASE_ZR  = 32;
+    PMD_800GBASE_ZR_PLUS = 33;
   }
   oneof pmd_value {
     Pmd pmd = 4;

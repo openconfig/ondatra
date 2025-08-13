@@ -184,6 +184,8 @@ const (
 	Speed100Gb = Speed(opb.Port_S_100GB)
 	// Speed400Gb is a port speed of 400Gbps.
 	Speed400Gb = Speed(opb.Port_S_400GB)
+	// Speed800Gb is a port speed of 800Gbps.
+	Speed800Gb = Speed(opb.Port_S_800GB)
 )
 
 // Speed returns the port speed.
@@ -258,6 +260,10 @@ const (
 	PMD400GBASELR8 = PMD(opb.Port_PMD_400GBASE_LR8)
 	// PMD400GBASEDR4 is the PMD 400GBASE-DR4.
 	PMD400GBASEDR4 = PMD(opb.Port_PMD_400GBASE_DR4)
+	// PMD800GBASEZR is the PMD 800GBASE-ZR.
+	PMD800GBASEZR = PMD(opb.Port_PMD_800GBASE_ZR)
+	// PMD800GBASEZRP is the PMD 800GBASE-ZR PLUS.
+	PMD800GBASEZRP = PMD(opb.Port_PMD_800GBASE_ZR_PLUS)
 )
 
 func (pmd PMD) String() string {
