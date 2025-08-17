@@ -54,6 +54,9 @@ using the following YANG input files:
   - public/release/models/network-instance/openconfig-network-instance.yang
   - public/release/models/network-instance/openconfig-network-instance-l2.yang
   - public/release/models/network-instance/openconfig-network-instance-static.yang
+  - public/release/models/oam/openconfig-cfm-types.yang
+  - public/release/models/oam/openconfig-oam.yang
+  - public/release/models/oam/openconfig-oam-cfm.yang
   - public/release/models/openconfig-extensions.yang
   - public/release/models/optical-transport/openconfig-terminal-device.yang
   - public/release/models/optical-transport/openconfig-transport-types.yang
@@ -1422,6 +1425,11 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		1: {Name: "LOCAL_PROTECTION"},
 		2: {Name: "LINK_EXCLUDED"},
 	},
+	"E_LinkLossForwarding_Action": {
+		1: {Name: "SHUTDOWN"},
+		2: {Name: "ALARM"},
+		3: {Name: "DISABLE_ROUTING"},
+	},
 	"E_LinkProtectionType_Type": {
 		1: {Name: "EXTRA_TRAFFIC"},
 		2: {Name: "UNPROTECTED"},
@@ -1507,6 +1515,27 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		2: {Name: "GCM_AES_256"},
 		3: {Name: "GCM_AES_XPN_128"},
 		4: {Name: "GCM_AES_XPN_256"},
+	},
+	"E_MaintenanceAssociation_CcmInterval": {
+		1: {Name: "300MS"},
+		2: {Name: "1S"},
+		3: {Name: "10S"},
+	},
+	"E_MaintenanceAssociation_MaNameType": {
+		1: {Name: "PRIMARY_VID"},
+		2: {Name: "CHARACTER_STRING"},
+		3: {Name: "UINT16"},
+		4: {Name: "RFC2685_VPN_ID"},
+	},
+	"E_MaintenanceDomain_MdNameType": {
+		1: {Name: "NONE"},
+		2: {Name: "DOMAIN_NAME"},
+		3: {Name: "MAC_ADDRESS_AND_UINT"},
+		4: {Name: "CHARACTER_STRING"},
+	},
+	"E_MepEndpoint_Direction": {
+		2: {Name: "DOWN"},
+		3: {Name: "UP"},
 	},
 	"E_Messages_DEBUG_SERVICE": {},
 	"E_Messages_SyslogSeverity": {
@@ -1692,6 +1721,57 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 	},
 	"E_NodeAttribute_SubTlv_Type": {
 		1: {Name: "UNKNOWN"},
+	},
+	"E_OamCfm_ConfigErrorType": {
+		1: {Name: "CFM_LEAK"},
+		2: {Name: "CONFLICTING_VIDS"},
+		3: {Name: "EXCESSIVE_LEVELS"},
+		4: {Name: "OVERLAPPED_LEVELS"},
+	},
+	"E_OamCfm_FngStateType": {
+		2: {Name: "FNG_RESET"},
+		3: {Name: "FNG_DEFECT"},
+		4: {Name: "FNG_REPORT_DEFECT"},
+		5: {Name: "FNG_DEFECT_REPORTED"},
+		6: {Name: "FNG_DEFECT_CLEARING"},
+	},
+	"E_OamCfm_HighestDefectPriorityType": {
+		1: {Name: "NONE"},
+		2: {Name: "DEF_RDI_CCM"},
+		3: {Name: "DEF_MAC_STATUS"},
+		4: {Name: "DEF_REMOTE_CCM"},
+		5: {Name: "DEF_ERROR_CCM"},
+		6: {Name: "DEF_XCON_CCM"},
+	},
+	"E_OamCfm_InterfaceStatusType": {
+		1: {Name: "NO_STATUS_TLV"},
+		2: {Name: "UP"},
+		3: {Name: "DOWN"},
+		4: {Name: "TESTING"},
+		5: {Name: "UNKNOWN"},
+		6: {Name: "DORMANT"},
+		7: {Name: "NOT_PRESENT"},
+		8: {Name: "LOWER_LAYER_DOWN"},
+	},
+	"E_OamCfm_LowestAlarmPriorityType": {
+		2: {Name: "ALL_DEF"},
+		3: {Name: "MAC_REMOTE_ERROR_XCON"},
+		4: {Name: "REMOTE_ERROR_XCON"},
+		5: {Name: "ERROR_XCON"},
+		6: {Name: "XCON"},
+		7: {Name: "NO_XCON"},
+	},
+	"E_OamCfm_MepDefectsType": {
+		2: {Name: "DEF_RDI_CCM"},
+		3: {Name: "DEF_MAC_STATUS"},
+		4: {Name: "DEF_REMOTE_CCM"},
+		5: {Name: "DEF_ERROR_CCM"},
+		6: {Name: "DEF_XCON_CCM"},
+	},
+	"E_OamCfm_OperationalStateType": {
+		1: {Name: "ENABLED"},
+		2: {Name: "DISABLED"},
+		3: {Name: "UNKNOWN"},
 	},
 	"E_OpaqueLsa_Scope": {
 		1: {Name: "LINK"},
@@ -1942,6 +2022,16 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 	"E_Platform_ComponentRedundantRole": {
 		1: {Name: "PRIMARY"},
 		2: {Name: "SECONDARY"},
+	},
+	"E_PmProfile_MeasurementType": {
+		1: {Name: "LMM"},
+		2: {Name: "SLM"},
+		3: {Name: "DMM"},
+		4: {Name: "CCM"},
+	},
+	"E_PmProfile_ProtocolType": {
+		1: {Name: "SINGLE_ENDED"},
+		2: {Name: "DUAL_ENDED"},
 	},
 	"E_PolicyForwardingEntry_MplsLabel": {
 		1: {Name: "IPV4_EXPLICIT_NULL"},
@@ -4776,6 +4866,96 @@ func initΛEnumTypes() {
 		},
 		"/network-instances/network-instance/vlans/vlan/state/status": {
 			reflect.TypeOf((E_Vlan_Status)(0)),
+		},
+		"/oam/cfm/domains/maintenance-domain/config/md-name-type": {
+			reflect.TypeOf((E_MaintenanceDomain_MdNameType)(0)),
+		},
+		"/oam/cfm/domains/maintenance-domain/maintenance-associations/maintenance-association/config/ccm-interval": {
+			reflect.TypeOf((E_MaintenanceAssociation_CcmInterval)(0)),
+		},
+		"/oam/cfm/domains/maintenance-domain/maintenance-associations/maintenance-association/config/ma-name-type": {
+			reflect.TypeOf((E_MaintenanceAssociation_MaNameType)(0)),
+		},
+		"/oam/cfm/domains/maintenance-domain/maintenance-associations/maintenance-association/mep-endpoints/mep-endpoint/config/direction": {
+			reflect.TypeOf((E_MepEndpoint_Direction)(0)),
+		},
+		"/oam/cfm/domains/maintenance-domain/maintenance-associations/maintenance-association/mep-endpoints/mep-endpoint/config/lowest-priority-defect": {
+			reflect.TypeOf((E_OamCfm_LowestAlarmPriorityType)(0)),
+		},
+		"/oam/cfm/domains/maintenance-domain/maintenance-associations/maintenance-association/mep-endpoints/mep-endpoint/link-loss-forwarding/config/action": {
+			reflect.TypeOf((E_LinkLossForwarding_Action)(0)),
+		},
+		"/oam/cfm/domains/maintenance-domain/maintenance-associations/maintenance-association/mep-endpoints/mep-endpoint/link-loss-forwarding/state/action": {
+			reflect.TypeOf((E_LinkLossForwarding_Action)(0)),
+		},
+		"/oam/cfm/domains/maintenance-domain/maintenance-associations/maintenance-association/mep-endpoints/mep-endpoint/pm-profiles/pm-profile/state/measurement-type": {
+			reflect.TypeOf((E_PmProfile_MeasurementType)(0)),
+		},
+		"/oam/cfm/domains/maintenance-domain/maintenance-associations/maintenance-association/mep-endpoints/mep-endpoint/pm-profiles/pm-profile/state/protocol-type": {
+			reflect.TypeOf((E_PmProfile_ProtocolType)(0)),
+		},
+		"/oam/cfm/domains/maintenance-domain/maintenance-associations/maintenance-association/mep-endpoints/mep-endpoint/remote-meps/remote-mep/state/config-errors-detected": {
+			reflect.TypeOf((E_OamCfm_ConfigErrorType)(0)),
+		},
+		"/oam/cfm/domains/maintenance-domain/maintenance-associations/maintenance-association/mep-endpoints/mep-endpoint/remote-meps/remote-mep/state/fng-state": {
+			reflect.TypeOf((E_OamCfm_FngStateType)(0)),
+		},
+		"/oam/cfm/domains/maintenance-domain/maintenance-associations/maintenance-association/mep-endpoints/mep-endpoint/remote-meps/remote-mep/state/highest-priority-defect": {
+			reflect.TypeOf((E_OamCfm_HighestDefectPriorityType)(0)),
+		},
+		"/oam/cfm/domains/maintenance-domain/maintenance-associations/maintenance-association/mep-endpoints/mep-endpoint/remote-meps/remote-mep/state/interface-state": {
+			reflect.TypeOf((E_OamCfm_InterfaceStatusType)(0)),
+		},
+		"/oam/cfm/domains/maintenance-domain/maintenance-associations/maintenance-association/mep-endpoints/mep-endpoint/remote-meps/remote-mep/state/mep-defects": {
+			reflect.TypeOf((E_OamCfm_MepDefectsType)(0)),
+		},
+		"/oam/cfm/domains/maintenance-domain/maintenance-associations/maintenance-association/mep-endpoints/mep-endpoint/remote-meps/remote-mep/state/oper-state": {
+			reflect.TypeOf((E_OamCfm_OperationalStateType)(0)),
+		},
+		"/oam/cfm/domains/maintenance-domain/maintenance-associations/maintenance-association/mep-endpoints/mep-endpoint/state/config-errors-detected": {
+			reflect.TypeOf((E_OamCfm_ConfigErrorType)(0)),
+		},
+		"/oam/cfm/domains/maintenance-domain/maintenance-associations/maintenance-association/mep-endpoints/mep-endpoint/state/direction": {
+			reflect.TypeOf((E_MepEndpoint_Direction)(0)),
+		},
+		"/oam/cfm/domains/maintenance-domain/maintenance-associations/maintenance-association/mep-endpoints/mep-endpoint/state/fng-state": {
+			reflect.TypeOf((E_OamCfm_FngStateType)(0)),
+		},
+		"/oam/cfm/domains/maintenance-domain/maintenance-associations/maintenance-association/mep-endpoints/mep-endpoint/state/highest-priority-defect": {
+			reflect.TypeOf((E_OamCfm_HighestDefectPriorityType)(0)),
+		},
+		"/oam/cfm/domains/maintenance-domain/maintenance-associations/maintenance-association/mep-endpoints/mep-endpoint/state/interface-state": {
+			reflect.TypeOf((E_OamCfm_InterfaceStatusType)(0)),
+		},
+		"/oam/cfm/domains/maintenance-domain/maintenance-associations/maintenance-association/mep-endpoints/mep-endpoint/state/lowest-priority-defect": {
+			reflect.TypeOf((E_OamCfm_LowestAlarmPriorityType)(0)),
+		},
+		"/oam/cfm/domains/maintenance-domain/maintenance-associations/maintenance-association/mep-endpoints/mep-endpoint/state/mep-defects": {
+			reflect.TypeOf((E_OamCfm_MepDefectsType)(0)),
+		},
+		"/oam/cfm/domains/maintenance-domain/maintenance-associations/maintenance-association/mep-endpoints/mep-endpoint/state/oper-state": {
+			reflect.TypeOf((E_OamCfm_OperationalStateType)(0)),
+		},
+		"/oam/cfm/domains/maintenance-domain/maintenance-associations/maintenance-association/state/ccm-interval": {
+			reflect.TypeOf((E_MaintenanceAssociation_CcmInterval)(0)),
+		},
+		"/oam/cfm/domains/maintenance-domain/maintenance-associations/maintenance-association/state/ma-name-type": {
+			reflect.TypeOf((E_MaintenanceAssociation_MaNameType)(0)),
+		},
+		"/oam/cfm/domains/maintenance-domain/state/md-name-type": {
+			reflect.TypeOf((E_MaintenanceDomain_MdNameType)(0)),
+		},
+		"/oam/cfm/performance-measurement-profiles-global/performance-measurement-profile/config/measurement-type": {
+			reflect.TypeOf((E_PmProfile_MeasurementType)(0)),
+		},
+		"/oam/cfm/performance-measurement-profiles-global/performance-measurement-profile/config/protocol-type": {
+			reflect.TypeOf((E_PmProfile_ProtocolType)(0)),
+		},
+		"/oam/cfm/performance-measurement-profiles-global/performance-measurement-profile/state/measurement-type": {
+			reflect.TypeOf((E_PmProfile_MeasurementType)(0)),
+		},
+		"/oam/cfm/performance-measurement-profiles-global/performance-measurement-profile/state/protocol-type": {
+			reflect.TypeOf((E_PmProfile_ProtocolType)(0)),
 		},
 		"/qos/buffer-allocation-profiles/buffer-allocation-profile/queues/queue/config/shared-buffer-limit-type": {
 			reflect.TypeOf((E_Qos_SHARED_BUFFER_LIMIT_TYPE)(0)),

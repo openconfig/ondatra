@@ -54,6 +54,9 @@ using the following YANG input files:
   - public/release/models/network-instance/openconfig-network-instance.yang
   - public/release/models/network-instance/openconfig-network-instance-l2.yang
   - public/release/models/network-instance/openconfig-network-instance-static.yang
+  - public/release/models/oam/openconfig-cfm-types.yang
+  - public/release/models/oam/openconfig-oam.yang
+  - public/release/models/oam/openconfig-oam-cfm.yang
   - public/release/models/openconfig-extensions.yang
   - public/release/models/optical-transport/openconfig-terminal-device.yang
   - public/release/models/optical-transport/openconfig-transport-types.yang

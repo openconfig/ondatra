@@ -54,6 +54,9 @@ using the following YANG input files:
   - public/release/models/network-instance/openconfig-network-instance.yang
   - public/release/models/network-instance/openconfig-network-instance-l2.yang
   - public/release/models/network-instance/openconfig-network-instance-static.yang
+  - public/release/models/oam/openconfig-cfm-types.yang
+  - public/release/models/oam/openconfig-oam.yang
+  - public/release/models/oam/openconfig-oam-cfm.yang
   - public/release/models/openconfig-extensions.yang
   - public/release/models/optical-transport/openconfig-terminal-device.yang
   - public/release/models/optical-transport/openconfig-transport-types.yang
@@ -5529,6 +5532,37 @@ const (
 	LinkAttributes_LocalProtection_LINK_EXCLUDED E_LinkAttributes_LocalProtection = 2
 )
 
+// E_LinkLossForwarding_Action is a derived int64 type which is used to represent
+// the enumerated node LinkLossForwarding_Action. An additional value named
+// LinkLossForwarding_Action_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_LinkLossForwarding_Action int64
+
+// IsYANGGoEnum ensures that LinkLossForwarding_Action implements the yang.GoEnum
+// interface. This ensures that LinkLossForwarding_Action can be identified as a
+// mapped type for a YANG enumeration.
+func (E_LinkLossForwarding_Action) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  LinkLossForwarding_Action.
+func (E_LinkLossForwarding_Action) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_LinkLossForwarding_Action.
+func (e E_LinkLossForwarding_Action) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_LinkLossForwarding_Action")
+}
+
+const (
+	// LinkLossForwarding_Action_UNSET corresponds to the value UNSET of LinkLossForwarding_Action
+	LinkLossForwarding_Action_UNSET E_LinkLossForwarding_Action = 0
+	// LinkLossForwarding_Action_SHUTDOWN corresponds to the value SHUTDOWN of LinkLossForwarding_Action
+	LinkLossForwarding_Action_SHUTDOWN E_LinkLossForwarding_Action = 1
+	// LinkLossForwarding_Action_ALARM corresponds to the value ALARM of LinkLossForwarding_Action
+	LinkLossForwarding_Action_ALARM E_LinkLossForwarding_Action = 2
+	// LinkLossForwarding_Action_DISABLE_ROUTING corresponds to the value DISABLE_ROUTING of LinkLossForwarding_Action
+	LinkLossForwarding_Action_DISABLE_ROUTING E_LinkLossForwarding_Action = 3
+)
+
 // E_LinkProtectionType_Type is a derived int64 type which is used to represent
 // the enumerated node LinkProtectionType_Type. An additional value named
 // LinkProtectionType_Type_UNSET is added to the enumeration which is used as
@@ -5955,6 +5989,136 @@ const (
 	Macsec_MacsecCipherSuite_GCM_AES_XPN_128 E_Macsec_MacsecCipherSuite = 3
 	// Macsec_MacsecCipherSuite_GCM_AES_XPN_256 corresponds to the value GCM_AES_XPN_256 of Macsec_MacsecCipherSuite
 	Macsec_MacsecCipherSuite_GCM_AES_XPN_256 E_Macsec_MacsecCipherSuite = 4
+)
+
+// E_MaintenanceAssociation_CcmInterval is a derived int64 type which is used to represent
+// the enumerated node MaintenanceAssociation_CcmInterval. An additional value named
+// MaintenanceAssociation_CcmInterval_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_MaintenanceAssociation_CcmInterval int64
+
+// IsYANGGoEnum ensures that MaintenanceAssociation_CcmInterval implements the yang.GoEnum
+// interface. This ensures that MaintenanceAssociation_CcmInterval can be identified as a
+// mapped type for a YANG enumeration.
+func (E_MaintenanceAssociation_CcmInterval) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  MaintenanceAssociation_CcmInterval.
+func (E_MaintenanceAssociation_CcmInterval) ΛMap() map[string]map[int64]ygot.EnumDefinition {
+	return ΛEnum
+}
+
+// String returns a logging-friendly string for E_MaintenanceAssociation_CcmInterval.
+func (e E_MaintenanceAssociation_CcmInterval) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_MaintenanceAssociation_CcmInterval")
+}
+
+const (
+	// MaintenanceAssociation_CcmInterval_UNSET corresponds to the value UNSET of MaintenanceAssociation_CcmInterval
+	MaintenanceAssociation_CcmInterval_UNSET E_MaintenanceAssociation_CcmInterval = 0
+	// MaintenanceAssociation_CcmInterval_300MS corresponds to the value 300MS of MaintenanceAssociation_CcmInterval
+	MaintenanceAssociation_CcmInterval_300MS E_MaintenanceAssociation_CcmInterval = 1
+	// MaintenanceAssociation_CcmInterval_1S corresponds to the value 1S of MaintenanceAssociation_CcmInterval
+	MaintenanceAssociation_CcmInterval_1S E_MaintenanceAssociation_CcmInterval = 2
+	// MaintenanceAssociation_CcmInterval_10S corresponds to the value 10S of MaintenanceAssociation_CcmInterval
+	MaintenanceAssociation_CcmInterval_10S E_MaintenanceAssociation_CcmInterval = 3
+)
+
+// E_MaintenanceAssociation_MaNameType is a derived int64 type which is used to represent
+// the enumerated node MaintenanceAssociation_MaNameType. An additional value named
+// MaintenanceAssociation_MaNameType_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_MaintenanceAssociation_MaNameType int64
+
+// IsYANGGoEnum ensures that MaintenanceAssociation_MaNameType implements the yang.GoEnum
+// interface. This ensures that MaintenanceAssociation_MaNameType can be identified as a
+// mapped type for a YANG enumeration.
+func (E_MaintenanceAssociation_MaNameType) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  MaintenanceAssociation_MaNameType.
+func (E_MaintenanceAssociation_MaNameType) ΛMap() map[string]map[int64]ygot.EnumDefinition {
+	return ΛEnum
+}
+
+// String returns a logging-friendly string for E_MaintenanceAssociation_MaNameType.
+func (e E_MaintenanceAssociation_MaNameType) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_MaintenanceAssociation_MaNameType")
+}
+
+const (
+	// MaintenanceAssociation_MaNameType_UNSET corresponds to the value UNSET of MaintenanceAssociation_MaNameType
+	MaintenanceAssociation_MaNameType_UNSET E_MaintenanceAssociation_MaNameType = 0
+	// MaintenanceAssociation_MaNameType_PRIMARY_VID corresponds to the value PRIMARY_VID of MaintenanceAssociation_MaNameType
+	MaintenanceAssociation_MaNameType_PRIMARY_VID E_MaintenanceAssociation_MaNameType = 1
+	// MaintenanceAssociation_MaNameType_CHARACTER_STRING corresponds to the value CHARACTER_STRING of MaintenanceAssociation_MaNameType
+	MaintenanceAssociation_MaNameType_CHARACTER_STRING E_MaintenanceAssociation_MaNameType = 2
+	// MaintenanceAssociation_MaNameType_UINT16 corresponds to the value UINT16 of MaintenanceAssociation_MaNameType
+	MaintenanceAssociation_MaNameType_UINT16 E_MaintenanceAssociation_MaNameType = 3
+	// MaintenanceAssociation_MaNameType_RFC2685_VPN_ID corresponds to the value RFC2685_VPN_ID of MaintenanceAssociation_MaNameType
+	MaintenanceAssociation_MaNameType_RFC2685_VPN_ID E_MaintenanceAssociation_MaNameType = 4
+)
+
+// E_MaintenanceDomain_MdNameType is a derived int64 type which is used to represent
+// the enumerated node MaintenanceDomain_MdNameType. An additional value named
+// MaintenanceDomain_MdNameType_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_MaintenanceDomain_MdNameType int64
+
+// IsYANGGoEnum ensures that MaintenanceDomain_MdNameType implements the yang.GoEnum
+// interface. This ensures that MaintenanceDomain_MdNameType can be identified as a
+// mapped type for a YANG enumeration.
+func (E_MaintenanceDomain_MdNameType) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  MaintenanceDomain_MdNameType.
+func (E_MaintenanceDomain_MdNameType) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_MaintenanceDomain_MdNameType.
+func (e E_MaintenanceDomain_MdNameType) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_MaintenanceDomain_MdNameType")
+}
+
+const (
+	// MaintenanceDomain_MdNameType_UNSET corresponds to the value UNSET of MaintenanceDomain_MdNameType
+	MaintenanceDomain_MdNameType_UNSET E_MaintenanceDomain_MdNameType = 0
+	// MaintenanceDomain_MdNameType_NONE corresponds to the value NONE of MaintenanceDomain_MdNameType
+	MaintenanceDomain_MdNameType_NONE E_MaintenanceDomain_MdNameType = 1
+	// MaintenanceDomain_MdNameType_DOMAIN_NAME corresponds to the value DOMAIN_NAME of MaintenanceDomain_MdNameType
+	MaintenanceDomain_MdNameType_DOMAIN_NAME E_MaintenanceDomain_MdNameType = 2
+	// MaintenanceDomain_MdNameType_MAC_ADDRESS_AND_UINT corresponds to the value MAC_ADDRESS_AND_UINT of MaintenanceDomain_MdNameType
+	MaintenanceDomain_MdNameType_MAC_ADDRESS_AND_UINT E_MaintenanceDomain_MdNameType = 3
+	// MaintenanceDomain_MdNameType_CHARACTER_STRING corresponds to the value CHARACTER_STRING of MaintenanceDomain_MdNameType
+	MaintenanceDomain_MdNameType_CHARACTER_STRING E_MaintenanceDomain_MdNameType = 4
+)
+
+// E_MepEndpoint_Direction is a derived int64 type which is used to represent
+// the enumerated node MepEndpoint_Direction. An additional value named
+// MepEndpoint_Direction_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_MepEndpoint_Direction int64
+
+// IsYANGGoEnum ensures that MepEndpoint_Direction implements the yang.GoEnum
+// interface. This ensures that MepEndpoint_Direction can be identified as a
+// mapped type for a YANG enumeration.
+func (E_MepEndpoint_Direction) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  MepEndpoint_Direction.
+func (E_MepEndpoint_Direction) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_MepEndpoint_Direction.
+func (e E_MepEndpoint_Direction) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_MepEndpoint_Direction")
+}
+
+const (
+	// MepEndpoint_Direction_UNSET corresponds to the value UNSET of MepEndpoint_Direction
+	MepEndpoint_Direction_UNSET E_MepEndpoint_Direction = 0
+	// MepEndpoint_Direction_DOWN corresponds to the value DOWN of MepEndpoint_Direction
+	MepEndpoint_Direction_DOWN E_MepEndpoint_Direction = 2
+	// MepEndpoint_Direction_UP corresponds to the value UP of MepEndpoint_Direction
+	MepEndpoint_Direction_UP E_MepEndpoint_Direction = 3
 )
 
 // E_Messages_DEBUG_SERVICE is a derived int64 type which is used to represent
@@ -7126,6 +7290,259 @@ const (
 	NodeAttribute_SubTlv_Type_UNSET E_NodeAttribute_SubTlv_Type = 0
 	// NodeAttribute_SubTlv_Type_UNKNOWN corresponds to the value UNKNOWN of NodeAttribute_SubTlv_Type
 	NodeAttribute_SubTlv_Type_UNKNOWN E_NodeAttribute_SubTlv_Type = 1
+)
+
+// E_OamCfm_ConfigErrorType is a derived int64 type which is used to represent
+// the enumerated node OamCfm_ConfigErrorType. An additional value named
+// OamCfm_ConfigErrorType_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_OamCfm_ConfigErrorType int64
+
+// IsYANGGoEnum ensures that OamCfm_ConfigErrorType implements the yang.GoEnum
+// interface. This ensures that OamCfm_ConfigErrorType can be identified as a
+// mapped type for a YANG enumeration.
+func (E_OamCfm_ConfigErrorType) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  OamCfm_ConfigErrorType.
+func (E_OamCfm_ConfigErrorType) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_OamCfm_ConfigErrorType.
+func (e E_OamCfm_ConfigErrorType) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_OamCfm_ConfigErrorType")
+}
+
+const (
+	// OamCfm_ConfigErrorType_UNSET corresponds to the value UNSET of OamCfm_ConfigErrorType
+	OamCfm_ConfigErrorType_UNSET E_OamCfm_ConfigErrorType = 0
+	// OamCfm_ConfigErrorType_CFM_LEAK corresponds to the value CFM_LEAK of OamCfm_ConfigErrorType
+	OamCfm_ConfigErrorType_CFM_LEAK E_OamCfm_ConfigErrorType = 1
+	// OamCfm_ConfigErrorType_CONFLICTING_VIDS corresponds to the value CONFLICTING_VIDS of OamCfm_ConfigErrorType
+	OamCfm_ConfigErrorType_CONFLICTING_VIDS E_OamCfm_ConfigErrorType = 2
+	// OamCfm_ConfigErrorType_EXCESSIVE_LEVELS corresponds to the value EXCESSIVE_LEVELS of OamCfm_ConfigErrorType
+	OamCfm_ConfigErrorType_EXCESSIVE_LEVELS E_OamCfm_ConfigErrorType = 3
+	// OamCfm_ConfigErrorType_OVERLAPPED_LEVELS corresponds to the value OVERLAPPED_LEVELS of OamCfm_ConfigErrorType
+	OamCfm_ConfigErrorType_OVERLAPPED_LEVELS E_OamCfm_ConfigErrorType = 4
+)
+
+// E_OamCfm_FngStateType is a derived int64 type which is used to represent
+// the enumerated node OamCfm_FngStateType. An additional value named
+// OamCfm_FngStateType_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_OamCfm_FngStateType int64
+
+// IsYANGGoEnum ensures that OamCfm_FngStateType implements the yang.GoEnum
+// interface. This ensures that OamCfm_FngStateType can be identified as a
+// mapped type for a YANG enumeration.
+func (E_OamCfm_FngStateType) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  OamCfm_FngStateType.
+func (E_OamCfm_FngStateType) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_OamCfm_FngStateType.
+func (e E_OamCfm_FngStateType) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_OamCfm_FngStateType")
+}
+
+const (
+	// OamCfm_FngStateType_UNSET corresponds to the value UNSET of OamCfm_FngStateType
+	OamCfm_FngStateType_UNSET E_OamCfm_FngStateType = 0
+	// OamCfm_FngStateType_FNG_RESET corresponds to the value FNG_RESET of OamCfm_FngStateType
+	OamCfm_FngStateType_FNG_RESET E_OamCfm_FngStateType = 2
+	// OamCfm_FngStateType_FNG_DEFECT corresponds to the value FNG_DEFECT of OamCfm_FngStateType
+	OamCfm_FngStateType_FNG_DEFECT E_OamCfm_FngStateType = 3
+	// OamCfm_FngStateType_FNG_REPORT_DEFECT corresponds to the value FNG_REPORT_DEFECT of OamCfm_FngStateType
+	OamCfm_FngStateType_FNG_REPORT_DEFECT E_OamCfm_FngStateType = 4
+	// OamCfm_FngStateType_FNG_DEFECT_REPORTED corresponds to the value FNG_DEFECT_REPORTED of OamCfm_FngStateType
+	OamCfm_FngStateType_FNG_DEFECT_REPORTED E_OamCfm_FngStateType = 5
+	// OamCfm_FngStateType_FNG_DEFECT_CLEARING corresponds to the value FNG_DEFECT_CLEARING of OamCfm_FngStateType
+	OamCfm_FngStateType_FNG_DEFECT_CLEARING E_OamCfm_FngStateType = 6
+)
+
+// E_OamCfm_HighestDefectPriorityType is a derived int64 type which is used to represent
+// the enumerated node OamCfm_HighestDefectPriorityType. An additional value named
+// OamCfm_HighestDefectPriorityType_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_OamCfm_HighestDefectPriorityType int64
+
+// IsYANGGoEnum ensures that OamCfm_HighestDefectPriorityType implements the yang.GoEnum
+// interface. This ensures that OamCfm_HighestDefectPriorityType can be identified as a
+// mapped type for a YANG enumeration.
+func (E_OamCfm_HighestDefectPriorityType) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  OamCfm_HighestDefectPriorityType.
+func (E_OamCfm_HighestDefectPriorityType) ΛMap() map[string]map[int64]ygot.EnumDefinition {
+	return ΛEnum
+}
+
+// String returns a logging-friendly string for E_OamCfm_HighestDefectPriorityType.
+func (e E_OamCfm_HighestDefectPriorityType) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_OamCfm_HighestDefectPriorityType")
+}
+
+const (
+	// OamCfm_HighestDefectPriorityType_UNSET corresponds to the value UNSET of OamCfm_HighestDefectPriorityType
+	OamCfm_HighestDefectPriorityType_UNSET E_OamCfm_HighestDefectPriorityType = 0
+	// OamCfm_HighestDefectPriorityType_NONE corresponds to the value NONE of OamCfm_HighestDefectPriorityType
+	OamCfm_HighestDefectPriorityType_NONE E_OamCfm_HighestDefectPriorityType = 1
+	// OamCfm_HighestDefectPriorityType_DEF_RDI_CCM corresponds to the value DEF_RDI_CCM of OamCfm_HighestDefectPriorityType
+	OamCfm_HighestDefectPriorityType_DEF_RDI_CCM E_OamCfm_HighestDefectPriorityType = 2
+	// OamCfm_HighestDefectPriorityType_DEF_MAC_STATUS corresponds to the value DEF_MAC_STATUS of OamCfm_HighestDefectPriorityType
+	OamCfm_HighestDefectPriorityType_DEF_MAC_STATUS E_OamCfm_HighestDefectPriorityType = 3
+	// OamCfm_HighestDefectPriorityType_DEF_REMOTE_CCM corresponds to the value DEF_REMOTE_CCM of OamCfm_HighestDefectPriorityType
+	OamCfm_HighestDefectPriorityType_DEF_REMOTE_CCM E_OamCfm_HighestDefectPriorityType = 4
+	// OamCfm_HighestDefectPriorityType_DEF_ERROR_CCM corresponds to the value DEF_ERROR_CCM of OamCfm_HighestDefectPriorityType
+	OamCfm_HighestDefectPriorityType_DEF_ERROR_CCM E_OamCfm_HighestDefectPriorityType = 5
+	// OamCfm_HighestDefectPriorityType_DEF_XCON_CCM corresponds to the value DEF_XCON_CCM of OamCfm_HighestDefectPriorityType
+	OamCfm_HighestDefectPriorityType_DEF_XCON_CCM E_OamCfm_HighestDefectPriorityType = 6
+)
+
+// E_OamCfm_InterfaceStatusType is a derived int64 type which is used to represent
+// the enumerated node OamCfm_InterfaceStatusType. An additional value named
+// OamCfm_InterfaceStatusType_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_OamCfm_InterfaceStatusType int64
+
+// IsYANGGoEnum ensures that OamCfm_InterfaceStatusType implements the yang.GoEnum
+// interface. This ensures that OamCfm_InterfaceStatusType can be identified as a
+// mapped type for a YANG enumeration.
+func (E_OamCfm_InterfaceStatusType) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  OamCfm_InterfaceStatusType.
+func (E_OamCfm_InterfaceStatusType) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_OamCfm_InterfaceStatusType.
+func (e E_OamCfm_InterfaceStatusType) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_OamCfm_InterfaceStatusType")
+}
+
+const (
+	// OamCfm_InterfaceStatusType_UNSET corresponds to the value UNSET of OamCfm_InterfaceStatusType
+	OamCfm_InterfaceStatusType_UNSET E_OamCfm_InterfaceStatusType = 0
+	// OamCfm_InterfaceStatusType_NO_STATUS_TLV corresponds to the value NO_STATUS_TLV of OamCfm_InterfaceStatusType
+	OamCfm_InterfaceStatusType_NO_STATUS_TLV E_OamCfm_InterfaceStatusType = 1
+	// OamCfm_InterfaceStatusType_UP corresponds to the value UP of OamCfm_InterfaceStatusType
+	OamCfm_InterfaceStatusType_UP E_OamCfm_InterfaceStatusType = 2
+	// OamCfm_InterfaceStatusType_DOWN corresponds to the value DOWN of OamCfm_InterfaceStatusType
+	OamCfm_InterfaceStatusType_DOWN E_OamCfm_InterfaceStatusType = 3
+	// OamCfm_InterfaceStatusType_TESTING corresponds to the value TESTING of OamCfm_InterfaceStatusType
+	OamCfm_InterfaceStatusType_TESTING E_OamCfm_InterfaceStatusType = 4
+	// OamCfm_InterfaceStatusType_UNKNOWN corresponds to the value UNKNOWN of OamCfm_InterfaceStatusType
+	OamCfm_InterfaceStatusType_UNKNOWN E_OamCfm_InterfaceStatusType = 5
+	// OamCfm_InterfaceStatusType_DORMANT corresponds to the value DORMANT of OamCfm_InterfaceStatusType
+	OamCfm_InterfaceStatusType_DORMANT E_OamCfm_InterfaceStatusType = 6
+	// OamCfm_InterfaceStatusType_NOT_PRESENT corresponds to the value NOT_PRESENT of OamCfm_InterfaceStatusType
+	OamCfm_InterfaceStatusType_NOT_PRESENT E_OamCfm_InterfaceStatusType = 7
+	// OamCfm_InterfaceStatusType_LOWER_LAYER_DOWN corresponds to the value LOWER_LAYER_DOWN of OamCfm_InterfaceStatusType
+	OamCfm_InterfaceStatusType_LOWER_LAYER_DOWN E_OamCfm_InterfaceStatusType = 8
+)
+
+// E_OamCfm_LowestAlarmPriorityType is a derived int64 type which is used to represent
+// the enumerated node OamCfm_LowestAlarmPriorityType. An additional value named
+// OamCfm_LowestAlarmPriorityType_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_OamCfm_LowestAlarmPriorityType int64
+
+// IsYANGGoEnum ensures that OamCfm_LowestAlarmPriorityType implements the yang.GoEnum
+// interface. This ensures that OamCfm_LowestAlarmPriorityType can be identified as a
+// mapped type for a YANG enumeration.
+func (E_OamCfm_LowestAlarmPriorityType) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  OamCfm_LowestAlarmPriorityType.
+func (E_OamCfm_LowestAlarmPriorityType) ΛMap() map[string]map[int64]ygot.EnumDefinition {
+	return ΛEnum
+}
+
+// String returns a logging-friendly string for E_OamCfm_LowestAlarmPriorityType.
+func (e E_OamCfm_LowestAlarmPriorityType) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_OamCfm_LowestAlarmPriorityType")
+}
+
+const (
+	// OamCfm_LowestAlarmPriorityType_UNSET corresponds to the value UNSET of OamCfm_LowestAlarmPriorityType
+	OamCfm_LowestAlarmPriorityType_UNSET E_OamCfm_LowestAlarmPriorityType = 0
+	// OamCfm_LowestAlarmPriorityType_ALL_DEF corresponds to the value ALL_DEF of OamCfm_LowestAlarmPriorityType
+	OamCfm_LowestAlarmPriorityType_ALL_DEF E_OamCfm_LowestAlarmPriorityType = 2
+	// OamCfm_LowestAlarmPriorityType_MAC_REMOTE_ERROR_XCON corresponds to the value MAC_REMOTE_ERROR_XCON of OamCfm_LowestAlarmPriorityType
+	OamCfm_LowestAlarmPriorityType_MAC_REMOTE_ERROR_XCON E_OamCfm_LowestAlarmPriorityType = 3
+	// OamCfm_LowestAlarmPriorityType_REMOTE_ERROR_XCON corresponds to the value REMOTE_ERROR_XCON of OamCfm_LowestAlarmPriorityType
+	OamCfm_LowestAlarmPriorityType_REMOTE_ERROR_XCON E_OamCfm_LowestAlarmPriorityType = 4
+	// OamCfm_LowestAlarmPriorityType_ERROR_XCON corresponds to the value ERROR_XCON of OamCfm_LowestAlarmPriorityType
+	OamCfm_LowestAlarmPriorityType_ERROR_XCON E_OamCfm_LowestAlarmPriorityType = 5
+	// OamCfm_LowestAlarmPriorityType_XCON corresponds to the value XCON of OamCfm_LowestAlarmPriorityType
+	OamCfm_LowestAlarmPriorityType_XCON E_OamCfm_LowestAlarmPriorityType = 6
+	// OamCfm_LowestAlarmPriorityType_NO_XCON corresponds to the value NO_XCON of OamCfm_LowestAlarmPriorityType
+	OamCfm_LowestAlarmPriorityType_NO_XCON E_OamCfm_LowestAlarmPriorityType = 7
+)
+
+// E_OamCfm_MepDefectsType is a derived int64 type which is used to represent
+// the enumerated node OamCfm_MepDefectsType. An additional value named
+// OamCfm_MepDefectsType_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_OamCfm_MepDefectsType int64
+
+// IsYANGGoEnum ensures that OamCfm_MepDefectsType implements the yang.GoEnum
+// interface. This ensures that OamCfm_MepDefectsType can be identified as a
+// mapped type for a YANG enumeration.
+func (E_OamCfm_MepDefectsType) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  OamCfm_MepDefectsType.
+func (E_OamCfm_MepDefectsType) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_OamCfm_MepDefectsType.
+func (e E_OamCfm_MepDefectsType) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_OamCfm_MepDefectsType")
+}
+
+const (
+	// OamCfm_MepDefectsType_UNSET corresponds to the value UNSET of OamCfm_MepDefectsType
+	OamCfm_MepDefectsType_UNSET E_OamCfm_MepDefectsType = 0
+	// OamCfm_MepDefectsType_DEF_RDI_CCM corresponds to the value DEF_RDI_CCM of OamCfm_MepDefectsType
+	OamCfm_MepDefectsType_DEF_RDI_CCM E_OamCfm_MepDefectsType = 2
+	// OamCfm_MepDefectsType_DEF_MAC_STATUS corresponds to the value DEF_MAC_STATUS of OamCfm_MepDefectsType
+	OamCfm_MepDefectsType_DEF_MAC_STATUS E_OamCfm_MepDefectsType = 3
+	// OamCfm_MepDefectsType_DEF_REMOTE_CCM corresponds to the value DEF_REMOTE_CCM of OamCfm_MepDefectsType
+	OamCfm_MepDefectsType_DEF_REMOTE_CCM E_OamCfm_MepDefectsType = 4
+	// OamCfm_MepDefectsType_DEF_ERROR_CCM corresponds to the value DEF_ERROR_CCM of OamCfm_MepDefectsType
+	OamCfm_MepDefectsType_DEF_ERROR_CCM E_OamCfm_MepDefectsType = 5
+	// OamCfm_MepDefectsType_DEF_XCON_CCM corresponds to the value DEF_XCON_CCM of OamCfm_MepDefectsType
+	OamCfm_MepDefectsType_DEF_XCON_CCM E_OamCfm_MepDefectsType = 6
+)
+
+// E_OamCfm_OperationalStateType is a derived int64 type which is used to represent
+// the enumerated node OamCfm_OperationalStateType. An additional value named
+// OamCfm_OperationalStateType_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_OamCfm_OperationalStateType int64
+
+// IsYANGGoEnum ensures that OamCfm_OperationalStateType implements the yang.GoEnum
+// interface. This ensures that OamCfm_OperationalStateType can be identified as a
+// mapped type for a YANG enumeration.
+func (E_OamCfm_OperationalStateType) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  OamCfm_OperationalStateType.
+func (E_OamCfm_OperationalStateType) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_OamCfm_OperationalStateType.
+func (e E_OamCfm_OperationalStateType) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_OamCfm_OperationalStateType")
+}
+
+const (
+	// OamCfm_OperationalStateType_UNSET corresponds to the value UNSET of OamCfm_OperationalStateType
+	OamCfm_OperationalStateType_UNSET E_OamCfm_OperationalStateType = 0
+	// OamCfm_OperationalStateType_ENABLED corresponds to the value ENABLED of OamCfm_OperationalStateType
+	OamCfm_OperationalStateType_ENABLED E_OamCfm_OperationalStateType = 1
+	// OamCfm_OperationalStateType_DISABLED corresponds to the value DISABLED of OamCfm_OperationalStateType
+	OamCfm_OperationalStateType_DISABLED E_OamCfm_OperationalStateType = 2
+	// OamCfm_OperationalStateType_UNKNOWN corresponds to the value UNKNOWN of OamCfm_OperationalStateType
+	OamCfm_OperationalStateType_UNKNOWN E_OamCfm_OperationalStateType = 3
 )
 
 // E_OpaqueLsa_Scope is a derived int64 type which is used to represent
@@ -8552,6 +8969,68 @@ const (
 	Platform_ComponentRedundantRole_PRIMARY E_Platform_ComponentRedundantRole = 1
 	// Platform_ComponentRedundantRole_SECONDARY corresponds to the value SECONDARY of Platform_ComponentRedundantRole
 	Platform_ComponentRedundantRole_SECONDARY E_Platform_ComponentRedundantRole = 2
+)
+
+// E_PmProfile_MeasurementType is a derived int64 type which is used to represent
+// the enumerated node PmProfile_MeasurementType. An additional value named
+// PmProfile_MeasurementType_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_PmProfile_MeasurementType int64
+
+// IsYANGGoEnum ensures that PmProfile_MeasurementType implements the yang.GoEnum
+// interface. This ensures that PmProfile_MeasurementType can be identified as a
+// mapped type for a YANG enumeration.
+func (E_PmProfile_MeasurementType) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  PmProfile_MeasurementType.
+func (E_PmProfile_MeasurementType) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_PmProfile_MeasurementType.
+func (e E_PmProfile_MeasurementType) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_PmProfile_MeasurementType")
+}
+
+const (
+	// PmProfile_MeasurementType_UNSET corresponds to the value UNSET of PmProfile_MeasurementType
+	PmProfile_MeasurementType_UNSET E_PmProfile_MeasurementType = 0
+	// PmProfile_MeasurementType_LMM corresponds to the value LMM of PmProfile_MeasurementType
+	PmProfile_MeasurementType_LMM E_PmProfile_MeasurementType = 1
+	// PmProfile_MeasurementType_SLM corresponds to the value SLM of PmProfile_MeasurementType
+	PmProfile_MeasurementType_SLM E_PmProfile_MeasurementType = 2
+	// PmProfile_MeasurementType_DMM corresponds to the value DMM of PmProfile_MeasurementType
+	PmProfile_MeasurementType_DMM E_PmProfile_MeasurementType = 3
+	// PmProfile_MeasurementType_CCM corresponds to the value CCM of PmProfile_MeasurementType
+	PmProfile_MeasurementType_CCM E_PmProfile_MeasurementType = 4
+)
+
+// E_PmProfile_ProtocolType is a derived int64 type which is used to represent
+// the enumerated node PmProfile_ProtocolType. An additional value named
+// PmProfile_ProtocolType_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_PmProfile_ProtocolType int64
+
+// IsYANGGoEnum ensures that PmProfile_ProtocolType implements the yang.GoEnum
+// interface. This ensures that PmProfile_ProtocolType can be identified as a
+// mapped type for a YANG enumeration.
+func (E_PmProfile_ProtocolType) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  PmProfile_ProtocolType.
+func (E_PmProfile_ProtocolType) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_PmProfile_ProtocolType.
+func (e E_PmProfile_ProtocolType) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_PmProfile_ProtocolType")
+}
+
+const (
+	// PmProfile_ProtocolType_UNSET corresponds to the value UNSET of PmProfile_ProtocolType
+	PmProfile_ProtocolType_UNSET E_PmProfile_ProtocolType = 0
+	// PmProfile_ProtocolType_SINGLE_ENDED corresponds to the value SINGLE_ENDED of PmProfile_ProtocolType
+	PmProfile_ProtocolType_SINGLE_ENDED E_PmProfile_ProtocolType = 1
+	// PmProfile_ProtocolType_DUAL_ENDED corresponds to the value DUAL_ENDED of PmProfile_ProtocolType
+	PmProfile_ProtocolType_DUAL_ENDED E_PmProfile_ProtocolType = 2
 )
 
 // E_PolicyForwardingEntry_MplsLabel is a derived int64 type which is used to represent

@@ -52,6 +52,9 @@ using the following YANG input files:
   - public/release/models/network-instance/openconfig-network-instance.yang
   - public/release/models/network-instance/openconfig-network-instance-l2.yang
   - public/release/models/network-instance/openconfig-network-instance-static.yang
+  - public/release/models/oam/openconfig-cfm-types.yang
+  - public/release/models/oam/openconfig-oam.yang
+  - public/release/models/oam/openconfig-oam-cfm.yang
   - public/release/models/openconfig-extensions.yang
   - public/release/models/optical-transport/openconfig-terminal-device.yang
   - public/release/models/optical-transport/openconfig-transport-types.yang
@@ -123,6 +126,7 @@ import (
 	"github.com/openconfig/ondatra/gnmi/oc/lldp"
 	"github.com/openconfig/ondatra/gnmi/oc/macsec"
 	"github.com/openconfig/ondatra/gnmi/oc/networkinstance"
+	"github.com/openconfig/ondatra/gnmi/oc/oam"
 	"github.com/openconfig/ondatra/gnmi/oc/platform"
 	"github.com/openconfig/ondatra/gnmi/oc/qos"
 	"github.com/openconfig/ondatra/gnmi/oc/relayagent"
@@ -532,6 +536,24 @@ func (n *RootPath) NetworkInstanceMap() *networkinstance.NetworkInstancePathMap 
 	ps := &networkinstance.NetworkInstancePathMap{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"network-instances"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// Oam (container): Operational state and configuration parameters relating to
+// Ethernet OAM
+//
+//	Defining module:      "openconfig-oam"
+//	Instantiating module: "openconfig-oam"
+//	Path from parent:     "oam"
+//	Path from root:       "/oam"
+func (n *RootPath) Oam() *oam.OamPath {
+	ps := &oam.OamPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"oam"},
 			map[string]interface{}{},
 			n,
 		),
