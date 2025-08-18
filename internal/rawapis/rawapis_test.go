@@ -39,6 +39,9 @@ var (
 		DialConsoleFn: func(context.Context) (binding.ConsoleClient, error) {
 			return &struct{ binding.ConsoleClient }{}, nil
 		},
+		DialSSHFn: func(context.Context, binding.SSHAuth) (binding.SSHClient, error) {
+			return &struct{ binding.SSHClient }{}, nil
+		},
 		DialGNMIFn: func(context.Context, ...grpc.DialOption) (gpb.GNMIClient, error) {
 			return &struct{ gpb.GNMIClient }{}, nil
 		},
@@ -81,6 +84,12 @@ func TestCLI(t *testing.T) {
 func TestConsole(t *testing.T) {
 	if _, err := NewConsole(context.Background(), dut); err != nil {
 		t.Fatalf("NewConsole() unexpected error: %v", err)
+	}
+}
+
+func TestSSH(t *testing.T) {
+	if _, err := NewSSH(context.Background(), binding.PasswordAuth{}, dut); err != nil {
+		t.Fatalf("NewSSH() unexpected error: %v", err)
 	}
 }
 

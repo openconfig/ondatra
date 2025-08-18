@@ -216,6 +216,31 @@ func TestConsole(t *testing.T) {
 	})
 }
 
+func TestSSH(t *testing.T) {
+	t.Run("error", func(t *testing.T) {
+		wantErr := "bad ssh"
+		dut.DialSSHFn = func(context.Context, binding.SSHAuth) (binding.SSHClient, error) {
+			return nil, errors.New(wantErr)
+		}
+		gotErr := testt.ExpectFatal(t, func(t testing.TB) {
+			dutAPIs.SSH(t, binding.PasswordAuth{})
+		})
+		if !strings.Contains(gotErr, wantErr) {
+			t.Errorf("SSH(t, auth) got err %v, want %v", gotErr, wantErr)
+		}
+	})
+
+	t.Run("success", func(t *testing.T) {
+		want := struct{ binding.SSHClient }{}
+		dut.DialSSHFn = func(context.Context, binding.SSHAuth) (binding.SSHClient, error) {
+			return want, nil
+		}
+		if got := dutAPIs.SSH(t, binding.KeyAuth{}); want != got {
+			t.Errorf("SSH(t, auth) got %v, want %v", got, want)
+		}
+	})
+}
+
 func TestGNMIATE(t *testing.T) {
 	t.Run("error", func(t *testing.T) {
 		wantErr := "bad gnmi"

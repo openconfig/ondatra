@@ -122,6 +122,11 @@ func (*AbstractDUT) DialGNPSI(context.Context, ...grpc.DialOption) (gnpsipb.GNPS
 	return nil, errors.New("DialGNPSI unimplemented")
 }
 
+// DialSSH returns an unimplemented error.
+func (*AbstractDUT) DialSSH(context.Context, SSHAuth) (SSHClient, error) {
+	return nil, errors.New("DialSSH unimplemented")
+}
+
 func (*AbstractDUT) mustEmbedAbstractDUT() {}
 
 var _ ATE = &AbstractATE{}
@@ -293,3 +298,20 @@ func (*AbstractConsoleClient) Close() error {
 }
 
 func (*AbstractConsoleClient) mustEmbedAbstractConsoleClient() {}
+
+var _ SSHClient = &AbstractSSHClient{}
+
+// AbstractSSHClient is implementation support for the SSHClient interface.
+type AbstractSSHClient struct{}
+
+// RunCommand returns an unimplemented error.
+func (*AbstractSSHClient) RunCommand(ctx context.Context, cmd string) (CommandResult, error) {
+	return nil, errors.New("RunCommand unimplemented")
+}
+
+// Close returns an unimplemented error.
+func (*AbstractSSHClient) Close() error {
+	return errors.New("Close unimplemented")
+}
+
+func (*AbstractSSHClient) mustEmbedAbstractSSHClient() {}

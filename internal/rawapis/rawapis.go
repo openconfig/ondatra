@@ -57,6 +57,11 @@ func NewConsole(ctx context.Context, dut binding.DUT) (binding.ConsoleClient, er
 	return dut.DialConsole(ctx)
 }
 
+// NewSSH creates a SSH client for the specified DUT.
+func NewSSH(ctx context.Context, auth binding.SSHAuth, dut binding.DUT) (binding.SSHClient, error) {
+	return dut.DialSSH(ctx, auth)
+}
+
 var (
 	gnmiMu sync.Mutex
 	gnmis  = make(map[GNMIDialer]gpb.GNMIClient)

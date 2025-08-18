@@ -160,6 +160,9 @@ type DUT interface {
 	// See the interface comment for proper handling of dial options.
 	DialGNPSI(context.Context, ...grpc.DialOption) (gnpsipb.GNPSIClient, error)
 
+	// DialSSH creates a client connection to the DUT's SSH endpoint.
+	DialSSH(context.Context, SSHAuth) (SSHClient, error)
+
 	mustEmbedAbstractDUT()
 }
 
@@ -256,4 +259,37 @@ type ConsoleClient interface {
 	Stderr() io.ReadCloser
 	Close() error
 	mustEmbedAbstractConsoleClient()
+}
+
+// SSHAuth represents an authentication method for DialSSH.
+// Implementations of this interface are not thread-safe.
+type SSHAuth interface {
+	// isSSHAuth is an unexported method to limit implementations of this interface.
+	isSSHAuth()
+}
+
+// PasswordAuth implements SSHAuth for username and password authentication.
+type PasswordAuth struct {
+	User     string
+	Password string
+}
+
+func (PasswordAuth) isSSHAuth() {}
+
+// KeyAuth implements SSHAuth for public key authentication.
+type KeyAuth struct {
+	User string
+	Key  []byte // Key is the PEM-encoded private key.
+}
+
+func (KeyAuth) isSSHAuth() {}
+
+// SSHClient provides an interface for running commands on a DUT over SSH.
+// All implementations of this interface must embed AbstractSSHClient.
+type SSHClient interface {
+	// RunCommand executes a command and waits for it to complete.
+	RunCommand(ctx context.Context, cmd string) (CommandResult, error)
+	// Close closes the SSH connection.
+	Close() error
+	mustEmbedAbstractSSHClient()
 }

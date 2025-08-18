@@ -92,6 +92,7 @@ type DUT struct {
 	PushConfigFn  func(context.Context, string, bool) error
 	DialCLIFn     func(context.Context) (binding.CLIClient, error)
 	DialConsoleFn func(context.Context) (binding.ConsoleClient, error)
+	DialSSHFn     func(context.Context, binding.SSHAuth) (binding.SSHClient, error)
 	DialGNMIFn    func(context.Context, ...grpc.DialOption) (gpb.GNMIClient, error)
 	DialGNOIFn    func(context.Context, ...grpc.DialOption) (gnoigo.Clients, error)
 	DialGNSIFn    func(context.Context, ...grpc.DialOption) (binding.GNSIClients, error)
@@ -122,6 +123,14 @@ func (d *DUT) DialConsole(ctx context.Context) (binding.ConsoleClient, error) {
 		log.Fatal("fakebind DialConsole called but DialConsoleFn not set")
 	}
 	return d.DialConsoleFn(ctx)
+}
+
+// DialSSH delegates to d.DialSSHFn.
+func (d *DUT) DialSSH(ctx context.Context, auth binding.SSHAuth) (binding.SSHClient, error) {
+	if d.DialSSHFn == nil {
+		log.FatalContext(ctx, "fakebind DialSSH called but DialSSHFn not set")
+	}
+	return d.DialSSHFn(ctx, auth)
 }
 
 // DialGNMI delegates to d.DialGNMIFn.

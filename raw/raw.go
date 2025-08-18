@@ -199,6 +199,17 @@ func (r *DUTAPIs) Console(t testing.TB) binding.ConsoleClient {
 	return c
 }
 
+// SSH returns a new SSH client for the DUT.
+func (r *DUTAPIs) SSH(t testing.TB, auth binding.SSHAuth) binding.SSHClient {
+	t.Helper()
+	t = events.ActionStarted(t, "Creating SSH client for %s", r.dut)
+	c, err := rawapis.NewSSH(context.Background(), auth, r.dut)
+	if err != nil {
+		t.Fatalf("Failed to create SSH client for %v: %v", r.dut, err)
+	}
+	return c
+}
+
 // NewATEAPIs returns a new instance of raw ATE APIs.
 // Tests must not call this directly.
 func NewATEAPIs(ate binding.ATE) *ATEAPIs {
