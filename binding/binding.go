@@ -163,6 +163,11 @@ type DUT interface {
 	// DialSSH creates a client connection to the DUT's SSH endpoint.
 	DialSSH(context.Context, SSHAuth) (SSHClient, error)
 
+	// DialContainer creates a client connection to a gRPC service on a container
+	// running on the DUT. The port is the TCP port of the service.
+	// See the interface comment for proper handling of dial options.
+	DialContainer(context.Context, int, ...grpc.DialOption) (*grpc.ClientConn, error)
+
 	mustEmbedAbstractDUT()
 }
 
