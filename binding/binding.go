@@ -284,6 +284,15 @@ type KeyAuth struct {
 
 func (KeyAuth) isSSHAuth() {}
 
+// CertificateAuth implements SSHAuth for certificate authentication.
+type CertificateAuth struct {
+	User        string
+	PrivateKey  []byte // PrivateKey is the PEM-encoded private key.
+	Certificate []byte // Certificate is the authorized certificate encoded per RFC 4253, section 6.6.
+}
+
+func (CertificateAuth) isSSHAuth() {}
+
 // SSHClient provides an interface for running commands on a DUT over SSH.
 // All implementations of this interface must embed AbstractSSHClient.
 type SSHClient interface {

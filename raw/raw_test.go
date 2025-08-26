@@ -239,6 +239,16 @@ func TestSSH(t *testing.T) {
 			t.Errorf("SSH(t, auth) got %v, want %v", got, want)
 		}
 	})
+
+	t.Run("success with certificate auth", func(t *testing.T) {
+		want := struct{ binding.SSHClient }{}
+		dut.DialSSHFn = func(context.Context, binding.SSHAuth) (binding.SSHClient, error) {
+			return want, nil
+		}
+		if got := dutAPIs.SSH(t, binding.CertificateAuth{}); want != got {
+			t.Errorf("SSH(t, auth) got %v, want %v", got, want)
+		}
+	})
 }
 
 func TestGNMIATE(t *testing.T) {

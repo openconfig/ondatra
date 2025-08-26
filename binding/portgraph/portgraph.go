@@ -244,15 +244,11 @@ func Solve(ctx context.Context, abstractGraph *AbstractGraph, superGraph *Concre
 	}
 
 	// Preprocess data for the solve.
-	// Map the AbstractPort to AbstractNode and initialize maps for maxSolve.
+	// Map the AbstractPort to AbstractNode and initialize map for maxSolve.
 	absPort2Node := make(map[*AbstractPort]*AbstractNode)
-	node2Node := make(map[*AbstractNode]*ConcreteNode)
-	port2Port := make(map[*AbstractPort]*ConcretePort)
 	for _, n := range abstractGraph.Nodes {
-		node2Node[n] = nil
 		for _, p := range n.Ports {
 			absPort2Node[p] = n
-			port2Port[p] = nil
 		}
 	}
 	// Map how many links there are between each AbstractNode to calculate matches.
