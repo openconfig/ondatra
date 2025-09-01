@@ -30,7 +30,7 @@ import (
 
 type dialer struct{}
 
-func (d *dialer) DialGRPC(ctx context.Context, target string, opts ...grpc.DialOption) (*grpc.ClientConn, error) {
+func (d *dialer) DialGRPCSvc(ctx context.Context, target string, opts ...grpc.DialOption) (*grpc.ClientConn, error) {
 	opts = append(opts, grpc.WithTransportCredentials(insecure.NewCredentials()))
 	return grpc.DialContext(ctx, target, opts...)
 }

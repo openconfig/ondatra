@@ -51,12 +51,12 @@ type DestProviderFn func(metadata.MD, string) (string, metadata.MD, error)
 
 // GRPCDialer is interface to dial a gRPC connection.
 type GRPCDialer interface {
-	DialGRPC(context.Context, string, ...grpc.DialOption) (*grpc.ClientConn, error)
+	DialGRPCSvc(context.Context, string, ...grpc.DialOption) (*grpc.ClientConn, error)
 }
 
 type defaultGRPCDialer struct{}
 
-func (d defaultGRPCDialer) DialGRPC(ctx context.Context, target string, opts ...grpc.DialOption) (*grpc.ClientConn, error) {
+func (d defaultGRPCDialer) DialGRPCSvc(ctx context.Context, target string, opts ...grpc.DialOption) (*grpc.ClientConn, error) {
 	log.Infof("DialContext(%s)", target)
 	conn, err := grpc.DialContext(ctx, target, opts...)
 	log.Infof("DialContext(%s) returns %s", target, err)
@@ -162,7 +162,7 @@ func (p *proxy) dialTarget(ctx context.Context, method string) (context.Context,
 		log.InfoContextf(ctx, "%s %s connection from cache", name, dest)
 		return destCtx, c, true, nil
 	}
-	c, err = p.grpcDialer.DialGRPC(ctx, dest, grpc.WithDefaultCallOptions(grpc.ForceCodec(codec())))
+	c, err = p.grpcDialer.DialGRPCSvc(ctx, dest, grpc.WithDefaultCallOptions(grpc.ForceCodec(codec())))
 	if err != nil {
 		log.Infof("%s proxy_error: cannot connect to target backend %s: %v", name, dest, err)
 		return nil, nil, false, status.Errorf(codes.Unavailable, "proxy_error: cannot connect to target backend: %v", err)

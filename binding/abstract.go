@@ -127,8 +127,8 @@ func (*AbstractDUT) DialSSH(context.Context, SSHAuth) (SSHClient, error) {
 	return nil, errors.New("DialSSH unimplemented")
 }
 
-// DialContainer returns an unimplemented error.
-func (*AbstractDUT) DialContainer(context.Context, int, ...grpc.DialOption) (*grpc.ClientConn, error) {
+// DialGRPC returns an unimplemented error.
+func (*AbstractDUT) DialGRPC(context.Context, int, ...grpc.DialOption) (*grpc.ClientConn, error) {
 	return nil, errors.New("DialContainer unimplemented")
 }
 

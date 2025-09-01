@@ -308,7 +308,7 @@ func (d *kneDUT) DialGNSI(ctx context.Context, opts ...grpc.DialOption) (binding
 
 // DialContainer creates a client connection to a gRPC service on a container
 // running on the DUT. The port is the TCP port of the service.
-func (d *kneDUT) DialContainer(ctx context.Context, port int, opts ...grpc.DialOption) (*grpc.ClientConn, error) {
+func (d *kneDUT) DialGRPC(ctx context.Context, port int, opts ...grpc.DialOption) (*grpc.ClientConn, error) {
 	var svcPB *tpb.Service
 	var svcName string
 	for name, s := range d.Services {
@@ -326,9 +326,9 @@ func (d *kneDUT) DialContainer(ctx context.Context, port int, opts ...grpc.DialO
 	return dialer.Dial(ctx, opts...)
 }
 
-// DialGRPC dials the service with the specified name.
+// DialGRPCSvc dials the service with the specified name.
 // It is exported so that test may use a type assertion to dial custom services.
-func (d *kneDUT) DialGRPC(ctx context.Context, serviceName string, opts ...grpc.DialOption) (*grpc.ClientConn, error) {
+func (d *kneDUT) DialGRPCSvc(ctx context.Context, serviceName string, opts ...grpc.DialOption) (*grpc.ClientConn, error) {
 	return d.dialGRPC(ctx, introspect.Service(serviceName), opts)
 }
 
