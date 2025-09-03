@@ -129,7 +129,7 @@ func (*AbstractDUT) DialSSH(context.Context, SSHAuth) (SSHClient, error) {
 
 // DialGRPC returns an unimplemented error.
 func (*AbstractDUT) DialGRPC(context.Context, int, ...grpc.DialOption) (*grpc.ClientConn, error) {
-	return nil, errors.New("DialContainer unimplemented")
+	return nil, errors.New("DialGRPC unimplemented")
 }
 
 func (*AbstractDUT) mustEmbedAbstractDUT() {}

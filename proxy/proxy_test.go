@@ -38,14 +38,14 @@ import (
 )
 
 type fakeBinding struct {
-	dialGRPC   func(ctx context.Context, target string, opts ...grpc.DialOption) (*grpc.ClientConn, error)
+	dialGRPCSvc func(ctx context.Context, target string, opts ...grpc.DialOption) (*grpc.ClientConn, error)
 	resolve    func() (*rpb.Reservation, error)
 	httpDialer func(string) (HTTPDoCloser, error)
 }
 
-func (fb *fakeBinding) DialGRPC(ctx context.Context, target string, opts ...grpc.DialOption) (*grpc.ClientConn, error) {
+func (fb *fakeBinding) DialGRPCSvc(ctx context.Context, target string, opts ...grpc.DialOption) (*grpc.ClientConn, error) {
 	opts = append(opts, grpc.WithTransportCredentials(insecure.NewCredentials()))
-	return fb.dialGRPC(ctx, target, opts...)
+	return fb.dialGRPCSvc(ctx, target, opts...)
 }
 
 func (fb *fakeBinding) Resolve() (*rpb.Reservation, error) {
@@ -65,7 +65,7 @@ func setupFake(t *testing.T) (*fakegnmi.StubGNMI, *fakeBinding) {
 	}
 	fAddr := fake.Addr()
 	b := &fakeBinding{}
-	b.dialGRPC = grpc.DialContext
+	b.dialGRPCSvc = grpc.DialContext
 	b.resolve = func() (*rpb.Reservation, error) {
 		return &rpb.Reservation{
 			Id: "fake reservation",
@@ -181,7 +181,7 @@ func TestLongStream(t *testing.T) {
 	defer fake.Stop()
 	fAddr := fake.Addr()
 	b := &fakeBinding{}
-	b.dialGRPC = grpc.DialContext
+	b.dialGRPCSvc = grpc.DialContext
 	b.resolve = func() (*rpb.Reservation, error) {
 		return &rpb.Reservation{
 			Id: "fake reservation",

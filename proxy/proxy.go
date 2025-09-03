@@ -60,11 +60,11 @@ func WrapHTTPDoCloser(c *http.Client) HTTPDoCloser {
 // to implement a proxy Dialer if they want to use the proxy as an extension to
 // ondatra.Binding interface.
 type Dialer interface {
-	// DialGRPC creates a client connection to the specified service endpoint
+	// DialGRPCSvc creates a client connection to the specified service endpoint
 	// on the target. The service will be represented as a gRPC service name.
 	// Implementations must append transport security options necessary to reach
 	// the server.
-	DialGRPC(context.Context, string, ...grpc.DialOption) (*grpc.ClientConn, error)
+	DialGRPCSvc(context.Context, string, ...grpc.DialOption) (*grpc.ClientConn, error)
 
 	// Resolve will return the resolved devices/ates and related services for the
 	// resolved topology.
