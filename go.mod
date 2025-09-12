@@ -6,7 +6,7 @@ require (
 	bitbucket.org/creachadair/stringset v0.0.14
 	github.com/golang/glog v1.2.5
 	github.com/google/go-cmp v0.7.0
-	github.com/hashicorp/golang-lru v0.5.4
+	github.com/hashicorp/golang-lru/v2 v2.0.7
 	github.com/jstemmer/go-junit-report/v2 v2.1.0
 	github.com/open-traffic-generator/snappi/gosnappi v1.33.3
 	github.com/openconfig/attestz v0.2.0

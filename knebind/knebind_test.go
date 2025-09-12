@@ -226,6 +226,14 @@ func TestNewRPCCredentials(t *testing.T) {
 		},
 		want: nil,
 	}, {
+		desc: "empty credentials with fallback",
+		cfg: &Config{
+			Credentials: &creds.Credentials{},
+			Username:    "deprecatedUser",
+			Password:    "deprecatedPass",
+		},
+		want: &creds.UserPass{Username: "deprecatedUser", Password: "deprecatedPass"},
+	}, {
 		desc: "from credentials",
 		cfg: &Config{
 			Credentials: &creds.Credentials{
@@ -477,6 +485,133 @@ func TestPushConfig(t *testing.T) {
 			}
 		})
 	}
+}
+
+func TestKneDUT(t *testing.T) {
+	t.Run("RPCUsername and RPCPassword", func(t *testing.T) {
+		dut := &kneDUT{
+			ServiceDUT: &solver.ServiceDUT{
+				AbstractDUT: &binding.AbstractDUT{Dims: &binding.Dims{Name: "dut1", Vendor: opb.Device_ARISTA}},
+				NodeVendor:  tpb.Vendor_ARISTA,
+			},
+			bind: &Bind{
+				cfg: &Config{},
+			},
+		}
+		tests := []struct {
+			desc     string
+			cfg      *Config
+			wantUser string
+			wantPass string
+		}{{
+			desc: "no creds",
+			cfg:  &Config{},
+		}, {
+			desc: "default user pass",
+			cfg: &Config{
+				Username: "user",
+				Password: "password",
+			},
+			wantUser: "user",
+			wantPass: "password",
+		}, {
+			desc: "creds by node name",
+			cfg: &Config{
+				Username: "user",
+				Password: "password",
+				Credentials: &creds.Credentials{
+					Node: map[string]*creds.UserPass{
+						"dut1": {Username: "node_user", Password: "node_password"},
+					},
+				},
+			},
+			wantUser: "node_user",
+			wantPass: "node_password",
+		}, {
+			desc: "creds by vendor",
+			cfg: &Config{
+				Username: "user",
+				Password: "password",
+				Credentials: &creds.Credentials{
+					Vendor: map[tpb.Vendor]*creds.UserPass{
+						tpb.Vendor_ARISTA: {Username: "vendor_user", Password: "vendor_password"},
+					},
+				},
+			},
+			wantUser: "vendor_user",
+			wantPass: "vendor_password",
+		}, {
+			desc: "creds by node name precedence",
+			cfg: &Config{
+				Username: "user",
+				Password: "password",
+				Credentials: &creds.Credentials{
+					Node: map[string]*creds.UserPass{
+						"dut1": {Username: "node_user", Password: "node_password"},
+					},
+					Vendor: map[tpb.Vendor]*creds.UserPass{
+						tpb.Vendor_ARISTA: {Username: "vendor_user", Password: "vendor_password"},
+					},
+				},
+			},
+			wantUser: "node_user",
+			wantPass: "node_password",
+		}}
+
+		for _, tt := range tests {
+			t.Run(tt.desc, func(t *testing.T) {
+				dut.bind.cfg = tt.cfg
+				if got := dut.RPCUsername(); got != tt.wantUser {
+					t.Errorf("RPCUsername() got %q, want %q", got, tt.wantUser)
+				}
+				if got := dut.RPCPassword(); got != tt.wantPass {
+					t.Errorf("RPCPassword() got %q, want %q", got, tt.wantPass)
+				}
+			})
+		}
+	})
+
+	t.Run("DialGRPCWithPort success", func(t *testing.T) {
+		d := &kneDUT{
+			ServiceDUT: &solver.ServiceDUT{
+				AbstractDUT: &binding.AbstractDUT{Dims: &binding.Dims{Name: "dut1"}},
+				Services: map[string]*tpb.Service{
+					"gnmi": {
+						Name:      "gnmi",
+						Inside:    9339,
+						Outside:   9339,
+						OutsideIp: "1.1.1.1",
+					},
+				},
+			},
+			bind: &Bind{cfg: &Config{}},
+		}
+		_, err := d.DialGRPCWithPort(context.Background(), 9339)
+		if err != nil {
+			t.Fatalf("DialGRPCWithPort() got unexpected error: %v", err)
+		}
+	})
+
+	t.Run("DialGRPCWithPort not found", func(t *testing.T) {
+		d := &kneDUT{
+			ServiceDUT: &solver.ServiceDUT{
+				AbstractDUT: &binding.AbstractDUT{Dims: &binding.Dims{Name: "dut1"}},
+				Services: map[string]*tpb.Service{
+					"gnmi": {
+						Name:   "gnmi",
+						Inside: 9339,
+					},
+				},
+			},
+		}
+		_, err := d.DialGRPCWithPort(context.Background(), 1234)
+		if err == nil {
+			t.Fatal("DialGRPCWithPort() got nil error, want non-nil")
+		}
+		if wantErr := "service for port 1234 not found on DUT \"dut1\""; err.Error() != wantErr {
+			t.Errorf("DialGRPCWithPort() got error %q, want %q", err, wantErr)
+		}
+	})
 }
 
 type fakeTopoManager struct {

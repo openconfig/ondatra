@@ -152,11 +152,15 @@ func (d *kneDUT) Dialer(svc introspect.Service) (*introspect.Dialer, error) {
 	if !ok {
 		return nil, fmt.Errorf("service %q not found on DUT %q", svcName, d.Name())
 	}
+	return makeDialer(svcPB, d.grpcDialOpts()...), nil
+}
+
+func (d *kneDUT) grpcDialOpts() []grpc.DialOption {
 	opts := []grpc.DialOption{grpc.WithTransportCredentials(credentials.NewTLS(&tls.Config{InsecureSkipVerify: true}))} // NOLINT
 	if creds := d.newRPCCredentials(); creds != nil {
 		opts = append(opts, grpc.WithPerRPCCredentials(creds))
 	}
-	return makeDialer(svcPB, opts...), nil
+	return opts
 }
 
 func (d *kneDUT) resetConfig(ctx context.Context) error {
@@ -239,6 +243,22 @@ func (d *kneDUT) DialP4RT(ctx context.Context, opts ...grpc.DialOption) (p4pb.P4
 	return p4pb.NewP4RuntimeClient(conn), nil
 }
 
+// RPCUsername returns the username for RPC connections to the DUT.
+func (d *kneDUT) RPCUsername() string {
+	if creds := d.newRPCCredentials(); creds != nil {
+		return creds.Username
+	}
+	return ""
+}
+
+// RPCPassword returns the password for RPC connections to the DUT.
+func (d *kneDUT) RPCPassword() string {
+	if creds := d.newRPCCredentials(); creds != nil {
+		return creds.Password
+	}
+	return ""
+}
+
 // gnsiConn implements the stub builder needed by the Ondatra
 // binding.Binding interface.
 type gnsiConn struct {
@@ -286,8 +306,25 @@ func (d *kneDUT) DialGNSI(ctx context.Context, opts ...grpc.DialOption) (binding
 	return &gnsiConn{conn: conn}, nil
 }
 
+// DialGRPCWithPort creates a client connection to a gRPC service on a container
+// running on the DUT. The port is the TCP port of the service.
+func (d *kneDUT) DialGRPCWithPort(ctx context.Context, port int, opts ...grpc.DialOption) (*grpc.ClientConn, error) {
+	var svcPB *tpb.Service
+	for _, s := range d.Services {
+		if int(s.GetInside()) == port {
+			svcPB = s
+			break
+		}
+	}
+	if svcPB == nil {
+		return nil, fmt.Errorf("service for port %d not found on DUT %q", port, d.Name())
+	}
+	dialer := makeDialer(svcPB, d.grpcDialOpts()...)
+	log.InfoContextf(ctx, "Dialing container on DUT %s, port %d with options %v", d.Name(), port, opts)
+	return dialer.Dial(ctx, opts...)
+}
+
 // DialGRPC dials the service with the specified name.
-// It is exported so that test may use a type assertion to dial custom services.
 func (d *kneDUT) DialGRPC(ctx context.Context, serviceName string, opts ...grpc.DialOption) (*grpc.ClientConn, error) {
 	return d.dialGRPC(ctx, introspect.Service(serviceName), opts)
 }
@@ -331,8 +368,10 @@ func (r *rpcCredentials) RequireTransportSecurity() bool {
 // 4. no credentials
 func (d *kneDUT) newRPCCredentials() *rpcCredentials {
 	cfg := d.bind.cfg
-	if userPass := cfg.Credentials.Lookup(d.Name(), d.NodeVendor); userPass != nil {
-		return &rpcCredentials{userPass}
+	if cfg.Credentials != nil {
+		if userPass := cfg.Credentials.Lookup(d.Name(), d.NodeVendor); userPass != nil {
+			return &rpcCredentials{userPass}
+		}
 	}
 	// TODO(team): Deprecate username and password fields.
 	if cfg.Username != "" {

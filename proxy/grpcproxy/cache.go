@@ -15,13 +15,10 @@
 package grpcproxy
 
 import (
-	log "github.com/golang/glog"
-	lru "github.com/hashicorp/golang-lru"
+	lru "github.com/hashicorp/golang-lru/v2"
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/connectivity"
 	"google.golang.org/grpc/metadata"
-	"google.golang.org/grpc/status"
 )
 
 // cacheKey is the key for caching a GRPC client connection.
@@ -54,12 +51,8 @@ func (p *proxy) initCache() error {
 		p.cacheEvictFn = func(metadata.MD) bool { return false }
 	}
 	if p.cacheSize > 0 {
-		cache, err := lru.NewWithEvict(p.cacheSize, func(key, value any) {
-			if conn, ok := value.(*grpc.ClientConn); !ok {
-				log.Error("proxy_error: lru cache value is not of type grpc.ClientConn")
-			} else {
-				conn.Close()
-			}
+		cache, err := lru.NewWithEvict[cacheKey, *grpc.ClientConn](p.cacheSize, func(key cacheKey, conn *grpc.ClientConn) {
+			conn.Close()
 		})
 		if err != nil {
 			return err
@@ -81,20 +74,16 @@ func (p *proxy) connFromCache(md metadata.MD, dest string) (*grpc.ClientConn, *c
 	// if cache evict, remove all cache entries for that host.
 	if p.cacheEvictFn(md) {
 		for _, k := range p.cache.Keys() {
-			if k.(cacheKey).host == host {
+			if k.host == host {
 				p.cache.Remove(k)
 			}
 		}
 	}
 	key := &cacheKey{host: host, port: port, connectionSecurity: cs}
-	if v, ok := p.cache.Get(*key); ok {
-		conn, ok := v.(*grpc.ClientConn)
-		if !ok {
-			return nil, nil, status.Errorf(codes.Internal, "proxy_error: unknown value from cache")
-		}
+	if conn, ok := p.cache.Get(*key); ok {
 		if conn.GetState() == connectivity.Shutdown {
 			// connectivity state is shutdown, remove from cache and retry.
-			p.cache.Remove(key)
+			p.cache.Remove(*key)
 			return nil, key, nil
 		}
 		return conn, key, nil

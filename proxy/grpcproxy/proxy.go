@@ -27,7 +27,7 @@ import (
 	"golang.org/x/net/context"
 
 	log "github.com/golang/glog"
-	lru "github.com/hashicorp/golang-lru"
+	lru "github.com/hashicorp/golang-lru/v2"
 	"go.opencensus.io/stats"
 	"go.opencensus.io/tag"
 	"go.opencensus.io/trace"
@@ -83,7 +83,7 @@ type proxy struct {
 	cacheKeyFn     CacheKeyFn
 	cacheEvictFn   CacheEvictFn
 	cacheSize      int
-	cache          *lru.Cache
+	cache          *lru.Cache[cacheKey, *grpc.ClientConn]
 }
 
 // Option configures the proxy server.
