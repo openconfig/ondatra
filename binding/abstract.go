@@ -309,6 +309,11 @@ func (*AbstractSSHClient) RunCommand(ctx context.Context, cmd string) (CommandRe
 	return nil, errors.New("RunCommand unimplemented")
 }
 
+// HostKey returns an unimplemented error.
+func (*AbstractSSHClient) HostKey() []byte {
+	return nil // HostKey unimplemented
+}
+
 // Close returns an unimplemented error.
 func (*AbstractSSHClient) Close() error {
 	return errors.New("Close unimplemented")

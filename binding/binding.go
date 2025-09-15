@@ -298,6 +298,8 @@ func (CertificateAuth) isSSHAuth() {}
 type SSHClient interface {
 	// RunCommand executes a command and waits for it to complete.
 	RunCommand(ctx context.Context, cmd string) (CommandResult, error)
+	// HostKey returns the Servers HostKey returned during SSH handshake.
+	HostKey() []byte
 	// Close closes the SSH connection.
 	Close() error
 	mustEmbedAbstractSSHClient()
