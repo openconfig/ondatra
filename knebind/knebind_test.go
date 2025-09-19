@@ -1,4 +1,4 @@
-// Copyright 2021 Google LLC
+// Copyright 2025 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -34,27 +34,146 @@ import (
 	"github.com/openconfig/ondatra/knebind/solver"
 	"google.golang.org/protobuf/testing/protocmp"
 
+	"github.com/open-traffic-generator/snappi/gosnappi"
+	"github.com/openconfig/ondatra/binding/introspect"
+	"google.golang.org/grpc"
+
 	cpb "github.com/openconfig/kne/proto/controller"
 	tpb "github.com/openconfig/kne/proto/topo"
 	opb "github.com/openconfig/ondatra/proto"
 )
 
+type fakeGosnappi struct {
+	gosnappi.Api
+	capturedGrpcTransport gosnappi.GrpcTransport
+}
+
+func (f *fakeGosnappi) NewGrpcTransport() gosnappi.GrpcTransport {
+	f.capturedGrpcTransport = f.Api.NewGrpcTransport()
+	return f.capturedGrpcTransport
+}
+
+func TestDialOTG(t *testing.T) {
+	tests := []struct {
+		name        string
+		otgTimeout  time.Duration
+		servicesMap map[string]*tpb.Service
+		wantTimeout time.Duration
+		wantErr     bool
+	}{
+		{
+			name:       "Success with Provided Timeout",
+			otgTimeout: 111 * time.Second,
+			servicesMap: map[string]*tpb.Service{
+				"grpc": {Name: "otg"},
+			},
+			wantTimeout: 111 * time.Second,
+		},
+		{
+			name: "Success with Zero Timeout",
+			servicesMap: map[string]*tpb.Service{
+				"grpc": {Name: "otg"},
+			},
+			wantTimeout: 0,
+		},
+		{
+			name:        "OTG Service Not Found",
+			otgTimeout:  60 * time.Second,
+			servicesMap: map[string]*tpb.Service{},
+			wantErr:     true,
+		},
+	}
+
+	for _, tc := range tests {
+		t.Run(tc.name, func(t *testing.T) {
+			origAteDialGRPCFn := ateDialGRPCFn
+			origGosnappiNewAPIFn := gosnappiNewAPIFn
+			defer func() {
+				ateDialGRPCFn = origAteDialGRPCFn
+				gosnappiNewAPIFn = origGosnappiNewAPIFn
+			}()
+
+			ateDialGRPCFn = func(a *kneATE, ctx context.Context, svc introspect.Service, opts []grpc.DialOption) (*grpc.ClientConn, error) {
+				if svc != introspect.OTG {
+					return nil, errors.New("fakeAteDialGRPC: unexpected service, want OTG")
+				}
+				return &grpc.ClientConn{}, nil
+			}
+
+			fakeAPI := &fakeGosnappi{Api: gosnappi.NewApi()}
+			gosnappiNewAPIFn = func() gosnappi.Api { return fakeAPI }
+
+			// Prepare kneATE with the desired OTGRequestTimeout in the config
+			ate := &kneATE{
+				ServiceATE: &solver.ServiceATE{
+					Services: tc.servicesMap,
+					AbstractATE: &binding.AbstractATE{
+						Dims: &binding.Dims{Name: "fakeATE"},
+					},
+				},
+				bind: &Bind{
+					otgRequestTimeout: tc.otgTimeout,
+				},
+			}
+
+			_, err := ate.DialOTG(context.Background())
+
+			if (err != nil) != tc.wantErr {
+				t.Fatalf("DialOTG() got error %v, want error? %v", err, tc.wantErr)
+			}
+			if err != nil {
+				return
+			}
+			if gotTimeout := fakeAPI.capturedGrpcTransport.RequestTimeout(); gotTimeout != tc.wantTimeout {
+				t.Errorf("DialOTG() SetRequestTimeout got %v, want %v", gotTimeout, tc.wantTimeout)
+			}
+		})
+	}
+}
+
 func TestNew(t *testing.T) {
 	userHomeDir := t.TempDir()
 
 	tests := []struct {
-		desc       string
-		configPath string
-		user       *user.User
-		wantPath   string
+		desc              string
+		configPath        string
+		user              *user.User
+		otgRequestTimeout time.Duration
+		setOTGTimeout     bool
+		wantPath          string
+		wantErr           bool
+		wantOTGTimeout    time.Duration
 	}{{
-		desc:       "kubeconfig provided",
-		configPath: userHomeDir + "/config",
-		wantPath:   userHomeDir + "/config",
+		desc:           "kubeconfig provided",
+		configPath:     userHomeDir + "/config",
+		wantPath:       userHomeDir + "/config",
+		wantOTGTimeout: DefaultOTGRequestTimeout,
 	}, {
-		desc:     "default kubeconfig",
-		user:     &user.User{HomeDir: userHomeDir},
-		wantPath: userHomeDir + "/.kube/config",
+		desc:           "default kubeconfig",
+		user:           &user.User{HomeDir: userHomeDir},
+		wantPath:       userHomeDir + "/.kube/config",
+		wantOTGTimeout: DefaultOTGRequestTimeout,
+	}, {
+		desc:              "zero otgRequestTimeout uses default",
+		user:              &user.User{HomeDir: userHomeDir},
+		otgRequestTimeout: 0,
+		setOTGTimeout:     true,
+		wantPath:          userHomeDir + "/.kube/config",
+		wantOTGTimeout:    DefaultOTGRequestTimeout,
+	}, {
+		desc:              "positive otgRequestTimeout",
+		user:              &user.User{HomeDir: userHomeDir},
+		otgRequestTimeout: 15 * time.Second,
+		setOTGTimeout:     true,
+		wantPath:          userHomeDir + "/.kube/config",
+		wantOTGTimeout:    15 * time.Second,
+	}, {
+		desc:              "negative otgRequestTimeout",
+		user:              &user.User{HomeDir: userHomeDir},
+		otgRequestTimeout: -10 * time.Second,
+		setOTGTimeout:     true,
+		wantPath:          userHomeDir + "/.kube/config",
+		wantErr:           true,
 	}}
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
@@ -66,11 +185,24 @@ func TestNew(t *testing.T) {
 				Topology:   "integration/topology.textproto",
 				Kubeconfig: test.configPath,
 			}
-			if _, err := New(cfg); err != nil {
-				t.Errorf("New() got unexpected error: %v", err)
+
+			var opts []Option
+			if test.setOTGTimeout {
+				opts = append(opts, WithOTGRequestTimeout(test.otgRequestTimeout))
+			}
+
+			bind, err := New(cfg, opts...)
+			if (err != nil) != test.wantErr {
+				t.Errorf("New() with OTGRequestTimeout %v got error %v, want error? %v", test.otgRequestTimeout, err, test.wantErr)
+			}
+			if err != nil {
+				return
 			}
 			if gotPath := cfg.Kubeconfig; gotPath != test.wantPath {
 				t.Errorf("New() got unexpected kubeconfig path %q, want %q", gotPath, test.wantPath)
+			}
+			if bind.otgRequestTimeout != test.wantOTGTimeout {
+				t.Errorf("New() got OTGRequestTimeout %v, want %v", bind.otgRequestTimeout, test.wantOTGTimeout)
 			}
 		})
 	}

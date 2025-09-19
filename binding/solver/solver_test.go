@@ -16,6 +16,7 @@ package solver
 
 import (
 	"fmt"
+	"strings"
 	"testing"
 
 	"golang.org/x/net/context"
@@ -771,6 +772,214 @@ func TestSolve(t *testing.T) {
 			}
 			if diff := cmp.Diff(test.wantPortAssign, gotPortAssign); diff != "" {
 				t.Errorf("Solve() returned diff in port assignments (-want +got):\n%s", diff)
+			}
+		})
+	}
+}
+
+func TestAssignmentToReservation(t *testing.T) {
+	tDUT1 := &opb.Device{Id: "dut1", Ports: []*opb.Port{{Id: "port1"}}}
+	tATE1 := &opb.Device{Id: "ate1", Ports: []*opb.Port{{Id: "port1"}}}
+	tb := &opb.Testbed{
+		Duts:  []*opb.Device{tDUT1},
+		Ates:  []*opb.Device{tATE1},
+		Links: []*opb.Link{{A: "dut1:port1", B: "ate1:port1"}},
+	}
+
+	bDUT1Port1 := &binding.Port{Name: "eth1"}
+	bATE1Port1 := &binding.Port{Name: "eth1"}
+	invDUT1 := &mockDUT{AbstractDUT: &binding.AbstractDUT{Dims: &binding.Dims{Name: "inventory_dut1", Ports: map[string]*binding.Port{"p1": bDUT1Port1}}}}
+	invATE1 := &mockATE{AbstractATE: &binding.AbstractATE{Dims: &binding.Dims{Name: "inventory_ate1", Ports: map[string]*binding.Port{"p1": bATE1Port1}}}}
+	bdevDUT1 := binding.Device(invDUT1)
+	bdevATE1 := binding.Device(invATE1)
+
+	absDUT1Node := &portgraph.AbstractNode{Desc: "dut1"}
+	absATE1Node := &portgraph.AbstractNode{Desc: "ate1"}
+	absDUT1Port1 := &portgraph.AbstractPort{Desc: "dut1:port1"}
+	absATE1Port1 := &portgraph.AbstractPort{Desc: "ate1:port1"}
+
+	conDUT1Node := &portgraph.ConcreteNode{Desc: invDUT1.Name()}
+	conATE1Node := &portgraph.ConcreteNode{Desc: invATE1.Name()}
+	conDUT1Port1 := &portgraph.ConcretePort{Desc: invDUT1.Name() + ":" + bDUT1Port1.Name}
+	conATE1Port1 := &portgraph.ConcretePort{Desc: invATE1.Name() + ":" + bATE1Port1.Name}
+
+	solveResult := &SolveResult{
+		Assignment: &portgraph.Assignment{
+			Node2Node: map[*portgraph.AbstractNode]*portgraph.ConcreteNode{
+				absDUT1Node: conDUT1Node,
+				absATE1Node: conATE1Node,
+			},
+			Port2Port: map[*portgraph.AbstractPort]*portgraph.ConcretePort{
+				absDUT1Port1: conDUT1Port1,
+				absATE1Port1: conATE1Port1,
+			},
+		},
+		AbsNode2Dev: map[*portgraph.AbstractNode]*opb.Device{
+			absDUT1Node: tDUT1,
+			absATE1Node: tATE1,
+		},
+		AbsPort2Port: map[*portgraph.AbstractPort]*opb.Port{
+			absDUT1Port1: tDUT1.Ports[0],
+			absATE1Port1: tATE1.Ports[0],
+		},
+		ConNode2BindDev: map[*portgraph.ConcreteNode]*binding.Device{
+			conDUT1Node: &bdevDUT1,
+			conATE1Node: &bdevATE1,
+		},
+		ConPort2BindPort: map[*portgraph.ConcretePort]*binding.Port{
+			conDUT1Port1: bDUT1Port1,
+			conATE1Port1: bATE1Port1,
+		},
+	}
+
+	res, err := AssignmentToReservation(solveResult, tb)
+	if err != nil {
+		t.Fatalf("AssignmentToReservation() got unexpected error: %v", err)
+	}
+
+	wantRes := &binding.Reservation{
+		ID: res.ID,
+		DUTs: map[string]binding.DUT{
+			"dut1": &staticDUT{
+				AbstractDUT: &binding.AbstractDUT{
+					Dims: &binding.Dims{
+						Name: "inventory_dut1",
+						Ports: map[string]*binding.Port{
+							"port1": bDUT1Port1,
+						},
+					},
+				},
+				dut: invDUT1,
+			},
+		},
+		ATEs: map[string]binding.ATE{
+			"ate1": &staticATE{
+				AbstractATE: &binding.AbstractATE{
+					Dims: &binding.Dims{
+						Name: "inventory_ate1",
+						Ports: map[string]*binding.Port{
+							"port1": bATE1Port1,
+						},
+					},
+				},
+				ate: invATE1,
+			},
+		},
+	}
+	if diff := cmp.Diff(wantRes, res, cmp.AllowUnexported(staticDUT{}, staticATE{})); diff != "" {
+		t.Errorf("AssignmentToReservation() returned diff (-want +got):\n%s", diff)
+	}
+}
+
+func TestAssignmentToReservationErrors(t *testing.T) {
+	tDUT1 := &opb.Device{Id: "dut1", Ports: []*opb.Port{{Id: "port1"}}}
+	tATE1 := &opb.Device{Id: "ate1", Ports: []*opb.Port{{Id: "port1"}}}
+	bDUT1Port1 := &binding.Port{Name: "eth1"}
+	bATE1Port1 := &binding.Port{Name: "eth1"}
+	invDUT1 := &mockDUT{AbstractDUT: &binding.AbstractDUT{Dims: &binding.Dims{Name: "inventory_dut1", Ports: map[string]*binding.Port{"p1": bDUT1Port1}}}}
+	invATE1 := &mockATE{AbstractATE: &binding.AbstractATE{Dims: &binding.Dims{Name: "inventory_ate1", Ports: map[string]*binding.Port{"p1": bATE1Port1}}}}
+	bdevDUT1 := binding.Device(invDUT1)
+	bdevATE1 := binding.Device(invATE1)
+	absDUT1Node := &portgraph.AbstractNode{Desc: "dut1"}
+	absATE1Node := &portgraph.AbstractNode{Desc: "ate1"}
+	conDUT1Node := &portgraph.ConcreteNode{Desc: invDUT1.Name()}
+	conATE1Node := &portgraph.ConcreteNode{Desc: invATE1.Name()}
+
+	tests := []struct {
+		desc        string
+		tb          *opb.Testbed
+		solveResult *SolveResult
+		wantErr     string
+	}{
+		{
+			desc: "dut not resolved",
+			tb:   &opb.Testbed{Duts: []*opb.Device{tDUT1}},
+			solveResult: &SolveResult{
+				Assignment:       &portgraph.Assignment{},
+				AbsNode2Dev:      map[*portgraph.AbstractNode]*opb.Device{},
+				AbsPort2Port:     map[*portgraph.AbstractPort]*opb.Port{},
+				ConNode2BindDev:  map[*portgraph.ConcreteNode]*binding.Device{},
+				ConPort2BindPort: map[*portgraph.ConcretePort]*binding.Port{},
+			},
+			wantErr: "not resolved",
+		},
+		{
+			desc: "ate not resolved",
+			tb:   &opb.Testbed{Ates: []*opb.Device{tATE1}},
+			solveResult: &SolveResult{
+				Assignment:       &portgraph.Assignment{},
+				AbsNode2Dev:      map[*portgraph.AbstractNode]*opb.Device{},
+				AbsPort2Port:     map[*portgraph.AbstractPort]*opb.Port{},
+				ConNode2BindDev:  map[*portgraph.ConcreteNode]*binding.Device{},
+				ConPort2BindPort: map[*portgraph.ConcretePort]*binding.Port{},
+			},
+			wantErr: "not resolved",
+		},
+		{
+			desc: "dut assigned ate device",
+			tb:   &opb.Testbed{Duts: []*opb.Device{tDUT1}},
+			solveResult: &SolveResult{
+				Assignment: &portgraph.Assignment{
+					Node2Node: map[*portgraph.AbstractNode]*portgraph.ConcreteNode{
+						absDUT1Node: conATE1Node,
+					},
+				},
+				AbsNode2Dev: map[*portgraph.AbstractNode]*opb.Device{
+					absDUT1Node: tDUT1,
+				},
+				ConNode2BindDev: map[*portgraph.ConcreteNode]*binding.Device{
+					conATE1Node: &bdevATE1,
+				},
+				AbsPort2Port:     map[*portgraph.AbstractPort]*opb.Port{},
+				ConPort2BindPort: map[*portgraph.ConcretePort]*binding.Port{},
+			},
+			wantErr: "is not a DUT",
+		},
+		{
+			desc: "ate assigned dut device",
+			tb:   &opb.Testbed{Ates: []*opb.Device{tATE1}},
+			solveResult: &SolveResult{
+				Assignment: &portgraph.Assignment{
+					Node2Node: map[*portgraph.AbstractNode]*portgraph.ConcreteNode{
+						absATE1Node: conDUT1Node,
+					},
+				},
+				AbsNode2Dev: map[*portgraph.AbstractNode]*opb.Device{
+					absATE1Node: tATE1,
+				},
+				ConNode2BindDev: map[*portgraph.ConcreteNode]*binding.Device{
+					conDUT1Node: &bdevDUT1,
+				},
+				AbsPort2Port:     map[*portgraph.AbstractPort]*opb.Port{},
+				ConPort2BindPort: map[*portgraph.ConcretePort]*binding.Port{},
+			},
+			wantErr: "is not an ATE",
+		},
+		{
+			desc: "nil assignment",
+			tb:   &opb.Testbed{Duts: []*opb.Device{tDUT1}},
+			solveResult: &SolveResult{
+				Assignment:       nil,
+				AbsNode2Dev:      map[*portgraph.AbstractNode]*opb.Device{},
+				AbsPort2Port:     map[*portgraph.AbstractPort]*opb.Port{},
+				ConNode2BindDev:  map[*portgraph.ConcreteNode]*binding.Device{},
+				ConPort2BindPort: map[*portgraph.ConcretePort]*binding.Port{},
+			},
+			wantErr: "solveResult.Assignment is nil",
+		},
+		{
+			desc:        "nil solveResult",
+			tb:          &opb.Testbed{Duts: []*opb.Device{tDUT1}},
+			solveResult: nil,
+			wantErr:     "solveResult is nil",
+		},
+	}
+
+	for _, test := range tests {
+		t.Run(test.desc, func(t *testing.T) {
+			_, err := AssignmentToReservation(test.solveResult, test.tb)
+			if err == nil || !strings.Contains(err.Error(), test.wantErr) {
+				t.Errorf("AssignmentToReservation() got err %v, want err containing %q", err, test.wantErr)
 			}
 		})
 	}

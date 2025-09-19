@@ -24,6 +24,7 @@ import (
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/binding/portgraph"
 	opb "github.com/openconfig/ondatra/proto"
+	"github.com/pborman/uuid"
 )
 
 // Inventory of available binding devices and links.
@@ -173,4 +174,84 @@ func inventoryToConcreteGraph(inv *Inventory) (*portgraph.ConcreteGraph, map[*po
 		}
 	}
 	return cg, conNode2BindDev, conPort2BindPort, nil
+}
+
+type staticDUT struct {
+	*binding.AbstractDUT
+	dut binding.DUT
+}
+
+type staticATE struct {
+	*binding.AbstractATE
+	ate binding.ATE
+}
+
+func dynDims(dev *opb.Device, bdev binding.Device, tbPort2BindPort map[*opb.Port]*binding.Port) *binding.Dims {
+	dims := &binding.Dims{
+		Name:            bdev.Name(),
+		Vendor:          bdev.Vendor(),
+		HardwareModel:   bdev.HardwareModel(),
+		SoftwareVersion: bdev.SoftwareVersion(),
+		Ports:           make(map[string]*binding.Port),
+	}
+	for _, tp := range dev.GetPorts() {
+		if bp, present := tbPort2BindPort[tp]; present {
+			dims.Ports[tp.GetId()] = bp
+		}
+	}
+	return dims
+}
+
+// AssignmentToReservation converts the solveResult to a binding.Reservation.
+func AssignmentToReservation(solveResult *SolveResult, tb *opb.Testbed) (*binding.Reservation, error) {
+	res := &binding.Reservation{
+		ID:   uuid.New(),
+		DUTs: make(map[string]binding.DUT),
+		ATEs: make(map[string]binding.ATE),
+	}
+	if solveResult == nil {
+		return nil, fmt.Errorf("solveResult is nil for this reservation: %s", res.ID)
+	}
+	if solveResult.Assignment == nil {
+		return nil, fmt.Errorf("solveResult.Assignment is nil for this reservation: %s", res.ID)
+	}
+
+	tbDev2BindDev := make(map[*opb.Device]*binding.Device)
+	for absNode, conNode := range solveResult.Assignment.Node2Node {
+		tbDev2BindDev[solveResult.AbsNode2Dev[absNode]] = solveResult.ConNode2BindDev[conNode]
+	}
+	tbPort2BindPort := make(map[*opb.Port]*binding.Port)
+	for absPort, conPort := range solveResult.Assignment.Port2Port {
+		tbPort2BindPort[solveResult.AbsPort2Port[absPort]] = solveResult.ConPort2BindPort[conPort]
+	}
+
+	for _, tdut := range tb.GetDuts() {
+		bdev := tbDev2BindDev[tdut]
+		if bdev == nil {
+			return nil, fmt.Errorf("DUT %q not resolved", tdut.GetId())
+		}
+		bdut, ok := (*bdev).(binding.DUT)
+		if !ok {
+			return nil, fmt.Errorf("device %q assigned to DUT %q is not a DUT", (*bdev).Name(), tdut.GetId())
+		}
+		res.DUTs[tdut.GetId()] = &staticDUT{
+			AbstractDUT: &binding.AbstractDUT{Dims: dynDims(tdut, bdut, tbPort2BindPort)},
+			dut:         bdut,
+		}
+	}
+	for _, tate := range tb.GetAtes() {
+		bdev := tbDev2BindDev[tate]
+		if bdev == nil {
+			return nil, fmt.Errorf("ATE %q not resolved", tate.GetId())
+		}
+		bate, ok := (*bdev).(binding.ATE)
+		if !ok {
+			return nil, fmt.Errorf("device %q assigned to ATE %q is not an ATE", (*bdev).Name(), tate.GetId())
+		}
+		res.ATEs[tate.GetId()] = &staticATE{
+			AbstractATE: &binding.AbstractATE{Dims: dynDims(tate, bate, tbPort2BindPort)},
+			ate:         bate,
+		}
+	}
+	return res, nil
 }

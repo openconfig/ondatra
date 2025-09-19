@@ -33,7 +33,8 @@ var (
 		"Optional path to a kubeconfig file; Defaults to ~/.kube/config")
 	skipReset = flag.Bool("skip_reset", false,
 		"If true, skip initial device reset that happens during reservation")
-	credFlags = creds.DefineFlags()
+	credFlags         = creds.DefineFlags()
+	otgRequestTimeout = flag.Duration("otg_request_timeout", knebind.DefaultOTGRequestTimeout, "Timeout for OTG API requests like SetConfig (e.g., '90s').")
 )
 
 // Init provides a generator for a KNE bind instance which uses the
@@ -53,7 +54,7 @@ func Init() (binding.Binding, error) {
 	if err := knebind.ValidateConfig(cfg); err != nil {
 		return nil, err
 	}
-	return knebind.New(cfg)
+	return knebind.New(cfg, knebind.WithOTGRequestTimeout(*otgRequestTimeout))
 }
 
 func parseFlags() (*knebind.Config, error) {

@@ -47,6 +47,7 @@ YANG_FILES=(
   public/release/models/bgp/openconfig-bgp-policy.yang
   public/release/models/bgp/openconfig-bgp-types.yang
   public/release/models/extensions/openconfig-metadata.yang
+  public/release/models/gnpsi/openconfig-gnpsi-types.yang
   public/release/models/gnsi/openconfig-gnsi-acctz.yang
   public/release/models/gnsi/openconfig-gnsi-authz.yang
   public/release/models/gnsi/openconfig-gnsi-certz.yang
@@ -59,25 +60,25 @@ YANG_FILES=(
   public/release/models/interfaces/openconfig-if-ethernet.yang
   public/release/models/interfaces/openconfig-if-ip-ext.yang
   public/release/models/interfaces/openconfig-if-ip.yang
+  public/release/models/interfaces/openconfig-if-rates.yang
   public/release/models/interfaces/openconfig-if-sdn-ext.yang
   public/release/models/interfaces/openconfig-interfaces.yang
-  public/release/models/interfaces/openconfig-if-rates.yang
   public/release/models/isis/openconfig-isis-policy.yang
   public/release/models/isis/openconfig-isis.yang
   public/release/models/lacp/openconfig-lacp.yang
   public/release/models/lldp/openconfig-lldp-types.yang
   public/release/models/lldp/openconfig-lldp.yang
-  public/release/models/local-routing/openconfig-local-routing.yang
   public/release/models/local-routing/openconfig-local-routing-network-instance.yang
+  public/release/models/local-routing/openconfig-local-routing.yang
   public/release/models/macsec/openconfig-macsec.yang
   public/release/models/mpls/openconfig-mpls-types.yang
   public/release/models/multicast/openconfig-pim.yang
-  public/release/models/network-instance/openconfig-network-instance.yang
   public/release/models/network-instance/openconfig-network-instance-l2.yang
   public/release/models/network-instance/openconfig-network-instance-static.yang
+  public/release/models/network-instance/openconfig-network-instance.yang
   public/release/models/oam/openconfig-cfm-types.yang
-  public/release/models/oam/openconfig-oam.yang
   public/release/models/oam/openconfig-oam-cfm.yang
+  public/release/models/oam/openconfig-oam.yang
   public/release/models/openconfig-extensions.yang
   public/release/models/optical-transport/openconfig-terminal-device.yang
   public/release/models/optical-transport/openconfig-transport-types.yang
@@ -85,11 +86,11 @@ YANG_FILES=(
   public/release/models/ospf/openconfig-ospf-area.yang
   public/release/models/ospf/openconfig-ospf-common.yang
   public/release/models/ospf/openconfig-ospf-global.yang
+  public/release/models/ospf/openconfig-ospf-policy.yang
   public/release/models/ospf/openconfig-ospf-types.yang
   public/release/models/ospf/openconfig-ospf.yang
-  public/release/models/ospf/openconfig-ospfv3-area-interface.yang
-  public/release/models/ospf/openconfig-ospf-policy.yang
   public/release/models/ospf/openconfig-ospfv2.yang
+  public/release/models/ospf/openconfig-ospfv3-area-interface.yang
   public/release/models/p4rt/openconfig-p4rt.yang
   public/release/models/platform/openconfig-platform-common.yang
   public/release/models/platform/openconfig-platform-controller-card.yang
@@ -108,8 +109,8 @@ YANG_FILES=(
   public/release/models/policy-forwarding/openconfig-pf-interfaces.yang
   public/release/models/policy-forwarding/openconfig-pf-path-groups.yang
   public/release/models/policy-forwarding/openconfig-policy-forwarding.yang
-  public/release/models/policy/openconfig-routing-policy.yang
   public/release/models/policy/openconfig-policy-types.yang
+  public/release/models/policy/openconfig-routing-policy.yang
   public/release/models/qos/openconfig-qos-elements.yang
   public/release/models/qos/openconfig-qos-interfaces.yang
   public/release/models/qos/openconfig-qos-types.yang
@@ -138,8 +139,8 @@ OTG_YANG_FILES=(
   models-yang/models/dhcp/v4server/open-traffic-generator-dhcpv4server.yang
   models-yang/models/dhcp/v6client/open-traffic-generator-dhcpv6client.yang
   models-yang/models/dhcp/v6server/open-traffic-generator-dhcpv6server.yang
-  models-yang/models/discovery/open-traffic-generator-discovery.yang
   models-yang/models/discovery/open-traffic-generator-discovery-interfaces.yang
+  models-yang/models/discovery/open-traffic-generator-discovery.yang
   models-yang/models/flow/open-traffic-generator-flow.yang
   models-yang/models/interface/open-traffic-generator-port.yang
   models-yang/models/isis/open-traffic-generator-isis.yang

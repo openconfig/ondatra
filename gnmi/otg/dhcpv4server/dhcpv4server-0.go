@@ -9,8 +9,8 @@ using the following YANG input files:
   - models-yang/models/dhcp/v4server/open-traffic-generator-dhcpv4server.yang
   - models-yang/models/dhcp/v6client/open-traffic-generator-dhcpv6client.yang
   - models-yang/models/dhcp/v6server/open-traffic-generator-dhcpv6server.yang
-  - models-yang/models/discovery/open-traffic-generator-discovery.yang
   - models-yang/models/discovery/open-traffic-generator-discovery-interfaces.yang
+  - models-yang/models/discovery/open-traffic-generator-discovery.yang
   - models-yang/models/flow/open-traffic-generator-flow.yang
   - models-yang/models/interface/open-traffic-generator-port.yang
   - models-yang/models/isis/open-traffic-generator-isis.yang

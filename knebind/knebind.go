@@ -60,18 +60,51 @@ import (
 	p4pb "github.com/p4lang/p4runtime/go/p4/v1"
 )
 
-const grpcDialTimeout = 30 * time.Second
-
-// To be stubbed out by unit tests
-var (
-	userCurrFn = user.Current
+const (
+	grpcDialTimeout = 30 * time.Second
+	// DefaultOTGRequestTimeout is the default timeout for OTG API requests if not specified.
+	DefaultOTGRequestTimeout = 30 * time.Second
 )
 
+var (
+	userCurrFn       = user.Current
+	gosnappiNewAPIFn = gosnappi.NewApi
+	ateDialGRPCFn    = (*kneATE).dialGRPC
+)
+
+// Option is an optional argument to the New constructor.
+type Option func(*Bind)
+
+// WithOTGRequestTimeout sets the timeout for OTG API requests.
+func WithOTGRequestTimeout(timeout time.Duration) Option {
+	return func(b *Bind) {
+		b.otgRequestTimeout = timeout
+	}
+}
+
 // New returns a new KNE bind instance.
-func New(cfg *Config) (*Bind, error) {
+func New(cfg *Config, opts ...Option) (*Bind, error) {
 	if cfg == nil {
 		return nil, fmt.Errorf("config cannot be nil")
 	}
+
+	bind := &Bind{
+		cfg:               cfg,
+		otgRequestTimeout: DefaultOTGRequestTimeout,
+	}
+
+	for _, opt := range opts {
+		opt(bind)
+	}
+
+	if bind.otgRequestTimeout < 0 {
+		return nil, fmt.Errorf("otgRequestTimeout must be a positive duration, got %v", bind.otgRequestTimeout)
+	}
+	if bind.otgRequestTimeout == 0 {
+		log.Infof("otgRequestTimeout is zero, using default %v", DefaultOTGRequestTimeout)
+		bind.otgRequestTimeout = DefaultOTGRequestTimeout
+	}
+
 	if cfg.Kubeconfig == "" {
 		user, err := userCurrFn()
 		if err != nil {
@@ -87,14 +120,16 @@ func New(cfg *Config) (*Bind, error) {
 	if err != nil {
 		return nil, fmt.Errorf("error creating topology manager: %w", err)
 	}
-	return &Bind{cfg: cfg, tm: tm}, nil
+	bind.tm = tm
+	return bind, nil
 }
 
 // Bind implements the ondatra Binding interface for KNE
 type Bind struct {
 	binding.Binding
-	cfg *Config
-	tm  topoManager
+	cfg               *Config
+	tm                topoManager
+	otgRequestTimeout time.Duration
 }
 
 // Reserve implements the binding Reserve method by finding nodes and links in
@@ -493,10 +528,10 @@ func (a *kneATE) DialOTG(ctx context.Context, opts ...grpc.DialOption) (gosnappi
 	if err != nil {
 		return nil, err
 	}
-	api := gosnappi.NewApi()
-	api.NewGrpcTransport().
-		SetClientConnection(conn).
-		SetRequestTimeout(30 * time.Second)
+	api := gosnappiNewAPIFn()
+	transport := api.NewGrpcTransport().SetClientConnection(conn)
+
+	transport.SetRequestTimeout(a.bind.otgRequestTimeout)
 	return api, nil
 }
 
