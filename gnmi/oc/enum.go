@@ -26,6 +26,7 @@ using the following YANG input files:
   - public/release/models/bgp/openconfig-bgp-policy.yang
   - public/release/models/bgp/openconfig-bgp-types.yang
   - public/release/models/extensions/openconfig-metadata.yang
+  - public/release/models/firewall/openconfig-fw-high-availability.yang
   - public/release/models/gnpsi/openconfig-gnpsi-types.yang
   - public/release/models/gnsi/openconfig-gnsi-acctz.yang
   - public/release/models/gnsi/openconfig-gnsi-authz.yang
@@ -2454,6 +2455,41 @@ const (
 	Flow_MplsLabel_NO_LABEL E_Flow_MplsLabel = 9
 )
 
+// E_FwHighAvailability_HA_PEER_MISMATCHED_ITEM is a derived int64 type which is used to represent
+// the enumerated node FwHighAvailability_HA_PEER_MISMATCHED_ITEM. An additional value named
+// FwHighAvailability_HA_PEER_MISMATCHED_ITEM_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_FwHighAvailability_HA_PEER_MISMATCHED_ITEM int64
+
+// IsYANGGoEnum ensures that FwHighAvailability_HA_PEER_MISMATCHED_ITEM implements the yang.GoEnum
+// interface. This ensures that FwHighAvailability_HA_PEER_MISMATCHED_ITEM can be identified as a
+// mapped type for a YANG enumeration.
+func (E_FwHighAvailability_HA_PEER_MISMATCHED_ITEM) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  FwHighAvailability_HA_PEER_MISMATCHED_ITEM.
+func (E_FwHighAvailability_HA_PEER_MISMATCHED_ITEM) ΛMap() map[string]map[int64]ygot.EnumDefinition {
+	return ΛEnum
+}
+
+// String returns a logging-friendly string for E_FwHighAvailability_HA_PEER_MISMATCHED_ITEM.
+func (e E_FwHighAvailability_HA_PEER_MISMATCHED_ITEM) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_FwHighAvailability_HA_PEER_MISMATCHED_ITEM")
+}
+
+const (
+	// FwHighAvailability_HA_PEER_MISMATCHED_ITEM_UNSET corresponds to the value UNSET of FwHighAvailability_HA_PEER_MISMATCHED_ITEM
+	FwHighAvailability_HA_PEER_MISMATCHED_ITEM_UNSET E_FwHighAvailability_HA_PEER_MISMATCHED_ITEM = 0
+	// FwHighAvailability_HA_PEER_MISMATCHED_ITEM_AVC_SIGNATURES_MISMATCH corresponds to the value AVC_SIGNATURES_MISMATCH of FwHighAvailability_HA_PEER_MISMATCHED_ITEM
+	FwHighAvailability_HA_PEER_MISMATCHED_ITEM_AVC_SIGNATURES_MISMATCH E_FwHighAvailability_HA_PEER_MISMATCHED_ITEM = 1
+	// FwHighAvailability_HA_PEER_MISMATCHED_ITEM_IPS_SIGNATURES_MISMATCH corresponds to the value IPS_SIGNATURES_MISMATCH of FwHighAvailability_HA_PEER_MISMATCHED_ITEM
+	FwHighAvailability_HA_PEER_MISMATCHED_ITEM_IPS_SIGNATURES_MISMATCH E_FwHighAvailability_HA_PEER_MISMATCHED_ITEM = 2
+	// FwHighAvailability_HA_PEER_MISMATCHED_ITEM_RUNNING_CONFIG_MISMATCH corresponds to the value RUNNING_CONFIG_MISMATCH of FwHighAvailability_HA_PEER_MISMATCHED_ITEM
+	FwHighAvailability_HA_PEER_MISMATCHED_ITEM_RUNNING_CONFIG_MISMATCH E_FwHighAvailability_HA_PEER_MISMATCHED_ITEM = 3
+	// FwHighAvailability_HA_PEER_MISMATCHED_ITEM_SOFTWARE_MISMATCH corresponds to the value SOFTWARE_MISMATCH of FwHighAvailability_HA_PEER_MISMATCHED_ITEM
+	FwHighAvailability_HA_PEER_MISMATCHED_ITEM_SOFTWARE_MISMATCH E_FwHighAvailability_HA_PEER_MISMATCHED_ITEM = 4
+)
+
 // E_Global_SummaryRouteCostMode is a derived int64 type which is used to represent
 // the enumerated node Global_SummaryRouteCostMode. An additional value named
 // Global_SummaryRouteCostMode_UNSET is added to the enumeration which is used as
@@ -2677,6 +2713,124 @@ const (
 	GrpcServer_ListenAddresses_UNSET E_GrpcServer_ListenAddresses = 0
 	// GrpcServer_ListenAddresses_ANY corresponds to the value ANY of GrpcServer_ListenAddresses
 	GrpcServer_ListenAddresses_ANY E_GrpcServer_ListenAddresses = 1
+)
+
+// E_HaGroup_GlobalHealthPolicy is a derived int64 type which is used to represent
+// the enumerated node HaGroup_GlobalHealthPolicy. An additional value named
+// HaGroup_GlobalHealthPolicy_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_HaGroup_GlobalHealthPolicy int64
+
+// IsYANGGoEnum ensures that HaGroup_GlobalHealthPolicy implements the yang.GoEnum
+// interface. This ensures that HaGroup_GlobalHealthPolicy can be identified as a
+// mapped type for a YANG enumeration.
+func (E_HaGroup_GlobalHealthPolicy) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  HaGroup_GlobalHealthPolicy.
+func (E_HaGroup_GlobalHealthPolicy) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_HaGroup_GlobalHealthPolicy.
+func (e E_HaGroup_GlobalHealthPolicy) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_HaGroup_GlobalHealthPolicy")
+}
+
+const (
+	// HaGroup_GlobalHealthPolicy_UNSET corresponds to the value UNSET of HaGroup_GlobalHealthPolicy
+	HaGroup_GlobalHealthPolicy_UNSET E_HaGroup_GlobalHealthPolicy = 0
+	// HaGroup_GlobalHealthPolicy_ANY corresponds to the value ANY of HaGroup_GlobalHealthPolicy
+	HaGroup_GlobalHealthPolicy_ANY E_HaGroup_GlobalHealthPolicy = 1
+	// HaGroup_GlobalHealthPolicy_ALL corresponds to the value ALL of HaGroup_GlobalHealthPolicy
+	HaGroup_GlobalHealthPolicy_ALL E_HaGroup_GlobalHealthPolicy = 2
+)
+
+// E_HaGroup_GlobalHealthStatus is a derived int64 type which is used to represent
+// the enumerated node HaGroup_GlobalHealthStatus. An additional value named
+// HaGroup_GlobalHealthStatus_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_HaGroup_GlobalHealthStatus int64
+
+// IsYANGGoEnum ensures that HaGroup_GlobalHealthStatus implements the yang.GoEnum
+// interface. This ensures that HaGroup_GlobalHealthStatus can be identified as a
+// mapped type for a YANG enumeration.
+func (E_HaGroup_GlobalHealthStatus) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  HaGroup_GlobalHealthStatus.
+func (E_HaGroup_GlobalHealthStatus) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_HaGroup_GlobalHealthStatus.
+func (e E_HaGroup_GlobalHealthStatus) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_HaGroup_GlobalHealthStatus")
+}
+
+const (
+	// HaGroup_GlobalHealthStatus_UNSET corresponds to the value UNSET of HaGroup_GlobalHealthStatus
+	HaGroup_GlobalHealthStatus_UNSET E_HaGroup_GlobalHealthStatus = 0
+	// HaGroup_GlobalHealthStatus_UP corresponds to the value UP of HaGroup_GlobalHealthStatus
+	HaGroup_GlobalHealthStatus_UP E_HaGroup_GlobalHealthStatus = 1
+	// HaGroup_GlobalHealthStatus_DOWN corresponds to the value DOWN of HaGroup_GlobalHealthStatus
+	HaGroup_GlobalHealthStatus_DOWN E_HaGroup_GlobalHealthStatus = 2
+)
+
+// E_HaGroup_HaMode is a derived int64 type which is used to represent
+// the enumerated node HaGroup_HaMode. An additional value named
+// HaGroup_HaMode_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_HaGroup_HaMode int64
+
+// IsYANGGoEnum ensures that HaGroup_HaMode implements the yang.GoEnum
+// interface. This ensures that HaGroup_HaMode can be identified as a
+// mapped type for a YANG enumeration.
+func (E_HaGroup_HaMode) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  HaGroup_HaMode.
+func (E_HaGroup_HaMode) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_HaGroup_HaMode.
+func (e E_HaGroup_HaMode) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_HaGroup_HaMode")
+}
+
+const (
+	// HaGroup_HaMode_UNSET corresponds to the value UNSET of HaGroup_HaMode
+	HaGroup_HaMode_UNSET E_HaGroup_HaMode = 0
+	// HaGroup_HaMode_ACTIVE_PASSIVE corresponds to the value ACTIVE_PASSIVE of HaGroup_HaMode
+	HaGroup_HaMode_ACTIVE_PASSIVE E_HaGroup_HaMode = 1
+)
+
+// E_HaGroup_HaState is a derived int64 type which is used to represent
+// the enumerated node HaGroup_HaState. An additional value named
+// HaGroup_HaState_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_HaGroup_HaState int64
+
+// IsYANGGoEnum ensures that HaGroup_HaState implements the yang.GoEnum
+// interface. This ensures that HaGroup_HaState can be identified as a
+// mapped type for a YANG enumeration.
+func (E_HaGroup_HaState) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  HaGroup_HaState.
+func (E_HaGroup_HaState) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_HaGroup_HaState.
+func (e E_HaGroup_HaState) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_HaGroup_HaState")
+}
+
+const (
+	// HaGroup_HaState_UNSET corresponds to the value UNSET of HaGroup_HaState
+	HaGroup_HaState_UNSET E_HaGroup_HaState = 0
+	// HaGroup_HaState_ACTIVE corresponds to the value ACTIVE of HaGroup_HaState
+	HaGroup_HaState_ACTIVE E_HaGroup_HaState = 1
+	// HaGroup_HaState_PASSIVE corresponds to the value PASSIVE of HaGroup_HaState
+	HaGroup_HaState_PASSIVE E_HaGroup_HaState = 2
+	// HaGroup_HaState_DEGRADED corresponds to the value DEGRADED of HaGroup_HaState
+	HaGroup_HaState_DEGRADED E_HaGroup_HaState = 3
+	// HaGroup_HaState_SUSPENDED corresponds to the value SUSPENDED of HaGroup_HaState
+	HaGroup_HaState_SUSPENDED E_HaGroup_HaState = 4
 )
 
 // E_IETFInterfaces_InterfaceType is a derived int64 type which is used to represent
@@ -4341,6 +4495,64 @@ const (
 	Input_InputType_IN_PROFILE E_Input_InputType = 2
 	// Input_InputType_OUT_PROFILE corresponds to the value OUT_PROFILE of Input_InputType
 	Input_InputType_OUT_PROFILE E_Input_InputType = 3
+)
+
+// E_InterfaceGroup_GroupPolicy is a derived int64 type which is used to represent
+// the enumerated node InterfaceGroup_GroupPolicy. An additional value named
+// InterfaceGroup_GroupPolicy_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_InterfaceGroup_GroupPolicy int64
+
+// IsYANGGoEnum ensures that InterfaceGroup_GroupPolicy implements the yang.GoEnum
+// interface. This ensures that InterfaceGroup_GroupPolicy can be identified as a
+// mapped type for a YANG enumeration.
+func (E_InterfaceGroup_GroupPolicy) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  InterfaceGroup_GroupPolicy.
+func (E_InterfaceGroup_GroupPolicy) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_InterfaceGroup_GroupPolicy.
+func (e E_InterfaceGroup_GroupPolicy) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_InterfaceGroup_GroupPolicy")
+}
+
+const (
+	// InterfaceGroup_GroupPolicy_UNSET corresponds to the value UNSET of InterfaceGroup_GroupPolicy
+	InterfaceGroup_GroupPolicy_UNSET E_InterfaceGroup_GroupPolicy = 0
+	// InterfaceGroup_GroupPolicy_ANY corresponds to the value ANY of InterfaceGroup_GroupPolicy
+	InterfaceGroup_GroupPolicy_ANY E_InterfaceGroup_GroupPolicy = 1
+	// InterfaceGroup_GroupPolicy_ALL corresponds to the value ALL of InterfaceGroup_GroupPolicy
+	InterfaceGroup_GroupPolicy_ALL E_InterfaceGroup_GroupPolicy = 2
+)
+
+// E_InterfaceGroup_GroupStatus is a derived int64 type which is used to represent
+// the enumerated node InterfaceGroup_GroupStatus. An additional value named
+// InterfaceGroup_GroupStatus_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_InterfaceGroup_GroupStatus int64
+
+// IsYANGGoEnum ensures that InterfaceGroup_GroupStatus implements the yang.GoEnum
+// interface. This ensures that InterfaceGroup_GroupStatus can be identified as a
+// mapped type for a YANG enumeration.
+func (E_InterfaceGroup_GroupStatus) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  InterfaceGroup_GroupStatus.
+func (E_InterfaceGroup_GroupStatus) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_InterfaceGroup_GroupStatus.
+func (e E_InterfaceGroup_GroupStatus) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_InterfaceGroup_GroupStatus")
+}
+
+const (
+	// InterfaceGroup_GroupStatus_UNSET corresponds to the value UNSET of InterfaceGroup_GroupStatus
+	InterfaceGroup_GroupStatus_UNSET E_InterfaceGroup_GroupStatus = 0
+	// InterfaceGroup_GroupStatus_UP corresponds to the value UP of InterfaceGroup_GroupStatus
+	InterfaceGroup_GroupStatus_UP E_InterfaceGroup_GroupStatus = 1
+	// InterfaceGroup_GroupStatus_DOWN corresponds to the value DOWN of InterfaceGroup_GroupStatus
+	InterfaceGroup_GroupStatus_DOWN E_InterfaceGroup_GroupStatus = 2
 )
 
 // E_Interface_AdminStatus is a derived int64 type which is used to represent
