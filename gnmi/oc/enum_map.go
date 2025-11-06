@@ -26,6 +26,7 @@ using the following YANG input files:
   - public/release/models/bgp/openconfig-bgp-policy.yang
   - public/release/models/bgp/openconfig-bgp-types.yang
   - public/release/models/extensions/openconfig-metadata.yang
+  - public/release/models/firewall/openconfig-fw-high-availability.yang
   - public/release/models/gnpsi/openconfig-gnpsi-types.yang
   - public/release/models/gnsi/openconfig-gnsi-acctz.yang
   - public/release/models/gnsi/openconfig-gnsi-authz.yang
@@ -557,6 +558,12 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		8: {Name: "ENTROPY_LABEL_INDICATOR"},
 		9: {Name: "NO_LABEL"},
 	},
+	"E_FwHighAvailability_HA_PEER_MISMATCHED_ITEM": {
+		1: {Name: "AVC_SIGNATURES_MISMATCH", DefiningModule: "openconfig-fw-high-availability"},
+		2: {Name: "IPS_SIGNATURES_MISMATCH", DefiningModule: "openconfig-fw-high-availability"},
+		3: {Name: "RUNNING_CONFIG_MISMATCH", DefiningModule: "openconfig-fw-high-availability"},
+		4: {Name: "SOFTWARE_MISMATCH", DefiningModule: "openconfig-fw-high-availability"},
+	},
 	"E_Global_SummaryRouteCostMode": {
 		1: {Name: "RFC1583_COMPATIBLE"},
 		2: {Name: "RFC2328_COMPATIBLE"},
@@ -594,6 +601,23 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 	},
 	"E_GrpcServer_ListenAddresses": {
 		1: {Name: "ANY"},
+	},
+	"E_HaGroup_GlobalHealthPolicy": {
+		1: {Name: "ANY"},
+		2: {Name: "ALL"},
+	},
+	"E_HaGroup_GlobalHealthStatus": {
+		1: {Name: "UP"},
+		2: {Name: "DOWN"},
+	},
+	"E_HaGroup_HaMode": {
+		1: {Name: "ACTIVE_PASSIVE"},
+	},
+	"E_HaGroup_HaState": {
+		1: {Name: "ACTIVE"},
+		2: {Name: "PASSIVE"},
+		3: {Name: "DEGRADED"},
+		4: {Name: "SUSPENDED"},
 	},
 	"E_IETFInterfaces_InterfaceType": {
 		1:   {Name: "a12MppSwitch", DefiningModule: "iana-if-type"},
@@ -1191,6 +1215,14 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		1: {Name: "QUEUE"},
 		2: {Name: "IN_PROFILE"},
 		3: {Name: "OUT_PROFILE"},
+	},
+	"E_InterfaceGroup_GroupPolicy": {
+		1: {Name: "ANY"},
+		2: {Name: "ALL"},
+	},
+	"E_InterfaceGroup_GroupStatus": {
+		1: {Name: "UP"},
+		2: {Name: "DOWN"},
 	},
 	"E_Interface_AdminStatus": {
 		1: {Name: "UP"},
@@ -2982,6 +3014,36 @@ func initΛEnumTypes() {
 		},
 		"/flows/flow/state/mpls-label": {
 			reflect.TypeOf((E_Flow_MplsLabel)(0)),
+		},
+		"/ha-groups/ha-group/config/global-health-policy": {
+			reflect.TypeOf((E_HaGroup_GlobalHealthPolicy)(0)),
+		},
+		"/ha-groups/ha-group/config/ha-mode": {
+			reflect.TypeOf((E_HaGroup_HaMode)(0)),
+		},
+		"/ha-groups/ha-group/interface-groups/interface-group/config/group-policy": {
+			reflect.TypeOf((E_InterfaceGroup_GroupPolicy)(0)),
+		},
+		"/ha-groups/ha-group/interface-groups/interface-group/state/group-policy": {
+			reflect.TypeOf((E_InterfaceGroup_GroupPolicy)(0)),
+		},
+		"/ha-groups/ha-group/interface-groups/interface-group/state/group-status": {
+			reflect.TypeOf((E_InterfaceGroup_GroupStatus)(0)),
+		},
+		"/ha-groups/ha-group/state/global-health-policy": {
+			reflect.TypeOf((E_HaGroup_GlobalHealthPolicy)(0)),
+		},
+		"/ha-groups/ha-group/state/global-health-status": {
+			reflect.TypeOf((E_HaGroup_GlobalHealthStatus)(0)),
+		},
+		"/ha-groups/ha-group/state/ha-mismatched-parameters": {
+			reflect.TypeOf((E_FwHighAvailability_HA_PEER_MISMATCHED_ITEM)(0)),
+		},
+		"/ha-groups/ha-group/state/ha-mode": {
+			reflect.TypeOf((E_HaGroup_HaMode)(0)),
+		},
+		"/ha-groups/ha-group/state/ha-state": {
+			reflect.TypeOf((E_HaGroup_HaState)(0)),
 		},
 		"/interfaces/interface/aggregation/config/lag-type": {
 			reflect.TypeOf((E_IfAggregate_AggregationType)(0)),

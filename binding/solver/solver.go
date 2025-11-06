@@ -80,18 +80,6 @@ func inventoryToConcreteGraph(inv *Inventory) (*portgraph.ConcreteGraph, map[*po
 	bindPortToConPort := make(map[*binding.Port]*portgraph.ConcretePort)
 
 	addDevice := func(dev binding.Device, role string) error {
-		var dims *binding.Dims
-		// Type assert to interface with Dims() to access device dimensions
-		switch d := dev.(type) {
-		case interface{ Dims() *binding.Dims }:
-			dims = d.Dims()
-		default:
-			return fmt.Errorf("device %s (%T) does not provide a Dims() method", dev.Name(), dev)
-		}
-
-		if dims == nil {
-			return fmt.Errorf("device %s has nil Dims", dev.Name())
-		}
 		attrs := map[string]string{
 			portgraph.RoleAttr:   role,
 			portgraph.VendorAttr: dev.Vendor().String(),
@@ -102,7 +90,7 @@ func inventoryToConcreteGraph(inv *Inventory) (*portgraph.ConcreteGraph, map[*po
 
 		var ports []*portgraph.ConcretePort
 		// Accessing ports using the map from the Dims struct.
-		for portID, bp := range dims.Ports {
+		for portID, bp := range dev.Ports() {
 			if bp == nil {
 				return fmt.Errorf("device %s port ID %s has a nil *binding.Port", dev.Name(), portID)
 			}
@@ -110,6 +98,9 @@ func inventoryToConcreteGraph(inv *Inventory) (*portgraph.ConcreteGraph, map[*po
 				portgraph.NameAttr:  bp.Name,
 				portgraph.SpeedAttr: bp.Speed.String(),
 				portgraph.PMDAttr:   bp.PMD.String(),
+			}
+			if bp.Group != "" {
+				pAttrs[portgraph.GroupAttr] = bp.Group
 			}
 			cp := &portgraph.ConcretePort{
 				// Desc should be unique for each concrete port.
@@ -176,16 +167,6 @@ func inventoryToConcreteGraph(inv *Inventory) (*portgraph.ConcreteGraph, map[*po
 	return cg, conNode2BindDev, conPort2BindPort, nil
 }
 
-type staticDUT struct {
-	*binding.AbstractDUT
-	dut binding.DUT
-}
-
-type staticATE struct {
-	*binding.AbstractATE
-	ate binding.ATE
-}
-
 func dynDims(dev *opb.Device, bdev binding.Device, tbPort2BindPort map[*opb.Port]*binding.Port) *binding.Dims {
 	dims := &binding.Dims{
 		Name:            bdev.Name(),
@@ -234,10 +215,8 @@ func AssignmentToReservation(solveResult *SolveResult, tb *opb.Testbed) (*bindin
 		if !ok {
 			return nil, fmt.Errorf("device %q assigned to DUT %q is not a DUT", (*bdev).Name(), tdut.GetId())
 		}
-		res.DUTs[tdut.GetId()] = &staticDUT{
-			AbstractDUT: &binding.AbstractDUT{Dims: dynDims(tdut, bdut, tbPort2BindPort)},
-			dut:         bdut,
-		}
+		dims := dynDims(tdut, bdut, tbPort2BindPort)
+		res.DUTs[tdut.GetId()] = &binding.AbstractDUT{Dims: dims}
 	}
 	for _, tate := range tb.GetAtes() {
 		bdev := tbDev2BindDev[tate]
@@ -248,10 +227,8 @@ func AssignmentToReservation(solveResult *SolveResult, tb *opb.Testbed) (*bindin
 		if !ok {
 			return nil, fmt.Errorf("device %q assigned to ATE %q is not an ATE", (*bdev).Name(), tate.GetId())
 		}
-		res.ATEs[tate.GetId()] = &staticATE{
-			AbstractATE: &binding.AbstractATE{Dims: dynDims(tate, bate, tbPort2BindPort)},
-			ate:         bate,
-		}
+		dims := dynDims(tate, bate, tbPort2BindPort)
+		res.ATEs[tate.GetId()] = &binding.AbstractATE{Dims: dims}
 	}
 	return res, nil
 }

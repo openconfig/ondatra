@@ -244,9 +244,10 @@ func (ix *IxWeb) request(ctx context.Context, method httpMethod, path, contentTy
 func (ix *IxWeb) waitForAsync(ctx context.Context, data []byte, out any) error {
 	const pollDelay = 5 * time.Second
 	var status struct {
-		State  string          `json:"state"`
-		URL    string          `json:"url"`
-		Result json.RawMessage `json:"result"`
+		State     string          `json:"state"`
+		URL       string          `json:"url"`
+		Result    json.RawMessage `json:"result"`
+		ResultURL string          `json:"resultUrl"`
 	}
 	if err := unmarshal(data, &status); err != nil {
 		return err
@@ -259,13 +260,23 @@ func (ix *IxWeb) waitForAsync(ctx context.Context, data []byte, out any) error {
 		case "IN_PROGRESS":
 			pollURL, err := url.Parse(status.URL)
 			if err != nil {
-				return fmt.Errorf("invalid operation poll URL %q: %w", status.URL, err)
+				return fmt.Errorf("invalid operation poll URL %q: %v", status.URL, err)
 			}
 			sleepFn(pollDelay)
 			if err := ix.jsonReq(ctx, get, pollURL.Path, nil, &status); err != nil {
 				return err
 			}
 		case "COMPLETED", "SUCCESS":
+			if status.ResultURL != "" {
+				resultURL, err := url.Parse(status.ResultURL)
+				if err != nil {
+					return fmt.Errorf("invalid operation result URL %q: %v", status.ResultURL, err)
+				}
+				if err := ix.jsonReq(ctx, get, resultURL.Path, nil, out); err != nil {
+					return fmt.Errorf("error fetching result from %q: %v", status.ResultURL, err)
+				}
+				return nil
+			}
 			return unmarshal(status.Result, out)
 		default:
 			return fmt.Errorf("unknown state in response: %v", out)

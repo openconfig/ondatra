@@ -26,6 +26,7 @@ using the following YANG input files:
   - public/release/models/bgp/openconfig-bgp-policy.yang
   - public/release/models/bgp/openconfig-bgp-types.yang
   - public/release/models/extensions/openconfig-metadata.yang
+  - public/release/models/firewall/openconfig-fw-high-availability.yang
   - public/release/models/gnpsi/openconfig-gnpsi-types.yang
   - public/release/models/gnsi/openconfig-gnsi-acctz.yang
   - public/release/models/gnsi/openconfig-gnsi-authz.yang
@@ -514,6 +515,38 @@ func (t *Flow_IngressTracking) To_Flow_IngressTracking_MplsLabel_Union(i interfa
 		return UnionUint32(v), nil
 	}
 	return nil, fmt.Errorf("cannot convert %v to Flow_IngressTracking_MplsLabel_Union, unknown union type, got: %T, want any of [E_IngressTracking_MplsLabel, uint32]", i, i)
+}
+
+// HaGroup_InterfaceGroup_Id_Union is an interface that is implemented by valid types for the union
+// for the leaf /openconfig-fw-high-availability/ha-groups/ha-group/interface-groups/interface-group/state/id within the YANG schema.
+// Union type can be one of [UnionString, UnionUint8].
+type HaGroup_InterfaceGroup_Id_Union interface {
+	// Union type can be one of [UnionString, UnionUint8]
+	Documentation_for_HaGroup_InterfaceGroup_Id_Union()
+}
+
+// Documentation_for_HaGroup_InterfaceGroup_Id_Union ensures that UnionString
+// implements the HaGroup_InterfaceGroup_Id_Union interface.
+func (UnionString) Documentation_for_HaGroup_InterfaceGroup_Id_Union() {}
+
+// Documentation_for_HaGroup_InterfaceGroup_Id_Union ensures that UnionUint8
+// implements the HaGroup_InterfaceGroup_Id_Union interface.
+func (UnionUint8) Documentation_for_HaGroup_InterfaceGroup_Id_Union() {}
+
+// To_HaGroup_InterfaceGroup_Id_Union takes an input interface{} and attempts to convert it to a struct
+// which implements the HaGroup_InterfaceGroup_Id_Union union. It returns an error if the interface{} supplied
+// cannot be converted to a type within the union.
+func (t *HaGroup_InterfaceGroup) To_HaGroup_InterfaceGroup_Id_Union(i interface{}) (HaGroup_InterfaceGroup_Id_Union, error) {
+	if v, ok := i.(HaGroup_InterfaceGroup_Id_Union); ok {
+		return v, nil
+	}
+	switch v := i.(type) {
+	case string:
+		return UnionString(v), nil
+	case uint8:
+		return UnionUint8(v), nil
+	}
+	return nil, fmt.Errorf("cannot convert %v to HaGroup_InterfaceGroup_Id_Union, unknown union type, got: %T, want any of [string, uint8]", i, i)
 }
 
 // Interface_Aggregation_SwitchedVlan_TrunkVlans_Union is an interface that is implemented by valid types for the union

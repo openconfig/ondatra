@@ -33,28 +33,9 @@ type mockDUT struct {
 	*binding.AbstractDUT
 }
 
-func (m *mockDUT) Dims() *binding.Dims {
-	return m.AbstractDUT.Dims
-}
-
-type mockDUTWithNilDims struct {
-	mockDUT
-	name string
-}
-
-func (d *mockDUTWithNilDims) Name() string              { return d.name }
-func (d *mockDUTWithNilDims) Dims() *binding.Dims       { return nil }
-func (d *mockDUTWithNilDims) Vendor() opb.Device_Vendor { return opb.Device_VENDOR_UNSPECIFIED }
-func (d *mockDUTWithNilDims) HardwareModel() string     { return "" }
-func (d *mockDUTWithNilDims) SoftwareVersion() string   { return "" }
-
 // Mock ATE implementation for testing
 type mockATE struct {
 	*binding.AbstractATE
-}
-
-func (m *mockATE) Dims() *binding.Dims {
-	return m.AbstractATE.Dims
 }
 
 // TestInventoryToConcreteGraph tests the conversion of an Inventory to a ConcreteGraph, including link canonicalization and edge deduplication.
@@ -151,12 +132,6 @@ func TestInventoryToConcreteGraph(t *testing.T) {
 		inv: &Inventory{
 			DUTs:  []binding.DUT{errLinkDut1},
 			Links: map[*binding.Port]*binding.Port{errLinkDut1P1: nonExistentPort},
-		},
-		wantErr: true,
-	}, {
-		desc: "device with nil dims",
-		inv: &Inventory{
-			DUTs: []binding.DUT{&mockDUTWithNilDims{name: "dut1"}},
 		},
 		wantErr: true,
 	},
@@ -840,33 +815,27 @@ func TestAssignmentToReservation(t *testing.T) {
 	wantRes := &binding.Reservation{
 		ID: res.ID,
 		DUTs: map[string]binding.DUT{
-			"dut1": &staticDUT{
-				AbstractDUT: &binding.AbstractDUT{
-					Dims: &binding.Dims{
-						Name: "inventory_dut1",
-						Ports: map[string]*binding.Port{
-							"port1": bDUT1Port1,
-						},
+			"dut1": &binding.AbstractDUT{
+				Dims: &binding.Dims{
+					Name: "inventory_dut1",
+					Ports: map[string]*binding.Port{
+						"port1": bDUT1Port1,
 					},
 				},
-				dut: invDUT1,
 			},
 		},
 		ATEs: map[string]binding.ATE{
-			"ate1": &staticATE{
-				AbstractATE: &binding.AbstractATE{
-					Dims: &binding.Dims{
-						Name: "inventory_ate1",
-						Ports: map[string]*binding.Port{
-							"port1": bATE1Port1,
-						},
+			"ate1": &binding.AbstractATE{
+				Dims: &binding.Dims{
+					Name: "inventory_ate1",
+					Ports: map[string]*binding.Port{
+						"port1": bATE1Port1,
 					},
 				},
-				ate: invATE1,
 			},
 		},
 	}
-	if diff := cmp.Diff(wantRes, res, cmp.AllowUnexported(staticDUT{}, staticATE{})); diff != "" {
+	if diff := cmp.Diff(wantRes, res); diff != "" {
 		t.Errorf("AssignmentToReservation() returned diff (-want +got):\n%s", diff)
 	}
 }

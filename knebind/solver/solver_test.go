@@ -21,9 +21,11 @@ import (
 	"golang.org/x/net/context"
 
 	"github.com/google/go-cmp/cmp"
+	"github.com/google/go-cmp/cmp/cmpopts"
 	"github.com/openconfig/gnmi/errdiff"
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/binding/portgraph"
+	bindingsolver "github.com/openconfig/ondatra/binding/solver"
 	"google.golang.org/protobuf/encoding/prototext"
 	"google.golang.org/protobuf/testing/protocmp"
 
@@ -155,8 +157,9 @@ func TestSolve(t *testing.T) {
 		Ports:                []*opb.Port{{Id: "port1", PmdValue: &opb.Port_PmdRegex{PmdRegex: ".*"}}},
 	}
 	ate1 := &opb.Device{
-		Id:    "ate1",
-		Ports: []*opb.Port{{Id: "port1"}},
+		Id:     "ate1",
+		Vendor: opb.Device_IXIA,
+		Ports:  []*opb.Port{{Id: "port1"}},
 	}
 	ate2 := &opb.Device{
 		Id:     "ate2",
@@ -634,6 +637,303 @@ func TestSolve(t *testing.T) {
 			}
 		})
 	}
+}
+
+type linkSpec struct {
+	aDev, aPort, zDev, zPort string
+}
+
+func TestTopoToInventory(t *testing.T) {
+	tests := []struct {
+		desc      string
+		topo      *tpb.Topology
+		want      *bindingsolver.Inventory
+		wantLinks []linkSpec
+	}{{
+		desc: "all link types",
+		topo: &tpb.Topology{
+			Name: "test_topology",
+			Nodes: []*tpb.Node{
+				{
+					Name:   "dut",
+					Vendor: tpb.Vendor_ARISTA,
+					Model:  "ceos",
+					Os:     "4.25.0F",
+					Interfaces: map[string]*tpb.Interface{
+						"eth1": {Name: "Ethernet1"},
+						"eth2": {Name: "Ethernet2"},
+					},
+				},
+				{
+					Name:   "ate",
+					Vendor: tpb.Vendor_KEYSIGHT,
+					Labels: map[string]string{
+						roleLabel: "ATE",
+					},
+					Interfaces: map[string]*tpb.Interface{
+						"port1": {Name: "Port1"},
+						"port2": {Name: "Port2"},
+					},
+				},
+				{
+					Name:   "dut2",
+					Vendor: tpb.Vendor_CISCO,
+					Model:  "iosxr",
+					Os:     "7.3.1",
+					Interfaces: map[string]*tpb.Interface{
+						"eth1": {Name: "GigabitEthernet0/0/0/0"},
+						"eth2": {Name: "GigabitEthernet0/0/0/1"},
+					},
+				},
+			},
+			Links: []*tpb.Link{
+				{
+					ANode: "dut",
+					AInt:  "eth1",
+					ZNode: "ate",
+					ZInt:  "port1",
+				},
+				{
+					ANode: "ate",
+					AInt:  "port2",
+					ZNode: "dut2",
+					ZInt:  "eth1",
+				},
+				{
+					ANode: "dut",
+					AInt:  "eth2",
+					ZNode: "dut2",
+					ZInt:  "eth2",
+				},
+			},
+		},
+		want: &bindingsolver.Inventory{
+			DUTs: []binding.DUT{
+				&ServiceDUT{
+					AbstractDUT: &binding.AbstractDUT{
+						Dims: &binding.Dims{
+							Name:            "dut",
+							Vendor:          opb.Device_ARISTA,
+							HardwareModel:   "ceos",
+							SoftwareVersion: "4.25.0F",
+							Ports: map[string]*binding.Port{
+								"eth1": {Name: "Ethernet1"},
+								"eth2": {Name: "Ethernet2"},
+							},
+						},
+					},
+					Services:   map[string]*tpb.Service{},
+					NodeVendor: tpb.Vendor_ARISTA,
+				},
+				&ServiceDUT{
+					AbstractDUT: &binding.AbstractDUT{
+						Dims: &binding.Dims{
+							Name:            "dut2",
+							Vendor:          opb.Device_CISCO,
+							HardwareModel:   "iosxr",
+							SoftwareVersion: "7.3.1",
+							Ports: map[string]*binding.Port{
+								"eth1": {Name: "GigabitEthernet0/0/0/0"},
+								"eth2": {Name: "GigabitEthernet0/0/0/1"},
+							},
+						},
+					},
+					Services:   map[string]*tpb.Service{},
+					NodeVendor: tpb.Vendor_CISCO,
+				},
+			},
+			ATEs: []binding.ATE{
+				&ServiceATE{
+					AbstractATE: &binding.AbstractATE{
+						Dims: &binding.Dims{
+							Name:   "ate",
+							Vendor: opb.Device_IXIA,
+							Ports: map[string]*binding.Port{
+								"port1": {Name: "Port1"},
+								"port2": {Name: "Port2"},
+							},
+						},
+					},
+					Services:   map[string]*tpb.Service{},
+					NodeVendor: tpb.Vendor_KEYSIGHT,
+				},
+			},
+		},
+		wantLinks: []linkSpec{
+			{aDev: "dut", aPort: "eth1", zDev: "ate", zPort: "port1"},
+			{aDev: "ate", aPort: "port2", zDev: "dut2", zPort: "eth1"},
+			{aDev: "dut", aPort: "eth2", zDev: "dut2", zPort: "eth2"},
+		},
+	}, {
+		desc: "node interface with no name",
+		topo: &tpb.Topology{
+			Nodes: []*tpb.Node{{
+				Name: "dut",
+				Interfaces: map[string]*tpb.Interface{
+					"eth1": {Name: ""},
+				},
+				Vendor: tpb.Vendor_ARISTA,
+			}},
+		},
+		want: &bindingsolver.Inventory{
+			DUTs: []binding.DUT{
+				&ServiceDUT{
+					AbstractDUT: &binding.AbstractDUT{
+						Dims: &binding.Dims{
+							Name:   "dut",
+							Vendor: opb.Device_ARISTA,
+							Ports: map[string]*binding.Port{
+								"eth1": {Name: "eth1"},
+							},
+						},
+					},
+					Services:   map[string]*tpb.Service{},
+					NodeVendor: tpb.Vendor_ARISTA,
+				},
+			},
+			ATEs:  []binding.ATE{},
+			Links: map[*binding.Port]*binding.Port{},
+		},
+	}}
+
+	for _, tc := range tests {
+		t.Run(tc.desc, func(t *testing.T) {
+			got, err := topoToInventory(tc.topo)
+			if err != nil {
+				t.Fatalf("topoToInventory() got unexpected error: %v", err)
+			}
+			opts := []cmp.Option{
+				protocmp.Transform(),
+				cmpopts.IgnoreFields(bindingsolver.Inventory{}, "Links"),
+				cmpopts.SortSlices(func(a, b binding.DUT) bool { return a.Name() < b.Name() }),
+				cmpopts.SortSlices(func(a, b binding.ATE) bool { return a.Name() < b.Name() }),
+			}
+			if diff := cmp.Diff(tc.want, got, opts...); diff != "" {
+				t.Errorf("topoToInventory() returned diff in DUTs/ATEs (-want,+got): %s", diff)
+			}
+
+			if gotLen, wantLen := len(got.Links), 2*len(tc.wantLinks); gotLen != wantLen {
+				t.Fatalf("len(got.Links) = %d, want %d", gotLen, wantLen)
+			}
+			for _, link := range tc.wantLinks {
+				pA := findPort(got, link.aDev, link.aPort)
+				if pA == nil {
+					t.Errorf("findPort(got, %q, %q) returned nil", link.aDev, link.aPort)
+					continue
+				}
+				pZ := findPort(got, link.zDev, link.zPort)
+				if pZ == nil {
+					t.Errorf("findPort(got, %q, %q) returned nil", link.zDev, link.zPort)
+					continue
+				}
+				if got.Links[pA] != pZ {
+					t.Errorf("got.Links[%s:%s] = %v, want %v", link.aDev, link.aPort, got.Links[pA], pZ)
+				}
+				if got.Links[pZ] != pA {
+					t.Errorf("got.Links[%s:%s] = %v, want %v", link.zDev, link.zPort, got.Links[pZ], pA)
+				}
+			}
+		})
+	}
+}
+
+func TestTopoToInventoryErrors(t *testing.T) {
+	tests := []struct {
+		desc    string
+		topo    *tpb.Topology
+		wantErr string
+	}{
+		{
+			desc: "unknown vendor",
+			topo: &tpb.Topology{
+				Nodes: []*tpb.Node{{
+					Name:   "dut",
+					Vendor: tpb.Vendor_UNKNOWN,
+				}},
+			},
+			wantErr: "unknown vendor",
+		}, {
+			desc: "node interface with no name",
+			topo: &tpb.Topology{
+				Nodes: []*tpb.Node{{
+					Name: "dut",
+					Interfaces: map[string]*tpb.Interface{
+						"eth1": {Name: ""},
+					},
+					Vendor: tpb.Vendor_ARISTA,
+				}},
+			},
+			wantErr: "",
+		},
+		{
+			desc: "link to nonexistent z_node",
+			topo: &tpb.Topology{
+				Nodes: []*tpb.Node{{
+					Name:   "dut",
+					Vendor: tpb.Vendor_ARISTA,
+					Interfaces: map[string]*tpb.Interface{
+						"eth1": {Name: "Ethernet1"},
+					},
+				},
+					{
+						Name:   "dut3",
+						Vendor: tpb.Vendor_ARISTA,
+						Interfaces: map[string]*tpb.Interface{
+							"eth1": {Name: "Ethernet1"},
+						},
+					}},
+				Links: []*tpb.Link{{
+					ANode: "dut",
+					AInt:  "eth1",
+					ZNode: "dut2",
+					ZInt:  "eth2",
+				}},
+			},
+			wantErr: "does not exist",
+		},
+		{
+			desc: "link to nonexistent a_node",
+			topo: &tpb.Topology{
+				Nodes: []*tpb.Node{{
+					Name:   "dut",
+					Vendor: tpb.Vendor_ARISTA,
+				}},
+				Links: []*tpb.Link{{
+					ANode: "dut1",
+					AInt:  "eth1",
+					ZNode: "dut",
+					ZInt:  "eth1",
+				}},
+			},
+			wantErr: "does not exist",
+		},
+	}
+	for _, test := range tests {
+		t.Run(test.desc, func(t *testing.T) {
+			_, err := topoToInventory(test.topo)
+			if diff := errdiff.Substring(err, test.wantErr); diff != "" {
+				t.Errorf("topoToInventory() got unexpected error diff: %s", diff)
+			}
+		})
+	}
+}
+
+func findPort(inv *bindingsolver.Inventory, devName, portID string) *binding.Port {
+	for _, d := range inv.DUTs {
+		if d.Name() == devName {
+			if p, ok := d.Ports()[portID]; ok {
+				return p
+			}
+		}
+	}
+	for _, a := range inv.ATEs {
+		if a.Name() == devName {
+			if p, ok := a.Ports()[portID]; ok {
+				return p
+			}
+		}
+	}
+	return nil
 }
 
 func TestPortGroupsSolve(t *testing.T) {

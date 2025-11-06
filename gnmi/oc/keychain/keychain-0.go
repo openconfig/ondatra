@@ -24,6 +24,7 @@ using the following YANG input files:
   - public/release/models/bgp/openconfig-bgp-policy.yang
   - public/release/models/bgp/openconfig-bgp-types.yang
   - public/release/models/extensions/openconfig-metadata.yang
+  - public/release/models/firewall/openconfig-fw-high-availability.yang
   - public/release/models/gnpsi/openconfig-gnpsi-types.yang
   - public/release/models/gnsi/openconfig-gnsi-acctz.yang
   - public/release/models/gnsi/openconfig-gnsi-authz.yang

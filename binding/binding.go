@@ -200,6 +200,7 @@ type Port struct {
 	Speed     opb.Port_Speed
 	CardModel string
 	PMD       opb.Port_Pmd
+	Group     string
 }
 
 func (p *Port) String() string {

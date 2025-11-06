@@ -25,13 +25,13 @@ import (
 
 	"bitbucket.org/creachadair/stringset"
 	log "github.com/golang/glog"
+	tpb "github.com/openconfig/kne/proto/topo"
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/binding/introspect"
 	"github.com/openconfig/ondatra/binding/portgraph"
-	"github.com/pborman/uuid"
-
-	tpb "github.com/openconfig/kne/proto/topo"
+	bindingsolver "github.com/openconfig/ondatra/binding/solver"
 	opb "github.com/openconfig/ondatra/proto"
+	"github.com/pborman/uuid"
 )
 
 const (
@@ -270,6 +270,10 @@ func createExactMap(tb *opb.Testbed, topo *tpb.Topology) map[string]string {
 	return m
 }
 
+type deviceWithDims interface {
+	GetDims() *binding.Dims
+}
+
 // Solve creates a new Reservation from a desired testbed and an available topology.
 func Solve(ctx context.Context, tb *opb.Testbed, topo *tpb.Topology, partial map[string]string) (*binding.Reservation, error) {
 	if partial == nil {
@@ -286,25 +290,155 @@ func Solve(ctx context.Context, tb *opb.Testbed, topo *tpb.Topology, partial map
 			" testbed has %d links and topology only has %d links", numTBLinks, numTopoLinks)
 	}
 
-	abstractGraph, absNode2Dev, absPort2Port, err := portgraph.TestbedToAbstractGraph(tb, partial)
+	inventory, err := topoToInventory(topo)
 	if err != nil {
-		return nil, fmt.Errorf("could not parse specified testbed: %w", err)
-	}
-	superGraph, conNode2Node, conPort2Intf, err := topoToConcreteGraph(topo)
-	if err != nil {
-		return nil, fmt.Errorf("could not parse specified testbed: %w", err)
+		return nil, fmt.Errorf("could not convert topology to inventory: %w", err)
 	}
 
-	assignment, err := portgraph.Solve(ctx, abstractGraph, superGraph)
+	result, err := bindingsolver.Solve(ctx, tb, inventory, partial)
 	if err != nil {
 		return nil, fmt.Errorf("could not solve for specified testbed: %w", err)
 	}
 
-	res, err := assignmentToReservation(assignment, tb.GetDuts(), tb.GetAtes(), absNode2Dev, absPort2Port, conNode2Node, conPort2Intf)
+	absRes, err := bindingsolver.AssignmentToReservation(result, tb)
 	if err != nil {
 		return nil, err
 	}
+
+	id2BindDev := make(map[string]binding.Device)
+	for an, d := range result.AbsNode2Dev {
+		id2BindDev[d.GetId()] = *result.ConNode2BindDev[result.Assignment.Node2Node[an]]
+	}
+
+	res := &binding.Reservation{
+		ID:   absRes.ID,
+		DUTs: make(map[string]binding.DUT),
+		ATEs: make(map[string]binding.ATE),
+	}
+	for id, dut := range absRes.DUTs {
+		sd := id2BindDev[id].(*ServiceDUT)
+		sd.Dims.Ports = dut.Ports()
+		res.DUTs[id] = sd
+	}
+	for id, ate := range absRes.ATEs {
+		sa := id2BindDev[id].(*ServiceATE)
+		sa.Dims.Ports = ate.Ports()
+		res.ATEs[id] = sa
+	}
 	return res, nil
+}
+
+func createServiceMap(node *tpb.Node) map[string]*tpb.Service {
+	sm := map[string]*tpb.Service{}
+	for _, s := range node.GetServices() {
+		names := stringset.New()
+		for _, n := range append(s.GetNames(), s.GetName()) {
+			if n != "" {
+				names.Add(n)
+			}
+		}
+		for _, n := range names.Elements() {
+			sm[n] = s
+		}
+	}
+	return sm
+}
+
+func createBindingDevice(node *tpb.Node, ports map[string]*binding.Port, sm map[string]*tpb.Service) (deviceWithDims, error) {
+	ondatraVendor, ok := deviceVendors[node.GetVendor()]
+	if !ok {
+		return nil, fmt.Errorf("unknown vendor %v for node %q", node.GetVendor(), node.GetName())
+	}
+	dims := &binding.Dims{
+		Name:            node.GetName(),
+		Ports:           ports,
+		Vendor:          ondatraVendor,
+		HardwareModel:   node.GetModel(),
+		SoftwareVersion: node.GetOs(),
+	}
+	if role(node) == portgraph.RoleATE {
+		return &ServiceATE{
+			AbstractATE: &binding.AbstractATE{Dims: dims},
+			Services:    sm,
+			Cert:        node.GetConfig().GetCert(),
+			NodeVendor:  node.GetVendor(),
+		}, nil
+	}
+	return &ServiceDUT{
+		AbstractDUT: &binding.AbstractDUT{Dims: dims},
+		Services:    sm,
+		Cert:        node.GetConfig().GetCert(),
+		NodeVendor:  node.GetVendor(),
+	}, nil
+}
+
+func addLinksToInventory(inv *bindingsolver.Inventory, topo *tpb.Topology, devMap map[string]deviceWithDims) error {
+	for _, link := range topo.GetLinks() {
+		aDev, ok := devMap[link.ANode]
+		if !ok {
+			return fmt.Errorf("link %v specifies device %q that does not exist", link, link.ANode)
+		}
+		aDims := aDev.GetDims()
+		aPort, ok := aDims.Ports[link.AInt]
+		if !ok {
+			aPort = &binding.Port{Name: link.AInt}
+			aDims.Ports[link.AInt] = aPort
+		}
+		zDev, ok := devMap[link.ZNode]
+		if !ok {
+			return fmt.Errorf("link %v specifies device %q that does not exist", link, link.ZNode)
+		}
+		zDims := zDev.GetDims()
+		zPort, ok := zDims.Ports[link.ZInt]
+		if !ok {
+			zPort = &binding.Port{Name: link.ZInt}
+			zDims.Ports[link.ZInt] = zPort
+		}
+		inv.Links[aPort] = zPort
+		inv.Links[zPort] = aPort
+	}
+	return nil
+}
+
+// topoToInventory converts a KNE topology to a bindingsolver.Inventory.
+func topoToInventory(topo *tpb.Topology) (*bindingsolver.Inventory, error) {
+	inv := &bindingsolver.Inventory{
+		DUTs:  []binding.DUT{},
+		ATEs:  []binding.ATE{},
+		Links: make(map[*binding.Port]*binding.Port),
+	}
+	devMap := make(map[string]deviceWithDims)
+	for _, node := range topo.GetNodes() {
+		ports := make(map[string]*binding.Port)
+		for intfName, nodeIntf := range node.GetInterfaces() {
+			name := nodeIntf.GetName()
+			if name == "" {
+				name = intfName
+			}
+			ports[intfName] = &binding.Port{Name: name, Group: nodeIntf.GetGroup()}
+		}
+
+		sm := createServiceMap(node)
+
+		device, err := createBindingDevice(node, ports, sm)
+		if err != nil {
+			return nil, err
+		}
+
+		switch d := device.(type) {
+		case *ServiceATE:
+			inv.ATEs = append(inv.ATEs, d)
+			devMap[node.GetName()] = d
+		case *ServiceDUT:
+			inv.DUTs = append(inv.DUTs, d)
+			devMap[node.GetName()] = d
+		}
+	}
+
+	if err := addLinksToInventory(inv, topo, devMap); err != nil {
+		return nil, err
+	}
+	return inv, nil
 }
 
 // ServiceDUT is a DUT that contains a service map.
@@ -314,6 +448,9 @@ type ServiceDUT struct {
 	Cert       *tpb.CertificateCfg
 	NodeVendor tpb.Vendor
 }
+
+// GetDims returns the dimensions of the DUT.
+func (d *ServiceDUT) GetDims() *binding.Dims { return d.AbstractDUT.Dims }
 
 // Service returns the KNE service details for a given service name.
 func (d *ServiceDUT) Service(service string) (*tpb.Service, error) {
@@ -331,6 +468,9 @@ type ServiceATE struct {
 	Cert       *tpb.CertificateCfg
 	NodeVendor tpb.Vendor
 }
+
+// GetDims returns the dimensions of the ATE.
+func (a *ServiceATE) GetDims() *binding.Dims { return a.AbstractATE.Dims }
 
 // Service returns the KNE service details for a given service name.
 func (a *ServiceATE) Service(service string) (*tpb.Service, error) {

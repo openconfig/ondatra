@@ -88,6 +88,8 @@ func TestConnect(t *testing.T) {
 
 func TestAsyncOperation(t *testing.T) {
 	successBody := `{"state":"SUCCESS"}`
+	successBodyWithResultURL := `{"state":"SUCCESS", "resultUrl":"http://some.url"}`
+	resultBody := `{}`
 	completedBody := `{"state":"COMPLETED"}`
 	progressBody := `{"state":"IN_PROGRESS"}`
 	errorBody := `{"state":"ERROR", "result":"error response"}`
@@ -110,6 +112,9 @@ func TestAsyncOperation(t *testing.T) {
 		desc:    "completed after progress",
 		doResps: []*http.Response{fakeResponse(202, progressBody), fakeResponse(200, completedBody)},
 	}, {
+		desc:    "success with result URL pointer",
+		doResps: []*http.Response{fakeResponse(202, successBodyWithResultURL), fakeResponse(200, resultBody)},
+	}, {
 		desc: "progress timeout",
 		doResps: append(append([]*http.Response{},
 			fakeResponse(202, progressBody)),
@@ -123,6 +128,10 @@ func TestAsyncOperation(t *testing.T) {
 		desc:    "exception",
 		doResps: []*http.Response{fakeResponse(202, exceptionBody)},
 		wantErr: "exception response",
+	}, {
+		desc:    "success with bad result URL pointer",
+		doResps: []*http.Response{fakeResponse(202, successBodyWithResultURL), fakeResponse(404, resultBody)},
+		wantErr: "error fetching result",
 	}}
 	for _, test := range tests {
 		t.Run(test.desc, func(t *testing.T) {
