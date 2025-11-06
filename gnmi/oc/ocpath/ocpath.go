@@ -24,6 +24,7 @@ using the following YANG input files:
   - public/release/models/bgp/openconfig-bgp-policy.yang
   - public/release/models/bgp/openconfig-bgp-types.yang
   - public/release/models/extensions/openconfig-metadata.yang
+  - public/release/models/firewall/openconfig-fw-high-availability.yang
   - public/release/models/gnpsi/openconfig-gnpsi-types.yang
   - public/release/models/gnsi/openconfig-gnsi-acctz.yang
   - public/release/models/gnsi/openconfig-gnsi-authz.yang
@@ -120,6 +121,7 @@ import (
 	"github.com/openconfig/ondatra/gnmi/oc/acl"
 	"github.com/openconfig/ondatra/gnmi/oc/ateflow"
 	"github.com/openconfig/ondatra/gnmi/oc/definedsets"
+	"github.com/openconfig/ondatra/gnmi/oc/fwhighavailability"
 	"github.com/openconfig/ondatra/gnmi/oc/gnmicollectormetadata"
 	"github.com/openconfig/ondatra/gnmi/oc/interfaces"
 	"github.com/openconfig/ondatra/gnmi/oc/keychain"
@@ -294,6 +296,59 @@ func (n *RootPath) FlowMap() *ateflow.FlowPathMap {
 	ps := &ateflow.FlowPathMap{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"flows"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// HaGroupAny (list): HA group id used to create a logical HA group
+//
+//	Defining module:      "openconfig-fw-high-availability"
+//	Instantiating module: "openconfig-fw-high-availability"
+//	Path from parent:     "ha-groups/ha-group"
+//	Path from root:       "/ha-groups/ha-group"
+func (n *RootPath) HaGroupAny() *fwhighavailability.HaGroupPathAny {
+	ps := &fwhighavailability.HaGroupPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"ha-groups", "ha-group"},
+			map[string]interface{}{"id": "*"},
+			n,
+		),
+	}
+	return ps
+}
+
+// HaGroup (list): HA group id used to create a logical HA group
+//
+//	Defining module:      "openconfig-fw-high-availability"
+//	Instantiating module: "openconfig-fw-high-availability"
+//	Path from parent:     "ha-groups/ha-group"
+//	Path from root:       "/ha-groups/ha-group"
+//
+//	Id: uint8
+func (n *RootPath) HaGroup(Id uint8) *fwhighavailability.HaGroupPath {
+	ps := &fwhighavailability.HaGroupPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"ha-groups", "ha-group"},
+			map[string]interface{}{"id": Id},
+			n,
+		),
+	}
+	return ps
+}
+
+// HaGroupMap (list): HA group id used to create a logical HA group
+//
+//	Defining module:      "openconfig-fw-high-availability"
+//	Instantiating module: "openconfig-fw-high-availability"
+//	Path from parent:     "ha-groups/ha-group"
+//	Path from root:       "/ha-groups/ha-group"
+func (n *RootPath) HaGroupMap() *fwhighavailability.HaGroupPathMap {
+	ps := &fwhighavailability.HaGroupPathMap{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"ha-groups"},
 			map[string]interface{}{},
 			n,
 		),
