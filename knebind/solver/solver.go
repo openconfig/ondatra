@@ -62,6 +62,8 @@ func ServiceName(svc introspect.Service) (string, bool) {
 		return "gnmi", true
 	case introspect.GNOI:
 		return "gnoi", true
+	case introspect.GNPSI:
+		return "gnpsi", true
 	case introspect.GNSI:
 		return "gnsi", true
 	case introspect.GRIBI:

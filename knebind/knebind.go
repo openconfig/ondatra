@@ -48,6 +48,7 @@ import (
 	attestzpb "github.com/openconfig/attestz/proto/tpm_attestz"
 	enrollzpb "github.com/openconfig/attestz/proto/tpm_enrollz"
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
+	gnpsipb "github.com/openconfig/gnpsi/proto/gnpsi"
 	acctzpb "github.com/openconfig/gnsi/acctz"
 	authzpb "github.com/openconfig/gnsi/authz"
 	certzpb "github.com/openconfig/gnsi/certz"
@@ -260,6 +261,14 @@ func (d *kneDUT) DialGNOI(ctx context.Context, opts ...grpc.DialOption) (gnoigo.
 		return nil, err
 	}
 	return gnoigo.NewClients(conn), nil
+}
+
+func (d *kneDUT) DialGNPSI(ctx context.Context, opts ...grpc.DialOption) (gnpsipb.GNPSIClient, error) {
+	conn, err := d.dialGRPC(ctx, introspect.GNPSI, opts)
+	if err != nil {
+		return nil, err
+	}
+	return gnpsipb.NewGNPSIClient(conn), nil
 }
 
 func (d *kneDUT) DialGRIBI(ctx context.Context, opts ...grpc.DialOption) (grpb.GRIBIClient, error) {
