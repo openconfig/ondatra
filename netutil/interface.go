@@ -141,6 +141,7 @@ var namingVendors map[ondatra.Vendor]entname.Vendor = map[ondatra.Vendor]entname
 	ondatra.CISCO:   entname.VendorCisco,
 	ondatra.JUNIPER: entname.VendorJuniper,
 	ondatra.NOKIA:   entname.VendorNokia,
+	ondatra.CIENA:   entname.VendorCiena,
 }
 
 func deviceParams(dut dutIntf) (*entname.DeviceParams, error) {
