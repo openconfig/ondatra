@@ -136,6 +136,7 @@ YANG_FILES=(
 
 OTG_YANG_FILES=(
   models-yang/models/bgp/open-traffic-generator-bgp.yang
+  models-yang/models/bmp-server/open-traffic-generator-bmp-server.yang
   models-yang/models/dhcp/v4client/open-traffic-generator-dhcpv4client.yang
   models-yang/models/dhcp/v4server/open-traffic-generator-dhcpv4server.yang
   models-yang/models/dhcp/v6client/open-traffic-generator-dhcpv6client.yang
