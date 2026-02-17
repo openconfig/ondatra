@@ -661,6 +661,40 @@ func (n *PortPathAny) Counters() *Port_CountersPathAny {
 	return ps
 }
 
+// DataIntegrity (container): The container for data integrity metrics. The container will be empty if options.port_options.data_integrity has not been enabled during set_config.
+//
+//	Defining module:      "open-traffic-generator-port"
+//	Instantiating module: "open-traffic-generator-port"
+//	Path from parent:     "state/data-integrity"
+//	Path from root:       "/ports/port/state/data-integrity"
+func (n *PortPath) DataIntegrity() *Port_DataIntegrityPath {
+	ps := &Port_DataIntegrityPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "data-integrity"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// DataIntegrity (container): The container for data integrity metrics. The container will be empty if options.port_options.data_integrity has not been enabled during set_config.
+//
+//	Defining module:      "open-traffic-generator-port"
+//	Instantiating module: "open-traffic-generator-port"
+//	Path from parent:     "state/data-integrity"
+//	Path from root:       "/ports/port/state/data-integrity"
+func (n *PortPathAny) DataIntegrity() *Port_DataIntegrityPathAny {
+	ps := &Port_DataIntegrityPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "data-integrity"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
 // InRate (leaf): The current receive rate of an OTG port, measured in
 // bits per second.
 //
@@ -1497,6 +1531,341 @@ func (n *Port_CountersPath) State() ygnmi.SingletonQuery[*oc.Port_Counters] {
 func (n *Port_CountersPathAny) State() ygnmi.WildcardQuery[*oc.Port_Counters] {
 	return ygnmi.NewWildcardQuery[*oc.Port_Counters](
 		"Port_Counters",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Port_DataIntegrity_InErrorFramesPath represents the /open-traffic-generator-port/ports/port/state/data-integrity/in-error-frames YANG schema element.
+type Port_DataIntegrity_InErrorFramesPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Port_DataIntegrity_InErrorFramesPathAny represents the wildcard version of the /open-traffic-generator-port/ports/port/state/data-integrity/in-error-frames YANG schema element.
+type Port_DataIntegrity_InErrorFramesPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Port_DataIntegrity_InErrorFramesPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-port"
+//	Instantiating module: "open-traffic-generator-port"
+//	Path from parent:     "in-error-frames"
+//	Path from root:       "/ports/port/state/data-integrity/in-error-frames"
+func (n *Port_DataIntegrity_InErrorFramesPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Port_DataIntegrity",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"in-error-frames"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Port_DataIntegrity).InErrorFrames
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Port_DataIntegrity) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-port"
+//	Instantiating module: "open-traffic-generator-port"
+//	Path from parent:     "in-error-frames"
+//	Path from root:       "/ports/port/state/data-integrity/in-error-frames"
+func (n *Port_DataIntegrity_InErrorFramesPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Port_DataIntegrity",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"in-error-frames"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Port_DataIntegrity).InErrorFrames
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Port_DataIntegrity) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Port_DataIntegrity_InTotalFramesPath represents the /open-traffic-generator-port/ports/port/state/data-integrity/in-total-frames YANG schema element.
+type Port_DataIntegrity_InTotalFramesPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Port_DataIntegrity_InTotalFramesPathAny represents the wildcard version of the /open-traffic-generator-port/ports/port/state/data-integrity/in-total-frames YANG schema element.
+type Port_DataIntegrity_InTotalFramesPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Port_DataIntegrity_InTotalFramesPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-port"
+//	Instantiating module: "open-traffic-generator-port"
+//	Path from parent:     "in-total-frames"
+//	Path from root:       "/ports/port/state/data-integrity/in-total-frames"
+func (n *Port_DataIntegrity_InTotalFramesPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Port_DataIntegrity",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"in-total-frames"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Port_DataIntegrity).InTotalFrames
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Port_DataIntegrity) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-port"
+//	Instantiating module: "open-traffic-generator-port"
+//	Path from parent:     "in-total-frames"
+//	Path from root:       "/ports/port/state/data-integrity/in-total-frames"
+func (n *Port_DataIntegrity_InTotalFramesPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Port_DataIntegrity",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"in-total-frames"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Port_DataIntegrity).InTotalFrames
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Port_DataIntegrity) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Port_DataIntegrityPath represents the /open-traffic-generator-port/ports/port/state/data-integrity YANG schema element.
+type Port_DataIntegrityPath struct {
+	*ygnmi.NodePath
+}
+
+// Port_DataIntegrityPathAny represents the wildcard version of the /open-traffic-generator-port/ports/port/state/data-integrity YANG schema element.
+type Port_DataIntegrityPathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Port_DataIntegrityPath) PathOriginName() string {
+	return "openconfig"
+}
+
+// InErrorFrames (leaf): The total number of data integrity enabled frames received with payload modified.
+//
+//	Defining module:      "open-traffic-generator-port"
+//	Instantiating module: "open-traffic-generator-port"
+//	Path from parent:     "in-error-frames"
+//	Path from root:       "/ports/port/state/data-integrity/in-error-frames"
+func (n *Port_DataIntegrityPath) InErrorFrames() *Port_DataIntegrity_InErrorFramesPath {
+	ps := &Port_DataIntegrity_InErrorFramesPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"in-error-frames"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// InErrorFrames (leaf): The total number of data integrity enabled frames received with payload modified.
+//
+//	Defining module:      "open-traffic-generator-port"
+//	Instantiating module: "open-traffic-generator-port"
+//	Path from parent:     "in-error-frames"
+//	Path from root:       "/ports/port/state/data-integrity/in-error-frames"
+func (n *Port_DataIntegrityPathAny) InErrorFrames() *Port_DataIntegrity_InErrorFramesPathAny {
+	ps := &Port_DataIntegrity_InErrorFramesPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"in-error-frames"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// InTotalFrames (leaf): The total number of data integrity enabled frames received.
+//
+//	Defining module:      "open-traffic-generator-port"
+//	Instantiating module: "open-traffic-generator-port"
+//	Path from parent:     "in-total-frames"
+//	Path from root:       "/ports/port/state/data-integrity/in-total-frames"
+func (n *Port_DataIntegrityPath) InTotalFrames() *Port_DataIntegrity_InTotalFramesPath {
+	ps := &Port_DataIntegrity_InTotalFramesPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"in-total-frames"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// InTotalFrames (leaf): The total number of data integrity enabled frames received.
+//
+//	Defining module:      "open-traffic-generator-port"
+//	Instantiating module: "open-traffic-generator-port"
+//	Path from parent:     "in-total-frames"
+//	Path from root:       "/ports/port/state/data-integrity/in-total-frames"
+func (n *Port_DataIntegrityPathAny) InTotalFrames() *Port_DataIntegrity_InTotalFramesPathAny {
+	ps := &Port_DataIntegrity_InTotalFramesPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"in-total-frames"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Port_DataIntegrityPath) State() ygnmi.SingletonQuery[*oc.Port_DataIntegrity] {
+	return ygnmi.NewSingletonQuery[*oc.Port_DataIntegrity](
+		"Port_DataIntegrity",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Port_DataIntegrityPathAny) State() ygnmi.WildcardQuery[*oc.Port_DataIntegrity] {
+	return ygnmi.NewWildcardQuery[*oc.Port_DataIntegrity](
+		"Port_DataIntegrity",
 		true,
 		false,
 		false,

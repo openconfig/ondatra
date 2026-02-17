@@ -837,6 +837,187 @@ func (n *Lldp_HelloTimerPathAny) Config() ygnmi.WildcardQuery[uint64] {
 	)
 }
 
+// Lldp_ManagementInterfacePath represents the /openconfig-lldp/lldp/state/management-interface YANG schema element.
+type Lldp_ManagementInterfacePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Lldp_ManagementInterfacePathAny represents the wildcard version of the /openconfig-lldp/lldp/state/management-interface YANG schema element.
+type Lldp_ManagementInterfacePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Lldp_ManagementInterfacePath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "state/management-interface"
+//	Path from root:       "/lldp/state/management-interface"
+func (n *Lldp_ManagementInterfacePath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewSingletonQuery[string](
+		"Lldp",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "management-interface"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Lldp).ManagementInterface
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Lldp) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "state/management-interface"
+//	Path from root:       "/lldp/state/management-interface"
+func (n *Lldp_ManagementInterfacePathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"Lldp",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "management-interface"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Lldp).ManagementInterface
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Lldp) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "config/management-interface"
+//	Path from root:       "/lldp/config/management-interface"
+func (n *Lldp_ManagementInterfacePath) Config() ygnmi.ConfigQuery[string] {
+	return ygnmi.NewConfigQuery[string](
+		"Lldp",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "management-interface"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Lldp).ManagementInterface
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Lldp) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "config/management-interface"
+//	Path from root:       "/lldp/config/management-interface"
+func (n *Lldp_ManagementInterfacePathAny) Config() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"Lldp",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "management-interface"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Lldp).ManagementInterface
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Lldp) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
 // Lldp_SuppressTlvAdvertisementPath represents the /openconfig-lldp/lldp/state/suppress-tlv-advertisement YANG schema element.
 type Lldp_SuppressTlvAdvertisementPath struct {
 	*ygnmi.NodePath
@@ -1668,6 +1849,158 @@ func (n *LldpPathAny) InterfaceMap() *Lldp_InterfacePathMapAny {
 	ps := &Lldp_InterfacePathMapAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"interfaces"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// ManagementInterface (leaf): The interface in which to derive the population of Management
+// Address TLV parameters.  If unspecified, the implementation may
+// choose which interface is utilized.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "*/management-interface"
+//	Path from root:       "/lldp/*/management-interface"
+func (n *LldpPath) ManagementInterface() *Lldp_ManagementInterfacePath {
+	ps := &Lldp_ManagementInterfacePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "management-interface"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// ManagementInterface (leaf): The interface in which to derive the population of Management
+// Address TLV parameters.  If unspecified, the implementation may
+// choose which interface is utilized.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "*/management-interface"
+//	Path from root:       "/lldp/*/management-interface"
+func (n *LldpPathAny) ManagementInterface() *Lldp_ManagementInterfacePathAny {
+	ps := &Lldp_ManagementInterfacePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "management-interface"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// MgmtAddressAny (list): List of management addresses in use by the local/remote
+// system
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "mgmt-addresses/mgmt-address"
+//	Path from root:       "/lldp/mgmt-addresses/mgmt-address"
+func (n *LldpPath) MgmtAddressAny() *Lldp_MgmtAddressPathAny {
+	ps := &Lldp_MgmtAddressPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"mgmt-addresses", "mgmt-address"},
+			map[string]interface{}{"address": "*"},
+			n,
+		),
+	}
+	return ps
+}
+
+// MgmtAddressAny (list): List of management addresses in use by the local/remote
+// system
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "mgmt-addresses/mgmt-address"
+//	Path from root:       "/lldp/mgmt-addresses/mgmt-address"
+func (n *LldpPathAny) MgmtAddressAny() *Lldp_MgmtAddressPathAny {
+	ps := &Lldp_MgmtAddressPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"mgmt-addresses", "mgmt-address"},
+			map[string]interface{}{"address": "*"},
+			n,
+		),
+	}
+	return ps
+}
+
+// MgmtAddress (list): List of management addresses in use by the local/remote
+// system
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "mgmt-addresses/mgmt-address"
+//	Path from root:       "/lldp/mgmt-addresses/mgmt-address"
+//
+//	Address: string
+func (n *LldpPath) MgmtAddress(Address string) *Lldp_MgmtAddressPath {
+	ps := &Lldp_MgmtAddressPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"mgmt-addresses", "mgmt-address"},
+			map[string]interface{}{"address": Address},
+			n,
+		),
+	}
+	return ps
+}
+
+// MgmtAddress (list): List of management addresses in use by the local/remote
+// system
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "mgmt-addresses/mgmt-address"
+//	Path from root:       "/lldp/mgmt-addresses/mgmt-address"
+//
+//	Address: string
+func (n *LldpPathAny) MgmtAddress(Address string) *Lldp_MgmtAddressPathAny {
+	ps := &Lldp_MgmtAddressPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"mgmt-addresses", "mgmt-address"},
+			map[string]interface{}{"address": Address},
+			n,
+		),
+	}
+	return ps
+}
+
+// MgmtAddressMap (list): List of management addresses in use by the local/remote
+// system
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "mgmt-addresses/mgmt-address"
+//	Path from root:       "/lldp/mgmt-addresses/mgmt-address"
+func (n *LldpPath) MgmtAddressMap() *Lldp_MgmtAddressPathMap {
+	ps := &Lldp_MgmtAddressPathMap{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"mgmt-addresses"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// MgmtAddressMap (list): List of management addresses in use by the local/remote
+// system
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "mgmt-addresses/mgmt-address"
+//	Path from root:       "/lldp/mgmt-addresses/mgmt-address"
+func (n *LldpPathAny) MgmtAddressMap() *Lldp_MgmtAddressPathMapAny {
+	ps := &Lldp_MgmtAddressPathMapAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"mgmt-addresses"},
 			map[string]interface{}{},
 			n,
 		),
@@ -5947,6 +6280,105 @@ func (n *Lldp_Interface_Neighbor_ManagementAddressTypePathAny) State() ygnmi.Wil
 	)
 }
 
+// Lldp_Interface_Neighbor_ManagementInterfacePath represents the /openconfig-lldp/lldp/interfaces/interface/neighbors/neighbor/state/management-interface YANG schema element.
+type Lldp_Interface_Neighbor_ManagementInterfacePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Lldp_Interface_Neighbor_ManagementInterfacePathAny represents the wildcard version of the /openconfig-lldp/lldp/interfaces/interface/neighbors/neighbor/state/management-interface YANG schema element.
+type Lldp_Interface_Neighbor_ManagementInterfacePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Lldp_Interface_Neighbor_ManagementInterfacePath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "state/management-interface"
+//	Path from root:       "/lldp/interfaces/interface/neighbors/neighbor/state/management-interface"
+func (n *Lldp_Interface_Neighbor_ManagementInterfacePath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewSingletonQuery[string](
+		"Lldp_Interface_Neighbor",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "management-interface"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Lldp_Interface_Neighbor).ManagementInterface
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Lldp_Interface_Neighbor) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "state/management-interface"
+//	Path from root:       "/lldp/interfaces/interface/neighbors/neighbor/state/management-interface"
+func (n *Lldp_Interface_Neighbor_ManagementInterfacePathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"Lldp_Interface_Neighbor",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "management-interface"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Lldp_Interface_Neighbor).ManagementInterface
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Lldp_Interface_Neighbor) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
 // Lldp_Interface_Neighbor_PortDescriptionPath represents the /openconfig-lldp/lldp/interfaces/interface/neighbors/neighbor/state/port-description YANG schema element.
 type Lldp_Interface_Neighbor_PortDescriptionPath struct {
 	*ygnmi.NodePath
@@ -6872,6 +7304,11 @@ func (n *Lldp_Interface_NeighborPathAny) LastUpdate() *Lldp_Interface_Neighbor_L
 // can be used to reach the agent on the port identified in the
 // Port ID TLV.
 //
+// This leaf has been deprecated in favor of the management-address
+// list structure to accomodate multiple addresses and distinct
+// typing to pair up with the 802.1AB Management Address TLV
+// specification.
+//
 //	Defining module:      "openconfig-lldp"
 //	Instantiating module: "openconfig-lldp"
 //	Path from parent:     "state/management-address"
@@ -6892,6 +7329,11 @@ func (n *Lldp_Interface_NeighborPath) ManagementAddress() *Lldp_Interface_Neighb
 // network address associated with the local LLDP agent, which
 // can be used to reach the agent on the port identified in the
 // Port ID TLV.
+//
+// This leaf has been deprecated in favor of the management-address
+// list structure to accomodate multiple addresses and distinct
+// typing to pair up with the 802.1AB Management Address TLV
+// specification.
 //
 //	Defining module:      "openconfig-lldp"
 //	Instantiating module: "openconfig-lldp"
@@ -6914,6 +7356,11 @@ func (n *Lldp_Interface_NeighborPathAny) ManagementAddress() *Lldp_Interface_Nei
 // 'Assigned Numbers' RFC [RFC3232] and the
 // ianaAddressFamilyNumbers object.
 //
+// This leaf has been deprecated in favor of the management-address
+// list structure to accomodate multiple addresses and distinct
+// typing to pair up with the 802.1AB Management Address TLV
+// specification.
+//
 //	Defining module:      "openconfig-lldp"
 //	Instantiating module: "openconfig-lldp"
 //	Path from parent:     "state/management-address-type"
@@ -6935,6 +7382,11 @@ func (n *Lldp_Interface_NeighborPath) ManagementAddressType() *Lldp_Interface_Ne
 // 'Assigned Numbers' RFC [RFC3232] and the
 // ianaAddressFamilyNumbers object.
 //
+// This leaf has been deprecated in favor of the management-address
+// list structure to accomodate multiple addresses and distinct
+// typing to pair up with the 802.1AB Management Address TLV
+// specification.
+//
 //	Defining module:      "openconfig-lldp"
 //	Instantiating module: "openconfig-lldp"
 //	Path from parent:     "state/management-address-type"
@@ -6947,6 +7399,158 @@ func (n *Lldp_Interface_NeighborPathAny) ManagementAddressType() *Lldp_Interface
 			n,
 		),
 		parent: n,
+	}
+	return ps
+}
+
+// ManagementInterface (leaf): The interface in which to derive the population of Management
+// Address TLV parameters.  If unspecified, the implementation may
+// choose which interface is utilized.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "state/management-interface"
+//	Path from root:       "/lldp/interfaces/interface/neighbors/neighbor/state/management-interface"
+func (n *Lldp_Interface_NeighborPath) ManagementInterface() *Lldp_Interface_Neighbor_ManagementInterfacePath {
+	ps := &Lldp_Interface_Neighbor_ManagementInterfacePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "management-interface"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// ManagementInterface (leaf): The interface in which to derive the population of Management
+// Address TLV parameters.  If unspecified, the implementation may
+// choose which interface is utilized.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "state/management-interface"
+//	Path from root:       "/lldp/interfaces/interface/neighbors/neighbor/state/management-interface"
+func (n *Lldp_Interface_NeighborPathAny) ManagementInterface() *Lldp_Interface_Neighbor_ManagementInterfacePathAny {
+	ps := &Lldp_Interface_Neighbor_ManagementInterfacePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "management-interface"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// MgmtAddressAny (list): List of management addresses in use by the local/remote
+// system
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "mgmt-addresses/mgmt-address"
+//	Path from root:       "/lldp/interfaces/interface/neighbors/neighbor/mgmt-addresses/mgmt-address"
+func (n *Lldp_Interface_NeighborPath) MgmtAddressAny() *Lldp_Interface_Neighbor_MgmtAddressPathAny {
+	ps := &Lldp_Interface_Neighbor_MgmtAddressPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"mgmt-addresses", "mgmt-address"},
+			map[string]interface{}{"address": "*"},
+			n,
+		),
+	}
+	return ps
+}
+
+// MgmtAddressAny (list): List of management addresses in use by the local/remote
+// system
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "mgmt-addresses/mgmt-address"
+//	Path from root:       "/lldp/interfaces/interface/neighbors/neighbor/mgmt-addresses/mgmt-address"
+func (n *Lldp_Interface_NeighborPathAny) MgmtAddressAny() *Lldp_Interface_Neighbor_MgmtAddressPathAny {
+	ps := &Lldp_Interface_Neighbor_MgmtAddressPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"mgmt-addresses", "mgmt-address"},
+			map[string]interface{}{"address": "*"},
+			n,
+		),
+	}
+	return ps
+}
+
+// MgmtAddress (list): List of management addresses in use by the local/remote
+// system
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "mgmt-addresses/mgmt-address"
+//	Path from root:       "/lldp/interfaces/interface/neighbors/neighbor/mgmt-addresses/mgmt-address"
+//
+//	Address: string
+func (n *Lldp_Interface_NeighborPath) MgmtAddress(Address string) *Lldp_Interface_Neighbor_MgmtAddressPath {
+	ps := &Lldp_Interface_Neighbor_MgmtAddressPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"mgmt-addresses", "mgmt-address"},
+			map[string]interface{}{"address": Address},
+			n,
+		),
+	}
+	return ps
+}
+
+// MgmtAddress (list): List of management addresses in use by the local/remote
+// system
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "mgmt-addresses/mgmt-address"
+//	Path from root:       "/lldp/interfaces/interface/neighbors/neighbor/mgmt-addresses/mgmt-address"
+//
+//	Address: string
+func (n *Lldp_Interface_NeighborPathAny) MgmtAddress(Address string) *Lldp_Interface_Neighbor_MgmtAddressPathAny {
+	ps := &Lldp_Interface_Neighbor_MgmtAddressPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"mgmt-addresses", "mgmt-address"},
+			map[string]interface{}{"address": Address},
+			n,
+		),
+	}
+	return ps
+}
+
+// MgmtAddressMap (list): List of management addresses in use by the local/remote
+// system
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "mgmt-addresses/mgmt-address"
+//	Path from root:       "/lldp/interfaces/interface/neighbors/neighbor/mgmt-addresses/mgmt-address"
+func (n *Lldp_Interface_NeighborPath) MgmtAddressMap() *Lldp_Interface_Neighbor_MgmtAddressPathMap {
+	ps := &Lldp_Interface_Neighbor_MgmtAddressPathMap{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"mgmt-addresses"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// MgmtAddressMap (list): List of management addresses in use by the local/remote
+// system
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "mgmt-addresses/mgmt-address"
+//	Path from root:       "/lldp/interfaces/interface/neighbors/neighbor/mgmt-addresses/mgmt-address"
+func (n *Lldp_Interface_NeighborPathAny) MgmtAddressMap() *Lldp_Interface_Neighbor_MgmtAddressPathMapAny {
+	ps := &Lldp_Interface_Neighbor_MgmtAddressPathMapAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"mgmt-addresses"},
+			map[string]interface{}{},
+			n,
+		),
 	}
 	return ps
 }
@@ -7940,6 +8544,637 @@ func (n *Lldp_Interface_Neighbor_CapabilityPathMapAny) State() ygnmi.WildcardQue
 	)
 }
 
+// Lldp_Interface_Neighbor_MgmtAddress_AddressPath represents the /openconfig-lldp/lldp/interfaces/interface/neighbors/neighbor/mgmt-addresses/mgmt-address/state/address YANG schema element.
+type Lldp_Interface_Neighbor_MgmtAddress_AddressPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Lldp_Interface_Neighbor_MgmtAddress_AddressPathAny represents the wildcard version of the /openconfig-lldp/lldp/interfaces/interface/neighbors/neighbor/mgmt-addresses/mgmt-address/state/address YANG schema element.
+type Lldp_Interface_Neighbor_MgmtAddress_AddressPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Lldp_Interface_Neighbor_MgmtAddress_AddressPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "state/address"
+//	Path from root:       "/lldp/interfaces/interface/neighbors/neighbor/mgmt-addresses/mgmt-address/state/address"
+func (n *Lldp_Interface_Neighbor_MgmtAddress_AddressPath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewSingletonQuery[string](
+		"Lldp_Interface_Neighbor_MgmtAddress",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "address"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Lldp_Interface_Neighbor_MgmtAddress).Address
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Lldp_Interface_Neighbor_MgmtAddress) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "state/address"
+//	Path from root:       "/lldp/interfaces/interface/neighbors/neighbor/mgmt-addresses/mgmt-address/state/address"
+func (n *Lldp_Interface_Neighbor_MgmtAddress_AddressPathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"Lldp_Interface_Neighbor_MgmtAddress",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "address"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Lldp_Interface_Neighbor_MgmtAddress).Address
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Lldp_Interface_Neighbor_MgmtAddress) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "address"
+//	Path from root:       ""
+func (n *Lldp_Interface_Neighbor_MgmtAddress_AddressPath) Config() ygnmi.ConfigQuery[string] {
+	return ygnmi.NewConfigQuery[string](
+		"Lldp_Interface_Neighbor_MgmtAddress",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"address"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Lldp_Interface_Neighbor_MgmtAddress).Address
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Lldp_Interface_Neighbor_MgmtAddress) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "address"
+//	Path from root:       ""
+func (n *Lldp_Interface_Neighbor_MgmtAddress_AddressPathAny) Config() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"Lldp_Interface_Neighbor_MgmtAddress",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"address"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Lldp_Interface_Neighbor_MgmtAddress).Address
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Lldp_Interface_Neighbor_MgmtAddress) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Lldp_Interface_Neighbor_MgmtAddress_InterfaceNumberPath represents the /openconfig-lldp/lldp/interfaces/interface/neighbors/neighbor/mgmt-addresses/mgmt-address/state/interface-number YANG schema element.
+type Lldp_Interface_Neighbor_MgmtAddress_InterfaceNumberPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Lldp_Interface_Neighbor_MgmtAddress_InterfaceNumberPathAny represents the wildcard version of the /openconfig-lldp/lldp/interfaces/interface/neighbors/neighbor/mgmt-addresses/mgmt-address/state/interface-number YANG schema element.
+type Lldp_Interface_Neighbor_MgmtAddress_InterfaceNumberPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Lldp_Interface_Neighbor_MgmtAddress_InterfaceNumberPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "state/interface-number"
+//	Path from root:       "/lldp/interfaces/interface/neighbors/neighbor/mgmt-addresses/mgmt-address/state/interface-number"
+func (n *Lldp_Interface_Neighbor_MgmtAddress_InterfaceNumberPath) State() ygnmi.SingletonQuery[uint32] {
+	return ygnmi.NewSingletonQuery[uint32](
+		"Lldp_Interface_Neighbor_MgmtAddress",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "interface-number"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.Lldp_Interface_Neighbor_MgmtAddress).InterfaceNumber
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Lldp_Interface_Neighbor_MgmtAddress) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "state/interface-number"
+//	Path from root:       "/lldp/interfaces/interface/neighbors/neighbor/mgmt-addresses/mgmt-address/state/interface-number"
+func (n *Lldp_Interface_Neighbor_MgmtAddress_InterfaceNumberPathAny) State() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewWildcardQuery[uint32](
+		"Lldp_Interface_Neighbor_MgmtAddress",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "interface-number"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.Lldp_Interface_Neighbor_MgmtAddress).InterfaceNumber
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Lldp_Interface_Neighbor_MgmtAddress) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Lldp_Interface_Neighbor_MgmtAddress_InterfaceNumberSubtypePath represents the /openconfig-lldp/lldp/interfaces/interface/neighbors/neighbor/mgmt-addresses/mgmt-address/state/interface-number-subtype YANG schema element.
+type Lldp_Interface_Neighbor_MgmtAddress_InterfaceNumberSubtypePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Lldp_Interface_Neighbor_MgmtAddress_InterfaceNumberSubtypePathAny represents the wildcard version of the /openconfig-lldp/lldp/interfaces/interface/neighbors/neighbor/mgmt-addresses/mgmt-address/state/interface-number-subtype YANG schema element.
+type Lldp_Interface_Neighbor_MgmtAddress_InterfaceNumberSubtypePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Lldp_Interface_Neighbor_MgmtAddress_InterfaceNumberSubtypePath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "state/interface-number-subtype"
+//	Path from root:       "/lldp/interfaces/interface/neighbors/neighbor/mgmt-addresses/mgmt-address/state/interface-number-subtype"
+func (n *Lldp_Interface_Neighbor_MgmtAddress_InterfaceNumberSubtypePath) State() ygnmi.SingletonQuery[oc.E_Lldp_MgmtInterfaceNumberSubtype] {
+	return ygnmi.NewSingletonQuery[oc.E_Lldp_MgmtInterfaceNumberSubtype](
+		"Lldp_Interface_Neighbor_MgmtAddress",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "interface-number-subtype"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Lldp_MgmtInterfaceNumberSubtype, bool) {
+			ret := gs.(*oc.Lldp_Interface_Neighbor_MgmtAddress).InterfaceNumberSubtype
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Lldp_Interface_Neighbor_MgmtAddress) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "state/interface-number-subtype"
+//	Path from root:       "/lldp/interfaces/interface/neighbors/neighbor/mgmt-addresses/mgmt-address/state/interface-number-subtype"
+func (n *Lldp_Interface_Neighbor_MgmtAddress_InterfaceNumberSubtypePathAny) State() ygnmi.WildcardQuery[oc.E_Lldp_MgmtInterfaceNumberSubtype] {
+	return ygnmi.NewWildcardQuery[oc.E_Lldp_MgmtInterfaceNumberSubtype](
+		"Lldp_Interface_Neighbor_MgmtAddress",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "interface-number-subtype"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Lldp_MgmtInterfaceNumberSubtype, bool) {
+			ret := gs.(*oc.Lldp_Interface_Neighbor_MgmtAddress).InterfaceNumberSubtype
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Lldp_Interface_Neighbor_MgmtAddress) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Lldp_Interface_Neighbor_MgmtAddressPath represents the /openconfig-lldp/lldp/interfaces/interface/neighbors/neighbor/mgmt-addresses/mgmt-address YANG schema element.
+type Lldp_Interface_Neighbor_MgmtAddressPath struct {
+	*ygnmi.NodePath
+}
+
+// Lldp_Interface_Neighbor_MgmtAddressPathAny represents the wildcard version of the /openconfig-lldp/lldp/interfaces/interface/neighbors/neighbor/mgmt-addresses/mgmt-address YANG schema element.
+type Lldp_Interface_Neighbor_MgmtAddressPathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Lldp_Interface_Neighbor_MgmtAddressPath) PathOriginName() string {
+	return "openconfig"
+}
+
+// Lldp_Interface_Neighbor_MgmtAddressPathMap represents the /openconfig-lldp/lldp/interfaces/interface/neighbors/neighbor/mgmt-addresses/mgmt-address YANG schema element.
+type Lldp_Interface_Neighbor_MgmtAddressPathMap struct {
+	*ygnmi.NodePath
+}
+
+// Lldp_Interface_Neighbor_MgmtAddressPathMapAny represents the wildcard version of the /openconfig-lldp/lldp/interfaces/interface/neighbors/neighbor/mgmt-addresses/mgmt-address YANG schema element.
+type Lldp_Interface_Neighbor_MgmtAddressPathMapAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Lldp_Interface_Neighbor_MgmtAddressPathMap) PathOriginName() string {
+	return "openconfig"
+}
+
+// Address (leaf): Management address associated with the Management Address
+// TLV.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "*/address"
+//	Path from root:       "/lldp/interfaces/interface/neighbors/neighbor/mgmt-addresses/mgmt-address/*/address"
+func (n *Lldp_Interface_Neighbor_MgmtAddressPath) Address() *Lldp_Interface_Neighbor_MgmtAddress_AddressPath {
+	ps := &Lldp_Interface_Neighbor_MgmtAddress_AddressPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "address"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Address (leaf): Management address associated with the Management Address
+// TLV.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "*/address"
+//	Path from root:       "/lldp/interfaces/interface/neighbors/neighbor/mgmt-addresses/mgmt-address/*/address"
+func (n *Lldp_Interface_Neighbor_MgmtAddressPathAny) Address() *Lldp_Interface_Neighbor_MgmtAddress_AddressPathAny {
+	ps := &Lldp_Interface_Neighbor_MgmtAddress_AddressPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "address"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// InterfaceNumber (leaf): Interface number that identifies the specific interface
+// associated with this management address.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "state/interface-number"
+//	Path from root:       "/lldp/interfaces/interface/neighbors/neighbor/mgmt-addresses/mgmt-address/state/interface-number"
+func (n *Lldp_Interface_Neighbor_MgmtAddressPath) InterfaceNumber() *Lldp_Interface_Neighbor_MgmtAddress_InterfaceNumberPath {
+	ps := &Lldp_Interface_Neighbor_MgmtAddress_InterfaceNumberPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "interface-number"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// InterfaceNumber (leaf): Interface number that identifies the specific interface
+// associated with this management address.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "state/interface-number"
+//	Path from root:       "/lldp/interfaces/interface/neighbors/neighbor/mgmt-addresses/mgmt-address/state/interface-number"
+func (n *Lldp_Interface_Neighbor_MgmtAddressPathAny) InterfaceNumber() *Lldp_Interface_Neighbor_MgmtAddress_InterfaceNumberPathAny {
+	ps := &Lldp_Interface_Neighbor_MgmtAddress_InterfaceNumberPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "interface-number"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// InterfaceNumberSubtype (leaf): The Management address interface numbering subtype field
+// indicating the numbering method used for defining the
+// interface-number.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "state/interface-number-subtype"
+//	Path from root:       "/lldp/interfaces/interface/neighbors/neighbor/mgmt-addresses/mgmt-address/state/interface-number-subtype"
+func (n *Lldp_Interface_Neighbor_MgmtAddressPath) InterfaceNumberSubtype() *Lldp_Interface_Neighbor_MgmtAddress_InterfaceNumberSubtypePath {
+	ps := &Lldp_Interface_Neighbor_MgmtAddress_InterfaceNumberSubtypePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "interface-number-subtype"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// InterfaceNumberSubtype (leaf): The Management address interface numbering subtype field
+// indicating the numbering method used for defining the
+// interface-number.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "state/interface-number-subtype"
+//	Path from root:       "/lldp/interfaces/interface/neighbors/neighbor/mgmt-addresses/mgmt-address/state/interface-number-subtype"
+func (n *Lldp_Interface_Neighbor_MgmtAddressPathAny) InterfaceNumberSubtype() *Lldp_Interface_Neighbor_MgmtAddress_InterfaceNumberSubtypePathAny {
+	ps := &Lldp_Interface_Neighbor_MgmtAddress_InterfaceNumberSubtypePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "interface-number-subtype"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Lldp_Interface_Neighbor_MgmtAddressPath) State() ygnmi.SingletonQuery[*oc.Lldp_Interface_Neighbor_MgmtAddress] {
+	return ygnmi.NewSingletonQuery[*oc.Lldp_Interface_Neighbor_MgmtAddress](
+		"Lldp_Interface_Neighbor_MgmtAddress",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Lldp_Interface_Neighbor_MgmtAddressPathAny) State() ygnmi.WildcardQuery[*oc.Lldp_Interface_Neighbor_MgmtAddress] {
+	return ygnmi.NewWildcardQuery[*oc.Lldp_Interface_Neighbor_MgmtAddress](
+		"Lldp_Interface_Neighbor_MgmtAddress",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Lldp_Interface_Neighbor_MgmtAddressPathMap) State() ygnmi.SingletonQuery[map[string]*oc.Lldp_Interface_Neighbor_MgmtAddress] {
+	return ygnmi.NewSingletonQuery[map[string]*oc.Lldp_Interface_Neighbor_MgmtAddress](
+		"Lldp_Interface_Neighbor",
+		true,
+		false,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[string]*oc.Lldp_Interface_Neighbor_MgmtAddress, bool) {
+			ret := gs.(*oc.Lldp_Interface_Neighbor).MgmtAddress
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Lldp_Interface_Neighbor) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-lldp:mgmt-addresses"},
+			PostRelPath: []string{"openconfig-lldp:mgmt-address"},
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Lldp_Interface_Neighbor_MgmtAddressPathMapAny) State() ygnmi.WildcardQuery[map[string]*oc.Lldp_Interface_Neighbor_MgmtAddress] {
+	return ygnmi.NewWildcardQuery[map[string]*oc.Lldp_Interface_Neighbor_MgmtAddress](
+		"Lldp_Interface_Neighbor",
+		true,
+		false,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[string]*oc.Lldp_Interface_Neighbor_MgmtAddress, bool) {
+			ret := gs.(*oc.Lldp_Interface_Neighbor).MgmtAddress
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Lldp_Interface_Neighbor) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-lldp:mgmt-addresses"},
+			PostRelPath: []string{"openconfig-lldp:mgmt-address"},
+		},
+	)
+}
+
 // Lldp_Interface_Neighbor_Tlv_OuiPath represents the /openconfig-lldp/lldp/interfaces/interface/neighbors/neighbor/custom-tlvs/tlv/state/oui YANG schema element.
 type Lldp_Interface_Neighbor_Tlv_OuiPath struct {
 	*ygnmi.NodePath
@@ -8874,6 +10109,637 @@ func (n *Lldp_Interface_Neighbor_TlvPathMapAny) State() ygnmi.WildcardQuery[map[
 		&ygnmi.CompressionInfo{
 			PreRelPath:  []string{"openconfig-lldp:custom-tlvs"},
 			PostRelPath: []string{"openconfig-lldp:tlv"},
+		},
+	)
+}
+
+// Lldp_MgmtAddress_AddressPath represents the /openconfig-lldp/lldp/mgmt-addresses/mgmt-address/state/address YANG schema element.
+type Lldp_MgmtAddress_AddressPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Lldp_MgmtAddress_AddressPathAny represents the wildcard version of the /openconfig-lldp/lldp/mgmt-addresses/mgmt-address/state/address YANG schema element.
+type Lldp_MgmtAddress_AddressPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Lldp_MgmtAddress_AddressPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "state/address"
+//	Path from root:       "/lldp/mgmt-addresses/mgmt-address/state/address"
+func (n *Lldp_MgmtAddress_AddressPath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewSingletonQuery[string](
+		"Lldp_MgmtAddress",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "address"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Lldp_MgmtAddress).Address
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Lldp_MgmtAddress) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "state/address"
+//	Path from root:       "/lldp/mgmt-addresses/mgmt-address/state/address"
+func (n *Lldp_MgmtAddress_AddressPathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"Lldp_MgmtAddress",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "address"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Lldp_MgmtAddress).Address
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Lldp_MgmtAddress) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "address"
+//	Path from root:       ""
+func (n *Lldp_MgmtAddress_AddressPath) Config() ygnmi.ConfigQuery[string] {
+	return ygnmi.NewConfigQuery[string](
+		"Lldp_MgmtAddress",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"address"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Lldp_MgmtAddress).Address
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Lldp_MgmtAddress) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "address"
+//	Path from root:       ""
+func (n *Lldp_MgmtAddress_AddressPathAny) Config() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"Lldp_MgmtAddress",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"address"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Lldp_MgmtAddress).Address
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Lldp_MgmtAddress) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Lldp_MgmtAddress_InterfaceNumberPath represents the /openconfig-lldp/lldp/mgmt-addresses/mgmt-address/state/interface-number YANG schema element.
+type Lldp_MgmtAddress_InterfaceNumberPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Lldp_MgmtAddress_InterfaceNumberPathAny represents the wildcard version of the /openconfig-lldp/lldp/mgmt-addresses/mgmt-address/state/interface-number YANG schema element.
+type Lldp_MgmtAddress_InterfaceNumberPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Lldp_MgmtAddress_InterfaceNumberPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "state/interface-number"
+//	Path from root:       "/lldp/mgmt-addresses/mgmt-address/state/interface-number"
+func (n *Lldp_MgmtAddress_InterfaceNumberPath) State() ygnmi.SingletonQuery[uint32] {
+	return ygnmi.NewSingletonQuery[uint32](
+		"Lldp_MgmtAddress",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "interface-number"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.Lldp_MgmtAddress).InterfaceNumber
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Lldp_MgmtAddress) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "state/interface-number"
+//	Path from root:       "/lldp/mgmt-addresses/mgmt-address/state/interface-number"
+func (n *Lldp_MgmtAddress_InterfaceNumberPathAny) State() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewWildcardQuery[uint32](
+		"Lldp_MgmtAddress",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "interface-number"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.Lldp_MgmtAddress).InterfaceNumber
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Lldp_MgmtAddress) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Lldp_MgmtAddress_InterfaceNumberSubtypePath represents the /openconfig-lldp/lldp/mgmt-addresses/mgmt-address/state/interface-number-subtype YANG schema element.
+type Lldp_MgmtAddress_InterfaceNumberSubtypePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Lldp_MgmtAddress_InterfaceNumberSubtypePathAny represents the wildcard version of the /openconfig-lldp/lldp/mgmt-addresses/mgmt-address/state/interface-number-subtype YANG schema element.
+type Lldp_MgmtAddress_InterfaceNumberSubtypePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Lldp_MgmtAddress_InterfaceNumberSubtypePath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "state/interface-number-subtype"
+//	Path from root:       "/lldp/mgmt-addresses/mgmt-address/state/interface-number-subtype"
+func (n *Lldp_MgmtAddress_InterfaceNumberSubtypePath) State() ygnmi.SingletonQuery[oc.E_Lldp_MgmtInterfaceNumberSubtype] {
+	return ygnmi.NewSingletonQuery[oc.E_Lldp_MgmtInterfaceNumberSubtype](
+		"Lldp_MgmtAddress",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "interface-number-subtype"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Lldp_MgmtInterfaceNumberSubtype, bool) {
+			ret := gs.(*oc.Lldp_MgmtAddress).InterfaceNumberSubtype
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Lldp_MgmtAddress) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "state/interface-number-subtype"
+//	Path from root:       "/lldp/mgmt-addresses/mgmt-address/state/interface-number-subtype"
+func (n *Lldp_MgmtAddress_InterfaceNumberSubtypePathAny) State() ygnmi.WildcardQuery[oc.E_Lldp_MgmtInterfaceNumberSubtype] {
+	return ygnmi.NewWildcardQuery[oc.E_Lldp_MgmtInterfaceNumberSubtype](
+		"Lldp_MgmtAddress",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "interface-number-subtype"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Lldp_MgmtInterfaceNumberSubtype, bool) {
+			ret := gs.(*oc.Lldp_MgmtAddress).InterfaceNumberSubtype
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Lldp_MgmtAddress) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Lldp_MgmtAddressPath represents the /openconfig-lldp/lldp/mgmt-addresses/mgmt-address YANG schema element.
+type Lldp_MgmtAddressPath struct {
+	*ygnmi.NodePath
+}
+
+// Lldp_MgmtAddressPathAny represents the wildcard version of the /openconfig-lldp/lldp/mgmt-addresses/mgmt-address YANG schema element.
+type Lldp_MgmtAddressPathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Lldp_MgmtAddressPath) PathOriginName() string {
+	return "openconfig"
+}
+
+// Lldp_MgmtAddressPathMap represents the /openconfig-lldp/lldp/mgmt-addresses/mgmt-address YANG schema element.
+type Lldp_MgmtAddressPathMap struct {
+	*ygnmi.NodePath
+}
+
+// Lldp_MgmtAddressPathMapAny represents the wildcard version of the /openconfig-lldp/lldp/mgmt-addresses/mgmt-address YANG schema element.
+type Lldp_MgmtAddressPathMapAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Lldp_MgmtAddressPathMap) PathOriginName() string {
+	return "openconfig"
+}
+
+// Address (leaf): Management address associated with the Management Address
+// TLV.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "*/address"
+//	Path from root:       "/lldp/mgmt-addresses/mgmt-address/*/address"
+func (n *Lldp_MgmtAddressPath) Address() *Lldp_MgmtAddress_AddressPath {
+	ps := &Lldp_MgmtAddress_AddressPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "address"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Address (leaf): Management address associated with the Management Address
+// TLV.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "*/address"
+//	Path from root:       "/lldp/mgmt-addresses/mgmt-address/*/address"
+func (n *Lldp_MgmtAddressPathAny) Address() *Lldp_MgmtAddress_AddressPathAny {
+	ps := &Lldp_MgmtAddress_AddressPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "address"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// InterfaceNumber (leaf): Interface number that identifies the specific interface
+// associated with this management address.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "state/interface-number"
+//	Path from root:       "/lldp/mgmt-addresses/mgmt-address/state/interface-number"
+func (n *Lldp_MgmtAddressPath) InterfaceNumber() *Lldp_MgmtAddress_InterfaceNumberPath {
+	ps := &Lldp_MgmtAddress_InterfaceNumberPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "interface-number"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// InterfaceNumber (leaf): Interface number that identifies the specific interface
+// associated with this management address.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "state/interface-number"
+//	Path from root:       "/lldp/mgmt-addresses/mgmt-address/state/interface-number"
+func (n *Lldp_MgmtAddressPathAny) InterfaceNumber() *Lldp_MgmtAddress_InterfaceNumberPathAny {
+	ps := &Lldp_MgmtAddress_InterfaceNumberPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "interface-number"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// InterfaceNumberSubtype (leaf): The Management address interface numbering subtype field
+// indicating the numbering method used for defining the
+// interface-number.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "state/interface-number-subtype"
+//	Path from root:       "/lldp/mgmt-addresses/mgmt-address/state/interface-number-subtype"
+func (n *Lldp_MgmtAddressPath) InterfaceNumberSubtype() *Lldp_MgmtAddress_InterfaceNumberSubtypePath {
+	ps := &Lldp_MgmtAddress_InterfaceNumberSubtypePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "interface-number-subtype"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// InterfaceNumberSubtype (leaf): The Management address interface numbering subtype field
+// indicating the numbering method used for defining the
+// interface-number.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-lldp"
+//	Path from parent:     "state/interface-number-subtype"
+//	Path from root:       "/lldp/mgmt-addresses/mgmt-address/state/interface-number-subtype"
+func (n *Lldp_MgmtAddressPathAny) InterfaceNumberSubtype() *Lldp_MgmtAddress_InterfaceNumberSubtypePathAny {
+	ps := &Lldp_MgmtAddress_InterfaceNumberSubtypePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "interface-number-subtype"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Lldp_MgmtAddressPath) State() ygnmi.SingletonQuery[*oc.Lldp_MgmtAddress] {
+	return ygnmi.NewSingletonQuery[*oc.Lldp_MgmtAddress](
+		"Lldp_MgmtAddress",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Lldp_MgmtAddressPathAny) State() ygnmi.WildcardQuery[*oc.Lldp_MgmtAddress] {
+	return ygnmi.NewWildcardQuery[*oc.Lldp_MgmtAddress](
+		"Lldp_MgmtAddress",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Lldp_MgmtAddressPathMap) State() ygnmi.SingletonQuery[map[string]*oc.Lldp_MgmtAddress] {
+	return ygnmi.NewSingletonQuery[map[string]*oc.Lldp_MgmtAddress](
+		"Lldp",
+		true,
+		false,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[string]*oc.Lldp_MgmtAddress, bool) {
+			ret := gs.(*oc.Lldp).MgmtAddress
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Lldp) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-lldp:mgmt-addresses"},
+			PostRelPath: []string{"openconfig-lldp:mgmt-address"},
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Lldp_MgmtAddressPathMapAny) State() ygnmi.WildcardQuery[map[string]*oc.Lldp_MgmtAddress] {
+	return ygnmi.NewWildcardQuery[map[string]*oc.Lldp_MgmtAddress](
+		"Lldp",
+		true,
+		false,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[string]*oc.Lldp_MgmtAddress, bool) {
+			ret := gs.(*oc.Lldp).MgmtAddress
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Lldp) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-lldp:mgmt-addresses"},
+			PostRelPath: []string{"openconfig-lldp:mgmt-address"},
 		},
 	)
 }

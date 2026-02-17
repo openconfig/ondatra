@@ -130,24 +130,32 @@ func ReservationDone() error {
 		"Testbed Reservation Complete",
 		fmt.Sprintf("ID: %s\n", res.ID),
 	}
+	var components []string
 	addLine := func(format string, args ...any) {
 		lines = append(lines, fmt.Sprintf(format, args...))
 	}
-	addAssign := func(id, name string) {
+	addAssignDev := func(id, name string) {
+		components = append(components, fmt.Sprintf("%s=%s", id, name))
 		addLine("  %-17s %s", id+":", name)
 	}
+	addAssignPort := func(did, pid, name string) {
+		components = append(components, fmt.Sprintf("%s:%s=%s", did, pid, name))
+		addLine("  %-17s %s", pid+":", name)
+	}
+
 	for id, d := range res.DUTs {
-		addAssign(id, d.Name())
+		addAssignDev(id, d.Name())
 		for pid, p := range d.Ports() {
-			addAssign(pid, p.Name)
+			addAssignPort(id, pid, p.Name)
 		}
 	}
 	for id, a := range res.ATEs {
-		addAssign(id, a.Name())
+		addAssignDev(id, a.Name())
 		for pid, p := range a.Ports() {
-			addAssign(pid, p.Name)
+			addAssignPort(id, pid, p.Name)
 		}
 	}
+	lines = append(lines, "", fmt.Sprintf("Use the following arg to repro: --test_arg=--reserve=%s", strings.Join(components, ",")))
 
 	if reservePause {
 		lines = append(lines,

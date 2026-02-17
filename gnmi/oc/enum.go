@@ -5512,30 +5512,48 @@ func (e E_KeychainTypes_CRYPTO_TYPE) String() string {
 const (
 	// KeychainTypes_CRYPTO_TYPE_UNSET corresponds to the value UNSET of KeychainTypes_CRYPTO_TYPE
 	KeychainTypes_CRYPTO_TYPE_UNSET E_KeychainTypes_CRYPTO_TYPE = 0
+	// KeychainTypes_CRYPTO_TYPE_AES_128_CBC corresponds to the value AES_128_CBC of KeychainTypes_CRYPTO_TYPE
+	KeychainTypes_CRYPTO_TYPE_AES_128_CBC E_KeychainTypes_CRYPTO_TYPE = 1
 	// KeychainTypes_CRYPTO_TYPE_AES_128_CMAC corresponds to the value AES_128_CMAC of KeychainTypes_CRYPTO_TYPE
-	KeychainTypes_CRYPTO_TYPE_AES_128_CMAC E_KeychainTypes_CRYPTO_TYPE = 1
+	KeychainTypes_CRYPTO_TYPE_AES_128_CMAC E_KeychainTypes_CRYPTO_TYPE = 2
 	// KeychainTypes_CRYPTO_TYPE_AES_128_CMAC_96 corresponds to the value AES_128_CMAC_96 of KeychainTypes_CRYPTO_TYPE
-	KeychainTypes_CRYPTO_TYPE_AES_128_CMAC_96 E_KeychainTypes_CRYPTO_TYPE = 2
+	KeychainTypes_CRYPTO_TYPE_AES_128_CMAC_96 E_KeychainTypes_CRYPTO_TYPE = 3
+	// KeychainTypes_CRYPTO_TYPE_AES_128_GCM_128 corresponds to the value AES_128_GCM_128 of KeychainTypes_CRYPTO_TYPE
+	KeychainTypes_CRYPTO_TYPE_AES_128_GCM_128 E_KeychainTypes_CRYPTO_TYPE = 4
+	// KeychainTypes_CRYPTO_TYPE_AES_128_GCM_64 corresponds to the value AES_128_GCM_64 of KeychainTypes_CRYPTO_TYPE
+	KeychainTypes_CRYPTO_TYPE_AES_128_GCM_64 E_KeychainTypes_CRYPTO_TYPE = 5
+	// KeychainTypes_CRYPTO_TYPE_AES_192_CBC corresponds to the value AES_192_CBC of KeychainTypes_CRYPTO_TYPE
+	KeychainTypes_CRYPTO_TYPE_AES_192_CBC E_KeychainTypes_CRYPTO_TYPE = 6
+	// KeychainTypes_CRYPTO_TYPE_AES_256_CBC corresponds to the value AES_256_CBC of KeychainTypes_CRYPTO_TYPE
+	KeychainTypes_CRYPTO_TYPE_AES_256_CBC E_KeychainTypes_CRYPTO_TYPE = 7
 	// KeychainTypes_CRYPTO_TYPE_AES_256_CMAC corresponds to the value AES_256_CMAC of KeychainTypes_CRYPTO_TYPE
-	KeychainTypes_CRYPTO_TYPE_AES_256_CMAC E_KeychainTypes_CRYPTO_TYPE = 3
+	KeychainTypes_CRYPTO_TYPE_AES_256_CMAC E_KeychainTypes_CRYPTO_TYPE = 8
+	// KeychainTypes_CRYPTO_TYPE_AES_256_GCM_128 corresponds to the value AES_256_GCM_128 of KeychainTypes_CRYPTO_TYPE
+	KeychainTypes_CRYPTO_TYPE_AES_256_GCM_128 E_KeychainTypes_CRYPTO_TYPE = 9
 	// KeychainTypes_CRYPTO_TYPE_CRYPTO_NONE corresponds to the value CRYPTO_NONE of KeychainTypes_CRYPTO_TYPE
-	KeychainTypes_CRYPTO_TYPE_CRYPTO_NONE E_KeychainTypes_CRYPTO_TYPE = 4
+	KeychainTypes_CRYPTO_TYPE_CRYPTO_NONE E_KeychainTypes_CRYPTO_TYPE = 10
 	// KeychainTypes_CRYPTO_TYPE_HMAC_MD5 corresponds to the value HMAC_MD5 of KeychainTypes_CRYPTO_TYPE
-	KeychainTypes_CRYPTO_TYPE_HMAC_MD5 E_KeychainTypes_CRYPTO_TYPE = 5
+	KeychainTypes_CRYPTO_TYPE_HMAC_MD5 E_KeychainTypes_CRYPTO_TYPE = 11
 	// KeychainTypes_CRYPTO_TYPE_HMAC_SHA_1 corresponds to the value HMAC_SHA_1 of KeychainTypes_CRYPTO_TYPE
-	KeychainTypes_CRYPTO_TYPE_HMAC_SHA_1 E_KeychainTypes_CRYPTO_TYPE = 6
+	KeychainTypes_CRYPTO_TYPE_HMAC_SHA_1 E_KeychainTypes_CRYPTO_TYPE = 12
 	// KeychainTypes_CRYPTO_TYPE_HMAC_SHA_1_12 corresponds to the value HMAC_SHA_1_12 of KeychainTypes_CRYPTO_TYPE
-	KeychainTypes_CRYPTO_TYPE_HMAC_SHA_1_12 E_KeychainTypes_CRYPTO_TYPE = 7
+	KeychainTypes_CRYPTO_TYPE_HMAC_SHA_1_12 E_KeychainTypes_CRYPTO_TYPE = 13
 	// KeychainTypes_CRYPTO_TYPE_HMAC_SHA_1_20 corresponds to the value HMAC_SHA_1_20 of KeychainTypes_CRYPTO_TYPE
-	KeychainTypes_CRYPTO_TYPE_HMAC_SHA_1_20 E_KeychainTypes_CRYPTO_TYPE = 8
+	KeychainTypes_CRYPTO_TYPE_HMAC_SHA_1_20 E_KeychainTypes_CRYPTO_TYPE = 14
 	// KeychainTypes_CRYPTO_TYPE_HMAC_SHA_1_96 corresponds to the value HMAC_SHA_1_96 of KeychainTypes_CRYPTO_TYPE
-	KeychainTypes_CRYPTO_TYPE_HMAC_SHA_1_96 E_KeychainTypes_CRYPTO_TYPE = 9
+	KeychainTypes_CRYPTO_TYPE_HMAC_SHA_1_96 E_KeychainTypes_CRYPTO_TYPE = 15
 	// KeychainTypes_CRYPTO_TYPE_HMAC_SHA_256 corresponds to the value HMAC_SHA_256 of KeychainTypes_CRYPTO_TYPE
-	KeychainTypes_CRYPTO_TYPE_HMAC_SHA_256 E_KeychainTypes_CRYPTO_TYPE = 10
+	KeychainTypes_CRYPTO_TYPE_HMAC_SHA_256 E_KeychainTypes_CRYPTO_TYPE = 16
+	// KeychainTypes_CRYPTO_TYPE_HMAC_SHA_384 corresponds to the value HMAC_SHA_384 of KeychainTypes_CRYPTO_TYPE
+	KeychainTypes_CRYPTO_TYPE_HMAC_SHA_384 E_KeychainTypes_CRYPTO_TYPE = 17
+	// KeychainTypes_CRYPTO_TYPE_HMAC_SHA_512 corresponds to the value HMAC_SHA_512 of KeychainTypes_CRYPTO_TYPE
+	KeychainTypes_CRYPTO_TYPE_HMAC_SHA_512 E_KeychainTypes_CRYPTO_TYPE = 18
 	// KeychainTypes_CRYPTO_TYPE_MD5 corresponds to the value MD5 of KeychainTypes_CRYPTO_TYPE
-	KeychainTypes_CRYPTO_TYPE_MD5 E_KeychainTypes_CRYPTO_TYPE = 11
+	KeychainTypes_CRYPTO_TYPE_MD5 E_KeychainTypes_CRYPTO_TYPE = 19
 	// KeychainTypes_CRYPTO_TYPE_SHA_1 corresponds to the value SHA_1 of KeychainTypes_CRYPTO_TYPE
-	KeychainTypes_CRYPTO_TYPE_SHA_1 E_KeychainTypes_CRYPTO_TYPE = 12
+	KeychainTypes_CRYPTO_TYPE_SHA_1 E_KeychainTypes_CRYPTO_TYPE = 20
+	// KeychainTypes_CRYPTO_TYPE_TRIPLE_DES corresponds to the value TRIPLE_DES of KeychainTypes_CRYPTO_TYPE
+	KeychainTypes_CRYPTO_TYPE_TRIPLE_DES E_KeychainTypes_CRYPTO_TYPE = 21
 )
 
 // E_Keychain_Tolerance is a derived int64 type which is used to represent
@@ -6043,6 +6061,39 @@ const (
 	Lldp_ChassisIdType_INTERFACE_NAME E_Lldp_ChassisIdType = 6
 	// Lldp_ChassisIdType_LOCAL corresponds to the value LOCAL of Lldp_ChassisIdType
 	Lldp_ChassisIdType_LOCAL E_Lldp_ChassisIdType = 7
+)
+
+// E_Lldp_MgmtInterfaceNumberSubtype is a derived int64 type which is used to represent
+// the enumerated node Lldp_MgmtInterfaceNumberSubtype. An additional value named
+// Lldp_MgmtInterfaceNumberSubtype_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_Lldp_MgmtInterfaceNumberSubtype int64
+
+// IsYANGGoEnum ensures that Lldp_MgmtInterfaceNumberSubtype implements the yang.GoEnum
+// interface. This ensures that Lldp_MgmtInterfaceNumberSubtype can be identified as a
+// mapped type for a YANG enumeration.
+func (E_Lldp_MgmtInterfaceNumberSubtype) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  Lldp_MgmtInterfaceNumberSubtype.
+func (E_Lldp_MgmtInterfaceNumberSubtype) ΛMap() map[string]map[int64]ygot.EnumDefinition {
+	return ΛEnum
+}
+
+// String returns a logging-friendly string for E_Lldp_MgmtInterfaceNumberSubtype.
+func (e E_Lldp_MgmtInterfaceNumberSubtype) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_Lldp_MgmtInterfaceNumberSubtype")
+}
+
+const (
+	// Lldp_MgmtInterfaceNumberSubtype_UNSET corresponds to the value UNSET of Lldp_MgmtInterfaceNumberSubtype
+	Lldp_MgmtInterfaceNumberSubtype_UNSET E_Lldp_MgmtInterfaceNumberSubtype = 0
+	// Lldp_MgmtInterfaceNumberSubtype_UNKNOWN corresponds to the value UNKNOWN of Lldp_MgmtInterfaceNumberSubtype
+	Lldp_MgmtInterfaceNumberSubtype_UNKNOWN E_Lldp_MgmtInterfaceNumberSubtype = 2
+	// Lldp_MgmtInterfaceNumberSubtype_IFINDEX corresponds to the value IFINDEX of Lldp_MgmtInterfaceNumberSubtype
+	Lldp_MgmtInterfaceNumberSubtype_IFINDEX E_Lldp_MgmtInterfaceNumberSubtype = 3
+	// Lldp_MgmtInterfaceNumberSubtype_SYSTEM_PORT_NUMBER corresponds to the value SYSTEM_PORT_NUMBER of Lldp_MgmtInterfaceNumberSubtype
+	Lldp_MgmtInterfaceNumberSubtype_SYSTEM_PORT_NUMBER E_Lldp_MgmtInterfaceNumberSubtype = 4
 )
 
 // E_Lldp_PortIdType is a derived int64 type which is used to represent

@@ -1711,6 +1711,8 @@ const (
 	Structured_Transitive_2OctetAsType_ROUTE_TARGET_SUBTYPE E_Structured_Transitive_2OctetAsType = 1
 	// Structured_Transitive_2OctetAsType_ROUTE_ORIGIN_SUBTYPE corresponds to the value ROUTE_ORIGIN_SUBTYPE of Structured_Transitive_2OctetAsType
 	Structured_Transitive_2OctetAsType_ROUTE_ORIGIN_SUBTYPE E_Structured_Transitive_2OctetAsType = 2
+	// Structured_Transitive_2OctetAsType_LINK_BANDWIDTH_SUBTYPE corresponds to the value LINK_BANDWIDTH_SUBTYPE of Structured_Transitive_2OctetAsType
+	Structured_Transitive_2OctetAsType_LINK_BANDWIDTH_SUBTYPE E_Structured_Transitive_2OctetAsType = 3
 )
 
 // E_Structured_Transitive_4OctetAsType is a derived int64 type which is used to represent

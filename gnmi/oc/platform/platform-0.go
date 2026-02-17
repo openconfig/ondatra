@@ -40467,8 +40467,11 @@ func (n *Component_OpticalChannelPathAny) Esnr() *Component_OpticalChannel_EsnrP
 	return ps
 }
 
-// FecUncorrectableBlocks (leaf): The number of blocks or frames that were uncorrectable by
-// the FEC
+// FecUncorrectableBlocks (leaf): The number of blocks or frames that were uncorrectable by the
+// FEC. The reported value is the cumulative count over the prior
+// Performance Monitoring (PM) interval defined by the host.
+// NOTE: The reference to the CMIS specification is for pluggable
+// and on-board modules only.
 //
 //	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-platform"
@@ -40486,8 +40489,11 @@ func (n *Component_OpticalChannelPath) FecUncorrectableBlocks() *Component_Optic
 	return ps
 }
 
-// FecUncorrectableBlocks (leaf): The number of blocks or frames that were uncorrectable by
-// the FEC
+// FecUncorrectableBlocks (leaf): The number of blocks or frames that were uncorrectable by the
+// FEC. The reported value is the cumulative count over the prior
+// Performance Monitoring (PM) interval defined by the host.
+// NOTE: The reference to the CMIS specification is for pluggable
+// and on-board modules only.
 //
 //	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-platform"
@@ -76303,6 +76309,105 @@ func (n *Component_Transceiver_FecCorrectedBitsPathAny) State() ygnmi.WildcardQu
 	)
 }
 
+// Component_Transceiver_FecCorrectedBlocksPath represents the /openconfig-platform/components/component/transceiver/state/fec-corrected-blocks YANG schema element.
+type Component_Transceiver_FecCorrectedBlocksPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Transceiver_FecCorrectedBlocksPathAny represents the wildcard version of the /openconfig-platform/components/component/transceiver/state/fec-corrected-blocks YANG schema element.
+type Component_Transceiver_FecCorrectedBlocksPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Component_Transceiver_FecCorrectedBlocksPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform-transceiver"
+//	Path from parent:     "state/fec-corrected-blocks"
+//	Path from root:       "/components/component/transceiver/state/fec-corrected-blocks"
+func (n *Component_Transceiver_FecCorrectedBlocksPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Component_Transceiver",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "fec-corrected-blocks"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_Transceiver).FecCorrectedBlocks
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Transceiver) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform-transceiver"
+//	Path from parent:     "state/fec-corrected-blocks"
+//	Path from root:       "/components/component/transceiver/state/fec-corrected-blocks"
+func (n *Component_Transceiver_FecCorrectedBlocksPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Component_Transceiver",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "fec-corrected-blocks"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_Transceiver).FecCorrectedBlocks
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Transceiver) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
 // Component_Transceiver_FecCorrectedBytesPath represents the /openconfig-platform/components/component/transceiver/state/fec-corrected-bytes YANG schema element.
 type Component_Transceiver_FecCorrectedBytesPath struct {
 	*ygnmi.NodePath
@@ -78379,6 +78484,48 @@ func (n *Component_TransceiverPathAny) FecCorrectedBits() *Component_Transceiver
 	return ps
 }
 
+// FecCorrectedBlocks (leaf): The number of words/symbols that were corrected by
+// the FEC;
+// This is IEEE802.3 clause 119.3.2 (also IEEE802.3df clause
+// 172.3.2 for 800GE) FEC_corrected_cw_counter
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/fec-corrected-blocks"
+//	Path from root:       "/components/component/transceiver/state/fec-corrected-blocks"
+func (n *Component_TransceiverPath) FecCorrectedBlocks() *Component_Transceiver_FecCorrectedBlocksPath {
+	ps := &Component_Transceiver_FecCorrectedBlocksPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "fec-corrected-blocks"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// FecCorrectedBlocks (leaf): The number of words/symbols that were corrected by
+// the FEC;
+// This is IEEE802.3 clause 119.3.2 (also IEEE802.3df clause
+// 172.3.2 for 800GE) FEC_corrected_cw_counter
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/fec-corrected-blocks"
+//	Path from root:       "/components/component/transceiver/state/fec-corrected-blocks"
+func (n *Component_TransceiverPathAny) FecCorrectedBlocks() *Component_Transceiver_FecCorrectedBlocksPathAny {
+	ps := &Component_Transceiver_FecCorrectedBlocksPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "fec-corrected-blocks"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
 // FecCorrectedBytes (leaf): The number of bytes that were corrected by the FEC
 //
 //	Defining module:      "openconfig-platform-transceiver"
@@ -78491,7 +78638,10 @@ func (n *Component_TransceiverPathAny) FecStatus() *Component_Transceiver_FecSta
 	return ps
 }
 
-// FecUncorrectableBlocks (leaf): The number of blocks that were uncorrectable by the FEC
+// FecUncorrectableBlocks (leaf): The number of block/codeword that were uncorrectable by
+// the FEC;
+// This is IEEE802.3 clause 119.3.3 (also IEEE802.3df clause
+// 172.3.3 for 800GE) FEC_uncorrected_cw_counter.
 //
 //	Defining module:      "openconfig-platform-transceiver"
 //	Instantiating module: "openconfig-platform"
@@ -78509,7 +78659,10 @@ func (n *Component_TransceiverPath) FecUncorrectableBlocks() *Component_Transcei
 	return ps
 }
 
-// FecUncorrectableBlocks (leaf): The number of blocks that were uncorrectable by the FEC
+// FecUncorrectableBlocks (leaf): The number of block/codeword that were uncorrectable by
+// the FEC;
+// This is IEEE802.3 clause 119.3.3 (also IEEE802.3df clause
+// 172.3.3 for 800GE) FEC_uncorrected_cw_counter.
 //
 //	Defining module:      "openconfig-platform-transceiver"
 //	Instantiating module: "openconfig-platform"

@@ -18,6 +18,8 @@ import (
 	"testing"
 
 	"github.com/openconfig/ondatra/binding"
+	"github.com/openconfig/ondatra/fakebind"
+	"github.com/pborman/uuid"
 )
 
 var (
@@ -46,7 +48,33 @@ func init() {
 		return ""
 	}
 	reservationFn = func() (*binding.Reservation, error) {
-		return &binding.Reservation{}, nil
+		return &binding.Reservation{
+			ID: uuid.New(),
+			DUTs: map[string]binding.DUT{
+				"dut": &fakebind.DUT{
+					AbstractDUT: &binding.AbstractDUT{
+						Dims: &binding.Dims{
+							Name: "xx99.sql99",
+							Ports: map[string]*binding.Port{
+								"port": &binding.Port{Name: "et-0/0/0"},
+							},
+						},
+					},
+				},
+			},
+			ATEs: map[string]binding.ATE{
+				"ate": &fakebind.ATE{
+					AbstractATE: &binding.AbstractATE{
+						Dims: &binding.Dims{
+							Name: "ixia99.sql99",
+							Ports: map[string]*binding.Port{
+								"port": &binding.Port{Name: "1/1"},
+							},
+						},
+					},
+				},
+			},
+		}, nil
 	}
 }
 

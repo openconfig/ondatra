@@ -5673,6 +5673,40 @@ func (n *System_Aaa_AuthenticationPathAny) AuthenticationMethod() *System_Aaa_Au
 	return ps
 }
 
+// Glome (container): GLOME (Generic Low Overhead Message Exchange) authentication parameters for console access.
+//
+//	Defining module:      "openconfig-aaa"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "glome"
+//	Path from root:       "/system/aaa/authentication/glome"
+func (n *System_Aaa_AuthenticationPath) Glome() *System_Aaa_Authentication_GlomePath {
+	ps := &System_Aaa_Authentication_GlomePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"glome"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// Glome (container): GLOME (Generic Low Overhead Message Exchange) authentication parameters for console access.
+//
+//	Defining module:      "openconfig-aaa"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "glome"
+//	Path from root:       "/system/aaa/authentication/glome"
+func (n *System_Aaa_AuthenticationPathAny) Glome() *System_Aaa_Authentication_GlomePathAny {
+	ps := &System_Aaa_Authentication_GlomePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"glome"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
 // UserAny (list): List of local users on the system
 //
 //	Defining module:      "openconfig-aaa"
@@ -7398,6 +7432,534 @@ func (n *System_Aaa_Authentication_AdminUserPath) Config() ygnmi.ConfigQuery[*oc
 func (n *System_Aaa_Authentication_AdminUserPathAny) Config() ygnmi.WildcardQuery[*oc.System_Aaa_Authentication_AdminUser] {
 	return ygnmi.NewWildcardQuery[*oc.System_Aaa_Authentication_AdminUser](
 		"System_Aaa_Authentication_AdminUser",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// System_Aaa_Authentication_Glome_ActiveGlomeKeyCreatedOnPath represents the /openconfig-system/system/aaa/authentication/glome/state/active-glome-key-created-on YANG schema element.
+type System_Aaa_Authentication_Glome_ActiveGlomeKeyCreatedOnPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_Aaa_Authentication_Glome_ActiveGlomeKeyCreatedOnPathAny represents the wildcard version of the /openconfig-system/system/aaa/authentication/glome/state/active-glome-key-created-on YANG schema element.
+type System_Aaa_Authentication_Glome_ActiveGlomeKeyCreatedOnPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *System_Aaa_Authentication_Glome_ActiveGlomeKeyCreatedOnPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-gnsi-credentialz"
+//	Instantiating module: "openconfig-gnsi-credentialz"
+//	Path from parent:     "state/active-glome-key-created-on"
+//	Path from root:       "/system/aaa/authentication/glome/state/active-glome-key-created-on"
+func (n *System_Aaa_Authentication_Glome_ActiveGlomeKeyCreatedOnPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"System_Aaa_Authentication_Glome",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "active-glome-key-created-on"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.System_Aaa_Authentication_Glome).ActiveGlomeKeyCreatedOn
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Aaa_Authentication_Glome) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-gnsi-credentialz"
+//	Instantiating module: "openconfig-gnsi-credentialz"
+//	Path from parent:     "state/active-glome-key-created-on"
+//	Path from root:       "/system/aaa/authentication/glome/state/active-glome-key-created-on"
+func (n *System_Aaa_Authentication_Glome_ActiveGlomeKeyCreatedOnPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"System_Aaa_Authentication_Glome",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "active-glome-key-created-on"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.System_Aaa_Authentication_Glome).ActiveGlomeKeyCreatedOn
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Aaa_Authentication_Glome) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// System_Aaa_Authentication_Glome_ActiveGlomeKeyVersionPath represents the /openconfig-system/system/aaa/authentication/glome/state/active-glome-key-version YANG schema element.
+type System_Aaa_Authentication_Glome_ActiveGlomeKeyVersionPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_Aaa_Authentication_Glome_ActiveGlomeKeyVersionPathAny represents the wildcard version of the /openconfig-system/system/aaa/authentication/glome/state/active-glome-key-version YANG schema element.
+type System_Aaa_Authentication_Glome_ActiveGlomeKeyVersionPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *System_Aaa_Authentication_Glome_ActiveGlomeKeyVersionPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-gnsi-credentialz"
+//	Instantiating module: "openconfig-gnsi-credentialz"
+//	Path from parent:     "state/active-glome-key-version"
+//	Path from root:       "/system/aaa/authentication/glome/state/active-glome-key-version"
+func (n *System_Aaa_Authentication_Glome_ActiveGlomeKeyVersionPath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewSingletonQuery[string](
+		"System_Aaa_Authentication_Glome",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "active-glome-key-version"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_Aaa_Authentication_Glome).ActiveGlomeKeyVersion
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Aaa_Authentication_Glome) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-gnsi-credentialz"
+//	Instantiating module: "openconfig-gnsi-credentialz"
+//	Path from parent:     "state/active-glome-key-version"
+//	Path from root:       "/system/aaa/authentication/glome/state/active-glome-key-version"
+func (n *System_Aaa_Authentication_Glome_ActiveGlomeKeyVersionPathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"System_Aaa_Authentication_Glome",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "active-glome-key-version"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_Aaa_Authentication_Glome).ActiveGlomeKeyVersion
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Aaa_Authentication_Glome) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// System_Aaa_Authentication_Glome_EnabledPath represents the /openconfig-system/system/aaa/authentication/glome/state/enabled YANG schema element.
+type System_Aaa_Authentication_Glome_EnabledPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_Aaa_Authentication_Glome_EnabledPathAny represents the wildcard version of the /openconfig-system/system/aaa/authentication/glome/state/enabled YANG schema element.
+type System_Aaa_Authentication_Glome_EnabledPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *System_Aaa_Authentication_Glome_EnabledPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-gnsi-credentialz"
+//	Instantiating module: "openconfig-gnsi-credentialz"
+//	Path from parent:     "state/enabled"
+//	Path from root:       "/system/aaa/authentication/glome/state/enabled"
+func (n *System_Aaa_Authentication_Glome_EnabledPath) State() ygnmi.SingletonQuery[bool] {
+	return ygnmi.NewSingletonQuery[bool](
+		"System_Aaa_Authentication_Glome",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "enabled"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.System_Aaa_Authentication_Glome).Enabled
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Aaa_Authentication_Glome) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-gnsi-credentialz"
+//	Instantiating module: "openconfig-gnsi-credentialz"
+//	Path from parent:     "state/enabled"
+//	Path from root:       "/system/aaa/authentication/glome/state/enabled"
+func (n *System_Aaa_Authentication_Glome_EnabledPathAny) State() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewWildcardQuery[bool](
+		"System_Aaa_Authentication_Glome",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "enabled"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.System_Aaa_Authentication_Glome).Enabled
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Aaa_Authentication_Glome) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// System_Aaa_Authentication_GlomePath represents the /openconfig-system/system/aaa/authentication/glome YANG schema element.
+type System_Aaa_Authentication_GlomePath struct {
+	*ygnmi.NodePath
+}
+
+// System_Aaa_Authentication_GlomePathAny represents the wildcard version of the /openconfig-system/system/aaa/authentication/glome YANG schema element.
+type System_Aaa_Authentication_GlomePathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *System_Aaa_Authentication_GlomePath) PathOriginName() string {
+	return "openconfig"
+}
+
+// ActiveGlomeKeyCreatedOn (leaf): The timestamp of the moment when the GLOME key
+// was created.
+// This leaf persists through a reboot.  The value is the
+// timestamp in nanoseconds relative to the Unix Epoch
+// (Jan 1, 1970 00:00:00 UTC).
+//
+//	Defining module:      "openconfig-gnsi-credentialz"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/active-glome-key-created-on"
+//	Path from root:       "/system/aaa/authentication/glome/state/active-glome-key-created-on"
+func (n *System_Aaa_Authentication_GlomePath) ActiveGlomeKeyCreatedOn() *System_Aaa_Authentication_Glome_ActiveGlomeKeyCreatedOnPath {
+	ps := &System_Aaa_Authentication_Glome_ActiveGlomeKeyCreatedOnPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "active-glome-key-created-on"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// ActiveGlomeKeyCreatedOn (leaf): The timestamp of the moment when the GLOME key
+// was created.
+// This leaf persists through a reboot.  The value is the
+// timestamp in nanoseconds relative to the Unix Epoch
+// (Jan 1, 1970 00:00:00 UTC).
+//
+//	Defining module:      "openconfig-gnsi-credentialz"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/active-glome-key-created-on"
+//	Path from root:       "/system/aaa/authentication/glome/state/active-glome-key-created-on"
+func (n *System_Aaa_Authentication_GlomePathAny) ActiveGlomeKeyCreatedOn() *System_Aaa_Authentication_Glome_ActiveGlomeKeyCreatedOnPathAny {
+	ps := &System_Aaa_Authentication_Glome_ActiveGlomeKeyCreatedOnPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "active-glome-key-created-on"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// ActiveGlomeKeyVersion (leaf): The version of the GLOME key.
+//
+//	Defining module:      "openconfig-gnsi-credentialz"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/active-glome-key-version"
+//	Path from root:       "/system/aaa/authentication/glome/state/active-glome-key-version"
+func (n *System_Aaa_Authentication_GlomePath) ActiveGlomeKeyVersion() *System_Aaa_Authentication_Glome_ActiveGlomeKeyVersionPath {
+	ps := &System_Aaa_Authentication_Glome_ActiveGlomeKeyVersionPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "active-glome-key-version"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// ActiveGlomeKeyVersion (leaf): The version of the GLOME key.
+//
+//	Defining module:      "openconfig-gnsi-credentialz"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/active-glome-key-version"
+//	Path from root:       "/system/aaa/authentication/glome/state/active-glome-key-version"
+func (n *System_Aaa_Authentication_GlomePathAny) ActiveGlomeKeyVersion() *System_Aaa_Authentication_Glome_ActiveGlomeKeyVersionPathAny {
+	ps := &System_Aaa_Authentication_Glome_ActiveGlomeKeyVersionPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "active-glome-key-version"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Enabled (leaf): Whether GLOME is enabled or not.
+//
+//	Defining module:      "openconfig-gnsi-credentialz"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/enabled"
+//	Path from root:       "/system/aaa/authentication/glome/state/enabled"
+func (n *System_Aaa_Authentication_GlomePath) Enabled() *System_Aaa_Authentication_Glome_EnabledPath {
+	ps := &System_Aaa_Authentication_Glome_EnabledPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "enabled"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Enabled (leaf): Whether GLOME is enabled or not.
+//
+//	Defining module:      "openconfig-gnsi-credentialz"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/enabled"
+//	Path from root:       "/system/aaa/authentication/glome/state/enabled"
+func (n *System_Aaa_Authentication_GlomePathAny) Enabled() *System_Aaa_Authentication_Glome_EnabledPathAny {
+	ps := &System_Aaa_Authentication_Glome_EnabledPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "enabled"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_Aaa_Authentication_GlomePath) State() ygnmi.SingletonQuery[*oc.System_Aaa_Authentication_Glome] {
+	return ygnmi.NewSingletonQuery[*oc.System_Aaa_Authentication_Glome](
+		"System_Aaa_Authentication_Glome",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_Aaa_Authentication_GlomePathAny) State() ygnmi.WildcardQuery[*oc.System_Aaa_Authentication_Glome] {
+	return ygnmi.NewWildcardQuery[*oc.System_Aaa_Authentication_Glome](
+		"System_Aaa_Authentication_Glome",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *System_Aaa_Authentication_GlomePath) Config() ygnmi.ConfigQuery[*oc.System_Aaa_Authentication_Glome] {
+	return ygnmi.NewConfigQuery[*oc.System_Aaa_Authentication_Glome](
+		"System_Aaa_Authentication_Glome",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *System_Aaa_Authentication_GlomePathAny) Config() ygnmi.WildcardQuery[*oc.System_Aaa_Authentication_Glome] {
+	return ygnmi.NewWildcardQuery[*oc.System_Aaa_Authentication_Glome](
+		"System_Aaa_Authentication_Glome",
 		false,
 		true,
 		false,

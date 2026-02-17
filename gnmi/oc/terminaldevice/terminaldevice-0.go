@@ -5618,7 +5618,7 @@ func (n *TerminalDevice_Channel_Ethernet_In_8021QFramesPath) PathOriginName() st
 
 // State returns a Query that can be used in gNMI operations.
 //
-//	Defining module:      "openconfig-if-ethernet"
+//	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"
 //	Path from parent:     "state/in-8021q-frames"
 //	Path from root:       "/terminal-device/logical-channels/channel/ethernet/state/in-8021q-frames"
@@ -5659,7 +5659,7 @@ func (n *TerminalDevice_Channel_Ethernet_In_8021QFramesPath) State() ygnmi.Singl
 
 // State returns a Query that can be used in gNMI operations.
 //
-//	Defining module:      "openconfig-if-ethernet"
+//	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"
 //	Path from parent:     "state/in-8021q-frames"
 //	Path from root:       "/terminal-device/logical-channels/channel/ethernet/state/in-8021q-frames"
@@ -5717,7 +5717,7 @@ func (n *TerminalDevice_Channel_Ethernet_InBlockErrorsPath) PathOriginName() str
 
 // State returns a Query that can be used in gNMI operations.
 //
-//	Defining module:      "openconfig-if-ethernet"
+//	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"
 //	Path from parent:     "state/in-block-errors"
 //	Path from root:       "/terminal-device/logical-channels/channel/ethernet/state/in-block-errors"
@@ -5758,7 +5758,7 @@ func (n *TerminalDevice_Channel_Ethernet_InBlockErrorsPath) State() ygnmi.Single
 
 // State returns a Query that can be used in gNMI operations.
 //
-//	Defining module:      "openconfig-if-ethernet"
+//	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"
 //	Path from parent:     "state/in-block-errors"
 //	Path from root:       "/terminal-device/logical-channels/channel/ethernet/state/in-block-errors"
@@ -5816,7 +5816,7 @@ func (n *TerminalDevice_Channel_Ethernet_InCarrierErrorsPath) PathOriginName() s
 
 // State returns a Query that can be used in gNMI operations.
 //
-//	Defining module:      "openconfig-if-ethernet"
+//	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"
 //	Path from parent:     "state/in-carrier-errors"
 //	Path from root:       "/terminal-device/logical-channels/channel/ethernet/state/in-carrier-errors"
@@ -5857,7 +5857,7 @@ func (n *TerminalDevice_Channel_Ethernet_InCarrierErrorsPath) State() ygnmi.Sing
 
 // State returns a Query that can be used in gNMI operations.
 //
-//	Defining module:      "openconfig-if-ethernet"
+//	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"
 //	Path from parent:     "state/in-carrier-errors"
 //	Path from root:       "/terminal-device/logical-channels/channel/ethernet/state/in-carrier-errors"
@@ -5915,7 +5915,7 @@ func (n *TerminalDevice_Channel_Ethernet_InCrcErrorsPath) PathOriginName() strin
 
 // State returns a Query that can be used in gNMI operations.
 //
-//	Defining module:      "openconfig-if-ethernet"
+//	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"
 //	Path from parent:     "state/in-crc-errors"
 //	Path from root:       "/terminal-device/logical-channels/channel/ethernet/state/in-crc-errors"
@@ -5956,7 +5956,7 @@ func (n *TerminalDevice_Channel_Ethernet_InCrcErrorsPath) State() ygnmi.Singleto
 
 // State returns a Query that can be used in gNMI operations.
 //
-//	Defining module:      "openconfig-if-ethernet"
+//	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"
 //	Path from parent:     "state/in-crc-errors"
 //	Path from root:       "/terminal-device/logical-channels/channel/ethernet/state/in-crc-errors"
@@ -6014,7 +6014,7 @@ func (n *TerminalDevice_Channel_Ethernet_InFragmentFramesPath) PathOriginName() 
 
 // State returns a Query that can be used in gNMI operations.
 //
-//	Defining module:      "openconfig-if-ethernet"
+//	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"
 //	Path from parent:     "state/in-fragment-frames"
 //	Path from root:       "/terminal-device/logical-channels/channel/ethernet/state/in-fragment-frames"
@@ -6055,7 +6055,7 @@ func (n *TerminalDevice_Channel_Ethernet_InFragmentFramesPath) State() ygnmi.Sin
 
 // State returns a Query that can be used in gNMI operations.
 //
-//	Defining module:      "openconfig-if-ethernet"
+//	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"
 //	Path from parent:     "state/in-fragment-frames"
 //	Path from root:       "/terminal-device/logical-channels/channel/ethernet/state/in-fragment-frames"
@@ -6113,7 +6113,7 @@ func (n *TerminalDevice_Channel_Ethernet_InInterruptedTxPath) PathOriginName() s
 
 // State returns a Query that can be used in gNMI operations.
 //
-//	Defining module:      "openconfig-if-ethernet"
+//	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"
 //	Path from parent:     "state/in-interrupted-tx"
 //	Path from root:       "/terminal-device/logical-channels/channel/ethernet/state/in-interrupted-tx"
@@ -6154,7 +6154,7 @@ func (n *TerminalDevice_Channel_Ethernet_InInterruptedTxPath) State() ygnmi.Sing
 
 // State returns a Query that can be used in gNMI operations.
 //
-//	Defining module:      "openconfig-if-ethernet"
+//	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"
 //	Path from parent:     "state/in-interrupted-tx"
 //	Path from root:       "/terminal-device/logical-channels/channel/ethernet/state/in-interrupted-tx"
@@ -6212,7 +6212,7 @@ func (n *TerminalDevice_Channel_Ethernet_InJabberFramesPath) PathOriginName() st
 
 // State returns a Query that can be used in gNMI operations.
 //
-//	Defining module:      "openconfig-if-ethernet"
+//	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"
 //	Path from parent:     "state/in-jabber-frames"
 //	Path from root:       "/terminal-device/logical-channels/channel/ethernet/state/in-jabber-frames"
@@ -6253,7 +6253,7 @@ func (n *TerminalDevice_Channel_Ethernet_InJabberFramesPath) State() ygnmi.Singl
 
 // State returns a Query that can be used in gNMI operations.
 //
-//	Defining module:      "openconfig-if-ethernet"
+//	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"
 //	Path from parent:     "state/in-jabber-frames"
 //	Path from root:       "/terminal-device/logical-channels/channel/ethernet/state/in-jabber-frames"
@@ -6311,7 +6311,7 @@ func (n *TerminalDevice_Channel_Ethernet_InLateCollisionPath) PathOriginName() s
 
 // State returns a Query that can be used in gNMI operations.
 //
-//	Defining module:      "openconfig-if-ethernet"
+//	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"
 //	Path from parent:     "state/in-late-collision"
 //	Path from root:       "/terminal-device/logical-channels/channel/ethernet/state/in-late-collision"
@@ -6352,7 +6352,7 @@ func (n *TerminalDevice_Channel_Ethernet_InLateCollisionPath) State() ygnmi.Sing
 
 // State returns a Query that can be used in gNMI operations.
 //
-//	Defining module:      "openconfig-if-ethernet"
+//	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"
 //	Path from parent:     "state/in-late-collision"
 //	Path from root:       "/terminal-device/logical-channels/channel/ethernet/state/in-late-collision"
@@ -6410,7 +6410,7 @@ func (n *TerminalDevice_Channel_Ethernet_InMacControlFramesPath) PathOriginName(
 
 // State returns a Query that can be used in gNMI operations.
 //
-//	Defining module:      "openconfig-if-ethernet"
+//	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"
 //	Path from parent:     "state/in-mac-control-frames"
 //	Path from root:       "/terminal-device/logical-channels/channel/ethernet/state/in-mac-control-frames"
@@ -6451,7 +6451,7 @@ func (n *TerminalDevice_Channel_Ethernet_InMacControlFramesPath) State() ygnmi.S
 
 // State returns a Query that can be used in gNMI operations.
 //
-//	Defining module:      "openconfig-if-ethernet"
+//	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"
 //	Path from parent:     "state/in-mac-control-frames"
 //	Path from root:       "/terminal-device/logical-channels/channel/ethernet/state/in-mac-control-frames"
@@ -6509,7 +6509,7 @@ func (n *TerminalDevice_Channel_Ethernet_InMacErrorsRxPath) PathOriginName() str
 
 // State returns a Query that can be used in gNMI operations.
 //
-//	Defining module:      "openconfig-if-ethernet"
+//	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"
 //	Path from parent:     "state/in-mac-errors-rx"
 //	Path from root:       "/terminal-device/logical-channels/channel/ethernet/state/in-mac-errors-rx"
@@ -6550,7 +6550,7 @@ func (n *TerminalDevice_Channel_Ethernet_InMacErrorsRxPath) State() ygnmi.Single
 
 // State returns a Query that can be used in gNMI operations.
 //
-//	Defining module:      "openconfig-if-ethernet"
+//	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"
 //	Path from parent:     "state/in-mac-errors-rx"
 //	Path from root:       "/terminal-device/logical-channels/channel/ethernet/state/in-mac-errors-rx"
@@ -6608,7 +6608,7 @@ func (n *TerminalDevice_Channel_Ethernet_InMacPauseFramesPath) PathOriginName() 
 
 // State returns a Query that can be used in gNMI operations.
 //
-//	Defining module:      "openconfig-if-ethernet"
+//	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"
 //	Path from parent:     "state/in-mac-pause-frames"
 //	Path from root:       "/terminal-device/logical-channels/channel/ethernet/state/in-mac-pause-frames"
@@ -6649,7 +6649,7 @@ func (n *TerminalDevice_Channel_Ethernet_InMacPauseFramesPath) State() ygnmi.Sin
 
 // State returns a Query that can be used in gNMI operations.
 //
-//	Defining module:      "openconfig-if-ethernet"
+//	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"
 //	Path from parent:     "state/in-mac-pause-frames"
 //	Path from root:       "/terminal-device/logical-channels/channel/ethernet/state/in-mac-pause-frames"
@@ -6707,7 +6707,7 @@ func (n *TerminalDevice_Channel_Ethernet_InMaxsizeExceededPath) PathOriginName()
 
 // State returns a Query that can be used in gNMI operations.
 //
-//	Defining module:      "openconfig-if-ethernet"
+//	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"
 //	Path from parent:     "state/in-maxsize-exceeded"
 //	Path from root:       "/terminal-device/logical-channels/channel/ethernet/state/in-maxsize-exceeded"
@@ -6748,7 +6748,7 @@ func (n *TerminalDevice_Channel_Ethernet_InMaxsizeExceededPath) State() ygnmi.Si
 
 // State returns a Query that can be used in gNMI operations.
 //
-//	Defining module:      "openconfig-if-ethernet"
+//	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"
 //	Path from parent:     "state/in-maxsize-exceeded"
 //	Path from root:       "/terminal-device/logical-channels/channel/ethernet/state/in-maxsize-exceeded"
@@ -6806,7 +6806,7 @@ func (n *TerminalDevice_Channel_Ethernet_InOversizeFramesPath) PathOriginName() 
 
 // State returns a Query that can be used in gNMI operations.
 //
-//	Defining module:      "openconfig-if-ethernet"
+//	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"
 //	Path from parent:     "state/in-oversize-frames"
 //	Path from root:       "/terminal-device/logical-channels/channel/ethernet/state/in-oversize-frames"
@@ -6847,7 +6847,7 @@ func (n *TerminalDevice_Channel_Ethernet_InOversizeFramesPath) State() ygnmi.Sin
 
 // State returns a Query that can be used in gNMI operations.
 //
-//	Defining module:      "openconfig-if-ethernet"
+//	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"
 //	Path from parent:     "state/in-oversize-frames"
 //	Path from root:       "/terminal-device/logical-channels/channel/ethernet/state/in-oversize-frames"
@@ -7301,7 +7301,7 @@ func (n *TerminalDevice_Channel_Ethernet_InSingleCollisionPath) PathOriginName()
 
 // State returns a Query that can be used in gNMI operations.
 //
-//	Defining module:      "openconfig-if-ethernet"
+//	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"
 //	Path from parent:     "state/in-single-collision"
 //	Path from root:       "/terminal-device/logical-channels/channel/ethernet/state/in-single-collision"
@@ -7342,7 +7342,7 @@ func (n *TerminalDevice_Channel_Ethernet_InSingleCollisionPath) State() ygnmi.Si
 
 // State returns a Query that can be used in gNMI operations.
 //
-//	Defining module:      "openconfig-if-ethernet"
+//	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"
 //	Path from parent:     "state/in-single-collision"
 //	Path from root:       "/terminal-device/logical-channels/channel/ethernet/state/in-single-collision"
@@ -7400,7 +7400,7 @@ func (n *TerminalDevice_Channel_Ethernet_InSymbolErrorPath) PathOriginName() str
 
 // State returns a Query that can be used in gNMI operations.
 //
-//	Defining module:      "openconfig-if-ethernet"
+//	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"
 //	Path from parent:     "state/in-symbol-error"
 //	Path from root:       "/terminal-device/logical-channels/channel/ethernet/state/in-symbol-error"
@@ -7441,7 +7441,7 @@ func (n *TerminalDevice_Channel_Ethernet_InSymbolErrorPath) State() ygnmi.Single
 
 // State returns a Query that can be used in gNMI operations.
 //
-//	Defining module:      "openconfig-if-ethernet"
+//	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"
 //	Path from parent:     "state/in-symbol-error"
 //	Path from root:       "/terminal-device/logical-channels/channel/ethernet/state/in-symbol-error"
@@ -7499,7 +7499,7 @@ func (n *TerminalDevice_Channel_Ethernet_InUndersizeFramesPath) PathOriginName()
 
 // State returns a Query that can be used in gNMI operations.
 //
-//	Defining module:      "openconfig-if-ethernet"
+//	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"
 //	Path from parent:     "state/in-undersize-frames"
 //	Path from root:       "/terminal-device/logical-channels/channel/ethernet/state/in-undersize-frames"
@@ -7540,7 +7540,7 @@ func (n *TerminalDevice_Channel_Ethernet_InUndersizeFramesPath) State() ygnmi.Si
 
 // State returns a Query that can be used in gNMI operations.
 //
-//	Defining module:      "openconfig-if-ethernet"
+//	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"
 //	Path from parent:     "state/in-undersize-frames"
 //	Path from root:       "/terminal-device/logical-channels/channel/ethernet/state/in-undersize-frames"
@@ -7598,7 +7598,7 @@ func (n *TerminalDevice_Channel_Ethernet_Out_8021QFramesPath) PathOriginName() s
 
 // State returns a Query that can be used in gNMI operations.
 //
-//	Defining module:      "openconfig-if-ethernet"
+//	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"
 //	Path from parent:     "state/out-8021q-frames"
 //	Path from root:       "/terminal-device/logical-channels/channel/ethernet/state/out-8021q-frames"
@@ -7639,7 +7639,7 @@ func (n *TerminalDevice_Channel_Ethernet_Out_8021QFramesPath) State() ygnmi.Sing
 
 // State returns a Query that can be used in gNMI operations.
 //
-//	Defining module:      "openconfig-if-ethernet"
+//	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"
 //	Path from parent:     "state/out-8021q-frames"
 //	Path from root:       "/terminal-device/logical-channels/channel/ethernet/state/out-8021q-frames"
@@ -7895,7 +7895,7 @@ func (n *TerminalDevice_Channel_Ethernet_OutMacControlFramesPath) PathOriginName
 
 // State returns a Query that can be used in gNMI operations.
 //
-//	Defining module:      "openconfig-if-ethernet"
+//	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"
 //	Path from parent:     "state/out-mac-control-frames"
 //	Path from root:       "/terminal-device/logical-channels/channel/ethernet/state/out-mac-control-frames"
@@ -7936,7 +7936,7 @@ func (n *TerminalDevice_Channel_Ethernet_OutMacControlFramesPath) State() ygnmi.
 
 // State returns a Query that can be used in gNMI operations.
 //
-//	Defining module:      "openconfig-if-ethernet"
+//	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"
 //	Path from parent:     "state/out-mac-control-frames"
 //	Path from root:       "/terminal-device/logical-channels/channel/ethernet/state/out-mac-control-frames"
@@ -7994,7 +7994,7 @@ func (n *TerminalDevice_Channel_Ethernet_OutMacErrorsTxPath) PathOriginName() st
 
 // State returns a Query that can be used in gNMI operations.
 //
-//	Defining module:      "openconfig-if-ethernet"
+//	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"
 //	Path from parent:     "state/out-mac-errors-tx"
 //	Path from root:       "/terminal-device/logical-channels/channel/ethernet/state/out-mac-errors-tx"
@@ -8035,7 +8035,7 @@ func (n *TerminalDevice_Channel_Ethernet_OutMacErrorsTxPath) State() ygnmi.Singl
 
 // State returns a Query that can be used in gNMI operations.
 //
-//	Defining module:      "openconfig-if-ethernet"
+//	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"
 //	Path from parent:     "state/out-mac-errors-tx"
 //	Path from root:       "/terminal-device/logical-channels/channel/ethernet/state/out-mac-errors-tx"
@@ -8093,7 +8093,7 @@ func (n *TerminalDevice_Channel_Ethernet_OutMacPauseFramesPath) PathOriginName()
 
 // State returns a Query that can be used in gNMI operations.
 //
-//	Defining module:      "openconfig-if-ethernet"
+//	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"
 //	Path from parent:     "state/out-mac-pause-frames"
 //	Path from root:       "/terminal-device/logical-channels/channel/ethernet/state/out-mac-pause-frames"
@@ -8134,7 +8134,7 @@ func (n *TerminalDevice_Channel_Ethernet_OutMacPauseFramesPath) State() ygnmi.Si
 
 // State returns a Query that can be used in gNMI operations.
 //
-//	Defining module:      "openconfig-if-ethernet"
+//	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"
 //	Path from parent:     "state/out-mac-pause-frames"
 //	Path from root:       "/terminal-device/logical-channels/channel/ethernet/state/out-mac-pause-frames"
@@ -8419,8 +8419,11 @@ func (n *TerminalDevice_Channel_EthernetPathAny) Esnr() *TerminalDevice_Channel_
 	return ps
 }
 
-// FecUncorrectableBlocks (leaf): The number of blocks or frames that were uncorrectable by
-// the FEC
+// FecUncorrectableBlocks (leaf): The number of blocks or frames that were uncorrectable by the
+// FEC. The reported value is the cumulative count over the prior
+// Performance Monitoring (PM) interval defined by the host.
+// NOTE: The reference to the CMIS specification is for pluggable
+// and on-board modules only.
 //
 //	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"
@@ -8438,8 +8441,11 @@ func (n *TerminalDevice_Channel_EthernetPath) FecUncorrectableBlocks() *Terminal
 	return ps
 }
 
-// FecUncorrectableBlocks (leaf): The number of blocks or frames that were uncorrectable by
-// the FEC
+// FecUncorrectableBlocks (leaf): The number of blocks or frames that were uncorrectable by the
+// FEC. The reported value is the cumulative count over the prior
+// Performance Monitoring (PM) interval defined by the host.
+// NOTE: The reference to the CMIS specification is for pluggable
+// and on-board modules only.
 //
 //	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"
@@ -8459,7 +8465,7 @@ func (n *TerminalDevice_Channel_EthernetPathAny) FecUncorrectableBlocks() *Termi
 
 // In_8021QFrames (leaf): Number of 802.1q tagged frames received on the interface
 //
-//	Defining module:      "openconfig-if-ethernet"
+//	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"
 //	Path from parent:     "state/in-8021q-frames"
 //	Path from root:       "/terminal-device/logical-channels/channel/ethernet/state/in-8021q-frames"
@@ -8477,7 +8483,7 @@ func (n *TerminalDevice_Channel_EthernetPath) In_8021QFrames() *TerminalDevice_C
 
 // In_8021QFrames (leaf): Number of 802.1q tagged frames received on the interface
 //
-//	Defining module:      "openconfig-if-ethernet"
+//	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"
 //	Path from parent:     "state/in-8021q-frames"
 //	Path from root:       "/terminal-device/logical-channels/channel/ethernet/state/in-8021q-frames"
@@ -8499,7 +8505,7 @@ func (n *TerminalDevice_Channel_EthernetPathAny) In_8021QFrames() *TerminalDevic
 // normally not possible to determine the exact number of errored
 // bits within the block
 //
-//	Defining module:      "openconfig-if-ethernet"
+//	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"
 //	Path from parent:     "state/in-block-errors"
 //	Path from root:       "/terminal-device/logical-channels/channel/ethernet/state/in-block-errors"
@@ -8521,7 +8527,7 @@ func (n *TerminalDevice_Channel_EthernetPath) InBlockErrors() *TerminalDevice_Ch
 // normally not possible to determine the exact number of errored
 // bits within the block
 //
-//	Defining module:      "openconfig-if-ethernet"
+//	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"
 //	Path from parent:     "state/in-block-errors"
 //	Path from root:       "/terminal-device/logical-channels/channel/ethernet/state/in-block-errors"
@@ -8542,7 +8548,7 @@ func (n *TerminalDevice_Channel_EthernetPathAny) InBlockErrors() *TerminalDevice
 // dot3StatsCarrierSenseErrors
 // oid=1.3.6.1.2.1.10.7.2.1.11
 //
-//	Defining module:      "openconfig-if-ethernet"
+//	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"
 //	Path from parent:     "state/in-carrier-errors"
 //	Path from root:       "/terminal-device/logical-channels/channel/ethernet/state/in-carrier-errors"
@@ -8563,7 +8569,7 @@ func (n *TerminalDevice_Channel_EthernetPath) InCarrierErrors() *TerminalDevice_
 // dot3StatsCarrierSenseErrors
 // oid=1.3.6.1.2.1.10.7.2.1.11
 //
-//	Defining module:      "openconfig-if-ethernet"
+//	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"
 //	Path from parent:     "state/in-carrier-errors"
 //	Path from root:       "/terminal-device/logical-channels/channel/ethernet/state/in-carrier-errors"
@@ -8587,7 +8593,7 @@ func (n *TerminalDevice_Channel_EthernetPathAny) InCarrierErrors() *TerminalDevi
 // number of octets (FCS Error) or a bad FCS with
 // a non-integral number of octets (Alignment Error)
 //
-//	Defining module:      "openconfig-if-ethernet"
+//	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"
 //	Path from parent:     "state/in-crc-errors"
 //	Path from root:       "/terminal-device/logical-channels/channel/ethernet/state/in-crc-errors"
@@ -8611,7 +8617,7 @@ func (n *TerminalDevice_Channel_EthernetPath) InCrcErrors() *TerminalDevice_Chan
 // number of octets (FCS Error) or a bad FCS with
 // a non-integral number of octets (Alignment Error)
 //
-//	Defining module:      "openconfig-if-ethernet"
+//	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"
 //	Path from parent:     "state/in-crc-errors"
 //	Path from root:       "/terminal-device/logical-channels/channel/ethernet/state/in-crc-errors"
@@ -8634,7 +8640,7 @@ func (n *TerminalDevice_Channel_EthernetPathAny) InCrcErrors() *TerminalDevice_C
 // bad FCS with a non-integral number of octets (Alignment
 // Error).
 //
-//	Defining module:      "openconfig-if-ethernet"
+//	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"
 //	Path from parent:     "state/in-fragment-frames"
 //	Path from root:       "/terminal-device/logical-channels/channel/ethernet/state/in-fragment-frames"
@@ -8657,7 +8663,7 @@ func (n *TerminalDevice_Channel_EthernetPath) InFragmentFrames() *TerminalDevice
 // bad FCS with a non-integral number of octets (Alignment
 // Error).
 //
-//	Defining module:      "openconfig-if-ethernet"
+//	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"
 //	Path from parent:     "state/in-fragment-frames"
 //	Path from root:       "/terminal-device/logical-channels/channel/ethernet/state/in-fragment-frames"
@@ -8678,7 +8684,7 @@ func (n *TerminalDevice_Channel_EthernetPathAny) InFragmentFrames() *TerminalDev
 // dot3StatsDeferredTransmissions
 // oid=1.3.6.1.2.1.10.7.2.1.7
 //
-//	Defining module:      "openconfig-if-ethernet"
+//	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"
 //	Path from parent:     "state/in-interrupted-tx"
 //	Path from root:       "/terminal-device/logical-channels/channel/ethernet/state/in-interrupted-tx"
@@ -8699,7 +8705,7 @@ func (n *TerminalDevice_Channel_EthernetPath) InInterruptedTx() *TerminalDevice_
 // dot3StatsDeferredTransmissions
 // oid=1.3.6.1.2.1.10.7.2.1.7
 //
-//	Defining module:      "openconfig-if-ethernet"
+//	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"
 //	Path from parent:     "state/in-interrupted-tx"
 //	Path from root:       "/terminal-device/logical-channels/channel/ethernet/state/in-interrupted-tx"
@@ -8721,7 +8727,7 @@ func (n *TerminalDevice_Channel_EthernetPathAny) InInterruptedTx() *TerminalDevi
 // slightly different definitions of what constitutes a jabber
 // frame.  Often indicative of a NIC hardware problem.
 //
-//	Defining module:      "openconfig-if-ethernet"
+//	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"
 //	Path from parent:     "state/in-jabber-frames"
 //	Path from root:       "/terminal-device/logical-channels/channel/ethernet/state/in-jabber-frames"
@@ -8743,7 +8749,7 @@ func (n *TerminalDevice_Channel_EthernetPath) InJabberFrames() *TerminalDevice_C
 // slightly different definitions of what constitutes a jabber
 // frame.  Often indicative of a NIC hardware problem.
 //
-//	Defining module:      "openconfig-if-ethernet"
+//	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"
 //	Path from parent:     "state/in-jabber-frames"
 //	Path from root:       "/terminal-device/logical-channels/channel/ethernet/state/in-jabber-frames"
@@ -8764,7 +8770,7 @@ func (n *TerminalDevice_Channel_EthernetPathAny) InJabberFrames() *TerminalDevic
 // dot3StatsLateCollisions
 // oid=1.3.6.1.2.1.10.7.2.1.8
 //
-//	Defining module:      "openconfig-if-ethernet"
+//	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"
 //	Path from parent:     "state/in-late-collision"
 //	Path from root:       "/terminal-device/logical-channels/channel/ethernet/state/in-late-collision"
@@ -8785,7 +8791,7 @@ func (n *TerminalDevice_Channel_EthernetPath) InLateCollision() *TerminalDevice_
 // dot3StatsLateCollisions
 // oid=1.3.6.1.2.1.10.7.2.1.8
 //
-//	Defining module:      "openconfig-if-ethernet"
+//	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"
 //	Path from parent:     "state/in-late-collision"
 //	Path from root:       "/terminal-device/logical-channels/channel/ethernet/state/in-late-collision"
@@ -8803,7 +8809,7 @@ func (n *TerminalDevice_Channel_EthernetPathAny) InLateCollision() *TerminalDevi
 
 // InMacControlFrames (leaf): MAC layer control frames received on the interface
 //
-//	Defining module:      "openconfig-if-ethernet"
+//	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"
 //	Path from parent:     "state/in-mac-control-frames"
 //	Path from root:       "/terminal-device/logical-channels/channel/ethernet/state/in-mac-control-frames"
@@ -8821,7 +8827,7 @@ func (n *TerminalDevice_Channel_EthernetPath) InMacControlFrames() *TerminalDevi
 
 // InMacControlFrames (leaf): MAC layer control frames received on the interface
 //
-//	Defining module:      "openconfig-if-ethernet"
+//	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"
 //	Path from parent:     "state/in-mac-control-frames"
 //	Path from root:       "/terminal-device/logical-channels/channel/ethernet/state/in-mac-control-frames"
@@ -8842,7 +8848,7 @@ func (n *TerminalDevice_Channel_EthernetPathAny) InMacControlFrames() *TerminalD
 // dot3StatsInternalMacReceiveErrors
 // oid=1.3.6.1.2.1.10.7.2.1.16
 //
-//	Defining module:      "openconfig-if-ethernet"
+//	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"
 //	Path from parent:     "state/in-mac-errors-rx"
 //	Path from root:       "/terminal-device/logical-channels/channel/ethernet/state/in-mac-errors-rx"
@@ -8863,7 +8869,7 @@ func (n *TerminalDevice_Channel_EthernetPath) InMacErrorsRx() *TerminalDevice_Ch
 // dot3StatsInternalMacReceiveErrors
 // oid=1.3.6.1.2.1.10.7.2.1.16
 //
-//	Defining module:      "openconfig-if-ethernet"
+//	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"
 //	Path from parent:     "state/in-mac-errors-rx"
 //	Path from root:       "/terminal-device/logical-channels/channel/ethernet/state/in-mac-errors-rx"
@@ -8881,7 +8887,7 @@ func (n *TerminalDevice_Channel_EthernetPathAny) InMacErrorsRx() *TerminalDevice
 
 // InMacPauseFrames (leaf): MAC layer PAUSE frames received on the interface
 //
-//	Defining module:      "openconfig-if-ethernet"
+//	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"
 //	Path from parent:     "state/in-mac-pause-frames"
 //	Path from root:       "/terminal-device/logical-channels/channel/ethernet/state/in-mac-pause-frames"
@@ -8899,7 +8905,7 @@ func (n *TerminalDevice_Channel_EthernetPath) InMacPauseFrames() *TerminalDevice
 
 // InMacPauseFrames (leaf): MAC layer PAUSE frames received on the interface
 //
-//	Defining module:      "openconfig-if-ethernet"
+//	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"
 //	Path from parent:     "state/in-mac-pause-frames"
 //	Path from root:       "/terminal-device/logical-channels/channel/ethernet/state/in-mac-pause-frames"
@@ -8919,7 +8925,7 @@ func (n *TerminalDevice_Channel_EthernetPathAny) InMacPauseFrames() *TerminalDev
 // dropped due to exceeding the maximum frame size on the interface
 // (e.g., MTU or MRU)
 //
-//	Defining module:      "openconfig-if-ethernet"
+//	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"
 //	Path from parent:     "state/in-maxsize-exceeded"
 //	Path from root:       "/terminal-device/logical-channels/channel/ethernet/state/in-maxsize-exceeded"
@@ -8939,7 +8945,7 @@ func (n *TerminalDevice_Channel_EthernetPath) InMaxsizeExceeded() *TerminalDevic
 // dropped due to exceeding the maximum frame size on the interface
 // (e.g., MTU or MRU)
 //
-//	Defining module:      "openconfig-if-ethernet"
+//	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"
 //	Path from parent:     "state/in-maxsize-exceeded"
 //	Path from root:       "/terminal-device/logical-channels/channel/ethernet/state/in-maxsize-exceeded"
@@ -8960,7 +8966,7 @@ func (n *TerminalDevice_Channel_EthernetPathAny) InMaxsizeExceeded() *TerminalDe
 // but including FCS octets) and were otherwise
 // well formed.
 //
-//	Defining module:      "openconfig-if-ethernet"
+//	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"
 //	Path from parent:     "state/in-oversize-frames"
 //	Path from root:       "/terminal-device/logical-channels/channel/ethernet/state/in-oversize-frames"
@@ -8981,7 +8987,7 @@ func (n *TerminalDevice_Channel_EthernetPath) InOversizeFrames() *TerminalDevice
 // but including FCS octets) and were otherwise
 // well formed.
 //
-//	Defining module:      "openconfig-if-ethernet"
+//	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"
 //	Path from parent:     "state/in-oversize-frames"
 //	Path from root:       "/terminal-device/logical-channels/channel/ethernet/state/in-oversize-frames"
@@ -9164,7 +9170,7 @@ func (n *TerminalDevice_Channel_EthernetPathAny) InPcsUnavailableSeconds() *Term
 // dot3StatsSingleCollisionFrames
 // oid=1.3.6.1.2.1.10.7.2.1.4
 //
-//	Defining module:      "openconfig-if-ethernet"
+//	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"
 //	Path from parent:     "state/in-single-collision"
 //	Path from root:       "/terminal-device/logical-channels/channel/ethernet/state/in-single-collision"
@@ -9185,7 +9191,7 @@ func (n *TerminalDevice_Channel_EthernetPath) InSingleCollision() *TerminalDevic
 // dot3StatsSingleCollisionFrames
 // oid=1.3.6.1.2.1.10.7.2.1.4
 //
-//	Defining module:      "openconfig-if-ethernet"
+//	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"
 //	Path from parent:     "state/in-single-collision"
 //	Path from root:       "/terminal-device/logical-channels/channel/ethernet/state/in-single-collision"
@@ -9206,7 +9212,7 @@ func (n *TerminalDevice_Channel_EthernetPathAny) InSingleCollision() *TerminalDe
 // in-symbol-error
 // oid=1.3.6.1.2.1.10.7.2.1.18
 //
-//	Defining module:      "openconfig-if-ethernet"
+//	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"
 //	Path from parent:     "state/in-symbol-error"
 //	Path from root:       "/terminal-device/logical-channels/channel/ethernet/state/in-symbol-error"
@@ -9227,7 +9233,7 @@ func (n *TerminalDevice_Channel_EthernetPath) InSymbolError() *TerminalDevice_Ch
 // in-symbol-error
 // oid=1.3.6.1.2.1.10.7.2.1.18
 //
-//	Defining module:      "openconfig-if-ethernet"
+//	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"
 //	Path from parent:     "state/in-symbol-error"
 //	Path from root:       "/terminal-device/logical-channels/channel/ethernet/state/in-symbol-error"
@@ -9248,7 +9254,7 @@ func (n *TerminalDevice_Channel_EthernetPathAny) InSymbolError() *TerminalDevice
 // but including FCS octets) and were otherwise well
 // formed.
 //
-//	Defining module:      "openconfig-if-ethernet"
+//	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"
 //	Path from parent:     "state/in-undersize-frames"
 //	Path from root:       "/terminal-device/logical-channels/channel/ethernet/state/in-undersize-frames"
@@ -9269,7 +9275,7 @@ func (n *TerminalDevice_Channel_EthernetPath) InUndersizeFrames() *TerminalDevic
 // but including FCS octets) and were otherwise well
 // formed.
 //
-//	Defining module:      "openconfig-if-ethernet"
+//	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"
 //	Path from parent:     "state/in-undersize-frames"
 //	Path from root:       "/terminal-device/logical-channels/channel/ethernet/state/in-undersize-frames"
@@ -9321,7 +9327,7 @@ func (n *TerminalDevice_Channel_EthernetPathAny) Lldp() *TerminalDevice_Channel_
 
 // Out_8021QFrames (leaf): Number of 802.1q tagged frames sent on the interface
 //
-//	Defining module:      "openconfig-if-ethernet"
+//	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"
 //	Path from parent:     "state/out-8021q-frames"
 //	Path from root:       "/terminal-device/logical-channels/channel/ethernet/state/out-8021q-frames"
@@ -9339,7 +9345,7 @@ func (n *TerminalDevice_Channel_EthernetPath) Out_8021QFrames() *TerminalDevice_
 
 // Out_8021QFrames (leaf): Number of 802.1q tagged frames sent on the interface
 //
-//	Defining module:      "openconfig-if-ethernet"
+//	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"
 //	Path from parent:     "state/out-8021q-frames"
 //	Path from root:       "/terminal-device/logical-channels/channel/ethernet/state/out-8021q-frames"
@@ -9437,7 +9443,7 @@ func (n *TerminalDevice_Channel_EthernetPathAny) OutCrcErrors() *TerminalDevice_
 
 // OutMacControlFrames (leaf): MAC layer control frames sent on the interface
 //
-//	Defining module:      "openconfig-if-ethernet"
+//	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"
 //	Path from parent:     "state/out-mac-control-frames"
 //	Path from root:       "/terminal-device/logical-channels/channel/ethernet/state/out-mac-control-frames"
@@ -9455,7 +9461,7 @@ func (n *TerminalDevice_Channel_EthernetPath) OutMacControlFrames() *TerminalDev
 
 // OutMacControlFrames (leaf): MAC layer control frames sent on the interface
 //
-//	Defining module:      "openconfig-if-ethernet"
+//	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"
 //	Path from parent:     "state/out-mac-control-frames"
 //	Path from root:       "/terminal-device/logical-channels/channel/ethernet/state/out-mac-control-frames"
@@ -9476,7 +9482,7 @@ func (n *TerminalDevice_Channel_EthernetPathAny) OutMacControlFrames() *Terminal
 // dot3StatsInternalMacTransmitErrors
 // oid=1.3.6.1.2.1.10.7.2.1.10
 //
-//	Defining module:      "openconfig-if-ethernet"
+//	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"
 //	Path from parent:     "state/out-mac-errors-tx"
 //	Path from root:       "/terminal-device/logical-channels/channel/ethernet/state/out-mac-errors-tx"
@@ -9497,7 +9503,7 @@ func (n *TerminalDevice_Channel_EthernetPath) OutMacErrorsTx() *TerminalDevice_C
 // dot3StatsInternalMacTransmitErrors
 // oid=1.3.6.1.2.1.10.7.2.1.10
 //
-//	Defining module:      "openconfig-if-ethernet"
+//	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"
 //	Path from parent:     "state/out-mac-errors-tx"
 //	Path from root:       "/terminal-device/logical-channels/channel/ethernet/state/out-mac-errors-tx"
@@ -9515,7 +9521,7 @@ func (n *TerminalDevice_Channel_EthernetPathAny) OutMacErrorsTx() *TerminalDevic
 
 // OutMacPauseFrames (leaf): MAC layer PAUSE frames sent on the interface
 //
-//	Defining module:      "openconfig-if-ethernet"
+//	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"
 //	Path from parent:     "state/out-mac-pause-frames"
 //	Path from root:       "/terminal-device/logical-channels/channel/ethernet/state/out-mac-pause-frames"
@@ -9533,7 +9539,7 @@ func (n *TerminalDevice_Channel_EthernetPath) OutMacPauseFrames() *TerminalDevic
 
 // OutMacPauseFrames (leaf): MAC layer PAUSE frames sent on the interface
 //
-//	Defining module:      "openconfig-if-ethernet"
+//	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"
 //	Path from parent:     "state/out-mac-pause-frames"
 //	Path from root:       "/terminal-device/logical-channels/channel/ethernet/state/out-mac-pause-frames"
@@ -13506,6 +13512,105 @@ func (n *TerminalDevice_Channel_Ethernet_Lldp_Neighbor_ManagementAddressTypePath
 	)
 }
 
+// TerminalDevice_Channel_Ethernet_Lldp_Neighbor_ManagementInterfacePath represents the /openconfig-terminal-device/terminal-device/logical-channels/channel/ethernet/lldp/neighbors/neighbor/state/management-interface YANG schema element.
+type TerminalDevice_Channel_Ethernet_Lldp_Neighbor_ManagementInterfacePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// TerminalDevice_Channel_Ethernet_Lldp_Neighbor_ManagementInterfacePathAny represents the wildcard version of the /openconfig-terminal-device/terminal-device/logical-channels/channel/ethernet/lldp/neighbors/neighbor/state/management-interface YANG schema element.
+type TerminalDevice_Channel_Ethernet_Lldp_Neighbor_ManagementInterfacePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *TerminalDevice_Channel_Ethernet_Lldp_Neighbor_ManagementInterfacePath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "state/management-interface"
+//	Path from root:       "/terminal-device/logical-channels/channel/ethernet/lldp/neighbors/neighbor/state/management-interface"
+func (n *TerminalDevice_Channel_Ethernet_Lldp_Neighbor_ManagementInterfacePath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewSingletonQuery[string](
+		"TerminalDevice_Channel_Ethernet_Lldp_Neighbor",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "management-interface"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.TerminalDevice_Channel_Ethernet_Lldp_Neighbor).ManagementInterface
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.TerminalDevice_Channel_Ethernet_Lldp_Neighbor) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "state/management-interface"
+//	Path from root:       "/terminal-device/logical-channels/channel/ethernet/lldp/neighbors/neighbor/state/management-interface"
+func (n *TerminalDevice_Channel_Ethernet_Lldp_Neighbor_ManagementInterfacePathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"TerminalDevice_Channel_Ethernet_Lldp_Neighbor",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "management-interface"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.TerminalDevice_Channel_Ethernet_Lldp_Neighbor).ManagementInterface
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.TerminalDevice_Channel_Ethernet_Lldp_Neighbor) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
 // TerminalDevice_Channel_Ethernet_Lldp_Neighbor_PortDescriptionPath represents the /openconfig-terminal-device/terminal-device/logical-channels/channel/ethernet/lldp/neighbors/neighbor/state/port-description YANG schema element.
 type TerminalDevice_Channel_Ethernet_Lldp_Neighbor_PortDescriptionPath struct {
 	*ygnmi.NodePath
@@ -14319,6 +14424,11 @@ func (n *TerminalDevice_Channel_Ethernet_Lldp_NeighborPathAny) LastUpdate() *Ter
 // can be used to reach the agent on the port identified in the
 // Port ID TLV.
 //
+// This leaf has been deprecated in favor of the management-address
+// list structure to accomodate multiple addresses and distinct
+// typing to pair up with the 802.1AB Management Address TLV
+// specification.
+//
 //	Defining module:      "openconfig-lldp"
 //	Instantiating module: "openconfig-terminal-device"
 //	Path from parent:     "state/management-address"
@@ -14339,6 +14449,11 @@ func (n *TerminalDevice_Channel_Ethernet_Lldp_NeighborPath) ManagementAddress() 
 // network address associated with the local LLDP agent, which
 // can be used to reach the agent on the port identified in the
 // Port ID TLV.
+//
+// This leaf has been deprecated in favor of the management-address
+// list structure to accomodate multiple addresses and distinct
+// typing to pair up with the 802.1AB Management Address TLV
+// specification.
 //
 //	Defining module:      "openconfig-lldp"
 //	Instantiating module: "openconfig-terminal-device"
@@ -14361,6 +14476,11 @@ func (n *TerminalDevice_Channel_Ethernet_Lldp_NeighborPathAny) ManagementAddress
 // 'Assigned Numbers' RFC [RFC3232] and the
 // ianaAddressFamilyNumbers object.
 //
+// This leaf has been deprecated in favor of the management-address
+// list structure to accomodate multiple addresses and distinct
+// typing to pair up with the 802.1AB Management Address TLV
+// specification.
+//
 //	Defining module:      "openconfig-lldp"
 //	Instantiating module: "openconfig-terminal-device"
 //	Path from parent:     "state/management-address-type"
@@ -14382,6 +14502,11 @@ func (n *TerminalDevice_Channel_Ethernet_Lldp_NeighborPath) ManagementAddressTyp
 // 'Assigned Numbers' RFC [RFC3232] and the
 // ianaAddressFamilyNumbers object.
 //
+// This leaf has been deprecated in favor of the management-address
+// list structure to accomodate multiple addresses and distinct
+// typing to pair up with the 802.1AB Management Address TLV
+// specification.
+//
 //	Defining module:      "openconfig-lldp"
 //	Instantiating module: "openconfig-terminal-device"
 //	Path from parent:     "state/management-address-type"
@@ -14390,6 +14515,46 @@ func (n *TerminalDevice_Channel_Ethernet_Lldp_NeighborPathAny) ManagementAddress
 	ps := &TerminalDevice_Channel_Ethernet_Lldp_Neighbor_ManagementAddressTypePathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"state", "management-address-type"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// ManagementInterface (leaf): The interface in which to derive the population of Management
+// Address TLV parameters.  If unspecified, the implementation may
+// choose which interface is utilized.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "state/management-interface"
+//	Path from root:       "/terminal-device/logical-channels/channel/ethernet/lldp/neighbors/neighbor/state/management-interface"
+func (n *TerminalDevice_Channel_Ethernet_Lldp_NeighborPath) ManagementInterface() *TerminalDevice_Channel_Ethernet_Lldp_Neighbor_ManagementInterfacePath {
+	ps := &TerminalDevice_Channel_Ethernet_Lldp_Neighbor_ManagementInterfacePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "management-interface"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// ManagementInterface (leaf): The interface in which to derive the population of Management
+// Address TLV parameters.  If unspecified, the implementation may
+// choose which interface is utilized.
+//
+//	Defining module:      "openconfig-lldp"
+//	Instantiating module: "openconfig-terminal-device"
+//	Path from parent:     "state/management-interface"
+//	Path from root:       "/terminal-device/logical-channels/channel/ethernet/lldp/neighbors/neighbor/state/management-interface"
+func (n *TerminalDevice_Channel_Ethernet_Lldp_NeighborPathAny) ManagementInterface() *TerminalDevice_Channel_Ethernet_Lldp_Neighbor_ManagementInterfacePathAny {
+	ps := &TerminalDevice_Channel_Ethernet_Lldp_Neighbor_ManagementInterfacePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "management-interface"},
 			map[string]interface{}{},
 			n,
 		),
@@ -21892,8 +22057,11 @@ func (n *TerminalDevice_Channel_OtnPathAny) FecCorrectedBytes() *TerminalDevice_
 	return ps
 }
 
-// FecUncorrectableBlocks (leaf): The number of blocks or frames that were uncorrectable by
-// the FEC
+// FecUncorrectableBlocks (leaf): The number of blocks or frames that were uncorrectable by the
+// FEC. The reported value is the cumulative count over the prior
+// Performance Monitoring (PM) interval defined by the host.
+// NOTE: The reference to the CMIS specification is for pluggable
+// and on-board modules only.
 //
 //	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"
@@ -21911,8 +22079,11 @@ func (n *TerminalDevice_Channel_OtnPath) FecUncorrectableBlocks() *TerminalDevic
 	return ps
 }
 
-// FecUncorrectableBlocks (leaf): The number of blocks or frames that were uncorrectable by
-// the FEC
+// FecUncorrectableBlocks (leaf): The number of blocks or frames that were uncorrectable by the
+// FEC. The reported value is the cumulative count over the prior
+// Performance Monitoring (PM) interval defined by the host.
+// NOTE: The reference to the CMIS specification is for pluggable
+// and on-board modules only.
 //
 //	Defining module:      "openconfig-terminal-device"
 //	Instantiating module: "openconfig-terminal-device"

@@ -35893,8 +35893,8 @@ func (n *Qos_QueueManagementProfile_Red_Uniform_MaxThresholdPercentPath) PathOri
 //	Instantiating module: "openconfig-qos"
 //	Path from parent:     "state/max-threshold-percent"
 //	Path from root:       "/qos/queue-management-profiles/queue-management-profile/red/uniform/state/max-threshold-percent"
-func (n *Qos_QueueManagementProfile_Red_Uniform_MaxThresholdPercentPath) State() ygnmi.SingletonQuery[uint8] {
-	return ygnmi.NewSingletonQuery[uint8](
+func (n *Qos_QueueManagementProfile_Red_Uniform_MaxThresholdPercentPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
 		"Qos_QueueManagementProfile_Red_Uniform",
 		true,
 		false,
@@ -35907,10 +35907,10 @@ func (n *Qos_QueueManagementProfile_Red_Uniform_MaxThresholdPercentPath) State()
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
 			ret := gs.(*oc.Qos_QueueManagementProfile_Red_Uniform).MaxThresholdPercent
 			if ret == nil {
-				var zero uint8
+				var zero uint64
 				return zero, false
 			}
 			return *ret, true
@@ -35934,8 +35934,8 @@ func (n *Qos_QueueManagementProfile_Red_Uniform_MaxThresholdPercentPath) State()
 //	Instantiating module: "openconfig-qos"
 //	Path from parent:     "state/max-threshold-percent"
 //	Path from root:       "/qos/queue-management-profiles/queue-management-profile/red/uniform/state/max-threshold-percent"
-func (n *Qos_QueueManagementProfile_Red_Uniform_MaxThresholdPercentPathAny) State() ygnmi.WildcardQuery[uint8] {
-	return ygnmi.NewWildcardQuery[uint8](
+func (n *Qos_QueueManagementProfile_Red_Uniform_MaxThresholdPercentPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
 		"Qos_QueueManagementProfile_Red_Uniform",
 		true,
 		false,
@@ -35948,10 +35948,10 @@ func (n *Qos_QueueManagementProfile_Red_Uniform_MaxThresholdPercentPathAny) Stat
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
 			ret := gs.(*oc.Qos_QueueManagementProfile_Red_Uniform).MaxThresholdPercent
 			if ret == nil {
-				var zero uint8
+				var zero uint64
 				return zero, false
 			}
 			return *ret, true
@@ -35975,8 +35975,8 @@ func (n *Qos_QueueManagementProfile_Red_Uniform_MaxThresholdPercentPathAny) Stat
 //	Instantiating module: "openconfig-qos"
 //	Path from parent:     "config/max-threshold-percent"
 //	Path from root:       "/qos/queue-management-profiles/queue-management-profile/red/uniform/config/max-threshold-percent"
-func (n *Qos_QueueManagementProfile_Red_Uniform_MaxThresholdPercentPath) Config() ygnmi.ConfigQuery[uint8] {
-	return ygnmi.NewConfigQuery[uint8](
+func (n *Qos_QueueManagementProfile_Red_Uniform_MaxThresholdPercentPath) Config() ygnmi.ConfigQuery[uint64] {
+	return ygnmi.NewConfigQuery[uint64](
 		"Qos_QueueManagementProfile_Red_Uniform",
 		false,
 		true,
@@ -35989,10 +35989,10 @@ func (n *Qos_QueueManagementProfile_Red_Uniform_MaxThresholdPercentPath) Config(
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
 			ret := gs.(*oc.Qos_QueueManagementProfile_Red_Uniform).MaxThresholdPercent
 			if ret == nil {
-				var zero uint8
+				var zero uint64
 				return zero, false
 			}
 			return *ret, true
@@ -36016,8 +36016,8 @@ func (n *Qos_QueueManagementProfile_Red_Uniform_MaxThresholdPercentPath) Config(
 //	Instantiating module: "openconfig-qos"
 //	Path from parent:     "config/max-threshold-percent"
 //	Path from root:       "/qos/queue-management-profiles/queue-management-profile/red/uniform/config/max-threshold-percent"
-func (n *Qos_QueueManagementProfile_Red_Uniform_MaxThresholdPercentPathAny) Config() ygnmi.WildcardQuery[uint8] {
-	return ygnmi.NewWildcardQuery[uint8](
+func (n *Qos_QueueManagementProfile_Red_Uniform_MaxThresholdPercentPathAny) Config() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
 		"Qos_QueueManagementProfile_Red_Uniform",
 		false,
 		true,
@@ -36030,10 +36030,10 @@ func (n *Qos_QueueManagementProfile_Red_Uniform_MaxThresholdPercentPathAny) Conf
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
 			ret := gs.(*oc.Qos_QueueManagementProfile_Red_Uniform).MaxThresholdPercent
 			if ret == nil {
-				var zero uint8
+				var zero uint64
 				return zero, false
 			}
 			return *ret, true
@@ -36255,8 +36255,8 @@ func (n *Qos_QueueManagementProfile_Red_Uniform_MinThresholdPercentPath) PathOri
 //	Instantiating module: "openconfig-qos"
 //	Path from parent:     "state/min-threshold-percent"
 //	Path from root:       "/qos/queue-management-profiles/queue-management-profile/red/uniform/state/min-threshold-percent"
-func (n *Qos_QueueManagementProfile_Red_Uniform_MinThresholdPercentPath) State() ygnmi.SingletonQuery[uint8] {
-	return ygnmi.NewSingletonQuery[uint8](
+func (n *Qos_QueueManagementProfile_Red_Uniform_MinThresholdPercentPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
 		"Qos_QueueManagementProfile_Red_Uniform",
 		true,
 		false,
@@ -36269,10 +36269,10 @@ func (n *Qos_QueueManagementProfile_Red_Uniform_MinThresholdPercentPath) State()
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
 			ret := gs.(*oc.Qos_QueueManagementProfile_Red_Uniform).MinThresholdPercent
 			if ret == nil {
-				var zero uint8
+				var zero uint64
 				return zero, false
 			}
 			return *ret, true
@@ -36296,8 +36296,8 @@ func (n *Qos_QueueManagementProfile_Red_Uniform_MinThresholdPercentPath) State()
 //	Instantiating module: "openconfig-qos"
 //	Path from parent:     "state/min-threshold-percent"
 //	Path from root:       "/qos/queue-management-profiles/queue-management-profile/red/uniform/state/min-threshold-percent"
-func (n *Qos_QueueManagementProfile_Red_Uniform_MinThresholdPercentPathAny) State() ygnmi.WildcardQuery[uint8] {
-	return ygnmi.NewWildcardQuery[uint8](
+func (n *Qos_QueueManagementProfile_Red_Uniform_MinThresholdPercentPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
 		"Qos_QueueManagementProfile_Red_Uniform",
 		true,
 		false,
@@ -36310,10 +36310,10 @@ func (n *Qos_QueueManagementProfile_Red_Uniform_MinThresholdPercentPathAny) Stat
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
 			ret := gs.(*oc.Qos_QueueManagementProfile_Red_Uniform).MinThresholdPercent
 			if ret == nil {
-				var zero uint8
+				var zero uint64
 				return zero, false
 			}
 			return *ret, true
@@ -36337,8 +36337,8 @@ func (n *Qos_QueueManagementProfile_Red_Uniform_MinThresholdPercentPathAny) Stat
 //	Instantiating module: "openconfig-qos"
 //	Path from parent:     "config/min-threshold-percent"
 //	Path from root:       "/qos/queue-management-profiles/queue-management-profile/red/uniform/config/min-threshold-percent"
-func (n *Qos_QueueManagementProfile_Red_Uniform_MinThresholdPercentPath) Config() ygnmi.ConfigQuery[uint8] {
-	return ygnmi.NewConfigQuery[uint8](
+func (n *Qos_QueueManagementProfile_Red_Uniform_MinThresholdPercentPath) Config() ygnmi.ConfigQuery[uint64] {
+	return ygnmi.NewConfigQuery[uint64](
 		"Qos_QueueManagementProfile_Red_Uniform",
 		false,
 		true,
@@ -36351,10 +36351,10 @@ func (n *Qos_QueueManagementProfile_Red_Uniform_MinThresholdPercentPath) Config(
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
 			ret := gs.(*oc.Qos_QueueManagementProfile_Red_Uniform).MinThresholdPercent
 			if ret == nil {
-				var zero uint8
+				var zero uint64
 				return zero, false
 			}
 			return *ret, true
@@ -36378,8 +36378,8 @@ func (n *Qos_QueueManagementProfile_Red_Uniform_MinThresholdPercentPath) Config(
 //	Instantiating module: "openconfig-qos"
 //	Path from parent:     "config/min-threshold-percent"
 //	Path from root:       "/qos/queue-management-profiles/queue-management-profile/red/uniform/config/min-threshold-percent"
-func (n *Qos_QueueManagementProfile_Red_Uniform_MinThresholdPercentPathAny) Config() ygnmi.WildcardQuery[uint8] {
-	return ygnmi.NewWildcardQuery[uint8](
+func (n *Qos_QueueManagementProfile_Red_Uniform_MinThresholdPercentPathAny) Config() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
 		"Qos_QueueManagementProfile_Red_Uniform",
 		false,
 		true,
@@ -36392,10 +36392,10 @@ func (n *Qos_QueueManagementProfile_Red_Uniform_MinThresholdPercentPathAny) Conf
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
 			ret := gs.(*oc.Qos_QueueManagementProfile_Red_Uniform).MinThresholdPercent
 			if ret == nil {
-				var zero uint8
+				var zero uint64
 				return zero, false
 			}
 			return *ret, true
@@ -37688,8 +37688,8 @@ func (n *Qos_QueueManagementProfile_Wred_Uniform_MaxThresholdPercentPath) PathOr
 //	Instantiating module: "openconfig-qos"
 //	Path from parent:     "state/max-threshold-percent"
 //	Path from root:       "/qos/queue-management-profiles/queue-management-profile/wred/uniform/state/max-threshold-percent"
-func (n *Qos_QueueManagementProfile_Wred_Uniform_MaxThresholdPercentPath) State() ygnmi.SingletonQuery[uint8] {
-	return ygnmi.NewSingletonQuery[uint8](
+func (n *Qos_QueueManagementProfile_Wred_Uniform_MaxThresholdPercentPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
 		"Qos_QueueManagementProfile_Wred_Uniform",
 		true,
 		false,
@@ -37702,10 +37702,10 @@ func (n *Qos_QueueManagementProfile_Wred_Uniform_MaxThresholdPercentPath) State(
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
 			ret := gs.(*oc.Qos_QueueManagementProfile_Wred_Uniform).MaxThresholdPercent
 			if ret == nil {
-				var zero uint8
+				var zero uint64
 				return zero, false
 			}
 			return *ret, true
@@ -37729,8 +37729,8 @@ func (n *Qos_QueueManagementProfile_Wred_Uniform_MaxThresholdPercentPath) State(
 //	Instantiating module: "openconfig-qos"
 //	Path from parent:     "state/max-threshold-percent"
 //	Path from root:       "/qos/queue-management-profiles/queue-management-profile/wred/uniform/state/max-threshold-percent"
-func (n *Qos_QueueManagementProfile_Wred_Uniform_MaxThresholdPercentPathAny) State() ygnmi.WildcardQuery[uint8] {
-	return ygnmi.NewWildcardQuery[uint8](
+func (n *Qos_QueueManagementProfile_Wred_Uniform_MaxThresholdPercentPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
 		"Qos_QueueManagementProfile_Wred_Uniform",
 		true,
 		false,
@@ -37743,10 +37743,10 @@ func (n *Qos_QueueManagementProfile_Wred_Uniform_MaxThresholdPercentPathAny) Sta
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
 			ret := gs.(*oc.Qos_QueueManagementProfile_Wred_Uniform).MaxThresholdPercent
 			if ret == nil {
-				var zero uint8
+				var zero uint64
 				return zero, false
 			}
 			return *ret, true
@@ -37770,8 +37770,8 @@ func (n *Qos_QueueManagementProfile_Wred_Uniform_MaxThresholdPercentPathAny) Sta
 //	Instantiating module: "openconfig-qos"
 //	Path from parent:     "config/max-threshold-percent"
 //	Path from root:       "/qos/queue-management-profiles/queue-management-profile/wred/uniform/config/max-threshold-percent"
-func (n *Qos_QueueManagementProfile_Wred_Uniform_MaxThresholdPercentPath) Config() ygnmi.ConfigQuery[uint8] {
-	return ygnmi.NewConfigQuery[uint8](
+func (n *Qos_QueueManagementProfile_Wred_Uniform_MaxThresholdPercentPath) Config() ygnmi.ConfigQuery[uint64] {
+	return ygnmi.NewConfigQuery[uint64](
 		"Qos_QueueManagementProfile_Wred_Uniform",
 		false,
 		true,
@@ -37784,10 +37784,10 @@ func (n *Qos_QueueManagementProfile_Wred_Uniform_MaxThresholdPercentPath) Config
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
 			ret := gs.(*oc.Qos_QueueManagementProfile_Wred_Uniform).MaxThresholdPercent
 			if ret == nil {
-				var zero uint8
+				var zero uint64
 				return zero, false
 			}
 			return *ret, true
@@ -37811,8 +37811,8 @@ func (n *Qos_QueueManagementProfile_Wred_Uniform_MaxThresholdPercentPath) Config
 //	Instantiating module: "openconfig-qos"
 //	Path from parent:     "config/max-threshold-percent"
 //	Path from root:       "/qos/queue-management-profiles/queue-management-profile/wred/uniform/config/max-threshold-percent"
-func (n *Qos_QueueManagementProfile_Wred_Uniform_MaxThresholdPercentPathAny) Config() ygnmi.WildcardQuery[uint8] {
-	return ygnmi.NewWildcardQuery[uint8](
+func (n *Qos_QueueManagementProfile_Wred_Uniform_MaxThresholdPercentPathAny) Config() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
 		"Qos_QueueManagementProfile_Wred_Uniform",
 		false,
 		true,
@@ -37825,10 +37825,10 @@ func (n *Qos_QueueManagementProfile_Wred_Uniform_MaxThresholdPercentPathAny) Con
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
 			ret := gs.(*oc.Qos_QueueManagementProfile_Wred_Uniform).MaxThresholdPercent
 			if ret == nil {
-				var zero uint8
+				var zero uint64
 				return zero, false
 			}
 			return *ret, true
@@ -38050,8 +38050,8 @@ func (n *Qos_QueueManagementProfile_Wred_Uniform_MinThresholdPercentPath) PathOr
 //	Instantiating module: "openconfig-qos"
 //	Path from parent:     "state/min-threshold-percent"
 //	Path from root:       "/qos/queue-management-profiles/queue-management-profile/wred/uniform/state/min-threshold-percent"
-func (n *Qos_QueueManagementProfile_Wred_Uniform_MinThresholdPercentPath) State() ygnmi.SingletonQuery[uint8] {
-	return ygnmi.NewSingletonQuery[uint8](
+func (n *Qos_QueueManagementProfile_Wred_Uniform_MinThresholdPercentPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
 		"Qos_QueueManagementProfile_Wred_Uniform",
 		true,
 		false,
@@ -38064,10 +38064,10 @@ func (n *Qos_QueueManagementProfile_Wred_Uniform_MinThresholdPercentPath) State(
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
 			ret := gs.(*oc.Qos_QueueManagementProfile_Wred_Uniform).MinThresholdPercent
 			if ret == nil {
-				var zero uint8
+				var zero uint64
 				return zero, false
 			}
 			return *ret, true
@@ -38091,8 +38091,8 @@ func (n *Qos_QueueManagementProfile_Wred_Uniform_MinThresholdPercentPath) State(
 //	Instantiating module: "openconfig-qos"
 //	Path from parent:     "state/min-threshold-percent"
 //	Path from root:       "/qos/queue-management-profiles/queue-management-profile/wred/uniform/state/min-threshold-percent"
-func (n *Qos_QueueManagementProfile_Wred_Uniform_MinThresholdPercentPathAny) State() ygnmi.WildcardQuery[uint8] {
-	return ygnmi.NewWildcardQuery[uint8](
+func (n *Qos_QueueManagementProfile_Wred_Uniform_MinThresholdPercentPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
 		"Qos_QueueManagementProfile_Wred_Uniform",
 		true,
 		false,
@@ -38105,10 +38105,10 @@ func (n *Qos_QueueManagementProfile_Wred_Uniform_MinThresholdPercentPathAny) Sta
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
 			ret := gs.(*oc.Qos_QueueManagementProfile_Wred_Uniform).MinThresholdPercent
 			if ret == nil {
-				var zero uint8
+				var zero uint64
 				return zero, false
 			}
 			return *ret, true
@@ -38132,8 +38132,8 @@ func (n *Qos_QueueManagementProfile_Wred_Uniform_MinThresholdPercentPathAny) Sta
 //	Instantiating module: "openconfig-qos"
 //	Path from parent:     "config/min-threshold-percent"
 //	Path from root:       "/qos/queue-management-profiles/queue-management-profile/wred/uniform/config/min-threshold-percent"
-func (n *Qos_QueueManagementProfile_Wred_Uniform_MinThresholdPercentPath) Config() ygnmi.ConfigQuery[uint8] {
-	return ygnmi.NewConfigQuery[uint8](
+func (n *Qos_QueueManagementProfile_Wred_Uniform_MinThresholdPercentPath) Config() ygnmi.ConfigQuery[uint64] {
+	return ygnmi.NewConfigQuery[uint64](
 		"Qos_QueueManagementProfile_Wred_Uniform",
 		false,
 		true,
@@ -38146,10 +38146,10 @@ func (n *Qos_QueueManagementProfile_Wred_Uniform_MinThresholdPercentPath) Config
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
 			ret := gs.(*oc.Qos_QueueManagementProfile_Wred_Uniform).MinThresholdPercent
 			if ret == nil {
-				var zero uint8
+				var zero uint64
 				return zero, false
 			}
 			return *ret, true
@@ -38173,8 +38173,8 @@ func (n *Qos_QueueManagementProfile_Wred_Uniform_MinThresholdPercentPath) Config
 //	Instantiating module: "openconfig-qos"
 //	Path from parent:     "config/min-threshold-percent"
 //	Path from root:       "/qos/queue-management-profiles/queue-management-profile/wred/uniform/config/min-threshold-percent"
-func (n *Qos_QueueManagementProfile_Wred_Uniform_MinThresholdPercentPathAny) Config() ygnmi.WildcardQuery[uint8] {
-	return ygnmi.NewWildcardQuery[uint8](
+func (n *Qos_QueueManagementProfile_Wred_Uniform_MinThresholdPercentPathAny) Config() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
 		"Qos_QueueManagementProfile_Wred_Uniform",
 		false,
 		true,
@@ -38187,10 +38187,10 @@ func (n *Qos_QueueManagementProfile_Wred_Uniform_MinThresholdPercentPathAny) Con
 			nil,
 			n.parent,
 		),
-		func(gs ygot.ValidatedGoStruct) (uint8, bool) {
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
 			ret := gs.(*oc.Qos_QueueManagementProfile_Wred_Uniform).MinThresholdPercent
 			if ret == nil {
-				var zero uint8
+				var zero uint64
 				return zero, false
 			}
 			return *ret, true

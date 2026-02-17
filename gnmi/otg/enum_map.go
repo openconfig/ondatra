@@ -316,6 +316,7 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 	"E_Structured_Transitive_2OctetAsType": {
 		1: {Name: "ROUTE_TARGET_SUBTYPE"},
 		2: {Name: "ROUTE_ORIGIN_SUBTYPE"},
+		3: {Name: "LINK_BANDWIDTH_SUBTYPE"},
 	},
 	"E_Structured_Transitive_4OctetAsType": {
 		1: {Name: "ROUTE_TARGET_SUBTYPE"},

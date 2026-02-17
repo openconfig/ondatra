@@ -11802,6 +11802,106 @@ func (n *Interface_EthernetPathAny) PortSpeed() *Interface_Ethernet_PortSpeedPat
 	return ps
 }
 
+// PostFecBer (container): Bit error rate after forward error correction -- computed
+// value with 18 decimal precision. Note that decimal64
+// supports values as small as i x 10^-18 where i is an
+// integer. Values smaller than this should be reported as 0
+// to inidicate error free or near error free performance.
+// Values include the instantaneous, average, minimum, and
+// maximum statistics. If avg/min/max statistics are not
+// supported, the target is expected to just supply the
+// instant value. Applicable id gec-mode is not NONE.
+//
+//	Defining module:      "openconfig-if-ethernet"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "state/post-fec-ber"
+//	Path from root:       "/interfaces/interface/ethernet/state/post-fec-ber"
+func (n *Interface_EthernetPath) PostFecBer() *Interface_Ethernet_PostFecBerPath {
+	ps := &Interface_Ethernet_PostFecBerPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "post-fec-ber"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// PostFecBer (container): Bit error rate after forward error correction -- computed
+// value with 18 decimal precision. Note that decimal64
+// supports values as small as i x 10^-18 where i is an
+// integer. Values smaller than this should be reported as 0
+// to inidicate error free or near error free performance.
+// Values include the instantaneous, average, minimum, and
+// maximum statistics. If avg/min/max statistics are not
+// supported, the target is expected to just supply the
+// instant value. Applicable id gec-mode is not NONE.
+//
+//	Defining module:      "openconfig-if-ethernet"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "state/post-fec-ber"
+//	Path from root:       "/interfaces/interface/ethernet/state/post-fec-ber"
+func (n *Interface_EthernetPathAny) PostFecBer() *Interface_Ethernet_PostFecBerPathAny {
+	ps := &Interface_Ethernet_PostFecBerPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "post-fec-ber"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// PreFecBer (container): Bit error rate before forward error correction -- computed
+// value with 18 decimal precision. Note that decimal64
+// supports values as small as i x 10^-18 where i is an
+// integer. Values smaller than this should be reported as 0
+// to inidicate error free or near error free performance.
+// Values include the instantaneous, average, minimum, and
+// maximum statistics. If avg/min/max statistics are not
+// supported, the target is expected to just supply the
+// instant value. Applicable id gec-mode is not NONE.
+//
+//	Defining module:      "openconfig-if-ethernet"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "state/pre-fec-ber"
+//	Path from root:       "/interfaces/interface/ethernet/state/pre-fec-ber"
+func (n *Interface_EthernetPath) PreFecBer() *Interface_Ethernet_PreFecBerPath {
+	ps := &Interface_Ethernet_PreFecBerPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "pre-fec-ber"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// PreFecBer (container): Bit error rate before forward error correction -- computed
+// value with 18 decimal precision. Note that decimal64
+// supports values as small as i x 10^-18 where i is an
+// integer. Values smaller than this should be reported as 0
+// to inidicate error free or near error free performance.
+// Values include the instantaneous, average, minimum, and
+// maximum statistics. If avg/min/max statistics are not
+// supported, the target is expected to just supply the
+// instant value. Applicable id gec-mode is not NONE.
+//
+//	Defining module:      "openconfig-if-ethernet"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "state/pre-fec-ber"
+//	Path from root:       "/interfaces/interface/ethernet/state/pre-fec-ber"
+func (n *Interface_EthernetPathAny) PreFecBer() *Interface_Ethernet_PreFecBerPathAny {
+	ps := &Interface_Ethernet_PreFecBerPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "pre-fec-ber"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
 // StandaloneLinkTraining (leaf): Link training is automatic tuning of the SerDes transmit and
 // receive parameters to ensure an optimal connection over copper
 // links. It is normally run as part of the auto negotiation
@@ -11986,6 +12086,204 @@ func (n *Interface_EthernetPathAny) Config() ygnmi.WildcardQuery[*oc.Interface_E
 		n,
 		nil,
 		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_Ethernet_Counters_FecCorrectedBlocksPath represents the /openconfig-interfaces/interfaces/interface/ethernet/state/counters/fec-corrected-blocks YANG schema element.
+type Interface_Ethernet_Counters_FecCorrectedBlocksPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Ethernet_Counters_FecCorrectedBlocksPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/ethernet/state/counters/fec-corrected-blocks YANG schema element.
+type Interface_Ethernet_Counters_FecCorrectedBlocksPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Interface_Ethernet_Counters_FecCorrectedBlocksPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ethernet"
+//	Instantiating module: "openconfig-if-ethernet"
+//	Path from parent:     "fec-corrected-blocks"
+//	Path from root:       "/interfaces/interface/ethernet/state/counters/fec-corrected-blocks"
+func (n *Interface_Ethernet_Counters_FecCorrectedBlocksPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Interface_Ethernet_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"fec-corrected-blocks"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Ethernet_Counters).FecCorrectedBlocks
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Ethernet_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ethernet"
+//	Instantiating module: "openconfig-if-ethernet"
+//	Path from parent:     "fec-corrected-blocks"
+//	Path from root:       "/interfaces/interface/ethernet/state/counters/fec-corrected-blocks"
+func (n *Interface_Ethernet_Counters_FecCorrectedBlocksPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Interface_Ethernet_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"fec-corrected-blocks"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Ethernet_Counters).FecCorrectedBlocks
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Ethernet_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_Ethernet_Counters_FecUncorrectableBlocksPath represents the /openconfig-interfaces/interfaces/interface/ethernet/state/counters/fec-uncorrectable-blocks YANG schema element.
+type Interface_Ethernet_Counters_FecUncorrectableBlocksPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Ethernet_Counters_FecUncorrectableBlocksPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/ethernet/state/counters/fec-uncorrectable-blocks YANG schema element.
+type Interface_Ethernet_Counters_FecUncorrectableBlocksPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Interface_Ethernet_Counters_FecUncorrectableBlocksPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ethernet"
+//	Instantiating module: "openconfig-if-ethernet"
+//	Path from parent:     "fec-uncorrectable-blocks"
+//	Path from root:       "/interfaces/interface/ethernet/state/counters/fec-uncorrectable-blocks"
+func (n *Interface_Ethernet_Counters_FecUncorrectableBlocksPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Interface_Ethernet_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"fec-uncorrectable-blocks"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Ethernet_Counters).FecUncorrectableBlocks
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Ethernet_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ethernet"
+//	Instantiating module: "openconfig-if-ethernet"
+//	Path from parent:     "fec-uncorrectable-blocks"
+//	Path from root:       "/interfaces/interface/ethernet/state/counters/fec-uncorrectable-blocks"
+func (n *Interface_Ethernet_Counters_FecUncorrectableBlocksPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Interface_Ethernet_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"fec-uncorrectable-blocks"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Ethernet_Counters).FecUncorrectableBlocks
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Ethernet_Counters) },
 		func() *ytypes.Schema {
 			return &ytypes.Schema{
 				Root:       &oc.Root{},
@@ -13993,6 +14291,92 @@ func (n *Interface_Ethernet_CountersPath) PathOriginName() string {
 	return "openconfig"
 }
 
+// FecCorrectedBlocks (leaf): The number of words/symbols that were corrected by
+// the FEC;
+// Applicable if fec-mode is not NONE.
+// This is IEEE802.3 clause 119.3.2 (also IEEE802.3df clause
+// 172.3.2 for 800GE) FEC_corrected_cw_counter
+//
+//	Defining module:      "openconfig-if-ethernet"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "fec-corrected-blocks"
+//	Path from root:       "/interfaces/interface/ethernet/state/counters/fec-corrected-blocks"
+func (n *Interface_Ethernet_CountersPath) FecCorrectedBlocks() *Interface_Ethernet_Counters_FecCorrectedBlocksPath {
+	ps := &Interface_Ethernet_Counters_FecCorrectedBlocksPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"fec-corrected-blocks"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// FecCorrectedBlocks (leaf): The number of words/symbols that were corrected by
+// the FEC;
+// Applicable if fec-mode is not NONE.
+// This is IEEE802.3 clause 119.3.2 (also IEEE802.3df clause
+// 172.3.2 for 800GE) FEC_corrected_cw_counter
+//
+//	Defining module:      "openconfig-if-ethernet"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "fec-corrected-blocks"
+//	Path from root:       "/interfaces/interface/ethernet/state/counters/fec-corrected-blocks"
+func (n *Interface_Ethernet_CountersPathAny) FecCorrectedBlocks() *Interface_Ethernet_Counters_FecCorrectedBlocksPathAny {
+	ps := &Interface_Ethernet_Counters_FecCorrectedBlocksPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"fec-corrected-blocks"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// FecUncorrectableBlocks (leaf): The number of block/codeword that were uncorrectable by
+// the FEC;
+// This is IEEE802.3 clause 119.3.3 (also IEEE802.3df clause
+// 172.3.3 for 800GE) FEC_uncorrected_cw_counter.
+//
+//	Defining module:      "openconfig-if-ethernet"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "fec-uncorrectable-blocks"
+//	Path from root:       "/interfaces/interface/ethernet/state/counters/fec-uncorrectable-blocks"
+func (n *Interface_Ethernet_CountersPath) FecUncorrectableBlocks() *Interface_Ethernet_Counters_FecUncorrectableBlocksPath {
+	ps := &Interface_Ethernet_Counters_FecUncorrectableBlocksPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"fec-uncorrectable-blocks"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// FecUncorrectableBlocks (leaf): The number of block/codeword that were uncorrectable by
+// the FEC;
+// This is IEEE802.3 clause 119.3.3 (also IEEE802.3df clause
+// 172.3.3 for 800GE) FEC_uncorrected_cw_counter.
+//
+//	Defining module:      "openconfig-if-ethernet"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "fec-uncorrectable-blocks"
+//	Path from root:       "/interfaces/interface/ethernet/state/counters/fec-uncorrectable-blocks"
+func (n *Interface_Ethernet_CountersPathAny) FecUncorrectableBlocks() *Interface_Ethernet_Counters_FecUncorrectableBlocksPathAny {
+	ps := &Interface_Ethernet_Counters_FecUncorrectableBlocksPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"fec-uncorrectable-blocks"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
 // In_8021QFrames (leaf): Number of 802.1q tagged frames received on the interface
 //
 //	Defining module:      "openconfig-if-ethernet"
@@ -15771,6 +16155,2062 @@ func (n *Interface_Ethernet_Counters_InDistributionPath) State() ygnmi.Singleton
 func (n *Interface_Ethernet_Counters_InDistributionPathAny) State() ygnmi.WildcardQuery[*oc.Interface_Ethernet_Counters_InDistribution] {
 	return ygnmi.NewWildcardQuery[*oc.Interface_Ethernet_Counters_InDistribution](
 		"Interface_Ethernet_Counters_InDistribution",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_Ethernet_PostFecBer_AvgPath represents the /openconfig-interfaces/interfaces/interface/ethernet/state/post-fec-ber/avg YANG schema element.
+type Interface_Ethernet_PostFecBer_AvgPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Ethernet_PostFecBer_AvgPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/ethernet/state/post-fec-ber/avg YANG schema element.
+type Interface_Ethernet_PostFecBer_AvgPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Interface_Ethernet_PostFecBer_AvgPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-if-ethernet"
+//	Path from parent:     "avg"
+//	Path from root:       "/interfaces/interface/ethernet/state/post-fec-ber/avg"
+func (n *Interface_Ethernet_PostFecBer_AvgPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewSingletonQuery[float64](
+		"Interface_Ethernet_PostFecBer",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"avg"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Interface_Ethernet_PostFecBer).Avg
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Ethernet_PostFecBer) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-if-ethernet"
+//	Path from parent:     "avg"
+//	Path from root:       "/interfaces/interface/ethernet/state/post-fec-ber/avg"
+func (n *Interface_Ethernet_PostFecBer_AvgPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewWildcardQuery[float64](
+		"Interface_Ethernet_PostFecBer",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"avg"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Interface_Ethernet_PostFecBer).Avg
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Ethernet_PostFecBer) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_Ethernet_PostFecBer_InstantPath represents the /openconfig-interfaces/interfaces/interface/ethernet/state/post-fec-ber/instant YANG schema element.
+type Interface_Ethernet_PostFecBer_InstantPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Ethernet_PostFecBer_InstantPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/ethernet/state/post-fec-ber/instant YANG schema element.
+type Interface_Ethernet_PostFecBer_InstantPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Interface_Ethernet_PostFecBer_InstantPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-if-ethernet"
+//	Path from parent:     "instant"
+//	Path from root:       "/interfaces/interface/ethernet/state/post-fec-ber/instant"
+func (n *Interface_Ethernet_PostFecBer_InstantPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewSingletonQuery[float64](
+		"Interface_Ethernet_PostFecBer",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"instant"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Interface_Ethernet_PostFecBer).Instant
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Ethernet_PostFecBer) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-if-ethernet"
+//	Path from parent:     "instant"
+//	Path from root:       "/interfaces/interface/ethernet/state/post-fec-ber/instant"
+func (n *Interface_Ethernet_PostFecBer_InstantPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewWildcardQuery[float64](
+		"Interface_Ethernet_PostFecBer",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"instant"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Interface_Ethernet_PostFecBer).Instant
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Ethernet_PostFecBer) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_Ethernet_PostFecBer_IntervalPath represents the /openconfig-interfaces/interfaces/interface/ethernet/state/post-fec-ber/interval YANG schema element.
+type Interface_Ethernet_PostFecBer_IntervalPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Ethernet_PostFecBer_IntervalPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/ethernet/state/post-fec-ber/interval YANG schema element.
+type Interface_Ethernet_PostFecBer_IntervalPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Interface_Ethernet_PostFecBer_IntervalPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-if-ethernet"
+//	Path from parent:     "interval"
+//	Path from root:       "/interfaces/interface/ethernet/state/post-fec-ber/interval"
+func (n *Interface_Ethernet_PostFecBer_IntervalPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Interface_Ethernet_PostFecBer",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"interval"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Ethernet_PostFecBer).Interval
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Ethernet_PostFecBer) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-if-ethernet"
+//	Path from parent:     "interval"
+//	Path from root:       "/interfaces/interface/ethernet/state/post-fec-ber/interval"
+func (n *Interface_Ethernet_PostFecBer_IntervalPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Interface_Ethernet_PostFecBer",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"interval"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Ethernet_PostFecBer).Interval
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Ethernet_PostFecBer) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_Ethernet_PostFecBer_MaxPath represents the /openconfig-interfaces/interfaces/interface/ethernet/state/post-fec-ber/max YANG schema element.
+type Interface_Ethernet_PostFecBer_MaxPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Ethernet_PostFecBer_MaxPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/ethernet/state/post-fec-ber/max YANG schema element.
+type Interface_Ethernet_PostFecBer_MaxPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Interface_Ethernet_PostFecBer_MaxPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-if-ethernet"
+//	Path from parent:     "max"
+//	Path from root:       "/interfaces/interface/ethernet/state/post-fec-ber/max"
+func (n *Interface_Ethernet_PostFecBer_MaxPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewSingletonQuery[float64](
+		"Interface_Ethernet_PostFecBer",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"max"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Interface_Ethernet_PostFecBer).Max
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Ethernet_PostFecBer) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-if-ethernet"
+//	Path from parent:     "max"
+//	Path from root:       "/interfaces/interface/ethernet/state/post-fec-ber/max"
+func (n *Interface_Ethernet_PostFecBer_MaxPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewWildcardQuery[float64](
+		"Interface_Ethernet_PostFecBer",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"max"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Interface_Ethernet_PostFecBer).Max
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Ethernet_PostFecBer) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_Ethernet_PostFecBer_MaxTimePath represents the /openconfig-interfaces/interfaces/interface/ethernet/state/post-fec-ber/max-time YANG schema element.
+type Interface_Ethernet_PostFecBer_MaxTimePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Ethernet_PostFecBer_MaxTimePathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/ethernet/state/post-fec-ber/max-time YANG schema element.
+type Interface_Ethernet_PostFecBer_MaxTimePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Interface_Ethernet_PostFecBer_MaxTimePath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-if-ethernet"
+//	Path from parent:     "max-time"
+//	Path from root:       "/interfaces/interface/ethernet/state/post-fec-ber/max-time"
+func (n *Interface_Ethernet_PostFecBer_MaxTimePath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Interface_Ethernet_PostFecBer",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"max-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Ethernet_PostFecBer).MaxTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Ethernet_PostFecBer) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-if-ethernet"
+//	Path from parent:     "max-time"
+//	Path from root:       "/interfaces/interface/ethernet/state/post-fec-ber/max-time"
+func (n *Interface_Ethernet_PostFecBer_MaxTimePathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Interface_Ethernet_PostFecBer",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"max-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Ethernet_PostFecBer).MaxTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Ethernet_PostFecBer) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_Ethernet_PostFecBer_MinPath represents the /openconfig-interfaces/interfaces/interface/ethernet/state/post-fec-ber/min YANG schema element.
+type Interface_Ethernet_PostFecBer_MinPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Ethernet_PostFecBer_MinPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/ethernet/state/post-fec-ber/min YANG schema element.
+type Interface_Ethernet_PostFecBer_MinPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Interface_Ethernet_PostFecBer_MinPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-if-ethernet"
+//	Path from parent:     "min"
+//	Path from root:       "/interfaces/interface/ethernet/state/post-fec-ber/min"
+func (n *Interface_Ethernet_PostFecBer_MinPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewSingletonQuery[float64](
+		"Interface_Ethernet_PostFecBer",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"min"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Interface_Ethernet_PostFecBer).Min
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Ethernet_PostFecBer) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-if-ethernet"
+//	Path from parent:     "min"
+//	Path from root:       "/interfaces/interface/ethernet/state/post-fec-ber/min"
+func (n *Interface_Ethernet_PostFecBer_MinPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewWildcardQuery[float64](
+		"Interface_Ethernet_PostFecBer",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"min"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Interface_Ethernet_PostFecBer).Min
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Ethernet_PostFecBer) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_Ethernet_PostFecBer_MinTimePath represents the /openconfig-interfaces/interfaces/interface/ethernet/state/post-fec-ber/min-time YANG schema element.
+type Interface_Ethernet_PostFecBer_MinTimePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Ethernet_PostFecBer_MinTimePathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/ethernet/state/post-fec-ber/min-time YANG schema element.
+type Interface_Ethernet_PostFecBer_MinTimePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Interface_Ethernet_PostFecBer_MinTimePath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-if-ethernet"
+//	Path from parent:     "min-time"
+//	Path from root:       "/interfaces/interface/ethernet/state/post-fec-ber/min-time"
+func (n *Interface_Ethernet_PostFecBer_MinTimePath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Interface_Ethernet_PostFecBer",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"min-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Ethernet_PostFecBer).MinTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Ethernet_PostFecBer) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-if-ethernet"
+//	Path from parent:     "min-time"
+//	Path from root:       "/interfaces/interface/ethernet/state/post-fec-ber/min-time"
+func (n *Interface_Ethernet_PostFecBer_MinTimePathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Interface_Ethernet_PostFecBer",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"min-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Ethernet_PostFecBer).MinTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Ethernet_PostFecBer) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_Ethernet_PostFecBerPath represents the /openconfig-interfaces/interfaces/interface/ethernet/state/post-fec-ber YANG schema element.
+type Interface_Ethernet_PostFecBerPath struct {
+	*ygnmi.NodePath
+}
+
+// Interface_Ethernet_PostFecBerPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/ethernet/state/post-fec-ber YANG schema element.
+type Interface_Ethernet_PostFecBerPathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Interface_Ethernet_PostFecBerPath) PathOriginName() string {
+	return "openconfig"
+}
+
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "avg"
+//	Path from root:       "/interfaces/interface/ethernet/state/post-fec-ber/avg"
+func (n *Interface_Ethernet_PostFecBerPath) Avg() *Interface_Ethernet_PostFecBer_AvgPath {
+	ps := &Interface_Ethernet_PostFecBer_AvgPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "avg"
+//	Path from root:       "/interfaces/interface/ethernet/state/post-fec-ber/avg"
+func (n *Interface_Ethernet_PostFecBerPathAny) Avg() *Interface_Ethernet_PostFecBer_AvgPathAny {
+	ps := &Interface_Ethernet_PostFecBer_AvgPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Instant (leaf): The instantaneous value of the statistic.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "instant"
+//	Path from root:       "/interfaces/interface/ethernet/state/post-fec-ber/instant"
+func (n *Interface_Ethernet_PostFecBerPath) Instant() *Interface_Ethernet_PostFecBer_InstantPath {
+	ps := &Interface_Ethernet_PostFecBer_InstantPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"instant"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Instant (leaf): The instantaneous value of the statistic.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "instant"
+//	Path from root:       "/interfaces/interface/ethernet/state/post-fec-ber/instant"
+func (n *Interface_Ethernet_PostFecBerPathAny) Instant() *Interface_Ethernet_PostFecBer_InstantPathAny {
+	ps := &Interface_Ethernet_PostFecBer_InstantPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"instant"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "interval"
+//	Path from root:       "/interfaces/interface/ethernet/state/post-fec-ber/interval"
+func (n *Interface_Ethernet_PostFecBerPath) Interval() *Interface_Ethernet_PostFecBer_IntervalPath {
+	ps := &Interface_Ethernet_PostFecBer_IntervalPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"interval"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "interval"
+//	Path from root:       "/interfaces/interface/ethernet/state/post-fec-ber/interval"
+func (n *Interface_Ethernet_PostFecBerPathAny) Interval() *Interface_Ethernet_PostFecBer_IntervalPathAny {
+	ps := &Interface_Ethernet_PostFecBer_IntervalPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"interval"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Max (leaf): The maximum value of the statistic over the time
+// interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "max"
+//	Path from root:       "/interfaces/interface/ethernet/state/post-fec-ber/max"
+func (n *Interface_Ethernet_PostFecBerPath) Max() *Interface_Ethernet_PostFecBer_MaxPath {
+	ps := &Interface_Ethernet_PostFecBer_MaxPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Max (leaf): The maximum value of the statistic over the time
+// interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "max"
+//	Path from root:       "/interfaces/interface/ethernet/state/post-fec-ber/max"
+func (n *Interface_Ethernet_PostFecBerPathAny) Max() *Interface_Ethernet_PostFecBer_MaxPathAny {
+	ps := &Interface_Ethernet_PostFecBer_MaxPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-interfaces"
+//		Path from parent:     "max-time"
+//		Path from root:       "/interfaces/interface/ethernet/state/post-fec-ber/max-time"
+func (n *Interface_Ethernet_PostFecBerPath) MaxTime() *Interface_Ethernet_PostFecBer_MaxTimePath {
+	ps := &Interface_Ethernet_PostFecBer_MaxTimePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-interfaces"
+//		Path from parent:     "max-time"
+//		Path from root:       "/interfaces/interface/ethernet/state/post-fec-ber/max-time"
+func (n *Interface_Ethernet_PostFecBerPathAny) MaxTime() *Interface_Ethernet_PostFecBer_MaxTimePathAny {
+	ps := &Interface_Ethernet_PostFecBer_MaxTimePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Min (leaf): The minimum value of the statistic over the time
+// interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "min"
+//	Path from root:       "/interfaces/interface/ethernet/state/post-fec-ber/min"
+func (n *Interface_Ethernet_PostFecBerPath) Min() *Interface_Ethernet_PostFecBer_MinPath {
+	ps := &Interface_Ethernet_PostFecBer_MinPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Min (leaf): The minimum value of the statistic over the time
+// interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "min"
+//	Path from root:       "/interfaces/interface/ethernet/state/post-fec-ber/min"
+func (n *Interface_Ethernet_PostFecBerPathAny) Min() *Interface_Ethernet_PostFecBer_MinPathAny {
+	ps := &Interface_Ethernet_PostFecBer_MinPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-interfaces"
+//		Path from parent:     "min-time"
+//		Path from root:       "/interfaces/interface/ethernet/state/post-fec-ber/min-time"
+func (n *Interface_Ethernet_PostFecBerPath) MinTime() *Interface_Ethernet_PostFecBer_MinTimePath {
+	ps := &Interface_Ethernet_PostFecBer_MinTimePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-interfaces"
+//		Path from parent:     "min-time"
+//		Path from root:       "/interfaces/interface/ethernet/state/post-fec-ber/min-time"
+func (n *Interface_Ethernet_PostFecBerPathAny) MinTime() *Interface_Ethernet_PostFecBer_MinTimePathAny {
+	ps := &Interface_Ethernet_PostFecBer_MinTimePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Interface_Ethernet_PostFecBerPath) State() ygnmi.SingletonQuery[*oc.Interface_Ethernet_PostFecBer] {
+	return ygnmi.NewSingletonQuery[*oc.Interface_Ethernet_PostFecBer](
+		"Interface_Ethernet_PostFecBer",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Interface_Ethernet_PostFecBerPathAny) State() ygnmi.WildcardQuery[*oc.Interface_Ethernet_PostFecBer] {
+	return ygnmi.NewWildcardQuery[*oc.Interface_Ethernet_PostFecBer](
+		"Interface_Ethernet_PostFecBer",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_Ethernet_PreFecBer_AvgPath represents the /openconfig-interfaces/interfaces/interface/ethernet/state/pre-fec-ber/avg YANG schema element.
+type Interface_Ethernet_PreFecBer_AvgPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Ethernet_PreFecBer_AvgPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/ethernet/state/pre-fec-ber/avg YANG schema element.
+type Interface_Ethernet_PreFecBer_AvgPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Interface_Ethernet_PreFecBer_AvgPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-if-ethernet"
+//	Path from parent:     "avg"
+//	Path from root:       "/interfaces/interface/ethernet/state/pre-fec-ber/avg"
+func (n *Interface_Ethernet_PreFecBer_AvgPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewSingletonQuery[float64](
+		"Interface_Ethernet_PreFecBer",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"avg"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Interface_Ethernet_PreFecBer).Avg
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Ethernet_PreFecBer) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-if-ethernet"
+//	Path from parent:     "avg"
+//	Path from root:       "/interfaces/interface/ethernet/state/pre-fec-ber/avg"
+func (n *Interface_Ethernet_PreFecBer_AvgPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewWildcardQuery[float64](
+		"Interface_Ethernet_PreFecBer",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"avg"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Interface_Ethernet_PreFecBer).Avg
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Ethernet_PreFecBer) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_Ethernet_PreFecBer_InstantPath represents the /openconfig-interfaces/interfaces/interface/ethernet/state/pre-fec-ber/instant YANG schema element.
+type Interface_Ethernet_PreFecBer_InstantPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Ethernet_PreFecBer_InstantPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/ethernet/state/pre-fec-ber/instant YANG schema element.
+type Interface_Ethernet_PreFecBer_InstantPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Interface_Ethernet_PreFecBer_InstantPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-if-ethernet"
+//	Path from parent:     "instant"
+//	Path from root:       "/interfaces/interface/ethernet/state/pre-fec-ber/instant"
+func (n *Interface_Ethernet_PreFecBer_InstantPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewSingletonQuery[float64](
+		"Interface_Ethernet_PreFecBer",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"instant"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Interface_Ethernet_PreFecBer).Instant
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Ethernet_PreFecBer) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-if-ethernet"
+//	Path from parent:     "instant"
+//	Path from root:       "/interfaces/interface/ethernet/state/pre-fec-ber/instant"
+func (n *Interface_Ethernet_PreFecBer_InstantPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewWildcardQuery[float64](
+		"Interface_Ethernet_PreFecBer",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"instant"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Interface_Ethernet_PreFecBer).Instant
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Ethernet_PreFecBer) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_Ethernet_PreFecBer_IntervalPath represents the /openconfig-interfaces/interfaces/interface/ethernet/state/pre-fec-ber/interval YANG schema element.
+type Interface_Ethernet_PreFecBer_IntervalPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Ethernet_PreFecBer_IntervalPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/ethernet/state/pre-fec-ber/interval YANG schema element.
+type Interface_Ethernet_PreFecBer_IntervalPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Interface_Ethernet_PreFecBer_IntervalPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-if-ethernet"
+//	Path from parent:     "interval"
+//	Path from root:       "/interfaces/interface/ethernet/state/pre-fec-ber/interval"
+func (n *Interface_Ethernet_PreFecBer_IntervalPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Interface_Ethernet_PreFecBer",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"interval"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Ethernet_PreFecBer).Interval
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Ethernet_PreFecBer) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-if-ethernet"
+//	Path from parent:     "interval"
+//	Path from root:       "/interfaces/interface/ethernet/state/pre-fec-ber/interval"
+func (n *Interface_Ethernet_PreFecBer_IntervalPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Interface_Ethernet_PreFecBer",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"interval"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Ethernet_PreFecBer).Interval
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Ethernet_PreFecBer) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_Ethernet_PreFecBer_MaxPath represents the /openconfig-interfaces/interfaces/interface/ethernet/state/pre-fec-ber/max YANG schema element.
+type Interface_Ethernet_PreFecBer_MaxPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Ethernet_PreFecBer_MaxPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/ethernet/state/pre-fec-ber/max YANG schema element.
+type Interface_Ethernet_PreFecBer_MaxPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Interface_Ethernet_PreFecBer_MaxPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-if-ethernet"
+//	Path from parent:     "max"
+//	Path from root:       "/interfaces/interface/ethernet/state/pre-fec-ber/max"
+func (n *Interface_Ethernet_PreFecBer_MaxPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewSingletonQuery[float64](
+		"Interface_Ethernet_PreFecBer",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"max"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Interface_Ethernet_PreFecBer).Max
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Ethernet_PreFecBer) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-if-ethernet"
+//	Path from parent:     "max"
+//	Path from root:       "/interfaces/interface/ethernet/state/pre-fec-ber/max"
+func (n *Interface_Ethernet_PreFecBer_MaxPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewWildcardQuery[float64](
+		"Interface_Ethernet_PreFecBer",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"max"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Interface_Ethernet_PreFecBer).Max
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Ethernet_PreFecBer) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_Ethernet_PreFecBer_MaxTimePath represents the /openconfig-interfaces/interfaces/interface/ethernet/state/pre-fec-ber/max-time YANG schema element.
+type Interface_Ethernet_PreFecBer_MaxTimePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Ethernet_PreFecBer_MaxTimePathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/ethernet/state/pre-fec-ber/max-time YANG schema element.
+type Interface_Ethernet_PreFecBer_MaxTimePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Interface_Ethernet_PreFecBer_MaxTimePath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-if-ethernet"
+//	Path from parent:     "max-time"
+//	Path from root:       "/interfaces/interface/ethernet/state/pre-fec-ber/max-time"
+func (n *Interface_Ethernet_PreFecBer_MaxTimePath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Interface_Ethernet_PreFecBer",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"max-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Ethernet_PreFecBer).MaxTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Ethernet_PreFecBer) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-if-ethernet"
+//	Path from parent:     "max-time"
+//	Path from root:       "/interfaces/interface/ethernet/state/pre-fec-ber/max-time"
+func (n *Interface_Ethernet_PreFecBer_MaxTimePathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Interface_Ethernet_PreFecBer",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"max-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Ethernet_PreFecBer).MaxTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Ethernet_PreFecBer) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_Ethernet_PreFecBer_MinPath represents the /openconfig-interfaces/interfaces/interface/ethernet/state/pre-fec-ber/min YANG schema element.
+type Interface_Ethernet_PreFecBer_MinPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Ethernet_PreFecBer_MinPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/ethernet/state/pre-fec-ber/min YANG schema element.
+type Interface_Ethernet_PreFecBer_MinPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Interface_Ethernet_PreFecBer_MinPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-if-ethernet"
+//	Path from parent:     "min"
+//	Path from root:       "/interfaces/interface/ethernet/state/pre-fec-ber/min"
+func (n *Interface_Ethernet_PreFecBer_MinPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewSingletonQuery[float64](
+		"Interface_Ethernet_PreFecBer",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"min"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Interface_Ethernet_PreFecBer).Min
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Ethernet_PreFecBer) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-if-ethernet"
+//	Path from parent:     "min"
+//	Path from root:       "/interfaces/interface/ethernet/state/pre-fec-ber/min"
+func (n *Interface_Ethernet_PreFecBer_MinPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewWildcardQuery[float64](
+		"Interface_Ethernet_PreFecBer",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"min"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Interface_Ethernet_PreFecBer).Min
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Ethernet_PreFecBer) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_Ethernet_PreFecBer_MinTimePath represents the /openconfig-interfaces/interfaces/interface/ethernet/state/pre-fec-ber/min-time YANG schema element.
+type Interface_Ethernet_PreFecBer_MinTimePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Ethernet_PreFecBer_MinTimePathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/ethernet/state/pre-fec-ber/min-time YANG schema element.
+type Interface_Ethernet_PreFecBer_MinTimePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Interface_Ethernet_PreFecBer_MinTimePath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-if-ethernet"
+//	Path from parent:     "min-time"
+//	Path from root:       "/interfaces/interface/ethernet/state/pre-fec-ber/min-time"
+func (n *Interface_Ethernet_PreFecBer_MinTimePath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Interface_Ethernet_PreFecBer",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"min-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Ethernet_PreFecBer).MinTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Ethernet_PreFecBer) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-if-ethernet"
+//	Path from parent:     "min-time"
+//	Path from root:       "/interfaces/interface/ethernet/state/pre-fec-ber/min-time"
+func (n *Interface_Ethernet_PreFecBer_MinTimePathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Interface_Ethernet_PreFecBer",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"min-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Ethernet_PreFecBer).MinTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Ethernet_PreFecBer) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_Ethernet_PreFecBerPath represents the /openconfig-interfaces/interfaces/interface/ethernet/state/pre-fec-ber YANG schema element.
+type Interface_Ethernet_PreFecBerPath struct {
+	*ygnmi.NodePath
+}
+
+// Interface_Ethernet_PreFecBerPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/ethernet/state/pre-fec-ber YANG schema element.
+type Interface_Ethernet_PreFecBerPathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Interface_Ethernet_PreFecBerPath) PathOriginName() string {
+	return "openconfig"
+}
+
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "avg"
+//	Path from root:       "/interfaces/interface/ethernet/state/pre-fec-ber/avg"
+func (n *Interface_Ethernet_PreFecBerPath) Avg() *Interface_Ethernet_PreFecBer_AvgPath {
+	ps := &Interface_Ethernet_PreFecBer_AvgPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "avg"
+//	Path from root:       "/interfaces/interface/ethernet/state/pre-fec-ber/avg"
+func (n *Interface_Ethernet_PreFecBerPathAny) Avg() *Interface_Ethernet_PreFecBer_AvgPathAny {
+	ps := &Interface_Ethernet_PreFecBer_AvgPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Instant (leaf): The instantaneous value of the statistic.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "instant"
+//	Path from root:       "/interfaces/interface/ethernet/state/pre-fec-ber/instant"
+func (n *Interface_Ethernet_PreFecBerPath) Instant() *Interface_Ethernet_PreFecBer_InstantPath {
+	ps := &Interface_Ethernet_PreFecBer_InstantPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"instant"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Instant (leaf): The instantaneous value of the statistic.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "instant"
+//	Path from root:       "/interfaces/interface/ethernet/state/pre-fec-ber/instant"
+func (n *Interface_Ethernet_PreFecBerPathAny) Instant() *Interface_Ethernet_PreFecBer_InstantPathAny {
+	ps := &Interface_Ethernet_PreFecBer_InstantPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"instant"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "interval"
+//	Path from root:       "/interfaces/interface/ethernet/state/pre-fec-ber/interval"
+func (n *Interface_Ethernet_PreFecBerPath) Interval() *Interface_Ethernet_PreFecBer_IntervalPath {
+	ps := &Interface_Ethernet_PreFecBer_IntervalPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"interval"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "interval"
+//	Path from root:       "/interfaces/interface/ethernet/state/pre-fec-ber/interval"
+func (n *Interface_Ethernet_PreFecBerPathAny) Interval() *Interface_Ethernet_PreFecBer_IntervalPathAny {
+	ps := &Interface_Ethernet_PreFecBer_IntervalPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"interval"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Max (leaf): The maximum value of the statistic over the time
+// interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "max"
+//	Path from root:       "/interfaces/interface/ethernet/state/pre-fec-ber/max"
+func (n *Interface_Ethernet_PreFecBerPath) Max() *Interface_Ethernet_PreFecBer_MaxPath {
+	ps := &Interface_Ethernet_PreFecBer_MaxPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Max (leaf): The maximum value of the statistic over the time
+// interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "max"
+//	Path from root:       "/interfaces/interface/ethernet/state/pre-fec-ber/max"
+func (n *Interface_Ethernet_PreFecBerPathAny) Max() *Interface_Ethernet_PreFecBer_MaxPathAny {
+	ps := &Interface_Ethernet_PreFecBer_MaxPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-interfaces"
+//		Path from parent:     "max-time"
+//		Path from root:       "/interfaces/interface/ethernet/state/pre-fec-ber/max-time"
+func (n *Interface_Ethernet_PreFecBerPath) MaxTime() *Interface_Ethernet_PreFecBer_MaxTimePath {
+	ps := &Interface_Ethernet_PreFecBer_MaxTimePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-interfaces"
+//		Path from parent:     "max-time"
+//		Path from root:       "/interfaces/interface/ethernet/state/pre-fec-ber/max-time"
+func (n *Interface_Ethernet_PreFecBerPathAny) MaxTime() *Interface_Ethernet_PreFecBer_MaxTimePathAny {
+	ps := &Interface_Ethernet_PreFecBer_MaxTimePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Min (leaf): The minimum value of the statistic over the time
+// interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "min"
+//	Path from root:       "/interfaces/interface/ethernet/state/pre-fec-ber/min"
+func (n *Interface_Ethernet_PreFecBerPath) Min() *Interface_Ethernet_PreFecBer_MinPath {
+	ps := &Interface_Ethernet_PreFecBer_MinPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Min (leaf): The minimum value of the statistic over the time
+// interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "min"
+//	Path from root:       "/interfaces/interface/ethernet/state/pre-fec-ber/min"
+func (n *Interface_Ethernet_PreFecBerPathAny) Min() *Interface_Ethernet_PreFecBer_MinPathAny {
+	ps := &Interface_Ethernet_PreFecBer_MinPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-interfaces"
+//		Path from parent:     "min-time"
+//		Path from root:       "/interfaces/interface/ethernet/state/pre-fec-ber/min-time"
+func (n *Interface_Ethernet_PreFecBerPath) MinTime() *Interface_Ethernet_PreFecBer_MinTimePath {
+	ps := &Interface_Ethernet_PreFecBer_MinTimePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-interfaces"
+//		Path from parent:     "min-time"
+//		Path from root:       "/interfaces/interface/ethernet/state/pre-fec-ber/min-time"
+func (n *Interface_Ethernet_PreFecBerPathAny) MinTime() *Interface_Ethernet_PreFecBer_MinTimePathAny {
+	ps := &Interface_Ethernet_PreFecBer_MinTimePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Interface_Ethernet_PreFecBerPath) State() ygnmi.SingletonQuery[*oc.Interface_Ethernet_PreFecBer] {
+	return ygnmi.NewSingletonQuery[*oc.Interface_Ethernet_PreFecBer](
+		"Interface_Ethernet_PreFecBer",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Interface_Ethernet_PreFecBerPathAny) State() ygnmi.WildcardQuery[*oc.Interface_Ethernet_PreFecBer] {
+	return ygnmi.NewWildcardQuery[*oc.Interface_Ethernet_PreFecBer](
+		"Interface_Ethernet_PreFecBer",
 		true,
 		false,
 		false,
@@ -41539,6 +43979,118 @@ func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisementPath) PathOriginName() str
 	return "openconfig"
 }
 
+// DnsServerAny (list): List of DNS servers that are to be advertised on the interface
+// (RDNSS). The list is keyed by the IPv6 address of the DNS server.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "dns-servers/dns-server"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/dns-servers/dns-server"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisementPath) DnsServerAny() *Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServerPathAny {
+	ps := &Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServerPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"dns-servers", "dns-server"},
+			map[string]interface{}{"ip-address": "*"},
+			n,
+		),
+	}
+	return ps
+}
+
+// DnsServerAny (list): List of DNS servers that are to be advertised on the interface
+// (RDNSS). The list is keyed by the IPv6 address of the DNS server.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "dns-servers/dns-server"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/dns-servers/dns-server"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisementPathAny) DnsServerAny() *Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServerPathAny {
+	ps := &Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServerPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"dns-servers", "dns-server"},
+			map[string]interface{}{"ip-address": "*"},
+			n,
+		),
+	}
+	return ps
+}
+
+// DnsServer (list): List of DNS servers that are to be advertised on the interface
+// (RDNSS). The list is keyed by the IPv6 address of the DNS server.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "dns-servers/dns-server"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/dns-servers/dns-server"
+//
+//	IpAddress: string
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisementPath) DnsServer(IpAddress string) *Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServerPath {
+	ps := &Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServerPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"dns-servers", "dns-server"},
+			map[string]interface{}{"ip-address": IpAddress},
+			n,
+		),
+	}
+	return ps
+}
+
+// DnsServer (list): List of DNS servers that are to be advertised on the interface
+// (RDNSS). The list is keyed by the IPv6 address of the DNS server.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "dns-servers/dns-server"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/dns-servers/dns-server"
+//
+//	IpAddress: string
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisementPathAny) DnsServer(IpAddress string) *Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServerPathAny {
+	ps := &Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServerPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"dns-servers", "dns-server"},
+			map[string]interface{}{"ip-address": IpAddress},
+			n,
+		),
+	}
+	return ps
+}
+
+// DnsServerMap (list): List of DNS servers that are to be advertised on the interface
+// (RDNSS). The list is keyed by the IPv6 address of the DNS server.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "dns-servers/dns-server"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/dns-servers/dns-server"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisementPath) DnsServerMap() *Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServerPathMap {
+	ps := &Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServerPathMap{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"dns-servers"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// DnsServerMap (list): List of DNS servers that are to be advertised on the interface
+// (RDNSS). The list is keyed by the IPv6 address of the DNS server.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "dns-servers/dns-server"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/dns-servers/dns-server"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisementPathAny) DnsServerMap() *Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServerPathMapAny {
+	ps := &Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServerPathMapAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"dns-servers"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
 // Enable (leaf): If set to false, all IPv6 router advertisement functions are
 // disabled.  The local system will not transmit router advertisement
 // messages and will not respond to router solicitation messages.
@@ -42064,6 +44616,712 @@ func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisementPathAny) Config() ygnmi.Wi
 		},
 		nil,
 		nil,
+	)
+}
+
+// Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServer_IpAddressPath represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/router-advertisement/dns-servers/dns-server/state/ip-address YANG schema element.
+type Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServer_IpAddressPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServer_IpAddressPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/router-advertisement/dns-servers/dns-server/state/ip-address YANG schema element.
+type Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServer_IpAddressPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServer_IpAddressPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/ip-address"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/dns-servers/dns-server/state/ip-address"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServer_IpAddressPath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewSingletonQuery[string](
+		"Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServer",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "ip-address"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServer).IpAddress
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServer) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/ip-address"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/dns-servers/dns-server/state/ip-address"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServer_IpAddressPathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServer",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "ip-address"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServer).IpAddress
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServer) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/ip-address"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/dns-servers/dns-server/config/ip-address"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServer_IpAddressPath) Config() ygnmi.ConfigQuery[string] {
+	return ygnmi.NewConfigQuery[string](
+		"Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServer",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "ip-address"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServer).IpAddress
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServer) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/ip-address"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/dns-servers/dns-server/config/ip-address"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServer_IpAddressPathAny) Config() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServer",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "ip-address"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServer).IpAddress
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServer) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServer_LifetimePath represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/router-advertisement/dns-servers/dns-server/state/lifetime YANG schema element.
+type Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServer_LifetimePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServer_LifetimePathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/router-advertisement/dns-servers/dns-server/state/lifetime YANG schema element.
+type Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServer_LifetimePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServer_LifetimePath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/lifetime"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/dns-servers/dns-server/state/lifetime"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServer_LifetimePath) State() ygnmi.SingletonQuery[uint32] {
+	return ygnmi.NewSingletonQuery[uint32](
+		"Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServer",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "lifetime"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServer).Lifetime
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServer) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/lifetime"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/dns-servers/dns-server/state/lifetime"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServer_LifetimePathAny) State() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewWildcardQuery[uint32](
+		"Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServer",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "lifetime"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServer).Lifetime
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServer) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/lifetime"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/dns-servers/dns-server/config/lifetime"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServer_LifetimePath) Config() ygnmi.ConfigQuery[uint32] {
+	return ygnmi.NewConfigQuery[uint32](
+		"Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServer",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "lifetime"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServer).Lifetime
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServer) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/lifetime"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/dns-servers/dns-server/config/lifetime"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServer_LifetimePathAny) Config() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewWildcardQuery[uint32](
+		"Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServer",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "lifetime"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServer).Lifetime
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServer) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServerPath represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/router-advertisement/dns-servers/dns-server YANG schema element.
+type Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServerPath struct {
+	*ygnmi.NodePath
+}
+
+// Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServerPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/router-advertisement/dns-servers/dns-server YANG schema element.
+type Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServerPathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServerPath) PathOriginName() string {
+	return "openconfig"
+}
+
+// Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServerPathMap represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/router-advertisement/dns-servers/dns-server YANG schema element.
+type Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServerPathMap struct {
+	*ygnmi.NodePath
+}
+
+// Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServerPathMapAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/router-advertisement/dns-servers/dns-server YANG schema element.
+type Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServerPathMapAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServerPathMap) PathOriginName() string {
+	return "openconfig"
+}
+
+// IpAddress (leaf): IPv6 DNS server address to be advertised within the router
+// advertisement message.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/ip-address"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/dns-servers/dns-server/*/ip-address"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServerPath) IpAddress() *Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServer_IpAddressPath {
+	ps := &Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServer_IpAddressPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "ip-address"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// IpAddress (leaf): IPv6 DNS server address to be advertised within the router
+// advertisement message.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/ip-address"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/dns-servers/dns-server/*/ip-address"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServerPathAny) IpAddress() *Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServer_IpAddressPathAny {
+	ps := &Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServer_IpAddressPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "ip-address"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Lifetime (leaf): The maximum time in seconds (relative to the time the packet is
+// received) over which these RDNSS addresses MAY be used for name
+// resolution.
+//
+// The value of Lifetime SHOULD by default be at least
+// 3 * MaxRtrAdvInterval, where MaxRtrAdvInterval is the maximum RA
+// interval as defined in [RFC4861].  A value of all one bits
+// (0xffffffff) represents infinity.  A value of zero means that the
+// RDNSS addresses MUST no longer be used.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/lifetime"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/dns-servers/dns-server/*/lifetime"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServerPath) Lifetime() *Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServer_LifetimePath {
+	ps := &Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServer_LifetimePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "lifetime"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Lifetime (leaf): The maximum time in seconds (relative to the time the packet is
+// received) over which these RDNSS addresses MAY be used for name
+// resolution.
+//
+// The value of Lifetime SHOULD by default be at least
+// 3 * MaxRtrAdvInterval, where MaxRtrAdvInterval is the maximum RA
+// interval as defined in [RFC4861].  A value of all one bits
+// (0xffffffff) represents infinity.  A value of zero means that the
+// RDNSS addresses MUST no longer be used.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/lifetime"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/dns-servers/dns-server/*/lifetime"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServerPathAny) Lifetime() *Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServer_LifetimePathAny {
+	ps := &Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServer_LifetimePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "lifetime"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServerPath) State() ygnmi.SingletonQuery[*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServer] {
+	return ygnmi.NewSingletonQuery[*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServer](
+		"Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServer",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServerPathAny) State() ygnmi.WildcardQuery[*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServer] {
+	return ygnmi.NewWildcardQuery[*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServer](
+		"Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServer",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServerPath) Config() ygnmi.ConfigQuery[*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServer] {
+	return ygnmi.NewConfigQuery[*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServer](
+		"Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServer",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServerPathAny) Config() ygnmi.WildcardQuery[*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServer] {
+	return ygnmi.NewWildcardQuery[*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServer](
+		"Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServer",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServerPathMap) State() ygnmi.SingletonQuery[map[string]*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServer] {
+	return ygnmi.NewSingletonQuery[map[string]*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServer](
+		"Interface_RoutedVlan_Ipv6_RouterAdvertisement",
+		true,
+		false,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[string]*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServer, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement).DnsServer
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-if-ip:dns-servers"},
+			PostRelPath: []string{"openconfig-if-ip:dns-server"},
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServerPathMapAny) State() ygnmi.WildcardQuery[map[string]*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServer] {
+	return ygnmi.NewWildcardQuery[map[string]*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServer](
+		"Interface_RoutedVlan_Ipv6_RouterAdvertisement",
+		true,
+		false,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[string]*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServer, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement).DnsServer
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-if-ip:dns-servers"},
+			PostRelPath: []string{"openconfig-if-ip:dns-server"},
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServerPathMap) Config() ygnmi.ConfigQuery[map[string]*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServer] {
+	return ygnmi.NewConfigQuery[map[string]*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServer](
+		"Interface_RoutedVlan_Ipv6_RouterAdvertisement",
+		false,
+		true,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[string]*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServer, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement).DnsServer
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-if-ip:dns-servers"},
+			PostRelPath: []string{"openconfig-if-ip:dns-server"},
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServerPathMapAny) Config() ygnmi.WildcardQuery[map[string]*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServer] {
+	return ygnmi.NewWildcardQuery[map[string]*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServer](
+		"Interface_RoutedVlan_Ipv6_RouterAdvertisement",
+		false,
+		true,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[string]*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServer, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement).DnsServer
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-if-ip:dns-servers"},
+			PostRelPath: []string{"openconfig-if-ip:dns-server"},
+		},
 	)
 }
 
@@ -73777,6 +77035,118 @@ func (n *Interface_Subinterface_Ipv6_RouterAdvertisementPath) PathOriginName() s
 	return "openconfig"
 }
 
+// DnsServerAny (list): List of DNS servers that are to be advertised on the interface
+// (RDNSS). The list is keyed by the IPv6 address of the DNS server.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "dns-servers/dns-server"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/dns-servers/dns-server"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisementPath) DnsServerAny() *Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServerPathAny {
+	ps := &Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServerPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"dns-servers", "dns-server"},
+			map[string]interface{}{"ip-address": "*"},
+			n,
+		),
+	}
+	return ps
+}
+
+// DnsServerAny (list): List of DNS servers that are to be advertised on the interface
+// (RDNSS). The list is keyed by the IPv6 address of the DNS server.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "dns-servers/dns-server"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/dns-servers/dns-server"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisementPathAny) DnsServerAny() *Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServerPathAny {
+	ps := &Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServerPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"dns-servers", "dns-server"},
+			map[string]interface{}{"ip-address": "*"},
+			n,
+		),
+	}
+	return ps
+}
+
+// DnsServer (list): List of DNS servers that are to be advertised on the interface
+// (RDNSS). The list is keyed by the IPv6 address of the DNS server.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "dns-servers/dns-server"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/dns-servers/dns-server"
+//
+//	IpAddress: string
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisementPath) DnsServer(IpAddress string) *Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServerPath {
+	ps := &Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServerPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"dns-servers", "dns-server"},
+			map[string]interface{}{"ip-address": IpAddress},
+			n,
+		),
+	}
+	return ps
+}
+
+// DnsServer (list): List of DNS servers that are to be advertised on the interface
+// (RDNSS). The list is keyed by the IPv6 address of the DNS server.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "dns-servers/dns-server"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/dns-servers/dns-server"
+//
+//	IpAddress: string
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisementPathAny) DnsServer(IpAddress string) *Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServerPathAny {
+	ps := &Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServerPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"dns-servers", "dns-server"},
+			map[string]interface{}{"ip-address": IpAddress},
+			n,
+		),
+	}
+	return ps
+}
+
+// DnsServerMap (list): List of DNS servers that are to be advertised on the interface
+// (RDNSS). The list is keyed by the IPv6 address of the DNS server.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "dns-servers/dns-server"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/dns-servers/dns-server"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisementPath) DnsServerMap() *Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServerPathMap {
+	ps := &Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServerPathMap{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"dns-servers"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// DnsServerMap (list): List of DNS servers that are to be advertised on the interface
+// (RDNSS). The list is keyed by the IPv6 address of the DNS server.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "dns-servers/dns-server"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/dns-servers/dns-server"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisementPathAny) DnsServerMap() *Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServerPathMapAny {
+	ps := &Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServerPathMapAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"dns-servers"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
 // Enable (leaf): If set to false, all IPv6 router advertisement functions are
 // disabled.  The local system will not transmit router advertisement
 // messages and will not respond to router solicitation messages.
@@ -74302,6 +77672,728 @@ func (n *Interface_Subinterface_Ipv6_RouterAdvertisementPathAny) Config() ygnmi.
 		},
 		nil,
 		nil,
+	)
+}
+
+// Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServer_IpAddressPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/dns-servers/dns-server/state/ip-address YANG schema element.
+type Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServer_IpAddressPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServer_IpAddressPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/dns-servers/dns-server/state/ip-address YANG schema element.
+type Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServer_IpAddressPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServer_IpAddressPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/ip-address"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/dns-servers/dns-server/state/ip-address"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServer_IpAddressPath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewSingletonQuery[string](
+		"Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServer",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "ip-address"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServer).IpAddress
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServer)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/ip-address"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/dns-servers/dns-server/state/ip-address"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServer_IpAddressPathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServer",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "ip-address"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServer).IpAddress
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServer)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/ip-address"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/dns-servers/dns-server/config/ip-address"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServer_IpAddressPath) Config() ygnmi.ConfigQuery[string] {
+	return ygnmi.NewConfigQuery[string](
+		"Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServer",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "ip-address"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServer).IpAddress
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServer)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/ip-address"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/dns-servers/dns-server/config/ip-address"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServer_IpAddressPathAny) Config() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServer",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "ip-address"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServer).IpAddress
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServer)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServer_LifetimePath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/dns-servers/dns-server/state/lifetime YANG schema element.
+type Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServer_LifetimePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServer_LifetimePathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/dns-servers/dns-server/state/lifetime YANG schema element.
+type Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServer_LifetimePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServer_LifetimePath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/lifetime"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/dns-servers/dns-server/state/lifetime"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServer_LifetimePath) State() ygnmi.SingletonQuery[uint32] {
+	return ygnmi.NewSingletonQuery[uint32](
+		"Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServer",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "lifetime"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServer).Lifetime
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServer)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/lifetime"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/dns-servers/dns-server/state/lifetime"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServer_LifetimePathAny) State() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewWildcardQuery[uint32](
+		"Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServer",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "lifetime"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServer).Lifetime
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServer)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/lifetime"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/dns-servers/dns-server/config/lifetime"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServer_LifetimePath) Config() ygnmi.ConfigQuery[uint32] {
+	return ygnmi.NewConfigQuery[uint32](
+		"Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServer",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "lifetime"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServer).Lifetime
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServer)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/lifetime"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/dns-servers/dns-server/config/lifetime"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServer_LifetimePathAny) Config() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewWildcardQuery[uint32](
+		"Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServer",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "lifetime"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServer).Lifetime
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServer)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServerPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/dns-servers/dns-server YANG schema element.
+type Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServerPath struct {
+	*ygnmi.NodePath
+}
+
+// Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServerPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/dns-servers/dns-server YANG schema element.
+type Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServerPathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServerPath) PathOriginName() string {
+	return "openconfig"
+}
+
+// Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServerPathMap represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/dns-servers/dns-server YANG schema element.
+type Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServerPathMap struct {
+	*ygnmi.NodePath
+}
+
+// Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServerPathMapAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/dns-servers/dns-server YANG schema element.
+type Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServerPathMapAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServerPathMap) PathOriginName() string {
+	return "openconfig"
+}
+
+// IpAddress (leaf): IPv6 DNS server address to be advertised within the router
+// advertisement message.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/ip-address"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/dns-servers/dns-server/*/ip-address"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServerPath) IpAddress() *Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServer_IpAddressPath {
+	ps := &Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServer_IpAddressPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "ip-address"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// IpAddress (leaf): IPv6 DNS server address to be advertised within the router
+// advertisement message.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/ip-address"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/dns-servers/dns-server/*/ip-address"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServerPathAny) IpAddress() *Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServer_IpAddressPathAny {
+	ps := &Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServer_IpAddressPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "ip-address"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Lifetime (leaf): The maximum time in seconds (relative to the time the packet is
+// received) over which these RDNSS addresses MAY be used for name
+// resolution.
+//
+// The value of Lifetime SHOULD by default be at least
+// 3 * MaxRtrAdvInterval, where MaxRtrAdvInterval is the maximum RA
+// interval as defined in [RFC4861].  A value of all one bits
+// (0xffffffff) represents infinity.  A value of zero means that the
+// RDNSS addresses MUST no longer be used.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/lifetime"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/dns-servers/dns-server/*/lifetime"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServerPath) Lifetime() *Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServer_LifetimePath {
+	ps := &Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServer_LifetimePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "lifetime"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Lifetime (leaf): The maximum time in seconds (relative to the time the packet is
+// received) over which these RDNSS addresses MAY be used for name
+// resolution.
+//
+// The value of Lifetime SHOULD by default be at least
+// 3 * MaxRtrAdvInterval, where MaxRtrAdvInterval is the maximum RA
+// interval as defined in [RFC4861].  A value of all one bits
+// (0xffffffff) represents infinity.  A value of zero means that the
+// RDNSS addresses MUST no longer be used.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/lifetime"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/dns-servers/dns-server/*/lifetime"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServerPathAny) Lifetime() *Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServer_LifetimePathAny {
+	ps := &Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServer_LifetimePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "lifetime"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServerPath) State() ygnmi.SingletonQuery[*oc.Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServer] {
+	return ygnmi.NewSingletonQuery[*oc.Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServer](
+		"Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServer",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServerPathAny) State() ygnmi.WildcardQuery[*oc.Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServer] {
+	return ygnmi.NewWildcardQuery[*oc.Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServer](
+		"Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServer",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServerPath) Config() ygnmi.ConfigQuery[*oc.Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServer] {
+	return ygnmi.NewConfigQuery[*oc.Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServer](
+		"Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServer",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServerPathAny) Config() ygnmi.WildcardQuery[*oc.Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServer] {
+	return ygnmi.NewWildcardQuery[*oc.Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServer](
+		"Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServer",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServerPathMap) State() ygnmi.SingletonQuery[map[string]*oc.Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServer] {
+	return ygnmi.NewSingletonQuery[map[string]*oc.Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServer](
+		"Interface_Subinterface_Ipv6_RouterAdvertisement",
+		true,
+		false,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[string]*oc.Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServer, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_RouterAdvertisement).DnsServer
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_RouterAdvertisement) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-if-ip:dns-servers"},
+			PostRelPath: []string{"openconfig-if-ip:dns-server"},
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServerPathMapAny) State() ygnmi.WildcardQuery[map[string]*oc.Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServer] {
+	return ygnmi.NewWildcardQuery[map[string]*oc.Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServer](
+		"Interface_Subinterface_Ipv6_RouterAdvertisement",
+		true,
+		false,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[string]*oc.Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServer, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_RouterAdvertisement).DnsServer
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_RouterAdvertisement) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-if-ip:dns-servers"},
+			PostRelPath: []string{"openconfig-if-ip:dns-server"},
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServerPathMap) Config() ygnmi.ConfigQuery[map[string]*oc.Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServer] {
+	return ygnmi.NewConfigQuery[map[string]*oc.Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServer](
+		"Interface_Subinterface_Ipv6_RouterAdvertisement",
+		false,
+		true,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[string]*oc.Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServer, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_RouterAdvertisement).DnsServer
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_RouterAdvertisement) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-if-ip:dns-servers"},
+			PostRelPath: []string{"openconfig-if-ip:dns-server"},
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServerPathMapAny) Config() ygnmi.WildcardQuery[map[string]*oc.Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServer] {
+	return ygnmi.NewWildcardQuery[map[string]*oc.Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServer](
+		"Interface_Subinterface_Ipv6_RouterAdvertisement",
+		false,
+		true,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[string]*oc.Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServer, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_RouterAdvertisement).DnsServer
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_RouterAdvertisement) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-if-ip:dns-servers"},
+			PostRelPath: []string{"openconfig-if-ip:dns-server"},
+		},
 	)
 }
 

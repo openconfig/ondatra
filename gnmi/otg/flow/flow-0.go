@@ -4884,7 +4884,7 @@ func (n *Flow_TaggedMetric_Tags_TagValuePathAny) ValueAsFloat32() *Flow_TaggedMe
 	return ps
 }
 
-// ValueAsHex (leaf): Contains Tag Value in Hex String format.
+// ValueAsHex (leaf): Contains Tag Value in Hexadecimal format which is prefixed with 0x or 0X.
 //
 //	Defining module:      "open-traffic-generator-flow"
 //	Instantiating module: "open-traffic-generator-flow"
@@ -4902,7 +4902,7 @@ func (n *Flow_TaggedMetric_Tags_TagValuePath) ValueAsHex() *Flow_TaggedMetric_Ta
 	return ps
 }
 
-// ValueAsHex (leaf): Contains Tag Value in Hex String format.
+// ValueAsHex (leaf): Contains Tag Value in Hexadecimal format which is prefixed with 0x or 0X.
 //
 //	Defining module:      "open-traffic-generator-flow"
 //	Instantiating module: "open-traffic-generator-flow"
