@@ -35,6 +35,7 @@ import (
 	"github.com/openconfig/kne/topo"
 	"github.com/openconfig/kne/topo/node"
 	"github.com/openconfig/ondatra/binding"
+	"github.com/openconfig/ondatra/binding/grpcutil/grpclog"
 	"github.com/openconfig/ondatra/binding/introspect"
 	"github.com/openconfig/ondatra/knebind/creds"
 	"github.com/openconfig/ondatra/knebind/solver"
@@ -569,7 +570,7 @@ func makeDialer(svcPb *tpb.Service, opts ...grpc.DialOption) *introspect.Dialer 
 			return grpc.DialContext(ctx, addr, opts...)
 		},
 		DialTarget: serviceAddr(svcPb),
-		DialOpts:   opts,
+		DialOpts:   append(opts, grpc.WithChainUnaryInterceptor(grpclog.UnaryClientInterceptor()), grpc.WithChainStreamInterceptor(grpclog.StreamClientInterceptor())),
 		DevicePort: int(svcPb.GetInside()),
 	}
 }
