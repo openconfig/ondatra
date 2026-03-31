@@ -32,10 +32,11 @@ import (
 )
 
 var (
-	resMu   sync.RWMutex
-	res     *binding.Reservation
-	fetched bool
-	bind    binding.Binding
+	resMu       sync.RWMutex
+	res         *binding.Reservation
+	fetched     bool
+	bind        binding.Binding
+	skipRelease bool
 )
 
 // SetBinding sets the Ondatra binding.
@@ -49,6 +50,11 @@ func SetBinding(b binding.Binding) {
 func SetReservationForTesting(r *binding.Reservation) {
 	res = r
 	fetched = false
+}
+
+// SkipReservationRelease prevents the reservation from being released.
+func SkipReservationRelease() {
+	skipRelease = true
 }
 
 // Reservation returns the current reservation.
@@ -190,11 +196,12 @@ func validateDevice(dev *opb.Device, rd binding.Device) error {
 }
 
 // Release releases the testbed. This is a noop if the reservation is not
-// currently reserved or if the reservation was fetched and not created.
+// currently reserved or if the reservation was fetched and not created or if
+// skipRelease is true.
 func Release(ctx context.Context) error {
 	resMu.Lock()
 	defer resMu.Unlock()
-	if res == nil || fetched {
+	if res == nil || fetched || skipRelease {
 		return nil
 	}
 	res = nil

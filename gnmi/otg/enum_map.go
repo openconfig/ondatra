@@ -149,6 +149,16 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		1: {Name: "UP"},
 		2: {Name: "DOWN"},
 	},
+	"E_Ipv4MplsUnicastPrefix_Origin": {
+		1: {Name: "IGP"},
+		2: {Name: "EGP"},
+		3: {Name: "INCOMPLETE"},
+	},
+	"E_Ipv6MplsUnicastPrefix_Origin": {
+		1: {Name: "IGP"},
+		2: {Name: "EGP"},
+		3: {Name: "INCOMPLETE"},
+	},
 	"E_Ipv6Reachability_Prefix_OriginType": {
 		1: {Name: "INTERNAL"},
 		2: {Name: "EXTERNAL"},
@@ -357,6 +367,66 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 // of the map ensures that there are no clashes with valid YANG identifiers.
 func initΛEnumTypes() {
 	ΛEnumTypes = map[string][]reflect.Type{
+		"/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/as-path/segment-type": {
+			reflect.TypeOf((E_State_SegmentType)(0)),
+		},
+		"/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/community/community-type": {
+			reflect.TypeOf((E_State_CommunityType)(0)),
+		},
+		"/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/bgp-extended-community-structured_type": {
+			reflect.TypeOf((E_ExtendedCommunity_BgpExtendedCommunityStructuredType)(0)),
+		},
+		"/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/non_transitive_2octet_as_type/non_transitive_2octet_as_type": {
+			reflect.TypeOf((E_Structured_NonTransitive_2OctetAsType)(0)),
+		},
+		"/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/transitive_2octet_as_type": {
+			reflect.TypeOf((E_Structured_Transitive_2OctetAsType)(0)),
+		},
+		"/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type/transitive_4octet_as_type": {
+			reflect.TypeOf((E_Structured_Transitive_4OctetAsType)(0)),
+		},
+		"/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type/transitive_ipv4_address_type": {
+			reflect.TypeOf((E_Structured_TransitiveIpv4AddressType)(0)),
+		},
+		"/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type/transitive_opaque_type": {
+			reflect.TypeOf((E_Structured_TransitiveOpaqueType)(0)),
+		},
+		"/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/labels/label": {
+			reflect.TypeOf((E_Types_MplsLabel_Enum)(0)),
+		},
+		"/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/origin": {
+			reflect.TypeOf((E_Ipv4MplsUnicastPrefix_Origin)(0)),
+		},
+		"/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/as-path/segment-type": {
+			reflect.TypeOf((E_State_SegmentType)(0)),
+		},
+		"/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/community/community-type": {
+			reflect.TypeOf((E_State_CommunityType)(0)),
+		},
+		"/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/bgp-extended-community-structured_type": {
+			reflect.TypeOf((E_ExtendedCommunity_BgpExtendedCommunityStructuredType)(0)),
+		},
+		"/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/non_transitive_2octet_as_type/non_transitive_2octet_as_type": {
+			reflect.TypeOf((E_Structured_NonTransitive_2OctetAsType)(0)),
+		},
+		"/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/transitive_2octet_as_type": {
+			reflect.TypeOf((E_Structured_Transitive_2OctetAsType)(0)),
+		},
+		"/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type/transitive_4octet_as_type": {
+			reflect.TypeOf((E_Structured_Transitive_4OctetAsType)(0)),
+		},
+		"/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type/transitive_ipv4_address_type": {
+			reflect.TypeOf((E_Structured_TransitiveIpv4AddressType)(0)),
+		},
+		"/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type/transitive_opaque_type": {
+			reflect.TypeOf((E_Structured_TransitiveOpaqueType)(0)),
+		},
+		"/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/labels/label": {
+			reflect.TypeOf((E_Types_MplsLabel_Enum)(0)),
+		},
+		"/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/origin": {
+			reflect.TypeOf((E_Ipv6MplsUnicastPrefix_Origin)(0)),
+		},
 		"/bgp-peers/bgp-peer/state/session-state": {
 			reflect.TypeOf((E_BgpPeer_SessionState)(0)),
 		},

@@ -89,8 +89,8 @@ func updateXPaths(cfg *ixconfig.Ixnetwork) error {
 					for m, lb := range ndg.Ipv4Loopback {
 						for n, lsps := range lb.RsvpteLsps {
 							baseRsvpPath := fmt.Sprintf("/topology[%d]/deviceGroup[%d]/networkGroup[%d]/deviceGroup[%d]/ipv4Loopback[%d]/rsvpteLsps[%d]/", i+1, j+1, k+1, l+1, m+1, n+1)
-							lsps.RsvpP2PEgressLsps.Xpath = toXPath(path.Join(baseRsvpPath, "rsvpP2PEgressLsps"))
-							lsps.RsvpP2PIngressLsps.Xpath = toXPath(path.Join(baseRsvpPath, "rsvpP2PIngressLsps"))
+							lsps.RsvpP2PEgressLsps.Xpath = toXPath("%s", path.Join(baseRsvpPath, "rsvpP2PEgressLsps"))
+							lsps.RsvpP2PIngressLsps.Xpath = toXPath("%s", path.Join(baseRsvpPath, "rsvpP2PIngressLsps"))
 						}
 					}
 				}

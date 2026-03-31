@@ -235,6 +235,22 @@ func TestRelease(t *testing.T) {
 			t.Errorf("Release() got error %v, want %v", gotErr, wantErr)
 		}
 	})
+
+	t.Run("skip release", func(t *testing.T) {
+		bind := fakebind.Setup().WithReservation(new(binding.Reservation))
+		released := false
+		bind.ReleaseFn = func(context.Context) error {
+			released = true
+			return nil
+		}
+		testbed.SkipReservationRelease()
+		if err := testbed.Release(context.Background()); err != nil {
+			t.Errorf("Release() got unexpected error: %v", err)
+		}
+		if released {
+			t.Errorf("Release() called bind.ReleaseFn when SkipReservationRelease was called")
+		}
+	})
 }
 
 func writeTestbedFile(t *testing.T, dir, text string) string {

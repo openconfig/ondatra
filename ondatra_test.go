@@ -43,26 +43,26 @@ func TestRunTests(t *testing.T) {
 	flag.Set("testbed", emptyTB.Name())
 
 	tests := []struct {
-		desc                   string
+		name                   string
 		interrupt              bool
 		reserveErr, releaseErr error
 		wantErr                string
 	}{{
-		desc: "success",
+		name: "success",
 	}, {
-		desc:       "reserve error",
+		name:       "reserve_error",
 		reserveErr: errors.New("reserve error"),
 		wantErr:    "reserve error",
 	}, {
-		desc:       "release error",
+		name:       "release_error",
 		releaseErr: errors.New("release error"),
 		wantErr:    "release error",
 	}, {
-		desc:      "interrupted",
+		name:      "interrupted",
 		interrupt: true,
 	}}
 	for _, test := range tests {
-		t.Run(test.desc, func(t *testing.T) {
+		t.Run(test.name, func(t *testing.T) {
 			fakeBind := fakebind.Setup()
 			fakeBind.ReserveFn = func(context.Context, *opb.Testbed, time.Duration, time.Duration, map[string]string) (*binding.Reservation, error) {
 				return new(binding.Reservation), test.reserveErr
@@ -93,6 +93,38 @@ func TestRunTests(t *testing.T) {
 				<-releaseCh
 			}
 		})
+	}
+}
+
+func TestSkipReservationRelease(t *testing.T) {
+	emptyTB, err := os.CreateTemp(t.TempDir(), "*.textproto")
+	if err != nil {
+		t.Fatalf("Failed to create temp file: %v", err)
+	}
+	if err := emptyTB.Close(); err != nil {
+		t.Errorf("Failed to close temp file: %v", err)
+	}
+	flag.Set("testbed", emptyTB.Name())
+
+	fakeBind := fakebind.Setup()
+	fakeBind.ReserveFn = func(context.Context, *opb.Testbed, time.Duration, time.Duration, map[string]string) (*binding.Reservation, error) {
+		return new(binding.Reservation), nil
+	}
+	released := false
+	fakeBind.ReleaseFn = func(context.Context) error {
+		released = true
+		return nil
+	}
+	runFn := func() int {
+		SkipReservationRelease(t)
+		return 0
+	}
+
+	if err := runTests(runFn, func() (binding.Binding, error) { return fakeBind, nil }); err != nil {
+		t.Fatalf("runTests() got err %v, want nil", err)
+	}
+	if released {
+		t.Errorf("Reservation was released, want skip release")
 	}
 }
 
@@ -162,7 +194,7 @@ func TestGetters(t *testing.T) {
 		}
 	})
 
-	t.Run("DUT failure", func(t *testing.T) {
+	t.Run("DUT_failure", func(t *testing.T) {
 		id := "gaga"
 		got := testt.ExpectFatal(t, func(t testing.TB) {
 			DUT(t, id)
@@ -202,7 +234,7 @@ func TestGetters(t *testing.T) {
 		}
 	})
 
-	t.Run("ATE failure", func(t *testing.T) {
+	t.Run("ATE_failure", func(t *testing.T) {
 		id := "gaga"
 		got := testt.ExpectFatal(t, func(t testing.TB) {
 			ATE(t, id)
@@ -212,7 +244,7 @@ func TestGetters(t *testing.T) {
 		}
 	})
 
-	t.Run("DUT Port", func(t *testing.T) {
+	t.Run("DUT_port", func(t *testing.T) {
 		p := DUT(t, dutID).Port(t, portID)
 		if got, want := p.ID(), portID; got != want {
 			t.Errorf("port id = %q, want %q", got, want)
@@ -231,7 +263,7 @@ func TestGetters(t *testing.T) {
 		}
 	})
 
-	t.Run("DUT Port failure", func(t *testing.T) {
+	t.Run("DUT_port_failure", func(t *testing.T) {
 		const portID = "gaga"
 		d := DUT(t, dutID)
 		got := testt.ExpectFatal(t, func(t testing.TB) {
@@ -242,7 +274,7 @@ func TestGetters(t *testing.T) {
 		}
 	})
 
-	t.Run("ATE Port", func(t *testing.T) {
+	t.Run("ATE_port", func(t *testing.T) {
 		p := ATE(t, ateID).Port(t, portID)
 		if got, want := p.ID(), portID; got != want {
 			t.Errorf("port id = %q, want %q", got, want)
@@ -261,7 +293,7 @@ func TestGetters(t *testing.T) {
 		}
 	})
 
-	t.Run("ATE Port failure", func(t *testing.T) {
+	t.Run("ATE_port_failure", func(t *testing.T) {
 		const portID = "gaga"
 		a := ATE(t, ateID)
 		got := testt.ExpectFatal(t, func(t testing.TB) {

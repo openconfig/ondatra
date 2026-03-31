@@ -35,6 +35,66 @@ import (
 	"fmt"
 )
 
+// BgpPeer_Ipv4MplsUnicastPrefix_Labels_Label_Union is an interface that is implemented by valid types for the union
+// for the leaf /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/labels/label within the YANG schema.
+// Union type can be one of [E_Types_MplsLabel_Enum, UnionUint32].
+type BgpPeer_Ipv4MplsUnicastPrefix_Labels_Label_Union interface {
+	// Union type can be one of [E_Types_MplsLabel_Enum, UnionUint32]
+	Documentation_for_BgpPeer_Ipv4MplsUnicastPrefix_Labels_Label_Union()
+}
+
+// Documentation_for_BgpPeer_Ipv4MplsUnicastPrefix_Labels_Label_Union ensures that E_Types_MplsLabel_Enum
+// implements the BgpPeer_Ipv4MplsUnicastPrefix_Labels_Label_Union interface.
+func (E_Types_MplsLabel_Enum) Documentation_for_BgpPeer_Ipv4MplsUnicastPrefix_Labels_Label_Union() {}
+
+// Documentation_for_BgpPeer_Ipv4MplsUnicastPrefix_Labels_Label_Union ensures that UnionUint32
+// implements the BgpPeer_Ipv4MplsUnicastPrefix_Labels_Label_Union interface.
+func (UnionUint32) Documentation_for_BgpPeer_Ipv4MplsUnicastPrefix_Labels_Label_Union() {}
+
+// To_BgpPeer_Ipv4MplsUnicastPrefix_Labels_Label_Union takes an input interface{} and attempts to convert it to a struct
+// which implements the BgpPeer_Ipv4MplsUnicastPrefix_Labels_Label_Union union. It returns an error if the interface{} supplied
+// cannot be converted to a type within the union.
+func (t *BgpPeer_Ipv4MplsUnicastPrefix_Labels) To_BgpPeer_Ipv4MplsUnicastPrefix_Labels_Label_Union(i interface{}) (BgpPeer_Ipv4MplsUnicastPrefix_Labels_Label_Union, error) {
+	if v, ok := i.(BgpPeer_Ipv4MplsUnicastPrefix_Labels_Label_Union); ok {
+		return v, nil
+	}
+	switch v := i.(type) {
+	case uint32:
+		return UnionUint32(v), nil
+	}
+	return nil, fmt.Errorf("cannot convert %v to BgpPeer_Ipv4MplsUnicastPrefix_Labels_Label_Union, unknown union type, got: %T, want any of [E_Types_MplsLabel_Enum, uint32]", i, i)
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_Labels_Label_Union is an interface that is implemented by valid types for the union
+// for the leaf /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/labels/label within the YANG schema.
+// Union type can be one of [E_Types_MplsLabel_Enum, UnionUint32].
+type BgpPeer_Ipv6MplsUnicastPrefix_Labels_Label_Union interface {
+	// Union type can be one of [E_Types_MplsLabel_Enum, UnionUint32]
+	Documentation_for_BgpPeer_Ipv6MplsUnicastPrefix_Labels_Label_Union()
+}
+
+// Documentation_for_BgpPeer_Ipv6MplsUnicastPrefix_Labels_Label_Union ensures that E_Types_MplsLabel_Enum
+// implements the BgpPeer_Ipv6MplsUnicastPrefix_Labels_Label_Union interface.
+func (E_Types_MplsLabel_Enum) Documentation_for_BgpPeer_Ipv6MplsUnicastPrefix_Labels_Label_Union() {}
+
+// Documentation_for_BgpPeer_Ipv6MplsUnicastPrefix_Labels_Label_Union ensures that UnionUint32
+// implements the BgpPeer_Ipv6MplsUnicastPrefix_Labels_Label_Union interface.
+func (UnionUint32) Documentation_for_BgpPeer_Ipv6MplsUnicastPrefix_Labels_Label_Union() {}
+
+// To_BgpPeer_Ipv6MplsUnicastPrefix_Labels_Label_Union takes an input interface{} and attempts to convert it to a struct
+// which implements the BgpPeer_Ipv6MplsUnicastPrefix_Labels_Label_Union union. It returns an error if the interface{} supplied
+// cannot be converted to a type within the union.
+func (t *BgpPeer_Ipv6MplsUnicastPrefix_Labels) To_BgpPeer_Ipv6MplsUnicastPrefix_Labels_Label_Union(i interface{}) (BgpPeer_Ipv6MplsUnicastPrefix_Labels_Label_Union, error) {
+	if v, ok := i.(BgpPeer_Ipv6MplsUnicastPrefix_Labels_Label_Union); ok {
+		return v, nil
+	}
+	switch v := i.(type) {
+	case uint32:
+		return UnionUint32(v), nil
+	}
+	return nil, fmt.Errorf("cannot convert %v to BgpPeer_Ipv6MplsUnicastPrefix_Labels_Label_Union, unknown union type, got: %T, want any of [E_Types_MplsLabel_Enum, uint32]", i, i)
+}
+
 // RsvpteRouter_LabelSwitchedPathDatabase_Ipv4Lsp_LabelIn_Union is an interface that is implemented by valid types for the union
 // for the leaf /open-traffic-generator-rsvp/rsvpte-routers/rsvpte-router/state/label-switched-path-database/lsps/ipv4-lsp/state/label-in within the YANG schema.
 // Union type can be one of [E_Types_MplsLabel_Enum, UnionUint32].

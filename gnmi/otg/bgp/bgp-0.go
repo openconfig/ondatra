@@ -376,6 +376,218 @@ func (n *BgpPeerPathAny) Counters() *BgpPeer_CountersPathAny {
 	return ps
 }
 
+// Ipv4MplsUnicastPrefixAny (list): A list of BGP unicast IPv4 prefixes.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix"
+func (n *BgpPeerPath) Ipv4MplsUnicastPrefixAny() *BgpPeer_Ipv4MplsUnicastPrefixPathAny {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefixPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"ipv4-mpls-unicast-prefixes", "ipv4-mpls-unicast-prefix"},
+			map[string]interface{}{"address": "*", "prefix-length": "*", "origin": "*", "path-id": "*"},
+			n,
+		),
+	}
+	return ps
+}
+
+// Ipv4MplsUnicastPrefixAny (list): A list of BGP unicast IPv4 prefixes.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix"
+func (n *BgpPeerPathAny) Ipv4MplsUnicastPrefixAny() *BgpPeer_Ipv4MplsUnicastPrefixPathAny {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefixPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"ipv4-mpls-unicast-prefixes", "ipv4-mpls-unicast-prefix"},
+			map[string]interface{}{"address": "*", "prefix-length": "*", "origin": "*", "path-id": "*"},
+			n,
+		),
+	}
+	return ps
+}
+
+// WithAddress sets BgpPeer_Ipv4MplsUnicastPrefixPathAny's key "address" to the specified value.
+// Address: string
+func (n *BgpPeer_Ipv4MplsUnicastPrefixPathAny) WithAddress(Address string) *BgpPeer_Ipv4MplsUnicastPrefixPathAny {
+	ygnmi.ModifyKey(n.NodePath, "address", Address)
+	return n
+}
+
+// WithPrefixLength sets BgpPeer_Ipv4MplsUnicastPrefixPathAny's key "prefix-length" to the specified value.
+// PrefixLength: uint32
+func (n *BgpPeer_Ipv4MplsUnicastPrefixPathAny) WithPrefixLength(PrefixLength uint32) *BgpPeer_Ipv4MplsUnicastPrefixPathAny {
+	ygnmi.ModifyKey(n.NodePath, "prefix-length", PrefixLength)
+	return n
+}
+
+// WithOrigin sets BgpPeer_Ipv4MplsUnicastPrefixPathAny's key "origin" to the specified value.
+// Origin: oc.E_Ipv4MplsUnicastPrefix_Origin
+func (n *BgpPeer_Ipv4MplsUnicastPrefixPathAny) WithOrigin(Origin oc.E_Ipv4MplsUnicastPrefix_Origin) *BgpPeer_Ipv4MplsUnicastPrefixPathAny {
+	ygnmi.ModifyKey(n.NodePath, "origin", Origin)
+	return n
+}
+
+// WithPathId sets BgpPeer_Ipv4MplsUnicastPrefixPathAny's key "path-id" to the specified value.
+// PathId: uint32
+func (n *BgpPeer_Ipv4MplsUnicastPrefixPathAny) WithPathId(PathId uint32) *BgpPeer_Ipv4MplsUnicastPrefixPathAny {
+	ygnmi.ModifyKey(n.NodePath, "path-id", PathId)
+	return n
+}
+
+// Ipv4MplsUnicastPrefix (list): A list of BGP unicast IPv4 prefixes.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix"
+//
+//	Address: string
+//	PrefixLength: uint32
+//	Origin: oc.E_Ipv4MplsUnicastPrefix_Origin
+//	PathId: uint32
+func (n *BgpPeerPath) Ipv4MplsUnicastPrefix(Address string, PrefixLength uint32, Origin oc.E_Ipv4MplsUnicastPrefix_Origin, PathId uint32) *BgpPeer_Ipv4MplsUnicastPrefixPath {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefixPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"ipv4-mpls-unicast-prefixes", "ipv4-mpls-unicast-prefix"},
+			map[string]interface{}{"address": Address, "prefix-length": PrefixLength, "origin": Origin, "path-id": PathId},
+			n,
+		),
+	}
+	return ps
+}
+
+// Ipv4MplsUnicastPrefix (list): A list of BGP unicast IPv4 prefixes.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix"
+//
+//	Address: string
+//	PrefixLength: uint32
+//	Origin: oc.E_Ipv4MplsUnicastPrefix_Origin
+//	PathId: uint32
+func (n *BgpPeerPathAny) Ipv4MplsUnicastPrefix(Address string, PrefixLength uint32, Origin oc.E_Ipv4MplsUnicastPrefix_Origin, PathId uint32) *BgpPeer_Ipv4MplsUnicastPrefixPathAny {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefixPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"ipv4-mpls-unicast-prefixes", "ipv4-mpls-unicast-prefix"},
+			map[string]interface{}{"address": Address, "prefix-length": PrefixLength, "origin": Origin, "path-id": PathId},
+			n,
+		),
+	}
+	return ps
+}
+
+// Ipv6MplsUnicastPrefixAny (list): A list of BGP unicast IPv6 prefixes.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix"
+func (n *BgpPeerPath) Ipv6MplsUnicastPrefixAny() *BgpPeer_Ipv6MplsUnicastPrefixPathAny {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefixPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"ipv6-mpls-unicast-prefixes", "ipv6-mpls-unicast-prefix"},
+			map[string]interface{}{"address": "*", "prefix-length": "*", "origin": "*", "path-id": "*"},
+			n,
+		),
+	}
+	return ps
+}
+
+// Ipv6MplsUnicastPrefixAny (list): A list of BGP unicast IPv6 prefixes.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix"
+func (n *BgpPeerPathAny) Ipv6MplsUnicastPrefixAny() *BgpPeer_Ipv6MplsUnicastPrefixPathAny {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefixPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"ipv6-mpls-unicast-prefixes", "ipv6-mpls-unicast-prefix"},
+			map[string]interface{}{"address": "*", "prefix-length": "*", "origin": "*", "path-id": "*"},
+			n,
+		),
+	}
+	return ps
+}
+
+// WithAddress sets BgpPeer_Ipv6MplsUnicastPrefixPathAny's key "address" to the specified value.
+// Address: string
+func (n *BgpPeer_Ipv6MplsUnicastPrefixPathAny) WithAddress(Address string) *BgpPeer_Ipv6MplsUnicastPrefixPathAny {
+	ygnmi.ModifyKey(n.NodePath, "address", Address)
+	return n
+}
+
+// WithPrefixLength sets BgpPeer_Ipv6MplsUnicastPrefixPathAny's key "prefix-length" to the specified value.
+// PrefixLength: uint32
+func (n *BgpPeer_Ipv6MplsUnicastPrefixPathAny) WithPrefixLength(PrefixLength uint32) *BgpPeer_Ipv6MplsUnicastPrefixPathAny {
+	ygnmi.ModifyKey(n.NodePath, "prefix-length", PrefixLength)
+	return n
+}
+
+// WithOrigin sets BgpPeer_Ipv6MplsUnicastPrefixPathAny's key "origin" to the specified value.
+// Origin: oc.E_Ipv6MplsUnicastPrefix_Origin
+func (n *BgpPeer_Ipv6MplsUnicastPrefixPathAny) WithOrigin(Origin oc.E_Ipv6MplsUnicastPrefix_Origin) *BgpPeer_Ipv6MplsUnicastPrefixPathAny {
+	ygnmi.ModifyKey(n.NodePath, "origin", Origin)
+	return n
+}
+
+// WithPathId sets BgpPeer_Ipv6MplsUnicastPrefixPathAny's key "path-id" to the specified value.
+// PathId: uint32
+func (n *BgpPeer_Ipv6MplsUnicastPrefixPathAny) WithPathId(PathId uint32) *BgpPeer_Ipv6MplsUnicastPrefixPathAny {
+	ygnmi.ModifyKey(n.NodePath, "path-id", PathId)
+	return n
+}
+
+// Ipv6MplsUnicastPrefix (list): A list of BGP unicast IPv6 prefixes.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix"
+//
+//	Address: string
+//	PrefixLength: uint32
+//	Origin: oc.E_Ipv6MplsUnicastPrefix_Origin
+//	PathId: uint32
+func (n *BgpPeerPath) Ipv6MplsUnicastPrefix(Address string, PrefixLength uint32, Origin oc.E_Ipv6MplsUnicastPrefix_Origin, PathId uint32) *BgpPeer_Ipv6MplsUnicastPrefixPath {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefixPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"ipv6-mpls-unicast-prefixes", "ipv6-mpls-unicast-prefix"},
+			map[string]interface{}{"address": Address, "prefix-length": PrefixLength, "origin": Origin, "path-id": PathId},
+			n,
+		),
+	}
+	return ps
+}
+
+// Ipv6MplsUnicastPrefix (list): A list of BGP unicast IPv6 prefixes.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix"
+//
+//	Address: string
+//	PrefixLength: uint32
+//	Origin: oc.E_Ipv6MplsUnicastPrefix_Origin
+//	PathId: uint32
+func (n *BgpPeerPathAny) Ipv6MplsUnicastPrefix(Address string, PrefixLength uint32, Origin oc.E_Ipv6MplsUnicastPrefix_Origin, PathId uint32) *BgpPeer_Ipv6MplsUnicastPrefixPathAny {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefixPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"ipv6-mpls-unicast-prefixes", "ipv6-mpls-unicast-prefix"},
+			map[string]interface{}{"address": Address, "prefix-length": PrefixLength, "origin": Origin, "path-id": PathId},
+			n,
+		),
+	}
+	return ps
+}
+
 // Name (leaf): An arbitrary name of the BGP peer determined by the ATE
 // configuration.
 //
@@ -2656,6 +2868,14114 @@ func (n *BgpPeer_CountersPath) State() ygnmi.SingletonQuery[*oc.BgpPeer_Counters
 func (n *BgpPeer_CountersPathAny) State() ygnmi.WildcardQuery[*oc.BgpPeer_Counters] {
 	return ygnmi.NewWildcardQuery[*oc.BgpPeer_Counters](
 		"BgpPeer_Counters",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_AddressPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/address YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_AddressPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_AddressPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/address YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_AddressPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_AddressPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "state/address"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/address"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_AddressPath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewSingletonQuery[string](
+		"BgpPeer_Ipv4MplsUnicastPrefix",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "address"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv4MplsUnicastPrefix).Address
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.BgpPeer_Ipv4MplsUnicastPrefix) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "state/address"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/address"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_AddressPathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"BgpPeer_Ipv4MplsUnicastPrefix",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "address"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv4MplsUnicastPrefix).Address
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.BgpPeer_Ipv4MplsUnicastPrefix) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "address"
+//	Path from root:       ""
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_AddressPath) Config() ygnmi.ConfigQuery[string] {
+	return ygnmi.NewConfigQuery[string](
+		"BgpPeer_Ipv4MplsUnicastPrefix",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"address"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv4MplsUnicastPrefix).Address
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.BgpPeer_Ipv4MplsUnicastPrefix) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "address"
+//	Path from root:       ""
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_AddressPathAny) Config() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"BgpPeer_Ipv4MplsUnicastPrefix",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"address"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv4MplsUnicastPrefix).Address
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.BgpPeer_Ipv4MplsUnicastPrefix) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_LocalPreferencePath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/local-preference YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_LocalPreferencePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_LocalPreferencePathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/local-preference YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_LocalPreferencePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_LocalPreferencePath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "state/local-preference"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/local-preference"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_LocalPreferencePath) State() ygnmi.SingletonQuery[uint32] {
+	return ygnmi.NewSingletonQuery[uint32](
+		"BgpPeer_Ipv4MplsUnicastPrefix",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "local-preference"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv4MplsUnicastPrefix).LocalPreference
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.BgpPeer_Ipv4MplsUnicastPrefix) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "state/local-preference"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/local-preference"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_LocalPreferencePathAny) State() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewWildcardQuery[uint32](
+		"BgpPeer_Ipv4MplsUnicastPrefix",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "local-preference"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv4MplsUnicastPrefix).LocalPreference
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.BgpPeer_Ipv4MplsUnicastPrefix) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_MultiExitDiscriminatorPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/multi-exit-discriminator YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_MultiExitDiscriminatorPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_MultiExitDiscriminatorPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/multi-exit-discriminator YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_MultiExitDiscriminatorPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_MultiExitDiscriminatorPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "state/multi-exit-discriminator"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/multi-exit-discriminator"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_MultiExitDiscriminatorPath) State() ygnmi.SingletonQuery[uint32] {
+	return ygnmi.NewSingletonQuery[uint32](
+		"BgpPeer_Ipv4MplsUnicastPrefix",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "multi-exit-discriminator"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv4MplsUnicastPrefix).MultiExitDiscriminator
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.BgpPeer_Ipv4MplsUnicastPrefix) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "state/multi-exit-discriminator"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/multi-exit-discriminator"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_MultiExitDiscriminatorPathAny) State() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewWildcardQuery[uint32](
+		"BgpPeer_Ipv4MplsUnicastPrefix",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "multi-exit-discriminator"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv4MplsUnicastPrefix).MultiExitDiscriminator
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.BgpPeer_Ipv4MplsUnicastPrefix) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_NextHopIpv4AddressPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/next-hop-ipv4-address YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_NextHopIpv4AddressPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_NextHopIpv4AddressPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/next-hop-ipv4-address YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_NextHopIpv4AddressPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_NextHopIpv4AddressPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "state/next-hop-ipv4-address"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/next-hop-ipv4-address"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_NextHopIpv4AddressPath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewSingletonQuery[string](
+		"BgpPeer_Ipv4MplsUnicastPrefix",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "next-hop-ipv4-address"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv4MplsUnicastPrefix).NextHopIpv4Address
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.BgpPeer_Ipv4MplsUnicastPrefix) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "state/next-hop-ipv4-address"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/next-hop-ipv4-address"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_NextHopIpv4AddressPathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"BgpPeer_Ipv4MplsUnicastPrefix",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "next-hop-ipv4-address"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv4MplsUnicastPrefix).NextHopIpv4Address
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.BgpPeer_Ipv4MplsUnicastPrefix) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_NextHopIpv6AddressPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/next-hop-ipv6-address YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_NextHopIpv6AddressPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_NextHopIpv6AddressPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/next-hop-ipv6-address YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_NextHopIpv6AddressPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_NextHopIpv6AddressPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "state/next-hop-ipv6-address"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/next-hop-ipv6-address"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_NextHopIpv6AddressPath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewSingletonQuery[string](
+		"BgpPeer_Ipv4MplsUnicastPrefix",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "next-hop-ipv6-address"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv4MplsUnicastPrefix).NextHopIpv6Address
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.BgpPeer_Ipv4MplsUnicastPrefix) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "state/next-hop-ipv6-address"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/next-hop-ipv6-address"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_NextHopIpv6AddressPathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"BgpPeer_Ipv4MplsUnicastPrefix",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "next-hop-ipv6-address"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv4MplsUnicastPrefix).NextHopIpv6Address
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.BgpPeer_Ipv4MplsUnicastPrefix) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_OriginPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/origin YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_OriginPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_OriginPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/origin YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_OriginPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_OriginPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "state/origin"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/origin"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_OriginPath) State() ygnmi.SingletonQuery[oc.E_Ipv4MplsUnicastPrefix_Origin] {
+	return ygnmi.NewSingletonQuery[oc.E_Ipv4MplsUnicastPrefix_Origin](
+		"BgpPeer_Ipv4MplsUnicastPrefix",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "origin"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Ipv4MplsUnicastPrefix_Origin, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv4MplsUnicastPrefix).Origin
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.BgpPeer_Ipv4MplsUnicastPrefix) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "state/origin"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/origin"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_OriginPathAny) State() ygnmi.WildcardQuery[oc.E_Ipv4MplsUnicastPrefix_Origin] {
+	return ygnmi.NewWildcardQuery[oc.E_Ipv4MplsUnicastPrefix_Origin](
+		"BgpPeer_Ipv4MplsUnicastPrefix",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "origin"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Ipv4MplsUnicastPrefix_Origin, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv4MplsUnicastPrefix).Origin
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.BgpPeer_Ipv4MplsUnicastPrefix) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "origin"
+//	Path from root:       ""
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_OriginPath) Config() ygnmi.ConfigQuery[oc.E_Ipv4MplsUnicastPrefix_Origin] {
+	return ygnmi.NewConfigQuery[oc.E_Ipv4MplsUnicastPrefix_Origin](
+		"BgpPeer_Ipv4MplsUnicastPrefix",
+		false,
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"origin"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Ipv4MplsUnicastPrefix_Origin, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv4MplsUnicastPrefix).Origin
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.BgpPeer_Ipv4MplsUnicastPrefix) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "origin"
+//	Path from root:       ""
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_OriginPathAny) Config() ygnmi.WildcardQuery[oc.E_Ipv4MplsUnicastPrefix_Origin] {
+	return ygnmi.NewWildcardQuery[oc.E_Ipv4MplsUnicastPrefix_Origin](
+		"BgpPeer_Ipv4MplsUnicastPrefix",
+		false,
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"origin"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Ipv4MplsUnicastPrefix_Origin, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv4MplsUnicastPrefix).Origin
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.BgpPeer_Ipv4MplsUnicastPrefix) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_PathIdPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/path-id YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_PathIdPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_PathIdPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/path-id YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_PathIdPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_PathIdPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "state/path-id"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/path-id"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_PathIdPath) State() ygnmi.SingletonQuery[uint32] {
+	return ygnmi.NewSingletonQuery[uint32](
+		"BgpPeer_Ipv4MplsUnicastPrefix",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "path-id"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv4MplsUnicastPrefix).PathId
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.BgpPeer_Ipv4MplsUnicastPrefix) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "state/path-id"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/path-id"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_PathIdPathAny) State() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewWildcardQuery[uint32](
+		"BgpPeer_Ipv4MplsUnicastPrefix",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "path-id"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv4MplsUnicastPrefix).PathId
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.BgpPeer_Ipv4MplsUnicastPrefix) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "path-id"
+//	Path from root:       ""
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_PathIdPath) Config() ygnmi.ConfigQuery[uint32] {
+	return ygnmi.NewConfigQuery[uint32](
+		"BgpPeer_Ipv4MplsUnicastPrefix",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"path-id"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv4MplsUnicastPrefix).PathId
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.BgpPeer_Ipv4MplsUnicastPrefix) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "path-id"
+//	Path from root:       ""
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_PathIdPathAny) Config() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewWildcardQuery[uint32](
+		"BgpPeer_Ipv4MplsUnicastPrefix",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"path-id"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv4MplsUnicastPrefix).PathId
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.BgpPeer_Ipv4MplsUnicastPrefix) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_PrefixLengthPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/prefix-length YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_PrefixLengthPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_PrefixLengthPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/prefix-length YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_PrefixLengthPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_PrefixLengthPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "state/prefix-length"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/prefix-length"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_PrefixLengthPath) State() ygnmi.SingletonQuery[uint32] {
+	return ygnmi.NewSingletonQuery[uint32](
+		"BgpPeer_Ipv4MplsUnicastPrefix",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "prefix-length"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv4MplsUnicastPrefix).PrefixLength
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.BgpPeer_Ipv4MplsUnicastPrefix) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "state/prefix-length"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/prefix-length"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_PrefixLengthPathAny) State() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewWildcardQuery[uint32](
+		"BgpPeer_Ipv4MplsUnicastPrefix",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "prefix-length"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv4MplsUnicastPrefix).PrefixLength
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.BgpPeer_Ipv4MplsUnicastPrefix) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "prefix-length"
+//	Path from root:       ""
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_PrefixLengthPath) Config() ygnmi.ConfigQuery[uint32] {
+	return ygnmi.NewConfigQuery[uint32](
+		"BgpPeer_Ipv4MplsUnicastPrefix",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"prefix-length"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv4MplsUnicastPrefix).PrefixLength
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.BgpPeer_Ipv4MplsUnicastPrefix) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "prefix-length"
+//	Path from root:       ""
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_PrefixLengthPathAny) Config() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewWildcardQuery[uint32](
+		"BgpPeer_Ipv4MplsUnicastPrefix",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"prefix-length"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv4MplsUnicastPrefix).PrefixLength
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.BgpPeer_Ipv4MplsUnicastPrefix) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefixPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefixPath struct {
+	*ygnmi.NodePath
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefixPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefixPathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv4MplsUnicastPrefixPath) PathOriginName() string {
+	return "openconfig"
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefixPathMap represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefixPathMap struct {
+	*ygnmi.NodePath
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefixPathMapAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefixPathMapAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv4MplsUnicastPrefixPathMap) PathOriginName() string {
+	return "openconfig"
+}
+
+// Address (leaf): The IPv4 address.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "*/address"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/*/address"
+func (n *BgpPeer_Ipv4MplsUnicastPrefixPath) Address() *BgpPeer_Ipv4MplsUnicastPrefix_AddressPath {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_AddressPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "address"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Address (leaf): The IPv4 address.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "*/address"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/*/address"
+func (n *BgpPeer_Ipv4MplsUnicastPrefixPathAny) Address() *BgpPeer_Ipv4MplsUnicastPrefix_AddressPathAny {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_AddressPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "address"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// AsPathAny (list): Unkeyed list of AS PATH segments
+// This attribute identifies the autonomous systems through which routing information
+// carried in this UPDATE message has passed.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "state/as-path"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/as-path"
+func (n *BgpPeer_Ipv4MplsUnicastPrefixPath) AsPathAny() *BgpPeer_Ipv4MplsUnicastPrefix_AsPathPathAny {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_AsPathPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "as-path"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// AsPathAny (list): Unkeyed list of AS PATH segments
+// This attribute identifies the autonomous systems through which routing information
+// carried in this UPDATE message has passed.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "state/as-path"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/as-path"
+func (n *BgpPeer_Ipv4MplsUnicastPrefixPathAny) AsPathAny() *BgpPeer_Ipv4MplsUnicastPrefix_AsPathPathAny {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_AsPathPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "as-path"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// CommunityAny (list): Unkeyed list of optional community attributes present in the UPDATE message.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "state/community"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/community"
+func (n *BgpPeer_Ipv4MplsUnicastPrefixPath) CommunityAny() *BgpPeer_Ipv4MplsUnicastPrefix_CommunityPathAny {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_CommunityPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "community"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// CommunityAny (list): Unkeyed list of optional community attributes present in the UPDATE message.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "state/community"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/community"
+func (n *BgpPeer_Ipv4MplsUnicastPrefixPathAny) CommunityAny() *BgpPeer_Ipv4MplsUnicastPrefix_CommunityPathAny {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_CommunityPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "community"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// ExtendedCommunityAny (list): Unkeyed list of optional extended community attributes present in the UPDATE message.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "state/extended-community"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community"
+func (n *BgpPeer_Ipv4MplsUnicastPrefixPath) ExtendedCommunityAny() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunityPathAny {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunityPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "extended-community"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// ExtendedCommunityAny (list): Unkeyed list of optional extended community attributes present in the UPDATE message.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "state/extended-community"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community"
+func (n *BgpPeer_Ipv4MplsUnicastPrefixPathAny) ExtendedCommunityAny() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunityPathAny {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunityPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "extended-community"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// LabelsAny (list): Unkeyed list of MPLS labels associated with the prefix.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "state/labels"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/labels"
+func (n *BgpPeer_Ipv4MplsUnicastPrefixPath) LabelsAny() *BgpPeer_Ipv4MplsUnicastPrefix_LabelsPathAny {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_LabelsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "labels"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// LabelsAny (list): Unkeyed list of MPLS labels associated with the prefix.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "state/labels"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/labels"
+func (n *BgpPeer_Ipv4MplsUnicastPrefixPathAny) LabelsAny() *BgpPeer_Ipv4MplsUnicastPrefix_LabelsPathAny {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_LabelsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "labels"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// LocalPreference (leaf): The local preference is a well-known attribute and the value is used for route selection. The route with the highest local preference value is preferred.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "state/local-preference"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/local-preference"
+func (n *BgpPeer_Ipv4MplsUnicastPrefixPath) LocalPreference() *BgpPeer_Ipv4MplsUnicastPrefix_LocalPreferencePath {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_LocalPreferencePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "local-preference"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// LocalPreference (leaf): The local preference is a well-known attribute and the value is used for route selection. The route with the highest local preference value is preferred.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "state/local-preference"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/local-preference"
+func (n *BgpPeer_Ipv4MplsUnicastPrefixPathAny) LocalPreference() *BgpPeer_Ipv4MplsUnicastPrefix_LocalPreferencePathAny {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_LocalPreferencePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "local-preference"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// MultiExitDiscriminator (leaf): The multi exit discriminator (MED) is an optional non-transitive attribute and the value is used for route selection. The route with the lowest MED value is preferred.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "state/multi-exit-discriminator"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/multi-exit-discriminator"
+func (n *BgpPeer_Ipv4MplsUnicastPrefixPath) MultiExitDiscriminator() *BgpPeer_Ipv4MplsUnicastPrefix_MultiExitDiscriminatorPath {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_MultiExitDiscriminatorPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "multi-exit-discriminator"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// MultiExitDiscriminator (leaf): The multi exit discriminator (MED) is an optional non-transitive attribute and the value is used for route selection. The route with the lowest MED value is preferred.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "state/multi-exit-discriminator"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/multi-exit-discriminator"
+func (n *BgpPeer_Ipv4MplsUnicastPrefixPathAny) MultiExitDiscriminator() *BgpPeer_Ipv4MplsUnicastPrefix_MultiExitDiscriminatorPathAny {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_MultiExitDiscriminatorPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "multi-exit-discriminator"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// NextHopIpv4Address (leaf): The IPv4 address of the egress interface.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "state/next-hop-ipv4-address"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/next-hop-ipv4-address"
+func (n *BgpPeer_Ipv4MplsUnicastPrefixPath) NextHopIpv4Address() *BgpPeer_Ipv4MplsUnicastPrefix_NextHopIpv4AddressPath {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_NextHopIpv4AddressPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "next-hop-ipv4-address"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// NextHopIpv4Address (leaf): The IPv4 address of the egress interface.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "state/next-hop-ipv4-address"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/next-hop-ipv4-address"
+func (n *BgpPeer_Ipv4MplsUnicastPrefixPathAny) NextHopIpv4Address() *BgpPeer_Ipv4MplsUnicastPrefix_NextHopIpv4AddressPathAny {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_NextHopIpv4AddressPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "next-hop-ipv4-address"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// NextHopIpv6Address (leaf): The IPv6 address of the egress interface.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "state/next-hop-ipv6-address"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/next-hop-ipv6-address"
+func (n *BgpPeer_Ipv4MplsUnicastPrefixPath) NextHopIpv6Address() *BgpPeer_Ipv4MplsUnicastPrefix_NextHopIpv6AddressPath {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_NextHopIpv6AddressPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "next-hop-ipv6-address"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// NextHopIpv6Address (leaf): The IPv6 address of the egress interface.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "state/next-hop-ipv6-address"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/next-hop-ipv6-address"
+func (n *BgpPeer_Ipv4MplsUnicastPrefixPathAny) NextHopIpv6Address() *BgpPeer_Ipv4MplsUnicastPrefix_NextHopIpv6AddressPathAny {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_NextHopIpv6AddressPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "next-hop-ipv6-address"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Origin (leaf): The origin of the prefix.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "*/origin"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/*/origin"
+func (n *BgpPeer_Ipv4MplsUnicastPrefixPath) Origin() *BgpPeer_Ipv4MplsUnicastPrefix_OriginPath {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_OriginPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "origin"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Origin (leaf): The origin of the prefix.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "*/origin"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/*/origin"
+func (n *BgpPeer_Ipv4MplsUnicastPrefixPathAny) Origin() *BgpPeer_Ipv4MplsUnicastPrefix_OriginPathAny {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_OriginPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "origin"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// PathId (leaf): If the route is learned from a neighbor, the path-id
+// corresponds to the path-id for the route in the
+// corresponding adj-rib-in-post table.  If the route is
+// injected from another protocol, or the neighbor does not
+// support BGP add-paths, the path-id should be set
+// to zero, also the default value.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "*/path-id"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/*/path-id"
+func (n *BgpPeer_Ipv4MplsUnicastPrefixPath) PathId() *BgpPeer_Ipv4MplsUnicastPrefix_PathIdPath {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_PathIdPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "path-id"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// PathId (leaf): If the route is learned from a neighbor, the path-id
+// corresponds to the path-id for the route in the
+// corresponding adj-rib-in-post table.  If the route is
+// injected from another protocol, or the neighbor does not
+// support BGP add-paths, the path-id should be set
+// to zero, also the default value.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "*/path-id"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/*/path-id"
+func (n *BgpPeer_Ipv4MplsUnicastPrefixPathAny) PathId() *BgpPeer_Ipv4MplsUnicastPrefix_PathIdPathAny {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_PathIdPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "path-id"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// PrefixLength (leaf): The prefix length.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "*/prefix-length"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/*/prefix-length"
+func (n *BgpPeer_Ipv4MplsUnicastPrefixPath) PrefixLength() *BgpPeer_Ipv4MplsUnicastPrefix_PrefixLengthPath {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_PrefixLengthPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "prefix-length"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// PrefixLength (leaf): The prefix length.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "*/prefix-length"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/*/prefix-length"
+func (n *BgpPeer_Ipv4MplsUnicastPrefixPathAny) PrefixLength() *BgpPeer_Ipv4MplsUnicastPrefix_PrefixLengthPathAny {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_PrefixLengthPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "prefix-length"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv4MplsUnicastPrefixPath) State() ygnmi.SingletonQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix] {
+	return ygnmi.NewSingletonQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix](
+		"BgpPeer_Ipv4MplsUnicastPrefix",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv4MplsUnicastPrefixPathAny) State() ygnmi.WildcardQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix] {
+	return ygnmi.NewWildcardQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix](
+		"BgpPeer_Ipv4MplsUnicastPrefix",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_AsPathPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/as-path YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_AsPathPath struct {
+	*ygnmi.NodePath
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_AsPathPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/as-path YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_AsPathPathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_AsPathPath) PathOriginName() string {
+	return "openconfig"
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_AsPathPath) State() ygnmi.SingletonQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix_AsPath] {
+	return ygnmi.NewSingletonQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix_AsPath](
+		"BgpPeer_Ipv4MplsUnicastPrefix_AsPath",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_AsPathPathAny) State() ygnmi.WildcardQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix_AsPath] {
+	return ygnmi.NewWildcardQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix_AsPath](
+		"BgpPeer_Ipv4MplsUnicastPrefix_AsPath",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_CommunityPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/community YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_CommunityPath struct {
+	*ygnmi.NodePath
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_CommunityPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/community YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_CommunityPathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_CommunityPath) PathOriginName() string {
+	return "openconfig"
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_CommunityPath) State() ygnmi.SingletonQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix_Community] {
+	return ygnmi.NewSingletonQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix_Community](
+		"BgpPeer_Ipv4MplsUnicastPrefix_Community",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_CommunityPathAny) State() ygnmi.WildcardQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix_Community] {
+	return ygnmi.NewWildcardQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix_Community](
+		"BgpPeer_Ipv4MplsUnicastPrefix_Community",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunityPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunityPath struct {
+	*ygnmi.NodePath
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunityPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunityPathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunityPath) PathOriginName() string {
+	return "openconfig"
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunityPath) State() ygnmi.SingletonQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity] {
+	return ygnmi.NewSingletonQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunityPathAny) State() ygnmi.WildcardQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity] {
+	return ygnmi.NewWildcardQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_BgpExtendedCommunityStructuredTypePath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/bgp-extended-community-structured_type YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_BgpExtendedCommunityStructuredTypePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_BgpExtendedCommunityStructuredTypePathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/bgp-extended-community-structured_type YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_BgpExtendedCommunityStructuredTypePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_BgpExtendedCommunityStructuredTypePath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "bgp-extended-community-structured_type"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/bgp-extended-community-structured_type"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_BgpExtendedCommunityStructuredTypePath) State() ygnmi.SingletonQuery[oc.E_ExtendedCommunity_BgpExtendedCommunityStructuredType] {
+	return ygnmi.NewSingletonQuery[oc.E_ExtendedCommunity_BgpExtendedCommunityStructuredType](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"bgp-extended-community-structured_type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_ExtendedCommunity_BgpExtendedCommunityStructuredType, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured).BgpExtendedCommunityStructuredType
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "bgp-extended-community-structured_type"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/bgp-extended-community-structured_type"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_BgpExtendedCommunityStructuredTypePathAny) State() ygnmi.WildcardQuery[oc.E_ExtendedCommunity_BgpExtendedCommunityStructuredType] {
+	return ygnmi.NewWildcardQuery[oc.E_ExtendedCommunity_BgpExtendedCommunityStructuredType](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"bgp-extended-community-structured_type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_ExtendedCommunity_BgpExtendedCommunityStructuredType, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured).BgpExtendedCommunityStructuredType
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_StructuredPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_StructuredPath struct {
+	*ygnmi.NodePath
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_StructuredPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_StructuredPathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_StructuredPath) PathOriginName() string {
+	return "openconfig"
+}
+
+// BgpExtendedCommunityStructuredType (leaf): The type of Extended Community
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "bgp-extended-community-structured_type"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/bgp-extended-community-structured_type"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_StructuredPath) BgpExtendedCommunityStructuredType() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_BgpExtendedCommunityStructuredTypePath {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_BgpExtendedCommunityStructuredTypePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"bgp-extended-community-structured_type"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// BgpExtendedCommunityStructuredType (leaf): The type of Extended Community
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "bgp-extended-community-structured_type"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/bgp-extended-community-structured_type"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_StructuredPathAny) BgpExtendedCommunityStructuredType() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_BgpExtendedCommunityStructuredTypePathAny {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_BgpExtendedCommunityStructuredTypePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"bgp-extended-community-structured_type"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// NonTransitive_2OctetAsType (container): The Non-Transitive Two-Octet AS-Specific Extended Community is sent as type 0x40
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "non_transitive_2octet_as_type"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/non_transitive_2octet_as_type"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_StructuredPath) NonTransitive_2OctetAsType() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsTypePath {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsTypePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"non_transitive_2octet_as_type"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// NonTransitive_2OctetAsType (container): The Non-Transitive Two-Octet AS-Specific Extended Community is sent as type 0x40
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "non_transitive_2octet_as_type"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/non_transitive_2octet_as_type"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_StructuredPathAny) NonTransitive_2OctetAsType() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsTypePathAny {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsTypePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"non_transitive_2octet_as_type"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// Transitive_2OctetAsType (container): The Transitive Two-Octet AS-Specific Extended Community is sent as type 0x00
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "transitive_2octet_as_type"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_StructuredPath) Transitive_2OctetAsType() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsTypePath {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsTypePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"transitive_2octet_as_type"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// Transitive_2OctetAsType (container): The Transitive Two-Octet AS-Specific Extended Community is sent as type 0x00
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "transitive_2octet_as_type"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_StructuredPathAny) Transitive_2OctetAsType() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsTypePathAny {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsTypePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"transitive_2octet_as_type"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// Transitive_4OctetAsType (container): The Transitive Four-Octet AS-Specific Extended Community is sent as type 0x02
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "transitive_4octet_as_type"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_StructuredPath) Transitive_4OctetAsType() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsTypePath {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsTypePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"transitive_4octet_as_type"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// Transitive_4OctetAsType (container): The Transitive Four-Octet AS-Specific Extended Community is sent as type 0x02
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "transitive_4octet_as_type"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_StructuredPathAny) Transitive_4OctetAsType() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsTypePathAny {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsTypePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"transitive_4octet_as_type"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// TransitiveIpv4AddressType (container): The Transitive IPv4 Address Specific Extended Community is sent as type 0x01
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "transitive_ipv4_address_type"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_StructuredPath) TransitiveIpv4AddressType() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressTypePath {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressTypePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"transitive_ipv4_address_type"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// TransitiveIpv4AddressType (container): The Transitive IPv4 Address Specific Extended Community is sent as type 0x01
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "transitive_ipv4_address_type"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_StructuredPathAny) TransitiveIpv4AddressType() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressTypePathAny {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressTypePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"transitive_ipv4_address_type"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// TransitiveOpaqueType (container): The Transitive Opaque Extended Community is sent as type 0x03
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "transitive_opaque_type"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_StructuredPath) TransitiveOpaqueType() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueTypePath {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueTypePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"transitive_opaque_type"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// TransitiveOpaqueType (container): The Transitive Opaque Extended Community is sent as type 0x03
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "transitive_opaque_type"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_StructuredPathAny) TransitiveOpaqueType() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueTypePathAny {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueTypePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"transitive_opaque_type"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_StructuredPath) State() ygnmi.SingletonQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured] {
+	return ygnmi.NewSingletonQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_StructuredPathAny) State() ygnmi.WildcardQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured] {
+	return ygnmi.NewWildcardQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_NonTransitive_2OctetAsTypePath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/non_transitive_2octet_as_type/non_transitive_2octet_as_type YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_NonTransitive_2OctetAsTypePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_NonTransitive_2OctetAsTypePathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/non_transitive_2octet_as_type/non_transitive_2octet_as_type YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_NonTransitive_2OctetAsTypePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_NonTransitive_2OctetAsTypePath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "non_transitive_2octet_as_type"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/non_transitive_2octet_as_type/non_transitive_2octet_as_type"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_NonTransitive_2OctetAsTypePath) State() ygnmi.SingletonQuery[oc.E_Structured_NonTransitive_2OctetAsType] {
+	return ygnmi.NewSingletonQuery[oc.E_Structured_NonTransitive_2OctetAsType](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"non_transitive_2octet_as_type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Structured_NonTransitive_2OctetAsType, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType).NonTransitive_2OctetAsType
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "non_transitive_2octet_as_type"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/non_transitive_2octet_as_type/non_transitive_2octet_as_type"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_NonTransitive_2OctetAsTypePathAny) State() ygnmi.WildcardQuery[oc.E_Structured_NonTransitive_2OctetAsType] {
+	return ygnmi.NewWildcardQuery[oc.E_Structured_NonTransitive_2OctetAsType](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"non_transitive_2octet_as_type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Structured_NonTransitive_2OctetAsType, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType).NonTransitive_2OctetAsType
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsTypePath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/non_transitive_2octet_as_type YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsTypePath struct {
+	*ygnmi.NodePath
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsTypePathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/non_transitive_2octet_as_type YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsTypePathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsTypePath) PathOriginName() string {
+	return "openconfig"
+}
+
+// LinkBandwidthSubtype (container): The Link Bandwidth Extended Community attribute is defined in draft-ietf-idr-link-bandwidth. (https://datatracker.ietf.org/doc/draft-ietf-idr-link-bandwidth) It is sent with sub-type as 0x04.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "link_bandwidth_subtype"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/non_transitive_2octet_as_type/link_bandwidth_subtype"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsTypePath) LinkBandwidthSubtype() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtypePath {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtypePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"link_bandwidth_subtype"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// LinkBandwidthSubtype (container): The Link Bandwidth Extended Community attribute is defined in draft-ietf-idr-link-bandwidth. (https://datatracker.ietf.org/doc/draft-ietf-idr-link-bandwidth) It is sent with sub-type as 0x04.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "link_bandwidth_subtype"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/non_transitive_2octet_as_type/link_bandwidth_subtype"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsTypePathAny) LinkBandwidthSubtype() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtypePathAny {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtypePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"link_bandwidth_subtype"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// NonTransitive_2OctetAsType (leaf): The type of Non-Transitive Two-Octet AS-Specific Extended Community
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "non_transitive_2octet_as_type"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/non_transitive_2octet_as_type/non_transitive_2octet_as_type"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsTypePath) NonTransitive_2OctetAsType() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_NonTransitive_2OctetAsTypePath {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_NonTransitive_2OctetAsTypePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"non_transitive_2octet_as_type"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// NonTransitive_2OctetAsType (leaf): The type of Non-Transitive Two-Octet AS-Specific Extended Community
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "non_transitive_2octet_as_type"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/non_transitive_2octet_as_type/non_transitive_2octet_as_type"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsTypePathAny) NonTransitive_2OctetAsType() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_NonTransitive_2OctetAsTypePathAny {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_NonTransitive_2OctetAsTypePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"non_transitive_2octet_as_type"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsTypePath) State() ygnmi.SingletonQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType] {
+	return ygnmi.NewSingletonQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsTypePathAny) State() ygnmi.WildcardQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType] {
+	return ygnmi.NewWildcardQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype_BandwidthPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/non_transitive_2octet_as_type/link_bandwidth_subtype/bandwidth YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype_BandwidthPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype_BandwidthPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/non_transitive_2octet_as_type/link_bandwidth_subtype/bandwidth YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype_BandwidthPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype_BandwidthPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "bandwidth"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/non_transitive_2octet_as_type/link_bandwidth_subtype/bandwidth"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype_BandwidthPath) State() ygnmi.SingletonQuery[float32] {
+	return ygnmi.NewSingletonQuery[float32](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"bandwidth"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float32, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype).Bandwidth
+			v := reflect.ValueOf(ret)
+			return ygot.BinaryToFloat32(ret), v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "bandwidth"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/non_transitive_2octet_as_type/link_bandwidth_subtype/bandwidth"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype_BandwidthPathAny) State() ygnmi.WildcardQuery[float32] {
+	return ygnmi.NewWildcardQuery[float32](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"bandwidth"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float32, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype).Bandwidth
+			v := reflect.ValueOf(ret)
+			return ygot.BinaryToFloat32(ret), v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype_Global_2ByteAsPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/non_transitive_2octet_as_type/link_bandwidth_subtype/global_2byte_as YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype_Global_2ByteAsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype_Global_2ByteAsPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/non_transitive_2octet_as_type/link_bandwidth_subtype/global_2byte_as YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype_Global_2ByteAsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype_Global_2ByteAsPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "global_2byte_as"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/non_transitive_2octet_as_type/link_bandwidth_subtype/global_2byte_as"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype_Global_2ByteAsPath) State() ygnmi.SingletonQuery[uint16] {
+	return ygnmi.NewSingletonQuery[uint16](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"global_2byte_as"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype).Global_2ByteAs
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "global_2byte_as"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/non_transitive_2octet_as_type/link_bandwidth_subtype/global_2byte_as"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype_Global_2ByteAsPathAny) State() ygnmi.WildcardQuery[uint16] {
+	return ygnmi.NewWildcardQuery[uint16](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"global_2byte_as"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype).Global_2ByteAs
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtypePath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/non_transitive_2octet_as_type/link_bandwidth_subtype YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtypePath struct {
+	*ygnmi.NodePath
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtypePathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/non_transitive_2octet_as_type/link_bandwidth_subtype YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtypePathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtypePath) PathOriginName() string {
+	return "openconfig"
+}
+
+// Bandwidth (leaf): Bandwidth of the link in bytes per second. ( 1 Kbps is 1000 bytes per second and 1 Mbps is 1000 Kbps per second )
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "bandwidth"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/non_transitive_2octet_as_type/link_bandwidth_subtype/bandwidth"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtypePath) Bandwidth() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype_BandwidthPath {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype_BandwidthPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"bandwidth"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Bandwidth (leaf): Bandwidth of the link in bytes per second. ( 1 Kbps is 1000 bytes per second and 1 Mbps is 1000 Kbps per second )
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "bandwidth"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/non_transitive_2octet_as_type/link_bandwidth_subtype/bandwidth"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtypePathAny) Bandwidth() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype_BandwidthPathAny {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype_BandwidthPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"bandwidth"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Global_2ByteAs (leaf): The value of the Global Administrator subfield should represent the Autonomous System
+// of the router that attaches the Link Bandwidth Community.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "global_2byte_as"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/non_transitive_2octet_as_type/link_bandwidth_subtype/global_2byte_as"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtypePath) Global_2ByteAs() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype_Global_2ByteAsPath {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype_Global_2ByteAsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"global_2byte_as"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Global_2ByteAs (leaf): The value of the Global Administrator subfield should represent the Autonomous System
+// of the router that attaches the Link Bandwidth Community.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "global_2byte_as"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/non_transitive_2octet_as_type/link_bandwidth_subtype/global_2byte_as"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtypePathAny) Global_2ByteAs() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype_Global_2ByteAsPathAny {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype_Global_2ByteAsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"global_2byte_as"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtypePath) State() ygnmi.SingletonQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype] {
+	return ygnmi.NewSingletonQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtypePathAny) State() ygnmi.WildcardQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype] {
+	return ygnmi.NewWildcardQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_TransitiveIpv4AddressTypePath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type/transitive_ipv4_address_type YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_TransitiveIpv4AddressTypePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_TransitiveIpv4AddressTypePathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type/transitive_ipv4_address_type YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_TransitiveIpv4AddressTypePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_TransitiveIpv4AddressTypePath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "transitive_ipv4_address_type"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type/transitive_ipv4_address_type"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_TransitiveIpv4AddressTypePath) State() ygnmi.SingletonQuery[oc.E_Structured_TransitiveIpv4AddressType] {
+	return ygnmi.NewSingletonQuery[oc.E_Structured_TransitiveIpv4AddressType](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"transitive_ipv4_address_type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Structured_TransitiveIpv4AddressType, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType).TransitiveIpv4AddressType
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "transitive_ipv4_address_type"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type/transitive_ipv4_address_type"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_TransitiveIpv4AddressTypePathAny) State() ygnmi.WildcardQuery[oc.E_Structured_TransitiveIpv4AddressType] {
+	return ygnmi.NewWildcardQuery[oc.E_Structured_TransitiveIpv4AddressType](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"transitive_ipv4_address_type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Structured_TransitiveIpv4AddressType, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType).TransitiveIpv4AddressType
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressTypePath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressTypePath struct {
+	*ygnmi.NodePath
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressTypePathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressTypePathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressTypePath) PathOriginName() string {
+	return "openconfig"
+}
+
+// RouteOriginSubtype (container): The Route Origin Community identifies one or more routers that inject a set of routes (that carry this Community)
+// into BGP It is sent with sub-type as 0x03.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "route_origin_subtype"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type/route_origin_subtype"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressTypePath) RouteOriginSubtype() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtypePath {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtypePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"route_origin_subtype"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// RouteOriginSubtype (container): The Route Origin Community identifies one or more routers that inject a set of routes (that carry this Community)
+// into BGP It is sent with sub-type as 0x03.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "route_origin_subtype"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type/route_origin_subtype"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressTypePathAny) RouteOriginSubtype() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtypePathAny {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtypePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"route_origin_subtype"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// RouteTargetSubtype (container): The Route Target Community identifies one or more routers that may receive a set of routes (that carry this Community)
+// carried by BGP. It is sent with sub-type as 0x02.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "route_target_subtype"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type/route_target_subtype"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressTypePath) RouteTargetSubtype() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtypePath {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtypePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"route_target_subtype"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// RouteTargetSubtype (container): The Route Target Community identifies one or more routers that may receive a set of routes (that carry this Community)
+// carried by BGP. It is sent with sub-type as 0x02.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "route_target_subtype"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type/route_target_subtype"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressTypePathAny) RouteTargetSubtype() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtypePathAny {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtypePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"route_target_subtype"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// TransitiveIpv4AddressType (leaf): The type of Transitive IPv4 Address Specific Extended Community
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "transitive_ipv4_address_type"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type/transitive_ipv4_address_type"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressTypePath) TransitiveIpv4AddressType() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_TransitiveIpv4AddressTypePath {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_TransitiveIpv4AddressTypePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"transitive_ipv4_address_type"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// TransitiveIpv4AddressType (leaf): The type of Transitive IPv4 Address Specific Extended Community
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "transitive_ipv4_address_type"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type/transitive_ipv4_address_type"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressTypePathAny) TransitiveIpv4AddressType() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_TransitiveIpv4AddressTypePathAny {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_TransitiveIpv4AddressTypePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"transitive_ipv4_address_type"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressTypePath) State() ygnmi.SingletonQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType] {
+	return ygnmi.NewSingletonQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressTypePathAny) State() ygnmi.WildcardQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType] {
+	return ygnmi.NewWildcardQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype_GlobalIpv4AdminPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type/route_origin_subtype/global_ipv4_admin YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype_GlobalIpv4AdminPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype_GlobalIpv4AdminPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type/route_origin_subtype/global_ipv4_admin YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype_GlobalIpv4AdminPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype_GlobalIpv4AdminPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "global_ipv4_admin"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type/route_origin_subtype/global_ipv4_admin"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype_GlobalIpv4AdminPath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewSingletonQuery[string](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"global_ipv4_admin"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype).GlobalIpv4Admin
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "global_ipv4_admin"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type/route_origin_subtype/global_ipv4_admin"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype_GlobalIpv4AdminPathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"global_ipv4_admin"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype).GlobalIpv4Admin
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype_Local_2ByteAdminPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type/route_origin_subtype/local_2byte_admin YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype_Local_2ByteAdminPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype_Local_2ByteAdminPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type/route_origin_subtype/local_2byte_admin YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype_Local_2ByteAdminPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype_Local_2ByteAdminPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "local_2byte_admin"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type/route_origin_subtype/local_2byte_admin"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype_Local_2ByteAdminPath) State() ygnmi.SingletonQuery[uint16] {
+	return ygnmi.NewSingletonQuery[uint16](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"local_2byte_admin"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype).Local_2ByteAdmin
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "local_2byte_admin"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type/route_origin_subtype/local_2byte_admin"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype_Local_2ByteAdminPathAny) State() ygnmi.WildcardQuery[uint16] {
+	return ygnmi.NewWildcardQuery[uint16](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"local_2byte_admin"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype).Local_2ByteAdmin
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtypePath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type/route_origin_subtype YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtypePath struct {
+	*ygnmi.NodePath
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtypePathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type/route_origin_subtype YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtypePathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtypePath) PathOriginName() string {
+	return "openconfig"
+}
+
+// GlobalIpv4Admin (leaf): An IPv4 unicast address assigned by one of the Internet registries.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "global_ipv4_admin"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type/route_origin_subtype/global_ipv4_admin"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtypePath) GlobalIpv4Admin() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype_GlobalIpv4AdminPath {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype_GlobalIpv4AdminPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"global_ipv4_admin"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// GlobalIpv4Admin (leaf): An IPv4 unicast address assigned by one of the Internet registries.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "global_ipv4_admin"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type/route_origin_subtype/global_ipv4_admin"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtypePathAny) GlobalIpv4Admin() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype_GlobalIpv4AdminPathAny {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype_GlobalIpv4AdminPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"global_ipv4_admin"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Local_2ByteAdmin (leaf): The Local Administrator sub-field contains a number from a numbering space
+// that is administered by the organization to which the IP address carried in the
+// Global Administrator sub-field has been assigned by an appropriate authority.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "local_2byte_admin"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type/route_origin_subtype/local_2byte_admin"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtypePath) Local_2ByteAdmin() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype_Local_2ByteAdminPath {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype_Local_2ByteAdminPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"local_2byte_admin"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Local_2ByteAdmin (leaf): The Local Administrator sub-field contains a number from a numbering space
+// that is administered by the organization to which the IP address carried in the
+// Global Administrator sub-field has been assigned by an appropriate authority.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "local_2byte_admin"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type/route_origin_subtype/local_2byte_admin"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtypePathAny) Local_2ByteAdmin() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype_Local_2ByteAdminPathAny {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype_Local_2ByteAdminPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"local_2byte_admin"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtypePath) State() ygnmi.SingletonQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype] {
+	return ygnmi.NewSingletonQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtypePathAny) State() ygnmi.WildcardQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype] {
+	return ygnmi.NewWildcardQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype_GlobalIpv4AdminPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type/route_target_subtype/global_ipv4_admin YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype_GlobalIpv4AdminPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype_GlobalIpv4AdminPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type/route_target_subtype/global_ipv4_admin YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype_GlobalIpv4AdminPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype_GlobalIpv4AdminPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "global_ipv4_admin"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type/route_target_subtype/global_ipv4_admin"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype_GlobalIpv4AdminPath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewSingletonQuery[string](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"global_ipv4_admin"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype).GlobalIpv4Admin
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "global_ipv4_admin"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type/route_target_subtype/global_ipv4_admin"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype_GlobalIpv4AdminPathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"global_ipv4_admin"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype).GlobalIpv4Admin
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype_Local_2ByteAdminPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type/route_target_subtype/local_2byte_admin YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype_Local_2ByteAdminPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype_Local_2ByteAdminPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type/route_target_subtype/local_2byte_admin YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype_Local_2ByteAdminPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype_Local_2ByteAdminPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "local_2byte_admin"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type/route_target_subtype/local_2byte_admin"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype_Local_2ByteAdminPath) State() ygnmi.SingletonQuery[uint16] {
+	return ygnmi.NewSingletonQuery[uint16](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"local_2byte_admin"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype).Local_2ByteAdmin
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "local_2byte_admin"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type/route_target_subtype/local_2byte_admin"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype_Local_2ByteAdminPathAny) State() ygnmi.WildcardQuery[uint16] {
+	return ygnmi.NewWildcardQuery[uint16](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"local_2byte_admin"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype).Local_2ByteAdmin
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtypePath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type/route_target_subtype YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtypePath struct {
+	*ygnmi.NodePath
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtypePathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type/route_target_subtype YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtypePathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtypePath) PathOriginName() string {
+	return "openconfig"
+}
+
+// GlobalIpv4Admin (leaf): An IPv4 unicast address assigned by one of the Internet registries.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "global_ipv4_admin"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type/route_target_subtype/global_ipv4_admin"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtypePath) GlobalIpv4Admin() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype_GlobalIpv4AdminPath {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype_GlobalIpv4AdminPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"global_ipv4_admin"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// GlobalIpv4Admin (leaf): An IPv4 unicast address assigned by one of the Internet registries.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "global_ipv4_admin"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type/route_target_subtype/global_ipv4_admin"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtypePathAny) GlobalIpv4Admin() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype_GlobalIpv4AdminPathAny {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype_GlobalIpv4AdminPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"global_ipv4_admin"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Local_2ByteAdmin (leaf): The Local Administrator sub-field contains a number from a numbering space
+// that is administered by the organization to which the IP address carried in the
+// Global Administrator sub-field has been assigned by an appropriate authority.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "local_2byte_admin"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type/route_target_subtype/local_2byte_admin"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtypePath) Local_2ByteAdmin() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype_Local_2ByteAdminPath {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype_Local_2ByteAdminPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"local_2byte_admin"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Local_2ByteAdmin (leaf): The Local Administrator sub-field contains a number from a numbering space
+// that is administered by the organization to which the IP address carried in the
+// Global Administrator sub-field has been assigned by an appropriate authority.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "local_2byte_admin"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type/route_target_subtype/local_2byte_admin"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtypePathAny) Local_2ByteAdmin() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype_Local_2ByteAdminPathAny {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype_Local_2ByteAdminPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"local_2byte_admin"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtypePath) State() ygnmi.SingletonQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype] {
+	return ygnmi.NewSingletonQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtypePathAny) State() ygnmi.WildcardQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype] {
+	return ygnmi.NewWildcardQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_TransitiveOpaqueTypePath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type/transitive_opaque_type YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_TransitiveOpaqueTypePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_TransitiveOpaqueTypePathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type/transitive_opaque_type YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_TransitiveOpaqueTypePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_TransitiveOpaqueTypePath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "transitive_opaque_type"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type/transitive_opaque_type"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_TransitiveOpaqueTypePath) State() ygnmi.SingletonQuery[oc.E_Structured_TransitiveOpaqueType] {
+	return ygnmi.NewSingletonQuery[oc.E_Structured_TransitiveOpaqueType](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"transitive_opaque_type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Structured_TransitiveOpaqueType, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType).TransitiveOpaqueType
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "transitive_opaque_type"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type/transitive_opaque_type"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_TransitiveOpaqueTypePathAny) State() ygnmi.WildcardQuery[oc.E_Structured_TransitiveOpaqueType] {
+	return ygnmi.NewWildcardQuery[oc.E_Structured_TransitiveOpaqueType](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"transitive_opaque_type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Structured_TransitiveOpaqueType, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType).TransitiveOpaqueType
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueTypePath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueTypePath struct {
+	*ygnmi.NodePath
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueTypePathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueTypePathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueTypePath) PathOriginName() string {
+	return "openconfig"
+}
+
+// ColorSubtype (container): The Color Community contains locally administrator defined 'color' value which is used in conjunction with
+// Encapsulation attribute to decide whether a data packet can be transmitted on a certain tunnel or not.
+// It is defined in RFC9012 and sent with sub-type as 0x0b.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "color_subtype"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type/color_subtype"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueTypePath) ColorSubtype() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtypePath {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtypePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"color_subtype"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// ColorSubtype (container): The Color Community contains locally administrator defined 'color' value which is used in conjunction with
+// Encapsulation attribute to decide whether a data packet can be transmitted on a certain tunnel or not.
+// It is defined in RFC9012 and sent with sub-type as 0x0b.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "color_subtype"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type/color_subtype"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueTypePathAny) ColorSubtype() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtypePathAny {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtypePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"color_subtype"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// EncapsulationSubtype (container): This identifies the type of tunneling technology being signalled.
+// It is defined in RFC9012 and sent with sub-type as 0x0c.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "encapsulation_subtype"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type/encapsulation_subtype"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueTypePath) EncapsulationSubtype() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtypePath {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtypePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"encapsulation_subtype"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// EncapsulationSubtype (container): This identifies the type of tunneling technology being signalled.
+// It is defined in RFC9012 and sent with sub-type as 0x0c.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "encapsulation_subtype"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type/encapsulation_subtype"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueTypePathAny) EncapsulationSubtype() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtypePathAny {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtypePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"encapsulation_subtype"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// TransitiveOpaqueType (leaf): The type of Transitive Opaque Extended Community
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "transitive_opaque_type"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type/transitive_opaque_type"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueTypePath) TransitiveOpaqueType() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_TransitiveOpaqueTypePath {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_TransitiveOpaqueTypePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"transitive_opaque_type"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// TransitiveOpaqueType (leaf): The type of Transitive Opaque Extended Community
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "transitive_opaque_type"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type/transitive_opaque_type"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueTypePathAny) TransitiveOpaqueType() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_TransitiveOpaqueTypePathAny {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_TransitiveOpaqueTypePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"transitive_opaque_type"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueTypePath) State() ygnmi.SingletonQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType] {
+	return ygnmi.NewSingletonQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueTypePathAny) State() ygnmi.WildcardQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType] {
+	return ygnmi.NewWildcardQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype_ColorPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type/color_subtype/color YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype_ColorPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype_ColorPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type/color_subtype/color YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype_ColorPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype_ColorPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "color"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type/color_subtype/color"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype_ColorPath) State() ygnmi.SingletonQuery[uint32] {
+	return ygnmi.NewSingletonQuery[uint32](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"color"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype).Color
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "color"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type/color_subtype/color"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype_ColorPathAny) State() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewWildcardQuery[uint32](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"color"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype).Color
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype_FlagsPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type/color_subtype/flags YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype_FlagsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype_FlagsPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type/color_subtype/flags YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype_FlagsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype_FlagsPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "flags"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type/color_subtype/flags"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype_FlagsPath) State() ygnmi.SingletonQuery[uint16] {
+	return ygnmi.NewSingletonQuery[uint16](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"flags"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype).Flags
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "flags"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type/color_subtype/flags"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype_FlagsPathAny) State() ygnmi.WildcardQuery[uint16] {
+	return ygnmi.NewWildcardQuery[uint16](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"flags"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype).Flags
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtypePath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type/color_subtype YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtypePath struct {
+	*ygnmi.NodePath
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtypePathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type/color_subtype YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtypePathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtypePath) PathOriginName() string {
+	return "openconfig"
+}
+
+// Color (leaf): he color value is user defined and configured locally and used to determine whether
+// a data packet can be transmitted on a certain tunnel or not in conjunction with the
+// Encapsulation attribute. It is defined in RFC9012.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "color"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type/color_subtype/color"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtypePath) Color() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype_ColorPath {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype_ColorPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"color"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Color (leaf): he color value is user defined and configured locally and used to determine whether
+// a data packet can be transmitted on a certain tunnel or not in conjunction with the
+// Encapsulation attribute. It is defined in RFC9012.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "color"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type/color_subtype/color"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtypePathAny) Color() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype_ColorPathAny {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype_ColorPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"color"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Flags (leaf): Two octet flag values.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "flags"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type/color_subtype/flags"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtypePath) Flags() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype_FlagsPath {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype_FlagsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"flags"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Flags (leaf): Two octet flag values.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "flags"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type/color_subtype/flags"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtypePathAny) Flags() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype_FlagsPathAny {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype_FlagsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"flags"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtypePath) State() ygnmi.SingletonQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype] {
+	return ygnmi.NewSingletonQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtypePathAny) State() ygnmi.WildcardQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype] {
+	return ygnmi.NewWildcardQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype_ReservedPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type/encapsulation_subtype/reserved YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype_ReservedPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype_ReservedPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type/encapsulation_subtype/reserved YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype_ReservedPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype_ReservedPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "reserved"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type/encapsulation_subtype/reserved"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype_ReservedPath) State() ygnmi.SingletonQuery[uint32] {
+	return ygnmi.NewSingletonQuery[uint32](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"reserved"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype).Reserved
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "reserved"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type/encapsulation_subtype/reserved"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype_ReservedPathAny) State() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewWildcardQuery[uint32](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"reserved"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype).Reserved
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype_TunnelTypePath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type/encapsulation_subtype/tunnel_type YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype_TunnelTypePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype_TunnelTypePathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type/encapsulation_subtype/tunnel_type YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype_TunnelTypePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype_TunnelTypePath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "tunnel_type"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type/encapsulation_subtype/tunnel_type"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype_TunnelTypePath) State() ygnmi.SingletonQuery[uint16] {
+	return ygnmi.NewSingletonQuery[uint16](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"tunnel_type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype).TunnelType
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "tunnel_type"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type/encapsulation_subtype/tunnel_type"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype_TunnelTypePathAny) State() ygnmi.WildcardQuery[uint16] {
+	return ygnmi.NewWildcardQuery[uint16](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"tunnel_type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype).TunnelType
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtypePath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type/encapsulation_subtype YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtypePath struct {
+	*ygnmi.NodePath
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtypePathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type/encapsulation_subtype YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtypePathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtypePath) PathOriginName() string {
+	return "openconfig"
+}
+
+// Reserved (leaf): Four bytes of reserved values. Normally set to 0 on transmit and ignored on receive.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "reserved"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type/encapsulation_subtype/reserved"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtypePath) Reserved() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype_ReservedPath {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype_ReservedPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"reserved"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Reserved (leaf): Four bytes of reserved values. Normally set to 0 on transmit and ignored on receive.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "reserved"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type/encapsulation_subtype/reserved"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtypePathAny) Reserved() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype_ReservedPathAny {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype_ReservedPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"reserved"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// TunnelType (leaf): Identifies the type of tunneling technology being signalled.
+// Initially defined in RFC5512 and extended in RFC9012.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "tunnel_type"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type/encapsulation_subtype/tunnel_type"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtypePath) TunnelType() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype_TunnelTypePath {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype_TunnelTypePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"tunnel_type"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// TunnelType (leaf): Identifies the type of tunneling technology being signalled.
+// Initially defined in RFC5512 and extended in RFC9012.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "tunnel_type"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type/encapsulation_subtype/tunnel_type"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtypePathAny) TunnelType() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype_TunnelTypePathAny {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype_TunnelTypePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"tunnel_type"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtypePath) State() ygnmi.SingletonQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype] {
+	return ygnmi.NewSingletonQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtypePathAny) State() ygnmi.WildcardQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype] {
+	return ygnmi.NewWildcardQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_Transitive_2OctetAsTypePath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/transitive_2octet_as_type YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_Transitive_2OctetAsTypePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_Transitive_2OctetAsTypePathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/transitive_2octet_as_type YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_Transitive_2OctetAsTypePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_Transitive_2OctetAsTypePath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "transitive_2octet_as_type"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/transitive_2octet_as_type"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_Transitive_2OctetAsTypePath) State() ygnmi.SingletonQuery[oc.E_Structured_Transitive_2OctetAsType] {
+	return ygnmi.NewSingletonQuery[oc.E_Structured_Transitive_2OctetAsType](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"transitive_2octet_as_type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Structured_Transitive_2OctetAsType, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType).Transitive_2OctetAsType
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "transitive_2octet_as_type"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/transitive_2octet_as_type"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_Transitive_2OctetAsTypePathAny) State() ygnmi.WildcardQuery[oc.E_Structured_Transitive_2OctetAsType] {
+	return ygnmi.NewWildcardQuery[oc.E_Structured_Transitive_2OctetAsType](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"transitive_2octet_as_type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Structured_Transitive_2OctetAsType, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType).Transitive_2OctetAsType
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsTypePath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsTypePath struct {
+	*ygnmi.NodePath
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsTypePathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsTypePathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsTypePath) PathOriginName() string {
+	return "openconfig"
+}
+
+// LinkBandwidthSubtype (container): The Link Bandwidth Extended Community attribute is defined in draft-ietf-idr-link-bandwidth. (https://datatracker.ietf.org/doc/draft-ietf-idr-link-bandwidth) It is sent with sub-type as 0x04.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "link_bandwidth_subtype"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/link_bandwidth_subtype"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsTypePath) LinkBandwidthSubtype() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtypePath {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtypePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"link_bandwidth_subtype"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// LinkBandwidthSubtype (container): The Link Bandwidth Extended Community attribute is defined in draft-ietf-idr-link-bandwidth. (https://datatracker.ietf.org/doc/draft-ietf-idr-link-bandwidth) It is sent with sub-type as 0x04.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "link_bandwidth_subtype"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/link_bandwidth_subtype"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsTypePathAny) LinkBandwidthSubtype() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtypePathAny {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtypePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"link_bandwidth_subtype"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// RouteOriginSubtype (container): The Route Origin Community identifies one or more routers that inject a set of routes (that carry this Community)
+// into BGP. It is sent with sub-type as 0x03.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "route_origin_subtype"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/route_origin_subtype"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsTypePath) RouteOriginSubtype() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtypePath {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtypePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"route_origin_subtype"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// RouteOriginSubtype (container): The Route Origin Community identifies one or more routers that inject a set of routes (that carry this Community)
+// into BGP. It is sent with sub-type as 0x03.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "route_origin_subtype"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/route_origin_subtype"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsTypePathAny) RouteOriginSubtype() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtypePathAny {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtypePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"route_origin_subtype"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// RouteTargetSubtype (container): The Route Target Community identifies one or more routers that may receive a set of routes (that carry this Community)
+// carried by BGP. It is sent with sub-type as 0x02.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "route_target_subtype"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/route_target_subtype"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsTypePath) RouteTargetSubtype() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtypePath {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtypePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"route_target_subtype"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// RouteTargetSubtype (container): The Route Target Community identifies one or more routers that may receive a set of routes (that carry this Community)
+// carried by BGP. It is sent with sub-type as 0x02.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "route_target_subtype"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/route_target_subtype"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsTypePathAny) RouteTargetSubtype() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtypePathAny {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtypePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"route_target_subtype"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// Transitive_2OctetAsType (leaf): The type of Transitive Two-Octet AS-Specific Extended Community
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "transitive_2octet_as_type"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/transitive_2octet_as_type"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsTypePath) Transitive_2OctetAsType() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_Transitive_2OctetAsTypePath {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_Transitive_2OctetAsTypePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"transitive_2octet_as_type"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Transitive_2OctetAsType (leaf): The type of Transitive Two-Octet AS-Specific Extended Community
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "transitive_2octet_as_type"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/transitive_2octet_as_type"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsTypePathAny) Transitive_2OctetAsType() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_Transitive_2OctetAsTypePathAny {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_Transitive_2OctetAsTypePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"transitive_2octet_as_type"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsTypePath) State() ygnmi.SingletonQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType] {
+	return ygnmi.NewSingletonQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsTypePathAny) State() ygnmi.WildcardQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType] {
+	return ygnmi.NewWildcardQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_BandwidthPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/link_bandwidth_subtype/bandwidth YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_BandwidthPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_BandwidthPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/link_bandwidth_subtype/bandwidth YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_BandwidthPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_BandwidthPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "bandwidth"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/link_bandwidth_subtype/bandwidth"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_BandwidthPath) State() ygnmi.SingletonQuery[float32] {
+	return ygnmi.NewSingletonQuery[float32](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"bandwidth"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float32, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype).Bandwidth
+			v := reflect.ValueOf(ret)
+			return ygot.BinaryToFloat32(ret), v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "bandwidth"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/link_bandwidth_subtype/bandwidth"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_BandwidthPathAny) State() ygnmi.WildcardQuery[float32] {
+	return ygnmi.NewWildcardQuery[float32](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"bandwidth"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float32, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype).Bandwidth
+			v := reflect.ValueOf(ret)
+			return ygot.BinaryToFloat32(ret), v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_Global_2ByteAsPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/link_bandwidth_subtype/global_2byte_as YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_Global_2ByteAsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_Global_2ByteAsPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/link_bandwidth_subtype/global_2byte_as YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_Global_2ByteAsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_Global_2ByteAsPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "global_2byte_as"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/link_bandwidth_subtype/global_2byte_as"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_Global_2ByteAsPath) State() ygnmi.SingletonQuery[uint16] {
+	return ygnmi.NewSingletonQuery[uint16](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"global_2byte_as"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype).Global_2ByteAs
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "global_2byte_as"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/link_bandwidth_subtype/global_2byte_as"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_Global_2ByteAsPathAny) State() ygnmi.WildcardQuery[uint16] {
+	return ygnmi.NewWildcardQuery[uint16](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"global_2byte_as"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype).Global_2ByteAs
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtypePath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/link_bandwidth_subtype YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtypePath struct {
+	*ygnmi.NodePath
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtypePathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/link_bandwidth_subtype YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtypePathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtypePath) PathOriginName() string {
+	return "openconfig"
+}
+
+// Bandwidth (leaf): Bandwidth of the link in bytes per second. ( 1 Kbps is 1000 bytes per second and 1 Mbps is 1000 Kbps per second )
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "bandwidth"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/link_bandwidth_subtype/bandwidth"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtypePath) Bandwidth() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_BandwidthPath {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_BandwidthPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"bandwidth"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Bandwidth (leaf): Bandwidth of the link in bytes per second. ( 1 Kbps is 1000 bytes per second and 1 Mbps is 1000 Kbps per second )
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "bandwidth"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/link_bandwidth_subtype/bandwidth"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtypePathAny) Bandwidth() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_BandwidthPathAny {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_BandwidthPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"bandwidth"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Global_2ByteAs (leaf): The value of the Global Administrator subfield should represent the Autonomous System
+// of the router that attaches the Link Bandwidth Community.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "global_2byte_as"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/link_bandwidth_subtype/global_2byte_as"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtypePath) Global_2ByteAs() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_Global_2ByteAsPath {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_Global_2ByteAsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"global_2byte_as"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Global_2ByteAs (leaf): The value of the Global Administrator subfield should represent the Autonomous System
+// of the router that attaches the Link Bandwidth Community.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "global_2byte_as"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/link_bandwidth_subtype/global_2byte_as"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtypePathAny) Global_2ByteAs() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_Global_2ByteAsPathAny {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_Global_2ByteAsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"global_2byte_as"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtypePath) State() ygnmi.SingletonQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype] {
+	return ygnmi.NewSingletonQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtypePathAny) State() ygnmi.WildcardQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype] {
+	return ygnmi.NewWildcardQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype_Global_2ByteAsPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/route_origin_subtype/global_2byte_as YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype_Global_2ByteAsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype_Global_2ByteAsPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/route_origin_subtype/global_2byte_as YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype_Global_2ByteAsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype_Global_2ByteAsPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "global_2byte_as"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/route_origin_subtype/global_2byte_as"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype_Global_2ByteAsPath) State() ygnmi.SingletonQuery[uint16] {
+	return ygnmi.NewSingletonQuery[uint16](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"global_2byte_as"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype).Global_2ByteAs
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "global_2byte_as"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/route_origin_subtype/global_2byte_as"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype_Global_2ByteAsPathAny) State() ygnmi.WildcardQuery[uint16] {
+	return ygnmi.NewWildcardQuery[uint16](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"global_2byte_as"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype).Global_2ByteAs
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype_Local_4ByteAdminPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/route_origin_subtype/local_4byte_admin YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype_Local_4ByteAdminPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype_Local_4ByteAdminPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/route_origin_subtype/local_4byte_admin YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype_Local_4ByteAdminPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype_Local_4ByteAdminPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "local_4byte_admin"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/route_origin_subtype/local_4byte_admin"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype_Local_4ByteAdminPath) State() ygnmi.SingletonQuery[uint32] {
+	return ygnmi.NewSingletonQuery[uint32](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"local_4byte_admin"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype).Local_4ByteAdmin
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "local_4byte_admin"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/route_origin_subtype/local_4byte_admin"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype_Local_4ByteAdminPathAny) State() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewWildcardQuery[uint32](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"local_4byte_admin"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype).Local_4ByteAdmin
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtypePath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/route_origin_subtype YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtypePath struct {
+	*ygnmi.NodePath
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtypePathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/route_origin_subtype YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtypePathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtypePath) PathOriginName() string {
+	return "openconfig"
+}
+
+// Global_2ByteAs (leaf): The two octet IANA assigned AS value assigned to the Autonomous System.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "global_2byte_as"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/route_origin_subtype/global_2byte_as"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtypePath) Global_2ByteAs() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype_Global_2ByteAsPath {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype_Global_2ByteAsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"global_2byte_as"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Global_2ByteAs (leaf): The two octet IANA assigned AS value assigned to the Autonomous System.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "global_2byte_as"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/route_origin_subtype/global_2byte_as"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtypePathAny) Global_2ByteAs() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype_Global_2ByteAsPathAny {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype_Global_2ByteAsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"global_2byte_as"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Local_4ByteAdmin (leaf): The Local Administrator sub-field contains a number from a numbering space
+// that is administered by the organization to which the Autonomous System number
+// carried in the Global Administrator sub-field has been assigned by an appropriate authority.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "local_4byte_admin"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/route_origin_subtype/local_4byte_admin"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtypePath) Local_4ByteAdmin() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype_Local_4ByteAdminPath {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype_Local_4ByteAdminPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"local_4byte_admin"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Local_4ByteAdmin (leaf): The Local Administrator sub-field contains a number from a numbering space
+// that is administered by the organization to which the Autonomous System number
+// carried in the Global Administrator sub-field has been assigned by an appropriate authority.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "local_4byte_admin"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/route_origin_subtype/local_4byte_admin"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtypePathAny) Local_4ByteAdmin() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype_Local_4ByteAdminPathAny {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype_Local_4ByteAdminPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"local_4byte_admin"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtypePath) State() ygnmi.SingletonQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype] {
+	return ygnmi.NewSingletonQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtypePathAny) State() ygnmi.WildcardQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype] {
+	return ygnmi.NewWildcardQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype_Global_2ByteAsPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/route_target_subtype/global_2byte_as YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype_Global_2ByteAsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype_Global_2ByteAsPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/route_target_subtype/global_2byte_as YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype_Global_2ByteAsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype_Global_2ByteAsPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "global_2byte_as"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/route_target_subtype/global_2byte_as"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype_Global_2ByteAsPath) State() ygnmi.SingletonQuery[uint16] {
+	return ygnmi.NewSingletonQuery[uint16](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"global_2byte_as"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype).Global_2ByteAs
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "global_2byte_as"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/route_target_subtype/global_2byte_as"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype_Global_2ByteAsPathAny) State() ygnmi.WildcardQuery[uint16] {
+	return ygnmi.NewWildcardQuery[uint16](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"global_2byte_as"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype).Global_2ByteAs
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype_Local_4ByteAdminPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/route_target_subtype/local_4byte_admin YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype_Local_4ByteAdminPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype_Local_4ByteAdminPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/route_target_subtype/local_4byte_admin YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype_Local_4ByteAdminPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype_Local_4ByteAdminPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "local_4byte_admin"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/route_target_subtype/local_4byte_admin"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype_Local_4ByteAdminPath) State() ygnmi.SingletonQuery[uint32] {
+	return ygnmi.NewSingletonQuery[uint32](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"local_4byte_admin"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype).Local_4ByteAdmin
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "local_4byte_admin"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/route_target_subtype/local_4byte_admin"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype_Local_4ByteAdminPathAny) State() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewWildcardQuery[uint32](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"local_4byte_admin"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype).Local_4ByteAdmin
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtypePath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/route_target_subtype YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtypePath struct {
+	*ygnmi.NodePath
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtypePathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/route_target_subtype YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtypePathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtypePath) PathOriginName() string {
+	return "openconfig"
+}
+
+// Global_2ByteAs (leaf): The two octet IANA assigned AS value assigned to the Autonomous System.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "global_2byte_as"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/route_target_subtype/global_2byte_as"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtypePath) Global_2ByteAs() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype_Global_2ByteAsPath {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype_Global_2ByteAsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"global_2byte_as"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Global_2ByteAs (leaf): The two octet IANA assigned AS value assigned to the Autonomous System.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "global_2byte_as"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/route_target_subtype/global_2byte_as"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtypePathAny) Global_2ByteAs() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype_Global_2ByteAsPathAny {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype_Global_2ByteAsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"global_2byte_as"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Local_4ByteAdmin (leaf): The Local Administrator sub-field contains a number from a numbering space
+// that is administered by the organization to which the Autonomous System number
+// carried in the Global Administrator sub-field has been assigned by an appropriate authority.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "local_4byte_admin"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/route_target_subtype/local_4byte_admin"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtypePath) Local_4ByteAdmin() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype_Local_4ByteAdminPath {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype_Local_4ByteAdminPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"local_4byte_admin"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Local_4ByteAdmin (leaf): The Local Administrator sub-field contains a number from a numbering space
+// that is administered by the organization to which the Autonomous System number
+// carried in the Global Administrator sub-field has been assigned by an appropriate authority.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "local_4byte_admin"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/route_target_subtype/local_4byte_admin"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtypePathAny) Local_4ByteAdmin() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype_Local_4ByteAdminPathAny {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype_Local_4ByteAdminPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"local_4byte_admin"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtypePath) State() ygnmi.SingletonQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype] {
+	return ygnmi.NewSingletonQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtypePathAny) State() ygnmi.WildcardQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype] {
+	return ygnmi.NewWildcardQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_Transitive_4OctetAsTypePath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type/transitive_4octet_as_type YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_Transitive_4OctetAsTypePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_Transitive_4OctetAsTypePathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type/transitive_4octet_as_type YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_Transitive_4OctetAsTypePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_Transitive_4OctetAsTypePath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "transitive_4octet_as_type"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type/transitive_4octet_as_type"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_Transitive_4OctetAsTypePath) State() ygnmi.SingletonQuery[oc.E_Structured_Transitive_4OctetAsType] {
+	return ygnmi.NewSingletonQuery[oc.E_Structured_Transitive_4OctetAsType](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"transitive_4octet_as_type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Structured_Transitive_4OctetAsType, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType).Transitive_4OctetAsType
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "transitive_4octet_as_type"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type/transitive_4octet_as_type"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_Transitive_4OctetAsTypePathAny) State() ygnmi.WildcardQuery[oc.E_Structured_Transitive_4OctetAsType] {
+	return ygnmi.NewWildcardQuery[oc.E_Structured_Transitive_4OctetAsType](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"transitive_4octet_as_type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Structured_Transitive_4OctetAsType, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType).Transitive_4OctetAsType
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsTypePath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsTypePath struct {
+	*ygnmi.NodePath
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsTypePathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsTypePathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsTypePath) PathOriginName() string {
+	return "openconfig"
+}
+
+// RouteOriginSubtype (container): The Route Origin Community identifies one or more routers that inject a set of routes (that carry this Community)
+// into BGP. It is sent with sub-type as 0x03.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "route_origin_subtype"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type/route_origin_subtype"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsTypePath) RouteOriginSubtype() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtypePath {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtypePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"route_origin_subtype"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// RouteOriginSubtype (container): The Route Origin Community identifies one or more routers that inject a set of routes (that carry this Community)
+// into BGP. It is sent with sub-type as 0x03.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "route_origin_subtype"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type/route_origin_subtype"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsTypePathAny) RouteOriginSubtype() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtypePathAny {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtypePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"route_origin_subtype"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// RouteTargetSubtype (container): The Route Target Community identifies one or more routers that may receive a set of routes (that carry this Community)
+// carried by BGP. It is sent with sub-type as 0x02.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "route_target_subtype"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type/route_target_subtype"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsTypePath) RouteTargetSubtype() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtypePath {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtypePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"route_target_subtype"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// RouteTargetSubtype (container): The Route Target Community identifies one or more routers that may receive a set of routes (that carry this Community)
+// carried by BGP. It is sent with sub-type as 0x02.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "route_target_subtype"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type/route_target_subtype"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsTypePathAny) RouteTargetSubtype() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtypePathAny {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtypePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"route_target_subtype"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// Transitive_4OctetAsType (leaf): The type of Transitive Four-Octet AS-Specific Extended Community
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "transitive_4octet_as_type"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type/transitive_4octet_as_type"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsTypePath) Transitive_4OctetAsType() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_Transitive_4OctetAsTypePath {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_Transitive_4OctetAsTypePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"transitive_4octet_as_type"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Transitive_4OctetAsType (leaf): The type of Transitive Four-Octet AS-Specific Extended Community
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "transitive_4octet_as_type"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type/transitive_4octet_as_type"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsTypePathAny) Transitive_4OctetAsType() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_Transitive_4OctetAsTypePathAny {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_Transitive_4OctetAsTypePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"transitive_4octet_as_type"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsTypePath) State() ygnmi.SingletonQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType] {
+	return ygnmi.NewSingletonQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsTypePathAny) State() ygnmi.WildcardQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType] {
+	return ygnmi.NewWildcardQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype_Global_4ByteAsPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type/route_origin_subtype/global_4byte_as YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype_Global_4ByteAsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype_Global_4ByteAsPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type/route_origin_subtype/global_4byte_as YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype_Global_4ByteAsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype_Global_4ByteAsPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "global_4byte_as"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type/route_origin_subtype/global_4byte_as"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype_Global_4ByteAsPath) State() ygnmi.SingletonQuery[uint32] {
+	return ygnmi.NewSingletonQuery[uint32](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"global_4byte_as"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype).Global_4ByteAs
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "global_4byte_as"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type/route_origin_subtype/global_4byte_as"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype_Global_4ByteAsPathAny) State() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewWildcardQuery[uint32](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"global_4byte_as"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype).Global_4ByteAs
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype_Local_2ByteAdminPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type/route_origin_subtype/local_2byte_admin YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype_Local_2ByteAdminPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype_Local_2ByteAdminPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type/route_origin_subtype/local_2byte_admin YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype_Local_2ByteAdminPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype_Local_2ByteAdminPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "local_2byte_admin"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type/route_origin_subtype/local_2byte_admin"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype_Local_2ByteAdminPath) State() ygnmi.SingletonQuery[uint16] {
+	return ygnmi.NewSingletonQuery[uint16](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"local_2byte_admin"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype).Local_2ByteAdmin
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "local_2byte_admin"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type/route_origin_subtype/local_2byte_admin"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype_Local_2ByteAdminPathAny) State() ygnmi.WildcardQuery[uint16] {
+	return ygnmi.NewWildcardQuery[uint16](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"local_2byte_admin"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype).Local_2ByteAdmin
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtypePath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type/route_origin_subtype YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtypePath struct {
+	*ygnmi.NodePath
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtypePathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type/route_origin_subtype YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtypePathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtypePath) PathOriginName() string {
+	return "openconfig"
+}
+
+// Global_4ByteAs (leaf): The four octet IANA assigned AS value assigned to the Autonomous System.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "global_4byte_as"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type/route_origin_subtype/global_4byte_as"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtypePath) Global_4ByteAs() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype_Global_4ByteAsPath {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype_Global_4ByteAsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"global_4byte_as"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Global_4ByteAs (leaf): The four octet IANA assigned AS value assigned to the Autonomous System.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "global_4byte_as"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type/route_origin_subtype/global_4byte_as"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtypePathAny) Global_4ByteAs() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype_Global_4ByteAsPathAny {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype_Global_4ByteAsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"global_4byte_as"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Local_2ByteAdmin (leaf): The Local Administrator sub-field contains a number from a numbering space that is
+// administered by the organization to which the Autonomous System number carried in the
+// Global Administrator sub-field has been assigned by an appropriate authority.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "local_2byte_admin"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type/route_origin_subtype/local_2byte_admin"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtypePath) Local_2ByteAdmin() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype_Local_2ByteAdminPath {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype_Local_2ByteAdminPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"local_2byte_admin"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Local_2ByteAdmin (leaf): The Local Administrator sub-field contains a number from a numbering space that is
+// administered by the organization to which the Autonomous System number carried in the
+// Global Administrator sub-field has been assigned by an appropriate authority.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "local_2byte_admin"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type/route_origin_subtype/local_2byte_admin"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtypePathAny) Local_2ByteAdmin() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype_Local_2ByteAdminPathAny {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype_Local_2ByteAdminPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"local_2byte_admin"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtypePath) State() ygnmi.SingletonQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype] {
+	return ygnmi.NewSingletonQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtypePathAny) State() ygnmi.WildcardQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype] {
+	return ygnmi.NewWildcardQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype_Global_4ByteAsPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type/route_target_subtype/global_4byte_as YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype_Global_4ByteAsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype_Global_4ByteAsPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type/route_target_subtype/global_4byte_as YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype_Global_4ByteAsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype_Global_4ByteAsPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "global_4byte_as"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type/route_target_subtype/global_4byte_as"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype_Global_4ByteAsPath) State() ygnmi.SingletonQuery[uint32] {
+	return ygnmi.NewSingletonQuery[uint32](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"global_4byte_as"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype).Global_4ByteAs
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "global_4byte_as"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type/route_target_subtype/global_4byte_as"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype_Global_4ByteAsPathAny) State() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewWildcardQuery[uint32](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"global_4byte_as"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype).Global_4ByteAs
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype_Local_2ByteAdminPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type/route_target_subtype/local_2byte_admin YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype_Local_2ByteAdminPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype_Local_2ByteAdminPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type/route_target_subtype/local_2byte_admin YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype_Local_2ByteAdminPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype_Local_2ByteAdminPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "local_2byte_admin"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type/route_target_subtype/local_2byte_admin"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype_Local_2ByteAdminPath) State() ygnmi.SingletonQuery[uint16] {
+	return ygnmi.NewSingletonQuery[uint16](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"local_2byte_admin"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype).Local_2ByteAdmin
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "local_2byte_admin"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type/route_target_subtype/local_2byte_admin"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype_Local_2ByteAdminPathAny) State() ygnmi.WildcardQuery[uint16] {
+	return ygnmi.NewWildcardQuery[uint16](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"local_2byte_admin"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype).Local_2ByteAdmin
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtypePath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type/route_target_subtype YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtypePath struct {
+	*ygnmi.NodePath
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtypePathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type/route_target_subtype YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtypePathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtypePath) PathOriginName() string {
+	return "openconfig"
+}
+
+// Global_4ByteAs (leaf): The four octet IANA assigned AS value assigned to the Autonomous System.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "global_4byte_as"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type/route_target_subtype/global_4byte_as"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtypePath) Global_4ByteAs() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype_Global_4ByteAsPath {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype_Global_4ByteAsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"global_4byte_as"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Global_4ByteAs (leaf): The four octet IANA assigned AS value assigned to the Autonomous System.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "global_4byte_as"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type/route_target_subtype/global_4byte_as"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtypePathAny) Global_4ByteAs() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype_Global_4ByteAsPathAny {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype_Global_4ByteAsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"global_4byte_as"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Local_2ByteAdmin (leaf): The Local Administrator sub-field contains a number from a numbering space that is
+// administered by the organization to which the Autonomous System number carried in the
+// Global Administrator sub-field has been assigned by an appropriate authority.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "local_2byte_admin"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type/route_target_subtype/local_2byte_admin"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtypePath) Local_2ByteAdmin() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype_Local_2ByteAdminPath {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype_Local_2ByteAdminPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"local_2byte_admin"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Local_2ByteAdmin (leaf): The Local Administrator sub-field contains a number from a numbering space that is
+// administered by the organization to which the Autonomous System number carried in the
+// Global Administrator sub-field has been assigned by an appropriate authority.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "local_2byte_admin"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type/route_target_subtype/local_2byte_admin"
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtypePathAny) Local_2ByteAdmin() *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype_Local_2ByteAdminPathAny {
+	ps := &BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype_Local_2ByteAdminPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"local_2byte_admin"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtypePath) State() ygnmi.SingletonQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype] {
+	return ygnmi.NewSingletonQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtypePathAny) State() ygnmi.WildcardQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype] {
+	return ygnmi.NewWildcardQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype](
+		"BgpPeer_Ipv4MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_LabelsPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/labels YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_LabelsPath struct {
+	*ygnmi.NodePath
+}
+
+// BgpPeer_Ipv4MplsUnicastPrefix_LabelsPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv4-mpls-unicast-prefixes/ipv4-mpls-unicast-prefix/state/labels YANG schema element.
+type BgpPeer_Ipv4MplsUnicastPrefix_LabelsPathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_LabelsPath) PathOriginName() string {
+	return "openconfig"
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_LabelsPath) State() ygnmi.SingletonQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix_Labels] {
+	return ygnmi.NewSingletonQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix_Labels](
+		"BgpPeer_Ipv4MplsUnicastPrefix_Labels",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv4MplsUnicastPrefix_LabelsPathAny) State() ygnmi.WildcardQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix_Labels] {
+	return ygnmi.NewWildcardQuery[*oc.BgpPeer_Ipv4MplsUnicastPrefix_Labels](
+		"BgpPeer_Ipv4MplsUnicastPrefix_Labels",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_AddressPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/address YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_AddressPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_AddressPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/address YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_AddressPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_AddressPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "state/address"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/address"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_AddressPath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewSingletonQuery[string](
+		"BgpPeer_Ipv6MplsUnicastPrefix",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "address"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv6MplsUnicastPrefix).Address
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.BgpPeer_Ipv6MplsUnicastPrefix) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "state/address"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/address"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_AddressPathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"BgpPeer_Ipv6MplsUnicastPrefix",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "address"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv6MplsUnicastPrefix).Address
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.BgpPeer_Ipv6MplsUnicastPrefix) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "address"
+//	Path from root:       ""
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_AddressPath) Config() ygnmi.ConfigQuery[string] {
+	return ygnmi.NewConfigQuery[string](
+		"BgpPeer_Ipv6MplsUnicastPrefix",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"address"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv6MplsUnicastPrefix).Address
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.BgpPeer_Ipv6MplsUnicastPrefix) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "address"
+//	Path from root:       ""
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_AddressPathAny) Config() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"BgpPeer_Ipv6MplsUnicastPrefix",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"address"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv6MplsUnicastPrefix).Address
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.BgpPeer_Ipv6MplsUnicastPrefix) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_LocalPreferencePath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/local-preference YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_LocalPreferencePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_LocalPreferencePathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/local-preference YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_LocalPreferencePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_LocalPreferencePath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "state/local-preference"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/local-preference"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_LocalPreferencePath) State() ygnmi.SingletonQuery[uint32] {
+	return ygnmi.NewSingletonQuery[uint32](
+		"BgpPeer_Ipv6MplsUnicastPrefix",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "local-preference"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv6MplsUnicastPrefix).LocalPreference
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.BgpPeer_Ipv6MplsUnicastPrefix) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "state/local-preference"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/local-preference"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_LocalPreferencePathAny) State() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewWildcardQuery[uint32](
+		"BgpPeer_Ipv6MplsUnicastPrefix",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "local-preference"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv6MplsUnicastPrefix).LocalPreference
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.BgpPeer_Ipv6MplsUnicastPrefix) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_MultiExitDiscriminatorPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/multi-exit-discriminator YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_MultiExitDiscriminatorPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_MultiExitDiscriminatorPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/multi-exit-discriminator YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_MultiExitDiscriminatorPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_MultiExitDiscriminatorPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "state/multi-exit-discriminator"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/multi-exit-discriminator"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_MultiExitDiscriminatorPath) State() ygnmi.SingletonQuery[uint32] {
+	return ygnmi.NewSingletonQuery[uint32](
+		"BgpPeer_Ipv6MplsUnicastPrefix",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "multi-exit-discriminator"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv6MplsUnicastPrefix).MultiExitDiscriminator
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.BgpPeer_Ipv6MplsUnicastPrefix) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "state/multi-exit-discriminator"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/multi-exit-discriminator"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_MultiExitDiscriminatorPathAny) State() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewWildcardQuery[uint32](
+		"BgpPeer_Ipv6MplsUnicastPrefix",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "multi-exit-discriminator"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv6MplsUnicastPrefix).MultiExitDiscriminator
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.BgpPeer_Ipv6MplsUnicastPrefix) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_NextHopIpv4AddressPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/next-hop-ipv4-address YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_NextHopIpv4AddressPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_NextHopIpv4AddressPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/next-hop-ipv4-address YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_NextHopIpv4AddressPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_NextHopIpv4AddressPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "state/next-hop-ipv4-address"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/next-hop-ipv4-address"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_NextHopIpv4AddressPath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewSingletonQuery[string](
+		"BgpPeer_Ipv6MplsUnicastPrefix",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "next-hop-ipv4-address"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv6MplsUnicastPrefix).NextHopIpv4Address
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.BgpPeer_Ipv6MplsUnicastPrefix) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "state/next-hop-ipv4-address"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/next-hop-ipv4-address"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_NextHopIpv4AddressPathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"BgpPeer_Ipv6MplsUnicastPrefix",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "next-hop-ipv4-address"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv6MplsUnicastPrefix).NextHopIpv4Address
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.BgpPeer_Ipv6MplsUnicastPrefix) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_NextHopIpv6AddressPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/next-hop-ipv6-address YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_NextHopIpv6AddressPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_NextHopIpv6AddressPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/next-hop-ipv6-address YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_NextHopIpv6AddressPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_NextHopIpv6AddressPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "state/next-hop-ipv6-address"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/next-hop-ipv6-address"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_NextHopIpv6AddressPath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewSingletonQuery[string](
+		"BgpPeer_Ipv6MplsUnicastPrefix",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "next-hop-ipv6-address"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv6MplsUnicastPrefix).NextHopIpv6Address
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.BgpPeer_Ipv6MplsUnicastPrefix) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "state/next-hop-ipv6-address"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/next-hop-ipv6-address"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_NextHopIpv6AddressPathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"BgpPeer_Ipv6MplsUnicastPrefix",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "next-hop-ipv6-address"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv6MplsUnicastPrefix).NextHopIpv6Address
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.BgpPeer_Ipv6MplsUnicastPrefix) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_OriginPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/origin YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_OriginPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_OriginPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/origin YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_OriginPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_OriginPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "state/origin"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/origin"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_OriginPath) State() ygnmi.SingletonQuery[oc.E_Ipv6MplsUnicastPrefix_Origin] {
+	return ygnmi.NewSingletonQuery[oc.E_Ipv6MplsUnicastPrefix_Origin](
+		"BgpPeer_Ipv6MplsUnicastPrefix",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "origin"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Ipv6MplsUnicastPrefix_Origin, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv6MplsUnicastPrefix).Origin
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.BgpPeer_Ipv6MplsUnicastPrefix) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "state/origin"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/origin"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_OriginPathAny) State() ygnmi.WildcardQuery[oc.E_Ipv6MplsUnicastPrefix_Origin] {
+	return ygnmi.NewWildcardQuery[oc.E_Ipv6MplsUnicastPrefix_Origin](
+		"BgpPeer_Ipv6MplsUnicastPrefix",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "origin"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Ipv6MplsUnicastPrefix_Origin, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv6MplsUnicastPrefix).Origin
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.BgpPeer_Ipv6MplsUnicastPrefix) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "origin"
+//	Path from root:       ""
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_OriginPath) Config() ygnmi.ConfigQuery[oc.E_Ipv6MplsUnicastPrefix_Origin] {
+	return ygnmi.NewConfigQuery[oc.E_Ipv6MplsUnicastPrefix_Origin](
+		"BgpPeer_Ipv6MplsUnicastPrefix",
+		false,
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"origin"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Ipv6MplsUnicastPrefix_Origin, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv6MplsUnicastPrefix).Origin
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.BgpPeer_Ipv6MplsUnicastPrefix) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "origin"
+//	Path from root:       ""
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_OriginPathAny) Config() ygnmi.WildcardQuery[oc.E_Ipv6MplsUnicastPrefix_Origin] {
+	return ygnmi.NewWildcardQuery[oc.E_Ipv6MplsUnicastPrefix_Origin](
+		"BgpPeer_Ipv6MplsUnicastPrefix",
+		false,
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"origin"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Ipv6MplsUnicastPrefix_Origin, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv6MplsUnicastPrefix).Origin
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.BgpPeer_Ipv6MplsUnicastPrefix) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_PathIdPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/path-id YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_PathIdPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_PathIdPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/path-id YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_PathIdPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_PathIdPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "state/path-id"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/path-id"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_PathIdPath) State() ygnmi.SingletonQuery[uint32] {
+	return ygnmi.NewSingletonQuery[uint32](
+		"BgpPeer_Ipv6MplsUnicastPrefix",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "path-id"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv6MplsUnicastPrefix).PathId
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.BgpPeer_Ipv6MplsUnicastPrefix) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "state/path-id"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/path-id"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_PathIdPathAny) State() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewWildcardQuery[uint32](
+		"BgpPeer_Ipv6MplsUnicastPrefix",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "path-id"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv6MplsUnicastPrefix).PathId
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.BgpPeer_Ipv6MplsUnicastPrefix) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "path-id"
+//	Path from root:       ""
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_PathIdPath) Config() ygnmi.ConfigQuery[uint32] {
+	return ygnmi.NewConfigQuery[uint32](
+		"BgpPeer_Ipv6MplsUnicastPrefix",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"path-id"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv6MplsUnicastPrefix).PathId
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.BgpPeer_Ipv6MplsUnicastPrefix) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "path-id"
+//	Path from root:       ""
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_PathIdPathAny) Config() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewWildcardQuery[uint32](
+		"BgpPeer_Ipv6MplsUnicastPrefix",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"path-id"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv6MplsUnicastPrefix).PathId
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.BgpPeer_Ipv6MplsUnicastPrefix) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_PrefixLengthPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/prefix-length YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_PrefixLengthPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_PrefixLengthPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/prefix-length YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_PrefixLengthPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_PrefixLengthPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "state/prefix-length"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/prefix-length"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_PrefixLengthPath) State() ygnmi.SingletonQuery[uint32] {
+	return ygnmi.NewSingletonQuery[uint32](
+		"BgpPeer_Ipv6MplsUnicastPrefix",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "prefix-length"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv6MplsUnicastPrefix).PrefixLength
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.BgpPeer_Ipv6MplsUnicastPrefix) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "state/prefix-length"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/prefix-length"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_PrefixLengthPathAny) State() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewWildcardQuery[uint32](
+		"BgpPeer_Ipv6MplsUnicastPrefix",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "prefix-length"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv6MplsUnicastPrefix).PrefixLength
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.BgpPeer_Ipv6MplsUnicastPrefix) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "prefix-length"
+//	Path from root:       ""
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_PrefixLengthPath) Config() ygnmi.ConfigQuery[uint32] {
+	return ygnmi.NewConfigQuery[uint32](
+		"BgpPeer_Ipv6MplsUnicastPrefix",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"prefix-length"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv6MplsUnicastPrefix).PrefixLength
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.BgpPeer_Ipv6MplsUnicastPrefix) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "prefix-length"
+//	Path from root:       ""
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_PrefixLengthPathAny) Config() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewWildcardQuery[uint32](
+		"BgpPeer_Ipv6MplsUnicastPrefix",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"prefix-length"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv6MplsUnicastPrefix).PrefixLength
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.BgpPeer_Ipv6MplsUnicastPrefix) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefixPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefixPath struct {
+	*ygnmi.NodePath
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefixPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefixPathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv6MplsUnicastPrefixPath) PathOriginName() string {
+	return "openconfig"
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefixPathMap represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefixPathMap struct {
+	*ygnmi.NodePath
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefixPathMapAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefixPathMapAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv6MplsUnicastPrefixPathMap) PathOriginName() string {
+	return "openconfig"
+}
+
+// Address (leaf): The IPv6 address.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "*/address"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/*/address"
+func (n *BgpPeer_Ipv6MplsUnicastPrefixPath) Address() *BgpPeer_Ipv6MplsUnicastPrefix_AddressPath {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_AddressPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "address"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Address (leaf): The IPv6 address.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "*/address"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/*/address"
+func (n *BgpPeer_Ipv6MplsUnicastPrefixPathAny) Address() *BgpPeer_Ipv6MplsUnicastPrefix_AddressPathAny {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_AddressPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "address"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// AsPathAny (list): Unkeyed list of AS PATH segments
+// This attribute identifies the autonomous systems through which routing information
+// carried in this UPDATE message has passed.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "state/as-path"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/as-path"
+func (n *BgpPeer_Ipv6MplsUnicastPrefixPath) AsPathAny() *BgpPeer_Ipv6MplsUnicastPrefix_AsPathPathAny {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_AsPathPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "as-path"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// AsPathAny (list): Unkeyed list of AS PATH segments
+// This attribute identifies the autonomous systems through which routing information
+// carried in this UPDATE message has passed.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "state/as-path"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/as-path"
+func (n *BgpPeer_Ipv6MplsUnicastPrefixPathAny) AsPathAny() *BgpPeer_Ipv6MplsUnicastPrefix_AsPathPathAny {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_AsPathPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "as-path"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// CommunityAny (list): Unkeyed list of optional community attributes present in the UPDATE message.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "state/community"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/community"
+func (n *BgpPeer_Ipv6MplsUnicastPrefixPath) CommunityAny() *BgpPeer_Ipv6MplsUnicastPrefix_CommunityPathAny {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_CommunityPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "community"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// CommunityAny (list): Unkeyed list of optional community attributes present in the UPDATE message.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "state/community"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/community"
+func (n *BgpPeer_Ipv6MplsUnicastPrefixPathAny) CommunityAny() *BgpPeer_Ipv6MplsUnicastPrefix_CommunityPathAny {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_CommunityPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "community"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// ExtendedCommunityAny (list): Unkeyed list of optional extended community attributes present in the UPDATE message.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "state/extended-community"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community"
+func (n *BgpPeer_Ipv6MplsUnicastPrefixPath) ExtendedCommunityAny() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunityPathAny {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunityPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "extended-community"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// ExtendedCommunityAny (list): Unkeyed list of optional extended community attributes present in the UPDATE message.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "state/extended-community"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community"
+func (n *BgpPeer_Ipv6MplsUnicastPrefixPathAny) ExtendedCommunityAny() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunityPathAny {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunityPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "extended-community"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// LabelsAny (list): Unkeyed list of MPLS labels associated with the prefix.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "state/labels"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/labels"
+func (n *BgpPeer_Ipv6MplsUnicastPrefixPath) LabelsAny() *BgpPeer_Ipv6MplsUnicastPrefix_LabelsPathAny {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_LabelsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "labels"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// LabelsAny (list): Unkeyed list of MPLS labels associated with the prefix.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "state/labels"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/labels"
+func (n *BgpPeer_Ipv6MplsUnicastPrefixPathAny) LabelsAny() *BgpPeer_Ipv6MplsUnicastPrefix_LabelsPathAny {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_LabelsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "labels"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// LocalPreference (leaf): The local preference is a well-known attribute and the value is used for route selection. The route with the highest local preference value is preferred.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "state/local-preference"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/local-preference"
+func (n *BgpPeer_Ipv6MplsUnicastPrefixPath) LocalPreference() *BgpPeer_Ipv6MplsUnicastPrefix_LocalPreferencePath {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_LocalPreferencePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "local-preference"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// LocalPreference (leaf): The local preference is a well-known attribute and the value is used for route selection. The route with the highest local preference value is preferred.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "state/local-preference"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/local-preference"
+func (n *BgpPeer_Ipv6MplsUnicastPrefixPathAny) LocalPreference() *BgpPeer_Ipv6MplsUnicastPrefix_LocalPreferencePathAny {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_LocalPreferencePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "local-preference"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// MultiExitDiscriminator (leaf): The multi exit discriminator (MED) is an optional non-transitive attribute and the value is used for route selection. The route with the lowest MED value is preferred.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "state/multi-exit-discriminator"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/multi-exit-discriminator"
+func (n *BgpPeer_Ipv6MplsUnicastPrefixPath) MultiExitDiscriminator() *BgpPeer_Ipv6MplsUnicastPrefix_MultiExitDiscriminatorPath {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_MultiExitDiscriminatorPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "multi-exit-discriminator"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// MultiExitDiscriminator (leaf): The multi exit discriminator (MED) is an optional non-transitive attribute and the value is used for route selection. The route with the lowest MED value is preferred.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "state/multi-exit-discriminator"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/multi-exit-discriminator"
+func (n *BgpPeer_Ipv6MplsUnicastPrefixPathAny) MultiExitDiscriminator() *BgpPeer_Ipv6MplsUnicastPrefix_MultiExitDiscriminatorPathAny {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_MultiExitDiscriminatorPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "multi-exit-discriminator"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// NextHopIpv4Address (leaf): The IPv4 address of the egress interface.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "state/next-hop-ipv4-address"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/next-hop-ipv4-address"
+func (n *BgpPeer_Ipv6MplsUnicastPrefixPath) NextHopIpv4Address() *BgpPeer_Ipv6MplsUnicastPrefix_NextHopIpv4AddressPath {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_NextHopIpv4AddressPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "next-hop-ipv4-address"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// NextHopIpv4Address (leaf): The IPv4 address of the egress interface.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "state/next-hop-ipv4-address"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/next-hop-ipv4-address"
+func (n *BgpPeer_Ipv6MplsUnicastPrefixPathAny) NextHopIpv4Address() *BgpPeer_Ipv6MplsUnicastPrefix_NextHopIpv4AddressPathAny {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_NextHopIpv4AddressPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "next-hop-ipv4-address"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// NextHopIpv6Address (leaf): The IPv6 address of the egress interface.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "state/next-hop-ipv6-address"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/next-hop-ipv6-address"
+func (n *BgpPeer_Ipv6MplsUnicastPrefixPath) NextHopIpv6Address() *BgpPeer_Ipv6MplsUnicastPrefix_NextHopIpv6AddressPath {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_NextHopIpv6AddressPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "next-hop-ipv6-address"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// NextHopIpv6Address (leaf): The IPv6 address of the egress interface.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "state/next-hop-ipv6-address"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/next-hop-ipv6-address"
+func (n *BgpPeer_Ipv6MplsUnicastPrefixPathAny) NextHopIpv6Address() *BgpPeer_Ipv6MplsUnicastPrefix_NextHopIpv6AddressPathAny {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_NextHopIpv6AddressPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "next-hop-ipv6-address"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Origin (leaf): The origin of the prefix.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "*/origin"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/*/origin"
+func (n *BgpPeer_Ipv6MplsUnicastPrefixPath) Origin() *BgpPeer_Ipv6MplsUnicastPrefix_OriginPath {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_OriginPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "origin"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Origin (leaf): The origin of the prefix.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "*/origin"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/*/origin"
+func (n *BgpPeer_Ipv6MplsUnicastPrefixPathAny) Origin() *BgpPeer_Ipv6MplsUnicastPrefix_OriginPathAny {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_OriginPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "origin"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// PathId (leaf): If the route is learned from a neighbor, the path-id
+// corresponds to the path-id for the route in the
+// corresponding adj-rib-in-post table.  If the route is
+// injected from another protocol, or the neighbor does not
+// support BGP add-paths, the path-id should be set
+// to zero, also the default value.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "*/path-id"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/*/path-id"
+func (n *BgpPeer_Ipv6MplsUnicastPrefixPath) PathId() *BgpPeer_Ipv6MplsUnicastPrefix_PathIdPath {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_PathIdPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "path-id"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// PathId (leaf): If the route is learned from a neighbor, the path-id
+// corresponds to the path-id for the route in the
+// corresponding adj-rib-in-post table.  If the route is
+// injected from another protocol, or the neighbor does not
+// support BGP add-paths, the path-id should be set
+// to zero, also the default value.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "*/path-id"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/*/path-id"
+func (n *BgpPeer_Ipv6MplsUnicastPrefixPathAny) PathId() *BgpPeer_Ipv6MplsUnicastPrefix_PathIdPathAny {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_PathIdPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "path-id"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// PrefixLength (leaf): The prefix length.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "*/prefix-length"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/*/prefix-length"
+func (n *BgpPeer_Ipv6MplsUnicastPrefixPath) PrefixLength() *BgpPeer_Ipv6MplsUnicastPrefix_PrefixLengthPath {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_PrefixLengthPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "prefix-length"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// PrefixLength (leaf): The prefix length.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "*/prefix-length"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/*/prefix-length"
+func (n *BgpPeer_Ipv6MplsUnicastPrefixPathAny) PrefixLength() *BgpPeer_Ipv6MplsUnicastPrefix_PrefixLengthPathAny {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_PrefixLengthPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "prefix-length"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv6MplsUnicastPrefixPath) State() ygnmi.SingletonQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix] {
+	return ygnmi.NewSingletonQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix](
+		"BgpPeer_Ipv6MplsUnicastPrefix",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv6MplsUnicastPrefixPathAny) State() ygnmi.WildcardQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix] {
+	return ygnmi.NewWildcardQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix](
+		"BgpPeer_Ipv6MplsUnicastPrefix",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_AsPathPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/as-path YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_AsPathPath struct {
+	*ygnmi.NodePath
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_AsPathPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/as-path YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_AsPathPathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_AsPathPath) PathOriginName() string {
+	return "openconfig"
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_AsPathPath) State() ygnmi.SingletonQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix_AsPath] {
+	return ygnmi.NewSingletonQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix_AsPath](
+		"BgpPeer_Ipv6MplsUnicastPrefix_AsPath",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_AsPathPathAny) State() ygnmi.WildcardQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix_AsPath] {
+	return ygnmi.NewWildcardQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix_AsPath](
+		"BgpPeer_Ipv6MplsUnicastPrefix_AsPath",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_CommunityPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/community YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_CommunityPath struct {
+	*ygnmi.NodePath
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_CommunityPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/community YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_CommunityPathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_CommunityPath) PathOriginName() string {
+	return "openconfig"
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_CommunityPath) State() ygnmi.SingletonQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix_Community] {
+	return ygnmi.NewSingletonQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix_Community](
+		"BgpPeer_Ipv6MplsUnicastPrefix_Community",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_CommunityPathAny) State() ygnmi.WildcardQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix_Community] {
+	return ygnmi.NewWildcardQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix_Community](
+		"BgpPeer_Ipv6MplsUnicastPrefix_Community",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunityPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunityPath struct {
+	*ygnmi.NodePath
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunityPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunityPathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunityPath) PathOriginName() string {
+	return "openconfig"
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunityPath) State() ygnmi.SingletonQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity] {
+	return ygnmi.NewSingletonQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunityPathAny) State() ygnmi.WildcardQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity] {
+	return ygnmi.NewWildcardQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_BgpExtendedCommunityStructuredTypePath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/bgp-extended-community-structured_type YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_BgpExtendedCommunityStructuredTypePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_BgpExtendedCommunityStructuredTypePathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/bgp-extended-community-structured_type YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_BgpExtendedCommunityStructuredTypePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_BgpExtendedCommunityStructuredTypePath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "bgp-extended-community-structured_type"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/bgp-extended-community-structured_type"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_BgpExtendedCommunityStructuredTypePath) State() ygnmi.SingletonQuery[oc.E_ExtendedCommunity_BgpExtendedCommunityStructuredType] {
+	return ygnmi.NewSingletonQuery[oc.E_ExtendedCommunity_BgpExtendedCommunityStructuredType](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"bgp-extended-community-structured_type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_ExtendedCommunity_BgpExtendedCommunityStructuredType, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured).BgpExtendedCommunityStructuredType
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "bgp-extended-community-structured_type"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/bgp-extended-community-structured_type"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_BgpExtendedCommunityStructuredTypePathAny) State() ygnmi.WildcardQuery[oc.E_ExtendedCommunity_BgpExtendedCommunityStructuredType] {
+	return ygnmi.NewWildcardQuery[oc.E_ExtendedCommunity_BgpExtendedCommunityStructuredType](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"bgp-extended-community-structured_type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_ExtendedCommunity_BgpExtendedCommunityStructuredType, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured).BgpExtendedCommunityStructuredType
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_StructuredPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_StructuredPath struct {
+	*ygnmi.NodePath
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_StructuredPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_StructuredPathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_StructuredPath) PathOriginName() string {
+	return "openconfig"
+}
+
+// BgpExtendedCommunityStructuredType (leaf): The type of Extended Community
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "bgp-extended-community-structured_type"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/bgp-extended-community-structured_type"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_StructuredPath) BgpExtendedCommunityStructuredType() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_BgpExtendedCommunityStructuredTypePath {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_BgpExtendedCommunityStructuredTypePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"bgp-extended-community-structured_type"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// BgpExtendedCommunityStructuredType (leaf): The type of Extended Community
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "bgp-extended-community-structured_type"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/bgp-extended-community-structured_type"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_StructuredPathAny) BgpExtendedCommunityStructuredType() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_BgpExtendedCommunityStructuredTypePathAny {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_BgpExtendedCommunityStructuredTypePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"bgp-extended-community-structured_type"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// NonTransitive_2OctetAsType (container): The Non-Transitive Two-Octet AS-Specific Extended Community is sent as type 0x40
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "non_transitive_2octet_as_type"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/non_transitive_2octet_as_type"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_StructuredPath) NonTransitive_2OctetAsType() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsTypePath {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsTypePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"non_transitive_2octet_as_type"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// NonTransitive_2OctetAsType (container): The Non-Transitive Two-Octet AS-Specific Extended Community is sent as type 0x40
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "non_transitive_2octet_as_type"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/non_transitive_2octet_as_type"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_StructuredPathAny) NonTransitive_2OctetAsType() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsTypePathAny {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsTypePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"non_transitive_2octet_as_type"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// Transitive_2OctetAsType (container): The Transitive Two-Octet AS-Specific Extended Community is sent as type 0x00
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "transitive_2octet_as_type"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_StructuredPath) Transitive_2OctetAsType() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsTypePath {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsTypePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"transitive_2octet_as_type"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// Transitive_2OctetAsType (container): The Transitive Two-Octet AS-Specific Extended Community is sent as type 0x00
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "transitive_2octet_as_type"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_StructuredPathAny) Transitive_2OctetAsType() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsTypePathAny {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsTypePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"transitive_2octet_as_type"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// Transitive_4OctetAsType (container): The Transitive Four-Octet AS-Specific Extended Community is sent as type 0x02
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "transitive_4octet_as_type"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_StructuredPath) Transitive_4OctetAsType() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsTypePath {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsTypePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"transitive_4octet_as_type"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// Transitive_4OctetAsType (container): The Transitive Four-Octet AS-Specific Extended Community is sent as type 0x02
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "transitive_4octet_as_type"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_StructuredPathAny) Transitive_4OctetAsType() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsTypePathAny {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsTypePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"transitive_4octet_as_type"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// TransitiveIpv4AddressType (container): The Transitive IPv4 Address Specific Extended Community is sent as type 0x01
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "transitive_ipv4_address_type"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_StructuredPath) TransitiveIpv4AddressType() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressTypePath {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressTypePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"transitive_ipv4_address_type"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// TransitiveIpv4AddressType (container): The Transitive IPv4 Address Specific Extended Community is sent as type 0x01
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "transitive_ipv4_address_type"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_StructuredPathAny) TransitiveIpv4AddressType() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressTypePathAny {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressTypePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"transitive_ipv4_address_type"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// TransitiveOpaqueType (container): The Transitive Opaque Extended Community is sent as type 0x03
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "transitive_opaque_type"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_StructuredPath) TransitiveOpaqueType() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueTypePath {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueTypePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"transitive_opaque_type"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// TransitiveOpaqueType (container): The Transitive Opaque Extended Community is sent as type 0x03
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "transitive_opaque_type"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_StructuredPathAny) TransitiveOpaqueType() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueTypePathAny {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueTypePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"transitive_opaque_type"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_StructuredPath) State() ygnmi.SingletonQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured] {
+	return ygnmi.NewSingletonQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_StructuredPathAny) State() ygnmi.WildcardQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured] {
+	return ygnmi.NewWildcardQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_NonTransitive_2OctetAsTypePath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/non_transitive_2octet_as_type/non_transitive_2octet_as_type YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_NonTransitive_2OctetAsTypePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_NonTransitive_2OctetAsTypePathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/non_transitive_2octet_as_type/non_transitive_2octet_as_type YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_NonTransitive_2OctetAsTypePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_NonTransitive_2OctetAsTypePath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "non_transitive_2octet_as_type"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/non_transitive_2octet_as_type/non_transitive_2octet_as_type"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_NonTransitive_2OctetAsTypePath) State() ygnmi.SingletonQuery[oc.E_Structured_NonTransitive_2OctetAsType] {
+	return ygnmi.NewSingletonQuery[oc.E_Structured_NonTransitive_2OctetAsType](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"non_transitive_2octet_as_type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Structured_NonTransitive_2OctetAsType, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType).NonTransitive_2OctetAsType
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "non_transitive_2octet_as_type"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/non_transitive_2octet_as_type/non_transitive_2octet_as_type"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_NonTransitive_2OctetAsTypePathAny) State() ygnmi.WildcardQuery[oc.E_Structured_NonTransitive_2OctetAsType] {
+	return ygnmi.NewWildcardQuery[oc.E_Structured_NonTransitive_2OctetAsType](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"non_transitive_2octet_as_type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Structured_NonTransitive_2OctetAsType, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType).NonTransitive_2OctetAsType
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsTypePath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/non_transitive_2octet_as_type YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsTypePath struct {
+	*ygnmi.NodePath
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsTypePathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/non_transitive_2octet_as_type YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsTypePathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsTypePath) PathOriginName() string {
+	return "openconfig"
+}
+
+// LinkBandwidthSubtype (container): The Link Bandwidth Extended Community attribute is defined in draft-ietf-idr-link-bandwidth. (https://datatracker.ietf.org/doc/draft-ietf-idr-link-bandwidth) It is sent with sub-type as 0x04.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "link_bandwidth_subtype"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/non_transitive_2octet_as_type/link_bandwidth_subtype"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsTypePath) LinkBandwidthSubtype() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtypePath {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtypePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"link_bandwidth_subtype"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// LinkBandwidthSubtype (container): The Link Bandwidth Extended Community attribute is defined in draft-ietf-idr-link-bandwidth. (https://datatracker.ietf.org/doc/draft-ietf-idr-link-bandwidth) It is sent with sub-type as 0x04.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "link_bandwidth_subtype"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/non_transitive_2octet_as_type/link_bandwidth_subtype"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsTypePathAny) LinkBandwidthSubtype() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtypePathAny {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtypePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"link_bandwidth_subtype"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// NonTransitive_2OctetAsType (leaf): The type of Non-Transitive Two-Octet AS-Specific Extended Community
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "non_transitive_2octet_as_type"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/non_transitive_2octet_as_type/non_transitive_2octet_as_type"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsTypePath) NonTransitive_2OctetAsType() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_NonTransitive_2OctetAsTypePath {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_NonTransitive_2OctetAsTypePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"non_transitive_2octet_as_type"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// NonTransitive_2OctetAsType (leaf): The type of Non-Transitive Two-Octet AS-Specific Extended Community
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "non_transitive_2octet_as_type"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/non_transitive_2octet_as_type/non_transitive_2octet_as_type"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsTypePathAny) NonTransitive_2OctetAsType() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_NonTransitive_2OctetAsTypePathAny {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_NonTransitive_2OctetAsTypePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"non_transitive_2octet_as_type"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsTypePath) State() ygnmi.SingletonQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType] {
+	return ygnmi.NewSingletonQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsTypePathAny) State() ygnmi.WildcardQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType] {
+	return ygnmi.NewWildcardQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype_BandwidthPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/non_transitive_2octet_as_type/link_bandwidth_subtype/bandwidth YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype_BandwidthPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype_BandwidthPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/non_transitive_2octet_as_type/link_bandwidth_subtype/bandwidth YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype_BandwidthPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype_BandwidthPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "bandwidth"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/non_transitive_2octet_as_type/link_bandwidth_subtype/bandwidth"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype_BandwidthPath) State() ygnmi.SingletonQuery[float32] {
+	return ygnmi.NewSingletonQuery[float32](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"bandwidth"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float32, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype).Bandwidth
+			v := reflect.ValueOf(ret)
+			return ygot.BinaryToFloat32(ret), v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "bandwidth"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/non_transitive_2octet_as_type/link_bandwidth_subtype/bandwidth"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype_BandwidthPathAny) State() ygnmi.WildcardQuery[float32] {
+	return ygnmi.NewWildcardQuery[float32](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"bandwidth"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float32, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype).Bandwidth
+			v := reflect.ValueOf(ret)
+			return ygot.BinaryToFloat32(ret), v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype_Global_2ByteAsPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/non_transitive_2octet_as_type/link_bandwidth_subtype/global_2byte_as YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype_Global_2ByteAsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype_Global_2ByteAsPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/non_transitive_2octet_as_type/link_bandwidth_subtype/global_2byte_as YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype_Global_2ByteAsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype_Global_2ByteAsPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "global_2byte_as"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/non_transitive_2octet_as_type/link_bandwidth_subtype/global_2byte_as"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype_Global_2ByteAsPath) State() ygnmi.SingletonQuery[uint16] {
+	return ygnmi.NewSingletonQuery[uint16](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"global_2byte_as"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype).Global_2ByteAs
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "global_2byte_as"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/non_transitive_2octet_as_type/link_bandwidth_subtype/global_2byte_as"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype_Global_2ByteAsPathAny) State() ygnmi.WildcardQuery[uint16] {
+	return ygnmi.NewWildcardQuery[uint16](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"global_2byte_as"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype).Global_2ByteAs
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtypePath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/non_transitive_2octet_as_type/link_bandwidth_subtype YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtypePath struct {
+	*ygnmi.NodePath
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtypePathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/non_transitive_2octet_as_type/link_bandwidth_subtype YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtypePathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtypePath) PathOriginName() string {
+	return "openconfig"
+}
+
+// Bandwidth (leaf): Bandwidth of the link in bytes per second. ( 1 Kbps is 1000 bytes per second and 1 Mbps is 1000 Kbps per second )
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "bandwidth"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/non_transitive_2octet_as_type/link_bandwidth_subtype/bandwidth"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtypePath) Bandwidth() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype_BandwidthPath {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype_BandwidthPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"bandwidth"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Bandwidth (leaf): Bandwidth of the link in bytes per second. ( 1 Kbps is 1000 bytes per second and 1 Mbps is 1000 Kbps per second )
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "bandwidth"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/non_transitive_2octet_as_type/link_bandwidth_subtype/bandwidth"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtypePathAny) Bandwidth() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype_BandwidthPathAny {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype_BandwidthPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"bandwidth"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Global_2ByteAs (leaf): The value of the Global Administrator subfield should represent the Autonomous System
+// of the router that attaches the Link Bandwidth Community.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "global_2byte_as"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/non_transitive_2octet_as_type/link_bandwidth_subtype/global_2byte_as"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtypePath) Global_2ByteAs() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype_Global_2ByteAsPath {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype_Global_2ByteAsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"global_2byte_as"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Global_2ByteAs (leaf): The value of the Global Administrator subfield should represent the Autonomous System
+// of the router that attaches the Link Bandwidth Community.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "global_2byte_as"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/non_transitive_2octet_as_type/link_bandwidth_subtype/global_2byte_as"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtypePathAny) Global_2ByteAs() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype_Global_2ByteAsPathAny {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype_Global_2ByteAsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"global_2byte_as"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtypePath) State() ygnmi.SingletonQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype] {
+	return ygnmi.NewSingletonQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtypePathAny) State() ygnmi.WildcardQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype] {
+	return ygnmi.NewWildcardQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_NonTransitive_2OctetAsType_LinkBandwidthSubtype",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_TransitiveIpv4AddressTypePath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type/transitive_ipv4_address_type YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_TransitiveIpv4AddressTypePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_TransitiveIpv4AddressTypePathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type/transitive_ipv4_address_type YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_TransitiveIpv4AddressTypePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_TransitiveIpv4AddressTypePath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "transitive_ipv4_address_type"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type/transitive_ipv4_address_type"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_TransitiveIpv4AddressTypePath) State() ygnmi.SingletonQuery[oc.E_Structured_TransitiveIpv4AddressType] {
+	return ygnmi.NewSingletonQuery[oc.E_Structured_TransitiveIpv4AddressType](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"transitive_ipv4_address_type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Structured_TransitiveIpv4AddressType, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType).TransitiveIpv4AddressType
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "transitive_ipv4_address_type"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type/transitive_ipv4_address_type"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_TransitiveIpv4AddressTypePathAny) State() ygnmi.WildcardQuery[oc.E_Structured_TransitiveIpv4AddressType] {
+	return ygnmi.NewWildcardQuery[oc.E_Structured_TransitiveIpv4AddressType](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"transitive_ipv4_address_type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Structured_TransitiveIpv4AddressType, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType).TransitiveIpv4AddressType
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressTypePath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressTypePath struct {
+	*ygnmi.NodePath
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressTypePathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressTypePathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressTypePath) PathOriginName() string {
+	return "openconfig"
+}
+
+// RouteOriginSubtype (container): The Route Origin Community identifies one or more routers that inject a set of routes (that carry this Community)
+// into BGP It is sent with sub-type as 0x03.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "route_origin_subtype"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type/route_origin_subtype"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressTypePath) RouteOriginSubtype() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtypePath {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtypePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"route_origin_subtype"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// RouteOriginSubtype (container): The Route Origin Community identifies one or more routers that inject a set of routes (that carry this Community)
+// into BGP It is sent with sub-type as 0x03.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "route_origin_subtype"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type/route_origin_subtype"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressTypePathAny) RouteOriginSubtype() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtypePathAny {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtypePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"route_origin_subtype"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// RouteTargetSubtype (container): The Route Target Community identifies one or more routers that may receive a set of routes (that carry this Community)
+// carried by BGP. It is sent with sub-type as 0x02.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "route_target_subtype"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type/route_target_subtype"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressTypePath) RouteTargetSubtype() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtypePath {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtypePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"route_target_subtype"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// RouteTargetSubtype (container): The Route Target Community identifies one or more routers that may receive a set of routes (that carry this Community)
+// carried by BGP. It is sent with sub-type as 0x02.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "route_target_subtype"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type/route_target_subtype"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressTypePathAny) RouteTargetSubtype() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtypePathAny {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtypePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"route_target_subtype"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// TransitiveIpv4AddressType (leaf): The type of Transitive IPv4 Address Specific Extended Community
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "transitive_ipv4_address_type"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type/transitive_ipv4_address_type"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressTypePath) TransitiveIpv4AddressType() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_TransitiveIpv4AddressTypePath {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_TransitiveIpv4AddressTypePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"transitive_ipv4_address_type"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// TransitiveIpv4AddressType (leaf): The type of Transitive IPv4 Address Specific Extended Community
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "transitive_ipv4_address_type"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type/transitive_ipv4_address_type"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressTypePathAny) TransitiveIpv4AddressType() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_TransitiveIpv4AddressTypePathAny {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_TransitiveIpv4AddressTypePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"transitive_ipv4_address_type"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressTypePath) State() ygnmi.SingletonQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType] {
+	return ygnmi.NewSingletonQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressTypePathAny) State() ygnmi.WildcardQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType] {
+	return ygnmi.NewWildcardQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype_GlobalIpv4AdminPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type/route_origin_subtype/global_ipv4_admin YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype_GlobalIpv4AdminPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype_GlobalIpv4AdminPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type/route_origin_subtype/global_ipv4_admin YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype_GlobalIpv4AdminPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype_GlobalIpv4AdminPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "global_ipv4_admin"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type/route_origin_subtype/global_ipv4_admin"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype_GlobalIpv4AdminPath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewSingletonQuery[string](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"global_ipv4_admin"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype).GlobalIpv4Admin
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "global_ipv4_admin"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type/route_origin_subtype/global_ipv4_admin"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype_GlobalIpv4AdminPathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"global_ipv4_admin"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype).GlobalIpv4Admin
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype_Local_2ByteAdminPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type/route_origin_subtype/local_2byte_admin YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype_Local_2ByteAdminPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype_Local_2ByteAdminPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type/route_origin_subtype/local_2byte_admin YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype_Local_2ByteAdminPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype_Local_2ByteAdminPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "local_2byte_admin"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type/route_origin_subtype/local_2byte_admin"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype_Local_2ByteAdminPath) State() ygnmi.SingletonQuery[uint16] {
+	return ygnmi.NewSingletonQuery[uint16](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"local_2byte_admin"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype).Local_2ByteAdmin
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "local_2byte_admin"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type/route_origin_subtype/local_2byte_admin"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype_Local_2ByteAdminPathAny) State() ygnmi.WildcardQuery[uint16] {
+	return ygnmi.NewWildcardQuery[uint16](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"local_2byte_admin"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype).Local_2ByteAdmin
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtypePath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type/route_origin_subtype YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtypePath struct {
+	*ygnmi.NodePath
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtypePathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type/route_origin_subtype YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtypePathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtypePath) PathOriginName() string {
+	return "openconfig"
+}
+
+// GlobalIpv4Admin (leaf): An IPv4 unicast address assigned by one of the Internet registries.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "global_ipv4_admin"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type/route_origin_subtype/global_ipv4_admin"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtypePath) GlobalIpv4Admin() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype_GlobalIpv4AdminPath {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype_GlobalIpv4AdminPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"global_ipv4_admin"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// GlobalIpv4Admin (leaf): An IPv4 unicast address assigned by one of the Internet registries.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "global_ipv4_admin"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type/route_origin_subtype/global_ipv4_admin"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtypePathAny) GlobalIpv4Admin() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype_GlobalIpv4AdminPathAny {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype_GlobalIpv4AdminPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"global_ipv4_admin"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Local_2ByteAdmin (leaf): The Local Administrator sub-field contains a number from a numbering space
+// that is administered by the organization to which the IP address carried in the
+// Global Administrator sub-field has been assigned by an appropriate authority.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "local_2byte_admin"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type/route_origin_subtype/local_2byte_admin"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtypePath) Local_2ByteAdmin() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype_Local_2ByteAdminPath {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype_Local_2ByteAdminPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"local_2byte_admin"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Local_2ByteAdmin (leaf): The Local Administrator sub-field contains a number from a numbering space
+// that is administered by the organization to which the IP address carried in the
+// Global Administrator sub-field has been assigned by an appropriate authority.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "local_2byte_admin"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type/route_origin_subtype/local_2byte_admin"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtypePathAny) Local_2ByteAdmin() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype_Local_2ByteAdminPathAny {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype_Local_2ByteAdminPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"local_2byte_admin"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtypePath) State() ygnmi.SingletonQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype] {
+	return ygnmi.NewSingletonQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtypePathAny) State() ygnmi.WildcardQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype] {
+	return ygnmi.NewWildcardQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteOriginSubtype",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype_GlobalIpv4AdminPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type/route_target_subtype/global_ipv4_admin YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype_GlobalIpv4AdminPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype_GlobalIpv4AdminPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type/route_target_subtype/global_ipv4_admin YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype_GlobalIpv4AdminPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype_GlobalIpv4AdminPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "global_ipv4_admin"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type/route_target_subtype/global_ipv4_admin"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype_GlobalIpv4AdminPath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewSingletonQuery[string](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"global_ipv4_admin"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype).GlobalIpv4Admin
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "global_ipv4_admin"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type/route_target_subtype/global_ipv4_admin"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype_GlobalIpv4AdminPathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"global_ipv4_admin"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype).GlobalIpv4Admin
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype_Local_2ByteAdminPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type/route_target_subtype/local_2byte_admin YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype_Local_2ByteAdminPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype_Local_2ByteAdminPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type/route_target_subtype/local_2byte_admin YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype_Local_2ByteAdminPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype_Local_2ByteAdminPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "local_2byte_admin"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type/route_target_subtype/local_2byte_admin"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype_Local_2ByteAdminPath) State() ygnmi.SingletonQuery[uint16] {
+	return ygnmi.NewSingletonQuery[uint16](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"local_2byte_admin"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype).Local_2ByteAdmin
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "local_2byte_admin"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type/route_target_subtype/local_2byte_admin"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype_Local_2ByteAdminPathAny) State() ygnmi.WildcardQuery[uint16] {
+	return ygnmi.NewWildcardQuery[uint16](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"local_2byte_admin"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype).Local_2ByteAdmin
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtypePath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type/route_target_subtype YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtypePath struct {
+	*ygnmi.NodePath
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtypePathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type/route_target_subtype YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtypePathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtypePath) PathOriginName() string {
+	return "openconfig"
+}
+
+// GlobalIpv4Admin (leaf): An IPv4 unicast address assigned by one of the Internet registries.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "global_ipv4_admin"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type/route_target_subtype/global_ipv4_admin"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtypePath) GlobalIpv4Admin() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype_GlobalIpv4AdminPath {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype_GlobalIpv4AdminPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"global_ipv4_admin"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// GlobalIpv4Admin (leaf): An IPv4 unicast address assigned by one of the Internet registries.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "global_ipv4_admin"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type/route_target_subtype/global_ipv4_admin"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtypePathAny) GlobalIpv4Admin() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype_GlobalIpv4AdminPathAny {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype_GlobalIpv4AdminPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"global_ipv4_admin"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Local_2ByteAdmin (leaf): The Local Administrator sub-field contains a number from a numbering space
+// that is administered by the organization to which the IP address carried in the
+// Global Administrator sub-field has been assigned by an appropriate authority.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "local_2byte_admin"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type/route_target_subtype/local_2byte_admin"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtypePath) Local_2ByteAdmin() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype_Local_2ByteAdminPath {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype_Local_2ByteAdminPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"local_2byte_admin"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Local_2ByteAdmin (leaf): The Local Administrator sub-field contains a number from a numbering space
+// that is administered by the organization to which the IP address carried in the
+// Global Administrator sub-field has been assigned by an appropriate authority.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "local_2byte_admin"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_ipv4_address_type/route_target_subtype/local_2byte_admin"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtypePathAny) Local_2ByteAdmin() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype_Local_2ByteAdminPathAny {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype_Local_2ByteAdminPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"local_2byte_admin"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtypePath) State() ygnmi.SingletonQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype] {
+	return ygnmi.NewSingletonQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtypePathAny) State() ygnmi.WildcardQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype] {
+	return ygnmi.NewWildcardQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveIpv4AddressType_RouteTargetSubtype",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_TransitiveOpaqueTypePath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type/transitive_opaque_type YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_TransitiveOpaqueTypePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_TransitiveOpaqueTypePathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type/transitive_opaque_type YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_TransitiveOpaqueTypePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_TransitiveOpaqueTypePath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "transitive_opaque_type"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type/transitive_opaque_type"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_TransitiveOpaqueTypePath) State() ygnmi.SingletonQuery[oc.E_Structured_TransitiveOpaqueType] {
+	return ygnmi.NewSingletonQuery[oc.E_Structured_TransitiveOpaqueType](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"transitive_opaque_type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Structured_TransitiveOpaqueType, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType).TransitiveOpaqueType
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "transitive_opaque_type"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type/transitive_opaque_type"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_TransitiveOpaqueTypePathAny) State() ygnmi.WildcardQuery[oc.E_Structured_TransitiveOpaqueType] {
+	return ygnmi.NewWildcardQuery[oc.E_Structured_TransitiveOpaqueType](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"transitive_opaque_type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Structured_TransitiveOpaqueType, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType).TransitiveOpaqueType
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueTypePath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueTypePath struct {
+	*ygnmi.NodePath
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueTypePathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueTypePathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueTypePath) PathOriginName() string {
+	return "openconfig"
+}
+
+// ColorSubtype (container): The Color Community contains locally administrator defined 'color' value which is used in conjunction with
+// Encapsulation attribute to decide whether a data packet can be transmitted on a certain tunnel or not.
+// It is defined in RFC9012 and sent with sub-type as 0x0b.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "color_subtype"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type/color_subtype"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueTypePath) ColorSubtype() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtypePath {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtypePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"color_subtype"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// ColorSubtype (container): The Color Community contains locally administrator defined 'color' value which is used in conjunction with
+// Encapsulation attribute to decide whether a data packet can be transmitted on a certain tunnel or not.
+// It is defined in RFC9012 and sent with sub-type as 0x0b.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "color_subtype"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type/color_subtype"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueTypePathAny) ColorSubtype() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtypePathAny {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtypePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"color_subtype"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// EncapsulationSubtype (container): This identifies the type of tunneling technology being signalled.
+// It is defined in RFC9012 and sent with sub-type as 0x0c.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "encapsulation_subtype"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type/encapsulation_subtype"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueTypePath) EncapsulationSubtype() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtypePath {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtypePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"encapsulation_subtype"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// EncapsulationSubtype (container): This identifies the type of tunneling technology being signalled.
+// It is defined in RFC9012 and sent with sub-type as 0x0c.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "encapsulation_subtype"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type/encapsulation_subtype"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueTypePathAny) EncapsulationSubtype() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtypePathAny {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtypePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"encapsulation_subtype"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// TransitiveOpaqueType (leaf): The type of Transitive Opaque Extended Community
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "transitive_opaque_type"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type/transitive_opaque_type"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueTypePath) TransitiveOpaqueType() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_TransitiveOpaqueTypePath {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_TransitiveOpaqueTypePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"transitive_opaque_type"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// TransitiveOpaqueType (leaf): The type of Transitive Opaque Extended Community
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "transitive_opaque_type"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type/transitive_opaque_type"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueTypePathAny) TransitiveOpaqueType() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_TransitiveOpaqueTypePathAny {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_TransitiveOpaqueTypePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"transitive_opaque_type"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueTypePath) State() ygnmi.SingletonQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType] {
+	return ygnmi.NewSingletonQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueTypePathAny) State() ygnmi.WildcardQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType] {
+	return ygnmi.NewWildcardQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype_ColorPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type/color_subtype/color YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype_ColorPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype_ColorPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type/color_subtype/color YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype_ColorPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype_ColorPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "color"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type/color_subtype/color"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype_ColorPath) State() ygnmi.SingletonQuery[uint32] {
+	return ygnmi.NewSingletonQuery[uint32](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"color"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype).Color
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "color"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type/color_subtype/color"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype_ColorPathAny) State() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewWildcardQuery[uint32](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"color"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype).Color
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype_FlagsPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type/color_subtype/flags YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype_FlagsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype_FlagsPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type/color_subtype/flags YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype_FlagsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype_FlagsPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "flags"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type/color_subtype/flags"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype_FlagsPath) State() ygnmi.SingletonQuery[uint16] {
+	return ygnmi.NewSingletonQuery[uint16](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"flags"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype).Flags
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "flags"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type/color_subtype/flags"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype_FlagsPathAny) State() ygnmi.WildcardQuery[uint16] {
+	return ygnmi.NewWildcardQuery[uint16](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"flags"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype).Flags
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtypePath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type/color_subtype YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtypePath struct {
+	*ygnmi.NodePath
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtypePathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type/color_subtype YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtypePathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtypePath) PathOriginName() string {
+	return "openconfig"
+}
+
+// Color (leaf): he color value is user defined and configured locally and used to determine whether
+// a data packet can be transmitted on a certain tunnel or not in conjunction with the
+// Encapsulation attribute. It is defined in RFC9012.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "color"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type/color_subtype/color"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtypePath) Color() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype_ColorPath {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype_ColorPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"color"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Color (leaf): he color value is user defined and configured locally and used to determine whether
+// a data packet can be transmitted on a certain tunnel or not in conjunction with the
+// Encapsulation attribute. It is defined in RFC9012.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "color"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type/color_subtype/color"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtypePathAny) Color() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype_ColorPathAny {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype_ColorPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"color"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Flags (leaf): Two octet flag values.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "flags"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type/color_subtype/flags"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtypePath) Flags() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype_FlagsPath {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype_FlagsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"flags"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Flags (leaf): Two octet flag values.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "flags"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type/color_subtype/flags"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtypePathAny) Flags() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype_FlagsPathAny {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype_FlagsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"flags"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtypePath) State() ygnmi.SingletonQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype] {
+	return ygnmi.NewSingletonQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtypePathAny) State() ygnmi.WildcardQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype] {
+	return ygnmi.NewWildcardQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_ColorSubtype",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype_ReservedPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type/encapsulation_subtype/reserved YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype_ReservedPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype_ReservedPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type/encapsulation_subtype/reserved YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype_ReservedPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype_ReservedPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "reserved"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type/encapsulation_subtype/reserved"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype_ReservedPath) State() ygnmi.SingletonQuery[uint32] {
+	return ygnmi.NewSingletonQuery[uint32](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"reserved"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype).Reserved
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "reserved"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type/encapsulation_subtype/reserved"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype_ReservedPathAny) State() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewWildcardQuery[uint32](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"reserved"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype).Reserved
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype_TunnelTypePath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type/encapsulation_subtype/tunnel_type YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype_TunnelTypePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype_TunnelTypePathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type/encapsulation_subtype/tunnel_type YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype_TunnelTypePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype_TunnelTypePath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "tunnel_type"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type/encapsulation_subtype/tunnel_type"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype_TunnelTypePath) State() ygnmi.SingletonQuery[uint16] {
+	return ygnmi.NewSingletonQuery[uint16](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"tunnel_type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype).TunnelType
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "tunnel_type"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type/encapsulation_subtype/tunnel_type"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype_TunnelTypePathAny) State() ygnmi.WildcardQuery[uint16] {
+	return ygnmi.NewWildcardQuery[uint16](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"tunnel_type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype).TunnelType
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtypePath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type/encapsulation_subtype YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtypePath struct {
+	*ygnmi.NodePath
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtypePathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type/encapsulation_subtype YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtypePathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtypePath) PathOriginName() string {
+	return "openconfig"
+}
+
+// Reserved (leaf): Four bytes of reserved values. Normally set to 0 on transmit and ignored on receive.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "reserved"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type/encapsulation_subtype/reserved"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtypePath) Reserved() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype_ReservedPath {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype_ReservedPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"reserved"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Reserved (leaf): Four bytes of reserved values. Normally set to 0 on transmit and ignored on receive.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "reserved"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type/encapsulation_subtype/reserved"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtypePathAny) Reserved() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype_ReservedPathAny {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype_ReservedPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"reserved"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// TunnelType (leaf): Identifies the type of tunneling technology being signalled.
+// Initially defined in RFC5512 and extended in RFC9012.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "tunnel_type"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type/encapsulation_subtype/tunnel_type"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtypePath) TunnelType() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype_TunnelTypePath {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype_TunnelTypePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"tunnel_type"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// TunnelType (leaf): Identifies the type of tunneling technology being signalled.
+// Initially defined in RFC5512 and extended in RFC9012.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "tunnel_type"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_opaque_type/encapsulation_subtype/tunnel_type"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtypePathAny) TunnelType() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype_TunnelTypePathAny {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype_TunnelTypePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"tunnel_type"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtypePath) State() ygnmi.SingletonQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype] {
+	return ygnmi.NewSingletonQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtypePathAny) State() ygnmi.WildcardQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype] {
+	return ygnmi.NewWildcardQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_TransitiveOpaqueType_EncapsulationSubtype",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_Transitive_2OctetAsTypePath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/transitive_2octet_as_type YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_Transitive_2OctetAsTypePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_Transitive_2OctetAsTypePathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/transitive_2octet_as_type YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_Transitive_2OctetAsTypePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_Transitive_2OctetAsTypePath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "transitive_2octet_as_type"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/transitive_2octet_as_type"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_Transitive_2OctetAsTypePath) State() ygnmi.SingletonQuery[oc.E_Structured_Transitive_2OctetAsType] {
+	return ygnmi.NewSingletonQuery[oc.E_Structured_Transitive_2OctetAsType](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"transitive_2octet_as_type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Structured_Transitive_2OctetAsType, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType).Transitive_2OctetAsType
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "transitive_2octet_as_type"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/transitive_2octet_as_type"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_Transitive_2OctetAsTypePathAny) State() ygnmi.WildcardQuery[oc.E_Structured_Transitive_2OctetAsType] {
+	return ygnmi.NewWildcardQuery[oc.E_Structured_Transitive_2OctetAsType](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"transitive_2octet_as_type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Structured_Transitive_2OctetAsType, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType).Transitive_2OctetAsType
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsTypePath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsTypePath struct {
+	*ygnmi.NodePath
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsTypePathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsTypePathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsTypePath) PathOriginName() string {
+	return "openconfig"
+}
+
+// LinkBandwidthSubtype (container): The Link Bandwidth Extended Community attribute is defined in draft-ietf-idr-link-bandwidth. (https://datatracker.ietf.org/doc/draft-ietf-idr-link-bandwidth) It is sent with sub-type as 0x04.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "link_bandwidth_subtype"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/link_bandwidth_subtype"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsTypePath) LinkBandwidthSubtype() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtypePath {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtypePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"link_bandwidth_subtype"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// LinkBandwidthSubtype (container): The Link Bandwidth Extended Community attribute is defined in draft-ietf-idr-link-bandwidth. (https://datatracker.ietf.org/doc/draft-ietf-idr-link-bandwidth) It is sent with sub-type as 0x04.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "link_bandwidth_subtype"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/link_bandwidth_subtype"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsTypePathAny) LinkBandwidthSubtype() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtypePathAny {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtypePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"link_bandwidth_subtype"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// RouteOriginSubtype (container): The Route Origin Community identifies one or more routers that inject a set of routes (that carry this Community)
+// into BGP. It is sent with sub-type as 0x03.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "route_origin_subtype"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/route_origin_subtype"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsTypePath) RouteOriginSubtype() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtypePath {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtypePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"route_origin_subtype"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// RouteOriginSubtype (container): The Route Origin Community identifies one or more routers that inject a set of routes (that carry this Community)
+// into BGP. It is sent with sub-type as 0x03.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "route_origin_subtype"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/route_origin_subtype"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsTypePathAny) RouteOriginSubtype() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtypePathAny {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtypePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"route_origin_subtype"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// RouteTargetSubtype (container): The Route Target Community identifies one or more routers that may receive a set of routes (that carry this Community)
+// carried by BGP. It is sent with sub-type as 0x02.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "route_target_subtype"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/route_target_subtype"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsTypePath) RouteTargetSubtype() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtypePath {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtypePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"route_target_subtype"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// RouteTargetSubtype (container): The Route Target Community identifies one or more routers that may receive a set of routes (that carry this Community)
+// carried by BGP. It is sent with sub-type as 0x02.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "route_target_subtype"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/route_target_subtype"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsTypePathAny) RouteTargetSubtype() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtypePathAny {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtypePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"route_target_subtype"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// Transitive_2OctetAsType (leaf): The type of Transitive Two-Octet AS-Specific Extended Community
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "transitive_2octet_as_type"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/transitive_2octet_as_type"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsTypePath) Transitive_2OctetAsType() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_Transitive_2OctetAsTypePath {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_Transitive_2OctetAsTypePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"transitive_2octet_as_type"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Transitive_2OctetAsType (leaf): The type of Transitive Two-Octet AS-Specific Extended Community
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "transitive_2octet_as_type"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/transitive_2octet_as_type"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsTypePathAny) Transitive_2OctetAsType() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_Transitive_2OctetAsTypePathAny {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_Transitive_2OctetAsTypePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"transitive_2octet_as_type"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsTypePath) State() ygnmi.SingletonQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType] {
+	return ygnmi.NewSingletonQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsTypePathAny) State() ygnmi.WildcardQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType] {
+	return ygnmi.NewWildcardQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_BandwidthPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/link_bandwidth_subtype/bandwidth YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_BandwidthPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_BandwidthPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/link_bandwidth_subtype/bandwidth YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_BandwidthPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_BandwidthPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "bandwidth"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/link_bandwidth_subtype/bandwidth"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_BandwidthPath) State() ygnmi.SingletonQuery[float32] {
+	return ygnmi.NewSingletonQuery[float32](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"bandwidth"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float32, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype).Bandwidth
+			v := reflect.ValueOf(ret)
+			return ygot.BinaryToFloat32(ret), v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "bandwidth"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/link_bandwidth_subtype/bandwidth"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_BandwidthPathAny) State() ygnmi.WildcardQuery[float32] {
+	return ygnmi.NewWildcardQuery[float32](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"bandwidth"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float32, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype).Bandwidth
+			v := reflect.ValueOf(ret)
+			return ygot.BinaryToFloat32(ret), v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_Global_2ByteAsPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/link_bandwidth_subtype/global_2byte_as YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_Global_2ByteAsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_Global_2ByteAsPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/link_bandwidth_subtype/global_2byte_as YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_Global_2ByteAsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_Global_2ByteAsPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "global_2byte_as"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/link_bandwidth_subtype/global_2byte_as"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_Global_2ByteAsPath) State() ygnmi.SingletonQuery[uint16] {
+	return ygnmi.NewSingletonQuery[uint16](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"global_2byte_as"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype).Global_2ByteAs
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "global_2byte_as"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/link_bandwidth_subtype/global_2byte_as"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_Global_2ByteAsPathAny) State() ygnmi.WildcardQuery[uint16] {
+	return ygnmi.NewWildcardQuery[uint16](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"global_2byte_as"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype).Global_2ByteAs
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtypePath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/link_bandwidth_subtype YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtypePath struct {
+	*ygnmi.NodePath
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtypePathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/link_bandwidth_subtype YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtypePathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtypePath) PathOriginName() string {
+	return "openconfig"
+}
+
+// Bandwidth (leaf): Bandwidth of the link in bytes per second. ( 1 Kbps is 1000 bytes per second and 1 Mbps is 1000 Kbps per second )
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "bandwidth"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/link_bandwidth_subtype/bandwidth"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtypePath) Bandwidth() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_BandwidthPath {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_BandwidthPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"bandwidth"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Bandwidth (leaf): Bandwidth of the link in bytes per second. ( 1 Kbps is 1000 bytes per second and 1 Mbps is 1000 Kbps per second )
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "bandwidth"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/link_bandwidth_subtype/bandwidth"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtypePathAny) Bandwidth() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_BandwidthPathAny {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_BandwidthPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"bandwidth"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Global_2ByteAs (leaf): The value of the Global Administrator subfield should represent the Autonomous System
+// of the router that attaches the Link Bandwidth Community.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "global_2byte_as"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/link_bandwidth_subtype/global_2byte_as"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtypePath) Global_2ByteAs() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_Global_2ByteAsPath {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_Global_2ByteAsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"global_2byte_as"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Global_2ByteAs (leaf): The value of the Global Administrator subfield should represent the Autonomous System
+// of the router that attaches the Link Bandwidth Community.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "global_2byte_as"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/link_bandwidth_subtype/global_2byte_as"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtypePathAny) Global_2ByteAs() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_Global_2ByteAsPathAny {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype_Global_2ByteAsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"global_2byte_as"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtypePath) State() ygnmi.SingletonQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype] {
+	return ygnmi.NewSingletonQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtypePathAny) State() ygnmi.WildcardQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype] {
+	return ygnmi.NewWildcardQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_LinkBandwidthSubtype",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype_Global_2ByteAsPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/route_origin_subtype/global_2byte_as YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype_Global_2ByteAsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype_Global_2ByteAsPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/route_origin_subtype/global_2byte_as YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype_Global_2ByteAsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype_Global_2ByteAsPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "global_2byte_as"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/route_origin_subtype/global_2byte_as"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype_Global_2ByteAsPath) State() ygnmi.SingletonQuery[uint16] {
+	return ygnmi.NewSingletonQuery[uint16](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"global_2byte_as"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype).Global_2ByteAs
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "global_2byte_as"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/route_origin_subtype/global_2byte_as"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype_Global_2ByteAsPathAny) State() ygnmi.WildcardQuery[uint16] {
+	return ygnmi.NewWildcardQuery[uint16](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"global_2byte_as"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype).Global_2ByteAs
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype_Local_4ByteAdminPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/route_origin_subtype/local_4byte_admin YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype_Local_4ByteAdminPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype_Local_4ByteAdminPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/route_origin_subtype/local_4byte_admin YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype_Local_4ByteAdminPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype_Local_4ByteAdminPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "local_4byte_admin"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/route_origin_subtype/local_4byte_admin"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype_Local_4ByteAdminPath) State() ygnmi.SingletonQuery[uint32] {
+	return ygnmi.NewSingletonQuery[uint32](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"local_4byte_admin"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype).Local_4ByteAdmin
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "local_4byte_admin"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/route_origin_subtype/local_4byte_admin"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype_Local_4ByteAdminPathAny) State() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewWildcardQuery[uint32](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"local_4byte_admin"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype).Local_4ByteAdmin
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtypePath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/route_origin_subtype YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtypePath struct {
+	*ygnmi.NodePath
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtypePathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/route_origin_subtype YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtypePathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtypePath) PathOriginName() string {
+	return "openconfig"
+}
+
+// Global_2ByteAs (leaf): The two octet IANA assigned AS value assigned to the Autonomous System.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "global_2byte_as"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/route_origin_subtype/global_2byte_as"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtypePath) Global_2ByteAs() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype_Global_2ByteAsPath {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype_Global_2ByteAsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"global_2byte_as"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Global_2ByteAs (leaf): The two octet IANA assigned AS value assigned to the Autonomous System.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "global_2byte_as"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/route_origin_subtype/global_2byte_as"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtypePathAny) Global_2ByteAs() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype_Global_2ByteAsPathAny {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype_Global_2ByteAsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"global_2byte_as"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Local_4ByteAdmin (leaf): The Local Administrator sub-field contains a number from a numbering space
+// that is administered by the organization to which the Autonomous System number
+// carried in the Global Administrator sub-field has been assigned by an appropriate authority.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "local_4byte_admin"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/route_origin_subtype/local_4byte_admin"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtypePath) Local_4ByteAdmin() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype_Local_4ByteAdminPath {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype_Local_4ByteAdminPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"local_4byte_admin"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Local_4ByteAdmin (leaf): The Local Administrator sub-field contains a number from a numbering space
+// that is administered by the organization to which the Autonomous System number
+// carried in the Global Administrator sub-field has been assigned by an appropriate authority.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "local_4byte_admin"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/route_origin_subtype/local_4byte_admin"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtypePathAny) Local_4ByteAdmin() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype_Local_4ByteAdminPathAny {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype_Local_4ByteAdminPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"local_4byte_admin"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtypePath) State() ygnmi.SingletonQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype] {
+	return ygnmi.NewSingletonQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtypePathAny) State() ygnmi.WildcardQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype] {
+	return ygnmi.NewWildcardQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteOriginSubtype",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype_Global_2ByteAsPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/route_target_subtype/global_2byte_as YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype_Global_2ByteAsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype_Global_2ByteAsPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/route_target_subtype/global_2byte_as YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype_Global_2ByteAsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype_Global_2ByteAsPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "global_2byte_as"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/route_target_subtype/global_2byte_as"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype_Global_2ByteAsPath) State() ygnmi.SingletonQuery[uint16] {
+	return ygnmi.NewSingletonQuery[uint16](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"global_2byte_as"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype).Global_2ByteAs
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "global_2byte_as"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/route_target_subtype/global_2byte_as"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype_Global_2ByteAsPathAny) State() ygnmi.WildcardQuery[uint16] {
+	return ygnmi.NewWildcardQuery[uint16](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"global_2byte_as"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype).Global_2ByteAs
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype_Local_4ByteAdminPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/route_target_subtype/local_4byte_admin YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype_Local_4ByteAdminPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype_Local_4ByteAdminPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/route_target_subtype/local_4byte_admin YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype_Local_4ByteAdminPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype_Local_4ByteAdminPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "local_4byte_admin"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/route_target_subtype/local_4byte_admin"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype_Local_4ByteAdminPath) State() ygnmi.SingletonQuery[uint32] {
+	return ygnmi.NewSingletonQuery[uint32](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"local_4byte_admin"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype).Local_4ByteAdmin
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "local_4byte_admin"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/route_target_subtype/local_4byte_admin"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype_Local_4ByteAdminPathAny) State() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewWildcardQuery[uint32](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"local_4byte_admin"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype).Local_4ByteAdmin
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtypePath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/route_target_subtype YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtypePath struct {
+	*ygnmi.NodePath
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtypePathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/route_target_subtype YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtypePathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtypePath) PathOriginName() string {
+	return "openconfig"
+}
+
+// Global_2ByteAs (leaf): The two octet IANA assigned AS value assigned to the Autonomous System.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "global_2byte_as"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/route_target_subtype/global_2byte_as"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtypePath) Global_2ByteAs() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype_Global_2ByteAsPath {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype_Global_2ByteAsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"global_2byte_as"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Global_2ByteAs (leaf): The two octet IANA assigned AS value assigned to the Autonomous System.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "global_2byte_as"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/route_target_subtype/global_2byte_as"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtypePathAny) Global_2ByteAs() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype_Global_2ByteAsPathAny {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype_Global_2ByteAsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"global_2byte_as"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Local_4ByteAdmin (leaf): The Local Administrator sub-field contains a number from a numbering space
+// that is administered by the organization to which the Autonomous System number
+// carried in the Global Administrator sub-field has been assigned by an appropriate authority.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "local_4byte_admin"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/route_target_subtype/local_4byte_admin"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtypePath) Local_4ByteAdmin() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype_Local_4ByteAdminPath {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype_Local_4ByteAdminPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"local_4byte_admin"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Local_4ByteAdmin (leaf): The Local Administrator sub-field contains a number from a numbering space
+// that is administered by the organization to which the Autonomous System number
+// carried in the Global Administrator sub-field has been assigned by an appropriate authority.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "local_4byte_admin"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_2octet_as_type/route_target_subtype/local_4byte_admin"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtypePathAny) Local_4ByteAdmin() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype_Local_4ByteAdminPathAny {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype_Local_4ByteAdminPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"local_4byte_admin"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtypePath) State() ygnmi.SingletonQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype] {
+	return ygnmi.NewSingletonQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtypePathAny) State() ygnmi.WildcardQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype] {
+	return ygnmi.NewWildcardQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_2OctetAsType_RouteTargetSubtype",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_Transitive_4OctetAsTypePath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type/transitive_4octet_as_type YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_Transitive_4OctetAsTypePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_Transitive_4OctetAsTypePathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type/transitive_4octet_as_type YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_Transitive_4OctetAsTypePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_Transitive_4OctetAsTypePath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "transitive_4octet_as_type"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type/transitive_4octet_as_type"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_Transitive_4OctetAsTypePath) State() ygnmi.SingletonQuery[oc.E_Structured_Transitive_4OctetAsType] {
+	return ygnmi.NewSingletonQuery[oc.E_Structured_Transitive_4OctetAsType](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"transitive_4octet_as_type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Structured_Transitive_4OctetAsType, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType).Transitive_4OctetAsType
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "transitive_4octet_as_type"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type/transitive_4octet_as_type"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_Transitive_4OctetAsTypePathAny) State() ygnmi.WildcardQuery[oc.E_Structured_Transitive_4OctetAsType] {
+	return ygnmi.NewWildcardQuery[oc.E_Structured_Transitive_4OctetAsType](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"transitive_4octet_as_type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Structured_Transitive_4OctetAsType, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType).Transitive_4OctetAsType
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsTypePath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsTypePath struct {
+	*ygnmi.NodePath
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsTypePathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsTypePathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsTypePath) PathOriginName() string {
+	return "openconfig"
+}
+
+// RouteOriginSubtype (container): The Route Origin Community identifies one or more routers that inject a set of routes (that carry this Community)
+// into BGP. It is sent with sub-type as 0x03.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "route_origin_subtype"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type/route_origin_subtype"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsTypePath) RouteOriginSubtype() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtypePath {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtypePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"route_origin_subtype"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// RouteOriginSubtype (container): The Route Origin Community identifies one or more routers that inject a set of routes (that carry this Community)
+// into BGP. It is sent with sub-type as 0x03.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "route_origin_subtype"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type/route_origin_subtype"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsTypePathAny) RouteOriginSubtype() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtypePathAny {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtypePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"route_origin_subtype"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// RouteTargetSubtype (container): The Route Target Community identifies one or more routers that may receive a set of routes (that carry this Community)
+// carried by BGP. It is sent with sub-type as 0x02.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "route_target_subtype"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type/route_target_subtype"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsTypePath) RouteTargetSubtype() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtypePath {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtypePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"route_target_subtype"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// RouteTargetSubtype (container): The Route Target Community identifies one or more routers that may receive a set of routes (that carry this Community)
+// carried by BGP. It is sent with sub-type as 0x02.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "route_target_subtype"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type/route_target_subtype"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsTypePathAny) RouteTargetSubtype() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtypePathAny {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtypePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"route_target_subtype"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// Transitive_4OctetAsType (leaf): The type of Transitive Four-Octet AS-Specific Extended Community
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "transitive_4octet_as_type"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type/transitive_4octet_as_type"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsTypePath) Transitive_4OctetAsType() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_Transitive_4OctetAsTypePath {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_Transitive_4OctetAsTypePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"transitive_4octet_as_type"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Transitive_4OctetAsType (leaf): The type of Transitive Four-Octet AS-Specific Extended Community
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "transitive_4octet_as_type"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type/transitive_4octet_as_type"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsTypePathAny) Transitive_4OctetAsType() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_Transitive_4OctetAsTypePathAny {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_Transitive_4OctetAsTypePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"transitive_4octet_as_type"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsTypePath) State() ygnmi.SingletonQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType] {
+	return ygnmi.NewSingletonQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsTypePathAny) State() ygnmi.WildcardQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType] {
+	return ygnmi.NewWildcardQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype_Global_4ByteAsPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type/route_origin_subtype/global_4byte_as YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype_Global_4ByteAsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype_Global_4ByteAsPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type/route_origin_subtype/global_4byte_as YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype_Global_4ByteAsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype_Global_4ByteAsPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "global_4byte_as"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type/route_origin_subtype/global_4byte_as"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype_Global_4ByteAsPath) State() ygnmi.SingletonQuery[uint32] {
+	return ygnmi.NewSingletonQuery[uint32](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"global_4byte_as"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype).Global_4ByteAs
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "global_4byte_as"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type/route_origin_subtype/global_4byte_as"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype_Global_4ByteAsPathAny) State() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewWildcardQuery[uint32](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"global_4byte_as"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype).Global_4ByteAs
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype_Local_2ByteAdminPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type/route_origin_subtype/local_2byte_admin YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype_Local_2ByteAdminPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype_Local_2ByteAdminPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type/route_origin_subtype/local_2byte_admin YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype_Local_2ByteAdminPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype_Local_2ByteAdminPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "local_2byte_admin"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type/route_origin_subtype/local_2byte_admin"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype_Local_2ByteAdminPath) State() ygnmi.SingletonQuery[uint16] {
+	return ygnmi.NewSingletonQuery[uint16](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"local_2byte_admin"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype).Local_2ByteAdmin
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "local_2byte_admin"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type/route_origin_subtype/local_2byte_admin"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype_Local_2ByteAdminPathAny) State() ygnmi.WildcardQuery[uint16] {
+	return ygnmi.NewWildcardQuery[uint16](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"local_2byte_admin"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype).Local_2ByteAdmin
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtypePath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type/route_origin_subtype YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtypePath struct {
+	*ygnmi.NodePath
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtypePathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type/route_origin_subtype YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtypePathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtypePath) PathOriginName() string {
+	return "openconfig"
+}
+
+// Global_4ByteAs (leaf): The four octet IANA assigned AS value assigned to the Autonomous System.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "global_4byte_as"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type/route_origin_subtype/global_4byte_as"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtypePath) Global_4ByteAs() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype_Global_4ByteAsPath {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype_Global_4ByteAsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"global_4byte_as"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Global_4ByteAs (leaf): The four octet IANA assigned AS value assigned to the Autonomous System.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "global_4byte_as"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type/route_origin_subtype/global_4byte_as"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtypePathAny) Global_4ByteAs() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype_Global_4ByteAsPathAny {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype_Global_4ByteAsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"global_4byte_as"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Local_2ByteAdmin (leaf): The Local Administrator sub-field contains a number from a numbering space that is
+// administered by the organization to which the Autonomous System number carried in the
+// Global Administrator sub-field has been assigned by an appropriate authority.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "local_2byte_admin"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type/route_origin_subtype/local_2byte_admin"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtypePath) Local_2ByteAdmin() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype_Local_2ByteAdminPath {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype_Local_2ByteAdminPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"local_2byte_admin"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Local_2ByteAdmin (leaf): The Local Administrator sub-field contains a number from a numbering space that is
+// administered by the organization to which the Autonomous System number carried in the
+// Global Administrator sub-field has been assigned by an appropriate authority.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "local_2byte_admin"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type/route_origin_subtype/local_2byte_admin"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtypePathAny) Local_2ByteAdmin() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype_Local_2ByteAdminPathAny {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype_Local_2ByteAdminPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"local_2byte_admin"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtypePath) State() ygnmi.SingletonQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype] {
+	return ygnmi.NewSingletonQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtypePathAny) State() ygnmi.WildcardQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype] {
+	return ygnmi.NewWildcardQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteOriginSubtype",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype_Global_4ByteAsPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type/route_target_subtype/global_4byte_as YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype_Global_4ByteAsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype_Global_4ByteAsPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type/route_target_subtype/global_4byte_as YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype_Global_4ByteAsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype_Global_4ByteAsPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "global_4byte_as"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type/route_target_subtype/global_4byte_as"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype_Global_4ByteAsPath) State() ygnmi.SingletonQuery[uint32] {
+	return ygnmi.NewSingletonQuery[uint32](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"global_4byte_as"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype).Global_4ByteAs
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "global_4byte_as"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type/route_target_subtype/global_4byte_as"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype_Global_4ByteAsPathAny) State() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewWildcardQuery[uint32](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"global_4byte_as"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype).Global_4ByteAs
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype_Local_2ByteAdminPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type/route_target_subtype/local_2byte_admin YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype_Local_2ByteAdminPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype_Local_2ByteAdminPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type/route_target_subtype/local_2byte_admin YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype_Local_2ByteAdminPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype_Local_2ByteAdminPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "local_2byte_admin"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type/route_target_subtype/local_2byte_admin"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype_Local_2ByteAdminPath) State() ygnmi.SingletonQuery[uint16] {
+	return ygnmi.NewSingletonQuery[uint16](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"local_2byte_admin"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype).Local_2ByteAdmin
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "local_2byte_admin"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type/route_target_subtype/local_2byte_admin"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype_Local_2ByteAdminPathAny) State() ygnmi.WildcardQuery[uint16] {
+	return ygnmi.NewWildcardQuery[uint16](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"local_2byte_admin"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype).Local_2ByteAdmin
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtypePath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type/route_target_subtype YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtypePath struct {
+	*ygnmi.NodePath
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtypePathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type/route_target_subtype YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtypePathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtypePath) PathOriginName() string {
+	return "openconfig"
+}
+
+// Global_4ByteAs (leaf): The four octet IANA assigned AS value assigned to the Autonomous System.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "global_4byte_as"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type/route_target_subtype/global_4byte_as"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtypePath) Global_4ByteAs() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype_Global_4ByteAsPath {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype_Global_4ByteAsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"global_4byte_as"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Global_4ByteAs (leaf): The four octet IANA assigned AS value assigned to the Autonomous System.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "global_4byte_as"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type/route_target_subtype/global_4byte_as"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtypePathAny) Global_4ByteAs() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype_Global_4ByteAsPathAny {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype_Global_4ByteAsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"global_4byte_as"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Local_2ByteAdmin (leaf): The Local Administrator sub-field contains a number from a numbering space that is
+// administered by the organization to which the Autonomous System number carried in the
+// Global Administrator sub-field has been assigned by an appropriate authority.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "local_2byte_admin"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type/route_target_subtype/local_2byte_admin"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtypePath) Local_2ByteAdmin() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype_Local_2ByteAdminPath {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype_Local_2ByteAdminPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"local_2byte_admin"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Local_2ByteAdmin (leaf): The Local Administrator sub-field contains a number from a numbering space that is
+// administered by the organization to which the Autonomous System number carried in the
+// Global Administrator sub-field has been assigned by an appropriate authority.
+//
+//	Defining module:      "open-traffic-generator-bgp"
+//	Instantiating module: "open-traffic-generator-bgp"
+//	Path from parent:     "local_2byte_admin"
+//	Path from root:       "/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/extended-community/structured/transitive_4octet_as_type/route_target_subtype/local_2byte_admin"
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtypePathAny) Local_2ByteAdmin() *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype_Local_2ByteAdminPathAny {
+	ps := &BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype_Local_2ByteAdminPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"local_2byte_admin"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtypePath) State() ygnmi.SingletonQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype] {
+	return ygnmi.NewSingletonQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtypePathAny) State() ygnmi.WildcardQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype] {
+	return ygnmi.NewWildcardQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype](
+		"BgpPeer_Ipv6MplsUnicastPrefix_ExtendedCommunity_Structured_Transitive_4OctetAsType_RouteTargetSubtype",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_LabelsPath represents the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/labels YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_LabelsPath struct {
+	*ygnmi.NodePath
+}
+
+// BgpPeer_Ipv6MplsUnicastPrefix_LabelsPathAny represents the wildcard version of the /open-traffic-generator-bgp/bgp-peers/bgp-peer/ipv6-mpls-unicast-prefixes/ipv6-mpls-unicast-prefix/state/labels YANG schema element.
+type BgpPeer_Ipv6MplsUnicastPrefix_LabelsPathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_LabelsPath) PathOriginName() string {
+	return "openconfig"
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_LabelsPath) State() ygnmi.SingletonQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix_Labels] {
+	return ygnmi.NewSingletonQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix_Labels](
+		"BgpPeer_Ipv6MplsUnicastPrefix_Labels",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *BgpPeer_Ipv6MplsUnicastPrefix_LabelsPathAny) State() ygnmi.WildcardQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix_Labels] {
+	return ygnmi.NewWildcardQuery[*oc.BgpPeer_Ipv6MplsUnicastPrefix_Labels](
+		"BgpPeer_Ipv6MplsUnicastPrefix_Labels",
 		true,
 		false,
 		false,

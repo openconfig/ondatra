@@ -25,10 +25,11 @@ import (
 	"golang.org/x/net/context"
 
 	"github.com/openconfig/ondatra/binding/grpcutil/testservice"
-	tgrpcpb "github.com/openconfig/ondatra/binding/grpcutil/testservice/gen"
-	tpb "github.com/openconfig/ondatra/binding/grpcutil/testservice/gen"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/metadata"
+
+	tgrpcpb "github.com/openconfig/ondatra/binding/grpcutil/testservice/gen"
+	tpb "github.com/openconfig/ondatra/binding/grpcutil/testservice/gen"
 )
 
 func TestSanitizeTarget(t *testing.T) {
@@ -38,17 +39,17 @@ func TestSanitizeTarget(t *testing.T) {
 		want   string
 	}{
 		{
-			name:   "valid target",
+			name:   "valid_target",
 			target: "localhost:1234",
 			want:   "localhost_1234",
 		},
 		{
-			name:   "target with special chars",
+			name:   "target_with_special_chars",
 			target: "unix:///tmp/grpc.sock",
 			want:   "unix____tmp_grpc.sock",
 		},
 		{
-			name:   "empty target",
+			name:   "empty_target",
 			target: "",
 			want:   "",
 		},
@@ -84,7 +85,7 @@ func (*testServer) SendStream(stream tgrpcpb.Test_SendStreamServer) error {
 }
 
 func TestInterceptors(t *testing.T) {
-	ctx := context.Background()
+	ctx := t.Context()
 	opts := []grpc.DialOption{
 		grpc.WithChainUnaryInterceptor(UnaryClientInterceptor()),
 		grpc.WithChainStreamInterceptor(StreamClientInterceptor()),
@@ -122,14 +123,14 @@ func TestInterceptors(t *testing.T) {
 	}
 	sort.Strings(logFiles)
 
-	var gotLogs string
+	var gotLogs strings.Builder
 	for _, f := range logFiles {
 		logFile := filepath.Join(logDir, f)
 		data, err := os.ReadFile(logFile)
 		if err != nil {
 			t.Fatalf("Failed to read log file %s: %v", f, err)
 		}
-		gotLogs += string(data)
+		gotLogs.Write(data)
 	}
 
 	wantSubstrings := []string{
@@ -142,9 +143,11 @@ func TestInterceptors(t *testing.T) {
 		`(Stream /testservice.Test/SendStream) RecvMsg success:`,
 		`(Stream /testservice.Test/SendStream) RecvMsg error: EOF`,
 	}
+
+	got := gotLogs.String()
 	for _, want := range wantSubstrings {
-		if !strings.Contains(gotLogs, want) {
-			t.Errorf("Log files %v do not contain expected substring %q; combined content:\n%s", logFiles, want, gotLogs)
+		if !strings.Contains(got, want) {
+			t.Errorf("Log files %v got:\n%s\nwant to contain substring %q", logFiles, got, want)
 		}
 	}
 }

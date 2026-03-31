@@ -41,12 +41,21 @@ import (
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 )
 
-var sigc = make(chan os.Signal, 1)
+var (
+	sigc = make(chan os.Signal, 1)
+)
 
 // RunTests acquires the testbed of devices and runs the tests. Every device is
 // initialized with a baseline configuration that allows it to be managed.
 func RunTests(m *testing.M, newBindFn func() (binding.Binding, error)) {
 	// Careful to only exit at the very end, because exiting skips all pending defers.
+	if err := ExecuteTests(m, newBindFn); err != nil {
+		log.Exit()
+	}
+}
+
+// ExecuteTests is like RunTests but returns an error instead of calling os.Exit.
+func ExecuteTests(m *testing.M, newBindFn func() (binding.Binding, error)) error {
 	if err := runTests(m.Run, newBindFn); err != nil {
 		// If runTests returns an error, no test cases will be executed and the XML
 		// result file will be empty. To avoid user confusion over empty XML
@@ -57,8 +66,9 @@ func RunTests(m *testing.M, newBindFn func() (binding.Binding, error)) {
 		fmt.Println("=== RUN   TestMain")
 		fmt.Printf("    %v\n", err)
 		fmt.Println("--- FAIL: TestMain (0.00s)")
-		log.Exit()
+		return err
 	}
+	return nil
 }
 
 func runTests(runFn func() int, newBindFn func() (binding.Binding, error)) (rerr error) {
@@ -83,6 +93,7 @@ func runTests(runFn func() int, newBindFn func() (binding.Binding, error)) (rerr
 	if err := testbed.Reserve(ctx, flagVals); err != nil {
 		return err
 	}
+
 	go releaseOnSignal(ctx)
 	defer closer.Close(&rerr, func() error {
 		return testbed.Release(ctx)
@@ -113,12 +124,13 @@ func runTests(runFn func() int, newBindFn func() (binding.Binding, error)) (rerr
 	return nil
 }
 
+// releaseOnSignal releases the testbed when a signal is received.
 func releaseOnSignal(ctx context.Context) {
 	signal.Notify(sigc, unix.SIGINT, unix.SIGTERM)
 	s := <-sigc
-	log.Infof("Caught signal %s, releasing testbed", s)
+	log.InfoContextf(ctx, "Caught signal %s, releasing testbed", s)
 	if err := testbed.Release(ctx); err != nil {
-		log.Errorf("Error releasing testbed: %v", err)
+		log.ErrorContextf(ctx, "Error releasing testbed: %v", err)
 	}
 }
 
@@ -212,4 +224,10 @@ func newATE(id string, res binding.ATE) *ATEDevice {
 func ReservationID(t testing.TB) string {
 	t.Helper()
 	return checkRes(t).ID
+}
+
+// SkipReservationRelease prevents the reservation from being released.
+func SkipReservationRelease(t testing.TB) {
+	t.Helper()
+	testbed.SkipReservationRelease()
 }
