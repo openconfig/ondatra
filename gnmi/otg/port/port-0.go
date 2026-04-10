@@ -597,6 +597,105 @@ func (n *Port_OutRatePathAny) State() ygnmi.WildcardQuery[float32] {
 	)
 }
 
+// Port_SpeedPath represents the /open-traffic-generator-port/ports/port/state/speed YANG schema element.
+type Port_SpeedPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Port_SpeedPathAny represents the wildcard version of the /open-traffic-generator-port/ports/port/state/speed YANG schema element.
+type Port_SpeedPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Port_SpeedPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-port"
+//	Instantiating module: "open-traffic-generator-port"
+//	Path from parent:     "state/speed"
+//	Path from root:       "/ports/port/state/speed"
+func (n *Port_SpeedPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Port",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "speed"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Port).Speed
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Port) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "open-traffic-generator-port"
+//	Instantiating module: "open-traffic-generator-port"
+//	Path from parent:     "state/speed"
+//	Path from root:       "/ports/port/state/speed"
+func (n *Port_SpeedPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Port",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "speed"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Port).Speed
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Port) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
 // PortPath represents the /open-traffic-generator-port/ports/port YANG schema element.
 type PortPath struct {
 	*ygnmi.NodePath
@@ -881,6 +980,50 @@ func (n *PortPathAny) OutRate() *Port_OutRatePathAny {
 	ps := &Port_OutRatePathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"state", "out-rate"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Speed (leaf): The speed in KBps the frames are transmitted.
+// The calculated speed for a negotiated line speed of
+// (i) 100 Gbps is 100 * 1024 * 1024 / 8 = 13107200 KBps,
+// (ii) 1.6 Tbps (high performance devices) is 1.6 * 1024 * 1024 * 1024 / 8 = 214748365 KBps,
+// (iii) 10 Mbps (legacy devices) is 10 * 1024 / 8 = 1280 KBps
+//
+//	Defining module:      "open-traffic-generator-port"
+//	Instantiating module: "open-traffic-generator-port"
+//	Path from parent:     "state/speed"
+//	Path from root:       "/ports/port/state/speed"
+func (n *PortPath) Speed() *Port_SpeedPath {
+	ps := &Port_SpeedPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "speed"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Speed (leaf): The speed in KBps the frames are transmitted.
+// The calculated speed for a negotiated line speed of
+// (i) 100 Gbps is 100 * 1024 * 1024 / 8 = 13107200 KBps,
+// (ii) 1.6 Tbps (high performance devices) is 1.6 * 1024 * 1024 * 1024 / 8 = 214748365 KBps,
+// (iii) 10 Mbps (legacy devices) is 10 * 1024 / 8 = 1280 KBps
+//
+//	Defining module:      "open-traffic-generator-port"
+//	Instantiating module: "open-traffic-generator-port"
+//	Path from parent:     "state/speed"
+//	Path from root:       "/ports/port/state/speed"
+func (n *PortPathAny) Speed() *Port_SpeedPathAny {
+	ps := &Port_SpeedPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "speed"},
 			map[string]interface{}{},
 			n,
 		),

@@ -108,10 +108,10 @@ func runTests(runFn func() int, newBindFn func() (binding.Binding, error)) (rerr
 		return err
 	}
 	if flagVals.RunTime > 0 {
-		go func() {
-			time.Sleep(flagVals.RunTime)
+		timer := time.AfterFunc(flagVals.RunTime, func() {
 			log.Exitf("Ondatra test timed out after %v", flagVals.RunTime)
-		}()
+		})
+		defer timer.Stop()
 	}
 	code := runFn()
 	exitCode = &code

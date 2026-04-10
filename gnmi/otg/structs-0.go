@@ -43212,6 +43212,7 @@ type Port struct {
 	Link          E_Port_Link         `path:"state/link" module:"open-traffic-generator-port/open-traffic-generator-port"`
 	Name          *string             `path:"state/name|name" module:"open-traffic-generator-port/open-traffic-generator-port|open-traffic-generator-port" shadow-path:"name" shadow-module:"open-traffic-generator-port"`
 	OutRate       Binary              `path:"state/out-rate" module:"open-traffic-generator-port/open-traffic-generator-port"`
+	Speed         *uint64             `path:"state/speed" module:"open-traffic-generator-port/open-traffic-generator-port"`
 }
 
 // IsYANGGoStruct ensures that Port implements the yang.GoStruct
@@ -43339,6 +43340,22 @@ func (t *Port) GetOutRate() Binary {
 	return t.OutRate
 }
 
+// GetSpeed retrieves the value of the leaf Speed from the Port
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Speed is set, it can
+// safely use t.GetSpeed() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Speed == nil' before retrieving the leaf's value.
+func (t *Port) GetSpeed() uint64 {
+	if t == nil || t.Speed == nil {
+		return 0
+	}
+	return *t.Speed
+}
+
 // SetInRate sets the value of the leaf InRate in the Port
 // struct.
 func (t *Port) SetInRate(v Binary) {
@@ -43367,6 +43384,12 @@ func (t *Port) SetName(v string) {
 // struct.
 func (t *Port) SetOutRate(v Binary) {
 	t.OutRate = v
+}
+
+// SetSpeed sets the value of the leaf Speed in the Port
+// struct.
+func (t *Port) SetSpeed(v uint64) {
+	t.Speed = &v
 }
 
 // PopulateDefaults recursively populates unset leaf fields in the Port
