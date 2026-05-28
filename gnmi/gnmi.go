@@ -519,6 +519,11 @@ func (sb *SetBatch) Set(t testing.TB, dev DeviceOrOpts) *ygnmi.Result {
 	return res
 }
 
+// String returns a string representation of the queued operations in the SetBatch.
+func (sb *SetBatch) String() string {
+	return sb.sb.String()
+}
+
 // BatchUpdate stores an update operation in the SetBatch.
 func BatchUpdate[T any](sb *SetBatch, q ygnmi.ConfigQuery[T], val T) {
 	ygnmi.BatchUpdate(&sb.sb, q, val)

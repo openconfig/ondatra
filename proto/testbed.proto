@@ -146,7 +146,7 @@ message Port {
     PMD_100GBASE_DR = 29;
     PMD_100GBASE_CGR4 = 30;
     PMD_400GBASE_ZR_PLUS = 31;
-    PMD_800GBASE_ZR  = 32;
+    PMD_800GBASE_ZR = 32;
     PMD_800GBASE_ZR_PLUS = 33;
   }
   oneof pmd_value {
@@ -159,6 +159,16 @@ message Port {
   // hint is necessary to create a LAG, because a LAG requires additional
   // topological constraints that can't otherwise be expressed in the testbed.
   string group = 6;
+
+  // Role of the port, specifying whether a port is used for data, or management
+  // (in-band or out-of-band).
+  enum PortRole {
+    PORT_ROLE_UNSPECIFIED = 0;
+    DATA_INBAND = 1;
+    MGMT_INBAND = 2;
+    MGMT_OOB = 3;
+  }
+  optional PortRole role = 7;
 }
 
 // A physical link between ports on DUTs or ATEs.
