@@ -60,8 +60,12 @@ using the following YANG input files:
   - public/release/models/oam/openconfig-oam-cfm.yang
   - public/release/models/oam/openconfig-oam.yang
   - public/release/models/openconfig-extensions.yang
+  - public/release/models/optical-transport/openconfig-channel-monitor.yang
+  - public/release/models/optical-transport/openconfig-optical-amplifier.yang
+  - public/release/models/optical-transport/openconfig-optical-attenuator.yang
   - public/release/models/optical-transport/openconfig-terminal-device.yang
   - public/release/models/optical-transport/openconfig-transport-types.yang
+  - public/release/models/optical-transport/openconfig-wavelength-router.yang
   - public/release/models/ospf/openconfig-ospf-area-interface.yang
   - public/release/models/ospf/openconfig-ospf-area.yang
   - public/release/models/ospf/openconfig-ospf-common.yang
@@ -78,6 +82,8 @@ using the following YANG input files:
   - public/release/models/platform/openconfig-platform-ext.yang
   - public/release/models/platform/openconfig-platform-fabric.yang
   - public/release/models/platform/openconfig-platform-fan.yang
+  - public/release/models/platform/openconfig-platform-healthz.yang
+  - public/release/models/platform/openconfig-platform-healthz-fault.yang
   - public/release/models/platform/openconfig-platform-integrated-circuit.yang
   - public/release/models/platform/openconfig-platform-linecard.yang
   - public/release/models/platform/openconfig-platform-pipeline-counters.yang
@@ -411,10 +417,22 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		1: {Name: "FLOOD"},
 		2: {Name: "DOWN"},
 	},
+	"E_Channel_AseInjectionMode": {
+		1: {Name: "MODE_THRESHOLD"},
+		2: {Name: "MODE_DELTA"},
+	},
+	"E_Channel_AseStatus": {
+		1: {Name: "PRESENT"},
+		2: {Name: "NOT_PRESENT"},
+	},
 	"E_Channel_LinkState": {
 		1: {Name: "UP"},
 		2: {Name: "DOWN"},
 		3: {Name: "TESTING"},
+	},
+	"E_Channel_OperStatus": {
+		1: {Name: "UP"},
+		2: {Name: "DOWN"},
 	},
 	"E_Cpu_Index": {
 		1: {Name: "ALL"},
@@ -537,6 +555,11 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		3: {Name: "MINOR"},
 		4: {Name: "INFORMATIONAL"},
 	},
+	"E_Fault_Status": {
+		1: {Name: "UNSPECIFIED"},
+		2: {Name: "ACTIVE"},
+		3: {Name: "INACTIVE"},
+	},
 	"E_Flags_Flags": {
 		1: {Name: "EXTERNAL_FLAG"},
 		2: {Name: "READVERTISEMENT_FLAG"},
@@ -632,6 +655,11 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		2: {Name: "PASSIVE"},
 		3: {Name: "DEGRADED"},
 		4: {Name: "SUSPENDED"},
+	},
+	"E_Healthz_Status": {
+		1: {Name: "UNSPECIFIED"},
+		2: {Name: "HEALTHY"},
+		3: {Name: "UNHEALTHY"},
 	},
 	"E_IETFInterfaces_InterfaceType": {
 		1:   {Name: "a12MppSwitch", DefiningModule: "iana-if-type"},
@@ -1855,6 +1883,35 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		2: {Name: "AREA"},
 		3: {Name: "AS"},
 	},
+	"E_OpticalAmplifier_FIBER_TYPE_PROFILE": {
+		1: {Name: "DSF", DefiningModule: "openconfig-optical-amplifier"},
+		2: {Name: "LEAF", DefiningModule: "openconfig-optical-amplifier"},
+		3: {Name: "SSMF", DefiningModule: "openconfig-optical-amplifier"},
+		4: {Name: "TWC", DefiningModule: "openconfig-optical-amplifier"},
+		5: {Name: "TWRS", DefiningModule: "openconfig-optical-amplifier"},
+	},
+	"E_OpticalAmplifier_GAIN_RANGE": {
+		1: {Name: "FIXED_GAIN_RANGE", DefiningModule: "openconfig-optical-amplifier"},
+		2: {Name: "HIGH_GAIN_RANGE", DefiningModule: "openconfig-optical-amplifier"},
+		3: {Name: "LOW_GAIN_RANGE", DefiningModule: "openconfig-optical-amplifier"},
+		4: {Name: "MID_GAIN_RANGE", DefiningModule: "openconfig-optical-amplifier"},
+	},
+	"E_OpticalAmplifier_OPTICAL_AMPLIFIER_MODE": {
+		1: {Name: "CONSTANT_GAIN", DefiningModule: "openconfig-optical-amplifier"},
+		2: {Name: "CONSTANT_POWER", DefiningModule: "openconfig-optical-amplifier"},
+		3: {Name: "DYNAMIC_GAIN", DefiningModule: "openconfig-optical-amplifier"},
+	},
+	"E_OpticalAmplifier_OPTICAL_AMPLIFIER_TYPE": {
+		1: {Name: "BACKWARD_RAMAN", DefiningModule: "openconfig-optical-amplifier"},
+		2: {Name: "EDFA", DefiningModule: "openconfig-optical-amplifier"},
+		3: {Name: "FORWARD_RAMAN", DefiningModule: "openconfig-optical-amplifier"},
+		4: {Name: "HYBRID", DefiningModule: "openconfig-optical-amplifier"},
+	},
+	"E_OpticalAttenuator_OPTICAL_ATTENUATOR_MODE": {
+		1: {Name: "CONSTANT_ATTENUATION", DefiningModule: "openconfig-optical-attenuator"},
+		2: {Name: "CONSTANT_POWER", DefiningModule: "openconfig-optical-attenuator"},
+		3: {Name: "SYSTEM_CONTROLLED", DefiningModule: "openconfig-optical-attenuator"},
+	},
 	"E_OspfTypes_GRACE_LSA_TLV_TYPES": {
 		1: {Name: "GRACE_IP_INTERFACE_ADDRESS", DefiningModule: "openconfig-ospf-types"},
 		2: {Name: "GRACE_PERIOD", DefiningModule: "openconfig-ospf-types"},
@@ -2032,6 +2089,22 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		1: {Name: "PIM_MODE_BIDIR", DefiningModule: "openconfig-pim-types"},
 		2: {Name: "PIM_MODE_DENSE", DefiningModule: "openconfig-pim-types"},
 		3: {Name: "PIM_MODE_SPARSE", DefiningModule: "openconfig-pim-types"},
+	},
+	"E_PlatformHealthzFault_ACTION_BASE": {
+		1: {Name: "ACTION_COLD_REBOOT", DefiningModule: "openconfig-platform-healthz-fault"},
+		2: {Name: "ACTION_FACTORY_RESET", DefiningModule: "openconfig-platform-healthz-fault"},
+		3: {Name: "ACTION_POWER_CYCLE", DefiningModule: "openconfig-platform-healthz-fault"},
+		4: {Name: "ACTION_REPLACE", DefiningModule: "openconfig-platform-healthz-fault"},
+		5: {Name: "ACTION_RESEAT", DefiningModule: "openconfig-platform-healthz-fault"},
+		6: {Name: "ACTION_WARM_REBOOT", DefiningModule: "openconfig-platform-healthz-fault"},
+	},
+	"E_PlatformHealthzFault_SYMPTOM_BASE": {
+		1: {Name: "SYMPTOM_COMM_ERROR", DefiningModule: "openconfig-platform-healthz-fault"},
+		2: {Name: "SYMPTOM_MEMORY_ERRORS", DefiningModule: "openconfig-platform-healthz-fault"},
+		3: {Name: "SYMPTOM_MISSING_COMPONENT", DefiningModule: "openconfig-platform-healthz-fault"},
+		4: {Name: "SYMPTOM_OVER_THRESHOLD", DefiningModule: "openconfig-platform-healthz-fault"},
+		5: {Name: "SYMPTOM_UNDER_THRESHOLD", DefiningModule: "openconfig-platform-healthz-fault"},
+		6: {Name: "SYMPTOM_UNKNOWN", DefiningModule: "openconfig-platform-healthz-fault"},
 	},
 	"E_PlatformSoftware_SOFTWARE_MODULE_TYPE": {
 		1: {Name: "USERSPACE_PACKAGE", DefiningModule: "openconfig-platform-software"},
@@ -2532,6 +2605,11 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		8: {Name: "ENTROPY_LABEL_INDICATOR"},
 		9: {Name: "NO_LABEL"},
 	},
+	"E_TransportLineCommon_AdminStateType": {
+		1: {Name: "ENABLED"},
+		2: {Name: "DISABLED"},
+		3: {Name: "MAINT"},
+	},
 	"E_TransportTypes_CLIENT_MAPPING_MODE": {
 		1: {Name: "MODE_1X100G", DefiningModule: "openconfig-transport-types"},
 		2: {Name: "MODE_1X200G", DefiningModule: "openconfig-transport-types"},
@@ -2598,6 +2676,15 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 	"E_TransportTypes_LOGICAL_ELEMENT_PROTOCOL_TYPE": {
 		1: {Name: "PROT_ETHERNET", DefiningModule: "openconfig-transport-types"},
 		2: {Name: "PROT_OTN", DefiningModule: "openconfig-transport-types"},
+	},
+	"E_TransportTypes_OPTICAL_PORT_TYPE": {
+		1: {Name: "ADD", DefiningModule: "openconfig-transport-types"},
+		2: {Name: "DROP", DefiningModule: "openconfig-transport-types"},
+		3: {Name: "EGRESS", DefiningModule: "openconfig-transport-types"},
+		4: {Name: "INGRESS", DefiningModule: "openconfig-transport-types"},
+		5: {Name: "MONITOR", DefiningModule: "openconfig-transport-types"},
+		6: {Name: "TERMINAL_CLIENT", DefiningModule: "openconfig-transport-types"},
+		7: {Name: "TERMINAL_LINE", DefiningModule: "openconfig-transport-types"},
 	},
 	"E_TransportTypes_OTN_APPLICATION_CODE": {
 		1: {Name: "OTN_UNDEFINED", DefiningModule: "openconfig-transport-types"},
@@ -2793,6 +2880,26 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		2: {Name: "POP"},
 		3: {Name: "SWAP"},
 	},
+	"E_WavelengthRouter_ASE_CONTROL_MODE": {
+		1: {Name: "ASE_DISABLED", DefiningModule: "openconfig-wavelength-router"},
+		2: {Name: "ASE_ENABLED", DefiningModule: "openconfig-wavelength-router"},
+		3: {Name: "AUTO_ASE_FAILURE_AND_RESTORE", DefiningModule: "openconfig-wavelength-router"},
+		4: {Name: "AUTO_ASE_ON_FAILURE", DefiningModule: "openconfig-wavelength-router"},
+	},
+	"E_WavelengthRouter_ATTENUATION_CONTROL_MODE": {
+		1: {Name: "ATTENUATION_DYNAMIC_LOSS", DefiningModule: "openconfig-wavelength-router"},
+		2: {Name: "ATTENUATION_DYNAMIC_LOSS_DAMPED", DefiningModule: "openconfig-wavelength-router"},
+		3: {Name: "ATTENUATION_FIXED_LOSS", DefiningModule: "openconfig-wavelength-router"},
+	},
+	"E_WavelengthRouter_ATTENUATION_CONTROL_RANGE": {
+		1: {Name: "CONTROL_RANGE_FULL", DefiningModule: "openconfig-wavelength-router"},
+		2: {Name: "CONTROL_RANGE_LIMITED", DefiningModule: "openconfig-wavelength-router"},
+	},
+	"E_WavelengthRouter_AdminStateType": {
+		1: {Name: "ENABLED"},
+		2: {Name: "DISABLED"},
+		3: {Name: "MAINT"},
+	},
 	"E_WeightedEcmp_LoadBalancingWeight": {
 		1: {Name: "auto"},
 		2: {Name: "none"},
@@ -2948,6 +3055,18 @@ func initΛEnumTypes() {
 		"/components/component/fan/thresholds/threshold/state/severity": {
 			reflect.TypeOf((E_AlarmTypes_OPENCONFIG_ALARM_SEVERITY)(0)),
 		},
+		"/components/component/healthz/faults/fault/remediations/remediation/state/action": {
+			reflect.TypeOf((E_PlatformHealthzFault_ACTION_BASE)(0)),
+		},
+		"/components/component/healthz/faults/fault/state/status": {
+			reflect.TypeOf((E_Fault_Status)(0)),
+		},
+		"/components/component/healthz/faults/fault/state/symptom": {
+			reflect.TypeOf((E_PlatformHealthzFault_SYMPTOM_BASE)(0)),
+		},
+		"/components/component/healthz/state/status": {
+			reflect.TypeOf((E_Healthz_Status)(0)),
+		},
 		"/components/component/integrated-circuit/pipeline-counters/errors/fabric-block/fabric-block-error/state/action": {
 			reflect.TypeOf((E_FabricBlockError_Action)(0)),
 		},
@@ -2989,6 +3108,15 @@ func initΛEnumTypes() {
 		},
 		"/components/component/port/breakout-mode/groups/group/state/breakout-speed": {
 			reflect.TypeOf((E_IfEthernet_ETHERNET_SPEED)(0)),
+		},
+		"/components/component/port/optical-port/config/admin-state": {
+			reflect.TypeOf((E_TransportLineCommon_AdminStateType)(0)),
+		},
+		"/components/component/port/optical-port/state/admin-state": {
+			reflect.TypeOf((E_TransportLineCommon_AdminStateType)(0)),
+		},
+		"/components/component/port/optical-port/state/optical-port-type": {
+			reflect.TypeOf((E_TransportTypes_OPTICAL_PORT_TYPE)(0)),
 		},
 		"/components/component/software-module/state/module-type": {
 			reflect.TypeOf((E_PlatformSoftware_SOFTWARE_MODULE_TYPE)(0)),
@@ -5122,6 +5250,36 @@ func initΛEnumTypes() {
 		"/oam/cfm/performance-measurement-profiles-global/performance-measurement-profile/state/protocol-type": {
 			reflect.TypeOf((E_PmProfile_ProtocolType)(0)),
 		},
+		"/optical-amplifier/amplifiers/amplifier/config/amp-mode": {
+			reflect.TypeOf((E_OpticalAmplifier_OPTICAL_AMPLIFIER_MODE)(0)),
+		},
+		"/optical-amplifier/amplifiers/amplifier/config/fiber-type-profile": {
+			reflect.TypeOf((E_OpticalAmplifier_FIBER_TYPE_PROFILE)(0)),
+		},
+		"/optical-amplifier/amplifiers/amplifier/config/gain-range": {
+			reflect.TypeOf((E_OpticalAmplifier_GAIN_RANGE)(0)),
+		},
+		"/optical-amplifier/amplifiers/amplifier/config/type": {
+			reflect.TypeOf((E_OpticalAmplifier_OPTICAL_AMPLIFIER_TYPE)(0)),
+		},
+		"/optical-amplifier/amplifiers/amplifier/state/amp-mode": {
+			reflect.TypeOf((E_OpticalAmplifier_OPTICAL_AMPLIFIER_MODE)(0)),
+		},
+		"/optical-amplifier/amplifiers/amplifier/state/fiber-type-profile": {
+			reflect.TypeOf((E_OpticalAmplifier_FIBER_TYPE_PROFILE)(0)),
+		},
+		"/optical-amplifier/amplifiers/amplifier/state/gain-range": {
+			reflect.TypeOf((E_OpticalAmplifier_GAIN_RANGE)(0)),
+		},
+		"/optical-amplifier/amplifiers/amplifier/state/type": {
+			reflect.TypeOf((E_OpticalAmplifier_OPTICAL_AMPLIFIER_TYPE)(0)),
+		},
+		"/optical-attenuator/attenuators/attenuator/config/attenuation-mode": {
+			reflect.TypeOf((E_OpticalAttenuator_OPTICAL_ATTENUATOR_MODE)(0)),
+		},
+		"/optical-attenuator/attenuators/attenuator/state/attenuation-mode": {
+			reflect.TypeOf((E_OpticalAttenuator_OPTICAL_ATTENUATOR_MODE)(0)),
+		},
 		"/qos/buffer-allocation-profiles/buffer-allocation-profile/queues/queue/config/shared-buffer-limit-type": {
 			reflect.TypeOf((E_Qos_SHARED_BUFFER_LIMIT_TYPE)(0)),
 		},
@@ -5714,6 +5872,42 @@ func initΛEnumTypes() {
 		},
 		"/terminal-device/logical-channels/channel/state/trib-protocol": {
 			reflect.TypeOf((E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE)(0)),
+		},
+		"/wavelength-router/media-channels/channel/config/admin-status": {
+			reflect.TypeOf((E_WavelengthRouter_AdminStateType)(0)),
+		},
+		"/wavelength-router/media-channels/channel/config/ase-control-mode": {
+			reflect.TypeOf((E_WavelengthRouter_ASE_CONTROL_MODE)(0)),
+		},
+		"/wavelength-router/media-channels/channel/config/ase-injection-mode": {
+			reflect.TypeOf((E_Channel_AseInjectionMode)(0)),
+		},
+		"/wavelength-router/media-channels/channel/config/attenuation-control-mode": {
+			reflect.TypeOf((E_WavelengthRouter_ATTENUATION_CONTROL_MODE)(0)),
+		},
+		"/wavelength-router/media-channels/channel/config/attenuation-control-range": {
+			reflect.TypeOf((E_WavelengthRouter_ATTENUATION_CONTROL_RANGE)(0)),
+		},
+		"/wavelength-router/media-channels/channel/state/admin-status": {
+			reflect.TypeOf((E_WavelengthRouter_AdminStateType)(0)),
+		},
+		"/wavelength-router/media-channels/channel/state/ase-control-mode": {
+			reflect.TypeOf((E_WavelengthRouter_ASE_CONTROL_MODE)(0)),
+		},
+		"/wavelength-router/media-channels/channel/state/ase-injection-mode": {
+			reflect.TypeOf((E_Channel_AseInjectionMode)(0)),
+		},
+		"/wavelength-router/media-channels/channel/state/ase-status": {
+			reflect.TypeOf((E_Channel_AseStatus)(0)),
+		},
+		"/wavelength-router/media-channels/channel/state/attenuation-control-mode": {
+			reflect.TypeOf((E_WavelengthRouter_ATTENUATION_CONTROL_MODE)(0)),
+		},
+		"/wavelength-router/media-channels/channel/state/attenuation-control-range": {
+			reflect.TypeOf((E_WavelengthRouter_ATTENUATION_CONTROL_RANGE)(0)),
+		},
+		"/wavelength-router/media-channels/channel/state/oper-status": {
+			reflect.TypeOf((E_Channel_OperStatus)(0)),
 		},
 	}
 }

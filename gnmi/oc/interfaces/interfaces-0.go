@@ -58,8 +58,12 @@ using the following YANG input files:
   - public/release/models/oam/openconfig-oam-cfm.yang
   - public/release/models/oam/openconfig-oam.yang
   - public/release/models/openconfig-extensions.yang
+  - public/release/models/optical-transport/openconfig-channel-monitor.yang
+  - public/release/models/optical-transport/openconfig-optical-amplifier.yang
+  - public/release/models/optical-transport/openconfig-optical-attenuator.yang
   - public/release/models/optical-transport/openconfig-terminal-device.yang
   - public/release/models/optical-transport/openconfig-transport-types.yang
+  - public/release/models/optical-transport/openconfig-wavelength-router.yang
   - public/release/models/ospf/openconfig-ospf-area-interface.yang
   - public/release/models/ospf/openconfig-ospf-area.yang
   - public/release/models/ospf/openconfig-ospf-common.yang
@@ -76,6 +80,8 @@ using the following YANG input files:
   - public/release/models/platform/openconfig-platform-ext.yang
   - public/release/models/platform/openconfig-platform-fabric.yang
   - public/release/models/platform/openconfig-platform-fan.yang
+  - public/release/models/platform/openconfig-platform-healthz.yang
+  - public/release/models/platform/openconfig-platform-healthz-fault.yang
   - public/release/models/platform/openconfig-platform-integrated-circuit.yang
   - public/release/models/platform/openconfig-platform-linecard.yang
   - public/release/models/platform/openconfig-platform-pipeline-counters.yang
@@ -4125,6 +4131,40 @@ func (n *InterfacePathAny) RoutedVlan() *Interface_RoutedVlanPathAny {
 	ps := &Interface_RoutedVlanPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"routed-vlan"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// Sonet (container): Data related to SONET/SDH interfaces
+//
+//	Defining module:      "openconfig-transport-line-common"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "sonet"
+//	Path from root:       "/interfaces/interface/sonet"
+func (n *InterfacePath) Sonet() *Interface_SonetPath {
+	ps := &Interface_SonetPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"sonet"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// Sonet (container): Data related to SONET/SDH interfaces
+//
+//	Defining module:      "openconfig-transport-line-common"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "sonet"
+//	Path from root:       "/interfaces/interface/sonet"
+func (n *InterfacePathAny) Sonet() *Interface_SonetPathAny {
+	ps := &Interface_SonetPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"sonet"},
 			map[string]interface{}{},
 			n,
 		),
@@ -49272,6 +49312,121 @@ func (n *Interface_RoutedVlan_Ipv6_UrpfPath) Config() ygnmi.ConfigQuery[*oc.Inte
 func (n *Interface_RoutedVlan_Ipv6_UrpfPathAny) Config() ygnmi.WildcardQuery[*oc.Interface_RoutedVlan_Ipv6_Urpf] {
 	return ygnmi.NewWildcardQuery[*oc.Interface_RoutedVlan_Ipv6_Urpf](
 		"Interface_RoutedVlan_Ipv6_Urpf",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_SonetPath represents the /openconfig-interfaces/interfaces/interface/sonet YANG schema element.
+type Interface_SonetPath struct {
+	*ygnmi.NodePath
+}
+
+// Interface_SonetPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/sonet YANG schema element.
+type Interface_SonetPathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Interface_SonetPath) PathOriginName() string {
+	return "openconfig"
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Interface_SonetPath) State() ygnmi.SingletonQuery[*oc.Interface_Sonet] {
+	return ygnmi.NewSingletonQuery[*oc.Interface_Sonet](
+		"Interface_Sonet",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Interface_SonetPathAny) State() ygnmi.WildcardQuery[*oc.Interface_Sonet] {
+	return ygnmi.NewWildcardQuery[*oc.Interface_Sonet](
+		"Interface_Sonet",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *Interface_SonetPath) Config() ygnmi.ConfigQuery[*oc.Interface_Sonet] {
+	return ygnmi.NewConfigQuery[*oc.Interface_Sonet](
+		"Interface_Sonet",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *Interface_SonetPathAny) Config() ygnmi.WildcardQuery[*oc.Interface_Sonet] {
+	return ygnmi.NewWildcardQuery[*oc.Interface_Sonet](
+		"Interface_Sonet",
 		false,
 		true,
 		false,

@@ -429,13 +429,13 @@ func frameRate(fr *opb.FrameRate) (*ixconfig.TrafficTrafficItemConfigElementFram
 		}, map[string]any{"rate": fr.GetPercent()}, nil
 	case *opb.FrameRate_Bps:
 		return &ixconfig.TrafficTrafficItemConfigElementFrameRate{
-				Type_:            ixconfig.String("bitsPerSecond"),
-				BitRateUnitsType: ixconfig.String("bitsPerSec"),
-				Rate:             ixconfig.NumberUint64(fr.GetBps()),
-			}, map[string]any{
-				"bitRateUnitsType": "bitsPerSec",
-				"rate":             fr.GetBps(),
-			}, nil
+			Type_:            ixconfig.String("bitsPerSecond"),
+			BitRateUnitsType: ixconfig.String("bitsPerSec"),
+			Rate:             ixconfig.NumberUint64(fr.GetBps()),
+		}, map[string]any{
+			"bitRateUnitsType": "bitsPerSec",
+			"rate":             fr.GetBps(),
+		}, nil
 	case *opb.FrameRate_Fps:
 		return &ixconfig.TrafficTrafficItemConfigElementFrameRate{
 			Type_: ixconfig.String("framesPerSecond"),

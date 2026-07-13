@@ -81,8 +81,12 @@ YANG_FILES=(
   public/release/models/oam/openconfig-oam-cfm.yang
   public/release/models/oam/openconfig-oam.yang
   public/release/models/openconfig-extensions.yang
+  public/release/models/optical-transport/openconfig-channel-monitor.yang
+  public/release/models/optical-transport/openconfig-optical-amplifier.yang
+  public/release/models/optical-transport/openconfig-optical-attenuator.yang
   public/release/models/optical-transport/openconfig-terminal-device.yang
   public/release/models/optical-transport/openconfig-transport-types.yang
+  public/release/models/optical-transport/openconfig-wavelength-router.yang
   public/release/models/ospf/openconfig-ospf-area-interface.yang
   public/release/models/ospf/openconfig-ospf-area.yang
   public/release/models/ospf/openconfig-ospf-common.yang
@@ -99,6 +103,8 @@ YANG_FILES=(
   public/release/models/platform/openconfig-platform-ext.yang
   public/release/models/platform/openconfig-platform-fabric.yang
   public/release/models/platform/openconfig-platform-fan.yang
+  public/release/models/platform/openconfig-platform-healthz.yang
+  public/release/models/platform/openconfig-platform-healthz-fault.yang
   public/release/models/platform/openconfig-platform-integrated-circuit.yang
   public/release/models/platform/openconfig-platform-linecard.yang
   public/release/models/platform/openconfig-platform-pipeline-counters.yang
@@ -149,6 +155,8 @@ OTG_YANG_FILES=(
   models-yang/models/lacp/open-traffic-generator-lacp.yang
   models-yang/models/lag/open-traffic-generator-lag.yang
   models-yang/models/lldp/open-traffic-generator-lldp.yang
+  models-yang/models/macsec/open-traffic-generator-macsec.yang
+  models-yang/models/mka/open-traffic-generator-mka.yang
   models-yang/models/ospfv2/open-traffic-generator-ospfv2.yang
   models-yang/models/ospfv3/open-traffic-generator-ospfv3.yang
   models-yang/models/platform/open-traffic-generator-platform.yang

@@ -60,8 +60,12 @@ using the following YANG input files:
   - public/release/models/oam/openconfig-oam-cfm.yang
   - public/release/models/oam/openconfig-oam.yang
   - public/release/models/openconfig-extensions.yang
+  - public/release/models/optical-transport/openconfig-channel-monitor.yang
+  - public/release/models/optical-transport/openconfig-optical-amplifier.yang
+  - public/release/models/optical-transport/openconfig-optical-attenuator.yang
   - public/release/models/optical-transport/openconfig-terminal-device.yang
   - public/release/models/optical-transport/openconfig-transport-types.yang
+  - public/release/models/optical-transport/openconfig-wavelength-router.yang
   - public/release/models/ospf/openconfig-ospf-area-interface.yang
   - public/release/models/ospf/openconfig-ospf-area.yang
   - public/release/models/ospf/openconfig-ospf-common.yang
@@ -78,6 +82,8 @@ using the following YANG input files:
   - public/release/models/platform/openconfig-platform-ext.yang
   - public/release/models/platform/openconfig-platform-fabric.yang
   - public/release/models/platform/openconfig-platform-fan.yang
+  - public/release/models/platform/openconfig-platform-healthz.yang
+  - public/release/models/platform/openconfig-platform-healthz-fault.yang
   - public/release/models/platform/openconfig-platform-integrated-circuit.yang
   - public/release/models/platform/openconfig-platform-linecard.yang
   - public/release/models/platform/openconfig-platform-pipeline-counters.yang
@@ -1567,6 +1573,64 @@ const (
 	Capability_Flags_DOWN E_Capability_Flags = 2
 )
 
+// E_Channel_AseInjectionMode is a derived int64 type which is used to represent
+// the enumerated node Channel_AseInjectionMode. An additional value named
+// Channel_AseInjectionMode_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_Channel_AseInjectionMode int64
+
+// IsYANGGoEnum ensures that Channel_AseInjectionMode implements the yang.GoEnum
+// interface. This ensures that Channel_AseInjectionMode can be identified as a
+// mapped type for a YANG enumeration.
+func (E_Channel_AseInjectionMode) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  Channel_AseInjectionMode.
+func (E_Channel_AseInjectionMode) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_Channel_AseInjectionMode.
+func (e E_Channel_AseInjectionMode) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_Channel_AseInjectionMode")
+}
+
+const (
+	// Channel_AseInjectionMode_UNSET corresponds to the value UNSET of Channel_AseInjectionMode
+	Channel_AseInjectionMode_UNSET E_Channel_AseInjectionMode = 0
+	// Channel_AseInjectionMode_MODE_THRESHOLD corresponds to the value MODE_THRESHOLD of Channel_AseInjectionMode
+	Channel_AseInjectionMode_MODE_THRESHOLD E_Channel_AseInjectionMode = 1
+	// Channel_AseInjectionMode_MODE_DELTA corresponds to the value MODE_DELTA of Channel_AseInjectionMode
+	Channel_AseInjectionMode_MODE_DELTA E_Channel_AseInjectionMode = 2
+)
+
+// E_Channel_AseStatus is a derived int64 type which is used to represent
+// the enumerated node Channel_AseStatus. An additional value named
+// Channel_AseStatus_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_Channel_AseStatus int64
+
+// IsYANGGoEnum ensures that Channel_AseStatus implements the yang.GoEnum
+// interface. This ensures that Channel_AseStatus can be identified as a
+// mapped type for a YANG enumeration.
+func (E_Channel_AseStatus) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  Channel_AseStatus.
+func (E_Channel_AseStatus) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_Channel_AseStatus.
+func (e E_Channel_AseStatus) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_Channel_AseStatus")
+}
+
+const (
+	// Channel_AseStatus_UNSET corresponds to the value UNSET of Channel_AseStatus
+	Channel_AseStatus_UNSET E_Channel_AseStatus = 0
+	// Channel_AseStatus_PRESENT corresponds to the value PRESENT of Channel_AseStatus
+	Channel_AseStatus_PRESENT E_Channel_AseStatus = 1
+	// Channel_AseStatus_NOT_PRESENT corresponds to the value NOT_PRESENT of Channel_AseStatus
+	Channel_AseStatus_NOT_PRESENT E_Channel_AseStatus = 2
+)
+
 // E_Channel_LinkState is a derived int64 type which is used to represent
 // the enumerated node Channel_LinkState. An additional value named
 // Channel_LinkState_UNSET is added to the enumeration which is used as
@@ -1596,6 +1660,35 @@ const (
 	Channel_LinkState_DOWN E_Channel_LinkState = 2
 	// Channel_LinkState_TESTING corresponds to the value TESTING of Channel_LinkState
 	Channel_LinkState_TESTING E_Channel_LinkState = 3
+)
+
+// E_Channel_OperStatus is a derived int64 type which is used to represent
+// the enumerated node Channel_OperStatus. An additional value named
+// Channel_OperStatus_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_Channel_OperStatus int64
+
+// IsYANGGoEnum ensures that Channel_OperStatus implements the yang.GoEnum
+// interface. This ensures that Channel_OperStatus can be identified as a
+// mapped type for a YANG enumeration.
+func (E_Channel_OperStatus) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  Channel_OperStatus.
+func (E_Channel_OperStatus) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_Channel_OperStatus.
+func (e E_Channel_OperStatus) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_Channel_OperStatus")
+}
+
+const (
+	// Channel_OperStatus_UNSET corresponds to the value UNSET of Channel_OperStatus
+	Channel_OperStatus_UNSET E_Channel_OperStatus = 0
+	// Channel_OperStatus_UP corresponds to the value UP of Channel_OperStatus
+	Channel_OperStatus_UP E_Channel_OperStatus = 1
+	// Channel_OperStatus_DOWN corresponds to the value DOWN of Channel_OperStatus
+	Channel_OperStatus_DOWN E_Channel_OperStatus = 2
 )
 
 // E_Cpu_Index is a derived int64 type which is used to represent
@@ -2350,6 +2443,37 @@ const (
 	FabricBlockError_Level_INFORMATIONAL E_FabricBlockError_Level = 4
 )
 
+// E_Fault_Status is a derived int64 type which is used to represent
+// the enumerated node Fault_Status. An additional value named
+// Fault_Status_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_Fault_Status int64
+
+// IsYANGGoEnum ensures that Fault_Status implements the yang.GoEnum
+// interface. This ensures that Fault_Status can be identified as a
+// mapped type for a YANG enumeration.
+func (E_Fault_Status) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  Fault_Status.
+func (E_Fault_Status) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_Fault_Status.
+func (e E_Fault_Status) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_Fault_Status")
+}
+
+const (
+	// Fault_Status_UNSET corresponds to the value UNSET of Fault_Status
+	Fault_Status_UNSET E_Fault_Status = 0
+	// Fault_Status_UNSPECIFIED corresponds to the value UNSPECIFIED of Fault_Status
+	Fault_Status_UNSPECIFIED E_Fault_Status = 1
+	// Fault_Status_ACTIVE corresponds to the value ACTIVE of Fault_Status
+	Fault_Status_ACTIVE E_Fault_Status = 2
+	// Fault_Status_INACTIVE corresponds to the value INACTIVE of Fault_Status
+	Fault_Status_INACTIVE E_Fault_Status = 3
+)
+
 // E_Flags_Flags is a derived int64 type which is used to represent
 // the enumerated node Flags_Flags. An additional value named
 // Flags_Flags_UNSET is added to the enumeration which is used as
@@ -2880,6 +3004,37 @@ const (
 	HaGroup_HaState_DEGRADED E_HaGroup_HaState = 3
 	// HaGroup_HaState_SUSPENDED corresponds to the value SUSPENDED of HaGroup_HaState
 	HaGroup_HaState_SUSPENDED E_HaGroup_HaState = 4
+)
+
+// E_Healthz_Status is a derived int64 type which is used to represent
+// the enumerated node Healthz_Status. An additional value named
+// Healthz_Status_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_Healthz_Status int64
+
+// IsYANGGoEnum ensures that Healthz_Status implements the yang.GoEnum
+// interface. This ensures that Healthz_Status can be identified as a
+// mapped type for a YANG enumeration.
+func (E_Healthz_Status) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  Healthz_Status.
+func (E_Healthz_Status) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_Healthz_Status.
+func (e E_Healthz_Status) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_Healthz_Status")
+}
+
+const (
+	// Healthz_Status_UNSET corresponds to the value UNSET of Healthz_Status
+	Healthz_Status_UNSET E_Healthz_Status = 0
+	// Healthz_Status_UNSPECIFIED corresponds to the value UNSPECIFIED of Healthz_Status
+	Healthz_Status_UNSPECIFIED E_Healthz_Status = 1
+	// Healthz_Status_HEALTHY corresponds to the value HEALTHY of Healthz_Status
+	Healthz_Status_HEALTHY E_Healthz_Status = 2
+	// Healthz_Status_UNHEALTHY corresponds to the value UNHEALTHY of Healthz_Status
+	Healthz_Status_UNHEALTHY E_Healthz_Status = 3
 )
 
 // E_IETFInterfaces_InterfaceType is a derived int64 type which is used to represent
@@ -7986,6 +8141,177 @@ const (
 	OpaqueLsa_Scope_AS E_OpaqueLsa_Scope = 3
 )
 
+// E_OpticalAmplifier_FIBER_TYPE_PROFILE is a derived int64 type which is used to represent
+// the enumerated node OpticalAmplifier_FIBER_TYPE_PROFILE. An additional value named
+// OpticalAmplifier_FIBER_TYPE_PROFILE_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_OpticalAmplifier_FIBER_TYPE_PROFILE int64
+
+// IsYANGGoEnum ensures that OpticalAmplifier_FIBER_TYPE_PROFILE implements the yang.GoEnum
+// interface. This ensures that OpticalAmplifier_FIBER_TYPE_PROFILE can be identified as a
+// mapped type for a YANG enumeration.
+func (E_OpticalAmplifier_FIBER_TYPE_PROFILE) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  OpticalAmplifier_FIBER_TYPE_PROFILE.
+func (E_OpticalAmplifier_FIBER_TYPE_PROFILE) ΛMap() map[string]map[int64]ygot.EnumDefinition {
+	return ΛEnum
+}
+
+// String returns a logging-friendly string for E_OpticalAmplifier_FIBER_TYPE_PROFILE.
+func (e E_OpticalAmplifier_FIBER_TYPE_PROFILE) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_OpticalAmplifier_FIBER_TYPE_PROFILE")
+}
+
+const (
+	// OpticalAmplifier_FIBER_TYPE_PROFILE_UNSET corresponds to the value UNSET of OpticalAmplifier_FIBER_TYPE_PROFILE
+	OpticalAmplifier_FIBER_TYPE_PROFILE_UNSET E_OpticalAmplifier_FIBER_TYPE_PROFILE = 0
+	// OpticalAmplifier_FIBER_TYPE_PROFILE_DSF corresponds to the value DSF of OpticalAmplifier_FIBER_TYPE_PROFILE
+	OpticalAmplifier_FIBER_TYPE_PROFILE_DSF E_OpticalAmplifier_FIBER_TYPE_PROFILE = 1
+	// OpticalAmplifier_FIBER_TYPE_PROFILE_LEAF corresponds to the value LEAF of OpticalAmplifier_FIBER_TYPE_PROFILE
+	OpticalAmplifier_FIBER_TYPE_PROFILE_LEAF E_OpticalAmplifier_FIBER_TYPE_PROFILE = 2
+	// OpticalAmplifier_FIBER_TYPE_PROFILE_SSMF corresponds to the value SSMF of OpticalAmplifier_FIBER_TYPE_PROFILE
+	OpticalAmplifier_FIBER_TYPE_PROFILE_SSMF E_OpticalAmplifier_FIBER_TYPE_PROFILE = 3
+	// OpticalAmplifier_FIBER_TYPE_PROFILE_TWC corresponds to the value TWC of OpticalAmplifier_FIBER_TYPE_PROFILE
+	OpticalAmplifier_FIBER_TYPE_PROFILE_TWC E_OpticalAmplifier_FIBER_TYPE_PROFILE = 4
+	// OpticalAmplifier_FIBER_TYPE_PROFILE_TWRS corresponds to the value TWRS of OpticalAmplifier_FIBER_TYPE_PROFILE
+	OpticalAmplifier_FIBER_TYPE_PROFILE_TWRS E_OpticalAmplifier_FIBER_TYPE_PROFILE = 5
+)
+
+// E_OpticalAmplifier_GAIN_RANGE is a derived int64 type which is used to represent
+// the enumerated node OpticalAmplifier_GAIN_RANGE. An additional value named
+// OpticalAmplifier_GAIN_RANGE_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_OpticalAmplifier_GAIN_RANGE int64
+
+// IsYANGGoEnum ensures that OpticalAmplifier_GAIN_RANGE implements the yang.GoEnum
+// interface. This ensures that OpticalAmplifier_GAIN_RANGE can be identified as a
+// mapped type for a YANG enumeration.
+func (E_OpticalAmplifier_GAIN_RANGE) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  OpticalAmplifier_GAIN_RANGE.
+func (E_OpticalAmplifier_GAIN_RANGE) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_OpticalAmplifier_GAIN_RANGE.
+func (e E_OpticalAmplifier_GAIN_RANGE) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_OpticalAmplifier_GAIN_RANGE")
+}
+
+const (
+	// OpticalAmplifier_GAIN_RANGE_UNSET corresponds to the value UNSET of OpticalAmplifier_GAIN_RANGE
+	OpticalAmplifier_GAIN_RANGE_UNSET E_OpticalAmplifier_GAIN_RANGE = 0
+	// OpticalAmplifier_GAIN_RANGE_FIXED_GAIN_RANGE corresponds to the value FIXED_GAIN_RANGE of OpticalAmplifier_GAIN_RANGE
+	OpticalAmplifier_GAIN_RANGE_FIXED_GAIN_RANGE E_OpticalAmplifier_GAIN_RANGE = 1
+	// OpticalAmplifier_GAIN_RANGE_HIGH_GAIN_RANGE corresponds to the value HIGH_GAIN_RANGE of OpticalAmplifier_GAIN_RANGE
+	OpticalAmplifier_GAIN_RANGE_HIGH_GAIN_RANGE E_OpticalAmplifier_GAIN_RANGE = 2
+	// OpticalAmplifier_GAIN_RANGE_LOW_GAIN_RANGE corresponds to the value LOW_GAIN_RANGE of OpticalAmplifier_GAIN_RANGE
+	OpticalAmplifier_GAIN_RANGE_LOW_GAIN_RANGE E_OpticalAmplifier_GAIN_RANGE = 3
+	// OpticalAmplifier_GAIN_RANGE_MID_GAIN_RANGE corresponds to the value MID_GAIN_RANGE of OpticalAmplifier_GAIN_RANGE
+	OpticalAmplifier_GAIN_RANGE_MID_GAIN_RANGE E_OpticalAmplifier_GAIN_RANGE = 4
+)
+
+// E_OpticalAmplifier_OPTICAL_AMPLIFIER_MODE is a derived int64 type which is used to represent
+// the enumerated node OpticalAmplifier_OPTICAL_AMPLIFIER_MODE. An additional value named
+// OpticalAmplifier_OPTICAL_AMPLIFIER_MODE_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_OpticalAmplifier_OPTICAL_AMPLIFIER_MODE int64
+
+// IsYANGGoEnum ensures that OpticalAmplifier_OPTICAL_AMPLIFIER_MODE implements the yang.GoEnum
+// interface. This ensures that OpticalAmplifier_OPTICAL_AMPLIFIER_MODE can be identified as a
+// mapped type for a YANG enumeration.
+func (E_OpticalAmplifier_OPTICAL_AMPLIFIER_MODE) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  OpticalAmplifier_OPTICAL_AMPLIFIER_MODE.
+func (E_OpticalAmplifier_OPTICAL_AMPLIFIER_MODE) ΛMap() map[string]map[int64]ygot.EnumDefinition {
+	return ΛEnum
+}
+
+// String returns a logging-friendly string for E_OpticalAmplifier_OPTICAL_AMPLIFIER_MODE.
+func (e E_OpticalAmplifier_OPTICAL_AMPLIFIER_MODE) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_OpticalAmplifier_OPTICAL_AMPLIFIER_MODE")
+}
+
+const (
+	// OpticalAmplifier_OPTICAL_AMPLIFIER_MODE_UNSET corresponds to the value UNSET of OpticalAmplifier_OPTICAL_AMPLIFIER_MODE
+	OpticalAmplifier_OPTICAL_AMPLIFIER_MODE_UNSET E_OpticalAmplifier_OPTICAL_AMPLIFIER_MODE = 0
+	// OpticalAmplifier_OPTICAL_AMPLIFIER_MODE_CONSTANT_GAIN corresponds to the value CONSTANT_GAIN of OpticalAmplifier_OPTICAL_AMPLIFIER_MODE
+	OpticalAmplifier_OPTICAL_AMPLIFIER_MODE_CONSTANT_GAIN E_OpticalAmplifier_OPTICAL_AMPLIFIER_MODE = 1
+	// OpticalAmplifier_OPTICAL_AMPLIFIER_MODE_CONSTANT_POWER corresponds to the value CONSTANT_POWER of OpticalAmplifier_OPTICAL_AMPLIFIER_MODE
+	OpticalAmplifier_OPTICAL_AMPLIFIER_MODE_CONSTANT_POWER E_OpticalAmplifier_OPTICAL_AMPLIFIER_MODE = 2
+	// OpticalAmplifier_OPTICAL_AMPLIFIER_MODE_DYNAMIC_GAIN corresponds to the value DYNAMIC_GAIN of OpticalAmplifier_OPTICAL_AMPLIFIER_MODE
+	OpticalAmplifier_OPTICAL_AMPLIFIER_MODE_DYNAMIC_GAIN E_OpticalAmplifier_OPTICAL_AMPLIFIER_MODE = 3
+)
+
+// E_OpticalAmplifier_OPTICAL_AMPLIFIER_TYPE is a derived int64 type which is used to represent
+// the enumerated node OpticalAmplifier_OPTICAL_AMPLIFIER_TYPE. An additional value named
+// OpticalAmplifier_OPTICAL_AMPLIFIER_TYPE_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_OpticalAmplifier_OPTICAL_AMPLIFIER_TYPE int64
+
+// IsYANGGoEnum ensures that OpticalAmplifier_OPTICAL_AMPLIFIER_TYPE implements the yang.GoEnum
+// interface. This ensures that OpticalAmplifier_OPTICAL_AMPLIFIER_TYPE can be identified as a
+// mapped type for a YANG enumeration.
+func (E_OpticalAmplifier_OPTICAL_AMPLIFIER_TYPE) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  OpticalAmplifier_OPTICAL_AMPLIFIER_TYPE.
+func (E_OpticalAmplifier_OPTICAL_AMPLIFIER_TYPE) ΛMap() map[string]map[int64]ygot.EnumDefinition {
+	return ΛEnum
+}
+
+// String returns a logging-friendly string for E_OpticalAmplifier_OPTICAL_AMPLIFIER_TYPE.
+func (e E_OpticalAmplifier_OPTICAL_AMPLIFIER_TYPE) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_OpticalAmplifier_OPTICAL_AMPLIFIER_TYPE")
+}
+
+const (
+	// OpticalAmplifier_OPTICAL_AMPLIFIER_TYPE_UNSET corresponds to the value UNSET of OpticalAmplifier_OPTICAL_AMPLIFIER_TYPE
+	OpticalAmplifier_OPTICAL_AMPLIFIER_TYPE_UNSET E_OpticalAmplifier_OPTICAL_AMPLIFIER_TYPE = 0
+	// OpticalAmplifier_OPTICAL_AMPLIFIER_TYPE_BACKWARD_RAMAN corresponds to the value BACKWARD_RAMAN of OpticalAmplifier_OPTICAL_AMPLIFIER_TYPE
+	OpticalAmplifier_OPTICAL_AMPLIFIER_TYPE_BACKWARD_RAMAN E_OpticalAmplifier_OPTICAL_AMPLIFIER_TYPE = 1
+	// OpticalAmplifier_OPTICAL_AMPLIFIER_TYPE_EDFA corresponds to the value EDFA of OpticalAmplifier_OPTICAL_AMPLIFIER_TYPE
+	OpticalAmplifier_OPTICAL_AMPLIFIER_TYPE_EDFA E_OpticalAmplifier_OPTICAL_AMPLIFIER_TYPE = 2
+	// OpticalAmplifier_OPTICAL_AMPLIFIER_TYPE_FORWARD_RAMAN corresponds to the value FORWARD_RAMAN of OpticalAmplifier_OPTICAL_AMPLIFIER_TYPE
+	OpticalAmplifier_OPTICAL_AMPLIFIER_TYPE_FORWARD_RAMAN E_OpticalAmplifier_OPTICAL_AMPLIFIER_TYPE = 3
+	// OpticalAmplifier_OPTICAL_AMPLIFIER_TYPE_HYBRID corresponds to the value HYBRID of OpticalAmplifier_OPTICAL_AMPLIFIER_TYPE
+	OpticalAmplifier_OPTICAL_AMPLIFIER_TYPE_HYBRID E_OpticalAmplifier_OPTICAL_AMPLIFIER_TYPE = 4
+)
+
+// E_OpticalAttenuator_OPTICAL_ATTENUATOR_MODE is a derived int64 type which is used to represent
+// the enumerated node OpticalAttenuator_OPTICAL_ATTENUATOR_MODE. An additional value named
+// OpticalAttenuator_OPTICAL_ATTENUATOR_MODE_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_OpticalAttenuator_OPTICAL_ATTENUATOR_MODE int64
+
+// IsYANGGoEnum ensures that OpticalAttenuator_OPTICAL_ATTENUATOR_MODE implements the yang.GoEnum
+// interface. This ensures that OpticalAttenuator_OPTICAL_ATTENUATOR_MODE can be identified as a
+// mapped type for a YANG enumeration.
+func (E_OpticalAttenuator_OPTICAL_ATTENUATOR_MODE) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  OpticalAttenuator_OPTICAL_ATTENUATOR_MODE.
+func (E_OpticalAttenuator_OPTICAL_ATTENUATOR_MODE) ΛMap() map[string]map[int64]ygot.EnumDefinition {
+	return ΛEnum
+}
+
+// String returns a logging-friendly string for E_OpticalAttenuator_OPTICAL_ATTENUATOR_MODE.
+func (e E_OpticalAttenuator_OPTICAL_ATTENUATOR_MODE) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_OpticalAttenuator_OPTICAL_ATTENUATOR_MODE")
+}
+
+const (
+	// OpticalAttenuator_OPTICAL_ATTENUATOR_MODE_UNSET corresponds to the value UNSET of OpticalAttenuator_OPTICAL_ATTENUATOR_MODE
+	OpticalAttenuator_OPTICAL_ATTENUATOR_MODE_UNSET E_OpticalAttenuator_OPTICAL_ATTENUATOR_MODE = 0
+	// OpticalAttenuator_OPTICAL_ATTENUATOR_MODE_CONSTANT_ATTENUATION corresponds to the value CONSTANT_ATTENUATION of OpticalAttenuator_OPTICAL_ATTENUATOR_MODE
+	OpticalAttenuator_OPTICAL_ATTENUATOR_MODE_CONSTANT_ATTENUATION E_OpticalAttenuator_OPTICAL_ATTENUATOR_MODE = 1
+	// OpticalAttenuator_OPTICAL_ATTENUATOR_MODE_CONSTANT_POWER corresponds to the value CONSTANT_POWER of OpticalAttenuator_OPTICAL_ATTENUATOR_MODE
+	OpticalAttenuator_OPTICAL_ATTENUATOR_MODE_CONSTANT_POWER E_OpticalAttenuator_OPTICAL_ATTENUATOR_MODE = 2
+	// OpticalAttenuator_OPTICAL_ATTENUATOR_MODE_SYSTEM_CONTROLLED corresponds to the value SYSTEM_CONTROLLED of OpticalAttenuator_OPTICAL_ATTENUATOR_MODE
+	OpticalAttenuator_OPTICAL_ATTENUATOR_MODE_SYSTEM_CONTROLLED E_OpticalAttenuator_OPTICAL_ATTENUATOR_MODE = 3
+)
+
 // E_OspfTypes_GRACE_LSA_TLV_TYPES is a derived int64 type which is used to represent
 // the enumerated node OspfTypes_GRACE_LSA_TLV_TYPES. An additional value named
 // OspfTypes_GRACE_LSA_TLV_TYPES_UNSET is added to the enumeration which is used as
@@ -8996,6 +9322,84 @@ const (
 	PimTypes_PIM_MODE_PIM_MODE_DENSE E_PimTypes_PIM_MODE = 2
 	// PimTypes_PIM_MODE_PIM_MODE_SPARSE corresponds to the value PIM_MODE_SPARSE of PimTypes_PIM_MODE
 	PimTypes_PIM_MODE_PIM_MODE_SPARSE E_PimTypes_PIM_MODE = 3
+)
+
+// E_PlatformHealthzFault_ACTION_BASE is a derived int64 type which is used to represent
+// the enumerated node PlatformHealthzFault_ACTION_BASE. An additional value named
+// PlatformHealthzFault_ACTION_BASE_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_PlatformHealthzFault_ACTION_BASE int64
+
+// IsYANGGoEnum ensures that PlatformHealthzFault_ACTION_BASE implements the yang.GoEnum
+// interface. This ensures that PlatformHealthzFault_ACTION_BASE can be identified as a
+// mapped type for a YANG enumeration.
+func (E_PlatformHealthzFault_ACTION_BASE) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  PlatformHealthzFault_ACTION_BASE.
+func (E_PlatformHealthzFault_ACTION_BASE) ΛMap() map[string]map[int64]ygot.EnumDefinition {
+	return ΛEnum
+}
+
+// String returns a logging-friendly string for E_PlatformHealthzFault_ACTION_BASE.
+func (e E_PlatformHealthzFault_ACTION_BASE) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_PlatformHealthzFault_ACTION_BASE")
+}
+
+const (
+	// PlatformHealthzFault_ACTION_BASE_UNSET corresponds to the value UNSET of PlatformHealthzFault_ACTION_BASE
+	PlatformHealthzFault_ACTION_BASE_UNSET E_PlatformHealthzFault_ACTION_BASE = 0
+	// PlatformHealthzFault_ACTION_BASE_ACTION_COLD_REBOOT corresponds to the value ACTION_COLD_REBOOT of PlatformHealthzFault_ACTION_BASE
+	PlatformHealthzFault_ACTION_BASE_ACTION_COLD_REBOOT E_PlatformHealthzFault_ACTION_BASE = 1
+	// PlatformHealthzFault_ACTION_BASE_ACTION_FACTORY_RESET corresponds to the value ACTION_FACTORY_RESET of PlatformHealthzFault_ACTION_BASE
+	PlatformHealthzFault_ACTION_BASE_ACTION_FACTORY_RESET E_PlatformHealthzFault_ACTION_BASE = 2
+	// PlatformHealthzFault_ACTION_BASE_ACTION_POWER_CYCLE corresponds to the value ACTION_POWER_CYCLE of PlatformHealthzFault_ACTION_BASE
+	PlatformHealthzFault_ACTION_BASE_ACTION_POWER_CYCLE E_PlatformHealthzFault_ACTION_BASE = 3
+	// PlatformHealthzFault_ACTION_BASE_ACTION_REPLACE corresponds to the value ACTION_REPLACE of PlatformHealthzFault_ACTION_BASE
+	PlatformHealthzFault_ACTION_BASE_ACTION_REPLACE E_PlatformHealthzFault_ACTION_BASE = 4
+	// PlatformHealthzFault_ACTION_BASE_ACTION_RESEAT corresponds to the value ACTION_RESEAT of PlatformHealthzFault_ACTION_BASE
+	PlatformHealthzFault_ACTION_BASE_ACTION_RESEAT E_PlatformHealthzFault_ACTION_BASE = 5
+	// PlatformHealthzFault_ACTION_BASE_ACTION_WARM_REBOOT corresponds to the value ACTION_WARM_REBOOT of PlatformHealthzFault_ACTION_BASE
+	PlatformHealthzFault_ACTION_BASE_ACTION_WARM_REBOOT E_PlatformHealthzFault_ACTION_BASE = 6
+)
+
+// E_PlatformHealthzFault_SYMPTOM_BASE is a derived int64 type which is used to represent
+// the enumerated node PlatformHealthzFault_SYMPTOM_BASE. An additional value named
+// PlatformHealthzFault_SYMPTOM_BASE_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_PlatformHealthzFault_SYMPTOM_BASE int64
+
+// IsYANGGoEnum ensures that PlatformHealthzFault_SYMPTOM_BASE implements the yang.GoEnum
+// interface. This ensures that PlatformHealthzFault_SYMPTOM_BASE can be identified as a
+// mapped type for a YANG enumeration.
+func (E_PlatformHealthzFault_SYMPTOM_BASE) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  PlatformHealthzFault_SYMPTOM_BASE.
+func (E_PlatformHealthzFault_SYMPTOM_BASE) ΛMap() map[string]map[int64]ygot.EnumDefinition {
+	return ΛEnum
+}
+
+// String returns a logging-friendly string for E_PlatformHealthzFault_SYMPTOM_BASE.
+func (e E_PlatformHealthzFault_SYMPTOM_BASE) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_PlatformHealthzFault_SYMPTOM_BASE")
+}
+
+const (
+	// PlatformHealthzFault_SYMPTOM_BASE_UNSET corresponds to the value UNSET of PlatformHealthzFault_SYMPTOM_BASE
+	PlatformHealthzFault_SYMPTOM_BASE_UNSET E_PlatformHealthzFault_SYMPTOM_BASE = 0
+	// PlatformHealthzFault_SYMPTOM_BASE_SYMPTOM_COMM_ERROR corresponds to the value SYMPTOM_COMM_ERROR of PlatformHealthzFault_SYMPTOM_BASE
+	PlatformHealthzFault_SYMPTOM_BASE_SYMPTOM_COMM_ERROR E_PlatformHealthzFault_SYMPTOM_BASE = 1
+	// PlatformHealthzFault_SYMPTOM_BASE_SYMPTOM_MEMORY_ERRORS corresponds to the value SYMPTOM_MEMORY_ERRORS of PlatformHealthzFault_SYMPTOM_BASE
+	PlatformHealthzFault_SYMPTOM_BASE_SYMPTOM_MEMORY_ERRORS E_PlatformHealthzFault_SYMPTOM_BASE = 2
+	// PlatformHealthzFault_SYMPTOM_BASE_SYMPTOM_MISSING_COMPONENT corresponds to the value SYMPTOM_MISSING_COMPONENT of PlatformHealthzFault_SYMPTOM_BASE
+	PlatformHealthzFault_SYMPTOM_BASE_SYMPTOM_MISSING_COMPONENT E_PlatformHealthzFault_SYMPTOM_BASE = 3
+	// PlatformHealthzFault_SYMPTOM_BASE_SYMPTOM_OVER_THRESHOLD corresponds to the value SYMPTOM_OVER_THRESHOLD of PlatformHealthzFault_SYMPTOM_BASE
+	PlatformHealthzFault_SYMPTOM_BASE_SYMPTOM_OVER_THRESHOLD E_PlatformHealthzFault_SYMPTOM_BASE = 4
+	// PlatformHealthzFault_SYMPTOM_BASE_SYMPTOM_UNDER_THRESHOLD corresponds to the value SYMPTOM_UNDER_THRESHOLD of PlatformHealthzFault_SYMPTOM_BASE
+	PlatformHealthzFault_SYMPTOM_BASE_SYMPTOM_UNDER_THRESHOLD E_PlatformHealthzFault_SYMPTOM_BASE = 5
+	// PlatformHealthzFault_SYMPTOM_BASE_SYMPTOM_UNKNOWN corresponds to the value SYMPTOM_UNKNOWN of PlatformHealthzFault_SYMPTOM_BASE
+	PlatformHealthzFault_SYMPTOM_BASE_SYMPTOM_UNKNOWN E_PlatformHealthzFault_SYMPTOM_BASE = 6
 )
 
 // E_PlatformSoftware_SOFTWARE_MODULE_TYPE is a derived int64 type which is used to represent
@@ -11799,6 +12203,39 @@ const (
 	Transit_PushLabel_NO_LABEL E_Transit_PushLabel = 9
 )
 
+// E_TransportLineCommon_AdminStateType is a derived int64 type which is used to represent
+// the enumerated node TransportLineCommon_AdminStateType. An additional value named
+// TransportLineCommon_AdminStateType_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_TransportLineCommon_AdminStateType int64
+
+// IsYANGGoEnum ensures that TransportLineCommon_AdminStateType implements the yang.GoEnum
+// interface. This ensures that TransportLineCommon_AdminStateType can be identified as a
+// mapped type for a YANG enumeration.
+func (E_TransportLineCommon_AdminStateType) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  TransportLineCommon_AdminStateType.
+func (E_TransportLineCommon_AdminStateType) ΛMap() map[string]map[int64]ygot.EnumDefinition {
+	return ΛEnum
+}
+
+// String returns a logging-friendly string for E_TransportLineCommon_AdminStateType.
+func (e E_TransportLineCommon_AdminStateType) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_TransportLineCommon_AdminStateType")
+}
+
+const (
+	// TransportLineCommon_AdminStateType_UNSET corresponds to the value UNSET of TransportLineCommon_AdminStateType
+	TransportLineCommon_AdminStateType_UNSET E_TransportLineCommon_AdminStateType = 0
+	// TransportLineCommon_AdminStateType_ENABLED corresponds to the value ENABLED of TransportLineCommon_AdminStateType
+	TransportLineCommon_AdminStateType_ENABLED E_TransportLineCommon_AdminStateType = 1
+	// TransportLineCommon_AdminStateType_DISABLED corresponds to the value DISABLED of TransportLineCommon_AdminStateType
+	TransportLineCommon_AdminStateType_DISABLED E_TransportLineCommon_AdminStateType = 2
+	// TransportLineCommon_AdminStateType_MAINT corresponds to the value MAINT of TransportLineCommon_AdminStateType
+	TransportLineCommon_AdminStateType_MAINT E_TransportLineCommon_AdminStateType = 3
+)
+
 // E_TransportTypes_CLIENT_MAPPING_MODE is a derived int64 type which is used to represent
 // the enumerated node TransportTypes_CLIENT_MAPPING_MODE. An additional value named
 // TransportTypes_CLIENT_MAPPING_MODE_UNSET is added to the enumeration which is used as
@@ -12046,6 +12483,47 @@ const (
 	TransportTypes_LOGICAL_ELEMENT_PROTOCOL_TYPE_PROT_ETHERNET E_TransportTypes_LOGICAL_ELEMENT_PROTOCOL_TYPE = 1
 	// TransportTypes_LOGICAL_ELEMENT_PROTOCOL_TYPE_PROT_OTN corresponds to the value PROT_OTN of TransportTypes_LOGICAL_ELEMENT_PROTOCOL_TYPE
 	TransportTypes_LOGICAL_ELEMENT_PROTOCOL_TYPE_PROT_OTN E_TransportTypes_LOGICAL_ELEMENT_PROTOCOL_TYPE = 2
+)
+
+// E_TransportTypes_OPTICAL_PORT_TYPE is a derived int64 type which is used to represent
+// the enumerated node TransportTypes_OPTICAL_PORT_TYPE. An additional value named
+// TransportTypes_OPTICAL_PORT_TYPE_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_TransportTypes_OPTICAL_PORT_TYPE int64
+
+// IsYANGGoEnum ensures that TransportTypes_OPTICAL_PORT_TYPE implements the yang.GoEnum
+// interface. This ensures that TransportTypes_OPTICAL_PORT_TYPE can be identified as a
+// mapped type for a YANG enumeration.
+func (E_TransportTypes_OPTICAL_PORT_TYPE) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  TransportTypes_OPTICAL_PORT_TYPE.
+func (E_TransportTypes_OPTICAL_PORT_TYPE) ΛMap() map[string]map[int64]ygot.EnumDefinition {
+	return ΛEnum
+}
+
+// String returns a logging-friendly string for E_TransportTypes_OPTICAL_PORT_TYPE.
+func (e E_TransportTypes_OPTICAL_PORT_TYPE) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_TransportTypes_OPTICAL_PORT_TYPE")
+}
+
+const (
+	// TransportTypes_OPTICAL_PORT_TYPE_UNSET corresponds to the value UNSET of TransportTypes_OPTICAL_PORT_TYPE
+	TransportTypes_OPTICAL_PORT_TYPE_UNSET E_TransportTypes_OPTICAL_PORT_TYPE = 0
+	// TransportTypes_OPTICAL_PORT_TYPE_ADD corresponds to the value ADD of TransportTypes_OPTICAL_PORT_TYPE
+	TransportTypes_OPTICAL_PORT_TYPE_ADD E_TransportTypes_OPTICAL_PORT_TYPE = 1
+	// TransportTypes_OPTICAL_PORT_TYPE_DROP corresponds to the value DROP of TransportTypes_OPTICAL_PORT_TYPE
+	TransportTypes_OPTICAL_PORT_TYPE_DROP E_TransportTypes_OPTICAL_PORT_TYPE = 2
+	// TransportTypes_OPTICAL_PORT_TYPE_EGRESS corresponds to the value EGRESS of TransportTypes_OPTICAL_PORT_TYPE
+	TransportTypes_OPTICAL_PORT_TYPE_EGRESS E_TransportTypes_OPTICAL_PORT_TYPE = 3
+	// TransportTypes_OPTICAL_PORT_TYPE_INGRESS corresponds to the value INGRESS of TransportTypes_OPTICAL_PORT_TYPE
+	TransportTypes_OPTICAL_PORT_TYPE_INGRESS E_TransportTypes_OPTICAL_PORT_TYPE = 4
+	// TransportTypes_OPTICAL_PORT_TYPE_MONITOR corresponds to the value MONITOR of TransportTypes_OPTICAL_PORT_TYPE
+	TransportTypes_OPTICAL_PORT_TYPE_MONITOR E_TransportTypes_OPTICAL_PORT_TYPE = 5
+	// TransportTypes_OPTICAL_PORT_TYPE_TERMINAL_CLIENT corresponds to the value TERMINAL_CLIENT of TransportTypes_OPTICAL_PORT_TYPE
+	TransportTypes_OPTICAL_PORT_TYPE_TERMINAL_CLIENT E_TransportTypes_OPTICAL_PORT_TYPE = 6
+	// TransportTypes_OPTICAL_PORT_TYPE_TERMINAL_LINE corresponds to the value TERMINAL_LINE of TransportTypes_OPTICAL_PORT_TYPE
+	TransportTypes_OPTICAL_PORT_TYPE_TERMINAL_LINE E_TransportTypes_OPTICAL_PORT_TYPE = 7
 )
 
 // E_TransportTypes_OTN_APPLICATION_CODE is a derived int64 type which is used to represent
@@ -12807,6 +13285,138 @@ const (
 	Vlan_VlanStackAction_POP E_Vlan_VlanStackAction = 2
 	// Vlan_VlanStackAction_SWAP corresponds to the value SWAP of Vlan_VlanStackAction
 	Vlan_VlanStackAction_SWAP E_Vlan_VlanStackAction = 3
+)
+
+// E_WavelengthRouter_ASE_CONTROL_MODE is a derived int64 type which is used to represent
+// the enumerated node WavelengthRouter_ASE_CONTROL_MODE. An additional value named
+// WavelengthRouter_ASE_CONTROL_MODE_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_WavelengthRouter_ASE_CONTROL_MODE int64
+
+// IsYANGGoEnum ensures that WavelengthRouter_ASE_CONTROL_MODE implements the yang.GoEnum
+// interface. This ensures that WavelengthRouter_ASE_CONTROL_MODE can be identified as a
+// mapped type for a YANG enumeration.
+func (E_WavelengthRouter_ASE_CONTROL_MODE) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  WavelengthRouter_ASE_CONTROL_MODE.
+func (E_WavelengthRouter_ASE_CONTROL_MODE) ΛMap() map[string]map[int64]ygot.EnumDefinition {
+	return ΛEnum
+}
+
+// String returns a logging-friendly string for E_WavelengthRouter_ASE_CONTROL_MODE.
+func (e E_WavelengthRouter_ASE_CONTROL_MODE) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_WavelengthRouter_ASE_CONTROL_MODE")
+}
+
+const (
+	// WavelengthRouter_ASE_CONTROL_MODE_UNSET corresponds to the value UNSET of WavelengthRouter_ASE_CONTROL_MODE
+	WavelengthRouter_ASE_CONTROL_MODE_UNSET E_WavelengthRouter_ASE_CONTROL_MODE = 0
+	// WavelengthRouter_ASE_CONTROL_MODE_ASE_DISABLED corresponds to the value ASE_DISABLED of WavelengthRouter_ASE_CONTROL_MODE
+	WavelengthRouter_ASE_CONTROL_MODE_ASE_DISABLED E_WavelengthRouter_ASE_CONTROL_MODE = 1
+	// WavelengthRouter_ASE_CONTROL_MODE_ASE_ENABLED corresponds to the value ASE_ENABLED of WavelengthRouter_ASE_CONTROL_MODE
+	WavelengthRouter_ASE_CONTROL_MODE_ASE_ENABLED E_WavelengthRouter_ASE_CONTROL_MODE = 2
+	// WavelengthRouter_ASE_CONTROL_MODE_AUTO_ASE_FAILURE_AND_RESTORE corresponds to the value AUTO_ASE_FAILURE_AND_RESTORE of WavelengthRouter_ASE_CONTROL_MODE
+	WavelengthRouter_ASE_CONTROL_MODE_AUTO_ASE_FAILURE_AND_RESTORE E_WavelengthRouter_ASE_CONTROL_MODE = 3
+	// WavelengthRouter_ASE_CONTROL_MODE_AUTO_ASE_ON_FAILURE corresponds to the value AUTO_ASE_ON_FAILURE of WavelengthRouter_ASE_CONTROL_MODE
+	WavelengthRouter_ASE_CONTROL_MODE_AUTO_ASE_ON_FAILURE E_WavelengthRouter_ASE_CONTROL_MODE = 4
+)
+
+// E_WavelengthRouter_ATTENUATION_CONTROL_MODE is a derived int64 type which is used to represent
+// the enumerated node WavelengthRouter_ATTENUATION_CONTROL_MODE. An additional value named
+// WavelengthRouter_ATTENUATION_CONTROL_MODE_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_WavelengthRouter_ATTENUATION_CONTROL_MODE int64
+
+// IsYANGGoEnum ensures that WavelengthRouter_ATTENUATION_CONTROL_MODE implements the yang.GoEnum
+// interface. This ensures that WavelengthRouter_ATTENUATION_CONTROL_MODE can be identified as a
+// mapped type for a YANG enumeration.
+func (E_WavelengthRouter_ATTENUATION_CONTROL_MODE) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  WavelengthRouter_ATTENUATION_CONTROL_MODE.
+func (E_WavelengthRouter_ATTENUATION_CONTROL_MODE) ΛMap() map[string]map[int64]ygot.EnumDefinition {
+	return ΛEnum
+}
+
+// String returns a logging-friendly string for E_WavelengthRouter_ATTENUATION_CONTROL_MODE.
+func (e E_WavelengthRouter_ATTENUATION_CONTROL_MODE) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_WavelengthRouter_ATTENUATION_CONTROL_MODE")
+}
+
+const (
+	// WavelengthRouter_ATTENUATION_CONTROL_MODE_UNSET corresponds to the value UNSET of WavelengthRouter_ATTENUATION_CONTROL_MODE
+	WavelengthRouter_ATTENUATION_CONTROL_MODE_UNSET E_WavelengthRouter_ATTENUATION_CONTROL_MODE = 0
+	// WavelengthRouter_ATTENUATION_CONTROL_MODE_ATTENUATION_DYNAMIC_LOSS corresponds to the value ATTENUATION_DYNAMIC_LOSS of WavelengthRouter_ATTENUATION_CONTROL_MODE
+	WavelengthRouter_ATTENUATION_CONTROL_MODE_ATTENUATION_DYNAMIC_LOSS E_WavelengthRouter_ATTENUATION_CONTROL_MODE = 1
+	// WavelengthRouter_ATTENUATION_CONTROL_MODE_ATTENUATION_DYNAMIC_LOSS_DAMPED corresponds to the value ATTENUATION_DYNAMIC_LOSS_DAMPED of WavelengthRouter_ATTENUATION_CONTROL_MODE
+	WavelengthRouter_ATTENUATION_CONTROL_MODE_ATTENUATION_DYNAMIC_LOSS_DAMPED E_WavelengthRouter_ATTENUATION_CONTROL_MODE = 2
+	// WavelengthRouter_ATTENUATION_CONTROL_MODE_ATTENUATION_FIXED_LOSS corresponds to the value ATTENUATION_FIXED_LOSS of WavelengthRouter_ATTENUATION_CONTROL_MODE
+	WavelengthRouter_ATTENUATION_CONTROL_MODE_ATTENUATION_FIXED_LOSS E_WavelengthRouter_ATTENUATION_CONTROL_MODE = 3
+)
+
+// E_WavelengthRouter_ATTENUATION_CONTROL_RANGE is a derived int64 type which is used to represent
+// the enumerated node WavelengthRouter_ATTENUATION_CONTROL_RANGE. An additional value named
+// WavelengthRouter_ATTENUATION_CONTROL_RANGE_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_WavelengthRouter_ATTENUATION_CONTROL_RANGE int64
+
+// IsYANGGoEnum ensures that WavelengthRouter_ATTENUATION_CONTROL_RANGE implements the yang.GoEnum
+// interface. This ensures that WavelengthRouter_ATTENUATION_CONTROL_RANGE can be identified as a
+// mapped type for a YANG enumeration.
+func (E_WavelengthRouter_ATTENUATION_CONTROL_RANGE) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  WavelengthRouter_ATTENUATION_CONTROL_RANGE.
+func (E_WavelengthRouter_ATTENUATION_CONTROL_RANGE) ΛMap() map[string]map[int64]ygot.EnumDefinition {
+	return ΛEnum
+}
+
+// String returns a logging-friendly string for E_WavelengthRouter_ATTENUATION_CONTROL_RANGE.
+func (e E_WavelengthRouter_ATTENUATION_CONTROL_RANGE) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_WavelengthRouter_ATTENUATION_CONTROL_RANGE")
+}
+
+const (
+	// WavelengthRouter_ATTENUATION_CONTROL_RANGE_UNSET corresponds to the value UNSET of WavelengthRouter_ATTENUATION_CONTROL_RANGE
+	WavelengthRouter_ATTENUATION_CONTROL_RANGE_UNSET E_WavelengthRouter_ATTENUATION_CONTROL_RANGE = 0
+	// WavelengthRouter_ATTENUATION_CONTROL_RANGE_CONTROL_RANGE_FULL corresponds to the value CONTROL_RANGE_FULL of WavelengthRouter_ATTENUATION_CONTROL_RANGE
+	WavelengthRouter_ATTENUATION_CONTROL_RANGE_CONTROL_RANGE_FULL E_WavelengthRouter_ATTENUATION_CONTROL_RANGE = 1
+	// WavelengthRouter_ATTENUATION_CONTROL_RANGE_CONTROL_RANGE_LIMITED corresponds to the value CONTROL_RANGE_LIMITED of WavelengthRouter_ATTENUATION_CONTROL_RANGE
+	WavelengthRouter_ATTENUATION_CONTROL_RANGE_CONTROL_RANGE_LIMITED E_WavelengthRouter_ATTENUATION_CONTROL_RANGE = 2
+)
+
+// E_WavelengthRouter_AdminStateType is a derived int64 type which is used to represent
+// the enumerated node WavelengthRouter_AdminStateType. An additional value named
+// WavelengthRouter_AdminStateType_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_WavelengthRouter_AdminStateType int64
+
+// IsYANGGoEnum ensures that WavelengthRouter_AdminStateType implements the yang.GoEnum
+// interface. This ensures that WavelengthRouter_AdminStateType can be identified as a
+// mapped type for a YANG enumeration.
+func (E_WavelengthRouter_AdminStateType) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  WavelengthRouter_AdminStateType.
+func (E_WavelengthRouter_AdminStateType) ΛMap() map[string]map[int64]ygot.EnumDefinition {
+	return ΛEnum
+}
+
+// String returns a logging-friendly string for E_WavelengthRouter_AdminStateType.
+func (e E_WavelengthRouter_AdminStateType) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_WavelengthRouter_AdminStateType")
+}
+
+const (
+	// WavelengthRouter_AdminStateType_UNSET corresponds to the value UNSET of WavelengthRouter_AdminStateType
+	WavelengthRouter_AdminStateType_UNSET E_WavelengthRouter_AdminStateType = 0
+	// WavelengthRouter_AdminStateType_ENABLED corresponds to the value ENABLED of WavelengthRouter_AdminStateType
+	WavelengthRouter_AdminStateType_ENABLED E_WavelengthRouter_AdminStateType = 1
+	// WavelengthRouter_AdminStateType_DISABLED corresponds to the value DISABLED of WavelengthRouter_AdminStateType
+	WavelengthRouter_AdminStateType_DISABLED E_WavelengthRouter_AdminStateType = 2
+	// WavelengthRouter_AdminStateType_MAINT corresponds to the value MAINT of WavelengthRouter_AdminStateType
+	WavelengthRouter_AdminStateType_MAINT E_WavelengthRouter_AdminStateType = 3
 )
 
 // E_WeightedEcmp_LoadBalancingWeight is a derived int64 type which is used to represent

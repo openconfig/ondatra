@@ -58,8 +58,12 @@ using the following YANG input files:
   - public/release/models/oam/openconfig-oam-cfm.yang
   - public/release/models/oam/openconfig-oam.yang
   - public/release/models/openconfig-extensions.yang
+  - public/release/models/optical-transport/openconfig-channel-monitor.yang
+  - public/release/models/optical-transport/openconfig-optical-amplifier.yang
+  - public/release/models/optical-transport/openconfig-optical-attenuator.yang
   - public/release/models/optical-transport/openconfig-terminal-device.yang
   - public/release/models/optical-transport/openconfig-transport-types.yang
+  - public/release/models/optical-transport/openconfig-wavelength-router.yang
   - public/release/models/ospf/openconfig-ospf-area-interface.yang
   - public/release/models/ospf/openconfig-ospf-area.yang
   - public/release/models/ospf/openconfig-ospf-common.yang
@@ -76,6 +80,8 @@ using the following YANG input files:
   - public/release/models/platform/openconfig-platform-ext.yang
   - public/release/models/platform/openconfig-platform-fabric.yang
   - public/release/models/platform/openconfig-platform-fan.yang
+  - public/release/models/platform/openconfig-platform-healthz.yang
+  - public/release/models/platform/openconfig-platform-healthz-fault.yang
   - public/release/models/platform/openconfig-platform-integrated-circuit.yang
   - public/release/models/platform/openconfig-platform-linecard.yang
   - public/release/models/platform/openconfig-platform-pipeline-counters.yang
@@ -4150,6 +4156,66 @@ func (n *ComponentPathAny) HardwareVersion() *Component_HardwareVersionPathAny {
 			n,
 		),
 		parent: n,
+	}
+	return ps
+}
+
+// Healthz (container): The health of the component. The paramaters within this
+// container indicate the status of the component beyond whether
+// it is operationally up or down. When a signal is received
+// that a component is in an unhealthy state the gNOI.Healthz
+// service can be used to retrieve further diagnostic information
+// relating to the component.
+//
+// The contents of this directory relate only to the specific
+// component that it is associated with. In the case that child
+// components become unhealthy and this causes a parent component
+// to be unhealthy, the new unhealthy status should be reported at
+// both components, such that an interested system can take the
+// relevant actions (e.g., retrieve the Healthz output, or
+// apply mitigation actions).
+//
+//	Defining module:      "openconfig-platform-healthz"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "healthz"
+//	Path from root:       "/components/component/healthz"
+func (n *ComponentPath) Healthz() *Component_HealthzPath {
+	ps := &Component_HealthzPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"healthz"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// Healthz (container): The health of the component. The paramaters within this
+// container indicate the status of the component beyond whether
+// it is operationally up or down. When a signal is received
+// that a component is in an unhealthy state the gNOI.Healthz
+// service can be used to retrieve further diagnostic information
+// relating to the component.
+//
+// The contents of this directory relate only to the specific
+// component that it is associated with. In the case that child
+// components become unhealthy and this causes a parent component
+// to be unhealthy, the new unhealthy status should be reported at
+// both components, such that an interested system can take the
+// relevant actions (e.g., retrieve the Healthz output, or
+// apply mitigation actions).
+//
+//	Defining module:      "openconfig-platform-healthz"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "healthz"
+//	Path from root:       "/components/component/healthz"
+func (n *ComponentPathAny) Healthz() *Component_HealthzPathAny {
+	ps := &Component_HealthzPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"healthz"},
+			map[string]interface{}{},
+			n,
+		),
 	}
 	return ps
 }
@@ -11344,6 +11410,2578 @@ func (n *Component_Fan_ThresholdPathMapAny) State() ygnmi.WildcardQuery[map[oc.E
 		&ygnmi.CompressionInfo{
 			PreRelPath:  []string{"openconfig-platform-fan:thresholds"},
 			PostRelPath: []string{"openconfig-platform-fan:threshold"},
+		},
+	)
+}
+
+// Component_Healthz_LastUnhealthyPath represents the /openconfig-platform/components/component/healthz/state/last-unhealthy YANG schema element.
+type Component_Healthz_LastUnhealthyPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Healthz_LastUnhealthyPathAny represents the wildcard version of the /openconfig-platform/components/component/healthz/state/last-unhealthy YANG schema element.
+type Component_Healthz_LastUnhealthyPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Component_Healthz_LastUnhealthyPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-healthz"
+//	Instantiating module: "openconfig-platform-healthz"
+//	Path from parent:     "state/last-unhealthy"
+//	Path from root:       "/components/component/healthz/state/last-unhealthy"
+func (n *Component_Healthz_LastUnhealthyPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Component_Healthz",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "last-unhealthy"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_Healthz).LastUnhealthy
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Healthz) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-healthz"
+//	Instantiating module: "openconfig-platform-healthz"
+//	Path from parent:     "state/last-unhealthy"
+//	Path from root:       "/components/component/healthz/state/last-unhealthy"
+func (n *Component_Healthz_LastUnhealthyPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Component_Healthz",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "last-unhealthy"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_Healthz).LastUnhealthy
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Healthz) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Component_Healthz_StatusPath represents the /openconfig-platform/components/component/healthz/state/status YANG schema element.
+type Component_Healthz_StatusPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Healthz_StatusPathAny represents the wildcard version of the /openconfig-platform/components/component/healthz/state/status YANG schema element.
+type Component_Healthz_StatusPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Component_Healthz_StatusPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-healthz"
+//	Instantiating module: "openconfig-platform-healthz"
+//	Path from parent:     "state/status"
+//	Path from root:       "/components/component/healthz/state/status"
+func (n *Component_Healthz_StatusPath) State() ygnmi.SingletonQuery[oc.E_Healthz_Status] {
+	return ygnmi.NewSingletonQuery[oc.E_Healthz_Status](
+		"Component_Healthz",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "status"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Healthz_Status, bool) {
+			ret := gs.(*oc.Component_Healthz).Status
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Healthz) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-healthz"
+//	Instantiating module: "openconfig-platform-healthz"
+//	Path from parent:     "state/status"
+//	Path from root:       "/components/component/healthz/state/status"
+func (n *Component_Healthz_StatusPathAny) State() ygnmi.WildcardQuery[oc.E_Healthz_Status] {
+	return ygnmi.NewWildcardQuery[oc.E_Healthz_Status](
+		"Component_Healthz",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "status"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Healthz_Status, bool) {
+			ret := gs.(*oc.Component_Healthz).Status
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Healthz) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Component_Healthz_UnhealthyCountPath represents the /openconfig-platform/components/component/healthz/state/unhealthy-count YANG schema element.
+type Component_Healthz_UnhealthyCountPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Healthz_UnhealthyCountPathAny represents the wildcard version of the /openconfig-platform/components/component/healthz/state/unhealthy-count YANG schema element.
+type Component_Healthz_UnhealthyCountPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Component_Healthz_UnhealthyCountPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-healthz"
+//	Instantiating module: "openconfig-platform-healthz"
+//	Path from parent:     "state/unhealthy-count"
+//	Path from root:       "/components/component/healthz/state/unhealthy-count"
+func (n *Component_Healthz_UnhealthyCountPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Component_Healthz",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "unhealthy-count"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_Healthz).UnhealthyCount
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Healthz) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-healthz"
+//	Instantiating module: "openconfig-platform-healthz"
+//	Path from parent:     "state/unhealthy-count"
+//	Path from root:       "/components/component/healthz/state/unhealthy-count"
+func (n *Component_Healthz_UnhealthyCountPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Component_Healthz",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "unhealthy-count"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_Healthz).UnhealthyCount
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Healthz) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Component_HealthzPath represents the /openconfig-platform/components/component/healthz YANG schema element.
+type Component_HealthzPath struct {
+	*ygnmi.NodePath
+}
+
+// Component_HealthzPathAny represents the wildcard version of the /openconfig-platform/components/component/healthz YANG schema element.
+type Component_HealthzPathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Component_HealthzPath) PathOriginName() string {
+	return "openconfig"
+}
+
+// FaultAny (list): A fault indicates that a component has recently or is currently
+// experiencing a problem as expressed by a symptom. These symptoms have
+// underlying conditions that are platform-specific.
+//
+// Faults should only be raised if the component is no longer able to
+// perform the function expected of it and requires
+// remediation/intervention.
+//
+// The fault should not be deleted as soon as the underlying condition
+// is no longer asserted to avoid excessive fault creation and deletion.
+// Deletion of the fault should occur after a suitable period outside of
+// the triggering condition
+//
+//	Defining module:      "openconfig-platform-healthz-fault"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "faults/fault"
+//	Path from root:       "/components/component/healthz/faults/fault"
+func (n *Component_HealthzPath) FaultAny() *Component_Healthz_FaultPathAny {
+	ps := &Component_Healthz_FaultPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"faults", "fault"},
+			map[string]interface{}{"symptom": "*"},
+			n,
+		),
+	}
+	return ps
+}
+
+// FaultAny (list): A fault indicates that a component has recently or is currently
+// experiencing a problem as expressed by a symptom. These symptoms have
+// underlying conditions that are platform-specific.
+//
+// Faults should only be raised if the component is no longer able to
+// perform the function expected of it and requires
+// remediation/intervention.
+//
+// The fault should not be deleted as soon as the underlying condition
+// is no longer asserted to avoid excessive fault creation and deletion.
+// Deletion of the fault should occur after a suitable period outside of
+// the triggering condition
+//
+//	Defining module:      "openconfig-platform-healthz-fault"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "faults/fault"
+//	Path from root:       "/components/component/healthz/faults/fault"
+func (n *Component_HealthzPathAny) FaultAny() *Component_Healthz_FaultPathAny {
+	ps := &Component_Healthz_FaultPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"faults", "fault"},
+			map[string]interface{}{"symptom": "*"},
+			n,
+		),
+	}
+	return ps
+}
+
+// Fault (list): A fault indicates that a component has recently or is currently
+// experiencing a problem as expressed by a symptom. These symptoms have
+// underlying conditions that are platform-specific.
+//
+// Faults should only be raised if the component is no longer able to
+// perform the function expected of it and requires
+// remediation/intervention.
+//
+// The fault should not be deleted as soon as the underlying condition
+// is no longer asserted to avoid excessive fault creation and deletion.
+// Deletion of the fault should occur after a suitable period outside of
+// the triggering condition
+//
+//	Defining module:      "openconfig-platform-healthz-fault"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "faults/fault"
+//	Path from root:       "/components/component/healthz/faults/fault"
+//
+//	Symptom: oc.E_PlatformHealthzFault_SYMPTOM_BASE
+func (n *Component_HealthzPath) Fault(Symptom oc.E_PlatformHealthzFault_SYMPTOM_BASE) *Component_Healthz_FaultPath {
+	ps := &Component_Healthz_FaultPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"faults", "fault"},
+			map[string]interface{}{"symptom": Symptom},
+			n,
+		),
+	}
+	return ps
+}
+
+// Fault (list): A fault indicates that a component has recently or is currently
+// experiencing a problem as expressed by a symptom. These symptoms have
+// underlying conditions that are platform-specific.
+//
+// Faults should only be raised if the component is no longer able to
+// perform the function expected of it and requires
+// remediation/intervention.
+//
+// The fault should not be deleted as soon as the underlying condition
+// is no longer asserted to avoid excessive fault creation and deletion.
+// Deletion of the fault should occur after a suitable period outside of
+// the triggering condition
+//
+//	Defining module:      "openconfig-platform-healthz-fault"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "faults/fault"
+//	Path from root:       "/components/component/healthz/faults/fault"
+//
+//	Symptom: oc.E_PlatformHealthzFault_SYMPTOM_BASE
+func (n *Component_HealthzPathAny) Fault(Symptom oc.E_PlatformHealthzFault_SYMPTOM_BASE) *Component_Healthz_FaultPathAny {
+	ps := &Component_Healthz_FaultPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"faults", "fault"},
+			map[string]interface{}{"symptom": Symptom},
+			n,
+		),
+	}
+	return ps
+}
+
+// FaultMap (list): A fault indicates that a component has recently or is currently
+// experiencing a problem as expressed by a symptom. These symptoms have
+// underlying conditions that are platform-specific.
+//
+// Faults should only be raised if the component is no longer able to
+// perform the function expected of it and requires
+// remediation/intervention.
+//
+// The fault should not be deleted as soon as the underlying condition
+// is no longer asserted to avoid excessive fault creation and deletion.
+// Deletion of the fault should occur after a suitable period outside of
+// the triggering condition
+//
+//	Defining module:      "openconfig-platform-healthz-fault"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "faults/fault"
+//	Path from root:       "/components/component/healthz/faults/fault"
+func (n *Component_HealthzPath) FaultMap() *Component_Healthz_FaultPathMap {
+	ps := &Component_Healthz_FaultPathMap{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"faults"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// FaultMap (list): A fault indicates that a component has recently or is currently
+// experiencing a problem as expressed by a symptom. These symptoms have
+// underlying conditions that are platform-specific.
+//
+// Faults should only be raised if the component is no longer able to
+// perform the function expected of it and requires
+// remediation/intervention.
+//
+// The fault should not be deleted as soon as the underlying condition
+// is no longer asserted to avoid excessive fault creation and deletion.
+// Deletion of the fault should occur after a suitable period outside of
+// the triggering condition
+//
+//	Defining module:      "openconfig-platform-healthz-fault"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "faults/fault"
+//	Path from root:       "/components/component/healthz/faults/fault"
+func (n *Component_HealthzPathAny) FaultMap() *Component_Healthz_FaultPathMapAny {
+	ps := &Component_Healthz_FaultPathMapAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"faults"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// LastUnhealthy (leaf): The time at which the component as last observed to be unhealthy
+// represented as nanoseconds since the Unix epoch. Unhealthy is defined
+// as the component being in a state other than HEALTHY.
+//
+//	Defining module:      "openconfig-platform-healthz"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/last-unhealthy"
+//	Path from root:       "/components/component/healthz/state/last-unhealthy"
+func (n *Component_HealthzPath) LastUnhealthy() *Component_Healthz_LastUnhealthyPath {
+	ps := &Component_Healthz_LastUnhealthyPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "last-unhealthy"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// LastUnhealthy (leaf): The time at which the component as last observed to be unhealthy
+// represented as nanoseconds since the Unix epoch. Unhealthy is defined
+// as the component being in a state other than HEALTHY.
+//
+//	Defining module:      "openconfig-platform-healthz"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/last-unhealthy"
+//	Path from root:       "/components/component/healthz/state/last-unhealthy"
+func (n *Component_HealthzPathAny) LastUnhealthy() *Component_Healthz_LastUnhealthyPathAny {
+	ps := &Component_Healthz_LastUnhealthyPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "last-unhealthy"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Status (leaf): The status of the component, indicating its current health.
+//
+//	Defining module:      "openconfig-platform-healthz"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/status"
+//	Path from root:       "/components/component/healthz/state/status"
+func (n *Component_HealthzPath) Status() *Component_Healthz_StatusPath {
+	ps := &Component_Healthz_StatusPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "status"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Status (leaf): The status of the component, indicating its current health.
+//
+//	Defining module:      "openconfig-platform-healthz"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/status"
+//	Path from root:       "/components/component/healthz/state/status"
+func (n *Component_HealthzPathAny) Status() *Component_Healthz_StatusPathAny {
+	ps := &Component_Healthz_StatusPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "status"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// UnhealthyCount (leaf): The number of status checks that have determined this component
+// to be in an unhealthy state. This counter should be incremented
+// when the component transitions from the HEALTHY to any other
+// state such that the value reflects the number of times the
+// component has become unhealthy.
+//
+//	Defining module:      "openconfig-platform-healthz"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/unhealthy-count"
+//	Path from root:       "/components/component/healthz/state/unhealthy-count"
+func (n *Component_HealthzPath) UnhealthyCount() *Component_Healthz_UnhealthyCountPath {
+	ps := &Component_Healthz_UnhealthyCountPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "unhealthy-count"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// UnhealthyCount (leaf): The number of status checks that have determined this component
+// to be in an unhealthy state. This counter should be incremented
+// when the component transitions from the HEALTHY to any other
+// state such that the value reflects the number of times the
+// component has become unhealthy.
+//
+//	Defining module:      "openconfig-platform-healthz"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/unhealthy-count"
+//	Path from root:       "/components/component/healthz/state/unhealthy-count"
+func (n *Component_HealthzPathAny) UnhealthyCount() *Component_Healthz_UnhealthyCountPathAny {
+	ps := &Component_Healthz_UnhealthyCountPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "unhealthy-count"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_HealthzPath) State() ygnmi.SingletonQuery[*oc.Component_Healthz] {
+	return ygnmi.NewSingletonQuery[*oc.Component_Healthz](
+		"Component_Healthz",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_HealthzPathAny) State() ygnmi.WildcardQuery[*oc.Component_Healthz] {
+	return ygnmi.NewWildcardQuery[*oc.Component_Healthz](
+		"Component_Healthz",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *Component_HealthzPath) Config() ygnmi.ConfigQuery[*oc.Component_Healthz] {
+	return ygnmi.NewConfigQuery[*oc.Component_Healthz](
+		"Component_Healthz",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *Component_HealthzPathAny) Config() ygnmi.WildcardQuery[*oc.Component_Healthz] {
+	return ygnmi.NewWildcardQuery[*oc.Component_Healthz](
+		"Component_Healthz",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Component_Healthz_Fault_DescriptionPath represents the /openconfig-platform/components/component/healthz/faults/fault/state/description YANG schema element.
+type Component_Healthz_Fault_DescriptionPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Healthz_Fault_DescriptionPathAny represents the wildcard version of the /openconfig-platform/components/component/healthz/faults/fault/state/description YANG schema element.
+type Component_Healthz_Fault_DescriptionPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Component_Healthz_Fault_DescriptionPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-healthz-fault"
+//	Instantiating module: "openconfig-platform-healthz-fault"
+//	Path from parent:     "state/description"
+//	Path from root:       "/components/component/healthz/faults/fault/state/description"
+func (n *Component_Healthz_Fault_DescriptionPath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewSingletonQuery[string](
+		"Component_Healthz_Fault",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "description"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Component_Healthz_Fault).Description
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Healthz_Fault) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-healthz-fault"
+//	Instantiating module: "openconfig-platform-healthz-fault"
+//	Path from parent:     "state/description"
+//	Path from root:       "/components/component/healthz/faults/fault/state/description"
+func (n *Component_Healthz_Fault_DescriptionPathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"Component_Healthz_Fault",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "description"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Component_Healthz_Fault).Description
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Healthz_Fault) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Component_Healthz_Fault_LastDetectionTimePath represents the /openconfig-platform/components/component/healthz/faults/fault/state/last-detection-time YANG schema element.
+type Component_Healthz_Fault_LastDetectionTimePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Healthz_Fault_LastDetectionTimePathAny represents the wildcard version of the /openconfig-platform/components/component/healthz/faults/fault/state/last-detection-time YANG schema element.
+type Component_Healthz_Fault_LastDetectionTimePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Component_Healthz_Fault_LastDetectionTimePath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-healthz-fault"
+//	Instantiating module: "openconfig-platform-healthz-fault"
+//	Path from parent:     "state/last-detection-time"
+//	Path from root:       "/components/component/healthz/faults/fault/state/last-detection-time"
+func (n *Component_Healthz_Fault_LastDetectionTimePath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Component_Healthz_Fault",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "last-detection-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_Healthz_Fault).LastDetectionTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Healthz_Fault) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-healthz-fault"
+//	Instantiating module: "openconfig-platform-healthz-fault"
+//	Path from parent:     "state/last-detection-time"
+//	Path from root:       "/components/component/healthz/faults/fault/state/last-detection-time"
+func (n *Component_Healthz_Fault_LastDetectionTimePathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Component_Healthz_Fault",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "last-detection-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_Healthz_Fault).LastDetectionTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Healthz_Fault) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Component_Healthz_Fault_OriginTimePath represents the /openconfig-platform/components/component/healthz/faults/fault/state/origin-time YANG schema element.
+type Component_Healthz_Fault_OriginTimePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Healthz_Fault_OriginTimePathAny represents the wildcard version of the /openconfig-platform/components/component/healthz/faults/fault/state/origin-time YANG schema element.
+type Component_Healthz_Fault_OriginTimePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Component_Healthz_Fault_OriginTimePath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-healthz-fault"
+//	Instantiating module: "openconfig-platform-healthz-fault"
+//	Path from parent:     "state/origin-time"
+//	Path from root:       "/components/component/healthz/faults/fault/state/origin-time"
+func (n *Component_Healthz_Fault_OriginTimePath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Component_Healthz_Fault",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "origin-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_Healthz_Fault).OriginTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Healthz_Fault) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-healthz-fault"
+//	Instantiating module: "openconfig-platform-healthz-fault"
+//	Path from parent:     "state/origin-time"
+//	Path from root:       "/components/component/healthz/faults/fault/state/origin-time"
+func (n *Component_Healthz_Fault_OriginTimePathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Component_Healthz_Fault",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "origin-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_Healthz_Fault).OriginTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Healthz_Fault) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Component_Healthz_Fault_StatusPath represents the /openconfig-platform/components/component/healthz/faults/fault/state/status YANG schema element.
+type Component_Healthz_Fault_StatusPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Healthz_Fault_StatusPathAny represents the wildcard version of the /openconfig-platform/components/component/healthz/faults/fault/state/status YANG schema element.
+type Component_Healthz_Fault_StatusPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Component_Healthz_Fault_StatusPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-healthz-fault"
+//	Instantiating module: "openconfig-platform-healthz-fault"
+//	Path from parent:     "state/status"
+//	Path from root:       "/components/component/healthz/faults/fault/state/status"
+func (n *Component_Healthz_Fault_StatusPath) State() ygnmi.SingletonQuery[oc.E_Fault_Status] {
+	return ygnmi.NewSingletonQuery[oc.E_Fault_Status](
+		"Component_Healthz_Fault",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "status"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Fault_Status, bool) {
+			ret := gs.(*oc.Component_Healthz_Fault).Status
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Healthz_Fault) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-healthz-fault"
+//	Instantiating module: "openconfig-platform-healthz-fault"
+//	Path from parent:     "state/status"
+//	Path from root:       "/components/component/healthz/faults/fault/state/status"
+func (n *Component_Healthz_Fault_StatusPathAny) State() ygnmi.WildcardQuery[oc.E_Fault_Status] {
+	return ygnmi.NewWildcardQuery[oc.E_Fault_Status](
+		"Component_Healthz_Fault",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "status"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Fault_Status, bool) {
+			ret := gs.(*oc.Component_Healthz_Fault).Status
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Healthz_Fault) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Component_Healthz_Fault_SymptomPath represents the /openconfig-platform/components/component/healthz/faults/fault/state/symptom YANG schema element.
+type Component_Healthz_Fault_SymptomPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Healthz_Fault_SymptomPathAny represents the wildcard version of the /openconfig-platform/components/component/healthz/faults/fault/state/symptom YANG schema element.
+type Component_Healthz_Fault_SymptomPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Component_Healthz_Fault_SymptomPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-healthz-fault"
+//	Instantiating module: "openconfig-platform-healthz-fault"
+//	Path from parent:     "state/symptom"
+//	Path from root:       "/components/component/healthz/faults/fault/state/symptom"
+func (n *Component_Healthz_Fault_SymptomPath) State() ygnmi.SingletonQuery[oc.E_PlatformHealthzFault_SYMPTOM_BASE] {
+	return ygnmi.NewSingletonQuery[oc.E_PlatformHealthzFault_SYMPTOM_BASE](
+		"Component_Healthz_Fault",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "symptom"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_PlatformHealthzFault_SYMPTOM_BASE, bool) {
+			ret := gs.(*oc.Component_Healthz_Fault).Symptom
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Healthz_Fault) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-healthz-fault"
+//	Instantiating module: "openconfig-platform-healthz-fault"
+//	Path from parent:     "state/symptom"
+//	Path from root:       "/components/component/healthz/faults/fault/state/symptom"
+func (n *Component_Healthz_Fault_SymptomPathAny) State() ygnmi.WildcardQuery[oc.E_PlatformHealthzFault_SYMPTOM_BASE] {
+	return ygnmi.NewWildcardQuery[oc.E_PlatformHealthzFault_SYMPTOM_BASE](
+		"Component_Healthz_Fault",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "symptom"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_PlatformHealthzFault_SYMPTOM_BASE, bool) {
+			ret := gs.(*oc.Component_Healthz_Fault).Symptom
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Healthz_Fault) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-healthz-fault"
+//	Instantiating module: "openconfig-platform-healthz-fault"
+//	Path from parent:     "symptom"
+//	Path from root:       ""
+func (n *Component_Healthz_Fault_SymptomPath) Config() ygnmi.ConfigQuery[oc.E_PlatformHealthzFault_SYMPTOM_BASE] {
+	return ygnmi.NewConfigQuery[oc.E_PlatformHealthzFault_SYMPTOM_BASE](
+		"Component_Healthz_Fault",
+		false,
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"symptom"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_PlatformHealthzFault_SYMPTOM_BASE, bool) {
+			ret := gs.(*oc.Component_Healthz_Fault).Symptom
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Healthz_Fault) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-healthz-fault"
+//	Instantiating module: "openconfig-platform-healthz-fault"
+//	Path from parent:     "symptom"
+//	Path from root:       ""
+func (n *Component_Healthz_Fault_SymptomPathAny) Config() ygnmi.WildcardQuery[oc.E_PlatformHealthzFault_SYMPTOM_BASE] {
+	return ygnmi.NewWildcardQuery[oc.E_PlatformHealthzFault_SYMPTOM_BASE](
+		"Component_Healthz_Fault",
+		false,
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"symptom"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_PlatformHealthzFault_SYMPTOM_BASE, bool) {
+			ret := gs.(*oc.Component_Healthz_Fault).Symptom
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Healthz_Fault) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Component_Healthz_FaultPath represents the /openconfig-platform/components/component/healthz/faults/fault YANG schema element.
+type Component_Healthz_FaultPath struct {
+	*ygnmi.NodePath
+}
+
+// Component_Healthz_FaultPathAny represents the wildcard version of the /openconfig-platform/components/component/healthz/faults/fault YANG schema element.
+type Component_Healthz_FaultPathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Component_Healthz_FaultPath) PathOriginName() string {
+	return "openconfig"
+}
+
+// Component_Healthz_FaultPathMap represents the /openconfig-platform/components/component/healthz/faults/fault YANG schema element.
+type Component_Healthz_FaultPathMap struct {
+	*ygnmi.NodePath
+}
+
+// Component_Healthz_FaultPathMapAny represents the wildcard version of the /openconfig-platform/components/component/healthz/faults/fault YANG schema element.
+type Component_Healthz_FaultPathMapAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Component_Healthz_FaultPathMap) PathOriginName() string {
+	return "openconfig"
+}
+
+// Counters (container): A collection of fault counters.
+//
+//	Defining module:      "openconfig-platform-healthz-fault"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/counters"
+//	Path from root:       "/components/component/healthz/faults/fault/state/counters"
+func (n *Component_Healthz_FaultPath) Counters() *Component_Healthz_Fault_CountersPath {
+	ps := &Component_Healthz_Fault_CountersPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "counters"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// Counters (container): A collection of fault counters.
+//
+//	Defining module:      "openconfig-platform-healthz-fault"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/counters"
+//	Path from root:       "/components/component/healthz/faults/fault/state/counters"
+func (n *Component_Healthz_FaultPathAny) Counters() *Component_Healthz_Fault_CountersPathAny {
+	ps := &Component_Healthz_Fault_CountersPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "counters"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// Description (leaf): Description of the fault to assist with debuggability.
+// This is purely for informational purposes and consuming systems
+// should not expect a common behaviour/pattern, even across software
+// releases or hardware platforms
+//
+//	Defining module:      "openconfig-platform-healthz-fault"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/description"
+//	Path from root:       "/components/component/healthz/faults/fault/state/description"
+func (n *Component_Healthz_FaultPath) Description() *Component_Healthz_Fault_DescriptionPath {
+	ps := &Component_Healthz_Fault_DescriptionPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "description"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Description (leaf): Description of the fault to assist with debuggability.
+// This is purely for informational purposes and consuming systems
+// should not expect a common behaviour/pattern, even across software
+// releases or hardware platforms
+//
+//	Defining module:      "openconfig-platform-healthz-fault"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/description"
+//	Path from root:       "/components/component/healthz/faults/fault/state/description"
+func (n *Component_Healthz_FaultPathAny) Description() *Component_Healthz_Fault_DescriptionPathAny {
+	ps := &Component_Healthz_Fault_DescriptionPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "description"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// LastDetectionTime (leaf): The time at which the fault's underlying condition was last sampled
+// and confirmed asserted.
+//
+// The value is a Unix Epoch timestamp (nanoseconds since
+// Jan 1, 1970 00:00:00 UTC)
+//
+//	Defining module:      "openconfig-platform-healthz-fault"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/last-detection-time"
+//	Path from root:       "/components/component/healthz/faults/fault/state/last-detection-time"
+func (n *Component_Healthz_FaultPath) LastDetectionTime() *Component_Healthz_Fault_LastDetectionTimePath {
+	ps := &Component_Healthz_Fault_LastDetectionTimePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "last-detection-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// LastDetectionTime (leaf): The time at which the fault's underlying condition was last sampled
+// and confirmed asserted.
+//
+// The value is a Unix Epoch timestamp (nanoseconds since
+// Jan 1, 1970 00:00:00 UTC)
+//
+//	Defining module:      "openconfig-platform-healthz-fault"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/last-detection-time"
+//	Path from root:       "/components/component/healthz/faults/fault/state/last-detection-time"
+func (n *Component_Healthz_FaultPathAny) LastDetectionTime() *Component_Healthz_Fault_LastDetectionTimePathAny {
+	ps := &Component_Healthz_Fault_LastDetectionTimePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "last-detection-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// OriginTime (leaf): The time at which the fault first became active.
+// This value is static for the life of the fault.
+//
+// The value is a Unix Epoch timestamp (nanoseconds since
+// Jan 1, 1970 00:00:00 UTC)
+//
+//	Defining module:      "openconfig-platform-healthz-fault"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/origin-time"
+//	Path from root:       "/components/component/healthz/faults/fault/state/origin-time"
+func (n *Component_Healthz_FaultPath) OriginTime() *Component_Healthz_Fault_OriginTimePath {
+	ps := &Component_Healthz_Fault_OriginTimePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "origin-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// OriginTime (leaf): The time at which the fault first became active.
+// This value is static for the life of the fault.
+//
+// The value is a Unix Epoch timestamp (nanoseconds since
+// Jan 1, 1970 00:00:00 UTC)
+//
+//	Defining module:      "openconfig-platform-healthz-fault"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/origin-time"
+//	Path from root:       "/components/component/healthz/faults/fault/state/origin-time"
+func (n *Component_Healthz_FaultPathAny) OriginTime() *Component_Healthz_Fault_OriginTimePathAny {
+	ps := &Component_Healthz_Fault_OriginTimePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "origin-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// RemediationAny (list): List of recommended actions to respond to the fault
+//
+//	Defining module:      "openconfig-platform-healthz-fault"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "remediations/remediation"
+//	Path from root:       "/components/component/healthz/faults/fault/remediations/remediation"
+func (n *Component_Healthz_FaultPath) RemediationAny() *Component_Healthz_Fault_RemediationPathAny {
+	ps := &Component_Healthz_Fault_RemediationPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"remediations", "remediation"},
+			map[string]interface{}{"index": "*"},
+			n,
+		),
+	}
+	return ps
+}
+
+// RemediationAny (list): List of recommended actions to respond to the fault
+//
+//	Defining module:      "openconfig-platform-healthz-fault"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "remediations/remediation"
+//	Path from root:       "/components/component/healthz/faults/fault/remediations/remediation"
+func (n *Component_Healthz_FaultPathAny) RemediationAny() *Component_Healthz_Fault_RemediationPathAny {
+	ps := &Component_Healthz_Fault_RemediationPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"remediations", "remediation"},
+			map[string]interface{}{"index": "*"},
+			n,
+		),
+	}
+	return ps
+}
+
+// Remediation (list): List of recommended actions to respond to the fault
+//
+//	Defining module:      "openconfig-platform-healthz-fault"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "remediations/remediation"
+//	Path from root:       "/components/component/healthz/faults/fault/remediations/remediation"
+//
+//	Index: uint64
+func (n *Component_Healthz_FaultPath) Remediation(Index uint64) *Component_Healthz_Fault_RemediationPath {
+	ps := &Component_Healthz_Fault_RemediationPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"remediations", "remediation"},
+			map[string]interface{}{"index": Index},
+			n,
+		),
+	}
+	return ps
+}
+
+// Remediation (list): List of recommended actions to respond to the fault
+//
+//	Defining module:      "openconfig-platform-healthz-fault"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "remediations/remediation"
+//	Path from root:       "/components/component/healthz/faults/fault/remediations/remediation"
+//
+//	Index: uint64
+func (n *Component_Healthz_FaultPathAny) Remediation(Index uint64) *Component_Healthz_Fault_RemediationPathAny {
+	ps := &Component_Healthz_Fault_RemediationPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"remediations", "remediation"},
+			map[string]interface{}{"index": Index},
+			n,
+		),
+	}
+	return ps
+}
+
+// RemediationMap (list): List of recommended actions to respond to the fault
+//
+//	Defining module:      "openconfig-platform-healthz-fault"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "remediations/remediation"
+//	Path from root:       "/components/component/healthz/faults/fault/remediations/remediation"
+func (n *Component_Healthz_FaultPath) RemediationMap() *Component_Healthz_Fault_RemediationPathMap {
+	ps := &Component_Healthz_Fault_RemediationPathMap{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"remediations"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// RemediationMap (list): List of recommended actions to respond to the fault
+//
+//	Defining module:      "openconfig-platform-healthz-fault"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "remediations/remediation"
+//	Path from root:       "/components/component/healthz/faults/fault/remediations/remediation"
+func (n *Component_Healthz_FaultPathAny) RemediationMap() *Component_Healthz_Fault_RemediationPathMapAny {
+	ps := &Component_Healthz_Fault_RemediationPathMapAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"remediations"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// Status (leaf): The status of the fault, indicates whether the underlying condition
+// is actively asserted.
+//
+//	Defining module:      "openconfig-platform-healthz-fault"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/status"
+//	Path from root:       "/components/component/healthz/faults/fault/state/status"
+func (n *Component_Healthz_FaultPath) Status() *Component_Healthz_Fault_StatusPath {
+	ps := &Component_Healthz_Fault_StatusPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "status"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Status (leaf): The status of the fault, indicates whether the underlying condition
+// is actively asserted.
+//
+//	Defining module:      "openconfig-platform-healthz-fault"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/status"
+//	Path from root:       "/components/component/healthz/faults/fault/state/status"
+func (n *Component_Healthz_FaultPathAny) Status() *Component_Healthz_Fault_StatusPathAny {
+	ps := &Component_Healthz_Fault_StatusPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "status"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Symptom (leaf): The symptom that raised this fault
+//
+//	Defining module:      "openconfig-platform-healthz-fault"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "*/symptom"
+//	Path from root:       "/components/component/healthz/faults/fault/*/symptom"
+func (n *Component_Healthz_FaultPath) Symptom() *Component_Healthz_Fault_SymptomPath {
+	ps := &Component_Healthz_Fault_SymptomPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "symptom"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Symptom (leaf): The symptom that raised this fault
+//
+//	Defining module:      "openconfig-platform-healthz-fault"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "*/symptom"
+//	Path from root:       "/components/component/healthz/faults/fault/*/symptom"
+func (n *Component_Healthz_FaultPathAny) Symptom() *Component_Healthz_Fault_SymptomPathAny {
+	ps := &Component_Healthz_Fault_SymptomPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "symptom"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_Healthz_FaultPath) State() ygnmi.SingletonQuery[*oc.Component_Healthz_Fault] {
+	return ygnmi.NewSingletonQuery[*oc.Component_Healthz_Fault](
+		"Component_Healthz_Fault",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_Healthz_FaultPathAny) State() ygnmi.WildcardQuery[*oc.Component_Healthz_Fault] {
+	return ygnmi.NewWildcardQuery[*oc.Component_Healthz_Fault](
+		"Component_Healthz_Fault",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_Healthz_FaultPathMap) State() ygnmi.SingletonQuery[map[oc.E_PlatformHealthzFault_SYMPTOM_BASE]*oc.Component_Healthz_Fault] {
+	return ygnmi.NewSingletonQuery[map[oc.E_PlatformHealthzFault_SYMPTOM_BASE]*oc.Component_Healthz_Fault](
+		"Component_Healthz",
+		true,
+		false,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[oc.E_PlatformHealthzFault_SYMPTOM_BASE]*oc.Component_Healthz_Fault, bool) {
+			ret := gs.(*oc.Component_Healthz).Fault
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Healthz) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-platform-healthz-fault:faults"},
+			PostRelPath: []string{"openconfig-platform-healthz-fault:fault"},
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_Healthz_FaultPathMapAny) State() ygnmi.WildcardQuery[map[oc.E_PlatformHealthzFault_SYMPTOM_BASE]*oc.Component_Healthz_Fault] {
+	return ygnmi.NewWildcardQuery[map[oc.E_PlatformHealthzFault_SYMPTOM_BASE]*oc.Component_Healthz_Fault](
+		"Component_Healthz",
+		true,
+		false,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[oc.E_PlatformHealthzFault_SYMPTOM_BASE]*oc.Component_Healthz_Fault, bool) {
+			ret := gs.(*oc.Component_Healthz).Fault
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Healthz) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-platform-healthz-fault:faults"},
+			PostRelPath: []string{"openconfig-platform-healthz-fault:fault"},
+		},
+	)
+}
+
+// Component_Healthz_Fault_Counters_OccurrencesPath represents the /openconfig-platform/components/component/healthz/faults/fault/state/counters/occurrences YANG schema element.
+type Component_Healthz_Fault_Counters_OccurrencesPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Healthz_Fault_Counters_OccurrencesPathAny represents the wildcard version of the /openconfig-platform/components/component/healthz/faults/fault/state/counters/occurrences YANG schema element.
+type Component_Healthz_Fault_Counters_OccurrencesPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Component_Healthz_Fault_Counters_OccurrencesPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-healthz-fault"
+//	Instantiating module: "openconfig-platform-healthz-fault"
+//	Path from parent:     "occurrences"
+//	Path from root:       "/components/component/healthz/faults/fault/state/counters/occurrences"
+func (n *Component_Healthz_Fault_Counters_OccurrencesPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Component_Healthz_Fault_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"occurrences"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_Healthz_Fault_Counters).Occurrences
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Healthz_Fault_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-healthz-fault"
+//	Instantiating module: "openconfig-platform-healthz-fault"
+//	Path from parent:     "occurrences"
+//	Path from root:       "/components/component/healthz/faults/fault/state/counters/occurrences"
+func (n *Component_Healthz_Fault_Counters_OccurrencesPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Component_Healthz_Fault_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"occurrences"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_Healthz_Fault_Counters).Occurrences
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Healthz_Fault_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Component_Healthz_Fault_CountersPath represents the /openconfig-platform/components/component/healthz/faults/fault/state/counters YANG schema element.
+type Component_Healthz_Fault_CountersPath struct {
+	*ygnmi.NodePath
+}
+
+// Component_Healthz_Fault_CountersPathAny represents the wildcard version of the /openconfig-platform/components/component/healthz/faults/fault/state/counters YANG schema element.
+type Component_Healthz_Fault_CountersPathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Component_Healthz_Fault_CountersPath) PathOriginName() string {
+	return "openconfig"
+}
+
+// Occurrences (leaf): The number of times this fault transitioned into the active state.
+// When a fault is added, this value should start at 1.
+//
+//	Defining module:      "openconfig-platform-healthz-fault"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "occurrences"
+//	Path from root:       "/components/component/healthz/faults/fault/state/counters/occurrences"
+func (n *Component_Healthz_Fault_CountersPath) Occurrences() *Component_Healthz_Fault_Counters_OccurrencesPath {
+	ps := &Component_Healthz_Fault_Counters_OccurrencesPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"occurrences"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Occurrences (leaf): The number of times this fault transitioned into the active state.
+// When a fault is added, this value should start at 1.
+//
+//	Defining module:      "openconfig-platform-healthz-fault"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "occurrences"
+//	Path from root:       "/components/component/healthz/faults/fault/state/counters/occurrences"
+func (n *Component_Healthz_Fault_CountersPathAny) Occurrences() *Component_Healthz_Fault_Counters_OccurrencesPathAny {
+	ps := &Component_Healthz_Fault_Counters_OccurrencesPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"occurrences"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_Healthz_Fault_CountersPath) State() ygnmi.SingletonQuery[*oc.Component_Healthz_Fault_Counters] {
+	return ygnmi.NewSingletonQuery[*oc.Component_Healthz_Fault_Counters](
+		"Component_Healthz_Fault_Counters",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_Healthz_Fault_CountersPathAny) State() ygnmi.WildcardQuery[*oc.Component_Healthz_Fault_Counters] {
+	return ygnmi.NewWildcardQuery[*oc.Component_Healthz_Fault_Counters](
+		"Component_Healthz_Fault_Counters",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Component_Healthz_Fault_Remediation_ActionPath represents the /openconfig-platform/components/component/healthz/faults/fault/remediations/remediation/state/action YANG schema element.
+type Component_Healthz_Fault_Remediation_ActionPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Healthz_Fault_Remediation_ActionPathAny represents the wildcard version of the /openconfig-platform/components/component/healthz/faults/fault/remediations/remediation/state/action YANG schema element.
+type Component_Healthz_Fault_Remediation_ActionPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Component_Healthz_Fault_Remediation_ActionPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-healthz-fault"
+//	Instantiating module: "openconfig-platform-healthz-fault"
+//	Path from parent:     "state/action"
+//	Path from root:       "/components/component/healthz/faults/fault/remediations/remediation/state/action"
+func (n *Component_Healthz_Fault_Remediation_ActionPath) State() ygnmi.SingletonQuery[oc.E_PlatformHealthzFault_ACTION_BASE] {
+	return ygnmi.NewSingletonQuery[oc.E_PlatformHealthzFault_ACTION_BASE](
+		"Component_Healthz_Fault_Remediation",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "action"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_PlatformHealthzFault_ACTION_BASE, bool) {
+			ret := gs.(*oc.Component_Healthz_Fault_Remediation).Action
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Healthz_Fault_Remediation) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-healthz-fault"
+//	Instantiating module: "openconfig-platform-healthz-fault"
+//	Path from parent:     "state/action"
+//	Path from root:       "/components/component/healthz/faults/fault/remediations/remediation/state/action"
+func (n *Component_Healthz_Fault_Remediation_ActionPathAny) State() ygnmi.WildcardQuery[oc.E_PlatformHealthzFault_ACTION_BASE] {
+	return ygnmi.NewWildcardQuery[oc.E_PlatformHealthzFault_ACTION_BASE](
+		"Component_Healthz_Fault_Remediation",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "action"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_PlatformHealthzFault_ACTION_BASE, bool) {
+			ret := gs.(*oc.Component_Healthz_Fault_Remediation).Action
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Healthz_Fault_Remediation) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Component_Healthz_Fault_Remediation_IndexPath represents the /openconfig-platform/components/component/healthz/faults/fault/remediations/remediation/state/index YANG schema element.
+type Component_Healthz_Fault_Remediation_IndexPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Healthz_Fault_Remediation_IndexPathAny represents the wildcard version of the /openconfig-platform/components/component/healthz/faults/fault/remediations/remediation/state/index YANG schema element.
+type Component_Healthz_Fault_Remediation_IndexPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Component_Healthz_Fault_Remediation_IndexPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-healthz-fault"
+//	Instantiating module: "openconfig-platform-healthz-fault"
+//	Path from parent:     "state/index"
+//	Path from root:       "/components/component/healthz/faults/fault/remediations/remediation/state/index"
+func (n *Component_Healthz_Fault_Remediation_IndexPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Component_Healthz_Fault_Remediation",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "index"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_Healthz_Fault_Remediation).Index
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Healthz_Fault_Remediation) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-healthz-fault"
+//	Instantiating module: "openconfig-platform-healthz-fault"
+//	Path from parent:     "state/index"
+//	Path from root:       "/components/component/healthz/faults/fault/remediations/remediation/state/index"
+func (n *Component_Healthz_Fault_Remediation_IndexPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Component_Healthz_Fault_Remediation",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "index"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_Healthz_Fault_Remediation).Index
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Healthz_Fault_Remediation) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-healthz-fault"
+//	Instantiating module: "openconfig-platform-healthz-fault"
+//	Path from parent:     "index"
+//	Path from root:       ""
+func (n *Component_Healthz_Fault_Remediation_IndexPath) Config() ygnmi.ConfigQuery[uint64] {
+	return ygnmi.NewConfigQuery[uint64](
+		"Component_Healthz_Fault_Remediation",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"index"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_Healthz_Fault_Remediation).Index
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Healthz_Fault_Remediation) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-healthz-fault"
+//	Instantiating module: "openconfig-platform-healthz-fault"
+//	Path from parent:     "index"
+//	Path from root:       ""
+func (n *Component_Healthz_Fault_Remediation_IndexPathAny) Config() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Component_Healthz_Fault_Remediation",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"index"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_Healthz_Fault_Remediation).Index
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Healthz_Fault_Remediation) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Component_Healthz_Fault_Remediation_TargetPath represents the /openconfig-platform/components/component/healthz/faults/fault/remediations/remediation/state/target YANG schema element.
+type Component_Healthz_Fault_Remediation_TargetPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Healthz_Fault_Remediation_TargetPathAny represents the wildcard version of the /openconfig-platform/components/component/healthz/faults/fault/remediations/remediation/state/target YANG schema element.
+type Component_Healthz_Fault_Remediation_TargetPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Component_Healthz_Fault_Remediation_TargetPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-healthz-fault"
+//	Instantiating module: "openconfig-platform-healthz-fault"
+//	Path from parent:     "state/target"
+//	Path from root:       "/components/component/healthz/faults/fault/remediations/remediation/state/target"
+func (n *Component_Healthz_Fault_Remediation_TargetPath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewSingletonQuery[string](
+		"Component_Healthz_Fault_Remediation",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "target"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Component_Healthz_Fault_Remediation).Target
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Healthz_Fault_Remediation) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-healthz-fault"
+//	Instantiating module: "openconfig-platform-healthz-fault"
+//	Path from parent:     "state/target"
+//	Path from root:       "/components/component/healthz/faults/fault/remediations/remediation/state/target"
+func (n *Component_Healthz_Fault_Remediation_TargetPathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"Component_Healthz_Fault_Remediation",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "target"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Component_Healthz_Fault_Remediation).Target
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Healthz_Fault_Remediation) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Component_Healthz_Fault_RemediationPath represents the /openconfig-platform/components/component/healthz/faults/fault/remediations/remediation YANG schema element.
+type Component_Healthz_Fault_RemediationPath struct {
+	*ygnmi.NodePath
+}
+
+// Component_Healthz_Fault_RemediationPathAny represents the wildcard version of the /openconfig-platform/components/component/healthz/faults/fault/remediations/remediation YANG schema element.
+type Component_Healthz_Fault_RemediationPathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Component_Healthz_Fault_RemediationPath) PathOriginName() string {
+	return "openconfig"
+}
+
+// Component_Healthz_Fault_RemediationPathMap represents the /openconfig-platform/components/component/healthz/faults/fault/remediations/remediation YANG schema element.
+type Component_Healthz_Fault_RemediationPathMap struct {
+	*ygnmi.NodePath
+}
+
+// Component_Healthz_Fault_RemediationPathMapAny represents the wildcard version of the /openconfig-platform/components/component/healthz/faults/fault/remediations/remediation YANG schema element.
+type Component_Healthz_Fault_RemediationPathMapAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Component_Healthz_Fault_RemediationPathMap) PathOriginName() string {
+	return "openconfig"
+}
+
+// Action (leaf): The specific action to be performed
+//
+//	Defining module:      "openconfig-platform-healthz-fault"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/action"
+//	Path from root:       "/components/component/healthz/faults/fault/remediations/remediation/state/action"
+func (n *Component_Healthz_Fault_RemediationPath) Action() *Component_Healthz_Fault_Remediation_ActionPath {
+	ps := &Component_Healthz_Fault_Remediation_ActionPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "action"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Action (leaf): The specific action to be performed
+//
+//	Defining module:      "openconfig-platform-healthz-fault"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/action"
+//	Path from root:       "/components/component/healthz/faults/fault/remediations/remediation/state/action"
+func (n *Component_Healthz_Fault_RemediationPathAny) Action() *Component_Healthz_Fault_Remediation_ActionPathAny {
+	ps := &Component_Healthz_Fault_Remediation_ActionPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "action"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Index (leaf): This index indicates the order in which the actions should be
+// applied. The order should progress from least to most
+// disruptive.
+//
+//	Defining module:      "openconfig-platform-healthz-fault"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "*/index"
+//	Path from root:       "/components/component/healthz/faults/fault/remediations/remediation/*/index"
+func (n *Component_Healthz_Fault_RemediationPath) Index() *Component_Healthz_Fault_Remediation_IndexPath {
+	ps := &Component_Healthz_Fault_Remediation_IndexPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "index"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Index (leaf): This index indicates the order in which the actions should be
+// applied. The order should progress from least to most
+// disruptive.
+//
+//	Defining module:      "openconfig-platform-healthz-fault"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "*/index"
+//	Path from root:       "/components/component/healthz/faults/fault/remediations/remediation/*/index"
+func (n *Component_Healthz_Fault_RemediationPathAny) Index() *Component_Healthz_Fault_Remediation_IndexPathAny {
+	ps := &Component_Healthz_Fault_Remediation_IndexPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "index"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Target (leaf): The component on which the action should be applied
+//
+//	Defining module:      "openconfig-platform-healthz-fault"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/target"
+//	Path from root:       "/components/component/healthz/faults/fault/remediations/remediation/state/target"
+func (n *Component_Healthz_Fault_RemediationPath) Target() *Component_Healthz_Fault_Remediation_TargetPath {
+	ps := &Component_Healthz_Fault_Remediation_TargetPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "target"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Target (leaf): The component on which the action should be applied
+//
+//	Defining module:      "openconfig-platform-healthz-fault"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/target"
+//	Path from root:       "/components/component/healthz/faults/fault/remediations/remediation/state/target"
+func (n *Component_Healthz_Fault_RemediationPathAny) Target() *Component_Healthz_Fault_Remediation_TargetPathAny {
+	ps := &Component_Healthz_Fault_Remediation_TargetPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "target"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_Healthz_Fault_RemediationPath) State() ygnmi.SingletonQuery[*oc.Component_Healthz_Fault_Remediation] {
+	return ygnmi.NewSingletonQuery[*oc.Component_Healthz_Fault_Remediation](
+		"Component_Healthz_Fault_Remediation",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_Healthz_Fault_RemediationPathAny) State() ygnmi.WildcardQuery[*oc.Component_Healthz_Fault_Remediation] {
+	return ygnmi.NewWildcardQuery[*oc.Component_Healthz_Fault_Remediation](
+		"Component_Healthz_Fault_Remediation",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_Healthz_Fault_RemediationPathMap) State() ygnmi.SingletonQuery[map[uint64]*oc.Component_Healthz_Fault_Remediation] {
+	return ygnmi.NewSingletonQuery[map[uint64]*oc.Component_Healthz_Fault_Remediation](
+		"Component_Healthz_Fault",
+		true,
+		false,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[uint64]*oc.Component_Healthz_Fault_Remediation, bool) {
+			ret := gs.(*oc.Component_Healthz_Fault).Remediation
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Healthz_Fault) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-platform-healthz-fault:remediations"},
+			PostRelPath: []string{"openconfig-platform-healthz-fault:remediation"},
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_Healthz_Fault_RemediationPathMapAny) State() ygnmi.WildcardQuery[map[uint64]*oc.Component_Healthz_Fault_Remediation] {
+	return ygnmi.NewWildcardQuery[map[uint64]*oc.Component_Healthz_Fault_Remediation](
+		"Component_Healthz_Fault",
+		true,
+		false,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[uint64]*oc.Component_Healthz_Fault_Remediation, bool) {
+			ret := gs.(*oc.Component_Healthz_Fault).Remediation
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Healthz_Fault) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-platform-healthz-fault:remediations"},
+			PostRelPath: []string{"openconfig-platform-healthz-fault:remediation"},
 		},
 	)
 }
@@ -69841,6 +72479,42 @@ func (n *Component_PortPathAny) BreakoutMode() *Component_Port_BreakoutModePathA
 	return ps
 }
 
+// OpticalPort (container): Contains data specific to ports on optical transport
+// devices.
+//
+//	Defining module:      "openconfig-transport-line-common"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "optical-port"
+//	Path from root:       "/components/component/port/optical-port"
+func (n *Component_PortPath) OpticalPort() *Component_Port_OpticalPortPath {
+	ps := &Component_Port_OpticalPortPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"optical-port"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// OpticalPort (container): Contains data specific to ports on optical transport
+// devices.
+//
+//	Defining module:      "openconfig-transport-line-common"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "optical-port"
+//	Path from root:       "/components/component/port/optical-port"
+func (n *Component_PortPathAny) OpticalPort() *Component_Port_OpticalPortPathAny {
+	ps := &Component_Port_OpticalPortPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"optical-port"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
 // State returns a Query that can be used in gNMI operations.
 func (n *Component_PortPath) State() ygnmi.SingletonQuery[*oc.Component_Port] {
 	return ygnmi.NewSingletonQuery[*oc.Component_Port](
@@ -71287,6 +73961,2730 @@ func (n *Component_Port_BreakoutMode_GroupPathMapAny) Config() ygnmi.WildcardQue
 			PreRelPath:  []string{"openconfig-platform-port:groups"},
 			PostRelPath: []string{"openconfig-platform-port:group"},
 		},
+	)
+}
+
+// Component_Port_OpticalPort_AdminStatePath represents the /openconfig-platform/components/component/port/optical-port/state/admin-state YANG schema element.
+type Component_Port_OpticalPort_AdminStatePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Port_OpticalPort_AdminStatePathAny represents the wildcard version of the /openconfig-platform/components/component/port/optical-port/state/admin-state YANG schema element.
+type Component_Port_OpticalPort_AdminStatePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Component_Port_OpticalPort_AdminStatePath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-line-common"
+//	Instantiating module: "openconfig-transport-line-common"
+//	Path from parent:     "state/admin-state"
+//	Path from root:       "/components/component/port/optical-port/state/admin-state"
+func (n *Component_Port_OpticalPort_AdminStatePath) State() ygnmi.SingletonQuery[oc.E_TransportLineCommon_AdminStateType] {
+	return ygnmi.NewSingletonQuery[oc.E_TransportLineCommon_AdminStateType](
+		"Component_Port_OpticalPort",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "admin-state"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_TransportLineCommon_AdminStateType, bool) {
+			ret := gs.(*oc.Component_Port_OpticalPort).AdminState
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Port_OpticalPort) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-line-common"
+//	Instantiating module: "openconfig-transport-line-common"
+//	Path from parent:     "state/admin-state"
+//	Path from root:       "/components/component/port/optical-port/state/admin-state"
+func (n *Component_Port_OpticalPort_AdminStatePathAny) State() ygnmi.WildcardQuery[oc.E_TransportLineCommon_AdminStateType] {
+	return ygnmi.NewWildcardQuery[oc.E_TransportLineCommon_AdminStateType](
+		"Component_Port_OpticalPort",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "admin-state"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_TransportLineCommon_AdminStateType, bool) {
+			ret := gs.(*oc.Component_Port_OpticalPort).AdminState
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Port_OpticalPort) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-line-common"
+//	Instantiating module: "openconfig-transport-line-common"
+//	Path from parent:     "config/admin-state"
+//	Path from root:       "/components/component/port/optical-port/config/admin-state"
+func (n *Component_Port_OpticalPort_AdminStatePath) Config() ygnmi.ConfigQuery[oc.E_TransportLineCommon_AdminStateType] {
+	return ygnmi.NewConfigQuery[oc.E_TransportLineCommon_AdminStateType](
+		"Component_Port_OpticalPort",
+		false,
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "admin-state"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_TransportLineCommon_AdminStateType, bool) {
+			ret := gs.(*oc.Component_Port_OpticalPort).AdminState
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Port_OpticalPort) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-line-common"
+//	Instantiating module: "openconfig-transport-line-common"
+//	Path from parent:     "config/admin-state"
+//	Path from root:       "/components/component/port/optical-port/config/admin-state"
+func (n *Component_Port_OpticalPort_AdminStatePathAny) Config() ygnmi.WildcardQuery[oc.E_TransportLineCommon_AdminStateType] {
+	return ygnmi.NewWildcardQuery[oc.E_TransportLineCommon_AdminStateType](
+		"Component_Port_OpticalPort",
+		false,
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "admin-state"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_TransportLineCommon_AdminStateType, bool) {
+			ret := gs.(*oc.Component_Port_OpticalPort).AdminState
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Port_OpticalPort) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Component_Port_OpticalPort_OpticalPortTypePath represents the /openconfig-platform/components/component/port/optical-port/state/optical-port-type YANG schema element.
+type Component_Port_OpticalPort_OpticalPortTypePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Port_OpticalPort_OpticalPortTypePathAny represents the wildcard version of the /openconfig-platform/components/component/port/optical-port/state/optical-port-type YANG schema element.
+type Component_Port_OpticalPort_OpticalPortTypePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Component_Port_OpticalPort_OpticalPortTypePath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-line-common"
+//	Instantiating module: "openconfig-transport-line-common"
+//	Path from parent:     "state/optical-port-type"
+//	Path from root:       "/components/component/port/optical-port/state/optical-port-type"
+func (n *Component_Port_OpticalPort_OpticalPortTypePath) State() ygnmi.SingletonQuery[oc.E_TransportTypes_OPTICAL_PORT_TYPE] {
+	return ygnmi.NewSingletonQuery[oc.E_TransportTypes_OPTICAL_PORT_TYPE](
+		"Component_Port_OpticalPort",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "optical-port-type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_TransportTypes_OPTICAL_PORT_TYPE, bool) {
+			ret := gs.(*oc.Component_Port_OpticalPort).OpticalPortType
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Port_OpticalPort) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-line-common"
+//	Instantiating module: "openconfig-transport-line-common"
+//	Path from parent:     "state/optical-port-type"
+//	Path from root:       "/components/component/port/optical-port/state/optical-port-type"
+func (n *Component_Port_OpticalPort_OpticalPortTypePathAny) State() ygnmi.WildcardQuery[oc.E_TransportTypes_OPTICAL_PORT_TYPE] {
+	return ygnmi.NewWildcardQuery[oc.E_TransportTypes_OPTICAL_PORT_TYPE](
+		"Component_Port_OpticalPort",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "optical-port-type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_TransportTypes_OPTICAL_PORT_TYPE, bool) {
+			ret := gs.(*oc.Component_Port_OpticalPort).OpticalPortType
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Port_OpticalPort) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Component_Port_OpticalPort_TiltPath represents the /openconfig-platform/components/component/port/optical-port/state/tilt YANG schema element.
+type Component_Port_OpticalPort_TiltPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Port_OpticalPort_TiltPathAny represents the wildcard version of the /openconfig-platform/components/component/port/optical-port/state/tilt YANG schema element.
+type Component_Port_OpticalPort_TiltPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Component_Port_OpticalPort_TiltPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-line-common"
+//	Instantiating module: "openconfig-transport-line-common"
+//	Path from parent:     "state/tilt"
+//	Path from root:       "/components/component/port/optical-port/state/tilt"
+func (n *Component_Port_OpticalPort_TiltPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewSingletonQuery[float64](
+		"Component_Port_OpticalPort",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "tilt"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_Port_OpticalPort).Tilt
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Port_OpticalPort) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-line-common"
+//	Instantiating module: "openconfig-transport-line-common"
+//	Path from parent:     "state/tilt"
+//	Path from root:       "/components/component/port/optical-port/state/tilt"
+func (n *Component_Port_OpticalPort_TiltPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewWildcardQuery[float64](
+		"Component_Port_OpticalPort",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "tilt"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_Port_OpticalPort).Tilt
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Port_OpticalPort) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Component_Port_OpticalPortPath represents the /openconfig-platform/components/component/port/optical-port YANG schema element.
+type Component_Port_OpticalPortPath struct {
+	*ygnmi.NodePath
+}
+
+// Component_Port_OpticalPortPathAny represents the wildcard version of the /openconfig-platform/components/component/port/optical-port YANG schema element.
+type Component_Port_OpticalPortPathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Component_Port_OpticalPortPath) PathOriginName() string {
+	return "openconfig"
+}
+
+// AdminState (leaf): Sets the admin state of the optical-port
+//
+//	Defining module:      "openconfig-transport-line-common"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "*/admin-state"
+//	Path from root:       "/components/component/port/optical-port/*/admin-state"
+func (n *Component_Port_OpticalPortPath) AdminState() *Component_Port_OpticalPort_AdminStatePath {
+	ps := &Component_Port_OpticalPort_AdminStatePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "admin-state"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// AdminState (leaf): Sets the admin state of the optical-port
+//
+//	Defining module:      "openconfig-transport-line-common"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "*/admin-state"
+//	Path from root:       "/components/component/port/optical-port/*/admin-state"
+func (n *Component_Port_OpticalPortPathAny) AdminState() *Component_Port_OpticalPort_AdminStatePathAny {
+	ps := &Component_Port_OpticalPort_AdminStatePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "admin-state"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// InputPower (container): For line system device ports, this value indicates
+// the total input optical power of the port in units
+// of 0.01dBm. If avg/min/max statistics are not supported,
+// just supply the instant value
+//
+//	Defining module:      "openconfig-transport-line-common"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/input-power"
+//	Path from root:       "/components/component/port/optical-port/state/input-power"
+func (n *Component_Port_OpticalPortPath) InputPower() *Component_Port_OpticalPort_InputPowerPath {
+	ps := &Component_Port_OpticalPort_InputPowerPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "input-power"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// InputPower (container): For line system device ports, this value indicates
+// the total input optical power of the port in units
+// of 0.01dBm. If avg/min/max statistics are not supported,
+// just supply the instant value
+//
+//	Defining module:      "openconfig-transport-line-common"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/input-power"
+//	Path from root:       "/components/component/port/optical-port/state/input-power"
+func (n *Component_Port_OpticalPortPathAny) InputPower() *Component_Port_OpticalPort_InputPowerPathAny {
+	ps := &Component_Port_OpticalPort_InputPowerPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "input-power"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// OpticalPortType (leaf): For physical ports belonging to optical transport
+// devices, this indicates the type of optical port.  This is an
+// informational field that should be made available by the
+// device.
+//
+//	Defining module:      "openconfig-transport-line-common"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/optical-port-type"
+//	Path from root:       "/components/component/port/optical-port/state/optical-port-type"
+func (n *Component_Port_OpticalPortPath) OpticalPortType() *Component_Port_OpticalPort_OpticalPortTypePath {
+	ps := &Component_Port_OpticalPort_OpticalPortTypePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "optical-port-type"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// OpticalPortType (leaf): For physical ports belonging to optical transport
+// devices, this indicates the type of optical port.  This is an
+// informational field that should be made available by the
+// device.
+//
+//	Defining module:      "openconfig-transport-line-common"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/optical-port-type"
+//	Path from root:       "/components/component/port/optical-port/state/optical-port-type"
+func (n *Component_Port_OpticalPortPathAny) OpticalPortType() *Component_Port_OpticalPort_OpticalPortTypePathAny {
+	ps := &Component_Port_OpticalPort_OpticalPortTypePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "optical-port-type"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// OutputPower (container): For line system device ports, this value indicates
+// the total output optical power of the port in units
+// of 0.01dBm. If avg/min/max statistics are not supported,
+// just supply the instant value
+//
+//	Defining module:      "openconfig-transport-line-common"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/output-power"
+//	Path from root:       "/components/component/port/optical-port/state/output-power"
+func (n *Component_Port_OpticalPortPath) OutputPower() *Component_Port_OpticalPort_OutputPowerPath {
+	ps := &Component_Port_OpticalPort_OutputPowerPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "output-power"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// OutputPower (container): For line system device ports, this value indicates
+// the total output optical power of the port in units
+// of 0.01dBm. If avg/min/max statistics are not supported,
+// just supply the instant value
+//
+//	Defining module:      "openconfig-transport-line-common"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/output-power"
+//	Path from root:       "/components/component/port/optical-port/state/output-power"
+func (n *Component_Port_OpticalPortPathAny) OutputPower() *Component_Port_OpticalPort_OutputPowerPathAny {
+	ps := &Component_Port_OpticalPort_OutputPowerPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "output-power"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// Tilt (leaf): The total tilt measured on the port. This is applicable to
+//
+//	      ports of type INGRESS and EGRESS.
+//		Defining module:      "openconfig-transport-line-common"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "state/tilt"
+//		Path from root:       "/components/component/port/optical-port/state/tilt"
+func (n *Component_Port_OpticalPortPath) Tilt() *Component_Port_OpticalPort_TiltPath {
+	ps := &Component_Port_OpticalPort_TiltPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "tilt"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Tilt (leaf): The total tilt measured on the port. This is applicable to
+//
+//	      ports of type INGRESS and EGRESS.
+//		Defining module:      "openconfig-transport-line-common"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "state/tilt"
+//		Path from root:       "/components/component/port/optical-port/state/tilt"
+func (n *Component_Port_OpticalPortPathAny) Tilt() *Component_Port_OpticalPort_TiltPathAny {
+	ps := &Component_Port_OpticalPort_TiltPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "tilt"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_Port_OpticalPortPath) State() ygnmi.SingletonQuery[*oc.Component_Port_OpticalPort] {
+	return ygnmi.NewSingletonQuery[*oc.Component_Port_OpticalPort](
+		"Component_Port_OpticalPort",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_Port_OpticalPortPathAny) State() ygnmi.WildcardQuery[*oc.Component_Port_OpticalPort] {
+	return ygnmi.NewWildcardQuery[*oc.Component_Port_OpticalPort](
+		"Component_Port_OpticalPort",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *Component_Port_OpticalPortPath) Config() ygnmi.ConfigQuery[*oc.Component_Port_OpticalPort] {
+	return ygnmi.NewConfigQuery[*oc.Component_Port_OpticalPort](
+		"Component_Port_OpticalPort",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *Component_Port_OpticalPortPathAny) Config() ygnmi.WildcardQuery[*oc.Component_Port_OpticalPort] {
+	return ygnmi.NewWildcardQuery[*oc.Component_Port_OpticalPort](
+		"Component_Port_OpticalPort",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Component_Port_OpticalPort_InputPower_AvgPath represents the /openconfig-platform/components/component/port/optical-port/state/input-power/avg YANG schema element.
+type Component_Port_OpticalPort_InputPower_AvgPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Port_OpticalPort_InputPower_AvgPathAny represents the wildcard version of the /openconfig-platform/components/component/port/optical-port/state/input-power/avg YANG schema element.
+type Component_Port_OpticalPort_InputPower_AvgPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Component_Port_OpticalPort_InputPower_AvgPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-transport-line-common"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/port/optical-port/state/input-power/avg"
+func (n *Component_Port_OpticalPort_InputPower_AvgPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewSingletonQuery[float64](
+		"Component_Port_OpticalPort_InputPower",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"avg"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_Port_OpticalPort_InputPower).Avg
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Port_OpticalPort_InputPower) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-transport-line-common"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/port/optical-port/state/input-power/avg"
+func (n *Component_Port_OpticalPort_InputPower_AvgPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewWildcardQuery[float64](
+		"Component_Port_OpticalPort_InputPower",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"avg"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_Port_OpticalPort_InputPower).Avg
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Port_OpticalPort_InputPower) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Component_Port_OpticalPort_InputPower_InstantPath represents the /openconfig-platform/components/component/port/optical-port/state/input-power/instant YANG schema element.
+type Component_Port_OpticalPort_InputPower_InstantPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Port_OpticalPort_InputPower_InstantPathAny represents the wildcard version of the /openconfig-platform/components/component/port/optical-port/state/input-power/instant YANG schema element.
+type Component_Port_OpticalPort_InputPower_InstantPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Component_Port_OpticalPort_InputPower_InstantPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-transport-line-common"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/port/optical-port/state/input-power/instant"
+func (n *Component_Port_OpticalPort_InputPower_InstantPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewSingletonQuery[float64](
+		"Component_Port_OpticalPort_InputPower",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"instant"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_Port_OpticalPort_InputPower).Instant
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Port_OpticalPort_InputPower) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-transport-line-common"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/port/optical-port/state/input-power/instant"
+func (n *Component_Port_OpticalPort_InputPower_InstantPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewWildcardQuery[float64](
+		"Component_Port_OpticalPort_InputPower",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"instant"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_Port_OpticalPort_InputPower).Instant
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Port_OpticalPort_InputPower) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Component_Port_OpticalPort_InputPower_IntervalPath represents the /openconfig-platform/components/component/port/optical-port/state/input-power/interval YANG schema element.
+type Component_Port_OpticalPort_InputPower_IntervalPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Port_OpticalPort_InputPower_IntervalPathAny represents the wildcard version of the /openconfig-platform/components/component/port/optical-port/state/input-power/interval YANG schema element.
+type Component_Port_OpticalPort_InputPower_IntervalPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Component_Port_OpticalPort_InputPower_IntervalPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-transport-line-common"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/port/optical-port/state/input-power/interval"
+func (n *Component_Port_OpticalPort_InputPower_IntervalPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Component_Port_OpticalPort_InputPower",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"interval"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_Port_OpticalPort_InputPower).Interval
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Port_OpticalPort_InputPower) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-transport-line-common"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/port/optical-port/state/input-power/interval"
+func (n *Component_Port_OpticalPort_InputPower_IntervalPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Component_Port_OpticalPort_InputPower",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"interval"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_Port_OpticalPort_InputPower).Interval
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Port_OpticalPort_InputPower) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Component_Port_OpticalPort_InputPower_MaxPath represents the /openconfig-platform/components/component/port/optical-port/state/input-power/max YANG schema element.
+type Component_Port_OpticalPort_InputPower_MaxPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Port_OpticalPort_InputPower_MaxPathAny represents the wildcard version of the /openconfig-platform/components/component/port/optical-port/state/input-power/max YANG schema element.
+type Component_Port_OpticalPort_InputPower_MaxPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Component_Port_OpticalPort_InputPower_MaxPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-transport-line-common"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/port/optical-port/state/input-power/max"
+func (n *Component_Port_OpticalPort_InputPower_MaxPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewSingletonQuery[float64](
+		"Component_Port_OpticalPort_InputPower",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"max"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_Port_OpticalPort_InputPower).Max
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Port_OpticalPort_InputPower) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-transport-line-common"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/port/optical-port/state/input-power/max"
+func (n *Component_Port_OpticalPort_InputPower_MaxPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewWildcardQuery[float64](
+		"Component_Port_OpticalPort_InputPower",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"max"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_Port_OpticalPort_InputPower).Max
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Port_OpticalPort_InputPower) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Component_Port_OpticalPort_InputPower_MaxTimePath represents the /openconfig-platform/components/component/port/optical-port/state/input-power/max-time YANG schema element.
+type Component_Port_OpticalPort_InputPower_MaxTimePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Port_OpticalPort_InputPower_MaxTimePathAny represents the wildcard version of the /openconfig-platform/components/component/port/optical-port/state/input-power/max-time YANG schema element.
+type Component_Port_OpticalPort_InputPower_MaxTimePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Component_Port_OpticalPort_InputPower_MaxTimePath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-transport-line-common"
+//	Path from parent:     "max-time"
+//	Path from root:       "/components/component/port/optical-port/state/input-power/max-time"
+func (n *Component_Port_OpticalPort_InputPower_MaxTimePath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Component_Port_OpticalPort_InputPower",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"max-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_Port_OpticalPort_InputPower).MaxTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Port_OpticalPort_InputPower) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-transport-line-common"
+//	Path from parent:     "max-time"
+//	Path from root:       "/components/component/port/optical-port/state/input-power/max-time"
+func (n *Component_Port_OpticalPort_InputPower_MaxTimePathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Component_Port_OpticalPort_InputPower",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"max-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_Port_OpticalPort_InputPower).MaxTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Port_OpticalPort_InputPower) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Component_Port_OpticalPort_InputPower_MinPath represents the /openconfig-platform/components/component/port/optical-port/state/input-power/min YANG schema element.
+type Component_Port_OpticalPort_InputPower_MinPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Port_OpticalPort_InputPower_MinPathAny represents the wildcard version of the /openconfig-platform/components/component/port/optical-port/state/input-power/min YANG schema element.
+type Component_Port_OpticalPort_InputPower_MinPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Component_Port_OpticalPort_InputPower_MinPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-transport-line-common"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/port/optical-port/state/input-power/min"
+func (n *Component_Port_OpticalPort_InputPower_MinPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewSingletonQuery[float64](
+		"Component_Port_OpticalPort_InputPower",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"min"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_Port_OpticalPort_InputPower).Min
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Port_OpticalPort_InputPower) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-transport-line-common"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/port/optical-port/state/input-power/min"
+func (n *Component_Port_OpticalPort_InputPower_MinPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewWildcardQuery[float64](
+		"Component_Port_OpticalPort_InputPower",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"min"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_Port_OpticalPort_InputPower).Min
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Port_OpticalPort_InputPower) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Component_Port_OpticalPort_InputPower_MinTimePath represents the /openconfig-platform/components/component/port/optical-port/state/input-power/min-time YANG schema element.
+type Component_Port_OpticalPort_InputPower_MinTimePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Port_OpticalPort_InputPower_MinTimePathAny represents the wildcard version of the /openconfig-platform/components/component/port/optical-port/state/input-power/min-time YANG schema element.
+type Component_Port_OpticalPort_InputPower_MinTimePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Component_Port_OpticalPort_InputPower_MinTimePath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-transport-line-common"
+//	Path from parent:     "min-time"
+//	Path from root:       "/components/component/port/optical-port/state/input-power/min-time"
+func (n *Component_Port_OpticalPort_InputPower_MinTimePath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Component_Port_OpticalPort_InputPower",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"min-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_Port_OpticalPort_InputPower).MinTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Port_OpticalPort_InputPower) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-transport-line-common"
+//	Path from parent:     "min-time"
+//	Path from root:       "/components/component/port/optical-port/state/input-power/min-time"
+func (n *Component_Port_OpticalPort_InputPower_MinTimePathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Component_Port_OpticalPort_InputPower",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"min-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_Port_OpticalPort_InputPower).MinTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Port_OpticalPort_InputPower) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Component_Port_OpticalPort_InputPowerPath represents the /openconfig-platform/components/component/port/optical-port/state/input-power YANG schema element.
+type Component_Port_OpticalPort_InputPowerPath struct {
+	*ygnmi.NodePath
+}
+
+// Component_Port_OpticalPort_InputPowerPathAny represents the wildcard version of the /openconfig-platform/components/component/port/optical-port/state/input-power YANG schema element.
+type Component_Port_OpticalPort_InputPowerPathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Component_Port_OpticalPort_InputPowerPath) PathOriginName() string {
+	return "openconfig"
+}
+
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/port/optical-port/state/input-power/avg"
+func (n *Component_Port_OpticalPort_InputPowerPath) Avg() *Component_Port_OpticalPort_InputPower_AvgPath {
+	ps := &Component_Port_OpticalPort_InputPower_AvgPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/port/optical-port/state/input-power/avg"
+func (n *Component_Port_OpticalPort_InputPowerPathAny) Avg() *Component_Port_OpticalPort_InputPower_AvgPathAny {
+	ps := &Component_Port_OpticalPort_InputPower_AvgPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Instant (leaf): The instantaneous value of the statistic.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/port/optical-port/state/input-power/instant"
+func (n *Component_Port_OpticalPort_InputPowerPath) Instant() *Component_Port_OpticalPort_InputPower_InstantPath {
+	ps := &Component_Port_OpticalPort_InputPower_InstantPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"instant"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Instant (leaf): The instantaneous value of the statistic.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/port/optical-port/state/input-power/instant"
+func (n *Component_Port_OpticalPort_InputPowerPathAny) Instant() *Component_Port_OpticalPort_InputPower_InstantPathAny {
+	ps := &Component_Port_OpticalPort_InputPower_InstantPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"instant"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/port/optical-port/state/input-power/interval"
+func (n *Component_Port_OpticalPort_InputPowerPath) Interval() *Component_Port_OpticalPort_InputPower_IntervalPath {
+	ps := &Component_Port_OpticalPort_InputPower_IntervalPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"interval"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/port/optical-port/state/input-power/interval"
+func (n *Component_Port_OpticalPort_InputPowerPathAny) Interval() *Component_Port_OpticalPort_InputPower_IntervalPathAny {
+	ps := &Component_Port_OpticalPort_InputPower_IntervalPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"interval"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Max (leaf): The maximum value of the statistic over the time interval.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/port/optical-port/state/input-power/max"
+func (n *Component_Port_OpticalPort_InputPowerPath) Max() *Component_Port_OpticalPort_InputPower_MaxPath {
+	ps := &Component_Port_OpticalPort_InputPower_MaxPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Max (leaf): The maximum value of the statistic over the time interval.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/port/optical-port/state/input-power/max"
+func (n *Component_Port_OpticalPort_InputPowerPathAny) Max() *Component_Port_OpticalPort_InputPower_MaxPathAny {
+	ps := &Component_Port_OpticalPort_InputPower_MaxPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "max-time"
+//		Path from root:       "/components/component/port/optical-port/state/input-power/max-time"
+func (n *Component_Port_OpticalPort_InputPowerPath) MaxTime() *Component_Port_OpticalPort_InputPower_MaxTimePath {
+	ps := &Component_Port_OpticalPort_InputPower_MaxTimePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "max-time"
+//		Path from root:       "/components/component/port/optical-port/state/input-power/max-time"
+func (n *Component_Port_OpticalPort_InputPowerPathAny) MaxTime() *Component_Port_OpticalPort_InputPower_MaxTimePathAny {
+	ps := &Component_Port_OpticalPort_InputPower_MaxTimePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Min (leaf): The minimum value of the statistic over the time
+// interval.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/port/optical-port/state/input-power/min"
+func (n *Component_Port_OpticalPort_InputPowerPath) Min() *Component_Port_OpticalPort_InputPower_MinPath {
+	ps := &Component_Port_OpticalPort_InputPower_MinPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Min (leaf): The minimum value of the statistic over the time
+// interval.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/port/optical-port/state/input-power/min"
+func (n *Component_Port_OpticalPort_InputPowerPathAny) Min() *Component_Port_OpticalPort_InputPower_MinPathAny {
+	ps := &Component_Port_OpticalPort_InputPower_MinPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "min-time"
+//		Path from root:       "/components/component/port/optical-port/state/input-power/min-time"
+func (n *Component_Port_OpticalPort_InputPowerPath) MinTime() *Component_Port_OpticalPort_InputPower_MinTimePath {
+	ps := &Component_Port_OpticalPort_InputPower_MinTimePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "min-time"
+//		Path from root:       "/components/component/port/optical-port/state/input-power/min-time"
+func (n *Component_Port_OpticalPort_InputPowerPathAny) MinTime() *Component_Port_OpticalPort_InputPower_MinTimePathAny {
+	ps := &Component_Port_OpticalPort_InputPower_MinTimePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_Port_OpticalPort_InputPowerPath) State() ygnmi.SingletonQuery[*oc.Component_Port_OpticalPort_InputPower] {
+	return ygnmi.NewSingletonQuery[*oc.Component_Port_OpticalPort_InputPower](
+		"Component_Port_OpticalPort_InputPower",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_Port_OpticalPort_InputPowerPathAny) State() ygnmi.WildcardQuery[*oc.Component_Port_OpticalPort_InputPower] {
+	return ygnmi.NewWildcardQuery[*oc.Component_Port_OpticalPort_InputPower](
+		"Component_Port_OpticalPort_InputPower",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Component_Port_OpticalPort_OutputPower_AvgPath represents the /openconfig-platform/components/component/port/optical-port/state/output-power/avg YANG schema element.
+type Component_Port_OpticalPort_OutputPower_AvgPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Port_OpticalPort_OutputPower_AvgPathAny represents the wildcard version of the /openconfig-platform/components/component/port/optical-port/state/output-power/avg YANG schema element.
+type Component_Port_OpticalPort_OutputPower_AvgPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Component_Port_OpticalPort_OutputPower_AvgPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-transport-line-common"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/port/optical-port/state/output-power/avg"
+func (n *Component_Port_OpticalPort_OutputPower_AvgPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewSingletonQuery[float64](
+		"Component_Port_OpticalPort_OutputPower",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"avg"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_Port_OpticalPort_OutputPower).Avg
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Port_OpticalPort_OutputPower) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-transport-line-common"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/port/optical-port/state/output-power/avg"
+func (n *Component_Port_OpticalPort_OutputPower_AvgPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewWildcardQuery[float64](
+		"Component_Port_OpticalPort_OutputPower",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"avg"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_Port_OpticalPort_OutputPower).Avg
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Port_OpticalPort_OutputPower) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Component_Port_OpticalPort_OutputPower_InstantPath represents the /openconfig-platform/components/component/port/optical-port/state/output-power/instant YANG schema element.
+type Component_Port_OpticalPort_OutputPower_InstantPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Port_OpticalPort_OutputPower_InstantPathAny represents the wildcard version of the /openconfig-platform/components/component/port/optical-port/state/output-power/instant YANG schema element.
+type Component_Port_OpticalPort_OutputPower_InstantPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Component_Port_OpticalPort_OutputPower_InstantPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-transport-line-common"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/port/optical-port/state/output-power/instant"
+func (n *Component_Port_OpticalPort_OutputPower_InstantPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewSingletonQuery[float64](
+		"Component_Port_OpticalPort_OutputPower",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"instant"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_Port_OpticalPort_OutputPower).Instant
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Port_OpticalPort_OutputPower) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-transport-line-common"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/port/optical-port/state/output-power/instant"
+func (n *Component_Port_OpticalPort_OutputPower_InstantPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewWildcardQuery[float64](
+		"Component_Port_OpticalPort_OutputPower",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"instant"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_Port_OpticalPort_OutputPower).Instant
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Port_OpticalPort_OutputPower) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Component_Port_OpticalPort_OutputPower_IntervalPath represents the /openconfig-platform/components/component/port/optical-port/state/output-power/interval YANG schema element.
+type Component_Port_OpticalPort_OutputPower_IntervalPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Port_OpticalPort_OutputPower_IntervalPathAny represents the wildcard version of the /openconfig-platform/components/component/port/optical-port/state/output-power/interval YANG schema element.
+type Component_Port_OpticalPort_OutputPower_IntervalPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Component_Port_OpticalPort_OutputPower_IntervalPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-transport-line-common"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/port/optical-port/state/output-power/interval"
+func (n *Component_Port_OpticalPort_OutputPower_IntervalPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Component_Port_OpticalPort_OutputPower",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"interval"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_Port_OpticalPort_OutputPower).Interval
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Port_OpticalPort_OutputPower) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-transport-line-common"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/port/optical-port/state/output-power/interval"
+func (n *Component_Port_OpticalPort_OutputPower_IntervalPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Component_Port_OpticalPort_OutputPower",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"interval"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_Port_OpticalPort_OutputPower).Interval
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Port_OpticalPort_OutputPower) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Component_Port_OpticalPort_OutputPower_MaxPath represents the /openconfig-platform/components/component/port/optical-port/state/output-power/max YANG schema element.
+type Component_Port_OpticalPort_OutputPower_MaxPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Port_OpticalPort_OutputPower_MaxPathAny represents the wildcard version of the /openconfig-platform/components/component/port/optical-port/state/output-power/max YANG schema element.
+type Component_Port_OpticalPort_OutputPower_MaxPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Component_Port_OpticalPort_OutputPower_MaxPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-transport-line-common"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/port/optical-port/state/output-power/max"
+func (n *Component_Port_OpticalPort_OutputPower_MaxPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewSingletonQuery[float64](
+		"Component_Port_OpticalPort_OutputPower",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"max"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_Port_OpticalPort_OutputPower).Max
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Port_OpticalPort_OutputPower) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-transport-line-common"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/port/optical-port/state/output-power/max"
+func (n *Component_Port_OpticalPort_OutputPower_MaxPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewWildcardQuery[float64](
+		"Component_Port_OpticalPort_OutputPower",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"max"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_Port_OpticalPort_OutputPower).Max
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Port_OpticalPort_OutputPower) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Component_Port_OpticalPort_OutputPower_MaxTimePath represents the /openconfig-platform/components/component/port/optical-port/state/output-power/max-time YANG schema element.
+type Component_Port_OpticalPort_OutputPower_MaxTimePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Port_OpticalPort_OutputPower_MaxTimePathAny represents the wildcard version of the /openconfig-platform/components/component/port/optical-port/state/output-power/max-time YANG schema element.
+type Component_Port_OpticalPort_OutputPower_MaxTimePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Component_Port_OpticalPort_OutputPower_MaxTimePath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-transport-line-common"
+//	Path from parent:     "max-time"
+//	Path from root:       "/components/component/port/optical-port/state/output-power/max-time"
+func (n *Component_Port_OpticalPort_OutputPower_MaxTimePath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Component_Port_OpticalPort_OutputPower",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"max-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_Port_OpticalPort_OutputPower).MaxTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Port_OpticalPort_OutputPower) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-transport-line-common"
+//	Path from parent:     "max-time"
+//	Path from root:       "/components/component/port/optical-port/state/output-power/max-time"
+func (n *Component_Port_OpticalPort_OutputPower_MaxTimePathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Component_Port_OpticalPort_OutputPower",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"max-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_Port_OpticalPort_OutputPower).MaxTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Port_OpticalPort_OutputPower) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Component_Port_OpticalPort_OutputPower_MinPath represents the /openconfig-platform/components/component/port/optical-port/state/output-power/min YANG schema element.
+type Component_Port_OpticalPort_OutputPower_MinPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Port_OpticalPort_OutputPower_MinPathAny represents the wildcard version of the /openconfig-platform/components/component/port/optical-port/state/output-power/min YANG schema element.
+type Component_Port_OpticalPort_OutputPower_MinPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Component_Port_OpticalPort_OutputPower_MinPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-transport-line-common"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/port/optical-port/state/output-power/min"
+func (n *Component_Port_OpticalPort_OutputPower_MinPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewSingletonQuery[float64](
+		"Component_Port_OpticalPort_OutputPower",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"min"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_Port_OpticalPort_OutputPower).Min
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Port_OpticalPort_OutputPower) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-transport-line-common"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/port/optical-port/state/output-power/min"
+func (n *Component_Port_OpticalPort_OutputPower_MinPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewWildcardQuery[float64](
+		"Component_Port_OpticalPort_OutputPower",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"min"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_Port_OpticalPort_OutputPower).Min
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Port_OpticalPort_OutputPower) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Component_Port_OpticalPort_OutputPower_MinTimePath represents the /openconfig-platform/components/component/port/optical-port/state/output-power/min-time YANG schema element.
+type Component_Port_OpticalPort_OutputPower_MinTimePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Port_OpticalPort_OutputPower_MinTimePathAny represents the wildcard version of the /openconfig-platform/components/component/port/optical-port/state/output-power/min-time YANG schema element.
+type Component_Port_OpticalPort_OutputPower_MinTimePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Component_Port_OpticalPort_OutputPower_MinTimePath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-transport-line-common"
+//	Path from parent:     "min-time"
+//	Path from root:       "/components/component/port/optical-port/state/output-power/min-time"
+func (n *Component_Port_OpticalPort_OutputPower_MinTimePath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Component_Port_OpticalPort_OutputPower",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"min-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_Port_OpticalPort_OutputPower).MinTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Port_OpticalPort_OutputPower) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-transport-line-common"
+//	Path from parent:     "min-time"
+//	Path from root:       "/components/component/port/optical-port/state/output-power/min-time"
+func (n *Component_Port_OpticalPort_OutputPower_MinTimePathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Component_Port_OpticalPort_OutputPower",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"min-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_Port_OpticalPort_OutputPower).MinTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Port_OpticalPort_OutputPower) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Component_Port_OpticalPort_OutputPowerPath represents the /openconfig-platform/components/component/port/optical-port/state/output-power YANG schema element.
+type Component_Port_OpticalPort_OutputPowerPath struct {
+	*ygnmi.NodePath
+}
+
+// Component_Port_OpticalPort_OutputPowerPathAny represents the wildcard version of the /openconfig-platform/components/component/port/optical-port/state/output-power YANG schema element.
+type Component_Port_OpticalPort_OutputPowerPathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Component_Port_OpticalPort_OutputPowerPath) PathOriginName() string {
+	return "openconfig"
+}
+
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/port/optical-port/state/output-power/avg"
+func (n *Component_Port_OpticalPort_OutputPowerPath) Avg() *Component_Port_OpticalPort_OutputPower_AvgPath {
+	ps := &Component_Port_OpticalPort_OutputPower_AvgPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/port/optical-port/state/output-power/avg"
+func (n *Component_Port_OpticalPort_OutputPowerPathAny) Avg() *Component_Port_OpticalPort_OutputPower_AvgPathAny {
+	ps := &Component_Port_OpticalPort_OutputPower_AvgPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Instant (leaf): The instantaneous value of the statistic.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/port/optical-port/state/output-power/instant"
+func (n *Component_Port_OpticalPort_OutputPowerPath) Instant() *Component_Port_OpticalPort_OutputPower_InstantPath {
+	ps := &Component_Port_OpticalPort_OutputPower_InstantPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"instant"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Instant (leaf): The instantaneous value of the statistic.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/port/optical-port/state/output-power/instant"
+func (n *Component_Port_OpticalPort_OutputPowerPathAny) Instant() *Component_Port_OpticalPort_OutputPower_InstantPathAny {
+	ps := &Component_Port_OpticalPort_OutputPower_InstantPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"instant"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/port/optical-port/state/output-power/interval"
+func (n *Component_Port_OpticalPort_OutputPowerPath) Interval() *Component_Port_OpticalPort_OutputPower_IntervalPath {
+	ps := &Component_Port_OpticalPort_OutputPower_IntervalPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"interval"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/port/optical-port/state/output-power/interval"
+func (n *Component_Port_OpticalPort_OutputPowerPathAny) Interval() *Component_Port_OpticalPort_OutputPower_IntervalPathAny {
+	ps := &Component_Port_OpticalPort_OutputPower_IntervalPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"interval"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Max (leaf): The maximum value of the statistic over the time interval.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/port/optical-port/state/output-power/max"
+func (n *Component_Port_OpticalPort_OutputPowerPath) Max() *Component_Port_OpticalPort_OutputPower_MaxPath {
+	ps := &Component_Port_OpticalPort_OutputPower_MaxPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Max (leaf): The maximum value of the statistic over the time interval.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/port/optical-port/state/output-power/max"
+func (n *Component_Port_OpticalPort_OutputPowerPathAny) Max() *Component_Port_OpticalPort_OutputPower_MaxPathAny {
+	ps := &Component_Port_OpticalPort_OutputPower_MaxPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "max-time"
+//		Path from root:       "/components/component/port/optical-port/state/output-power/max-time"
+func (n *Component_Port_OpticalPort_OutputPowerPath) MaxTime() *Component_Port_OpticalPort_OutputPower_MaxTimePath {
+	ps := &Component_Port_OpticalPort_OutputPower_MaxTimePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "max-time"
+//		Path from root:       "/components/component/port/optical-port/state/output-power/max-time"
+func (n *Component_Port_OpticalPort_OutputPowerPathAny) MaxTime() *Component_Port_OpticalPort_OutputPower_MaxTimePathAny {
+	ps := &Component_Port_OpticalPort_OutputPower_MaxTimePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Min (leaf): The minimum value of the statistic over the time
+// interval.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/port/optical-port/state/output-power/min"
+func (n *Component_Port_OpticalPort_OutputPowerPath) Min() *Component_Port_OpticalPort_OutputPower_MinPath {
+	ps := &Component_Port_OpticalPort_OutputPower_MinPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Min (leaf): The minimum value of the statistic over the time
+// interval.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/port/optical-port/state/output-power/min"
+func (n *Component_Port_OpticalPort_OutputPowerPathAny) Min() *Component_Port_OpticalPort_OutputPower_MinPathAny {
+	ps := &Component_Port_OpticalPort_OutputPower_MinPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "min-time"
+//		Path from root:       "/components/component/port/optical-port/state/output-power/min-time"
+func (n *Component_Port_OpticalPort_OutputPowerPath) MinTime() *Component_Port_OpticalPort_OutputPower_MinTimePath {
+	ps := &Component_Port_OpticalPort_OutputPower_MinTimePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "min-time"
+//		Path from root:       "/components/component/port/optical-port/state/output-power/min-time"
+func (n *Component_Port_OpticalPort_OutputPowerPathAny) MinTime() *Component_Port_OpticalPort_OutputPower_MinTimePathAny {
+	ps := &Component_Port_OpticalPort_OutputPower_MinTimePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_Port_OpticalPort_OutputPowerPath) State() ygnmi.SingletonQuery[*oc.Component_Port_OpticalPort_OutputPower] {
+	return ygnmi.NewSingletonQuery[*oc.Component_Port_OpticalPort_OutputPower](
+		"Component_Port_OpticalPort_OutputPower",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_Port_OpticalPort_OutputPowerPathAny) State() ygnmi.WildcardQuery[*oc.Component_Port_OpticalPort_OutputPower] {
+	return ygnmi.NewWildcardQuery[*oc.Component_Port_OpticalPort_OutputPower](
+		"Component_Port_OpticalPort_OutputPower",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
 	)
 }
 

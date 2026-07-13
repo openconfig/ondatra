@@ -18,6 +18,8 @@ using the following YANG input files:
   - models-yang/models/lacp/open-traffic-generator-lacp.yang
   - models-yang/models/lag/open-traffic-generator-lag.yang
   - models-yang/models/lldp/open-traffic-generator-lldp.yang
+  - models-yang/models/macsec/open-traffic-generator-macsec.yang
+  - models-yang/models/mka/open-traffic-generator-mka.yang
   - models-yang/models/ospfv2/open-traffic-generator-ospfv2.yang
   - models-yang/models/ospfv3/open-traffic-generator-ospfv3.yang
   - models-yang/models/platform/open-traffic-generator-platform.yang
@@ -43,6 +45,8 @@ import (
 	"github.com/openconfig/ondatra/gnmi/otg/lacp"
 	"github.com/openconfig/ondatra/gnmi/otg/lag"
 	"github.com/openconfig/ondatra/gnmi/otg/lldp"
+	"github.com/openconfig/ondatra/gnmi/otg/macsec"
+	"github.com/openconfig/ondatra/gnmi/otg/mka"
 	"github.com/openconfig/ondatra/gnmi/otg/ospfv2"
 	"github.com/openconfig/ondatra/gnmi/otg/ospfv3"
 	"github.com/openconfig/ondatra/gnmi/otg/platform"
@@ -528,6 +532,40 @@ func (n *RootPath) LldpInterface(Name string) *lldp.LldpInterfacePath {
 		NodePath: ygnmi.NewNodePath(
 			[]string{"lldps", "lldp-interface"},
 			map[string]interface{}{"name": Name},
+			n,
+		),
+	}
+	return ps
+}
+
+// Macsec (container): The MACsec
+//
+//	Defining module:      "open-traffic-generator-macsec"
+//	Instantiating module: "open-traffic-generator-macsec"
+//	Path from parent:     "macsec"
+//	Path from root:       "/macsec"
+func (n *RootPath) Macsec() *macsec.MacsecPath {
+	ps := &macsec.MacsecPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"macsec"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// Mka (container): The MKA
+//
+//	Defining module:      "open-traffic-generator-mka"
+//	Instantiating module: "open-traffic-generator-mka"
+//	Path from parent:     "mka"
+//	Path from root:       "/mka"
+func (n *RootPath) Mka() *mka.MkaPath {
+	ps := &mka.MkaPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"mka"},
+			map[string]interface{}{},
 			n,
 		),
 	}

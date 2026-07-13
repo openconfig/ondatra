@@ -58,8 +58,12 @@ using the following YANG input files:
   - public/release/models/oam/openconfig-oam-cfm.yang
   - public/release/models/oam/openconfig-oam.yang
   - public/release/models/openconfig-extensions.yang
+  - public/release/models/optical-transport/openconfig-channel-monitor.yang
+  - public/release/models/optical-transport/openconfig-optical-amplifier.yang
+  - public/release/models/optical-transport/openconfig-optical-attenuator.yang
   - public/release/models/optical-transport/openconfig-terminal-device.yang
   - public/release/models/optical-transport/openconfig-transport-types.yang
+  - public/release/models/optical-transport/openconfig-wavelength-router.yang
   - public/release/models/ospf/openconfig-ospf-area-interface.yang
   - public/release/models/ospf/openconfig-ospf-area.yang
   - public/release/models/ospf/openconfig-ospf-common.yang
@@ -76,6 +80,8 @@ using the following YANG input files:
   - public/release/models/platform/openconfig-platform-ext.yang
   - public/release/models/platform/openconfig-platform-fabric.yang
   - public/release/models/platform/openconfig-platform-fan.yang
+  - public/release/models/platform/openconfig-platform-healthz.yang
+  - public/release/models/platform/openconfig-platform-healthz-fault.yang
   - public/release/models/platform/openconfig-platform-integrated-circuit.yang
   - public/release/models/platform/openconfig-platform-linecard.yang
   - public/release/models/platform/openconfig-platform-pipeline-counters.yang
@@ -120,6 +126,7 @@ import (
 	oc "github.com/openconfig/ondatra/gnmi/oc"
 	"github.com/openconfig/ondatra/gnmi/oc/acl"
 	"github.com/openconfig/ondatra/gnmi/oc/ateflow"
+	"github.com/openconfig/ondatra/gnmi/oc/channelmonitor"
 	"github.com/openconfig/ondatra/gnmi/oc/definedsets"
 	"github.com/openconfig/ondatra/gnmi/oc/fwhighavailability"
 	"github.com/openconfig/ondatra/gnmi/oc/gnmicollectormetadata"
@@ -130,6 +137,8 @@ import (
 	"github.com/openconfig/ondatra/gnmi/oc/macsec"
 	"github.com/openconfig/ondatra/gnmi/oc/networkinstance"
 	"github.com/openconfig/ondatra/gnmi/oc/oam"
+	"github.com/openconfig/ondatra/gnmi/oc/opticalamplifier"
+	"github.com/openconfig/ondatra/gnmi/oc/opticalattenuator"
 	"github.com/openconfig/ondatra/gnmi/oc/platform"
 	"github.com/openconfig/ondatra/gnmi/oc/qos"
 	"github.com/openconfig/ondatra/gnmi/oc/relayagent"
@@ -137,6 +146,7 @@ import (
 	"github.com/openconfig/ondatra/gnmi/oc/sampling"
 	"github.com/openconfig/ondatra/gnmi/oc/system"
 	"github.com/openconfig/ondatra/gnmi/oc/terminaldevice"
+	"github.com/openconfig/ondatra/gnmi/oc/wavelengthrouter"
 	"github.com/openconfig/ygnmi/ygnmi"
 	"github.com/openconfig/ygot/ygot"
 	"github.com/openconfig/ygot/ytypes"
@@ -163,6 +173,59 @@ func (n *RootPath) Acl() *acl.AclPath {
 	ps := &acl.AclPath{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"acl"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// ChannelMonitorAny (list): List of channel monitors, keyed by channel monitor name.
+//
+//	Defining module:      "openconfig-channel-monitor"
+//	Instantiating module: "openconfig-channel-monitor"
+//	Path from parent:     "channel-monitors/channel-monitor"
+//	Path from root:       "/channel-monitors/channel-monitor"
+func (n *RootPath) ChannelMonitorAny() *channelmonitor.ChannelMonitorPathAny {
+	ps := &channelmonitor.ChannelMonitorPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"channel-monitors", "channel-monitor"},
+			map[string]interface{}{"name": "*"},
+			n,
+		),
+	}
+	return ps
+}
+
+// ChannelMonitor (list): List of channel monitors, keyed by channel monitor name.
+//
+//	Defining module:      "openconfig-channel-monitor"
+//	Instantiating module: "openconfig-channel-monitor"
+//	Path from parent:     "channel-monitors/channel-monitor"
+//	Path from root:       "/channel-monitors/channel-monitor"
+//
+//	Name: string
+func (n *RootPath) ChannelMonitor(Name string) *channelmonitor.ChannelMonitorPath {
+	ps := &channelmonitor.ChannelMonitorPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"channel-monitors", "channel-monitor"},
+			map[string]interface{}{"name": Name},
+			n,
+		),
+	}
+	return ps
+}
+
+// ChannelMonitorMap (list): List of channel monitors, keyed by channel monitor name.
+//
+//	Defining module:      "openconfig-channel-monitor"
+//	Instantiating module: "openconfig-channel-monitor"
+//	Path from parent:     "channel-monitors/channel-monitor"
+//	Path from root:       "/channel-monitors/channel-monitor"
+func (n *RootPath) ChannelMonitorMap() *channelmonitor.ChannelMonitorPathMap {
+	ps := &channelmonitor.ChannelMonitorPathMap{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"channel-monitors"},
 			map[string]interface{}{},
 			n,
 		),
@@ -617,6 +680,40 @@ func (n *RootPath) Oam() *oam.OamPath {
 	return ps
 }
 
+// OpticalAmplifier (container): Enclosing container for amplifiers and supervisory channels
+//
+//	Defining module:      "openconfig-optical-amplifier"
+//	Instantiating module: "openconfig-optical-amplifier"
+//	Path from parent:     "optical-amplifier"
+//	Path from root:       "/optical-amplifier"
+func (n *RootPath) OpticalAmplifier() *opticalamplifier.OpticalAmplifierPath {
+	ps := &opticalamplifier.OpticalAmplifierPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"optical-amplifier"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// OpticalAttenuator (container): Enclosing container for attenuators
+//
+//	Defining module:      "openconfig-optical-attenuator"
+//	Instantiating module: "openconfig-optical-attenuator"
+//	Path from parent:     "optical-attenuator"
+//	Path from root:       "/optical-attenuator"
+func (n *RootPath) OpticalAttenuator() *opticalattenuator.OpticalAttenuatorPath {
+	ps := &opticalattenuator.OpticalAttenuatorPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"optical-attenuator"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
 // Qos (container): Top-level container for QoS data
 //
 //	Defining module:      "openconfig-qos"
@@ -715,6 +812,23 @@ func (n *RootPath) TerminalDevice() *terminaldevice.TerminalDevicePath {
 	ps := &terminaldevice.TerminalDevicePath{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"terminal-device"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// WavelengthRouter (container): Top-level container for wavelength router device
+//
+//	Defining module:      "openconfig-wavelength-router"
+//	Instantiating module: "openconfig-wavelength-router"
+//	Path from parent:     "wavelength-router"
+//	Path from root:       "/wavelength-router"
+func (n *RootPath) WavelengthRouter() *wavelengthrouter.WavelengthRouterPath {
+	ps := &wavelengthrouter.WavelengthRouterPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"wavelength-router"},
 			map[string]interface{}{},
 			n,
 		),

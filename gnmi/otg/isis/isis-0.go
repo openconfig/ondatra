@@ -18,6 +18,8 @@ using the following YANG input files:
   - models-yang/models/lacp/open-traffic-generator-lacp.yang
   - models-yang/models/lag/open-traffic-generator-lag.yang
   - models-yang/models/lldp/open-traffic-generator-lldp.yang
+  - models-yang/models/macsec/open-traffic-generator-macsec.yang
+  - models-yang/models/mka/open-traffic-generator-mka.yang
   - models-yang/models/ospfv2/open-traffic-generator-ospfv2.yang
   - models-yang/models/ospfv3/open-traffic-generator-ospfv3.yang
   - models-yang/models/platform/open-traffic-generator-platform.yang

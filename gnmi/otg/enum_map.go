@@ -20,6 +20,8 @@ using the following YANG input files:
   - models-yang/models/lacp/open-traffic-generator-lacp.yang
   - models-yang/models/lag/open-traffic-generator-lag.yang
   - models-yang/models/lldp/open-traffic-generator-lldp.yang
+  - models-yang/models/macsec/open-traffic-generator-macsec.yang
+  - models-yang/models/mka/open-traffic-generator-mka.yang
   - models-yang/models/ospfv2/open-traffic-generator-ospfv2.yang
   - models-yang/models/ospfv3/open-traffic-generator-ospfv3.yang
   - models-yang/models/platform/open-traffic-generator-platform.yang
@@ -129,6 +131,10 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		5: {Name: "NON_TRANSITIVE_2OCTET_AS_TYPE"},
 	},
 	"E_ExtendedIpv4Reachability_Prefix_RedistributionType": {
+		1: {Name: "UP"},
+		2: {Name: "DOWN"},
+	},
+	"E_Interface_SessionState": {
 		1: {Name: "UP"},
 		2: {Name: "DOWN"},
 	},
@@ -259,6 +265,10 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 	"E_Peer_SessionIpType": {
 		1: {Name: "IPv4"},
 		2: {Name: "IPv6"},
+	},
+	"E_Peer_SessionState": {
+		1: {Name: "UP"},
+		2: {Name: "DOWN"},
 	},
 	"E_Peer_Status": {
 		1: {Name: "UP"},
@@ -723,6 +733,12 @@ func initΛEnumTypes() {
 		},
 		"/lldps/lldp-interface/state/lldp-neighbor-database/lldp-neighbors/lldp-neighbor/state/port-id-type": {
 			reflect.TypeOf((E_LldpNeighbor_PortIdType)(0)),
+		},
+		"/macsec/interfaces/interface/state/session-state": {
+			reflect.TypeOf((E_Interface_SessionState)(0)),
+		},
+		"/mka/peers/peer/state/session-state": {
+			reflect.TypeOf((E_Peer_SessionState)(0)),
 		},
 		"/ospfv2-routers/ospfv2-router/state/link-state-database/lsa-states/opaque-lsa/state/type": {
 			reflect.TypeOf((E_OpaqueLsa_Type)(0)),

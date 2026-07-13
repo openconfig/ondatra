@@ -20,6 +20,8 @@ using the following YANG input files:
   - models-yang/models/lacp/open-traffic-generator-lacp.yang
   - models-yang/models/lag/open-traffic-generator-lag.yang
   - models-yang/models/lldp/open-traffic-generator-lldp.yang
+  - models-yang/models/macsec/open-traffic-generator-macsec.yang
+  - models-yang/models/mka/open-traffic-generator-mka.yang
   - models-yang/models/ospfv2/open-traffic-generator-ospfv2.yang
   - models-yang/models/ospfv3/open-traffic-generator-ospfv3.yang
   - models-yang/models/platform/open-traffic-generator-platform.yang
@@ -559,6 +561,35 @@ const (
 	ExtendedIpv4Reachability_Prefix_RedistributionType_UP E_ExtendedIpv4Reachability_Prefix_RedistributionType = 1
 	// ExtendedIpv4Reachability_Prefix_RedistributionType_DOWN corresponds to the value DOWN of ExtendedIpv4Reachability_Prefix_RedistributionType
 	ExtendedIpv4Reachability_Prefix_RedistributionType_DOWN E_ExtendedIpv4Reachability_Prefix_RedistributionType = 2
+)
+
+// E_Interface_SessionState is a derived int64 type which is used to represent
+// the enumerated node Interface_SessionState. An additional value named
+// Interface_SessionState_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_Interface_SessionState int64
+
+// IsYANGGoEnum ensures that Interface_SessionState implements the yang.GoEnum
+// interface. This ensures that Interface_SessionState can be identified as a
+// mapped type for a YANG enumeration.
+func (E_Interface_SessionState) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  Interface_SessionState.
+func (E_Interface_SessionState) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_Interface_SessionState.
+func (e E_Interface_SessionState) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_Interface_SessionState")
+}
+
+const (
+	// Interface_SessionState_UNSET corresponds to the value UNSET of Interface_SessionState
+	Interface_SessionState_UNSET E_Interface_SessionState = 0
+	// Interface_SessionState_UP corresponds to the value UP of Interface_SessionState
+	Interface_SessionState_UP E_Interface_SessionState = 1
+	// Interface_SessionState_DOWN corresponds to the value DOWN of Interface_SessionState
+	Interface_SessionState_DOWN E_Interface_SessionState = 2
 )
 
 // E_Ipv4ExternalReachability_Prefix_OriginType is a derived int64 type which is used to represent
@@ -1356,6 +1387,35 @@ const (
 	Peer_SessionIpType_IPv4 E_Peer_SessionIpType = 1
 	// Peer_SessionIpType_IPv6 corresponds to the value IPv6 of Peer_SessionIpType
 	Peer_SessionIpType_IPv6 E_Peer_SessionIpType = 2
+)
+
+// E_Peer_SessionState is a derived int64 type which is used to represent
+// the enumerated node Peer_SessionState. An additional value named
+// Peer_SessionState_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_Peer_SessionState int64
+
+// IsYANGGoEnum ensures that Peer_SessionState implements the yang.GoEnum
+// interface. This ensures that Peer_SessionState can be identified as a
+// mapped type for a YANG enumeration.
+func (E_Peer_SessionState) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  Peer_SessionState.
+func (E_Peer_SessionState) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_Peer_SessionState.
+func (e E_Peer_SessionState) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_Peer_SessionState")
+}
+
+const (
+	// Peer_SessionState_UNSET corresponds to the value UNSET of Peer_SessionState
+	Peer_SessionState_UNSET E_Peer_SessionState = 0
+	// Peer_SessionState_UP corresponds to the value UP of Peer_SessionState
+	Peer_SessionState_UP E_Peer_SessionState = 1
+	// Peer_SessionState_DOWN corresponds to the value DOWN of Peer_SessionState
+	Peer_SessionState_DOWN E_Peer_SessionState = 2
 )
 
 // E_Peer_Status is a derived int64 type which is used to represent
