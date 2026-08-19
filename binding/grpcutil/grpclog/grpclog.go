@@ -75,7 +75,7 @@ func writeLog(target string, format string, args ...any) {
 
 // appendToFile appends the msg string to the file at the given path.
 func appendToFile(filePath string, msg string) error {
-	f, err := os.OpenFile(filePath, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+	f, err := os.OpenFile(filePath, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0600)
 	if err != nil {
 		return err
 	}
@@ -91,7 +91,7 @@ func UnaryClientInterceptor() grpc.UnaryClientInterceptor {
 
 		md, _ := metadata.FromOutgoingContext(ctx)
 
-		writeLog(target, "CALL START: Method: %s, Metadata: %+v, Request: %+v", method, md, req)
+		writeLog(target, "CALL START: Method: %s, Metadata: %+v, Request: %+v", method, map[string][]string(md), req)
 
 		startTime := time.Now()
 		err := invoker(ctx, method, req, reply, cc, opts...)
@@ -114,11 +114,11 @@ func StreamClientInterceptor() grpc.StreamClientInterceptor {
 
 		md, _ := metadata.FromOutgoingContext(ctx)
 
-		writeLog(target, "CALL START: Method: %s, Metadata: %+v, StreamDesc: %+v", method, md, desc)
+		writeLog(target, "CALL START: Method: %s, Metadata: %+v, StreamDesc: %+v", method, map[string][]string(md), desc)
 
 		clientStream, err := streamer(ctx, desc, cc, method, opts...)
 		if err != nil {
-			writeLog(target, "CALL END: Failed to start stream (Method: %s, Metadata: %+v, StreamDesc: %+v): %v", method, md, desc, err)
+			writeLog(target, "CALL END: Failed to start stream (Method: %s, Metadata: %+v, StreamDesc: %+v): %v", method, map[string][]string(md), desc, err)
 			return nil, err
 		}
 
@@ -162,13 +162,13 @@ func (w *wrappedClientStream) Header() (metadata.MD, error) {
 	if err != nil {
 		writeLog(w.target, "(Stream %s) Header error: %v", w.method, err)
 	} else {
-		writeLog(w.target, "(Stream %s) Header success: %+v", w.method, md)
+		writeLog(w.target, "(Stream %s) Header success: %+v", w.method, map[string][]string(md))
 	}
 	return md, err
 }
 
 func (w *wrappedClientStream) Trailer() metadata.MD {
 	md := w.ClientStream.Trailer()
-	writeLog(w.target, "(Stream %s) Trailer: %+v", w.method, md)
+	writeLog(w.target, "(Stream %s) Trailer: %+v", w.method, map[string][]string(md))
 	return md
 }

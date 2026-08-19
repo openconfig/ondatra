@@ -85,6 +85,10 @@ func (*testServer) SendStream(stream tgrpcpb.Test_SendStreamServer) error {
 }
 
 func TestInterceptors(t *testing.T) {
+	origDir := testOutputsDir
+	testOutputsDir = t.TempDir()
+	defer func() { testOutputsDir = origDir }()
+
 	ctx := t.Context()
 	opts := []grpc.DialOption{
 		grpc.WithChainUnaryInterceptor(UnaryClientInterceptor()),
@@ -110,7 +114,7 @@ func TestInterceptors(t *testing.T) {
 	logDir := testOutputsDir
 	ents, err := os.ReadDir(logDir)
 	if err != nil {
-		t.Fatalf("Failed to read log dir: %v", err)
+		t.Fatalf("os.ReadDir(%q) got err %v, want nil", logDir, err)
 	}
 	var logFiles []string
 	for _, ent := range ents {
@@ -119,16 +123,23 @@ func TestInterceptors(t *testing.T) {
 		}
 	}
 	if len(logFiles) == 0 {
-		t.Fatalf("Got 0 log files, want at least 1")
+		t.Fatalf("len(logFiles) got 0, want >0")
 	}
 	sort.Strings(logFiles)
 
 	var gotLogs strings.Builder
 	for _, f := range logFiles {
 		logFile := filepath.Join(logDir, f)
+		info, err := os.Stat(logFile)
+		if err != nil {
+			t.Fatalf("os.Stat(%q) got error %v, want nil", logFile, err)
+		}
+		if got, want := info.Mode().Perm(), os.FileMode(0600); got != want {
+			t.Errorf("os.Stat(%q).Mode().Perm() got %#o, want %#o", logFile, got, want)
+		}
 		data, err := os.ReadFile(logFile)
 		if err != nil {
-			t.Fatalf("Failed to read log file %s: %v", f, err)
+			t.Fatalf("os.ReadFile(%q) got %v, want nil", f, err)
 		}
 		gotLogs.Write(data)
 	}
