@@ -32,6 +32,7 @@ var (
 	reserve = flag.String("reserve", "", "Reservation id or a mapping of device and port IDs to names of the form "+
 		"'dut=mydevice,dut:port1=Ethernet1/1,ate=myixia,ate:port2=2/3'")
 	xml   = flag.String("xml", "", "File path to write JUnit XML test results; disables normal Go test logging.")
+	jsonl = flag.String("jsonl", "", "File path to append JSON-Lines test results to.")
 	debug = flag.Bool("debug", false, "Whether the test is run in debug mode")
 )
 
@@ -43,6 +44,7 @@ type Values struct {
 	ResvID      string
 	ResvPartial map[string]string
 	XMLPath     string
+	JSONLPath   string
 	Debug       bool
 }
 
@@ -66,6 +68,9 @@ func Parse() (*Values, error) {
 	if *waitTime < 0 {
 		return nil, fmt.Errorf("wait timeout is negative: %d", *waitTime)
 	}
+	if *jsonl != "" && !strings.HasSuffix(*jsonl, ".jsonl") {
+		return nil, fmt.Errorf("jsonl path %q must end with .jsonl extension", *jsonl)
+	}
 	if *reserve != "" && !*debug {
 		return nil, fmt.Errorf("reserve flag is only allowed in debug mode")
 	}
@@ -80,6 +85,7 @@ func Parse() (*Values, error) {
 		ResvID:      resvID,
 		ResvPartial: resvPartial,
 		XMLPath:     *xml,
+		JSONLPath:   *jsonl,
 		Debug:       *debug,
 	}, nil
 }

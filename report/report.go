@@ -40,6 +40,7 @@ import (
 
 	log "github.com/golang/glog"
 	"github.com/jstemmer/go-junit-report/v2/junit"
+	"github.com/openconfig/ondatra/internal/jsonl"
 	"github.com/openconfig/ondatra/internal/junitxml"
 )
 
@@ -66,6 +67,7 @@ func (r *Report) AddTestProperty(t testing.TB, name, value string) {
 // callers should prefer using AddSuiteProperty or AddTestProperty.
 func (r *Report) AddRawProperty(test, name, value string) {
 	fmt.Printf("*** PROPERTY: %s -> %s\n", name, value)
+	jsonl.AddProperty(test, name, value)
 	junitxml.AddProperty(test, name, value)
 }
 

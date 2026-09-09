@@ -21,6 +21,42 @@ import (
 	"github.com/google/go-cmp/cmp"
 )
 
+func TestParseJSONL(t *testing.T) {
+	origTestbed := *testbed
+	origJSONL := *jsonl
+	t.Cleanup(func() {
+		*testbed = origTestbed
+		*jsonl = origJSONL
+	})
+
+	*testbed = "/path/to/testbed.textproto"
+
+	t.Run("ValidExtension", func(t *testing.T) {
+		*jsonl = "/path/to/ledger.jsonl"
+		vals, err := Parse()
+		if err != nil {
+			t.Fatalf("Parse() failed: %v", err)
+		}
+		if vals.JSONLPath != "/path/to/ledger.jsonl" {
+			t.Errorf("JSONLPath = %q, want %q", vals.JSONLPath, "/path/to/ledger.jsonl")
+		}
+	})
+
+	t.Run("MissingExtension", func(t *testing.T) {
+		*jsonl = "/path/to/ledger"
+		if _, err := Parse(); err == nil {
+			t.Errorf("Parse() succeeded for path without .jsonl extension, want error")
+		}
+	})
+
+	t.Run("WrongExtension", func(t *testing.T) {
+		*jsonl = "/path/to/ledger.txt"
+		if _, err := Parse(); err == nil {
+			t.Errorf("Parse() succeeded for path with .txt extension, want error")
+		}
+	})
+}
+
 func TestParseReserve(t *testing.T) {
 	tests := []struct {
 		desc        string

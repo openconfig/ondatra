@@ -21,6 +21,7 @@ import (
 
 	"github.com/google/go-cmp/cmp"
 	"github.com/jstemmer/go-junit-report/v2/junit"
+	"github.com/openconfig/ondatra/internal/jsonl"
 )
 
 func TestReadXML(t *testing.T) {
@@ -97,5 +98,16 @@ func TestExtractPropertiesNil(t *testing.T) {
 	suites := junit.Testsuites{Suites: []junit.Testsuite{{}}}
 	if got := ExtractProperties(suites); len(got) > 0 {
 		t.Errorf("ExtractProperties got %v, want none", got)
+	}
+}
+
+func TestAddRawPropertySetsPlanID(t *testing.T) {
+	rep := &Report{}
+	t.Cleanup(func() { rep.AddSuiteProperty("test.plan_id", "") })
+
+	rep.AddSuiteProperty("test.plan_id", "SUITE-PLAN-123")
+
+	if got := jsonl.ResolvePlanID(); got != "SUITE-PLAN-123" {
+		t.Errorf("jsonl.ResolvePlanID() = %q, want %q", got, "SUITE-PLAN-123")
 	}
 }

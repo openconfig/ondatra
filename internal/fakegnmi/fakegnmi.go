@@ -141,7 +141,13 @@ type StubGNMI struct {
 	getRequests []*gpb.GetRequest
 	subRequests []*gpb.SubscribeRequest
 	lis         net.Listener
-	srv         *grpc.Server
+	srv         server
+}
+
+type server interface {
+	Serve(lis net.Listener) error
+	GracefulStop()
+	RegisterService(desc *grpc.ServiceDesc, impl any)
 }
 
 // StartStubGNMI starts serving a gNMI server at the given port.
@@ -156,7 +162,7 @@ func StartStubGNMI(port int) (*StubGNMI, error) {
 }
 
 // NewStubGNMI creates a new stub gNMI server.
-func NewStubGNMI(srv *grpc.Server, lis net.Listener) *StubGNMI {
+func NewStubGNMI(srv server, lis net.Listener) *StubGNMI {
 	sg := &StubGNMI{lis: lis, srv: srv}
 	gpb.RegisterGNMIServer(srv, sg)
 	return sg

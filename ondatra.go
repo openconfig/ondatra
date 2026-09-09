@@ -32,6 +32,7 @@ import (
 	"github.com/openconfig/ondatra/internal/ate"
 	"github.com/openconfig/ondatra/internal/events"
 	"github.com/openconfig/ondatra/internal/flags"
+	"github.com/openconfig/ondatra/internal/jsonl"
 	"github.com/openconfig/ondatra/internal/junitxml"
 	"github.com/openconfig/ondatra/internal/rawapis"
 	"github.com/openconfig/ondatra/internal/testbed"
@@ -39,6 +40,7 @@ import (
 	"golang.org/x/sys/unix"
 
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
+	opb "github.com/openconfig/ondatra/proto"
 )
 
 var (
@@ -76,6 +78,14 @@ func runTests(runFn func() int, newBindFn func() (binding.Binding, error)) (rerr
 	if err != nil {
 		return err
 	}
+
+	var exitCode *int
+	if flagVals.JSONLPath != "" {
+		defer func() {
+			jsonl.RecordResult(flagVals.JSONLPath, rerr, exitCode)
+		}()
+	}
+
 	bind, err := newBindFn()
 	if err != nil {
 		return fmt.Errorf("failed to create binding: %w", err)
@@ -99,7 +109,6 @@ func runTests(runFn func() int, newBindFn func() (binding.Binding, error)) (rerr
 		return testbed.Release(ctx)
 	}, "error releasing testbed")
 
-	var exitCode *int
 	defer closer.Close(&rerr, func() error {
 		return events.TestsDone(exitCode)
 	}, "error notifying tests are done")
@@ -109,6 +118,9 @@ func runTests(runFn func() int, newBindFn func() (binding.Binding, error)) (rerr
 	}
 	if flagVals.RunTime > 0 {
 		timer := time.AfterFunc(flagVals.RunTime, func() {
+			if flagVals.JSONLPath != "" {
+				_ = jsonl.AppendResult(flagVals.JSONLPath, opb.TestStatus_TEST_STATUS_FAIL, fmt.Sprintf("test timed out after %v", flagVals.RunTime))
+			}
 			log.Exitf("Ondatra test timed out after %v", flagVals.RunTime)
 		})
 		defer timer.Stop()

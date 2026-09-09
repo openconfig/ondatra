@@ -17,6 +17,7 @@ package ondatra
 import (
 	"errors"
 	"os"
+	"path/filepath"
 	"strings"
 	"testing"
 	"time"
@@ -30,6 +31,7 @@ import (
 	"github.com/openconfig/testt"
 
 	opb "github.com/openconfig/ondatra/proto"
+	"google.golang.org/protobuf/encoding/protojson"
 )
 
 func TestRunTests(t *testing.T) {
@@ -91,6 +93,85 @@ func TestRunTests(t *testing.T) {
 			// wait for the deferred release at the end of runTests.
 			if test.reserveErr == nil && !test.interrupt {
 				<-releaseCh
+			}
+		})
+	}
+}
+
+func TestRunTestsJSONL(t *testing.T) {
+	origTestbed := flag.Lookup("testbed").Value.String()
+	origJSONL := flag.Lookup("jsonl").Value.String()
+	t.Cleanup(func() {
+		flag.Set("testbed", origTestbed)
+		flag.Set("jsonl", origJSONL)
+	})
+
+	tests := []struct {
+		name        string
+		runCode     int
+		reserveErr  error
+		wantErr     bool
+		wantStatus  opb.TestStatus
+		wantDetails string
+	}{
+		{
+			name:       "success_pass",
+			runCode:    0,
+			wantStatus: opb.TestStatus_TEST_STATUS_PASS,
+		},
+		{
+			name:       "test_failure_code",
+			runCode:    1,
+			wantStatus: opb.TestStatus_TEST_STATUS_FAIL,
+		},
+		{
+			name:        "reserve_error",
+			reserveErr:  errors.New("reserve failed"),
+			wantErr:     true,
+			wantStatus:  opb.TestStatus_TEST_STATUS_FAIL,
+			wantDetails: "reserve failed",
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			emptyTB, err := os.CreateTemp(t.TempDir(), "*.textproto")
+			if err != nil {
+				t.Fatalf("Failed to create temp file: %v", err)
+			}
+			emptyTB.Close()
+
+			jsonlFile := filepath.Join(t.TempDir(), "ledger.jsonl")
+			flag.Set("testbed", emptyTB.Name())
+			flag.Set("jsonl", jsonlFile)
+
+			fakeBind := fakebind.Setup()
+			fakeBind.ReserveFn = func(context.Context, *opb.Testbed, time.Duration, time.Duration, map[string]string) (*binding.Reservation, error) {
+				if tt.reserveErr != nil {
+					return nil, tt.reserveErr
+				}
+				return new(binding.Reservation), nil
+			}
+			fakeBind.ReleaseFn = func(context.Context) error { return nil }
+
+			err = runTests(func() int { return tt.runCode }, func() (binding.Binding, error) { return fakeBind, nil })
+			if (err != nil) != tt.wantErr {
+				t.Errorf("runTests() err = %v, wantErr = %v", err, tt.wantErr)
+			}
+
+			data, err := os.ReadFile(jsonlFile)
+			if err != nil {
+				t.Fatalf("JSONL ledger file %q was not created: %v", jsonlFile, err)
+			}
+			res := &opb.TestResult{}
+			if err := protojson.Unmarshal(data, res); err != nil {
+				t.Fatalf("Failed to parse JSONL output %q: %v", string(data), err)
+			}
+			if res.GetStatus() != tt.wantStatus {
+				t.Errorf("JSONL status = %v, want %v", res.GetStatus(), tt.wantStatus)
+			}
+			if tt.wantDetails != "" && !strings.Contains(res.GetStatusDetails(), tt.wantDetails) {
+				t.Errorf("JSONL statusDetails = %q, want containing %q", res.GetStatusDetails(), tt.wantDetails)
 			}
 		})
 	}
