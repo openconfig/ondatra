@@ -91,6 +91,8 @@ additional flags to control the execution of the test:
     for the testbed to be ready. If not specified, no limit is imposed.
 *   `-xml` (*optional*): File path to write JUnit XML test results; disables
     normal Go test logging.
+*   `-jsonl` (*optional*): File path to append JSON-Lines test results to; see
+    [JSON-Lines Test Report](#json-lines-test-report).
 *   `-debug` (*optional*): Whether the test is run in debug mode.
 *   `-reserve` (*optional*): Reservation id or a mapping of device and port IDs
     to names; allowed only in [debug mode](#debugging-an-ondatra-test)
@@ -173,6 +175,28 @@ Ondatra has the ability to output test results in JUnit XML format. If you pass
 Go test log to an XML file at the provided path. To attach properties to the XML
 report and to programmatically parse the XML file use the Ondatra
 [Report API](https://pkg.go.dev/github.com/openconfig/ondatra/report).
+
+## JSON-Lines Test Report
+
+Ondatra can also record test results in a JSON-Lines file. If you pass
+`-jsonl=[path]` to your `go test` invocation, Ondatra appends one JSON-encoded
+`TestResult` (see [test_result.proto](proto/test_result.proto)) per test run to
+the file, creating it if needed. Each record contains:
+
+*   `testId`: the `test.plan_id` suite property if set, otherwise the test
+    binary name.
+*   `status` and `statusDetails`: the outcome of the run and failure details.
+*   `executionTimestamp`: when the result was recorded.
+*   `gitCommit` and `gitDirty`: the `git.commit` and `git.clean` suite
+    properties, if the test reports them.
+
+Appends are protected by an exclusive file lock, so concurrent test runs on the
+same machine can safely share one file. Files from different machines can be
+concatenated.
+
+```shell
+$ go test -testbed=testbed.textproto -config=config.yaml -jsonl=results.jsonl
+```
 
 ## Testing on KNE
 
