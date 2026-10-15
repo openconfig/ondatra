@@ -56,8 +56,27 @@ func (o *OTG) String() string {
 	return fmt.Sprintf("{ate: %s}", o.ate)
 }
 
+// PushConfigOptions contains options for PushConfigOpts.
+type PushConfigOptions struct {
+	// LinkUp, when true, brings up the links for the ports just configured
+	// after pushing the config. When false, the link-up step is skipped.
+	LinkUp bool
+}
+
 // PushConfig pushes config to the ATE.
 func (o *OTG) PushConfig(t testing.TB, cfg gosnappi.Config) {
+	t.Helper()
+	o.pushConfig(t, cfg, true)
+}
+
+// PushConfigOpts pushes config to the ATE, using opts to control optional
+// behavior. If opts is nil, the link-up step is skipped.
+func (o *OTG) PushConfigOpts(t testing.TB, cfg gosnappi.Config, opts *PushConfigOptions) {
+	t.Helper()
+	o.pushConfig(t, cfg, opts != nil && opts.LinkUp)
+}
+
+func (o *OTG) pushConfig(t testing.TB, cfg gosnappi.Config, linkUp bool) {
 	t.Helper()
 	t = events.ActionStarted(t, "Pushing config to %s", o.ate)
 	warns, err := pushConfig(context.Background(), o.ate, cfg)
@@ -67,6 +86,32 @@ func (o *OTG) PushConfig(t testing.TB, cfg gosnappi.Config) {
 	if len(warns) > 0 {
 		t.Logf("PushConfig(t) on %s non-fatal warnings: %v", o.ate, warns)
 	}
+	// Bring up the links for the ports just configured, unless no ports are
+	// configured or the caller opted out of the link-up step.
+	if !linkUp || len(cfg.Ports().Items()) == 0 {
+		t.Logf("Skipping link-up step for %s", o.ate)
+		return
+	}
+	warnsLinkup, errLinkup := o.setLinkState(context.Background(), gosnappi.StatePortLinkState.UP)
+	if errLinkup != nil {
+		t.Fatalf("PushConfig(t) on %s: failed to set port link state up: %v", o.ate, errLinkup)
+	}
+
+	if len(warnsLinkup) > 0 {
+		t.Logf("PushConfig(t) on %s non-fatal warnings when setting port link state up: %v",
+			o.ate,
+			warnsLinkup)
+	}
+}
+
+func (o *OTG) setLinkState(ctx context.Context, state gosnappi.StatePortLinkStateEnum) ([]string, error) {
+	controlState := gosnappi.NewControlState()
+	controlState.Port().Link().SetState(state)
+	resp, err := o.setControlState(ctx, controlState)
+	if err != nil {
+		return nil, err
+	}
+	return resp.Warnings(), nil
 }
 
 func pushConfig(ctx context.Context, ate binding.ATE, cfg gosnappi.Config) ([]string, error) {
