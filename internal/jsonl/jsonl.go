@@ -21,6 +21,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"strconv"
 	"strings"
 	"sync"
 	"time"
@@ -29,23 +30,43 @@ import (
 	opb "github.com/openconfig/ondatra/proto"
 	"golang.org/x/sys/unix"
 	"google.golang.org/protobuf/encoding/protojson"
+	"google.golang.org/protobuf/proto"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
+// Suite property names recorded in the ledger.
+const (
+	planIDProperty    = "test.plan_id"
+	gitCommitProperty = "git.commit"
+	gitCleanProperty  = "git.clean"
+)
+
 var (
-	planIDMu sync.RWMutex
-	planID   string
+	propsMu   sync.RWMutex
+	planID    string
+	gitCommit string
+	gitDirty  *bool // nil if git.clean was not reported or is not a bool.
 
 	timeNowFn = time.Now
 )
 
-// AddProperty processes a name-value property and sets the plan ID if the key matches.
-// Note: test parameter is ignored as test.plan_id is suite-scoped (last write wins).
+// AddProperty records the name-value property if it is one recorded in the
+// ledger: the test plan ID, the git commit, or the git clean status.
+// Note: test parameter is ignored as these properties are suite-scoped (last
+// write wins).
 func AddProperty(test, name, value string) {
-	if name == "test.plan_id" {
-		planIDMu.Lock()
-		defer planIDMu.Unlock()
+	propsMu.Lock()
+	defer propsMu.Unlock()
+	switch name {
+	case planIDProperty:
 		planID = value
+	case gitCommitProperty:
+		gitCommit = value
+	case gitCleanProperty:
+		gitDirty = nil
+		if clean, err := strconv.ParseBool(value); err == nil {
+			gitDirty = proto.Bool(!clean)
+		}
 	}
 }
 
@@ -53,9 +74,9 @@ func AddProperty(test, name, value string) {
 // (such as ondatra.Report().AddSuiteProperty("test.plan_id", ...)), or falls back
 // to the executable base name.
 func ResolvePlanID() string {
-	planIDMu.RLock()
+	propsMu.RLock()
 	id := planID
-	planIDMu.RUnlock()
+	propsMu.RUnlock()
 
 	if id != "" {
 		return id
@@ -73,14 +94,21 @@ func ResolvePlanID() string {
 	return "UNKNOWN_TEST_ID"
 }
 
-// AppendResult creates a TestResult with the resolved plan ID, current timestamp, status,
-// and details, and atomically appends it to the specified JSON-Lines file.
+// AppendResult creates a TestResult with the resolved plan ID, git commit and
+// dirty state of the test code, current timestamp, status, and details, and
+// atomically appends it to the specified JSON-Lines file.
 func AppendResult(path string, status opb.TestStatus, details string) error {
+	propsMu.RLock()
+	commit, dirty := gitCommit, gitDirty
+	propsMu.RUnlock()
+
 	res := &opb.TestResult{
 		TestId:             ResolvePlanID(),
 		Status:             status,
 		StatusDetails:      details,
 		ExecutionTimestamp: timestamppb.New(timeNowFn()),
+		GitCommit:          commit,
+		GitDirty:           dirty,
 	}
 	return appendRecord(path, res)
 }

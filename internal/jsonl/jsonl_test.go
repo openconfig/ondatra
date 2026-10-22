@@ -26,12 +26,15 @@ import (
 	"github.com/google/go-cmp/cmp"
 	opb "github.com/openconfig/ondatra/proto"
 	"google.golang.org/protobuf/encoding/protojson"
+	"google.golang.org/protobuf/proto"
 	"google.golang.org/protobuf/testing/protocmp"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
-func resetPlanID() {
-	AddProperty("", "test.plan_id", "")
+func resetProperties() {
+	AddProperty("", planIDProperty, "")
+	AddProperty("", gitCommitProperty, "")
+	AddProperty("", gitCleanProperty, "")
 }
 
 func TestAddProperty(t *testing.T) {
@@ -67,8 +70,8 @@ func TestAddProperty(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			resetPlanID()
-			t.Cleanup(resetPlanID)
+			resetProperties()
+			t.Cleanup(resetProperties)
 
 			AddProperty(tt.testName, tt.propName, tt.propValue)
 			got := ResolvePlanID()
@@ -125,8 +128,8 @@ func TestResolvePlanID(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			resetPlanID()
-			t.Cleanup(resetPlanID)
+			resetProperties()
+			t.Cleanup(resetProperties)
 
 			if tt.planIDProp != "" {
 				AddProperty("", "test.plan_id", tt.planIDProp)
@@ -273,6 +276,7 @@ func TestAppendResult(t *testing.T) {
 	tests := []struct {
 		name       string
 		planID     string
+		props      map[string]string
 		status     opb.TestStatus
 		details    string
 		path       func(t *testing.T) string
@@ -315,15 +319,81 @@ func TestAppendResult(t *testing.T) {
 				ExecutionTimestamp: timestamppb.New(fixedTime),
 			},
 		},
+		{
+			name:   "clean_tree_records_commit_and_not_dirty",
+			planID: "RT-1.1",
+			props: map[string]string{
+				gitCommitProperty: "2af5a37c5542e1705c7e49e8f11a3b457629cd76",
+				gitCleanProperty:  "true",
+			},
+			status: opb.TestStatus_TEST_STATUS_PASS,
+			path:   func(t *testing.T) string { return filepath.Join(t.TempDir(), "clean.jsonl") },
+			wantResult: &opb.TestResult{
+				TestId:             "RT-1.1",
+				Status:             opb.TestStatus_TEST_STATUS_PASS,
+				ExecutionTimestamp: timestamppb.New(fixedTime),
+				GitCommit:          "2af5a37c5542e1705c7e49e8f11a3b457629cd76",
+				GitDirty:           proto.Bool(false),
+			},
+		},
+		{
+			name:   "modified_tree_records_dirty",
+			planID: "RT-1.1",
+			props: map[string]string{
+				gitCommitProperty: "2af5a37c5542e1705c7e49e8f11a3b457629cd76",
+				gitCleanProperty:  "false",
+			},
+			status: opb.TestStatus_TEST_STATUS_PASS,
+			path:   func(t *testing.T) string { return filepath.Join(t.TempDir(), "dirty.jsonl") },
+			wantResult: &opb.TestResult{
+				TestId:             "RT-1.1",
+				Status:             opb.TestStatus_TEST_STATUS_PASS,
+				ExecutionTimestamp: timestamppb.New(fixedTime),
+				GitCommit:          "2af5a37c5542e1705c7e49e8f11a3b457629cd76",
+				GitDirty:           proto.Bool(true),
+			},
+		},
+		{
+			name:   "unreported_clean_status_leaves_dirty_unset",
+			planID: "RT-1.1",
+			props: map[string]string{
+				gitCommitProperty: "2af5a37c5542e1705c7e49e8f11a3b457629cd76",
+			},
+			status: opb.TestStatus_TEST_STATUS_PASS,
+			path:   func(t *testing.T) string { return filepath.Join(t.TempDir(), "unknown.jsonl") },
+			wantResult: &opb.TestResult{
+				TestId:             "RT-1.1",
+				Status:             opb.TestStatus_TEST_STATUS_PASS,
+				ExecutionTimestamp: timestamppb.New(fixedTime),
+				GitCommit:          "2af5a37c5542e1705c7e49e8f11a3b457629cd76",
+			},
+		},
+		{
+			name:   "unrecognized_clean_status_leaves_dirty_unset",
+			planID: "RT-1.1",
+			props: map[string]string{
+				gitCleanProperty: "maybe",
+			},
+			status: opb.TestStatus_TEST_STATUS_PASS,
+			path:   func(t *testing.T) string { return filepath.Join(t.TempDir(), "invalid.jsonl") },
+			wantResult: &opb.TestResult{
+				TestId:             "RT-1.1",
+				Status:             opb.TestStatus_TEST_STATUS_PASS,
+				ExecutionTimestamp: timestamppb.New(fixedTime),
+			},
+		},
 	}
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			resetPlanID()
-			t.Cleanup(resetPlanID)
+			resetProperties()
+			t.Cleanup(resetProperties)
 
 			if tt.planID != "" {
 				AddProperty("", "test.plan_id", tt.planID)
+			}
+			for name, value := range tt.props {
+				AddProperty("", name, value)
 			}
 
 			origTimeNow := timeNowFn

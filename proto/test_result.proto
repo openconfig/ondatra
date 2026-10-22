@@ -42,4 +42,13 @@ message TestResult {
 
   // Execution timestamp.
   google.protobuf.Timestamp execution_timestamp = 4;
+
+  // Git commit hash (HEAD) of the test code that produced this result, as
+  // reported by the "git.commit" suite property. Empty if not reported.
+  string git_commit = 5;
+
+  // Whether the test code had uncommitted changes, as reported by the
+  // "git.clean" suite property. Unset if not reported, so that an unknown
+  // state is distinguishable from a clean one.
+  optional bool git_dirty = 6;
 }
