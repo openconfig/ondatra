@@ -33,6 +33,17 @@ import (
 	opb "github.com/openconfig/ondatra/proto"
 )
 
+func TestIsVirtual(t *testing.T) {
+	dut := &ServiceDUT{AbstractDUT: &binding.AbstractDUT{Dims: &binding.Dims{Name: "dut"}}}
+	if !dut.IsVirtual() {
+		t.Errorf("ServiceDUT.IsVirtual() = false, want true")
+	}
+	ate := &ServiceATE{AbstractATE: &binding.AbstractATE{Dims: &binding.Dims{Name: "ate"}}}
+	if !ate.IsVirtual() {
+		t.Errorf("ServiceATE.IsVirtual() = false, want true")
+	}
+}
+
 func TestSolve(t *testing.T) {
 	const topoText = `
 		nodes: {
