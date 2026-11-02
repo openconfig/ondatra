@@ -52,7 +52,7 @@ func TestFetchConfig(t *testing.T) {
 func TestPushConfig(t *testing.T) {
 	wantCfg := gosnappi.NewConfig()
 	wantCfg.Ports().Add().SetName("port1")
-	otgAPI.PushConfig(t, wantCfg)
+	otgAPI.PushConfigOpts(t, wantCfg, &PushConfigOptions{})
 	if gotCfg := fakeSnappi.config; wantCfg != gotCfg {
 		t.Errorf("PushConfig got unexpected config %v, want %v", gotCfg, wantCfg)
 	}

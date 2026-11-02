@@ -24,6 +24,7 @@ package otg
 
 import (
 	"fmt"
+	"strings"
 	"testing"
 	"time"
 
@@ -34,6 +35,7 @@ import (
 	"github.com/openconfig/ondatra/gnmi"
 	"github.com/openconfig/ondatra/internal/events"
 	"github.com/openconfig/ondatra/internal/rawapis"
+	"github.com/openconfig/ygnmi/ygnmi"
 
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 )
@@ -92,7 +94,78 @@ func (o *OTG) pushConfig(t testing.TB, cfg gosnappi.Config, linkUp bool) {
 		t.Logf("Skipping link-up step for %s", o.ate)
 		return
 	}
+	// logLinkStates logs each configured port's link state. With an expected
+	// state of "UP" or "DOWN", it first polls every pollIntervalMs until all
+	// ports reach that state or timeoutSec elapses; "NONE" logs immediately.
+	// Telemetry errors and timeouts are tolerated silently.
+	logLinkStates := func(when string, timeoutSec int, expectedState string, pollIntervalMs int) {
+		const queryTimeout = 10 * time.Second
+		ctx := context.Background()
+		gnmiClient, err := rawapis.FetchOTGGNMI(ctx, o.ate)
+		if err != nil {
+			return
+		}
+		client, err := ygnmi.NewClient(gnmiClient, ygnmi.WithTarget(o.ate.Name()))
+		if err != nil {
+			return
+		}
+		readStates := func(deadline time.Time) map[string]fmt.Stringer {
+			states := make(map[string]fmt.Stringer)
+			for _, cfgPort := range cfg.Ports().Items() {
+				timeout := queryTimeout
+				if !deadline.IsZero() {
+					timeout = max(min(queryTimeout, time.Until(deadline)), time.Second)
+				}
+				queryCtx, cancel := context.WithTimeout(ctx, timeout)
+				state, err := ygnmi.Get(queryCtx, client, gnmi.OTG().Port(cfgPort.Name()).Link().State())
+				cancel()
+				if err == nil {
+					states[cfgPort.Name()] = state
+				}
+			}
+			return states
+		}
+		allInState := func(states map[string]fmt.Stringer, want string) bool {
+			for _, cfgPort := range cfg.Ports().Items() {
+				state, ok := states[cfgPort.Name()]
+				if !ok || state.String() != want {
+					return false
+				}
+			}
+			return true
+		}
+
+		expected := strings.ToUpper(strings.TrimSpace(expectedState))
+		var states map[string]fmt.Stringer
+		if expected == "UP" || expected == "DOWN" {
+			deadline := time.Now().Add(time.Duration(max(timeoutSec, 0)) * time.Second)
+			pollInterval := time.Duration(max(pollIntervalMs, 1)) * time.Millisecond
+			states = readStates(deadline)
+			for !allInState(states, expected) {
+				remaining := time.Until(deadline)
+				if remaining <= 0 {
+					break
+				}
+				time.Sleep(min(pollInterval, remaining))
+				states = readStates(deadline)
+			}
+		} else {
+			states = readStates(time.Time{})
+		}
+
+		for _, cfgPort := range cfg.Ports().Items() {
+			if state, ok := states[cfgPort.Name()]; ok {
+				t.Logf("PushConfig(t) on: %s, %s : %v",
+					cfgPort.Name(),
+					when,
+					state)
+			}
+		}
+	}
+
+	logLinkStates("before setting link state actual link is", 10, "UP", 500)
 	warnsLinkup, errLinkup := o.setLinkState(context.Background(), gosnappi.StatePortLinkState.UP)
+	logLinkStates("after setting link state up actual link is", 10, "UP", 500)
 	if errLinkup != nil {
 		t.Fatalf("PushConfig(t) on %s: failed to set port link state up: %v", o.ate, errLinkup)
 	}
