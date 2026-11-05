@@ -16,12 +16,11 @@
 package solver
 
 import (
+	"context"
 	"fmt"
 	"regexp"
 	"strconv"
 	"strings"
-
-	"golang.org/x/net/context"
 
 	"bitbucket.org/creachadair/stringset"
 	log "github.com/golang/glog"

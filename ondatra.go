@@ -16,13 +16,12 @@
 package ondatra
 
 import (
+	"context"
 	"fmt"
 	"os"
 	"os/signal"
 	"testing"
 	"time"
-
-	"golang.org/x/net/context"
 
 	log "github.com/golang/glog"
 	closer "github.com/openconfig/gocloser"
@@ -74,16 +73,20 @@ func ExecuteTests(m *testing.M, newBindFn func() (binding.Binding, error)) error
 }
 
 func runTests(runFn func() int, newBindFn func() (binding.Binding, error)) (rerr error) {
+	// Set up the JSON-Lines ledger write before validating the other flags, so
+	// that a flag validation failure (such as a missing -testbed) is recorded as
+	// a failed result instead of leaving no ledger entry.
+	var exitCode *int
+	jsonlPath := flags.JSONLPath()
+	if jsonlPath != "" {
+		defer func() {
+			jsonl.RecordResult(jsonlPath, rerr, exitCode)
+		}()
+	}
+
 	flagVals, err := flags.Parse()
 	if err != nil {
 		return err
-	}
-
-	var exitCode *int
-	if flagVals.JSONLPath != "" {
-		defer func() {
-			jsonl.RecordResult(flagVals.JSONLPath, rerr, exitCode)
-		}()
 	}
 
 	bind, err := newBindFn()
@@ -118,8 +121,8 @@ func runTests(runFn func() int, newBindFn func() (binding.Binding, error)) (rerr
 	}
 	if flagVals.RunTime > 0 {
 		timer := time.AfterFunc(flagVals.RunTime, func() {
-			if flagVals.JSONLPath != "" {
-				_ = jsonl.AppendResult(flagVals.JSONLPath, opb.TestStatus_TEST_STATUS_FAIL, fmt.Sprintf("test timed out after %v", flagVals.RunTime))
+			if jsonlPath != "" {
+				_ = jsonl.AppendResult(jsonlPath, opb.TestStatus_TEST_STATUS_FAIL, fmt.Sprintf("test timed out after %v", flagVals.RunTime))
 			}
 			log.Exitf("Ondatra test timed out after %v", flagVals.RunTime)
 		})

@@ -16,10 +16,9 @@ package console
 
 import (
 	"bytes"
+	"context"
 	"strings"
 	"testing"
-
-	"golang.org/x/net/context"
 
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/fakebind"

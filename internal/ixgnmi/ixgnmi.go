@@ -16,6 +16,7 @@
 package ixgnmi
 
 import (
+	"context"
 	"errors"
 	"fmt"
 	"net"
@@ -24,8 +25,6 @@ import (
 	"strings"
 	"sync"
 	"time"
-
-	"golang.org/x/net/context"
 
 	log "github.com/golang/glog"
 	gcache "github.com/openconfig/gnmi/cache"

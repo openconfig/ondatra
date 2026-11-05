@@ -14,15 +14,19 @@
 package grpcproxy
 
 import (
+	"context"
+	"errors"
+	"io"
 	"net"
+	"strings"
 	"testing"
-
-	"golang.org/x/net/context"
 
 	"github.com/openconfig/ondatra/internal/fakegnmi"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/metadata"
+	"google.golang.org/grpc/status"
 	"google.golang.org/protobuf/proto"
 
 	gnmipb "github.com/openconfig/gnmi/proto/gnmi"
@@ -139,5 +143,179 @@ func TestProxyChain(t *testing.T) {
 		if !proto.Equal(v, wantResps[i]) {
 			t.Fatalf("invalid message: got %s, want %s", v, wantResps[i])
 		}
+	}
+}
+
+func TestProxyError(t *testing.T) {
+	tests := []struct {
+		name     string
+		err      error
+		wantCode codes.Code
+	}{
+		{
+			name:     "Canceled",
+			err:      status.Error(codes.Canceled, "context canceled"),
+			wantCode: codes.Canceled,
+		},
+		{
+			name:     "DeadlineExceeded",
+			err:      status.Error(codes.DeadlineExceeded, "context deadline exceeded"),
+			wantCode: codes.DeadlineExceeded,
+		},
+		{
+			name:     "Unavailable",
+			err:      status.Error(codes.Unavailable, "connection closed"),
+			wantCode: codes.Unavailable,
+		},
+		{
+			name:     "NonGRPCErrorDefaultsToInternal",
+			err:      errors.New("unexpected failure"),
+			wantCode: codes.Internal,
+		},
+	}
+
+	for _, tc := range tests {
+		t.Run(tc.name, func(t *testing.T) {
+			gotErr := proxyError(tc.err)
+			if gotCode := status.Code(gotErr); gotCode != tc.wantCode {
+				t.Errorf("proxyError(%v) code = %v, want %v", tc.err, gotCode, tc.wantCode)
+			}
+		})
+	}
+}
+
+type fakeClientStream struct {
+	grpc.ClientStream
+	headerErr    error
+	sendMsgErr   error
+	closeSendErr error
+}
+
+func (f *fakeClientStream) Header() (metadata.MD, error) {
+	return nil, f.headerErr
+}
+
+func (f *fakeClientStream) SendMsg(any) error {
+	return f.sendMsgErr
+}
+
+func (f *fakeClientStream) CloseSend() error {
+	return f.closeSendErr
+}
+
+type fakeServerStream struct {
+	grpc.ServerStream
+	recvMsgErr    error
+	sendHeaderErr error
+}
+
+func (f *fakeServerStream) RecvMsg(any) error {
+	return f.recvMsgErr
+}
+
+func (f *fakeServerStream) SendHeader(metadata.MD) error {
+	return f.sendHeaderErr
+}
+
+func TestForwardServerToClientErrors(t *testing.T) {
+	tests := []struct {
+		name     string
+		dst      *fakeClientStream
+		src      *fakeServerStream
+		wantCode codes.Code
+	}{
+		{
+			name:     "RecvMsgCanceled",
+			dst:      &fakeClientStream{},
+			src:      &fakeServerStream{recvMsgErr: status.Error(codes.Canceled, "client canceled")},
+			wantCode: codes.Canceled,
+		},
+		{
+			name:     "CloseSendError",
+			dst:      &fakeClientStream{closeSendErr: status.Error(codes.Unavailable, "close send failed")},
+			src:      &fakeServerStream{recvMsgErr: io.EOF},
+			wantCode: codes.Unavailable,
+		},
+		{
+			name:     "SendMsgError",
+			dst:      &fakeClientStream{sendMsgErr: status.Error(codes.Canceled, "send msg failed")},
+			src:      &fakeServerStream{},
+			wantCode: codes.Canceled,
+		},
+	}
+
+	for _, tc := range tests {
+		t.Run(tc.name, func(t *testing.T) {
+			err := forwardServerToClient(tc.dst, tc.src)
+			if gotCode := status.Code(err); gotCode != tc.wantCode {
+				t.Errorf("forwardServerToClient() code = %v, want %v (err: %v)", gotCode, tc.wantCode, err)
+			}
+			if err == nil || !strings.Contains(err.Error(), "proxy_error:") {
+				t.Errorf("forwardServerToClient() err = %v, want substring %q", err, "proxy_error:")
+			}
+		})
+	}
+}
+
+func TestForwardClientToServerErrors(t *testing.T) {
+	tests := []struct {
+		name     string
+		dst      *fakeServerStream
+		src      *fakeClientStream
+		wantCode codes.Code
+	}{
+		{
+			name:     "HeaderError",
+			dst:      &fakeServerStream{},
+			src:      &fakeClientStream{headerErr: status.Error(codes.Canceled, "header canceled")},
+			wantCode: codes.Canceled,
+		},
+		{
+			name:     "SendHeaderError",
+			dst:      &fakeServerStream{sendHeaderErr: status.Error(codes.Internal, "send header failed")},
+			src:      &fakeClientStream{},
+			wantCode: codes.Internal,
+		},
+	}
+
+	for _, tc := range tests {
+		t.Run(tc.name, func(t *testing.T) {
+			err := forwardClientToServer(tc.dst, tc.src)
+			if gotCode := status.Code(err); gotCode != tc.wantCode {
+				t.Errorf("forwardClientToServer() code = %v, want %v (err: %v)", gotCode, tc.wantCode, err)
+			}
+			if err == nil || !strings.Contains(err.Error(), "proxy_error:") {
+				t.Errorf("forwardClientToServer() err = %v, want substring %q", err, "proxy_error:")
+			}
+		})
+	}
+}
+
+type closedConnDialer struct{}
+
+func (d *closedConnDialer) DialGRPC(ctx context.Context, target string, opts ...grpc.DialOption) (*grpc.ClientConn, error) {
+	opts = append(opts, grpc.WithTransportCredentials(insecure.NewCredentials()))
+	conn, err := grpc.DialContext(ctx, target, opts...)
+	if err != nil {
+		return nil, err
+	}
+	conn.Close()
+	return conn, nil
+}
+
+func TestStreamHandlerNewClientStreamError(t *testing.T) {
+	p := &proxy{
+		destProvider: func(_ metadata.MD, _ string) (string, metadata.MD, error) {
+			return "localhost:0", nil, nil
+		},
+		grpcDialer: &closedConnDialer{},
+	}
+	ctx := metadata.NewIncomingContext(context.Background(), metadata.MD{})
+	err := p.streamHandler(ctx, "/gnmi.gNMI/Get", &fakeServerStream{})
+	if gotCode := status.Code(err); gotCode != codes.Canceled {
+		t.Errorf("streamHandler() code = %v, want %v (err: %v)", gotCode, codes.Canceled, err)
+	}
+	if err == nil || !strings.Contains(err.Error(), "proxy_error:") {
+		t.Errorf("streamHandler() err = %v, want substring %q", err, "proxy_error:")
 	}
 }

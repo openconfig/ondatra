@@ -37,13 +37,12 @@
 package console
 
 import (
+	"context"
 	"fmt"
 	"io"
 	"sync"
 	"sync/atomic"
 	"testing"
-
-	"golang.org/x/net/context"
 
 	log "github.com/golang/glog"
 	"github.com/openconfig/ondatra/binding"

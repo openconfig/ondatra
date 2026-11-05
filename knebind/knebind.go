@@ -17,16 +17,16 @@ package knebind
 
 import (
 	"bytes"
+	"context"
 	"crypto/tls"
 	"errors"
 	"fmt"
 	"io"
+	"net"
 	"os"
 	"os/user"
 	"path/filepath"
 	"time"
-
-	"golang.org/x/net/context"
 
 	log "github.com/golang/glog"
 	"github.com/open-traffic-generator/snappi/gosnappi"
@@ -443,33 +443,135 @@ type kneCLI struct {
 	dut *kneDUT
 }
 
-func (c *kneCLI) RunCommand(_ context.Context, cmd string) (_ binding.CommandResult, rerr error) {
-	s, err := c.dut.Service("ssh")
-	if err != nil {
-		return nil, err
-	}
-	addr := serviceAddr(s)
+func (c *kneCLI) RunCommand(ctx context.Context, cmd string) (_ binding.CommandResult, rerr error) {
 	userPass := c.dut.newRPCCredentials()
 	if userPass == nil {
 		return nil, errors.New("RunCommand requires node credentials be provided")
 	}
-	log.Infof("Using credentials %v to SSH", userPass)
-	cfg := &ssh.ClientConfig{
-		User: userPass.Username,
-		Auth: []ssh.AuthMethod{ssh.KeyboardInteractive(func(user, instruction string, questions []string, echos []bool) ([]string, error) {
-			if len(questions) > 0 {
-				return []string{userPass.Password}, nil
-			}
-			return nil, nil
-		})},
-		HostKeyCallback: ssh.InsecureIgnoreHostKey(),
+	log.InfoContextf(ctx, "Using credentials %v to SSH", userPass)
+	client, err := c.dut.DialSSH(ctx, binding.PasswordAuth{
+		User:     userPass.Username,
+		Password: userPass.Password,
+	})
+	if err != nil {
+		return nil, err
 	}
-	client, err := ssh.Dial("tcp", addr, cfg)
+	defer closer.Close(&rerr, client.Close, "error closing SSH client")
+	return client.RunCommand(ctx, cmd)
+}
+
+func (d *kneDUT) DialSSH(ctx context.Context, auth binding.SSHAuth) (binding.SSHClient, error) {
+	s, err := d.Service("ssh")
+	if err != nil {
+		return nil, err
+	}
+	addr := serviceAddr(s)
+
+	var username string
+	var authMethods []ssh.AuthMethod
+	switch auth := auth.(type) {
+	case binding.PasswordAuth:
+		username = auth.User
+		authMethods = []ssh.AuthMethod{
+			ssh.Password(auth.Password),
+			ssh.KeyboardInteractive(func(_, _ string, questions []string, _ []bool) ([]string, error) {
+				answers := make([]string, len(questions))
+				for i := range questions {
+					answers[i] = auth.Password
+				}
+				return answers, nil
+			}),
+		}
+	case binding.KeyAuth:
+		username = auth.User
+		signer, err := ssh.ParsePrivateKey(auth.Key)
+		if err != nil {
+			return nil, fmt.Errorf("parsing private key: %v", err)
+		}
+		authMethods = []ssh.AuthMethod{ssh.PublicKeys(signer)}
+	case binding.CertificateAuth:
+		username = auth.User
+		signer, err := ssh.ParsePrivateKey(auth.PrivateKey)
+		if err != nil {
+			return nil, fmt.Errorf("parsing private key: %v", err)
+		}
+		pubKey, _, _, _, err := ssh.ParseAuthorizedKey(auth.Certificate)
+		if err != nil {
+			return nil, fmt.Errorf("parsing certificate: %v", err)
+		}
+		cert, ok := pubKey.(*ssh.Certificate)
+		if !ok {
+			return nil, fmt.Errorf("parsed key is %T, want *ssh.Certificate", pubKey)
+		}
+		certSigner, err := ssh.NewCertSigner(cert, signer)
+		if err != nil {
+			return nil, fmt.Errorf("creating certificate signer: %v", err)
+		}
+		authMethods = []ssh.AuthMethod{ssh.PublicKeys(certSigner)}
+	default:
+		return nil, fmt.Errorf("unsupported SSH auth type: %T", auth)
+	}
+
+	var hk []byte
+	cfg := &ssh.ClientConfig{
+		User: username,
+		Auth: authMethods,
+		HostKeyCallback: func(_ string, _ net.Addr, key ssh.PublicKey) error {
+			hk = ssh.MarshalAuthorizedKey(key)
+			return nil
+		},
+	}
+	client, err := dialSSHClient(ctx, addr, cfg)
 	if err != nil {
 		return nil, fmt.Errorf("could not dial SSH server %s: %w", addr, err)
 	}
-	defer closer.Close(&rerr, client.Close, "error closing SSH client")
-	session, err := client.NewSession()
+	return &kneSSH{
+		Client:  client,
+		hostKey: hk,
+	}, nil
+}
+
+func dialSSHClient(ctx context.Context, addr string, cfg *ssh.ClientConfig) (*ssh.Client, error) {
+	var d net.Dialer
+	conn, err := d.DialContext(ctx, "tcp", addr)
+	if err != nil {
+		return nil, err
+	}
+	stop := context.AfterFunc(ctx, func() {
+		conn.SetDeadline(time.Now())
+	})
+	c, chans, reqs, err := ssh.NewClientConn(conn, addr, cfg)
+	if !stop() {
+		if err == nil {
+			c.Close()
+		}
+		return nil, ctx.Err()
+	}
+	if err != nil {
+		return nil, err
+	}
+	return ssh.NewClient(c, chans, reqs), nil
+}
+
+type kneSSH struct {
+	*binding.AbstractSSHClient
+	Client  *ssh.Client
+	hostKey []byte
+}
+
+func (s *kneSSH) HostKey() []byte {
+	return s.hostKey
+}
+
+func (s *kneSSH) Close() error {
+	return s.Client.Close()
+}
+
+func (s *kneSSH) RunCommand(ctx context.Context, cmd string) (_ binding.CommandResult, rerr error) {
+	if err := ctx.Err(); err != nil {
+		return nil, err
+	}
+	session, err := s.Client.NewSession()
 	if err != nil {
 		return nil, fmt.Errorf("could not create ssh session: %w", err)
 	}
@@ -480,9 +582,16 @@ func (c *kneCLI) RunCommand(_ context.Context, cmd string) (_ binding.CommandRes
 		return nil
 	}, "error closing SSH session")
 
+	stop := context.AfterFunc(ctx, func() {
+		session.Close()
+	})
 	var buf bytes.Buffer
 	session.Stdout = &buf
-	switch err := session.Run(cmd).(type) {
+	runErr := session.Run(cmd)
+	if !stop() {
+		return nil, ctx.Err()
+	}
+	switch err := runErr.(type) {
 	case nil:
 		return &cmdResult{output: buf.String()}, nil
 	case *ssh.ExitError, *ssh.ExitMissingError:

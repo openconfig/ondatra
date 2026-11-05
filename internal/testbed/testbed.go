@@ -16,13 +16,12 @@
 package testbed
 
 import (
+	"context"
 	"errors"
 	"fmt"
 	"os"
 	"regexp"
 	"sync"
-
-	"golang.org/x/net/context"
 
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/internal/flags"

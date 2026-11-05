@@ -15,11 +15,10 @@
 package gnoi
 
 import (
+	"context"
 	"errors"
 	"strings"
 	"testing"
-
-	"golang.org/x/net/context"
 
 	"github.com/openconfig/gnoigo"
 	"github.com/openconfig/ondatra"

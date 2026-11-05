@@ -162,11 +162,10 @@
 package gnmi
 
 import (
+	"context"
 	"errors"
 	"testing"
 	"time"
-
-	"golang.org/x/net/context"
 
 	"github.com/openconfig/ondatra/gnmi/oc/ocpath"
 	"github.com/openconfig/ondatra/gnmi/otg/otgpath"

@@ -16,11 +16,10 @@
 package binding
 
 import (
+	"context"
 	"fmt"
 	"io"
 	"time"
-
-	"golang.org/x/net/context"
 
 	"github.com/open-traffic-generator/snappi/gosnappi"
 	"github.com/openconfig/gnoigo"

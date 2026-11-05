@@ -15,14 +15,13 @@
 package ixconfig
 
 import (
+	"context"
 	"encoding/json"
 	"errors"
 	"fmt"
 	"strconv"
 	"strings"
 	"testing"
-
-	"golang.org/x/net/context"
 
 	"github.com/google/go-cmp/cmp"
 )

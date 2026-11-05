@@ -16,12 +16,11 @@
 package proxy
 
 import (
+	"context"
 	"fmt"
 	"net"
 	"net/http"
 	"sync"
-
-	"golang.org/x/net/context"
 
 	log "github.com/golang/glog"
 	"github.com/openconfig/gnmi/errlist"

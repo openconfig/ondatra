@@ -16,11 +16,10 @@
 package ate
 
 import (
+	"context"
 	"fmt"
 	"sync"
 	"time"
-
-	"golang.org/x/net/context"
 
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/internal/rawapis"

@@ -15,14 +15,13 @@
 package ondatra
 
 import (
+	"context"
 	"errors"
 	"os"
 	"path/filepath"
 	"strings"
 	"testing"
 	"time"
-
-	"golang.org/x/net/context"
 
 	"flag"
 
@@ -110,6 +109,7 @@ func TestRunTestsJSONL(t *testing.T) {
 		name        string
 		runCode     int
 		reserveErr  error
+		noTestbed   bool
 		wantErr     bool
 		wantStatus  opb.TestStatus
 		wantDetails string
@@ -131,6 +131,13 @@ func TestRunTestsJSONL(t *testing.T) {
 			wantStatus:  opb.TestStatus_TEST_STATUS_FAIL,
 			wantDetails: "reserve failed",
 		},
+		{
+			name:        "flag_validation_error",
+			noTestbed:   true,
+			wantErr:     true,
+			wantStatus:  opb.TestStatus_TEST_STATUS_FAIL,
+			wantDetails: "testbed path not specified",
+		},
 	}
 
 	for _, tt := range tests {
@@ -142,7 +149,11 @@ func TestRunTestsJSONL(t *testing.T) {
 			emptyTB.Close()
 
 			jsonlFile := filepath.Join(t.TempDir(), "ledger.jsonl")
-			flag.Set("testbed", emptyTB.Name())
+			tb := emptyTB.Name()
+			if tt.noTestbed {
+				tb = ""
+			}
+			flag.Set("testbed", tb)
 			flag.Set("jsonl", jsonlFile)
 
 			fakeBind := fakebind.Setup()

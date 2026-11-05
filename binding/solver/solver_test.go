@@ -15,11 +15,10 @@
 package solver
 
 import (
+	"context"
 	"fmt"
 	"strings"
 	"testing"
-
-	"golang.org/x/net/context"
 
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"

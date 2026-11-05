@@ -15,10 +15,9 @@
 package ixgnmi
 
 import (
+	"context"
 	"fmt"
 	"hash/fnv"
-
-	"golang.org/x/net/context"
 
 	"github.com/openconfig/ondatra/binding/ixweb"
 	"github.com/openconfig/ondatra/gnmi/oc"

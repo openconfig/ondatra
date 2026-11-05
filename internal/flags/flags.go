@@ -48,6 +48,23 @@ type Values struct {
 	Debug       bool
 }
 
+// JSONLPath returns the value of the -jsonl flag without validating the other
+// flags, or "" if the flag is unset or does not have the .jsonl extension. It
+// lets Ondatra record a result in the ledger even when Parse fails.
+func JSONLPath() string {
+	if !flag.Parsed() {
+		flag.Parse()
+	}
+	if !hasJSONLExt(*jsonl) {
+		return ""
+	}
+	return *jsonl
+}
+
+func hasJSONLExt(path string) bool {
+	return strings.HasSuffix(path, ".jsonl")
+}
+
 // Parse parse and validates the flag values.
 func Parse() (*Values, error) {
 	if !flag.Parsed() {
@@ -68,7 +85,7 @@ func Parse() (*Values, error) {
 	if *waitTime < 0 {
 		return nil, fmt.Errorf("wait timeout is negative: %d", *waitTime)
 	}
-	if *jsonl != "" && !strings.HasSuffix(*jsonl, ".jsonl") {
+	if *jsonl != "" && !hasJSONLExt(*jsonl) {
 		return nil, fmt.Errorf("jsonl path %q must end with .jsonl extension", *jsonl)
 	}
 	if *reserve != "" && !*debug {

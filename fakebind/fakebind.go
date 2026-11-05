@@ -16,9 +16,8 @@
 package fakebind
 
 import (
+	"context"
 	"time"
-
-	"golang.org/x/net/context"
 
 	log "github.com/golang/glog"
 	"github.com/open-traffic-generator/snappi/gosnappi"

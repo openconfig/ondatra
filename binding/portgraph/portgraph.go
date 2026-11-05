@@ -16,13 +16,12 @@
 package portgraph
 
 import (
+	"context"
 	"fmt"
 	"regexp"
 	"sort"
 	"strings"
 	"time"
-
-	"golang.org/x/net/context"
 
 	log "github.com/golang/glog"
 	"github.com/openconfig/ondatra/internal/orderedmap"

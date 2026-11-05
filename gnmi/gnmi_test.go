@@ -15,11 +15,10 @@
 package gnmi
 
 import (
+	"context"
 	"fmt"
 	"io"
 	"testing"
-
-	"golang.org/x/net/context"
 
 	"github.com/openconfig/testt"
 	"github.com/openconfig/ygnmi/ygnmi"

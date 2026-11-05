@@ -16,12 +16,11 @@
 package fakegnmi
 
 import (
+	"context"
 	"fmt"
 	"io"
 	"net"
 	"strings"
-
-	"golang.org/x/net/context"
 
 	"github.com/openconfig/gnmi/testing/fake/gnmi"
 	"google.golang.org/grpc"

@@ -190,6 +190,16 @@ the file, creating it if needed. Each record contains:
 *   `gitCommit` and `gitDirty`: the `git.commit` and `git.clean` suite
     properties, if the test reports them.
 
+A failed record is also written when the run fails before any test case starts,
+for example because of an invalid flag value or a binding or reservation error.
+
+To record timeouts as failures, set `-run_time` below the `go test -timeout`
+value. If only `go test -timeout` expires, Go terminates the process before a
+result can be written.
+Runs killed abruptly, such as by a test panic, an out-of-memory kill, or
+SIGKILL, leave no record because the process stops before it can write one;
+recording them would require an external supervisor process.
+
 Appends are protected by an exclusive file lock, so concurrent test runs on the
 same machine can safely share one file. Files from different machines can be
 concatenated.

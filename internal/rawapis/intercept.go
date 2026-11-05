@@ -15,10 +15,9 @@
 package rawapis
 
 import (
+	"context"
 	"fmt"
 	"sync/atomic"
-
-	"golang.org/x/net/context"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/status"

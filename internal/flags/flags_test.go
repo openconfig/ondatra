@@ -57,6 +57,39 @@ func TestParseJSONL(t *testing.T) {
 	})
 }
 
+func TestJSONLPath(t *testing.T) {
+	origJSONL := *jsonl
+	t.Cleanup(func() {
+		*jsonl = origJSONL
+	})
+
+	tests := []struct {
+		desc  string
+		jsonl string
+		want  string
+	}{{
+		desc:  "valid extension",
+		jsonl: "/path/to/ledger.jsonl",
+		want:  "/path/to/ledger.jsonl",
+	}, {
+		desc:  "unset",
+		jsonl: "",
+		want:  "",
+	}, {
+		desc:  "wrong extension",
+		jsonl: "/path/to/ledger.txt",
+		want:  "",
+	}}
+	for _, test := range tests {
+		t.Run(test.desc, func(t *testing.T) {
+			*jsonl = test.jsonl
+			if got := JSONLPath(); got != test.want {
+				t.Errorf("JSONLPath() = %q, want %q", got, test.want)
+			}
+		})
+	}
+}
+
 func TestParseReserve(t *testing.T) {
 	tests := []struct {
 		desc        string

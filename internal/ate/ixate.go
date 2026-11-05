@@ -15,6 +15,7 @@
 package ate
 
 import (
+	"context"
 	"encoding/json"
 	"errors"
 	"fmt"
@@ -28,8 +29,6 @@ import (
 	"strings"
 	"sync"
 	"time"
-
-	"golang.org/x/net/context"
 
 	log "github.com/golang/glog"
 	"github.com/openconfig/ondatra/binding"

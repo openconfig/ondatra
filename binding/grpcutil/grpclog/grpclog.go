@@ -30,13 +30,12 @@
 package grpclog
 
 import (
+	"context"
 	"fmt"
 	"os"
 	"path/filepath"
 	"regexp"
 	"time"
-
-	"golang.org/x/net/context"
 
 	log "github.com/golang/glog"
 	"google.golang.org/grpc"

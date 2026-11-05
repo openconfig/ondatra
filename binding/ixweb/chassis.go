@@ -15,9 +15,8 @@
 package ixweb
 
 import (
+	"context"
 	"path"
-
-	"golang.org/x/net/context"
 )
 
 // Chassis represents the chassis management application on Ixia Web Platform.

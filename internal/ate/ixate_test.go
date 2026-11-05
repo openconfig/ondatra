@@ -15,6 +15,7 @@
 package ate
 
 import (
+	"context"
 	"encoding/json"
 	"errors"
 	"fmt"
@@ -24,8 +25,6 @@ import (
 	"strings"
 	"testing"
 	"time"
-
-	"golang.org/x/net/context"
 
 	log "github.com/golang/glog"
 	"github.com/google/go-cmp/cmp"

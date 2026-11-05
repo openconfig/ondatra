@@ -15,8 +15,14 @@
 package knebind
 
 import (
+	"bytes"
+	"context"
+	"crypto/ed25519"
+	"crypto/rand"
+	"encoding/pem"
 	"errors"
 	"io"
+	"net"
 	"os"
 	"os/user"
 	"path/filepath"
@@ -24,14 +30,13 @@ import (
 	"testing"
 	"time"
 
-	"golang.org/x/net/context"
-
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
 	"github.com/openconfig/kne/topo/node"
 	"github.com/openconfig/ondatra/binding"
 	"github.com/openconfig/ondatra/knebind/creds"
 	"github.com/openconfig/ondatra/knebind/solver"
+	"golang.org/x/crypto/ssh"
 	"google.golang.org/protobuf/testing/protocmp"
 
 	"github.com/open-traffic-generator/snappi/gosnappi"
@@ -236,7 +241,7 @@ func TestReserve(t *testing.T) {
 			Os:     "eos",
 			Vendor: tpb.Vendor_ARISTA,
 			Services: map[uint32]*tpb.Service{
-				1234: &tpb.Service{Name: "gnmi"},
+				1234: {Name: "gnmi"},
 			},
 			Interfaces: map[string]*tpb.Interface{
 				"eth1": {Name: "Ethernet1"},
@@ -270,7 +275,7 @@ func TestReserve(t *testing.T) {
 		}},
 	}
 
-	wantDUTServices := map[string]*tpb.Service{"gnmi": &tpb.Service{Name: "gnmi"}}
+	wantDUTServices := map[string]*tpb.Service{"gnmi": {Name: "gnmi"}}
 	wantATEServices := make(map[string]*tpb.Service)
 	wantRes := &binding.Reservation{
 		DUTs: map[string]binding.DUT{
@@ -474,7 +479,7 @@ func TestServices(t *testing.T) {
 				Name:   "node1",
 				Vendor: tpb.Vendor_CISCO,
 				Services: map[uint32]*tpb.Service{
-					9339: &tpb.Service{
+					9339: {
 						Name:      "gnmi",
 						Outside:   9339,
 						OutsideIp: "1.1.1.1",
@@ -500,7 +505,7 @@ func TestServices(t *testing.T) {
 				Name:   "node1",
 				Vendor: tpb.Vendor_CISCO,
 				Services: map[uint32]*tpb.Service{
-					9339: &tpb.Service{
+					9339: {
 						Name:      "gnmi",
 						Outside:   9339,
 						OutsideIp: "1.1.1.1",
@@ -526,27 +531,27 @@ func TestServices(t *testing.T) {
 				Name:   "node1",
 				Vendor: tpb.Vendor_CISCO,
 				Services: map[uint32]*tpb.Service{
-					9336: &tpb.Service{
+					9336: {
 						Name:      "p4rt",
 						Outside:   9336,
 						OutsideIp: "1.1.1.1",
 					},
-					9339: &tpb.Service{
+					9339: {
 						Name:      "gnmi",
 						Outside:   9339,
 						OutsideIp: "1.1.1.1",
 					},
-					4242: &tpb.Service{
+					4242: {
 						Name:      "gribi",
 						Outside:   4242,
 						OutsideIp: "1.1.1.1",
 					},
-					9340: &tpb.Service{
+					9340: {
 						Name:      "gnsi",
 						Outside:   9339,
 						OutsideIp: "1.1.1.1",
 					},
-					4739: &tpb.Service{
+					4739: {
 						Name:      "gnpsi",
 						Outside:   4739,
 						OutsideIp: "1.1.1.1",
@@ -769,6 +774,516 @@ func TestKneDUT(t *testing.T) {
 			t.Errorf("DialGRPCWithPort() got error %q, want %q", err, wantErr)
 		}
 	})
+}
+
+type testSSHServer struct {
+	ip        string
+	port      uint32
+	hostKey   []byte
+	clientPEM []byte
+	clientPub []byte
+	certBytes []byte
+}
+
+func startTestSSHServer(t *testing.T) *testSSHServer {
+	t.Helper()
+
+	_, hostPriv, err := ed25519.GenerateKey(rand.Reader)
+	if err != nil {
+		t.Fatalf("failed to generate host key: %v", err)
+	}
+	hostSigner, err := ssh.NewSignerFromKey(hostPriv)
+	if err != nil {
+		t.Fatalf("failed to create host signer: %v", err)
+	}
+
+	_, clientPriv, err := ed25519.GenerateKey(rand.Reader)
+	if err != nil {
+		t.Fatalf("failed to generate client key: %v", err)
+	}
+	clientSigner, err := ssh.NewSignerFromKey(clientPriv)
+	if err != nil {
+		t.Fatalf("failed to create client signer: %v", err)
+	}
+	clientPEMBlock, err := ssh.MarshalPrivateKey(clientPriv, "")
+	if err != nil {
+		t.Fatalf("failed to marshal client private key: %v", err)
+	}
+	clientPEM := pem.EncodeToMemory(clientPEMBlock)
+
+	_, caPriv, err := ed25519.GenerateKey(rand.Reader)
+	if err != nil {
+		t.Fatalf("failed to generate CA key: %v", err)
+	}
+	caSigner, err := ssh.NewSignerFromKey(caPriv)
+	if err != nil {
+		t.Fatalf("failed to create CA signer: %v", err)
+	}
+	cert := &ssh.Certificate{
+		Key:             clientSigner.PublicKey(),
+		CertType:        ssh.UserCert,
+		ValidPrincipals: []string{"certuser"},
+		ValidAfter:      0,
+		ValidBefore:     ssh.CertTimeInfinity,
+	}
+	if err := cert.SignCert(rand.Reader, caSigner); err != nil {
+		t.Fatalf("failed to sign certificate: %v", err)
+	}
+
+	serverCfg := &ssh.ServerConfig{
+		PasswordCallback: func(conn ssh.ConnMetadata, pass []byte) (*ssh.Permissions, error) {
+			if conn.User() == "testuser" && string(pass) == "testpass" {
+				return nil, nil
+			}
+			return nil, errors.New("password rejected")
+		},
+		KeyboardInteractiveCallback: func(conn ssh.ConnMetadata, client ssh.KeyboardInteractiveChallenge) (*ssh.Permissions, error) {
+			ans, err := client(conn.User(), "", []string{"Password: "}, []bool{false})
+			if err != nil {
+				return nil, err
+			}
+			if conn.User() == "kiuser" && len(ans) == 1 && ans[0] == "kipass" {
+				return nil, nil
+			}
+			return nil, errors.New("keyboard-interactive rejected")
+		},
+		PublicKeyCallback: func(conn ssh.ConnMetadata, key ssh.PublicKey) (*ssh.Permissions, error) {
+			if c, ok := key.(*ssh.Certificate); ok {
+				if conn.User() == "certuser" && bytes.Equal(c.SignatureKey.Marshal(), caSigner.PublicKey().Marshal()) {
+					return nil, nil
+				}
+				return nil, errors.New("certificate rejected")
+			}
+			if conn.User() == "keyuser" && bytes.Equal(key.Marshal(), clientSigner.PublicKey().Marshal()) {
+				return nil, nil
+			}
+			return nil, errors.New("public key rejected")
+		},
+	}
+	serverCfg.AddHostKey(hostSigner)
+
+	listener, err := net.Listen("tcp", "127.0.0.1:0")
+	if err != nil {
+		t.Fatalf("failed to listen on loopback: %v", err)
+	}
+	t.Cleanup(func() { listener.Close() })
+
+	go func() {
+		for {
+			conn, err := listener.Accept()
+			if err != nil {
+				return
+			}
+			go func(c net.Conn) {
+				defer c.Close()
+				_, chans, reqs, err := ssh.NewServerConn(c, serverCfg)
+				if err != nil {
+					return
+				}
+				go ssh.DiscardRequests(reqs)
+				for newChan := range chans {
+					if newChan.ChannelType() != "session" {
+						newChan.Reject(ssh.UnknownChannelType, "unknown channel type")
+						continue
+					}
+					ch, requests, err := newChan.Accept()
+					if err != nil {
+						continue
+					}
+					go func(ch ssh.Channel, in <-chan *ssh.Request) {
+						defer ch.Close()
+						for req := range in {
+							if req.Type != "exec" {
+								if req.WantReply {
+									req.Reply(false, nil)
+								}
+								continue
+							}
+							var payload struct{ Cmd string }
+							if err := ssh.Unmarshal(req.Payload, &payload); err != nil {
+								req.Reply(false, nil)
+								return
+							}
+							req.Reply(true, nil)
+							var exitStatus uint32
+							switch payload.Cmd {
+							case "echo hello":
+								ch.Write([]byte("hello\n"))
+							case "fail":
+								ch.Write([]byte("failed output\n"))
+								exitStatus = 1
+							case "hang":
+								continue
+							default:
+								ch.Write([]byte("unknown\n"))
+							}
+							ch.SendRequest("exit-status", false, ssh.Marshal(struct{ Status uint32 }{Status: exitStatus}))
+							return
+						}
+					}(ch, requests)
+				}
+			}(conn)
+		}
+	}()
+
+	tcpAddr := listener.Addr().(*net.TCPAddr)
+	return &testSSHServer{
+		ip:        tcpAddr.IP.String(),
+		port:      uint32(tcpAddr.Port),
+		hostKey:   ssh.MarshalAuthorizedKey(hostSigner.PublicKey()),
+		clientPEM: clientPEM,
+		clientPub: ssh.MarshalAuthorizedKey(clientSigner.PublicKey()),
+		certBytes: ssh.MarshalAuthorizedKey(cert),
+	}
+}
+
+func TestDialSSH_Success(t *testing.T) {
+	srv := startTestSSHServer(t)
+	dut := &kneDUT{
+		ServiceDUT: &solver.ServiceDUT{
+			AbstractDUT: &binding.AbstractDUT{Dims: &binding.Dims{Name: "dut1"}},
+			Services: map[string]*tpb.Service{
+				"ssh": {
+					Name:      "ssh",
+					OutsideIp: srv.ip,
+					Outside:   srv.port,
+				},
+			},
+		},
+		bind: &Bind{cfg: &Config{}},
+	}
+
+	tests := []struct {
+		name string
+		auth binding.SSHAuth
+	}{
+		{
+			name: "password_auth",
+			auth: binding.PasswordAuth{User: "testuser", Password: "testpass"},
+		},
+		{
+			name: "keyboard_interactive_auth",
+			auth: binding.PasswordAuth{User: "kiuser", Password: "kipass"},
+		},
+		{
+			name: "key_auth",
+			auth: binding.KeyAuth{User: "keyuser", Key: srv.clientPEM},
+		},
+		{
+			name: "certificate_auth",
+			auth: binding.CertificateAuth{
+				User:        "certuser",
+				PrivateKey:  srv.clientPEM,
+				Certificate: srv.certBytes,
+			},
+		},
+	}
+
+	for _, tc := range tests {
+		t.Run(tc.name, func(t *testing.T) {
+			client, err := dut.DialSSH(t.Context(), tc.auth)
+			if err != nil {
+				t.Fatalf("DialSSH() unexpected error: %v", err)
+			}
+			defer client.Close()
+
+			if diff := cmp.Diff(srv.hostKey, client.HostKey()); diff != "" {
+				t.Errorf("HostKey() mismatch (-want +got):\n%s", diff)
+			}
+
+			res, err := client.RunCommand(t.Context(), "echo hello")
+			if err != nil {
+				t.Fatalf("RunCommand(\"echo hello\") unexpected error: %v", err)
+			}
+			if got, want := res.Output(), "hello\n"; got != want {
+				t.Errorf("RunCommand(\"echo hello\") Output() = %q, want %q", got, want)
+			}
+			if got := res.Error(); got != "" {
+				t.Errorf("RunCommand(\"echo hello\") Error() = %q, want empty", got)
+			}
+
+			failRes, err := client.RunCommand(t.Context(), "fail")
+			if err != nil {
+				t.Fatalf("RunCommand(\"fail\") unexpected error: %v", err)
+			}
+			if got, want := failRes.Output(), "failed output\n"; got != want {
+				t.Errorf("RunCommand(\"fail\") Output() = %q, want %q", got, want)
+			}
+			if got := failRes.Error(); got == "" {
+				t.Errorf("RunCommand(\"fail\") Error() = empty, want non-empty exit error")
+			}
+
+			canceledCtx, cancel := context.WithCancel(t.Context())
+			cancel()
+			if _, err := client.RunCommand(canceledCtx, "echo hello"); err == nil {
+				t.Errorf("RunCommand() with pre-canceled context = nil, want error")
+			}
+
+			hangCtx, cancelHang := context.WithTimeout(t.Context(), 50*time.Millisecond)
+			defer cancelHang()
+			if _, err := client.RunCommand(hangCtx, "hang"); err == nil {
+				t.Errorf("RunCommand(\"hang\") with expiring context = nil, want error")
+			}
+
+			if err := client.Close(); err != nil {
+				t.Fatalf("Close() unexpected error: %v", err)
+			}
+			if _, err := client.RunCommand(t.Context(), "echo hello"); err == nil {
+				t.Errorf("RunCommand() on closed client = nil, want error")
+			}
+		})
+	}
+}
+
+func TestDialSSH_Errors(t *testing.T) {
+	srv := startTestSSHServer(t)
+	_, otherPriv, err := ed25519.GenerateKey(rand.Reader)
+	if err != nil {
+		t.Fatalf("failed to generate other key: %v", err)
+	}
+	otherPEMBlock, err := ssh.MarshalPrivateKey(otherPriv, "")
+	if err != nil {
+		t.Fatalf("failed to marshal other private key: %v", err)
+	}
+	otherPEM := pem.EncodeToMemory(otherPEMBlock)
+
+	dutWithSSH := &kneDUT{
+		ServiceDUT: &solver.ServiceDUT{
+			AbstractDUT: &binding.AbstractDUT{Dims: &binding.Dims{Name: "dut1"}},
+			Services: map[string]*tpb.Service{
+				"ssh": {
+					Name:      "ssh",
+					OutsideIp: srv.ip,
+					Outside:   srv.port,
+				},
+			},
+		},
+		bind: &Bind{cfg: &Config{}},
+	}
+	dutWithoutSSH := &kneDUT{
+		ServiceDUT: &solver.ServiceDUT{
+			AbstractDUT: &binding.AbstractDUT{Dims: &binding.Dims{Name: "dut1"}},
+			Services:    map[string]*tpb.Service{},
+		},
+		bind: &Bind{cfg: &Config{}},
+	}
+
+	tests := []struct {
+		name    string
+		dut     *kneDUT
+		auth    binding.SSHAuth
+		wantErr string
+	}{
+		{
+			name:    "missing_ssh_service",
+			dut:     dutWithoutSSH,
+			auth:    binding.PasswordAuth{User: "testuser", Password: "testpass"},
+			wantErr: "service \"ssh\" not found",
+		},
+		{
+			name:    "nil_auth",
+			dut:     dutWithSSH,
+			auth:    nil,
+			wantErr: "unsupported SSH auth type",
+		},
+		{
+			name:    "invalid_password",
+			dut:     dutWithSSH,
+			auth:    binding.PasswordAuth{User: "testuser", Password: "wrongpassword"},
+			wantErr: "could not dial SSH server",
+		},
+		{
+			name:    "invalid_private_key_in_key_auth",
+			dut:     dutWithSSH,
+			auth:    binding.KeyAuth{User: "keyuser", Key: []byte("not-a-private-key")},
+			wantErr: "parsing private key",
+		},
+		{
+			name: "invalid_private_key_in_cert_auth",
+			dut:  dutWithSSH,
+			auth: binding.CertificateAuth{
+				User:        "certuser",
+				PrivateKey:  []byte("not-a-private-key"),
+				Certificate: srv.certBytes,
+			},
+			wantErr: "parsing private key",
+		},
+		{
+			name: "invalid_certificate_in_cert_auth",
+			dut:  dutWithSSH,
+			auth: binding.CertificateAuth{
+				User:        "certuser",
+				PrivateKey:  srv.clientPEM,
+				Certificate: []byte("not-a-certificate"),
+			},
+			wantErr: "parsing certificate",
+		},
+		{
+			name: "public_key_instead_of_certificate_in_cert_auth",
+			dut:  dutWithSSH,
+			auth: binding.CertificateAuth{
+				User:        "certuser",
+				PrivateKey:  srv.clientPEM,
+				Certificate: srv.clientPub,
+			},
+			wantErr: "want *ssh.Certificate",
+		},
+		{
+			name: "mismatched_key_and_certificate_in_cert_auth",
+			dut:  dutWithSSH,
+			auth: binding.CertificateAuth{
+				User:        "certuser",
+				PrivateKey:  otherPEM,
+				Certificate: srv.certBytes,
+			},
+			wantErr: "creating certificate signer",
+		},
+	}
+
+	for _, tc := range tests {
+		t.Run(tc.name, func(t *testing.T) {
+			client, err := tc.dut.DialSSH(t.Context(), tc.auth)
+			if err == nil {
+				client.Close()
+				t.Fatalf("DialSSH() = nil, want error containing %q", tc.wantErr)
+			}
+			if !strings.Contains(err.Error(), tc.wantErr) {
+				t.Errorf("DialSSH() error = %v, want error containing %q", err, tc.wantErr)
+			}
+		})
+	}
+}
+
+func TestDialSSH_ContextCanceled(t *testing.T) {
+	listener, err := net.Listen("tcp", "127.0.0.1:0")
+	if err != nil {
+		t.Fatalf("failed to listen on loopback: %v", err)
+	}
+	t.Cleanup(func() { listener.Close() })
+	go func() {
+		for {
+			conn, err := listener.Accept()
+			if err != nil {
+				return
+			}
+			t.Cleanup(func() { conn.Close() })
+		}
+	}()
+
+	tcpAddr := listener.Addr().(*net.TCPAddr)
+	dut := &kneDUT{
+		ServiceDUT: &solver.ServiceDUT{
+			AbstractDUT: &binding.AbstractDUT{Dims: &binding.Dims{Name: "dut1"}},
+			Services: map[string]*tpb.Service{
+				"ssh": {
+					Name:      "ssh",
+					OutsideIp: tcpAddr.IP.String(),
+					Outside:   uint32(tcpAddr.Port),
+				},
+			},
+		},
+		bind: &Bind{cfg: &Config{}},
+	}
+	auth := binding.PasswordAuth{User: "testuser", Password: "testpass"}
+
+	canceledCtx, cancel := context.WithCancel(t.Context())
+	cancel()
+	if client, err := dut.DialSSH(canceledCtx, auth); err == nil {
+		client.Close()
+		t.Errorf("DialSSH() with pre-canceled context = nil, want error")
+	}
+
+	handshakeCtx, cancelHandshake := context.WithTimeout(t.Context(), 50*time.Millisecond)
+	defer cancelHandshake()
+	if client, err := dut.DialSSH(handshakeCtx, auth); err == nil {
+		client.Close()
+		t.Errorf("DialSSH() with stalled handshake = nil, want error")
+	}
+}
+
+func TestDialCLI(t *testing.T) {
+	srv := startTestSSHServer(t)
+	dut := &kneDUT{
+		ServiceDUT: &solver.ServiceDUT{
+			AbstractDUT: &binding.AbstractDUT{Dims: &binding.Dims{Name: "dut1"}},
+			Services: map[string]*tpb.Service{
+				"ssh": {
+					Name:      "ssh",
+					OutsideIp: srv.ip,
+					Outside:   srv.port,
+				},
+			},
+		},
+		bind: &Bind{
+			cfg: &Config{
+				Username: "testuser",
+				Password: "testpass",
+			},
+		},
+	}
+	cli, err := dut.DialCLI(t.Context())
+	if err != nil {
+		t.Fatalf("DialCLI() unexpected error: %v", err)
+	}
+	res, err := cli.RunCommand(t.Context(), "echo hello")
+	if err != nil {
+		t.Fatalf("RunCommand(\"echo hello\") unexpected error: %v", err)
+	}
+	if got, want := res.Output(), "hello\n"; got != want {
+		t.Errorf("RunCommand(\"echo hello\") Output() = %q, want %q", got, want)
+	}
+}
+
+func TestDialCLI_Errors(t *testing.T) {
+	srv := startTestSSHServer(t)
+	tests := []struct {
+		name string
+		dut  *kneDUT
+	}{
+		{
+			name: "missing_credentials",
+			dut: &kneDUT{
+				ServiceDUT: &solver.ServiceDUT{
+					AbstractDUT: &binding.AbstractDUT{Dims: &binding.Dims{Name: "dut1"}},
+					Services: map[string]*tpb.Service{
+						"ssh": {
+							Name:      "ssh",
+							OutsideIp: srv.ip,
+							Outside:   srv.port,
+						},
+					},
+				},
+				bind: &Bind{cfg: &Config{}},
+			},
+		},
+		{
+			name: "dial_error",
+			dut: &kneDUT{
+				ServiceDUT: &solver.ServiceDUT{
+					AbstractDUT: &binding.AbstractDUT{Dims: &binding.Dims{Name: "dut1"}},
+					Services:    map[string]*tpb.Service{},
+				},
+				bind: &Bind{
+					cfg: &Config{
+						Username: "testuser",
+						Password: "testpass",
+					},
+				},
+			},
+		},
+	}
+
+	for _, tc := range tests {
+		t.Run(tc.name, func(t *testing.T) {
+			cli, err := tc.dut.DialCLI(t.Context())
+			if err != nil {
+				t.Fatalf("DialCLI() unexpected error: %v", err)
+			}
+			if _, err := cli.RunCommand(t.Context(), "echo hello"); err == nil {
+				t.Errorf("RunCommand() = nil, want error")
+			}
+		})
+	}
 }
 
 type fakeTopoManager struct {

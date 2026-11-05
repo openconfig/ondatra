@@ -15,10 +15,9 @@
 package ixgnmi
 
 import (
+	"context"
 	"fmt"
 	"path"
-
-	"golang.org/x/net/context"
 
 	log "github.com/golang/glog"
 	"github.com/openconfig/ondatra/binding/ixweb"

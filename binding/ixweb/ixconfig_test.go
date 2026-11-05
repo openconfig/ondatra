@@ -15,11 +15,10 @@
 package ixweb
 
 import (
+	"context"
 	"net/http"
 	"strings"
 	"testing"
-
-	"golang.org/x/net/context"
 
 	"github.com/google/go-cmp/cmp"
 )

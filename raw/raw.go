@@ -79,9 +79,8 @@
 package raw
 
 import (
+	"context"
 	"testing"
-
-	"golang.org/x/net/context"
 
 	"github.com/open-traffic-generator/snappi/gosnappi"
 	"github.com/openconfig/gnoigo"

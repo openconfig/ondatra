@@ -15,11 +15,10 @@
 package raw
 
 import (
+	"context"
 	"errors"
 	"strings"
 	"testing"
-
-	"golang.org/x/net/context"
 
 	"github.com/open-traffic-generator/snappi/gosnappi"
 	"github.com/openconfig/gnoigo"

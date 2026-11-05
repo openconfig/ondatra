@@ -16,9 +16,8 @@
 package introspect
 
 import (
+	"context"
 	"testing"
-
-	"golang.org/x/net/context"
 
 	"github.com/openconfig/ondatra"
 	"github.com/openconfig/ondatra/binding"

@@ -15,11 +15,10 @@
 package binding
 
 import (
+	"context"
 	"errors"
 	"fmt"
 	"io"
-
-	"golang.org/x/net/context"
 
 	log "github.com/golang/glog"
 	"github.com/open-traffic-generator/snappi/gosnappi"

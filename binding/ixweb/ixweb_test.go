@@ -16,6 +16,7 @@ package ixweb
 
 import (
 	"bytes"
+	"context"
 	"errors"
 	"fmt"
 	"io"
@@ -23,8 +24,6 @@ import (
 	"strings"
 	"testing"
 	"time"
-
-	"golang.org/x/net/context"
 )
 
 func init() {
@@ -94,6 +93,7 @@ func TestAsyncOperation(t *testing.T) {
 	progressBody := `{"state":"IN_PROGRESS"}`
 	errorBody := `{"state":"ERROR", "result":"error response"}`
 	exceptionBody := `{"state":"EXCEPTION", "message":"exception response"}`
+	errorAfterProgressBody := `{"state":"ERROR", "progress":100, "executionTimeMs":104158.0, "message":null, "result":"Port is not owned by this user\n"}`
 
 	tests := []struct {
 		desc    string
@@ -129,6 +129,17 @@ func TestAsyncOperation(t *testing.T) {
 		doResps: []*http.Response{fakeResponse(202, exceptionBody)},
 		wantErr: "exception response",
 	}, {
+		desc:    "error after progress",
+		doResps: []*http.Response{fakeResponse(202, progressBody), fakeResponse(200, errorAfterProgressBody)},
+		wantErr: `state=ERROR progress=100 executionTimeMs=104158.0 message="" result="Port is not owned by this user\n"`,
+	}, {
+		desc:    "success with unexpected status field types",
+		doResps: []*http.Response{fakeResponse(202, progressBody), fakeResponse(200, `{"state":"SUCCESS", "progress":"100%", "executionTimeMs":"1s", "message":{"text":"done"}}`)},
+	}, {
+		desc:    "exception after progress",
+		doResps: []*http.Response{fakeResponse(202, progressBody), fakeResponse(200, exceptionBody)},
+		wantErr: "exception response",
+	}, {
 		desc:    "success with bad result URL pointer",
 		doResps: []*http.Response{fakeResponse(202, successBodyWithResultURL), fakeResponse(404, resultBody)},
 		wantErr: "error fetching result",
@@ -142,6 +153,36 @@ func TestAsyncOperation(t *testing.T) {
 			}
 			if err != nil && !strings.Contains(err.Error(), test.wantErr) {
 				t.Errorf("request() got err %v, want contains %q", err, test.wantErr)
+			}
+		})
+	}
+}
+
+func TestRequestErrorsOmitCredentials(t *testing.T) {
+	const apiKey = "secretAPIKey"
+	tests := []struct {
+		desc    string
+		doResps []*http.Response
+		doErrs  []error
+	}{{
+		desc:    "bad status code",
+		doResps: []*http.Response{fakeResponse(400, `{"errors":["bad request"]}`)},
+	}, {
+		desc:   "persistent error",
+		doErrs: repeatErrors(errors.New("unknown error"), RetryLimit+1),
+	}}
+	for _, test := range tests {
+		t.Run(test.desc, func(t *testing.T) {
+			ix := &IxWeb{hostname: "fakeHost", apiKey: apiKey, client: &fakeHTTPClient{doResps: test.doResps, doErrs: test.doErrs}}
+			err := ix.jsonReq(context.Background(), patch, "/my/path", map[string]string{"k": "v"}, nil)
+			if err == nil {
+				t.Fatalf("jsonReq() got no error, want error")
+			}
+			if strings.Contains(err.Error(), apiKey) {
+				t.Errorf("jsonReq() error %q contains the API key", err)
+			}
+			if !strings.Contains(err.Error(), "PATCH https://fakeHost/my/path") {
+				t.Errorf("jsonReq() error %q does not identify the request", err)
 			}
 		})
 	}

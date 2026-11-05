@@ -17,6 +17,7 @@ package ixweb
 
 import (
 	"bytes"
+	"context"
 	"encoding/json"
 	"errors"
 	"fmt"
@@ -24,8 +25,6 @@ import (
 	"net/http"
 	"net/url"
 	"time"
-
-	"golang.org/x/net/context"
 
 	log "github.com/golang/glog"
 )
@@ -214,7 +213,9 @@ func (ix *IxWeb) request(ctx context.Context, method httpMethod, path, contentTy
 		}
 		// If out of retries or if the original context is no longer active (there would be error from the 'Do' in the latter case.).
 		if i == RetryLimit || ctx.Err() != nil {
-			return 0, nil, fmt.Errorf("error on HTTP request %v: %w", req, err)
+			// Only print the method and URL: the request headers carry credentials
+			// (API key and cookies) that must not end up in test logs.
+			return 0, nil, fmt.Errorf("error on HTTP request %s %s: %w", req.Method, req.URL, err)
 		}
 
 		if ctx.Err() != nil {
@@ -236,19 +237,43 @@ func (ix *IxWeb) request(ctx context.Context, method httpMethod, path, contentTy
 	log.V(1).Infof("Response to %q: %q", req.URL.Path, data)
 	status := resp.StatusCode
 	if status < 200 || status > 299 {
-		return 0, nil, fmt.Errorf("error status code %d on request %+v, response: %q", status, req, data)
+		return 0, nil, fmt.Errorf("error status code %d on request %s %s, response: %q", status, req.Method, req.URL, data)
 	}
 	return status, data, nil
 }
 
+// asyncStatus is the status of an asynchronous IxNetwork operation.
+// The fields that are only used for error messages are kept as raw JSON so that
+// an unexpected type cannot make an otherwise successful operation fail.
+type asyncStatus struct {
+	State           string          `json:"state"`
+	URL             string          `json:"url"`
+	Result          json.RawMessage `json:"result"`
+	ResultURL       string          `json:"resultUrl"`
+	Message         json.RawMessage `json:"message"`
+	Progress        json.RawMessage `json:"progress"`
+	ExecutionTimeMs json.RawMessage `json:"executionTimeMs"`
+}
+
+// String summarizes the status for error messages, including the result and
+// message that carry the failure reason when the operation fails.
+func (s asyncStatus) String() string {
+	return fmt.Sprintf("state=%s progress=%s executionTimeMs=%s message=%q result=%q",
+		s.State, rawText(s.Progress), rawText(s.ExecutionTimeMs), rawText(s.Message), rawText(s.Result))
+}
+
+// rawText returns a JSON string value unquoted, and any other JSON value as is.
+func rawText(raw json.RawMessage) string {
+	var s string
+	if err := json.Unmarshal(raw, &s); err == nil {
+		return s
+	}
+	return string(raw)
+}
+
 func (ix *IxWeb) waitForAsync(ctx context.Context, data []byte, out any) error {
 	const pollDelay = 5 * time.Second
-	var status struct {
-		State     string          `json:"state"`
-		URL       string          `json:"url"`
-		Result    json.RawMessage `json:"result"`
-		ResultURL string          `json:"resultUrl"`
-	}
+	var status asyncStatus
 	if err := unmarshal(data, &status); err != nil {
 		return err
 	}
@@ -256,7 +281,9 @@ func (ix *IxWeb) waitForAsync(ctx context.Context, data []byte, out any) error {
 	for i := 0; i < pollLimit; i++ {
 		switch status.State {
 		case "ERROR", "EXCEPTION":
-			return fmt.Errorf("operation failed: %s", string(data))
+			// Report the status that failed, not the initial response: the operation
+			// is usually still IN_PROGRESS when it is first returned.
+			return fmt.Errorf("operation %s failed after %d polls: %v", status.URL, i, status)
 		case "IN_PROGRESS":
 			pollURL, err := url.Parse(status.URL)
 			if err != nil {
@@ -279,11 +306,11 @@ func (ix *IxWeb) waitForAsync(ctx context.Context, data []byte, out any) error {
 			}
 			return unmarshal(status.Result, out)
 		default:
-			return fmt.Errorf("unknown state in response: %v", out)
+			return fmt.Errorf("unknown state in operation %s response: %v", status.URL, status)
 		}
 	}
 
-	return fmt.Errorf("operation timeout; last status: %v", status)
+	return fmt.Errorf("operation timeout after %d polls; last status of %s: %v", pollLimit, status.URL, status)
 }
 
 func unmarshal(data []byte, out any) error {

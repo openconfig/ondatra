@@ -16,10 +16,9 @@
 package grpcutil
 
 import (
+	"context"
 	"io"
 	"time"
-
-	"golang.org/x/net/context"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/metadata"

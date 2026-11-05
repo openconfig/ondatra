@@ -15,11 +15,10 @@
 package ixgnmi
 
 import (
+	"context"
 	"errors"
 	"hash"
 	"testing"
-
-	"golang.org/x/net/context"
 
 	"github.com/google/go-cmp/cmp"
 	"github.com/openconfig/gnmi/errdiff"

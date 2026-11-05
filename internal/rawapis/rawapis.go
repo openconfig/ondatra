@@ -23,10 +23,9 @@
 package rawapis
 
 import (
+	"context"
 	"fmt"
 	"sync"
-
-	"golang.org/x/net/context"
 
 	"github.com/open-traffic-generator/snappi/gosnappi"
 	"github.com/openconfig/gnoigo"

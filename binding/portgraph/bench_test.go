@@ -15,9 +15,8 @@
 package portgraph
 
 import (
+	"context"
 	"testing"
-
-	"golang.org/x/net/context"
 )
 
 var (

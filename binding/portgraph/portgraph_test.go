@@ -15,13 +15,12 @@
 package portgraph
 
 import (
+	"context"
 	"fmt"
 	"regexp"
 	"strings"
 	"testing"
 	"time"
-
-	"golang.org/x/net/context"
 )
 
 // Initialize ConcretePorts and ConcreteNodes for the super graph.

@@ -19,12 +19,11 @@
 package grpcproxy
 
 import (
+	"context"
 	"fmt"
 	"io"
 	"net"
 	"strings"
-
-	"golang.org/x/net/context"
 
 	log "github.com/golang/glog"
 	lru "github.com/hashicorp/golang-lru/v2"
@@ -222,9 +221,17 @@ func (p *proxy) streamHandler(ctx context.Context, method string, stream grpc.Se
 	defer clientCancel()
 	clientStream, err := grpc.NewClientStream(destCtx, clientStreamDesc, destConn, method, grpc.WaitForReady(true))
 	if err != nil {
-		return status.Errorf(codes.Internal, "proxy_error: %v", err)
+		return proxyError(err)
 	}
 	return p.bidiStream(clientStream, stream)
+}
+
+func proxyError(err error) error {
+	code := status.Code(err)
+	if code == codes.Unknown {
+		code = codes.Internal
+	}
+	return status.Errorf(code, "proxy_error: %v", err)
 }
 
 func (p *proxy) bidiStream(cs grpc.ClientStream, ss grpc.ServerStream) error {
@@ -257,14 +264,14 @@ func forwardServerToClient(dst grpc.ClientStream, src grpc.ServerStream) error {
 		if err := src.RecvMsg(p); err != nil {
 			if err == io.EOF {
 				if dErr := dst.CloseSend(); dErr != nil {
-					return status.Errorf(codes.Internal, "proxy_error: %v", dErr)
+					return proxyError(dErr)
 				}
 				return nil
 			}
-			return status.Errorf(codes.Internal, "proxy_error: %v", err)
+			return proxyError(err)
 		}
 		if err := dst.SendMsg(p); err != nil {
-			return status.Errorf(codes.Internal, "proxy_error: %v", err)
+			return proxyError(err)
 		}
 	}
 }
@@ -274,10 +281,10 @@ func forwardClientToServer(dst grpc.ServerStream, src grpc.ClientStream) error {
 	// Transfer Headers.
 	md, err := src.Header()
 	if err != nil {
-		return status.Errorf(codes.Internal, "proxy_error: %v", err)
+		return proxyError(err)
 	}
 	if err := dst.SendHeader(md); err != nil {
-		return status.Errorf(codes.Internal, "proxy_error: %v", err)
+		return proxyError(err)
 	}
 
 	// Transfer body.

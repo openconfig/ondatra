@@ -15,9 +15,8 @@
 package solver
 
 import (
+	"context"
 	"testing"
-
-	"golang.org/x/net/context"
 
 	opb "github.com/openconfig/ondatra/proto"
 )

@@ -15,7 +15,7 @@
 package ixweb
 
 import (
-	"golang.org/x/net/context"
+	"context"
 )
 
 // Files represents the IxNetwork files API.

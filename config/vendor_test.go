@@ -15,11 +15,10 @@
 package config
 
 import (
+	"context"
 	"path/filepath"
 	"strings"
 	"testing"
-
-	"golang.org/x/net/context"
 
 	"github.com/google/go-cmp/cmp"
 	"github.com/openconfig/ondatra/binding"

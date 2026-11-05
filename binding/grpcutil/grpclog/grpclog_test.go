@@ -15,14 +15,13 @@
 package grpclog
 
 import (
+	"context"
 	"io"
 	"os"
 	"path/filepath"
 	"sort"
 	"strings"
 	"testing"
-
-	"golang.org/x/net/context"
 
 	"github.com/openconfig/ondatra/binding/grpcutil/testservice"
 	"google.golang.org/grpc"
