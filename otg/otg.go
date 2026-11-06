@@ -25,6 +25,7 @@ package otg
 import (
 	"context"
 	"fmt"
+	"strings"
 	"testing"
 	"time"
 
@@ -33,6 +34,7 @@ import (
 	"github.com/openconfig/ondatra/gnmi"
 	"github.com/openconfig/ondatra/internal/events"
 	"github.com/openconfig/ondatra/internal/rawapis"
+	"github.com/openconfig/ygnmi/ygnmi"
 
 	gpb "github.com/openconfig/gnmi/proto/gnmi"
 )
@@ -55,8 +57,27 @@ func (o *OTG) String() string {
 	return fmt.Sprintf("{ate: %s}", o.ate)
 }
 
+// PushConfigOptions contains options for PushConfigOpts.
+type PushConfigOptions struct {
+	// LinkUp, when true, brings up the links for the ports just configured
+	// after pushing the config. When false, the link-up step is skipped.
+	LinkUp bool
+}
+
 // PushConfig pushes config to the ATE.
 func (o *OTG) PushConfig(t testing.TB, cfg gosnappi.Config) {
+	t.Helper()
+	o.pushConfig(t, cfg, true)
+}
+
+// PushConfigOpts pushes config to the ATE, using opts to control optional
+// behavior. If opts is nil, the link-up step is skipped.
+func (o *OTG) PushConfigOpts(t testing.TB, cfg gosnappi.Config, opts *PushConfigOptions) {
+	t.Helper()
+	o.pushConfig(t, cfg, opts != nil && opts.LinkUp)
+}
+
+func (o *OTG) pushConfig(t testing.TB, cfg gosnappi.Config, linkUp bool) {
 	t.Helper()
 	t = events.ActionStarted(t, "Pushing config to %s", o.ate)
 	warns, err := pushConfig(context.Background(), o.ate, cfg)
@@ -66,6 +87,103 @@ func (o *OTG) PushConfig(t testing.TB, cfg gosnappi.Config) {
 	if len(warns) > 0 {
 		t.Logf("PushConfig(t) on %s non-fatal warnings: %v", o.ate, warns)
 	}
+	// Bring up the links for the ports just configured, unless no ports are
+	// configured or the caller opted out of the link-up step.
+	if !linkUp || len(cfg.Ports().Items()) == 0 {
+		t.Logf("Skipping link-up step for %s", o.ate)
+		return
+	}
+	// logLinkStates logs each configured port's link state. With an expected
+	// state of "UP" or "DOWN", it first polls every pollIntervalMs until all
+	// ports reach that state or timeoutSec elapses; "NONE" logs immediately.
+	// Telemetry errors and timeouts are tolerated silently.
+	logLinkStates := func(when string, timeoutSec int, expectedState string, pollIntervalMs int) {
+		const queryTimeout = 10 * time.Second
+		ctx := context.Background()
+		gnmiClient, err := rawapis.FetchOTGGNMI(ctx, o.ate)
+		if err != nil {
+			return
+		}
+		client, err := ygnmi.NewClient(gnmiClient, ygnmi.WithTarget(o.ate.Name()))
+		if err != nil {
+			return
+		}
+		readStates := func(deadline time.Time) map[string]fmt.Stringer {
+			states := make(map[string]fmt.Stringer)
+			for _, cfgPort := range cfg.Ports().Items() {
+				timeout := queryTimeout
+				if !deadline.IsZero() {
+					timeout = max(min(queryTimeout, time.Until(deadline)), time.Second)
+				}
+				queryCtx, cancel := context.WithTimeout(ctx, timeout)
+				state, err := ygnmi.Get(queryCtx, client, gnmi.OTG().Port(cfgPort.Name()).Link().State())
+				cancel()
+				if err == nil {
+					states[cfgPort.Name()] = state
+				}
+			}
+			return states
+		}
+		allInState := func(states map[string]fmt.Stringer, want string) bool {
+			for _, cfgPort := range cfg.Ports().Items() {
+				state, ok := states[cfgPort.Name()]
+				if !ok || state.String() != want {
+					return false
+				}
+			}
+			return true
+		}
+
+		expected := strings.ToUpper(strings.TrimSpace(expectedState))
+		var states map[string]fmt.Stringer
+		if expected == "UP" || expected == "DOWN" {
+			deadline := time.Now().Add(time.Duration(max(timeoutSec, 0)) * time.Second)
+			pollInterval := time.Duration(max(pollIntervalMs, 1)) * time.Millisecond
+			states = readStates(deadline)
+			for !allInState(states, expected) {
+				remaining := time.Until(deadline)
+				if remaining <= 0 {
+					break
+				}
+				time.Sleep(min(pollInterval, remaining))
+				states = readStates(deadline)
+			}
+		} else {
+			states = readStates(time.Time{})
+		}
+
+		for _, cfgPort := range cfg.Ports().Items() {
+			if state, ok := states[cfgPort.Name()]; ok {
+				t.Logf("PushConfig(t) on: %s, %s : %v",
+					cfgPort.Name(),
+					when,
+					state)
+			}
+		}
+	}
+
+	logLinkStates("before setting link state actual link is", 10, "UP", 500)
+	warnsLinkup, errLinkup := o.setLinkState(context.Background(), gosnappi.StatePortLinkState.UP)
+	logLinkStates("after setting link state up actual link is", 10, "UP", 500)
+	if errLinkup != nil {
+		t.Fatalf("PushConfig(t) on %s: failed to set port link state up: %v", o.ate, errLinkup)
+	}
+
+	if len(warnsLinkup) > 0 {
+		t.Logf("PushConfig(t) on %s non-fatal warnings when setting port link state up: %v",
+			o.ate,
+			warnsLinkup)
+	}
+}
+
+func (o *OTG) setLinkState(ctx context.Context, state gosnappi.StatePortLinkStateEnum) ([]string, error) {
+	controlState := gosnappi.NewControlState()
+	controlState.Port().Link().SetState(state)
+	resp, err := o.setControlState(ctx, controlState)
+	if err != nil {
+		return nil, err
+	}
+	return resp.Warnings(), nil
 }
 
 func pushConfig(ctx context.Context, ate binding.ATE, cfg gosnappi.Config) ([]string, error) {
