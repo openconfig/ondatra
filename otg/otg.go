@@ -165,7 +165,7 @@ func (o *OTG) pushConfig(t testing.TB, cfg gosnappi.Config, linkUp bool) {
 
 	logLinkStates("before setting link state actual link is", 10, "UP", 500)
 	warnsLinkup, errLinkup := o.setLinkState(context.Background(), gosnappi.StatePortLinkState.UP)
-	logLinkStates("after setting link state up actual link is", 10, "UP", 500)
+	//logLinkStates("after setting link state up actual link is", 10, "UP", 500)
 	if errLinkup != nil {
 		t.Fatalf("PushConfig(t) on %s: failed to set port link state up: %v", o.ate, errLinkup)
 	}
