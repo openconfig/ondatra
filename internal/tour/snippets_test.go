@@ -20,6 +20,8 @@ import (
 	"testing"
 	"time"
 
+	"google3/ops/netops/lab/ondatra/b2bind/b2bindinit"
+
 	"github.com/open-traffic-generator/snappi/gosnappi"
 	"github.com/openconfig/gnoigo/system"
 	"github.com/openconfig/ondatra"
@@ -28,8 +30,6 @@ import (
 	"github.com/openconfig/ondatra/gnmi/otg"
 	"github.com/openconfig/ondatra/gnoi"
 	"github.com/openconfig/ondatra/netutil"
-
-	"google3/ops/netops/lab/ondatra/b2bind/b2bindinit"
 )
 
 var expectedRate float64

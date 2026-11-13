@@ -87,6 +87,21 @@ func (v Vendor) String() string {
 	return opb.Device_Vendor(v).String()
 }
 
+// Form represents the form factor of a device.
+type Form int
+
+// Form constants.
+const (
+	FormUnspecified = Form(opb.Device_FORM_UNSPECIFIED)
+	FormPhysical    = Form(opb.Device_PHYSICAL)
+	FormVirtual     = Form(opb.Device_VIRTUAL)
+)
+
+// String returns the name of the Form.
+func (f Form) String() string {
+	return opb.Device_Form(f).String()
+}
+
 // GNMIOpts returns a new set of options to customize gNMI queries.
 func (d *Device) GNMIOpts() *gnmi.Opts {
 	useGetForCfg := d.Vendor() == CISCO || d.Vendor() == JUNIPER || d.Vendor() == NOKIA
@@ -106,6 +121,11 @@ func (d *Device) Model() string {
 // Version returns the device software version.
 func (d *Device) Version() string {
 	return d.res.SoftwareVersion()
+}
+
+// Form returns the form of the device.
+func (d *Device) Form() Form {
+	return Form(d.res.Form())
 }
 
 // Port returns a port with a given id.

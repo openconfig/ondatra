@@ -221,7 +221,7 @@ func TestSkipReservationRelease(t *testing.T) {
 }
 
 func TestGetters(t *testing.T) {
-	const dutID, ateID, portID = "dut", "ate", "port"
+	const dutID, ateID, portID, dutUnsetID = "dut", "ate", "port", "dutUnset"
 	fakeRes := &binding.Reservation{
 		DUTs: map[string]binding.DUT{
 			dutID: &fakebind.DUT{
@@ -235,6 +235,12 @@ func TestGetters(t *testing.T) {
 						PMD:       opb.Port_PMD_10GBASE_LR,
 						Speed:     opb.Port_S_10GB,
 					}},
+					Form: opb.Device_VIRTUAL,
+				}},
+			},
+			dutUnsetID: &fakebind.DUT{
+				AbstractDUT: &binding.AbstractDUT{Dims: &binding.Dims{
+					Name: "fakeDUTUnset.net",
 				}},
 			},
 		},
@@ -250,6 +256,7 @@ func TestGetters(t *testing.T) {
 						PMD:       opb.Port_PMD_100GBASE_FR,
 						Speed:     opb.Port_S_100GB,
 					}},
+					Form: opb.Device_PHYSICAL,
 				}},
 			},
 		},
@@ -272,6 +279,19 @@ func TestGetters(t *testing.T) {
 		}
 		if got, want := d.Version(), "fakeDUTVersion"; got != want {
 			t.Errorf("DUT version = %v, want %v", got, want)
+		}
+		if got, want := d.Form(), FormVirtual; got != want {
+			t.Errorf("DUT form = %v, want %v", got, want)
+		}
+		if got, want := d.Form().String(), "VIRTUAL"; got != want {
+			t.Errorf("DUT form string = %q, want %q", got, want)
+		}
+		dUnset := DUT(t, dutUnsetID)
+		if got, want := dUnset.Form(), FormUnspecified; got != want {
+			t.Errorf("DUT unset form = %v, want %v", got, want)
+		}
+		if got, want := dUnset.Form().String(), "FORM_UNSPECIFIED"; got != want {
+			t.Errorf("DUT unset form string = %q, want %q", got, want)
 		}
 	})
 
@@ -312,6 +332,15 @@ func TestGetters(t *testing.T) {
 		}
 		if got, want := a.Version(), "fakeATEVersion"; got != want {
 			t.Errorf("ATE version = %v, want %v", got, want)
+		}
+		if got, want := a.Form(), FormPhysical; got != want {
+			t.Errorf("ATE form = %v, want %v", got, want)
+		}
+		if got, want := a.Form().String(), "PHYSICAL"; got != want {
+			t.Errorf("ATE form string = %q, want %q", got, want)
+		}
+		if got, want := FormUnspecified.String(), "FORM_UNSPECIFIED"; got != want {
+			t.Errorf("FormUnspecified string = %q, want %q", got, want)
 		}
 	})
 

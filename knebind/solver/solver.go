@@ -356,6 +356,7 @@ func createBindingDevice(node *tpb.Node, ports map[string]*binding.Port, sm map[
 		Vendor:          ondatraVendor,
 		HardwareModel:   node.GetModel(),
 		SoftwareVersion: node.GetOs(),
+		Form:            opb.Device_VIRTUAL,
 	}
 	if role(node) == portgraph.RoleATE {
 		return &ServiceATE{
@@ -563,6 +564,7 @@ func (a *assign) resolveDevice(dev *opb.Device) (*deviceResolution, error) {
 		HardwareModel:   node.GetModel(),
 		SoftwareVersion: node.GetOs(),
 		Ports:           make(map[string]*binding.Port),
+		Form:            opb.Device_VIRTUAL,
 	}
 	for _, p := range dev.GetPorts() {
 		dims.Ports[p.GetId()] = &binding.Port{Name: a.port2Intf[p].vendorName}

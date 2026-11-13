@@ -53,6 +53,13 @@ message Device {
   }
   Vendor vendor = 2;
 
+  // Form factor of the device.
+  enum Form {
+    FORM_UNSPECIFIED = 0;
+    PHYSICAL = 1;
+    VIRTUAL = 2;
+  }
+
   // Hardware model of the device.
   oneof hardware_model_value {
     string hardware_model = 4;

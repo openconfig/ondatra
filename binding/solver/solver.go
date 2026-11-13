@@ -173,6 +173,7 @@ func dynDims(dev *opb.Device, bdev binding.Device, tbPort2BindPort map[*opb.Port
 		HardwareModel:   bdev.HardwareModel(),
 		SoftwareVersion: bdev.SoftwareVersion(),
 		Ports:           make(map[string]*binding.Port),
+		Form:            bdev.Form(),
 	}
 	for _, tp := range dev.GetPorts() {
 		if bp, present := tbPort2BindPort[tp]; present {

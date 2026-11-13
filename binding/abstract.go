@@ -72,6 +72,11 @@ func (d *AbstractDUT) Ports() map[string]*Port {
 	return d.Dims.Ports
 }
 
+// Form returns the form of the DUT.
+func (d *AbstractDUT) Form() opb.Device_Form {
+	return d.Dims.Form
+}
+
 func (d *AbstractDUT) String() string {
 	return fmt.Sprintf("DUT%+v", *d)
 }
@@ -159,6 +164,11 @@ func (a *AbstractATE) HardwareModel() string {
 // Ports returns the reserved ports on the ATE.
 func (a *AbstractATE) Ports() map[string]*Port {
 	return a.Dims.Ports
+}
+
+// Form returns the form of the ATE.
+func (a *AbstractATE) Form() opb.Device_Form {
+	return a.Dims.Form
 }
 
 func (a *AbstractATE) String() string {

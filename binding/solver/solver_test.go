@@ -762,8 +762,8 @@ func TestAssignmentToReservation(t *testing.T) {
 
 	bDUT1Port1 := &binding.Port{Name: "eth1"}
 	bATE1Port1 := &binding.Port{Name: "eth1"}
-	invDUT1 := &mockDUT{AbstractDUT: &binding.AbstractDUT{Dims: &binding.Dims{Name: "inventory_dut1", Ports: map[string]*binding.Port{"p1": bDUT1Port1}}}}
-	invATE1 := &mockATE{AbstractATE: &binding.AbstractATE{Dims: &binding.Dims{Name: "inventory_ate1", Ports: map[string]*binding.Port{"p1": bATE1Port1}}}}
+	invDUT1 := &mockDUT{AbstractDUT: &binding.AbstractDUT{Dims: &binding.Dims{Name: "inventory_dut1", Ports: map[string]*binding.Port{"p1": bDUT1Port1}, Form: opb.Device_VIRTUAL}}}
+	invATE1 := &mockATE{AbstractATE: &binding.AbstractATE{Dims: &binding.Dims{Name: "inventory_ate1", Ports: map[string]*binding.Port{"p1": bATE1Port1}, Form: opb.Device_PHYSICAL}}}
 	bdevDUT1 := binding.Device(invDUT1)
 	bdevATE1 := binding.Device(invATE1)
 
@@ -820,6 +820,7 @@ func TestAssignmentToReservation(t *testing.T) {
 					Ports: map[string]*binding.Port{
 						"port1": bDUT1Port1,
 					},
+					Form: opb.Device_VIRTUAL,
 				},
 			},
 		},
@@ -830,6 +831,7 @@ func TestAssignmentToReservation(t *testing.T) {
 					Ports: map[string]*binding.Port{
 						"port1": bATE1Port1,
 					},
+					Form: opb.Device_PHYSICAL,
 				},
 			},
 		},

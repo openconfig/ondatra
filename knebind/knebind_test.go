@@ -289,6 +289,7 @@ func TestReserve(t *testing.T) {
 						Ports: map[string]*binding.Port{
 							"port1": {Name: "Ethernet1"},
 						},
+						Form: opb.Device_VIRTUAL,
 					}},
 					Services:   wantDUTServices,
 					NodeVendor: tpb.Vendor_ARISTA,
@@ -304,6 +305,7 @@ func TestReserve(t *testing.T) {
 						Ports: map[string]*binding.Port{
 							"port1": {Name: "eth1"},
 						},
+						Form: opb.Device_VIRTUAL,
 					}},
 					Services:   wantATEServices,
 					NodeVendor: tpb.Vendor_KEYSIGHT,
