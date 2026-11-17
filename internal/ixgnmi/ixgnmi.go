@@ -174,7 +174,11 @@ func NewClient(ctx context.Context, name string, reader StatReader, client *ixco
 	}
 	gc.SetClient(subSrv.Update)
 	gpb.RegisterGNMIServer(srv, subSrv)
-	lis, err := net.Listen("tcp", ":0")
+	// Only listen on loopback, preferring IPv6 and falling back to IPv4.
+	lis, err := net.Listen("tcp", "[::1]:0")
+	if err != nil {
+		lis, err = net.Listen("tcp", "127.0.0.1:0")
+	}
 	if err != nil {
 		return nil, fmt.Errorf("cannot listen on an available port: %w", err)
 	}

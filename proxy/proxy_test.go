@@ -19,6 +19,7 @@ import (
 	"context"
 	"fmt"
 	"io"
+	"net"
 	"net/http"
 	"testing"
 
@@ -166,6 +167,46 @@ func TestAuthProxy(t *testing.T) {
 				}
 				if !proto.Equal(v, want[i]) {
 					t.Fatalf("invalid message: got %s, want %s", v, want[i])
+				}
+			}
+		})
+	}
+}
+
+func TestEndpointsListenOnLoopback(t *testing.T) {
+	fake, grpcBinding := setupFake(t)
+	defer fake.Stop()
+	_, httpBinding := setupHTTP(t, "fake.target.com")
+
+	tests := []struct {
+		desc string
+		b    *fakeBinding
+	}{{
+		desc: "grpc proxy",
+		b:    grpcBinding,
+	}, {
+		desc: "http proxy",
+		b:    httpBinding,
+	}}
+	for _, tt := range tests {
+		t.Run(tt.desc, func(t *testing.T) {
+			m, err := New(tt.b)
+			if err != nil {
+				t.Fatalf("New() failed: %v", err)
+			}
+			defer m.Stop()
+
+			eps := m.Endpoints()
+			if len(eps) == 0 {
+				t.Fatal("Endpoints() returned no endpoints")
+			}
+			for name, ep := range eps {
+				host, _, err := net.SplitHostPort(ep.Addr)
+				if err != nil {
+					t.Fatalf("net.SplitHostPort(%q) failed: %v", ep.Addr, err)
+				}
+				if ip := net.ParseIP(host); ip == nil || !ip.IsLoopback() {
+					t.Errorf("Endpoints()[%q].Addr = %q, want a loopback address", name, ep.Addr)
 				}
 			}
 		})

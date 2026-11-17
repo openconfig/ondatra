@@ -103,6 +103,8 @@ type grpcProxy struct {
 }
 
 // New will create a new set of proxies for the provided Dialer.
+// The proxies listen on a loopback address and are only reachable from the
+// local host; use Endpoints to discover their addresses.
 func New(d Dialer, sOpts ...grpc.ServerOption) (*Proxy, error) {
 	if d == nil {
 		return nil, fmt.Errorf("dialer cannot be nil")
@@ -203,7 +205,11 @@ func (p *Proxy) addGRPC(d *rpb.ResolvedDevice) error {
 			log.Infof("gRPC server already registered for address %q used by service %s, continuing", targetAddr, name)
 			continue
 		}
-		lis, err := net.Listen("tcp", ":0")
+		// Only listen on loopback, preferring IPv6 and falling back to IPv4.
+		lis, err := net.Listen("tcp", "[::1]:0")
+		if err != nil {
+			lis, err = net.Listen("tcp", "127.0.0.1:0")
+		}
 		if err != nil {
 			return fmt.Errorf("failed to create listen port for %q: %w", targetAddr, err)
 		}
@@ -246,7 +252,11 @@ func (p *Proxy) addHTTP(key string, d *rpb.ResolvedDevice) error {
 		log.Infof("No service found for %q", key)
 		return nil
 	}
-	lis, err := net.Listen("tcp", ":0")
+	// Only listen on loopback, preferring IPv6 and falling back to IPv4.
+	lis, err := net.Listen("tcp", "[::1]:0")
+	if err != nil {
+		lis, err = net.Listen("tcp", "127.0.0.1:0")
+	}
 	if err != nil {
 		return fmt.Errorf("failed to create listen port for %q: %w", key, err)
 	}
