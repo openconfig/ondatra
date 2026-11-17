@@ -45356,6 +45356,42 @@ func (n *NetworkInstance_Protocol_Bgp_NeighborPathAny) LocalAs() *NetworkInstanc
 	return ps
 }
 
+// LocalAsOptions (container): Local-AS options.
+// Local-AS is a migration tool described in RFC7705.
+//
+//	Defining module:      "openconfig-bgp-neighbor"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "local-as-options"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/local-as-options"
+func (n *NetworkInstance_Protocol_Bgp_NeighborPath) LocalAsOptions() *NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptionsPath {
+	ps := &NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptionsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"local-as-options"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// LocalAsOptions (container): Local-AS options.
+// Local-AS is a migration tool described in RFC7705.
+//
+//	Defining module:      "openconfig-bgp-neighbor"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "local-as-options"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/local-as-options"
+func (n *NetworkInstance_Protocol_Bgp_NeighborPathAny) LocalAsOptions() *NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptionsPathAny {
+	ps := &NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptionsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"local-as-options"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
 // LoggingOptions (container): Logging options for events related to the BGP neighbor or
 // group
 //
@@ -52561,6 +52597,195 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_Prefix
 	)
 }
 
+// NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_EnableAigpPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-unicast/state/enable-aigp YANG schema element.
+type NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_EnableAigpPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_EnableAigpPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-unicast/state/enable-aigp YANG schema element.
+type NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_EnableAigpPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_EnableAigpPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-network-instance"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/enable-aigp"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-unicast/state/enable-aigp"
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_EnableAigpPath) State() ygnmi.SingletonQuery[bool] {
+	return ygnmi.NewSingletonQuery[bool](
+		"NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "enable-aigp"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast).EnableAigp
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-network-instance"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/enable-aigp"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-unicast/state/enable-aigp"
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_EnableAigpPathAny) State() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewWildcardQuery[bool](
+		"NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "enable-aigp"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast).EnableAigp
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-network-instance"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "config/enable-aigp"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-unicast/config/enable-aigp"
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_EnableAigpPath) Config() ygnmi.ConfigQuery[bool] {
+	return ygnmi.NewConfigQuery[bool](
+		"NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "enable-aigp"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast).EnableAigp
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-network-instance"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "config/enable-aigp"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-unicast/config/enable-aigp"
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_EnableAigpPathAny) Config() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewWildcardQuery[bool](
+		"NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "enable-aigp"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast).EnableAigp
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
 // NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_ExtendedNextHopEncodingPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-unicast/state/extended-next-hop-encoding YANG schema element.
 type NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_ExtendedNextHopEncodingPath struct {
 	*ygnmi.NodePath
@@ -52952,6 +53177,46 @@ type NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4UnicastPathAny struct {
 // PathOrigin returns the name of the origin for the path object.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4UnicastPath) PathOriginName() string {
 	return "openconfig"
+}
+
+// EnableAigp (leaf): Flag to enable sending / receiving accumulated IGP
+// attribute in routing updates for the address family as
+// stipulated by RFC 7311 Section 3.3
+//
+//	Defining module:      "openconfig-network-instance"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "*/enable-aigp"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-unicast/*/enable-aigp"
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4UnicastPath) EnableAigp() *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_EnableAigpPath {
+	ps := &NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_EnableAigpPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "enable-aigp"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// EnableAigp (leaf): Flag to enable sending / receiving accumulated IGP
+// attribute in routing updates for the address family as
+// stipulated by RFC 7311 Section 3.3
+//
+//	Defining module:      "openconfig-network-instance"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "*/enable-aigp"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-unicast/*/enable-aigp"
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4UnicastPathAny) EnableAigp() *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_EnableAigpPathAny {
+	ps := &NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_EnableAigpPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "enable-aigp"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
 }
 
 // ExtendedNextHopEncoding (leaf): This leaf indicates whether extended next-hop encoding is enabled for
@@ -57191,6 +57456,195 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_Prefix
 	)
 }
 
+// NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_EnableAigpPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/state/enable-aigp YANG schema element.
+type NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_EnableAigpPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_EnableAigpPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/state/enable-aigp YANG schema element.
+type NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_EnableAigpPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_EnableAigpPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-network-instance"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/enable-aigp"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/state/enable-aigp"
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_EnableAigpPath) State() ygnmi.SingletonQuery[bool] {
+	return ygnmi.NewSingletonQuery[bool](
+		"NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "enable-aigp"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast).EnableAigp
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-network-instance"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/enable-aigp"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/state/enable-aigp"
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_EnableAigpPathAny) State() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewWildcardQuery[bool](
+		"NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "enable-aigp"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast).EnableAigp
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-network-instance"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "config/enable-aigp"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/config/enable-aigp"
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_EnableAigpPath) Config() ygnmi.ConfigQuery[bool] {
+	return ygnmi.NewConfigQuery[bool](
+		"NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "enable-aigp"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast).EnableAigp
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-network-instance"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "config/enable-aigp"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/config/enable-aigp"
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_EnableAigpPathAny) Config() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewWildcardQuery[bool](
+		"NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "enable-aigp"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast).EnableAigp
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
 // NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_SendDefaultRoutePath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/state/send-default-route YANG schema element.
 type NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_SendDefaultRoutePath struct {
 	*ygnmi.NodePath
@@ -57393,6 +57847,46 @@ type NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6UnicastPathAny struct {
 // PathOrigin returns the name of the origin for the path object.
 func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6UnicastPath) PathOriginName() string {
 	return "openconfig"
+}
+
+// EnableAigp (leaf): Flag to enable sending / receiving accumulated IGP
+// attribute in routing updates for the address family as
+// stipulated by RFC 7311 Section 3.3
+//
+//	Defining module:      "openconfig-network-instance"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "*/enable-aigp"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/*/enable-aigp"
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6UnicastPath) EnableAigp() *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_EnableAigpPath {
+	ps := &NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_EnableAigpPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "enable-aigp"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// EnableAigp (leaf): Flag to enable sending / receiving accumulated IGP
+// attribute in routing updates for the address family as
+// stipulated by RFC 7311 Section 3.3
+//
+//	Defining module:      "openconfig-network-instance"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "*/enable-aigp"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast/*/enable-aigp"
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6UnicastPathAny) EnableAigp() *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_EnableAigpPathAny {
+	ps := &NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_EnableAigpPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "enable-aigp"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
 }
 
 // PrefixLimit (container): Configure the maximum number of prefixes that will be
@@ -83910,6 +84404,1009 @@ func (n *NetworkInstance_Protocol_Bgp_Neighbor_GracefulRestartPathAny) Config() 
 	)
 }
 
+// NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions_DualAsPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/local-as-options/state/dual-as YANG schema element.
+type NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions_DualAsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions_DualAsPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/local-as-options/state/dual-as YANG schema element.
+type NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions_DualAsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions_DualAsPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-bgp-common"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/dual-as"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/local-as-options/state/dual-as"
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions_DualAsPath) State() ygnmi.SingletonQuery[bool] {
+	return ygnmi.NewSingletonQuery[bool](
+		"NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "dual-as"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions).DualAs
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-bgp-common"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/dual-as"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/local-as-options/state/dual-as"
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions_DualAsPathAny) State() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewWildcardQuery[bool](
+		"NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "dual-as"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions).DualAs
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-bgp-common"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "config/dual-as"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/local-as-options/config/dual-as"
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions_DualAsPath) Config() ygnmi.ConfigQuery[bool] {
+	return ygnmi.NewConfigQuery[bool](
+		"NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "dual-as"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions).DualAs
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-bgp-common"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "config/dual-as"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/local-as-options/config/dual-as"
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions_DualAsPathAny) Config() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewWildcardQuery[bool](
+		"NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "dual-as"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions).DualAs
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions_LocalAsPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/local-as-options/state/local-as YANG schema element.
+type NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions_LocalAsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions_LocalAsPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/local-as-options/state/local-as YANG schema element.
+type NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions_LocalAsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions_LocalAsPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-bgp-common"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/local-as"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/local-as-options/state/local-as"
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions_LocalAsPath) State() ygnmi.SingletonQuery[uint32] {
+	return ygnmi.NewSingletonQuery[uint32](
+		"NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "local-as"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions).LocalAs
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-bgp-common"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/local-as"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/local-as-options/state/local-as"
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions_LocalAsPathAny) State() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewWildcardQuery[uint32](
+		"NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "local-as"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions).LocalAs
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-bgp-common"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "config/local-as"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/local-as-options/config/local-as"
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions_LocalAsPath) Config() ygnmi.ConfigQuery[uint32] {
+	return ygnmi.NewConfigQuery[uint32](
+		"NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "local-as"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions).LocalAs
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-bgp-common"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "config/local-as"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/local-as-options/config/local-as"
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions_LocalAsPathAny) Config() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewWildcardQuery[uint32](
+		"NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "local-as"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions).LocalAs
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions_NoPrependPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/local-as-options/state/no-prepend YANG schema element.
+type NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions_NoPrependPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions_NoPrependPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/local-as-options/state/no-prepend YANG schema element.
+type NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions_NoPrependPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions_NoPrependPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-bgp-common"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/no-prepend"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/local-as-options/state/no-prepend"
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions_NoPrependPath) State() ygnmi.SingletonQuery[bool] {
+	return ygnmi.NewSingletonQuery[bool](
+		"NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "no-prepend"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions).NoPrepend
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-bgp-common"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/no-prepend"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/local-as-options/state/no-prepend"
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions_NoPrependPathAny) State() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewWildcardQuery[bool](
+		"NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "no-prepend"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions).NoPrepend
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-bgp-common"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "config/no-prepend"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/local-as-options/config/no-prepend"
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions_NoPrependPath) Config() ygnmi.ConfigQuery[bool] {
+	return ygnmi.NewConfigQuery[bool](
+		"NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "no-prepend"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions).NoPrepend
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-bgp-common"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "config/no-prepend"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/local-as-options/config/no-prepend"
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions_NoPrependPathAny) Config() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewWildcardQuery[bool](
+		"NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "no-prepend"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions).NoPrepend
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions_ReplaceAsPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/local-as-options/state/replace-as YANG schema element.
+type NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions_ReplaceAsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions_ReplaceAsPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/local-as-options/state/replace-as YANG schema element.
+type NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions_ReplaceAsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions_ReplaceAsPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-bgp-common"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/replace-as"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/local-as-options/state/replace-as"
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions_ReplaceAsPath) State() ygnmi.SingletonQuery[bool] {
+	return ygnmi.NewSingletonQuery[bool](
+		"NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "replace-as"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions).ReplaceAs
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-bgp-common"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/replace-as"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/local-as-options/state/replace-as"
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions_ReplaceAsPathAny) State() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewWildcardQuery[bool](
+		"NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "replace-as"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions).ReplaceAs
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-bgp-common"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "config/replace-as"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/local-as-options/config/replace-as"
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions_ReplaceAsPath) Config() ygnmi.ConfigQuery[bool] {
+	return ygnmi.NewConfigQuery[bool](
+		"NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "replace-as"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions).ReplaceAs
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-bgp-common"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "config/replace-as"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/local-as-options/config/replace-as"
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions_ReplaceAsPathAny) Config() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewWildcardQuery[bool](
+		"NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "replace-as"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions).ReplaceAs
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptionsPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/local-as-options YANG schema element.
+type NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptionsPath struct {
+	*ygnmi.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptionsPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/local-as-options YANG schema element.
+type NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptionsPathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptionsPath) PathOriginName() string {
+	return "openconfig"
+}
+
+// DualAs (leaf): When set to TRUE, the speaker alternates between local-ASN
+// and global ASN in every other OPEN messages. Implemetation
+// may but not have to strictly follow procedure documented in
+// section 4.2 of RFC7705, that allows of use of local-ASN
+// only upon reception of BAD_PEER_AS error.
+//
+//	Defining module:      "openconfig-bgp-common"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "*/dual-as"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/local-as-options/*/dual-as"
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptionsPath) DualAs() *NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions_DualAsPath {
+	ps := &NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions_DualAsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "dual-as"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// DualAs (leaf): When set to TRUE, the speaker alternates between local-ASN
+// and global ASN in every other OPEN messages. Implemetation
+// may but not have to strictly follow procedure documented in
+// section 4.2 of RFC7705, that allows of use of local-ASN
+// only upon reception of BAD_PEER_AS error.
+//
+//	Defining module:      "openconfig-bgp-common"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "*/dual-as"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/local-as-options/*/dual-as"
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptionsPathAny) DualAs() *NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions_DualAsPathAny {
+	ps := &NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions_DualAsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "dual-as"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// LocalAs (leaf): The local autonomous system number that is to be used
+// when establishing sessions with the remote peer or peer
+// group, if this differs from the global BGP router
+// autonomous system number. Value is set in My Autonomous
+// System of the OPEN message sent to establish session.
+//
+//	Defining module:      "openconfig-bgp-common"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "*/local-as"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/local-as-options/*/local-as"
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptionsPath) LocalAs() *NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions_LocalAsPath {
+	ps := &NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions_LocalAsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "local-as"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// LocalAs (leaf): The local autonomous system number that is to be used
+// when establishing sessions with the remote peer or peer
+// group, if this differs from the global BGP router
+// autonomous system number. Value is set in My Autonomous
+// System of the OPEN message sent to establish session.
+//
+//	Defining module:      "openconfig-bgp-common"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "*/local-as"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/local-as-options/*/local-as"
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptionsPathAny) LocalAs() *NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions_LocalAsPathAny {
+	ps := &NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions_LocalAsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "local-as"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// NoPrepend (leaf): When set to TRUE, the value configured as local-as is
+// not prepended to AS-PATH on received routes.
+//
+//	Defining module:      "openconfig-bgp-common"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "*/no-prepend"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/local-as-options/*/no-prepend"
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptionsPath) NoPrepend() *NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions_NoPrependPath {
+	ps := &NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions_NoPrependPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "no-prepend"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// NoPrepend (leaf): When set to TRUE, the value configured as local-as is
+// not prepended to AS-PATH on received routes.
+//
+//	Defining module:      "openconfig-bgp-common"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "*/no-prepend"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/local-as-options/*/no-prepend"
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptionsPathAny) NoPrepend() *NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions_NoPrependPathAny {
+	ps := &NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions_NoPrependPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "no-prepend"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// ReplaceAs (leaf): When set to TRUE, the global AS is not added to AS-PATH
+// when route is advertised to peer. Only local-as is prepended.
+//
+//	Defining module:      "openconfig-bgp-common"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "*/replace-as"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/local-as-options/*/replace-as"
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptionsPath) ReplaceAs() *NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions_ReplaceAsPath {
+	ps := &NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions_ReplaceAsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "replace-as"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// ReplaceAs (leaf): When set to TRUE, the global AS is not added to AS-PATH
+// when route is advertised to peer. Only local-as is prepended.
+//
+//	Defining module:      "openconfig-bgp-common"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "*/replace-as"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/local-as-options/*/replace-as"
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptionsPathAny) ReplaceAs() *NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions_ReplaceAsPathAny {
+	ps := &NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions_ReplaceAsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "replace-as"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptionsPath) State() ygnmi.SingletonQuery[*oc.NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions] {
+	return ygnmi.NewSingletonQuery[*oc.NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions](
+		"NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptionsPathAny) State() ygnmi.WildcardQuery[*oc.NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions] {
+	return ygnmi.NewWildcardQuery[*oc.NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions](
+		"NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptionsPath) Config() ygnmi.ConfigQuery[*oc.NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions] {
+	return ygnmi.NewConfigQuery[*oc.NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions](
+		"NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptionsPathAny) Config() ygnmi.WildcardQuery[*oc.NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions] {
+	return ygnmi.NewWildcardQuery[*oc.NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions](
+		"NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
 // NetworkInstance_Protocol_Bgp_Neighbor_LoggingOptions_LogNeighborStateChangesPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/logging-options/state/log-neighbor-state-changes YANG schema element.
 type NetworkInstance_Protocol_Bgp_Neighbor_LoggingOptions_LogNeighborStateChangesPath struct {
 	*ygnmi.NodePath
@@ -92716,6 +94213,42 @@ func (n *NetworkInstance_Protocol_Bgp_PeerGroupPathAny) LocalAs() *NetworkInstan
 	return ps
 }
 
+// LocalAsOptions (container): Local-AS options.
+// Local-AS is a migration tool described in RFC7705.
+//
+//	Defining module:      "openconfig-bgp-peer-group"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "local-as-options"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/local-as-options"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroupPath) LocalAsOptions() *NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptionsPath {
+	ps := &NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptionsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"local-as-options"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// LocalAsOptions (container): Local-AS options.
+// Local-AS is a migration tool described in RFC7705.
+//
+//	Defining module:      "openconfig-bgp-peer-group"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "local-as-options"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/local-as-options"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroupPathAny) LocalAsOptions() *NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptionsPathAny {
+	ps := &NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptionsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"local-as-options"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
 // LoggingOptions (container): Logging options for events related to the BGP neighbor or
 // group
 //
@@ -99316,6 +100849,195 @@ func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4LabeledUnicast_Prefi
 	)
 }
 
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast_EnableAigpPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/ipv4-unicast/state/enable-aigp YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast_EnableAigpPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast_EnableAigpPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/ipv4-unicast/state/enable-aigp YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast_EnableAigpPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast_EnableAigpPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-network-instance"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/enable-aigp"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/ipv4-unicast/state/enable-aigp"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast_EnableAigpPath) State() ygnmi.SingletonQuery[bool] {
+	return ygnmi.NewSingletonQuery[bool](
+		"NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "enable-aigp"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast).EnableAigp
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-network-instance"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/enable-aigp"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/ipv4-unicast/state/enable-aigp"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast_EnableAigpPathAny) State() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewWildcardQuery[bool](
+		"NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "enable-aigp"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast).EnableAigp
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-network-instance"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "config/enable-aigp"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/ipv4-unicast/config/enable-aigp"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast_EnableAigpPath) Config() ygnmi.ConfigQuery[bool] {
+	return ygnmi.NewConfigQuery[bool](
+		"NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "enable-aigp"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast).EnableAigp
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-network-instance"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "config/enable-aigp"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/ipv4-unicast/config/enable-aigp"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast_EnableAigpPathAny) Config() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewWildcardQuery[bool](
+		"NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "enable-aigp"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast).EnableAigp
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
 // NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast_ExtendedNextHopEncodingPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/ipv4-unicast/state/extended-next-hop-encoding YANG schema element.
 type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast_ExtendedNextHopEncodingPath struct {
 	*ygnmi.NodePath
@@ -99707,6 +101429,46 @@ type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4UnicastPathAny struct {
 // PathOrigin returns the name of the origin for the path object.
 func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4UnicastPath) PathOriginName() string {
 	return "openconfig"
+}
+
+// EnableAigp (leaf): Flag to enable sending / receiving accumulated IGP
+// attribute in routing updates for the address family as
+// stipulated by RFC 7311 Section 3.3
+//
+//	Defining module:      "openconfig-network-instance"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "*/enable-aigp"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/ipv4-unicast/*/enable-aigp"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4UnicastPath) EnableAigp() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast_EnableAigpPath {
+	ps := &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast_EnableAigpPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "enable-aigp"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// EnableAigp (leaf): Flag to enable sending / receiving accumulated IGP
+// attribute in routing updates for the address family as
+// stipulated by RFC 7311 Section 3.3
+//
+//	Defining module:      "openconfig-network-instance"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "*/enable-aigp"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/ipv4-unicast/*/enable-aigp"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4UnicastPathAny) EnableAigp() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast_EnableAigpPathAny {
+	ps := &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast_EnableAigpPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "enable-aigp"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
 }
 
 // ExtendedNextHopEncoding (leaf): This leaf indicates whether extended next-hop encoding is enabled for
@@ -103946,6 +105708,195 @@ func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6LabeledUnicast_Prefi
 	)
 }
 
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast_EnableAigpPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/ipv6-unicast/state/enable-aigp YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast_EnableAigpPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast_EnableAigpPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/ipv6-unicast/state/enable-aigp YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast_EnableAigpPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast_EnableAigpPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-network-instance"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/enable-aigp"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/ipv6-unicast/state/enable-aigp"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast_EnableAigpPath) State() ygnmi.SingletonQuery[bool] {
+	return ygnmi.NewSingletonQuery[bool](
+		"NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "enable-aigp"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast).EnableAigp
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-network-instance"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/enable-aigp"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/ipv6-unicast/state/enable-aigp"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast_EnableAigpPathAny) State() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewWildcardQuery[bool](
+		"NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "enable-aigp"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast).EnableAigp
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-network-instance"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "config/enable-aigp"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/ipv6-unicast/config/enable-aigp"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast_EnableAigpPath) Config() ygnmi.ConfigQuery[bool] {
+	return ygnmi.NewConfigQuery[bool](
+		"NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "enable-aigp"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast).EnableAigp
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-network-instance"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "config/enable-aigp"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/ipv6-unicast/config/enable-aigp"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast_EnableAigpPathAny) Config() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewWildcardQuery[bool](
+		"NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "enable-aigp"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast).EnableAigp
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
 // NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast_SendDefaultRoutePath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/ipv6-unicast/state/send-default-route YANG schema element.
 type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast_SendDefaultRoutePath struct {
 	*ygnmi.NodePath
@@ -104148,6 +106099,46 @@ type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6UnicastPathAny struct {
 // PathOrigin returns the name of the origin for the path object.
 func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6UnicastPath) PathOriginName() string {
 	return "openconfig"
+}
+
+// EnableAigp (leaf): Flag to enable sending / receiving accumulated IGP
+// attribute in routing updates for the address family as
+// stipulated by RFC 7311 Section 3.3
+//
+//	Defining module:      "openconfig-network-instance"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "*/enable-aigp"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/ipv6-unicast/*/enable-aigp"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6UnicastPath) EnableAigp() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast_EnableAigpPath {
+	ps := &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast_EnableAigpPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "enable-aigp"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// EnableAigp (leaf): Flag to enable sending / receiving accumulated IGP
+// attribute in routing updates for the address family as
+// stipulated by RFC 7311 Section 3.3
+//
+//	Defining module:      "openconfig-network-instance"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "*/enable-aigp"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/ipv6-unicast/*/enable-aigp"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6UnicastPathAny) EnableAigp() *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast_EnableAigpPathAny {
+	ps := &NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast_EnableAigpPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "enable-aigp"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
 }
 
 // PrefixLimit (container): Configure the maximum number of prefixes that will be
@@ -130711,6 +132702,1009 @@ func (n *NetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestartPath) Config() yg
 func (n *NetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestartPathAny) Config() ygnmi.WildcardQuery[*oc.NetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart] {
 	return ygnmi.NewWildcardQuery[*oc.NetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart](
 		"NetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions_DualAsPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/local-as-options/state/dual-as YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions_DualAsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions_DualAsPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/local-as-options/state/dual-as YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions_DualAsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions_DualAsPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-bgp-common"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/dual-as"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/local-as-options/state/dual-as"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions_DualAsPath) State() ygnmi.SingletonQuery[bool] {
+	return ygnmi.NewSingletonQuery[bool](
+		"NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "dual-as"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions).DualAs
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-bgp-common"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/dual-as"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/local-as-options/state/dual-as"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions_DualAsPathAny) State() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewWildcardQuery[bool](
+		"NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "dual-as"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions).DualAs
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-bgp-common"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "config/dual-as"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/local-as-options/config/dual-as"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions_DualAsPath) Config() ygnmi.ConfigQuery[bool] {
+	return ygnmi.NewConfigQuery[bool](
+		"NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "dual-as"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions).DualAs
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-bgp-common"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "config/dual-as"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/local-as-options/config/dual-as"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions_DualAsPathAny) Config() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewWildcardQuery[bool](
+		"NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "dual-as"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions).DualAs
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions_LocalAsPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/local-as-options/state/local-as YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions_LocalAsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions_LocalAsPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/local-as-options/state/local-as YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions_LocalAsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions_LocalAsPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-bgp-common"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/local-as"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/local-as-options/state/local-as"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions_LocalAsPath) State() ygnmi.SingletonQuery[uint32] {
+	return ygnmi.NewSingletonQuery[uint32](
+		"NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "local-as"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions).LocalAs
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-bgp-common"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/local-as"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/local-as-options/state/local-as"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions_LocalAsPathAny) State() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewWildcardQuery[uint32](
+		"NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "local-as"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions).LocalAs
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-bgp-common"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "config/local-as"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/local-as-options/config/local-as"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions_LocalAsPath) Config() ygnmi.ConfigQuery[uint32] {
+	return ygnmi.NewConfigQuery[uint32](
+		"NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "local-as"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions).LocalAs
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-bgp-common"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "config/local-as"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/local-as-options/config/local-as"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions_LocalAsPathAny) Config() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewWildcardQuery[uint32](
+		"NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "local-as"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions).LocalAs
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions_NoPrependPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/local-as-options/state/no-prepend YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions_NoPrependPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions_NoPrependPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/local-as-options/state/no-prepend YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions_NoPrependPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions_NoPrependPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-bgp-common"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/no-prepend"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/local-as-options/state/no-prepend"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions_NoPrependPath) State() ygnmi.SingletonQuery[bool] {
+	return ygnmi.NewSingletonQuery[bool](
+		"NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "no-prepend"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions).NoPrepend
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-bgp-common"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/no-prepend"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/local-as-options/state/no-prepend"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions_NoPrependPathAny) State() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewWildcardQuery[bool](
+		"NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "no-prepend"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions).NoPrepend
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-bgp-common"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "config/no-prepend"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/local-as-options/config/no-prepend"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions_NoPrependPath) Config() ygnmi.ConfigQuery[bool] {
+	return ygnmi.NewConfigQuery[bool](
+		"NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "no-prepend"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions).NoPrepend
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-bgp-common"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "config/no-prepend"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/local-as-options/config/no-prepend"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions_NoPrependPathAny) Config() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewWildcardQuery[bool](
+		"NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "no-prepend"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions).NoPrepend
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions_ReplaceAsPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/local-as-options/state/replace-as YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions_ReplaceAsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions_ReplaceAsPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/local-as-options/state/replace-as YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions_ReplaceAsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions_ReplaceAsPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-bgp-common"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/replace-as"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/local-as-options/state/replace-as"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions_ReplaceAsPath) State() ygnmi.SingletonQuery[bool] {
+	return ygnmi.NewSingletonQuery[bool](
+		"NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "replace-as"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions).ReplaceAs
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-bgp-common"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/replace-as"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/local-as-options/state/replace-as"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions_ReplaceAsPathAny) State() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewWildcardQuery[bool](
+		"NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "replace-as"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions).ReplaceAs
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-bgp-common"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "config/replace-as"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/local-as-options/config/replace-as"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions_ReplaceAsPath) Config() ygnmi.ConfigQuery[bool] {
+	return ygnmi.NewConfigQuery[bool](
+		"NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "replace-as"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions).ReplaceAs
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-bgp-common"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "config/replace-as"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/local-as-options/config/replace-as"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions_ReplaceAsPathAny) Config() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewWildcardQuery[bool](
+		"NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "replace-as"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions).ReplaceAs
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptionsPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/local-as-options YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptionsPath struct {
+	*ygnmi.NodePath
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptionsPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/local-as-options YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptionsPathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptionsPath) PathOriginName() string {
+	return "openconfig"
+}
+
+// DualAs (leaf): When set to TRUE, the speaker alternates between local-ASN
+// and global ASN in every other OPEN messages. Implemetation
+// may but not have to strictly follow procedure documented in
+// section 4.2 of RFC7705, that allows of use of local-ASN
+// only upon reception of BAD_PEER_AS error.
+//
+//	Defining module:      "openconfig-bgp-common"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "*/dual-as"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/local-as-options/*/dual-as"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptionsPath) DualAs() *NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions_DualAsPath {
+	ps := &NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions_DualAsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "dual-as"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// DualAs (leaf): When set to TRUE, the speaker alternates between local-ASN
+// and global ASN in every other OPEN messages. Implemetation
+// may but not have to strictly follow procedure documented in
+// section 4.2 of RFC7705, that allows of use of local-ASN
+// only upon reception of BAD_PEER_AS error.
+//
+//	Defining module:      "openconfig-bgp-common"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "*/dual-as"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/local-as-options/*/dual-as"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptionsPathAny) DualAs() *NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions_DualAsPathAny {
+	ps := &NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions_DualAsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "dual-as"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// LocalAs (leaf): The local autonomous system number that is to be used
+// when establishing sessions with the remote peer or peer
+// group, if this differs from the global BGP router
+// autonomous system number. Value is set in My Autonomous
+// System of the OPEN message sent to establish session.
+//
+//	Defining module:      "openconfig-bgp-common"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "*/local-as"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/local-as-options/*/local-as"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptionsPath) LocalAs() *NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions_LocalAsPath {
+	ps := &NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions_LocalAsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "local-as"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// LocalAs (leaf): The local autonomous system number that is to be used
+// when establishing sessions with the remote peer or peer
+// group, if this differs from the global BGP router
+// autonomous system number. Value is set in My Autonomous
+// System of the OPEN message sent to establish session.
+//
+//	Defining module:      "openconfig-bgp-common"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "*/local-as"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/local-as-options/*/local-as"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptionsPathAny) LocalAs() *NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions_LocalAsPathAny {
+	ps := &NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions_LocalAsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "local-as"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// NoPrepend (leaf): When set to TRUE, the value configured as local-as is
+// not prepended to AS-PATH on received routes.
+//
+//	Defining module:      "openconfig-bgp-common"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "*/no-prepend"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/local-as-options/*/no-prepend"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptionsPath) NoPrepend() *NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions_NoPrependPath {
+	ps := &NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions_NoPrependPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "no-prepend"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// NoPrepend (leaf): When set to TRUE, the value configured as local-as is
+// not prepended to AS-PATH on received routes.
+//
+//	Defining module:      "openconfig-bgp-common"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "*/no-prepend"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/local-as-options/*/no-prepend"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptionsPathAny) NoPrepend() *NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions_NoPrependPathAny {
+	ps := &NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions_NoPrependPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "no-prepend"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// ReplaceAs (leaf): When set to TRUE, the global AS is not added to AS-PATH
+// when route is advertised to peer. Only local-as is prepended.
+//
+//	Defining module:      "openconfig-bgp-common"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "*/replace-as"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/local-as-options/*/replace-as"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptionsPath) ReplaceAs() *NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions_ReplaceAsPath {
+	ps := &NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions_ReplaceAsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "replace-as"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// ReplaceAs (leaf): When set to TRUE, the global AS is not added to AS-PATH
+// when route is advertised to peer. Only local-as is prepended.
+//
+//	Defining module:      "openconfig-bgp-common"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "*/replace-as"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/local-as-options/*/replace-as"
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptionsPathAny) ReplaceAs() *NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions_ReplaceAsPathAny {
+	ps := &NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions_ReplaceAsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "replace-as"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptionsPath) State() ygnmi.SingletonQuery[*oc.NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions] {
+	return ygnmi.NewSingletonQuery[*oc.NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions](
+		"NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptionsPathAny) State() ygnmi.WildcardQuery[*oc.NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions] {
+	return ygnmi.NewWildcardQuery[*oc.NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions](
+		"NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptionsPath) Config() ygnmi.ConfigQuery[*oc.NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions] {
+	return ygnmi.NewConfigQuery[*oc.NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions](
+		"NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptionsPathAny) Config() ygnmi.WildcardQuery[*oc.NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions] {
+	return ygnmi.NewWildcardQuery[*oc.NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions](
+		"NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions",
 		false,
 		true,
 		false,

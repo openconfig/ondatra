@@ -2675,6 +2675,44 @@ func (n *SystemPathAny) ProcessMap() *System_ProcessPathMapAny {
 	return ps
 }
 
+// Snmp (container): Configuration and operational state for
+// SNMP community access, notifications, and
+// trap receivers on a network device.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "snmp"
+//	Path from root:       "/system/snmp"
+func (n *SystemPath) Snmp() *System_SnmpPath {
+	ps := &System_SnmpPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"snmp"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// Snmp (container): Configuration and operational state for
+// SNMP community access, notifications, and
+// trap receivers on a network device.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "snmp"
+//	Path from root:       "/system/snmp"
+func (n *SystemPathAny) Snmp() *System_SnmpPathAny {
+	ps := &System_SnmpPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"snmp"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
 // SoftwareVersion (leaf): Operating system version of the currently active controller
 // of the device.  It is required that this value matches the
 // value of the state/software-version leaf in the component
@@ -56792,6 +56830,105 @@ func (n *System_MacAddressPathAny) Config() ygnmi.WildcardQuery[*oc.System_MacAd
 	)
 }
 
+// System_Memory_AvailablePath represents the /openconfig-system/system/memory/state/available YANG schema element.
+type System_Memory_AvailablePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_Memory_AvailablePathAny represents the wildcard version of the /openconfig-system/system/memory/state/available YANG schema element.
+type System_Memory_AvailablePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *System_Memory_AvailablePath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/available"
+//	Path from root:       "/system/memory/state/available"
+func (n *System_Memory_AvailablePath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"System_Memory",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "available"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.System_Memory).Available
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Memory) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/available"
+//	Path from root:       "/system/memory/state/available"
+func (n *System_Memory_AvailablePathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"System_Memory",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "available"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.System_Memory).Available
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Memory) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
 // System_Memory_FreePath represents the /openconfig-system/system/memory/state/free YANG schema element.
 type System_Memory_FreePath struct {
 	*ygnmi.NodePath
@@ -57201,6 +57338,50 @@ type System_MemoryPathAny struct {
 // PathOrigin returns the name of the origin for the path object.
 func (n *System_MemoryPath) PathOriginName() string {
 	return "openconfig"
+}
+
+// Available (leaf): The amount of memory that is available for use.
+//
+// In addition to the memory reported by free, this leaf also includes
+// memory used for system caches and buffers that can be
+// reclaimed by the operating system.
+//
+//	Defining module:      "openconfig-system"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/available"
+//	Path from root:       "/system/memory/state/available"
+func (n *System_MemoryPath) Available() *System_Memory_AvailablePath {
+	ps := &System_Memory_AvailablePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "available"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Available (leaf): The amount of memory that is available for use.
+//
+// In addition to the memory reported by free, this leaf also includes
+// memory used for system caches and buffers that can be
+// reclaimed by the operating system.
+//
+//	Defining module:      "openconfig-system"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/available"
+//	Path from root:       "/system/memory/state/available"
+func (n *System_MemoryPathAny) Available() *System_Memory_AvailablePathAny {
+	ps := &System_Memory_AvailablePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "available"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
 }
 
 // Counters (container): Counters for tracking system memory errors
@@ -59279,6 +59460,303 @@ func (n *System_MountPoint_AvailablePathAny) State() ygnmi.WildcardQuery[uint64]
 	)
 }
 
+// System_MountPoint_InodesAvailablePath represents the /openconfig-system/system/mount-points/mount-point/state/inodes-available YANG schema element.
+type System_MountPoint_InodesAvailablePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_MountPoint_InodesAvailablePathAny represents the wildcard version of the /openconfig-system/system/mount-points/mount-point/state/inodes-available YANG schema element.
+type System_MountPoint_InodesAvailablePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *System_MountPoint_InodesAvailablePath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/inodes-available"
+//	Path from root:       "/system/mount-points/mount-point/state/inodes-available"
+func (n *System_MountPoint_InodesAvailablePath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"System_MountPoint",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "inodes-available"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.System_MountPoint).InodesAvailable
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_MountPoint) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/inodes-available"
+//	Path from root:       "/system/mount-points/mount-point/state/inodes-available"
+func (n *System_MountPoint_InodesAvailablePathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"System_MountPoint",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "inodes-available"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.System_MountPoint).InodesAvailable
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_MountPoint) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// System_MountPoint_InodesTotalPath represents the /openconfig-system/system/mount-points/mount-point/state/inodes-total YANG schema element.
+type System_MountPoint_InodesTotalPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_MountPoint_InodesTotalPathAny represents the wildcard version of the /openconfig-system/system/mount-points/mount-point/state/inodes-total YANG schema element.
+type System_MountPoint_InodesTotalPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *System_MountPoint_InodesTotalPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/inodes-total"
+//	Path from root:       "/system/mount-points/mount-point/state/inodes-total"
+func (n *System_MountPoint_InodesTotalPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"System_MountPoint",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "inodes-total"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.System_MountPoint).InodesTotal
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_MountPoint) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/inodes-total"
+//	Path from root:       "/system/mount-points/mount-point/state/inodes-total"
+func (n *System_MountPoint_InodesTotalPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"System_MountPoint",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "inodes-total"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.System_MountPoint).InodesTotal
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_MountPoint) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// System_MountPoint_InodesUtilizedPath represents the /openconfig-system/system/mount-points/mount-point/state/inodes-utilized YANG schema element.
+type System_MountPoint_InodesUtilizedPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_MountPoint_InodesUtilizedPathAny represents the wildcard version of the /openconfig-system/system/mount-points/mount-point/state/inodes-utilized YANG schema element.
+type System_MountPoint_InodesUtilizedPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *System_MountPoint_InodesUtilizedPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/inodes-utilized"
+//	Path from root:       "/system/mount-points/mount-point/state/inodes-utilized"
+func (n *System_MountPoint_InodesUtilizedPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"System_MountPoint",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "inodes-utilized"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.System_MountPoint).InodesUtilized
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_MountPoint) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/inodes-utilized"
+//	Path from root:       "/system/mount-points/mount-point/state/inodes-utilized"
+func (n *System_MountPoint_InodesUtilizedPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"System_MountPoint",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "inodes-utilized"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.System_MountPoint).InodesUtilized
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_MountPoint) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
 // System_MountPoint_NamePath represents the /openconfig-system/system/mount-points/mount-point/state/name YANG schema element.
 type System_MountPoint_NamePath struct {
 	*ygnmi.NodePath
@@ -59443,6 +59921,105 @@ func (n *System_MountPoint_NamePathAny) Config() ygnmi.WildcardQuery[string] {
 			ret := gs.(*oc.System_MountPoint).Name
 			if ret == nil {
 				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_MountPoint) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// System_MountPoint_ReadOnlyPath represents the /openconfig-system/system/mount-points/mount-point/state/read-only YANG schema element.
+type System_MountPoint_ReadOnlyPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_MountPoint_ReadOnlyPathAny represents the wildcard version of the /openconfig-system/system/mount-points/mount-point/state/read-only YANG schema element.
+type System_MountPoint_ReadOnlyPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *System_MountPoint_ReadOnlyPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/read-only"
+//	Path from root:       "/system/mount-points/mount-point/state/read-only"
+func (n *System_MountPoint_ReadOnlyPath) State() ygnmi.SingletonQuery[bool] {
+	return ygnmi.NewSingletonQuery[bool](
+		"System_MountPoint",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "read-only"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.System_MountPoint).ReadOnly
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_MountPoint) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/read-only"
+//	Path from root:       "/system/mount-points/mount-point/state/read-only"
+func (n *System_MountPoint_ReadOnlyPathAny) State() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewWildcardQuery[bool](
+		"System_MountPoint",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "read-only"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.System_MountPoint).ReadOnly
+			if ret == nil {
+				var zero bool
 				return zero, false
 			}
 			return *ret, true
@@ -59916,6 +60493,114 @@ func (n *System_MountPointPathAny) Available() *System_MountPoint_AvailablePathA
 	return ps
 }
 
+// InodesAvailable (leaf): The number of free inodes available on the filesystem.
+//
+//	Defining module:      "openconfig-system"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/inodes-available"
+//	Path from root:       "/system/mount-points/mount-point/state/inodes-available"
+func (n *System_MountPointPath) InodesAvailable() *System_MountPoint_InodesAvailablePath {
+	ps := &System_MountPoint_InodesAvailablePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "inodes-available"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// InodesAvailable (leaf): The number of free inodes available on the filesystem.
+//
+//	Defining module:      "openconfig-system"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/inodes-available"
+//	Path from root:       "/system/mount-points/mount-point/state/inodes-available"
+func (n *System_MountPointPathAny) InodesAvailable() *System_MountPoint_InodesAvailablePathAny {
+	ps := &System_MountPoint_InodesAvailablePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "inodes-available"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// InodesTotal (leaf): The total number of inodes on the filesystem.
+//
+//	Defining module:      "openconfig-system"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/inodes-total"
+//	Path from root:       "/system/mount-points/mount-point/state/inodes-total"
+func (n *System_MountPointPath) InodesTotal() *System_MountPoint_InodesTotalPath {
+	ps := &System_MountPoint_InodesTotalPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "inodes-total"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// InodesTotal (leaf): The total number of inodes on the filesystem.
+//
+//	Defining module:      "openconfig-system"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/inodes-total"
+//	Path from root:       "/system/mount-points/mount-point/state/inodes-total"
+func (n *System_MountPointPathAny) InodesTotal() *System_MountPoint_InodesTotalPathAny {
+	ps := &System_MountPoint_InodesTotalPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "inodes-total"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// InodesUtilized (leaf): The number of used inodes on the filesystem.
+//
+//	Defining module:      "openconfig-system"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/inodes-utilized"
+//	Path from root:       "/system/mount-points/mount-point/state/inodes-utilized"
+func (n *System_MountPointPath) InodesUtilized() *System_MountPoint_InodesUtilizedPath {
+	ps := &System_MountPoint_InodesUtilizedPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "inodes-utilized"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// InodesUtilized (leaf): The number of used inodes on the filesystem.
+//
+//	Defining module:      "openconfig-system"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/inodes-utilized"
+//	Path from root:       "/system/mount-points/mount-point/state/inodes-utilized"
+func (n *System_MountPointPathAny) InodesUtilized() *System_MountPoint_InodesUtilizedPathAny {
+	ps := &System_MountPoint_InodesUtilizedPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "inodes-utilized"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
 // Name (leaf): Mount point name.
 //
 //	Defining module:      "openconfig-system"
@@ -59944,6 +60629,44 @@ func (n *System_MountPointPathAny) Name() *System_MountPoint_NamePathAny {
 	ps := &System_MountPoint_NamePathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"*", "name"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// ReadOnly (leaf): When true, indicates that the filesystem is mounted in read-only
+// mode.
+//
+//	Defining module:      "openconfig-system"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/read-only"
+//	Path from root:       "/system/mount-points/mount-point/state/read-only"
+func (n *System_MountPointPath) ReadOnly() *System_MountPoint_ReadOnlyPath {
+	ps := &System_MountPoint_ReadOnlyPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "read-only"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// ReadOnly (leaf): When true, indicates that the filesystem is mounted in read-only
+// mode.
+//
+//	Defining module:      "openconfig-system"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/read-only"
+//	Path from root:       "/system/mount-points/mount-point/state/read-only"
+func (n *System_MountPointPathAny) ReadOnly() *System_MountPoint_ReadOnlyPathAny {
+	ps := &System_MountPoint_ReadOnlyPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "read-only"},
 			map[string]interface{}{},
 			n,
 		),
@@ -66394,6 +67117,5470 @@ func (n *System_ProcessPathMapAny) State() ygnmi.WildcardQuery[map[uint64]*oc.Sy
 	)
 }
 
+// System_Snmp_ContactPath represents the /openconfig-system/system/snmp/state/contact YANG schema element.
+type System_Snmp_ContactPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_Snmp_ContactPathAny represents the wildcard version of the /openconfig-system/system/snmp/state/contact YANG schema element.
+type System_Snmp_ContactPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *System_Snmp_ContactPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/contact"
+//	Path from root:       "/system/snmp/state/contact"
+func (n *System_Snmp_ContactPath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewSingletonQuery[string](
+		"System_Snmp",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "contact"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_Snmp).Contact
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/contact"
+//	Path from root:       "/system/snmp/state/contact"
+func (n *System_Snmp_ContactPathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"System_Snmp",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "contact"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_Snmp).Contact
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "config/contact"
+//	Path from root:       "/system/snmp/config/contact"
+func (n *System_Snmp_ContactPath) Config() ygnmi.ConfigQuery[string] {
+	return ygnmi.NewConfigQuery[string](
+		"System_Snmp",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "contact"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_Snmp).Contact
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "config/contact"
+//	Path from root:       "/system/snmp/config/contact"
+func (n *System_Snmp_ContactPathAny) Config() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"System_Snmp",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "contact"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_Snmp).Contact
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// System_Snmp_LocationPath represents the /openconfig-system/system/snmp/state/location YANG schema element.
+type System_Snmp_LocationPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_Snmp_LocationPathAny represents the wildcard version of the /openconfig-system/system/snmp/state/location YANG schema element.
+type System_Snmp_LocationPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *System_Snmp_LocationPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/location"
+//	Path from root:       "/system/snmp/state/location"
+func (n *System_Snmp_LocationPath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewSingletonQuery[string](
+		"System_Snmp",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "location"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_Snmp).Location
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/location"
+//	Path from root:       "/system/snmp/state/location"
+func (n *System_Snmp_LocationPathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"System_Snmp",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "location"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_Snmp).Location
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "config/location"
+//	Path from root:       "/system/snmp/config/location"
+func (n *System_Snmp_LocationPath) Config() ygnmi.ConfigQuery[string] {
+	return ygnmi.NewConfigQuery[string](
+		"System_Snmp",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "location"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_Snmp).Location
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "config/location"
+//	Path from root:       "/system/snmp/config/location"
+func (n *System_Snmp_LocationPathAny) Config() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"System_Snmp",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "location"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_Snmp).Location
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// System_SnmpPath represents the /openconfig-system/system/snmp YANG schema element.
+type System_SnmpPath struct {
+	*ygnmi.NodePath
+}
+
+// System_SnmpPathAny represents the wildcard version of the /openconfig-system/system/snmp YANG schema element.
+type System_SnmpPathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *System_SnmpPath) PathOriginName() string {
+	return "openconfig"
+}
+
+// CommunityAny (list): List of configured SNMP communities.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "communities/community"
+//	Path from root:       "/system/snmp/communities/community"
+func (n *System_SnmpPath) CommunityAny() *System_Snmp_CommunityPathAny {
+	ps := &System_Snmp_CommunityPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"communities", "community"},
+			map[string]interface{}{"name": "*"},
+			n,
+		),
+	}
+	return ps
+}
+
+// CommunityAny (list): List of configured SNMP communities.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "communities/community"
+//	Path from root:       "/system/snmp/communities/community"
+func (n *System_SnmpPathAny) CommunityAny() *System_Snmp_CommunityPathAny {
+	ps := &System_Snmp_CommunityPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"communities", "community"},
+			map[string]interface{}{"name": "*"},
+			n,
+		),
+	}
+	return ps
+}
+
+// Community (list): List of configured SNMP communities.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "communities/community"
+//	Path from root:       "/system/snmp/communities/community"
+//
+//	Name: string
+func (n *System_SnmpPath) Community(Name string) *System_Snmp_CommunityPath {
+	ps := &System_Snmp_CommunityPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"communities", "community"},
+			map[string]interface{}{"name": Name},
+			n,
+		),
+	}
+	return ps
+}
+
+// Community (list): List of configured SNMP communities.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "communities/community"
+//	Path from root:       "/system/snmp/communities/community"
+//
+//	Name: string
+func (n *System_SnmpPathAny) Community(Name string) *System_Snmp_CommunityPathAny {
+	ps := &System_Snmp_CommunityPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"communities", "community"},
+			map[string]interface{}{"name": Name},
+			n,
+		),
+	}
+	return ps
+}
+
+// CommunityMap (list): List of configured SNMP communities.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "communities/community"
+//	Path from root:       "/system/snmp/communities/community"
+func (n *System_SnmpPath) CommunityMap() *System_Snmp_CommunityPathMap {
+	ps := &System_Snmp_CommunityPathMap{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"communities"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// CommunityMap (list): List of configured SNMP communities.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "communities/community"
+//	Path from root:       "/system/snmp/communities/community"
+func (n *System_SnmpPathAny) CommunityMap() *System_Snmp_CommunityPathMapAny {
+	ps := &System_Snmp_CommunityPathMapAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"communities"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// Contact (leaf): Configured SNMP contact string.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/contact"
+//	Path from root:       "/system/snmp/*/contact"
+func (n *System_SnmpPath) Contact() *System_Snmp_ContactPath {
+	ps := &System_Snmp_ContactPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "contact"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Contact (leaf): Configured SNMP contact string.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/contact"
+//	Path from root:       "/system/snmp/*/contact"
+func (n *System_SnmpPathAny) Contact() *System_Snmp_ContactPathAny {
+	ps := &System_Snmp_ContactPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "contact"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Location (leaf): Configured SNMP location string.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/location"
+//	Path from root:       "/system/snmp/*/location"
+func (n *System_SnmpPath) Location() *System_Snmp_LocationPath {
+	ps := &System_Snmp_LocationPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "location"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Location (leaf): Configured SNMP location string.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/location"
+//	Path from root:       "/system/snmp/*/location"
+func (n *System_SnmpPathAny) Location() *System_Snmp_LocationPathAny {
+	ps := &System_Snmp_LocationPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "location"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Notifications (container): Configuration and state for SNMP notifications.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "notifications"
+//	Path from root:       "/system/snmp/notifications"
+func (n *System_SnmpPath) Notifications() *System_Snmp_NotificationsPath {
+	ps := &System_Snmp_NotificationsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"notifications"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// Notifications (container): Configuration and state for SNMP notifications.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "notifications"
+//	Path from root:       "/system/snmp/notifications"
+func (n *System_SnmpPathAny) Notifications() *System_Snmp_NotificationsPathAny {
+	ps := &System_Snmp_NotificationsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"notifications"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_SnmpPath) State() ygnmi.SingletonQuery[*oc.System_Snmp] {
+	return ygnmi.NewSingletonQuery[*oc.System_Snmp](
+		"System_Snmp",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_SnmpPathAny) State() ygnmi.WildcardQuery[*oc.System_Snmp] {
+	return ygnmi.NewWildcardQuery[*oc.System_Snmp](
+		"System_Snmp",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *System_SnmpPath) Config() ygnmi.ConfigQuery[*oc.System_Snmp] {
+	return ygnmi.NewConfigQuery[*oc.System_Snmp](
+		"System_Snmp",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *System_SnmpPathAny) Config() ygnmi.WildcardQuery[*oc.System_Snmp] {
+	return ygnmi.NewWildcardQuery[*oc.System_Snmp](
+		"System_Snmp",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// System_Snmp_Community_AccessModePath represents the /openconfig-system/system/snmp/communities/community/state/access-mode YANG schema element.
+type System_Snmp_Community_AccessModePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_Snmp_Community_AccessModePathAny represents the wildcard version of the /openconfig-system/system/snmp/communities/community/state/access-mode YANG schema element.
+type System_Snmp_Community_AccessModePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *System_Snmp_Community_AccessModePath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/access-mode"
+//	Path from root:       "/system/snmp/communities/community/state/access-mode"
+func (n *System_Snmp_Community_AccessModePath) State() ygnmi.SingletonQuery[oc.E_Snmp_SnmpAccessMode] {
+	return ygnmi.NewSingletonQuery[oc.E_Snmp_SnmpAccessMode](
+		"System_Snmp_Community",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "access-mode"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Snmp_SnmpAccessMode, bool) {
+			ret := gs.(*oc.System_Snmp_Community).AccessMode
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp_Community) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/access-mode"
+//	Path from root:       "/system/snmp/communities/community/state/access-mode"
+func (n *System_Snmp_Community_AccessModePathAny) State() ygnmi.WildcardQuery[oc.E_Snmp_SnmpAccessMode] {
+	return ygnmi.NewWildcardQuery[oc.E_Snmp_SnmpAccessMode](
+		"System_Snmp_Community",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "access-mode"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Snmp_SnmpAccessMode, bool) {
+			ret := gs.(*oc.System_Snmp_Community).AccessMode
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp_Community) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "config/access-mode"
+//	Path from root:       "/system/snmp/communities/community/config/access-mode"
+func (n *System_Snmp_Community_AccessModePath) Config() ygnmi.ConfigQuery[oc.E_Snmp_SnmpAccessMode] {
+	return ygnmi.NewConfigQuery[oc.E_Snmp_SnmpAccessMode](
+		"System_Snmp_Community",
+		false,
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "access-mode"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Snmp_SnmpAccessMode, bool) {
+			ret := gs.(*oc.System_Snmp_Community).AccessMode
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp_Community) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "config/access-mode"
+//	Path from root:       "/system/snmp/communities/community/config/access-mode"
+func (n *System_Snmp_Community_AccessModePathAny) Config() ygnmi.WildcardQuery[oc.E_Snmp_SnmpAccessMode] {
+	return ygnmi.NewWildcardQuery[oc.E_Snmp_SnmpAccessMode](
+		"System_Snmp_Community",
+		false,
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "access-mode"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Snmp_SnmpAccessMode, bool) {
+			ret := gs.(*oc.System_Snmp_Community).AccessMode
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp_Community) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// System_Snmp_Community_NamePath represents the /openconfig-system/system/snmp/communities/community/state/name YANG schema element.
+type System_Snmp_Community_NamePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_Snmp_Community_NamePathAny represents the wildcard version of the /openconfig-system/system/snmp/communities/community/state/name YANG schema element.
+type System_Snmp_Community_NamePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *System_Snmp_Community_NamePath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/name"
+//	Path from root:       "/system/snmp/communities/community/state/name"
+func (n *System_Snmp_Community_NamePath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewSingletonQuery[string](
+		"System_Snmp_Community",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "name"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_Snmp_Community).Name
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp_Community) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/name"
+//	Path from root:       "/system/snmp/communities/community/state/name"
+func (n *System_Snmp_Community_NamePathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"System_Snmp_Community",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "name"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_Snmp_Community).Name
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp_Community) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "config/name"
+//	Path from root:       "/system/snmp/communities/community/config/name"
+func (n *System_Snmp_Community_NamePath) Config() ygnmi.ConfigQuery[string] {
+	return ygnmi.NewConfigQuery[string](
+		"System_Snmp_Community",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "name"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_Snmp_Community).Name
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp_Community) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "config/name"
+//	Path from root:       "/system/snmp/communities/community/config/name"
+func (n *System_Snmp_Community_NamePathAny) Config() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"System_Snmp_Community",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "name"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_Snmp_Community).Name
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp_Community) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// System_Snmp_Community_VersionPath represents the /openconfig-system/system/snmp/communities/community/state/version YANG schema element.
+type System_Snmp_Community_VersionPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_Snmp_Community_VersionPathAny represents the wildcard version of the /openconfig-system/system/snmp/communities/community/state/version YANG schema element.
+type System_Snmp_Community_VersionPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *System_Snmp_Community_VersionPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/version"
+//	Path from root:       "/system/snmp/communities/community/state/version"
+func (n *System_Snmp_Community_VersionPath) State() ygnmi.SingletonQuery[oc.E_Snmp_SnmpVersion] {
+	return ygnmi.NewSingletonQuery[oc.E_Snmp_SnmpVersion](
+		"System_Snmp_Community",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "version"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Snmp_SnmpVersion, bool) {
+			ret := gs.(*oc.System_Snmp_Community).Version
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp_Community) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/version"
+//	Path from root:       "/system/snmp/communities/community/state/version"
+func (n *System_Snmp_Community_VersionPathAny) State() ygnmi.WildcardQuery[oc.E_Snmp_SnmpVersion] {
+	return ygnmi.NewWildcardQuery[oc.E_Snmp_SnmpVersion](
+		"System_Snmp_Community",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "version"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Snmp_SnmpVersion, bool) {
+			ret := gs.(*oc.System_Snmp_Community).Version
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp_Community) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "config/version"
+//	Path from root:       "/system/snmp/communities/community/config/version"
+func (n *System_Snmp_Community_VersionPath) Config() ygnmi.ConfigQuery[oc.E_Snmp_SnmpVersion] {
+	return ygnmi.NewConfigQuery[oc.E_Snmp_SnmpVersion](
+		"System_Snmp_Community",
+		false,
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "version"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Snmp_SnmpVersion, bool) {
+			ret := gs.(*oc.System_Snmp_Community).Version
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp_Community) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "config/version"
+//	Path from root:       "/system/snmp/communities/community/config/version"
+func (n *System_Snmp_Community_VersionPathAny) Config() ygnmi.WildcardQuery[oc.E_Snmp_SnmpVersion] {
+	return ygnmi.NewWildcardQuery[oc.E_Snmp_SnmpVersion](
+		"System_Snmp_Community",
+		false,
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "version"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Snmp_SnmpVersion, bool) {
+			ret := gs.(*oc.System_Snmp_Community).Version
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp_Community) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// System_Snmp_CommunityPath represents the /openconfig-system/system/snmp/communities/community YANG schema element.
+type System_Snmp_CommunityPath struct {
+	*ygnmi.NodePath
+}
+
+// System_Snmp_CommunityPathAny represents the wildcard version of the /openconfig-system/system/snmp/communities/community YANG schema element.
+type System_Snmp_CommunityPathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *System_Snmp_CommunityPath) PathOriginName() string {
+	return "openconfig"
+}
+
+// System_Snmp_CommunityPathMap represents the /openconfig-system/system/snmp/communities/community YANG schema element.
+type System_Snmp_CommunityPathMap struct {
+	*ygnmi.NodePath
+}
+
+// System_Snmp_CommunityPathMapAny represents the wildcard version of the /openconfig-system/system/snmp/communities/community YANG schema element.
+type System_Snmp_CommunityPathMapAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *System_Snmp_CommunityPathMap) PathOriginName() string {
+	return "openconfig"
+}
+
+// AccessListAny (list): List of ACL tuples applied to this SNMP
+// community.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "access-lists/access-list"
+//	Path from root:       "/system/snmp/communities/community/access-lists/access-list"
+func (n *System_Snmp_CommunityPath) AccessListAny() *System_Snmp_Community_AccessListPathAny {
+	ps := &System_Snmp_Community_AccessListPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"access-lists", "access-list"},
+			map[string]interface{}{"name": "*", "type": "*"},
+			n,
+		),
+	}
+	return ps
+}
+
+// AccessListAny (list): List of ACL tuples applied to this SNMP
+// community.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "access-lists/access-list"
+//	Path from root:       "/system/snmp/communities/community/access-lists/access-list"
+func (n *System_Snmp_CommunityPathAny) AccessListAny() *System_Snmp_Community_AccessListPathAny {
+	ps := &System_Snmp_Community_AccessListPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"access-lists", "access-list"},
+			map[string]interface{}{"name": "*", "type": "*"},
+			n,
+		),
+	}
+	return ps
+}
+
+// WithName sets System_Snmp_Community_AccessListPathAny's key "name" to the specified value.
+// Name: string
+func (n *System_Snmp_Community_AccessListPathAny) WithName(Name string) *System_Snmp_Community_AccessListPathAny {
+	ygnmi.ModifyKey(n.NodePath, "name", Name)
+	return n
+}
+
+// WithType sets System_Snmp_Community_AccessListPathAny's key "type" to the specified value.
+// Type: oc.E_Acl_ACL_TYPE
+func (n *System_Snmp_Community_AccessListPathAny) WithType(Type oc.E_Acl_ACL_TYPE) *System_Snmp_Community_AccessListPathAny {
+	ygnmi.ModifyKey(n.NodePath, "type", Type)
+	return n
+}
+
+// AccessList (list): List of ACL tuples applied to this SNMP
+// community.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "access-lists/access-list"
+//	Path from root:       "/system/snmp/communities/community/access-lists/access-list"
+//
+//	Name: string
+//	Type: oc.E_Acl_ACL_TYPE
+func (n *System_Snmp_CommunityPath) AccessList(Name string, Type oc.E_Acl_ACL_TYPE) *System_Snmp_Community_AccessListPath {
+	ps := &System_Snmp_Community_AccessListPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"access-lists", "access-list"},
+			map[string]interface{}{"name": Name, "type": Type},
+			n,
+		),
+	}
+	return ps
+}
+
+// AccessList (list): List of ACL tuples applied to this SNMP
+// community.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "access-lists/access-list"
+//	Path from root:       "/system/snmp/communities/community/access-lists/access-list"
+//
+//	Name: string
+//	Type: oc.E_Acl_ACL_TYPE
+func (n *System_Snmp_CommunityPathAny) AccessList(Name string, Type oc.E_Acl_ACL_TYPE) *System_Snmp_Community_AccessListPathAny {
+	ps := &System_Snmp_Community_AccessListPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"access-lists", "access-list"},
+			map[string]interface{}{"name": Name, "type": Type},
+			n,
+		),
+	}
+	return ps
+}
+
+// AccessListMap (list): List of ACL tuples applied to this SNMP
+// community.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "access-lists/access-list"
+//	Path from root:       "/system/snmp/communities/community/access-lists/access-list"
+func (n *System_Snmp_CommunityPath) AccessListMap() *System_Snmp_Community_AccessListPathMap {
+	ps := &System_Snmp_Community_AccessListPathMap{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"access-lists"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// AccessListMap (list): List of ACL tuples applied to this SNMP
+// community.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "access-lists/access-list"
+//	Path from root:       "/system/snmp/communities/community/access-lists/access-list"
+func (n *System_Snmp_CommunityPathAny) AccessListMap() *System_Snmp_Community_AccessListPathMapAny {
+	ps := &System_Snmp_Community_AccessListPathMapAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"access-lists"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// AccessMode (leaf): Access mode for this community. If omitted,
+// the implementation-defined access mode is
+// used.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/access-mode"
+//	Path from root:       "/system/snmp/communities/community/*/access-mode"
+func (n *System_Snmp_CommunityPath) AccessMode() *System_Snmp_Community_AccessModePath {
+	ps := &System_Snmp_Community_AccessModePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "access-mode"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// AccessMode (leaf): Access mode for this community. If omitted,
+// the implementation-defined access mode is
+// used.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/access-mode"
+//	Path from root:       "/system/snmp/communities/community/*/access-mode"
+func (n *System_Snmp_CommunityPathAny) AccessMode() *System_Snmp_Community_AccessModePathAny {
+	ps := &System_Snmp_Community_AccessModePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "access-mode"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// ManagerAny (list): List of SNMP manager prefixes allowed to use
+// this community.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "managers/manager"
+//	Path from root:       "/system/snmp/communities/community/managers/manager"
+func (n *System_Snmp_CommunityPath) ManagerAny() *System_Snmp_Community_ManagerPathAny {
+	ps := &System_Snmp_Community_ManagerPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"managers", "manager"},
+			map[string]interface{}{"prefix": "*"},
+			n,
+		),
+	}
+	return ps
+}
+
+// ManagerAny (list): List of SNMP manager prefixes allowed to use
+// this community.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "managers/manager"
+//	Path from root:       "/system/snmp/communities/community/managers/manager"
+func (n *System_Snmp_CommunityPathAny) ManagerAny() *System_Snmp_Community_ManagerPathAny {
+	ps := &System_Snmp_Community_ManagerPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"managers", "manager"},
+			map[string]interface{}{"prefix": "*"},
+			n,
+		),
+	}
+	return ps
+}
+
+// Manager (list): List of SNMP manager prefixes allowed to use
+// this community.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "managers/manager"
+//	Path from root:       "/system/snmp/communities/community/managers/manager"
+//
+//	Prefix: string
+func (n *System_Snmp_CommunityPath) Manager(Prefix string) *System_Snmp_Community_ManagerPath {
+	ps := &System_Snmp_Community_ManagerPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"managers", "manager"},
+			map[string]interface{}{"prefix": Prefix},
+			n,
+		),
+	}
+	return ps
+}
+
+// Manager (list): List of SNMP manager prefixes allowed to use
+// this community.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "managers/manager"
+//	Path from root:       "/system/snmp/communities/community/managers/manager"
+//
+//	Prefix: string
+func (n *System_Snmp_CommunityPathAny) Manager(Prefix string) *System_Snmp_Community_ManagerPathAny {
+	ps := &System_Snmp_Community_ManagerPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"managers", "manager"},
+			map[string]interface{}{"prefix": Prefix},
+			n,
+		),
+	}
+	return ps
+}
+
+// ManagerMap (list): List of SNMP manager prefixes allowed to use
+// this community.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "managers/manager"
+//	Path from root:       "/system/snmp/communities/community/managers/manager"
+func (n *System_Snmp_CommunityPath) ManagerMap() *System_Snmp_Community_ManagerPathMap {
+	ps := &System_Snmp_Community_ManagerPathMap{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"managers"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// ManagerMap (list): List of SNMP manager prefixes allowed to use
+// this community.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "managers/manager"
+//	Path from root:       "/system/snmp/communities/community/managers/manager"
+func (n *System_Snmp_CommunityPathAny) ManagerMap() *System_Snmp_Community_ManagerPathMapAny {
+	ps := &System_Snmp_Community_ManagerPathMapAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"managers"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// Name (leaf): SNMP community name.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/name"
+//	Path from root:       "/system/snmp/communities/community/*/name"
+func (n *System_Snmp_CommunityPath) Name() *System_Snmp_Community_NamePath {
+	ps := &System_Snmp_Community_NamePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "name"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Name (leaf): SNMP community name.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/name"
+//	Path from root:       "/system/snmp/communities/community/*/name"
+func (n *System_Snmp_CommunityPathAny) Name() *System_Snmp_Community_NamePathAny {
+	ps := &System_Snmp_Community_NamePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "name"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Version (leaf): SNMP version associated with this community.
+// Only V1 and V2C are supported by this module.
+// If omitted, the implementation-defined
+// community version is used.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/version"
+//	Path from root:       "/system/snmp/communities/community/*/version"
+func (n *System_Snmp_CommunityPath) Version() *System_Snmp_Community_VersionPath {
+	ps := &System_Snmp_Community_VersionPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "version"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Version (leaf): SNMP version associated with this community.
+// Only V1 and V2C are supported by this module.
+// If omitted, the implementation-defined
+// community version is used.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/version"
+//	Path from root:       "/system/snmp/communities/community/*/version"
+func (n *System_Snmp_CommunityPathAny) Version() *System_Snmp_Community_VersionPathAny {
+	ps := &System_Snmp_Community_VersionPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "version"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_Snmp_CommunityPath) State() ygnmi.SingletonQuery[*oc.System_Snmp_Community] {
+	return ygnmi.NewSingletonQuery[*oc.System_Snmp_Community](
+		"System_Snmp_Community",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_Snmp_CommunityPathAny) State() ygnmi.WildcardQuery[*oc.System_Snmp_Community] {
+	return ygnmi.NewWildcardQuery[*oc.System_Snmp_Community](
+		"System_Snmp_Community",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *System_Snmp_CommunityPath) Config() ygnmi.ConfigQuery[*oc.System_Snmp_Community] {
+	return ygnmi.NewConfigQuery[*oc.System_Snmp_Community](
+		"System_Snmp_Community",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *System_Snmp_CommunityPathAny) Config() ygnmi.WildcardQuery[*oc.System_Snmp_Community] {
+	return ygnmi.NewWildcardQuery[*oc.System_Snmp_Community](
+		"System_Snmp_Community",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_Snmp_CommunityPathMap) State() ygnmi.SingletonQuery[map[string]*oc.System_Snmp_Community] {
+	return ygnmi.NewSingletonQuery[map[string]*oc.System_Snmp_Community](
+		"System_Snmp",
+		true,
+		false,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[string]*oc.System_Snmp_Community, bool) {
+			ret := gs.(*oc.System_Snmp).Community
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-system:communities"},
+			PostRelPath: []string{"openconfig-system:community"},
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_Snmp_CommunityPathMapAny) State() ygnmi.WildcardQuery[map[string]*oc.System_Snmp_Community] {
+	return ygnmi.NewWildcardQuery[map[string]*oc.System_Snmp_Community](
+		"System_Snmp",
+		true,
+		false,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[string]*oc.System_Snmp_Community, bool) {
+			ret := gs.(*oc.System_Snmp).Community
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-system:communities"},
+			PostRelPath: []string{"openconfig-system:community"},
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *System_Snmp_CommunityPathMap) Config() ygnmi.ConfigQuery[map[string]*oc.System_Snmp_Community] {
+	return ygnmi.NewConfigQuery[map[string]*oc.System_Snmp_Community](
+		"System_Snmp",
+		false,
+		true,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[string]*oc.System_Snmp_Community, bool) {
+			ret := gs.(*oc.System_Snmp).Community
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-system:communities"},
+			PostRelPath: []string{"openconfig-system:community"},
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *System_Snmp_CommunityPathMapAny) Config() ygnmi.WildcardQuery[map[string]*oc.System_Snmp_Community] {
+	return ygnmi.NewWildcardQuery[map[string]*oc.System_Snmp_Community](
+		"System_Snmp",
+		false,
+		true,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[string]*oc.System_Snmp_Community, bool) {
+			ret := gs.(*oc.System_Snmp).Community
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-system:communities"},
+			PostRelPath: []string{"openconfig-system:community"},
+		},
+	)
+}
+
+// System_Snmp_Community_AccessList_NamePath represents the /openconfig-system/system/snmp/communities/community/access-lists/access-list/state/name YANG schema element.
+type System_Snmp_Community_AccessList_NamePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_Snmp_Community_AccessList_NamePathAny represents the wildcard version of the /openconfig-system/system/snmp/communities/community/access-lists/access-list/state/name YANG schema element.
+type System_Snmp_Community_AccessList_NamePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *System_Snmp_Community_AccessList_NamePath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/name"
+//	Path from root:       "/system/snmp/communities/community/access-lists/access-list/state/name"
+func (n *System_Snmp_Community_AccessList_NamePath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewSingletonQuery[string](
+		"System_Snmp_Community_AccessList",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "name"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_Snmp_Community_AccessList).Name
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp_Community_AccessList) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/name"
+//	Path from root:       "/system/snmp/communities/community/access-lists/access-list/state/name"
+func (n *System_Snmp_Community_AccessList_NamePathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"System_Snmp_Community_AccessList",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "name"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_Snmp_Community_AccessList).Name
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp_Community_AccessList) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "config/name"
+//	Path from root:       "/system/snmp/communities/community/access-lists/access-list/config/name"
+func (n *System_Snmp_Community_AccessList_NamePath) Config() ygnmi.ConfigQuery[string] {
+	return ygnmi.NewConfigQuery[string](
+		"System_Snmp_Community_AccessList",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "name"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_Snmp_Community_AccessList).Name
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp_Community_AccessList) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "config/name"
+//	Path from root:       "/system/snmp/communities/community/access-lists/access-list/config/name"
+func (n *System_Snmp_Community_AccessList_NamePathAny) Config() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"System_Snmp_Community_AccessList",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "name"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_Snmp_Community_AccessList).Name
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp_Community_AccessList) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// System_Snmp_Community_AccessList_TypePath represents the /openconfig-system/system/snmp/communities/community/access-lists/access-list/state/type YANG schema element.
+type System_Snmp_Community_AccessList_TypePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_Snmp_Community_AccessList_TypePathAny represents the wildcard version of the /openconfig-system/system/snmp/communities/community/access-lists/access-list/state/type YANG schema element.
+type System_Snmp_Community_AccessList_TypePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *System_Snmp_Community_AccessList_TypePath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/type"
+//	Path from root:       "/system/snmp/communities/community/access-lists/access-list/state/type"
+func (n *System_Snmp_Community_AccessList_TypePath) State() ygnmi.SingletonQuery[oc.E_Acl_ACL_TYPE] {
+	return ygnmi.NewSingletonQuery[oc.E_Acl_ACL_TYPE](
+		"System_Snmp_Community_AccessList",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Acl_ACL_TYPE, bool) {
+			ret := gs.(*oc.System_Snmp_Community_AccessList).Type
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp_Community_AccessList) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/type"
+//	Path from root:       "/system/snmp/communities/community/access-lists/access-list/state/type"
+func (n *System_Snmp_Community_AccessList_TypePathAny) State() ygnmi.WildcardQuery[oc.E_Acl_ACL_TYPE] {
+	return ygnmi.NewWildcardQuery[oc.E_Acl_ACL_TYPE](
+		"System_Snmp_Community_AccessList",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Acl_ACL_TYPE, bool) {
+			ret := gs.(*oc.System_Snmp_Community_AccessList).Type
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp_Community_AccessList) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "config/type"
+//	Path from root:       "/system/snmp/communities/community/access-lists/access-list/config/type"
+func (n *System_Snmp_Community_AccessList_TypePath) Config() ygnmi.ConfigQuery[oc.E_Acl_ACL_TYPE] {
+	return ygnmi.NewConfigQuery[oc.E_Acl_ACL_TYPE](
+		"System_Snmp_Community_AccessList",
+		false,
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Acl_ACL_TYPE, bool) {
+			ret := gs.(*oc.System_Snmp_Community_AccessList).Type
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp_Community_AccessList) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "config/type"
+//	Path from root:       "/system/snmp/communities/community/access-lists/access-list/config/type"
+func (n *System_Snmp_Community_AccessList_TypePathAny) Config() ygnmi.WildcardQuery[oc.E_Acl_ACL_TYPE] {
+	return ygnmi.NewWildcardQuery[oc.E_Acl_ACL_TYPE](
+		"System_Snmp_Community_AccessList",
+		false,
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Acl_ACL_TYPE, bool) {
+			ret := gs.(*oc.System_Snmp_Community_AccessList).Type
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp_Community_AccessList) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// System_Snmp_Community_AccessListPath represents the /openconfig-system/system/snmp/communities/community/access-lists/access-list YANG schema element.
+type System_Snmp_Community_AccessListPath struct {
+	*ygnmi.NodePath
+}
+
+// System_Snmp_Community_AccessListPathAny represents the wildcard version of the /openconfig-system/system/snmp/communities/community/access-lists/access-list YANG schema element.
+type System_Snmp_Community_AccessListPathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *System_Snmp_Community_AccessListPath) PathOriginName() string {
+	return "openconfig"
+}
+
+// System_Snmp_Community_AccessListPathMap represents the /openconfig-system/system/snmp/communities/community/access-lists/access-list YANG schema element.
+type System_Snmp_Community_AccessListPathMap struct {
+	*ygnmi.NodePath
+}
+
+// System_Snmp_Community_AccessListPathMapAny represents the wildcard version of the /openconfig-system/system/snmp/communities/community/access-lists/access-list YANG schema element.
+type System_Snmp_Community_AccessListPathMapAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *System_Snmp_Community_AccessListPathMap) PathOriginName() string {
+	return "openconfig"
+}
+
+// Name (leaf): Name of the ACL set applied to this SNMP
+// community.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/name"
+//	Path from root:       "/system/snmp/communities/community/access-lists/access-list/*/name"
+func (n *System_Snmp_Community_AccessListPath) Name() *System_Snmp_Community_AccessList_NamePath {
+	ps := &System_Snmp_Community_AccessList_NamePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "name"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Name (leaf): Name of the ACL set applied to this SNMP
+// community.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/name"
+//	Path from root:       "/system/snmp/communities/community/access-lists/access-list/*/name"
+func (n *System_Snmp_Community_AccessListPathAny) Name() *System_Snmp_Community_AccessList_NamePathAny {
+	ps := &System_Snmp_Community_AccessList_NamePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "name"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Type (leaf): Type of the ACL set referenced by name. The
+// pair (name, type) uniquely identifies an ACL
+// set.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/type"
+//	Path from root:       "/system/snmp/communities/community/access-lists/access-list/*/type"
+func (n *System_Snmp_Community_AccessListPath) Type() *System_Snmp_Community_AccessList_TypePath {
+	ps := &System_Snmp_Community_AccessList_TypePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "type"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Type (leaf): Type of the ACL set referenced by name. The
+// pair (name, type) uniquely identifies an ACL
+// set.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/type"
+//	Path from root:       "/system/snmp/communities/community/access-lists/access-list/*/type"
+func (n *System_Snmp_Community_AccessListPathAny) Type() *System_Snmp_Community_AccessList_TypePathAny {
+	ps := &System_Snmp_Community_AccessList_TypePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "type"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_Snmp_Community_AccessListPath) State() ygnmi.SingletonQuery[*oc.System_Snmp_Community_AccessList] {
+	return ygnmi.NewSingletonQuery[*oc.System_Snmp_Community_AccessList](
+		"System_Snmp_Community_AccessList",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_Snmp_Community_AccessListPathAny) State() ygnmi.WildcardQuery[*oc.System_Snmp_Community_AccessList] {
+	return ygnmi.NewWildcardQuery[*oc.System_Snmp_Community_AccessList](
+		"System_Snmp_Community_AccessList",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *System_Snmp_Community_AccessListPath) Config() ygnmi.ConfigQuery[*oc.System_Snmp_Community_AccessList] {
+	return ygnmi.NewConfigQuery[*oc.System_Snmp_Community_AccessList](
+		"System_Snmp_Community_AccessList",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *System_Snmp_Community_AccessListPathAny) Config() ygnmi.WildcardQuery[*oc.System_Snmp_Community_AccessList] {
+	return ygnmi.NewWildcardQuery[*oc.System_Snmp_Community_AccessList](
+		"System_Snmp_Community_AccessList",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_Snmp_Community_AccessListPathMap) State() ygnmi.SingletonQuery[map[oc.System_Snmp_Community_AccessList_Key]*oc.System_Snmp_Community_AccessList] {
+	return ygnmi.NewSingletonQuery[map[oc.System_Snmp_Community_AccessList_Key]*oc.System_Snmp_Community_AccessList](
+		"System_Snmp_Community",
+		true,
+		false,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[oc.System_Snmp_Community_AccessList_Key]*oc.System_Snmp_Community_AccessList, bool) {
+			ret := gs.(*oc.System_Snmp_Community).AccessList
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp_Community) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-system:access-lists"},
+			PostRelPath: []string{"openconfig-system:access-list"},
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_Snmp_Community_AccessListPathMapAny) State() ygnmi.WildcardQuery[map[oc.System_Snmp_Community_AccessList_Key]*oc.System_Snmp_Community_AccessList] {
+	return ygnmi.NewWildcardQuery[map[oc.System_Snmp_Community_AccessList_Key]*oc.System_Snmp_Community_AccessList](
+		"System_Snmp_Community",
+		true,
+		false,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[oc.System_Snmp_Community_AccessList_Key]*oc.System_Snmp_Community_AccessList, bool) {
+			ret := gs.(*oc.System_Snmp_Community).AccessList
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp_Community) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-system:access-lists"},
+			PostRelPath: []string{"openconfig-system:access-list"},
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *System_Snmp_Community_AccessListPathMap) Config() ygnmi.ConfigQuery[map[oc.System_Snmp_Community_AccessList_Key]*oc.System_Snmp_Community_AccessList] {
+	return ygnmi.NewConfigQuery[map[oc.System_Snmp_Community_AccessList_Key]*oc.System_Snmp_Community_AccessList](
+		"System_Snmp_Community",
+		false,
+		true,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[oc.System_Snmp_Community_AccessList_Key]*oc.System_Snmp_Community_AccessList, bool) {
+			ret := gs.(*oc.System_Snmp_Community).AccessList
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp_Community) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-system:access-lists"},
+			PostRelPath: []string{"openconfig-system:access-list"},
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *System_Snmp_Community_AccessListPathMapAny) Config() ygnmi.WildcardQuery[map[oc.System_Snmp_Community_AccessList_Key]*oc.System_Snmp_Community_AccessList] {
+	return ygnmi.NewWildcardQuery[map[oc.System_Snmp_Community_AccessList_Key]*oc.System_Snmp_Community_AccessList](
+		"System_Snmp_Community",
+		false,
+		true,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[oc.System_Snmp_Community_AccessList_Key]*oc.System_Snmp_Community_AccessList, bool) {
+			ret := gs.(*oc.System_Snmp_Community).AccessList
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp_Community) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-system:access-lists"},
+			PostRelPath: []string{"openconfig-system:access-list"},
+		},
+	)
+}
+
+// System_Snmp_Community_Manager_PrefixPath represents the /openconfig-system/system/snmp/communities/community/managers/manager/state/prefix YANG schema element.
+type System_Snmp_Community_Manager_PrefixPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_Snmp_Community_Manager_PrefixPathAny represents the wildcard version of the /openconfig-system/system/snmp/communities/community/managers/manager/state/prefix YANG schema element.
+type System_Snmp_Community_Manager_PrefixPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *System_Snmp_Community_Manager_PrefixPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/prefix"
+//	Path from root:       "/system/snmp/communities/community/managers/manager/state/prefix"
+func (n *System_Snmp_Community_Manager_PrefixPath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewSingletonQuery[string](
+		"System_Snmp_Community_Manager",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "prefix"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_Snmp_Community_Manager).Prefix
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp_Community_Manager) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/prefix"
+//	Path from root:       "/system/snmp/communities/community/managers/manager/state/prefix"
+func (n *System_Snmp_Community_Manager_PrefixPathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"System_Snmp_Community_Manager",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "prefix"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_Snmp_Community_Manager).Prefix
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp_Community_Manager) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "config/prefix"
+//	Path from root:       "/system/snmp/communities/community/managers/manager/config/prefix"
+func (n *System_Snmp_Community_Manager_PrefixPath) Config() ygnmi.ConfigQuery[string] {
+	return ygnmi.NewConfigQuery[string](
+		"System_Snmp_Community_Manager",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "prefix"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_Snmp_Community_Manager).Prefix
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp_Community_Manager) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "config/prefix"
+//	Path from root:       "/system/snmp/communities/community/managers/manager/config/prefix"
+func (n *System_Snmp_Community_Manager_PrefixPathAny) Config() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"System_Snmp_Community_Manager",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "prefix"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_Snmp_Community_Manager).Prefix
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp_Community_Manager) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// System_Snmp_Community_ManagerPath represents the /openconfig-system/system/snmp/communities/community/managers/manager YANG schema element.
+type System_Snmp_Community_ManagerPath struct {
+	*ygnmi.NodePath
+}
+
+// System_Snmp_Community_ManagerPathAny represents the wildcard version of the /openconfig-system/system/snmp/communities/community/managers/manager YANG schema element.
+type System_Snmp_Community_ManagerPathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *System_Snmp_Community_ManagerPath) PathOriginName() string {
+	return "openconfig"
+}
+
+// System_Snmp_Community_ManagerPathMap represents the /openconfig-system/system/snmp/communities/community/managers/manager YANG schema element.
+type System_Snmp_Community_ManagerPathMap struct {
+	*ygnmi.NodePath
+}
+
+// System_Snmp_Community_ManagerPathMapAny represents the wildcard version of the /openconfig-system/system/snmp/communities/community/managers/manager YANG schema element.
+type System_Snmp_Community_ManagerPathMapAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *System_Snmp_Community_ManagerPathMap) PathOriginName() string {
+	return "openconfig"
+}
+
+// Prefix (leaf): Allowed manager prefix for this community.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/prefix"
+//	Path from root:       "/system/snmp/communities/community/managers/manager/*/prefix"
+func (n *System_Snmp_Community_ManagerPath) Prefix() *System_Snmp_Community_Manager_PrefixPath {
+	ps := &System_Snmp_Community_Manager_PrefixPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "prefix"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Prefix (leaf): Allowed manager prefix for this community.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/prefix"
+//	Path from root:       "/system/snmp/communities/community/managers/manager/*/prefix"
+func (n *System_Snmp_Community_ManagerPathAny) Prefix() *System_Snmp_Community_Manager_PrefixPathAny {
+	ps := &System_Snmp_Community_Manager_PrefixPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "prefix"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_Snmp_Community_ManagerPath) State() ygnmi.SingletonQuery[*oc.System_Snmp_Community_Manager] {
+	return ygnmi.NewSingletonQuery[*oc.System_Snmp_Community_Manager](
+		"System_Snmp_Community_Manager",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_Snmp_Community_ManagerPathAny) State() ygnmi.WildcardQuery[*oc.System_Snmp_Community_Manager] {
+	return ygnmi.NewWildcardQuery[*oc.System_Snmp_Community_Manager](
+		"System_Snmp_Community_Manager",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *System_Snmp_Community_ManagerPath) Config() ygnmi.ConfigQuery[*oc.System_Snmp_Community_Manager] {
+	return ygnmi.NewConfigQuery[*oc.System_Snmp_Community_Manager](
+		"System_Snmp_Community_Manager",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *System_Snmp_Community_ManagerPathAny) Config() ygnmi.WildcardQuery[*oc.System_Snmp_Community_Manager] {
+	return ygnmi.NewWildcardQuery[*oc.System_Snmp_Community_Manager](
+		"System_Snmp_Community_Manager",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_Snmp_Community_ManagerPathMap) State() ygnmi.SingletonQuery[map[string]*oc.System_Snmp_Community_Manager] {
+	return ygnmi.NewSingletonQuery[map[string]*oc.System_Snmp_Community_Manager](
+		"System_Snmp_Community",
+		true,
+		false,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[string]*oc.System_Snmp_Community_Manager, bool) {
+			ret := gs.(*oc.System_Snmp_Community).Manager
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp_Community) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-system:managers"},
+			PostRelPath: []string{"openconfig-system:manager"},
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_Snmp_Community_ManagerPathMapAny) State() ygnmi.WildcardQuery[map[string]*oc.System_Snmp_Community_Manager] {
+	return ygnmi.NewWildcardQuery[map[string]*oc.System_Snmp_Community_Manager](
+		"System_Snmp_Community",
+		true,
+		false,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[string]*oc.System_Snmp_Community_Manager, bool) {
+			ret := gs.(*oc.System_Snmp_Community).Manager
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp_Community) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-system:managers"},
+			PostRelPath: []string{"openconfig-system:manager"},
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *System_Snmp_Community_ManagerPathMap) Config() ygnmi.ConfigQuery[map[string]*oc.System_Snmp_Community_Manager] {
+	return ygnmi.NewConfigQuery[map[string]*oc.System_Snmp_Community_Manager](
+		"System_Snmp_Community",
+		false,
+		true,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[string]*oc.System_Snmp_Community_Manager, bool) {
+			ret := gs.(*oc.System_Snmp_Community).Manager
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp_Community) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-system:managers"},
+			PostRelPath: []string{"openconfig-system:manager"},
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *System_Snmp_Community_ManagerPathMapAny) Config() ygnmi.WildcardQuery[map[string]*oc.System_Snmp_Community_Manager] {
+	return ygnmi.NewWildcardQuery[map[string]*oc.System_Snmp_Community_Manager](
+		"System_Snmp_Community",
+		false,
+		true,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[string]*oc.System_Snmp_Community_Manager, bool) {
+			ret := gs.(*oc.System_Snmp_Community).Manager
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp_Community) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-system:managers"},
+			PostRelPath: []string{"openconfig-system:manager"},
+		},
+	)
+}
+
+// System_Snmp_Notifications_EventTypePath represents the /openconfig-system/system/snmp/notifications/state/event-type YANG schema element.
+type System_Snmp_Notifications_EventTypePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_Snmp_Notifications_EventTypePathAny represents the wildcard version of the /openconfig-system/system/snmp/notifications/state/event-type YANG schema element.
+type System_Snmp_Notifications_EventTypePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *System_Snmp_Notifications_EventTypePath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/event-type"
+//	Path from root:       "/system/snmp/notifications/state/event-type"
+func (n *System_Snmp_Notifications_EventTypePath) State() ygnmi.SingletonQuery[[]oc.E_Snmp_SNMP_NOTIFICATION_EVENT] {
+	return ygnmi.NewSingletonQuery[[]oc.E_Snmp_SNMP_NOTIFICATION_EVENT](
+		"System_Snmp_Notifications",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "event-type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) ([]oc.E_Snmp_SNMP_NOTIFICATION_EVENT, bool) {
+			ret := gs.(*oc.System_Snmp_Notifications).EventType
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp_Notifications) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/event-type"
+//	Path from root:       "/system/snmp/notifications/state/event-type"
+func (n *System_Snmp_Notifications_EventTypePathAny) State() ygnmi.WildcardQuery[[]oc.E_Snmp_SNMP_NOTIFICATION_EVENT] {
+	return ygnmi.NewWildcardQuery[[]oc.E_Snmp_SNMP_NOTIFICATION_EVENT](
+		"System_Snmp_Notifications",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "event-type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) ([]oc.E_Snmp_SNMP_NOTIFICATION_EVENT, bool) {
+			ret := gs.(*oc.System_Snmp_Notifications).EventType
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp_Notifications) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "config/event-type"
+//	Path from root:       "/system/snmp/notifications/config/event-type"
+func (n *System_Snmp_Notifications_EventTypePath) Config() ygnmi.ConfigQuery[[]oc.E_Snmp_SNMP_NOTIFICATION_EVENT] {
+	return ygnmi.NewConfigQuery[[]oc.E_Snmp_SNMP_NOTIFICATION_EVENT](
+		"System_Snmp_Notifications",
+		false,
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "event-type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) ([]oc.E_Snmp_SNMP_NOTIFICATION_EVENT, bool) {
+			ret := gs.(*oc.System_Snmp_Notifications).EventType
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp_Notifications) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "config/event-type"
+//	Path from root:       "/system/snmp/notifications/config/event-type"
+func (n *System_Snmp_Notifications_EventTypePathAny) Config() ygnmi.WildcardQuery[[]oc.E_Snmp_SNMP_NOTIFICATION_EVENT] {
+	return ygnmi.NewWildcardQuery[[]oc.E_Snmp_SNMP_NOTIFICATION_EVENT](
+		"System_Snmp_Notifications",
+		false,
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "event-type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) ([]oc.E_Snmp_SNMP_NOTIFICATION_EVENT, bool) {
+			ret := gs.(*oc.System_Snmp_Notifications).EventType
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp_Notifications) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// System_Snmp_NotificationsPath represents the /openconfig-system/system/snmp/notifications YANG schema element.
+type System_Snmp_NotificationsPath struct {
+	*ygnmi.NodePath
+}
+
+// System_Snmp_NotificationsPathAny represents the wildcard version of the /openconfig-system/system/snmp/notifications YANG schema element.
+type System_Snmp_NotificationsPathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *System_Snmp_NotificationsPath) PathOriginName() string {
+	return "openconfig"
+}
+
+// EventType (leaf-list): Globally enabled notification event types.
+// This list provides a default set of events for
+// all receivers. Individual receivers may override
+// this by specifying their own event-type list.
+// If ALL is included, all event types are enabled
+// globally; any additional identities are
+// redundant and have no additional effect.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/event-type"
+//	Path from root:       "/system/snmp/notifications/*/event-type"
+func (n *System_Snmp_NotificationsPath) EventType() *System_Snmp_Notifications_EventTypePath {
+	ps := &System_Snmp_Notifications_EventTypePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "event-type"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// EventType (leaf-list): Globally enabled notification event types.
+// This list provides a default set of events for
+// all receivers. Individual receivers may override
+// this by specifying their own event-type list.
+// If ALL is included, all event types are enabled
+// globally; any additional identities are
+// redundant and have no additional effect.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/event-type"
+//	Path from root:       "/system/snmp/notifications/*/event-type"
+func (n *System_Snmp_NotificationsPathAny) EventType() *System_Snmp_Notifications_EventTypePathAny {
+	ps := &System_Snmp_Notifications_EventTypePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "event-type"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// ReceiverAny (list): List of SNMP notification receivers.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "receivers/receiver"
+//	Path from root:       "/system/snmp/notifications/receivers/receiver"
+func (n *System_Snmp_NotificationsPath) ReceiverAny() *System_Snmp_Notifications_ReceiverPathAny {
+	ps := &System_Snmp_Notifications_ReceiverPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"receivers", "receiver"},
+			map[string]interface{}{"name": "*"},
+			n,
+		),
+	}
+	return ps
+}
+
+// ReceiverAny (list): List of SNMP notification receivers.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "receivers/receiver"
+//	Path from root:       "/system/snmp/notifications/receivers/receiver"
+func (n *System_Snmp_NotificationsPathAny) ReceiverAny() *System_Snmp_Notifications_ReceiverPathAny {
+	ps := &System_Snmp_Notifications_ReceiverPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"receivers", "receiver"},
+			map[string]interface{}{"name": "*"},
+			n,
+		),
+	}
+	return ps
+}
+
+// Receiver (list): List of SNMP notification receivers.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "receivers/receiver"
+//	Path from root:       "/system/snmp/notifications/receivers/receiver"
+//
+//	Name: string
+func (n *System_Snmp_NotificationsPath) Receiver(Name string) *System_Snmp_Notifications_ReceiverPath {
+	ps := &System_Snmp_Notifications_ReceiverPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"receivers", "receiver"},
+			map[string]interface{}{"name": Name},
+			n,
+		),
+	}
+	return ps
+}
+
+// Receiver (list): List of SNMP notification receivers.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "receivers/receiver"
+//	Path from root:       "/system/snmp/notifications/receivers/receiver"
+//
+//	Name: string
+func (n *System_Snmp_NotificationsPathAny) Receiver(Name string) *System_Snmp_Notifications_ReceiverPathAny {
+	ps := &System_Snmp_Notifications_ReceiverPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"receivers", "receiver"},
+			map[string]interface{}{"name": Name},
+			n,
+		),
+	}
+	return ps
+}
+
+// ReceiverMap (list): List of SNMP notification receivers.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "receivers/receiver"
+//	Path from root:       "/system/snmp/notifications/receivers/receiver"
+func (n *System_Snmp_NotificationsPath) ReceiverMap() *System_Snmp_Notifications_ReceiverPathMap {
+	ps := &System_Snmp_Notifications_ReceiverPathMap{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"receivers"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// ReceiverMap (list): List of SNMP notification receivers.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "receivers/receiver"
+//	Path from root:       "/system/snmp/notifications/receivers/receiver"
+func (n *System_Snmp_NotificationsPathAny) ReceiverMap() *System_Snmp_Notifications_ReceiverPathMapAny {
+	ps := &System_Snmp_Notifications_ReceiverPathMapAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"receivers"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_Snmp_NotificationsPath) State() ygnmi.SingletonQuery[*oc.System_Snmp_Notifications] {
+	return ygnmi.NewSingletonQuery[*oc.System_Snmp_Notifications](
+		"System_Snmp_Notifications",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_Snmp_NotificationsPathAny) State() ygnmi.WildcardQuery[*oc.System_Snmp_Notifications] {
+	return ygnmi.NewWildcardQuery[*oc.System_Snmp_Notifications](
+		"System_Snmp_Notifications",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *System_Snmp_NotificationsPath) Config() ygnmi.ConfigQuery[*oc.System_Snmp_Notifications] {
+	return ygnmi.NewConfigQuery[*oc.System_Snmp_Notifications](
+		"System_Snmp_Notifications",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *System_Snmp_NotificationsPathAny) Config() ygnmi.WildcardQuery[*oc.System_Snmp_Notifications] {
+	return ygnmi.NewWildcardQuery[*oc.System_Snmp_Notifications](
+		"System_Snmp_Notifications",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// System_Snmp_Notifications_Receiver_AddressPath represents the /openconfig-system/system/snmp/notifications/receivers/receiver/state/address YANG schema element.
+type System_Snmp_Notifications_Receiver_AddressPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_Snmp_Notifications_Receiver_AddressPathAny represents the wildcard version of the /openconfig-system/system/snmp/notifications/receivers/receiver/state/address YANG schema element.
+type System_Snmp_Notifications_Receiver_AddressPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *System_Snmp_Notifications_Receiver_AddressPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/address"
+//	Path from root:       "/system/snmp/notifications/receivers/receiver/state/address"
+func (n *System_Snmp_Notifications_Receiver_AddressPath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewSingletonQuery[string](
+		"System_Snmp_Notifications_Receiver",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "address"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_Snmp_Notifications_Receiver).Address
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp_Notifications_Receiver) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/address"
+//	Path from root:       "/system/snmp/notifications/receivers/receiver/state/address"
+func (n *System_Snmp_Notifications_Receiver_AddressPathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"System_Snmp_Notifications_Receiver",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "address"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_Snmp_Notifications_Receiver).Address
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp_Notifications_Receiver) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "config/address"
+//	Path from root:       "/system/snmp/notifications/receivers/receiver/config/address"
+func (n *System_Snmp_Notifications_Receiver_AddressPath) Config() ygnmi.ConfigQuery[string] {
+	return ygnmi.NewConfigQuery[string](
+		"System_Snmp_Notifications_Receiver",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "address"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_Snmp_Notifications_Receiver).Address
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp_Notifications_Receiver) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "config/address"
+//	Path from root:       "/system/snmp/notifications/receivers/receiver/config/address"
+func (n *System_Snmp_Notifications_Receiver_AddressPathAny) Config() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"System_Snmp_Notifications_Receiver",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "address"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_Snmp_Notifications_Receiver).Address
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp_Notifications_Receiver) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// System_Snmp_Notifications_Receiver_CommunityPath represents the /openconfig-system/system/snmp/notifications/receivers/receiver/state/community YANG schema element.
+type System_Snmp_Notifications_Receiver_CommunityPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_Snmp_Notifications_Receiver_CommunityPathAny represents the wildcard version of the /openconfig-system/system/snmp/notifications/receivers/receiver/state/community YANG schema element.
+type System_Snmp_Notifications_Receiver_CommunityPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *System_Snmp_Notifications_Receiver_CommunityPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/community"
+//	Path from root:       "/system/snmp/notifications/receivers/receiver/state/community"
+func (n *System_Snmp_Notifications_Receiver_CommunityPath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewSingletonQuery[string](
+		"System_Snmp_Notifications_Receiver",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "community"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_Snmp_Notifications_Receiver).Community
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp_Notifications_Receiver) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/community"
+//	Path from root:       "/system/snmp/notifications/receivers/receiver/state/community"
+func (n *System_Snmp_Notifications_Receiver_CommunityPathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"System_Snmp_Notifications_Receiver",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "community"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_Snmp_Notifications_Receiver).Community
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp_Notifications_Receiver) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "config/community"
+//	Path from root:       "/system/snmp/notifications/receivers/receiver/config/community"
+func (n *System_Snmp_Notifications_Receiver_CommunityPath) Config() ygnmi.ConfigQuery[string] {
+	return ygnmi.NewConfigQuery[string](
+		"System_Snmp_Notifications_Receiver",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "community"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_Snmp_Notifications_Receiver).Community
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp_Notifications_Receiver) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "config/community"
+//	Path from root:       "/system/snmp/notifications/receivers/receiver/config/community"
+func (n *System_Snmp_Notifications_Receiver_CommunityPathAny) Config() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"System_Snmp_Notifications_Receiver",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "community"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_Snmp_Notifications_Receiver).Community
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp_Notifications_Receiver) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// System_Snmp_Notifications_Receiver_EventTypePath represents the /openconfig-system/system/snmp/notifications/receivers/receiver/state/event-type YANG schema element.
+type System_Snmp_Notifications_Receiver_EventTypePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_Snmp_Notifications_Receiver_EventTypePathAny represents the wildcard version of the /openconfig-system/system/snmp/notifications/receivers/receiver/state/event-type YANG schema element.
+type System_Snmp_Notifications_Receiver_EventTypePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *System_Snmp_Notifications_Receiver_EventTypePath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/event-type"
+//	Path from root:       "/system/snmp/notifications/receivers/receiver/state/event-type"
+func (n *System_Snmp_Notifications_Receiver_EventTypePath) State() ygnmi.SingletonQuery[[]oc.E_Snmp_SNMP_NOTIFICATION_EVENT] {
+	return ygnmi.NewSingletonQuery[[]oc.E_Snmp_SNMP_NOTIFICATION_EVENT](
+		"System_Snmp_Notifications_Receiver",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "event-type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) ([]oc.E_Snmp_SNMP_NOTIFICATION_EVENT, bool) {
+			ret := gs.(*oc.System_Snmp_Notifications_Receiver).EventType
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp_Notifications_Receiver) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/event-type"
+//	Path from root:       "/system/snmp/notifications/receivers/receiver/state/event-type"
+func (n *System_Snmp_Notifications_Receiver_EventTypePathAny) State() ygnmi.WildcardQuery[[]oc.E_Snmp_SNMP_NOTIFICATION_EVENT] {
+	return ygnmi.NewWildcardQuery[[]oc.E_Snmp_SNMP_NOTIFICATION_EVENT](
+		"System_Snmp_Notifications_Receiver",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "event-type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) ([]oc.E_Snmp_SNMP_NOTIFICATION_EVENT, bool) {
+			ret := gs.(*oc.System_Snmp_Notifications_Receiver).EventType
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp_Notifications_Receiver) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "config/event-type"
+//	Path from root:       "/system/snmp/notifications/receivers/receiver/config/event-type"
+func (n *System_Snmp_Notifications_Receiver_EventTypePath) Config() ygnmi.ConfigQuery[[]oc.E_Snmp_SNMP_NOTIFICATION_EVENT] {
+	return ygnmi.NewConfigQuery[[]oc.E_Snmp_SNMP_NOTIFICATION_EVENT](
+		"System_Snmp_Notifications_Receiver",
+		false,
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "event-type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) ([]oc.E_Snmp_SNMP_NOTIFICATION_EVENT, bool) {
+			ret := gs.(*oc.System_Snmp_Notifications_Receiver).EventType
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp_Notifications_Receiver) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "config/event-type"
+//	Path from root:       "/system/snmp/notifications/receivers/receiver/config/event-type"
+func (n *System_Snmp_Notifications_Receiver_EventTypePathAny) Config() ygnmi.WildcardQuery[[]oc.E_Snmp_SNMP_NOTIFICATION_EVENT] {
+	return ygnmi.NewWildcardQuery[[]oc.E_Snmp_SNMP_NOTIFICATION_EVENT](
+		"System_Snmp_Notifications_Receiver",
+		false,
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "event-type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) ([]oc.E_Snmp_SNMP_NOTIFICATION_EVENT, bool) {
+			ret := gs.(*oc.System_Snmp_Notifications_Receiver).EventType
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp_Notifications_Receiver) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// System_Snmp_Notifications_Receiver_NamePath represents the /openconfig-system/system/snmp/notifications/receivers/receiver/state/name YANG schema element.
+type System_Snmp_Notifications_Receiver_NamePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_Snmp_Notifications_Receiver_NamePathAny represents the wildcard version of the /openconfig-system/system/snmp/notifications/receivers/receiver/state/name YANG schema element.
+type System_Snmp_Notifications_Receiver_NamePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *System_Snmp_Notifications_Receiver_NamePath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/name"
+//	Path from root:       "/system/snmp/notifications/receivers/receiver/state/name"
+func (n *System_Snmp_Notifications_Receiver_NamePath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewSingletonQuery[string](
+		"System_Snmp_Notifications_Receiver",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "name"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_Snmp_Notifications_Receiver).Name
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp_Notifications_Receiver) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/name"
+//	Path from root:       "/system/snmp/notifications/receivers/receiver/state/name"
+func (n *System_Snmp_Notifications_Receiver_NamePathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"System_Snmp_Notifications_Receiver",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "name"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_Snmp_Notifications_Receiver).Name
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp_Notifications_Receiver) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "config/name"
+//	Path from root:       "/system/snmp/notifications/receivers/receiver/config/name"
+func (n *System_Snmp_Notifications_Receiver_NamePath) Config() ygnmi.ConfigQuery[string] {
+	return ygnmi.NewConfigQuery[string](
+		"System_Snmp_Notifications_Receiver",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "name"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_Snmp_Notifications_Receiver).Name
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp_Notifications_Receiver) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "config/name"
+//	Path from root:       "/system/snmp/notifications/receivers/receiver/config/name"
+func (n *System_Snmp_Notifications_Receiver_NamePathAny) Config() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"System_Snmp_Notifications_Receiver",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "name"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_Snmp_Notifications_Receiver).Name
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp_Notifications_Receiver) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// System_Snmp_Notifications_Receiver_NotificationTypePath represents the /openconfig-system/system/snmp/notifications/receivers/receiver/state/notification-type YANG schema element.
+type System_Snmp_Notifications_Receiver_NotificationTypePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_Snmp_Notifications_Receiver_NotificationTypePathAny represents the wildcard version of the /openconfig-system/system/snmp/notifications/receivers/receiver/state/notification-type YANG schema element.
+type System_Snmp_Notifications_Receiver_NotificationTypePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *System_Snmp_Notifications_Receiver_NotificationTypePath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/notification-type"
+//	Path from root:       "/system/snmp/notifications/receivers/receiver/state/notification-type"
+func (n *System_Snmp_Notifications_Receiver_NotificationTypePath) State() ygnmi.SingletonQuery[oc.E_Snmp_SnmpNotificationType] {
+	return ygnmi.NewSingletonQuery[oc.E_Snmp_SnmpNotificationType](
+		"System_Snmp_Notifications_Receiver",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "notification-type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Snmp_SnmpNotificationType, bool) {
+			ret := gs.(*oc.System_Snmp_Notifications_Receiver).NotificationType
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp_Notifications_Receiver) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/notification-type"
+//	Path from root:       "/system/snmp/notifications/receivers/receiver/state/notification-type"
+func (n *System_Snmp_Notifications_Receiver_NotificationTypePathAny) State() ygnmi.WildcardQuery[oc.E_Snmp_SnmpNotificationType] {
+	return ygnmi.NewWildcardQuery[oc.E_Snmp_SnmpNotificationType](
+		"System_Snmp_Notifications_Receiver",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "notification-type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Snmp_SnmpNotificationType, bool) {
+			ret := gs.(*oc.System_Snmp_Notifications_Receiver).NotificationType
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp_Notifications_Receiver) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "config/notification-type"
+//	Path from root:       "/system/snmp/notifications/receivers/receiver/config/notification-type"
+func (n *System_Snmp_Notifications_Receiver_NotificationTypePath) Config() ygnmi.ConfigQuery[oc.E_Snmp_SnmpNotificationType] {
+	return ygnmi.NewConfigQuery[oc.E_Snmp_SnmpNotificationType](
+		"System_Snmp_Notifications_Receiver",
+		false,
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "notification-type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Snmp_SnmpNotificationType, bool) {
+			ret := gs.(*oc.System_Snmp_Notifications_Receiver).NotificationType
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp_Notifications_Receiver) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "config/notification-type"
+//	Path from root:       "/system/snmp/notifications/receivers/receiver/config/notification-type"
+func (n *System_Snmp_Notifications_Receiver_NotificationTypePathAny) Config() ygnmi.WildcardQuery[oc.E_Snmp_SnmpNotificationType] {
+	return ygnmi.NewWildcardQuery[oc.E_Snmp_SnmpNotificationType](
+		"System_Snmp_Notifications_Receiver",
+		false,
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "notification-type"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Snmp_SnmpNotificationType, bool) {
+			ret := gs.(*oc.System_Snmp_Notifications_Receiver).NotificationType
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp_Notifications_Receiver) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// System_Snmp_Notifications_Receiver_NotificationsDroppedPath represents the /openconfig-system/system/snmp/notifications/receivers/receiver/state/notifications-dropped YANG schema element.
+type System_Snmp_Notifications_Receiver_NotificationsDroppedPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_Snmp_Notifications_Receiver_NotificationsDroppedPathAny represents the wildcard version of the /openconfig-system/system/snmp/notifications/receivers/receiver/state/notifications-dropped YANG schema element.
+type System_Snmp_Notifications_Receiver_NotificationsDroppedPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *System_Snmp_Notifications_Receiver_NotificationsDroppedPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/notifications-dropped"
+//	Path from root:       "/system/snmp/notifications/receivers/receiver/state/notifications-dropped"
+func (n *System_Snmp_Notifications_Receiver_NotificationsDroppedPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"System_Snmp_Notifications_Receiver",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "notifications-dropped"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.System_Snmp_Notifications_Receiver).NotificationsDropped
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp_Notifications_Receiver) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/notifications-dropped"
+//	Path from root:       "/system/snmp/notifications/receivers/receiver/state/notifications-dropped"
+func (n *System_Snmp_Notifications_Receiver_NotificationsDroppedPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"System_Snmp_Notifications_Receiver",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "notifications-dropped"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.System_Snmp_Notifications_Receiver).NotificationsDropped
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp_Notifications_Receiver) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// System_Snmp_Notifications_Receiver_NotificationsSentPath represents the /openconfig-system/system/snmp/notifications/receivers/receiver/state/notifications-sent YANG schema element.
+type System_Snmp_Notifications_Receiver_NotificationsSentPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_Snmp_Notifications_Receiver_NotificationsSentPathAny represents the wildcard version of the /openconfig-system/system/snmp/notifications/receivers/receiver/state/notifications-sent YANG schema element.
+type System_Snmp_Notifications_Receiver_NotificationsSentPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *System_Snmp_Notifications_Receiver_NotificationsSentPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/notifications-sent"
+//	Path from root:       "/system/snmp/notifications/receivers/receiver/state/notifications-sent"
+func (n *System_Snmp_Notifications_Receiver_NotificationsSentPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"System_Snmp_Notifications_Receiver",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "notifications-sent"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.System_Snmp_Notifications_Receiver).NotificationsSent
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp_Notifications_Receiver) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/notifications-sent"
+//	Path from root:       "/system/snmp/notifications/receivers/receiver/state/notifications-sent"
+func (n *System_Snmp_Notifications_Receiver_NotificationsSentPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"System_Snmp_Notifications_Receiver",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "notifications-sent"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.System_Snmp_Notifications_Receiver).NotificationsSent
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp_Notifications_Receiver) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// System_Snmp_Notifications_Receiver_PortPath represents the /openconfig-system/system/snmp/notifications/receivers/receiver/state/port YANG schema element.
+type System_Snmp_Notifications_Receiver_PortPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_Snmp_Notifications_Receiver_PortPathAny represents the wildcard version of the /openconfig-system/system/snmp/notifications/receivers/receiver/state/port YANG schema element.
+type System_Snmp_Notifications_Receiver_PortPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *System_Snmp_Notifications_Receiver_PortPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/port"
+//	Path from root:       "/system/snmp/notifications/receivers/receiver/state/port"
+func (n *System_Snmp_Notifications_Receiver_PortPath) State() ygnmi.SingletonQuery[uint16] {
+	return ygnmi.NewSingletonQuery[uint16](
+		"System_Snmp_Notifications_Receiver",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "port"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.System_Snmp_Notifications_Receiver).Port
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp_Notifications_Receiver) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/port"
+//	Path from root:       "/system/snmp/notifications/receivers/receiver/state/port"
+func (n *System_Snmp_Notifications_Receiver_PortPathAny) State() ygnmi.WildcardQuery[uint16] {
+	return ygnmi.NewWildcardQuery[uint16](
+		"System_Snmp_Notifications_Receiver",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "port"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.System_Snmp_Notifications_Receiver).Port
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp_Notifications_Receiver) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "config/port"
+//	Path from root:       "/system/snmp/notifications/receivers/receiver/config/port"
+func (n *System_Snmp_Notifications_Receiver_PortPath) Config() ygnmi.ConfigQuery[uint16] {
+	return ygnmi.NewConfigQuery[uint16](
+		"System_Snmp_Notifications_Receiver",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "port"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.System_Snmp_Notifications_Receiver).Port
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp_Notifications_Receiver) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "config/port"
+//	Path from root:       "/system/snmp/notifications/receivers/receiver/config/port"
+func (n *System_Snmp_Notifications_Receiver_PortPathAny) Config() ygnmi.WildcardQuery[uint16] {
+	return ygnmi.NewWildcardQuery[uint16](
+		"System_Snmp_Notifications_Receiver",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "port"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint16, bool) {
+			ret := gs.(*oc.System_Snmp_Notifications_Receiver).Port
+			if ret == nil {
+				var zero uint16
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp_Notifications_Receiver) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// System_Snmp_Notifications_Receiver_VersionPath represents the /openconfig-system/system/snmp/notifications/receivers/receiver/state/version YANG schema element.
+type System_Snmp_Notifications_Receiver_VersionPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_Snmp_Notifications_Receiver_VersionPathAny represents the wildcard version of the /openconfig-system/system/snmp/notifications/receivers/receiver/state/version YANG schema element.
+type System_Snmp_Notifications_Receiver_VersionPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *System_Snmp_Notifications_Receiver_VersionPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/version"
+//	Path from root:       "/system/snmp/notifications/receivers/receiver/state/version"
+func (n *System_Snmp_Notifications_Receiver_VersionPath) State() ygnmi.SingletonQuery[oc.E_Snmp_SnmpVersion] {
+	return ygnmi.NewSingletonQuery[oc.E_Snmp_SnmpVersion](
+		"System_Snmp_Notifications_Receiver",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "version"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Snmp_SnmpVersion, bool) {
+			ret := gs.(*oc.System_Snmp_Notifications_Receiver).Version
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp_Notifications_Receiver) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/version"
+//	Path from root:       "/system/snmp/notifications/receivers/receiver/state/version"
+func (n *System_Snmp_Notifications_Receiver_VersionPathAny) State() ygnmi.WildcardQuery[oc.E_Snmp_SnmpVersion] {
+	return ygnmi.NewWildcardQuery[oc.E_Snmp_SnmpVersion](
+		"System_Snmp_Notifications_Receiver",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "version"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Snmp_SnmpVersion, bool) {
+			ret := gs.(*oc.System_Snmp_Notifications_Receiver).Version
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp_Notifications_Receiver) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "config/version"
+//	Path from root:       "/system/snmp/notifications/receivers/receiver/config/version"
+func (n *System_Snmp_Notifications_Receiver_VersionPath) Config() ygnmi.ConfigQuery[oc.E_Snmp_SnmpVersion] {
+	return ygnmi.NewConfigQuery[oc.E_Snmp_SnmpVersion](
+		"System_Snmp_Notifications_Receiver",
+		false,
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "version"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Snmp_SnmpVersion, bool) {
+			ret := gs.(*oc.System_Snmp_Notifications_Receiver).Version
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp_Notifications_Receiver) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "config/version"
+//	Path from root:       "/system/snmp/notifications/receivers/receiver/config/version"
+func (n *System_Snmp_Notifications_Receiver_VersionPathAny) Config() ygnmi.WildcardQuery[oc.E_Snmp_SnmpVersion] {
+	return ygnmi.NewWildcardQuery[oc.E_Snmp_SnmpVersion](
+		"System_Snmp_Notifications_Receiver",
+		false,
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "version"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Snmp_SnmpVersion, bool) {
+			ret := gs.(*oc.System_Snmp_Notifications_Receiver).Version
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp_Notifications_Receiver) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// System_Snmp_Notifications_ReceiverPath represents the /openconfig-system/system/snmp/notifications/receivers/receiver YANG schema element.
+type System_Snmp_Notifications_ReceiverPath struct {
+	*ygnmi.NodePath
+}
+
+// System_Snmp_Notifications_ReceiverPathAny represents the wildcard version of the /openconfig-system/system/snmp/notifications/receivers/receiver YANG schema element.
+type System_Snmp_Notifications_ReceiverPathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *System_Snmp_Notifications_ReceiverPath) PathOriginName() string {
+	return "openconfig"
+}
+
+// System_Snmp_Notifications_ReceiverPathMap represents the /openconfig-system/system/snmp/notifications/receivers/receiver YANG schema element.
+type System_Snmp_Notifications_ReceiverPathMap struct {
+	*ygnmi.NodePath
+}
+
+// System_Snmp_Notifications_ReceiverPathMapAny represents the wildcard version of the /openconfig-system/system/snmp/notifications/receivers/receiver YANG schema element.
+type System_Snmp_Notifications_ReceiverPathMapAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *System_Snmp_Notifications_ReceiverPathMap) PathOriginName() string {
+	return "openconfig"
+}
+
+// Address (leaf): Receiver address for notifications. If
+// omitted, no notification destination is
+// configured for this receiver.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/address"
+//	Path from root:       "/system/snmp/notifications/receivers/receiver/*/address"
+func (n *System_Snmp_Notifications_ReceiverPath) Address() *System_Snmp_Notifications_Receiver_AddressPath {
+	ps := &System_Snmp_Notifications_Receiver_AddressPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "address"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Address (leaf): Receiver address for notifications. If
+// omitted, no notification destination is
+// configured for this receiver.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/address"
+//	Path from root:       "/system/snmp/notifications/receivers/receiver/*/address"
+func (n *System_Snmp_Notifications_ReceiverPathAny) Address() *System_Snmp_Notifications_Receiver_AddressPathAny {
+	ps := &System_Snmp_Notifications_Receiver_AddressPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "address"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Community (leaf): Community string used for v1/v2c
+// notifications. If omitted, no v1/v2c
+// notifications are sent for this receiver.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/community"
+//	Path from root:       "/system/snmp/notifications/receivers/receiver/*/community"
+func (n *System_Snmp_Notifications_ReceiverPath) Community() *System_Snmp_Notifications_Receiver_CommunityPath {
+	ps := &System_Snmp_Notifications_Receiver_CommunityPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "community"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Community (leaf): Community string used for v1/v2c
+// notifications. If omitted, no v1/v2c
+// notifications are sent for this receiver.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/community"
+//	Path from root:       "/system/snmp/notifications/receivers/receiver/*/community"
+func (n *System_Snmp_Notifications_ReceiverPathAny) Community() *System_Snmp_Notifications_Receiver_CommunityPathAny {
+	ps := &System_Snmp_Notifications_Receiver_CommunityPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "community"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// EventType (leaf-list): Event types enabled for this specific receiver.
+// If empty, the receiver inherits the globally
+// configured event-type list under
+// notifications/config. If both are empty, no
+// notifications are sent. If this receiver-level
+// list contains ALL, all event types are enabled
+// for the receiver; any additional identities are
+// redundant and have no additional effect. If the
+// global list contains ALL, all event types are
+// sent unless this receiver-level list restricts
+// them to a subset.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/event-type"
+//	Path from root:       "/system/snmp/notifications/receivers/receiver/*/event-type"
+func (n *System_Snmp_Notifications_ReceiverPath) EventType() *System_Snmp_Notifications_Receiver_EventTypePath {
+	ps := &System_Snmp_Notifications_Receiver_EventTypePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "event-type"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// EventType (leaf-list): Event types enabled for this specific receiver.
+// If empty, the receiver inherits the globally
+// configured event-type list under
+// notifications/config. If both are empty, no
+// notifications are sent. If this receiver-level
+// list contains ALL, all event types are enabled
+// for the receiver; any additional identities are
+// redundant and have no additional effect. If the
+// global list contains ALL, all event types are
+// sent unless this receiver-level list restricts
+// them to a subset.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/event-type"
+//	Path from root:       "/system/snmp/notifications/receivers/receiver/*/event-type"
+func (n *System_Snmp_Notifications_ReceiverPathAny) EventType() *System_Snmp_Notifications_Receiver_EventTypePathAny {
+	ps := &System_Snmp_Notifications_Receiver_EventTypePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "event-type"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Name (leaf): Unique name identifying this receiver entry.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/name"
+//	Path from root:       "/system/snmp/notifications/receivers/receiver/*/name"
+func (n *System_Snmp_Notifications_ReceiverPath) Name() *System_Snmp_Notifications_Receiver_NamePath {
+	ps := &System_Snmp_Notifications_Receiver_NamePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "name"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Name (leaf): Unique name identifying this receiver entry.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/name"
+//	Path from root:       "/system/snmp/notifications/receivers/receiver/*/name"
+func (n *System_Snmp_Notifications_ReceiverPathAny) Name() *System_Snmp_Notifications_Receiver_NamePathAny {
+	ps := &System_Snmp_Notifications_Receiver_NamePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "name"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// NotificationType (leaf): Notification delivery mechanism for this
+// receiver. TRAP sends unacknowledged
+// notifications; INFORM sends acknowledged
+// notifications (V2C only). If omitted, TRAP
+// is assumed.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/notification-type"
+//	Path from root:       "/system/snmp/notifications/receivers/receiver/*/notification-type"
+func (n *System_Snmp_Notifications_ReceiverPath) NotificationType() *System_Snmp_Notifications_Receiver_NotificationTypePath {
+	ps := &System_Snmp_Notifications_Receiver_NotificationTypePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "notification-type"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// NotificationType (leaf): Notification delivery mechanism for this
+// receiver. TRAP sends unacknowledged
+// notifications; INFORM sends acknowledged
+// notifications (V2C only). If omitted, TRAP
+// is assumed.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/notification-type"
+//	Path from root:       "/system/snmp/notifications/receivers/receiver/*/notification-type"
+func (n *System_Snmp_Notifications_ReceiverPathAny) NotificationType() *System_Snmp_Notifications_Receiver_NotificationTypePathAny {
+	ps := &System_Snmp_Notifications_Receiver_NotificationTypePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "notification-type"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// NotificationsDropped (leaf): Total notifications dropped for this
+// receiver.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/notifications-dropped"
+//	Path from root:       "/system/snmp/notifications/receivers/receiver/state/notifications-dropped"
+func (n *System_Snmp_Notifications_ReceiverPath) NotificationsDropped() *System_Snmp_Notifications_Receiver_NotificationsDroppedPath {
+	ps := &System_Snmp_Notifications_Receiver_NotificationsDroppedPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "notifications-dropped"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// NotificationsDropped (leaf): Total notifications dropped for this
+// receiver.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/notifications-dropped"
+//	Path from root:       "/system/snmp/notifications/receivers/receiver/state/notifications-dropped"
+func (n *System_Snmp_Notifications_ReceiverPathAny) NotificationsDropped() *System_Snmp_Notifications_Receiver_NotificationsDroppedPathAny {
+	ps := &System_Snmp_Notifications_Receiver_NotificationsDroppedPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "notifications-dropped"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// NotificationsSent (leaf): Total notifications sent to this receiver.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/notifications-sent"
+//	Path from root:       "/system/snmp/notifications/receivers/receiver/state/notifications-sent"
+func (n *System_Snmp_Notifications_ReceiverPath) NotificationsSent() *System_Snmp_Notifications_Receiver_NotificationsSentPath {
+	ps := &System_Snmp_Notifications_Receiver_NotificationsSentPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "notifications-sent"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// NotificationsSent (leaf): Total notifications sent to this receiver.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/notifications-sent"
+//	Path from root:       "/system/snmp/notifications/receivers/receiver/state/notifications-sent"
+func (n *System_Snmp_Notifications_ReceiverPathAny) NotificationsSent() *System_Snmp_Notifications_Receiver_NotificationsSentPathAny {
+	ps := &System_Snmp_Notifications_Receiver_NotificationsSentPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "notifications-sent"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Port (leaf): UDP port used for notifications. If omitted,
+// the standard SNMP trap port (162) is used.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/port"
+//	Path from root:       "/system/snmp/notifications/receivers/receiver/*/port"
+func (n *System_Snmp_Notifications_ReceiverPath) Port() *System_Snmp_Notifications_Receiver_PortPath {
+	ps := &System_Snmp_Notifications_Receiver_PortPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "port"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Port (leaf): UDP port used for notifications. If omitted,
+// the standard SNMP trap port (162) is used.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/port"
+//	Path from root:       "/system/snmp/notifications/receivers/receiver/*/port"
+func (n *System_Snmp_Notifications_ReceiverPathAny) Port() *System_Snmp_Notifications_Receiver_PortPathAny {
+	ps := &System_Snmp_Notifications_Receiver_PortPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "port"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Version (leaf): SNMP version used for this receiver. Only V1
+// and V2C are supported by this module. If
+// omitted, the implementation-defined receiver
+// version is used.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/version"
+//	Path from root:       "/system/snmp/notifications/receivers/receiver/*/version"
+func (n *System_Snmp_Notifications_ReceiverPath) Version() *System_Snmp_Notifications_Receiver_VersionPath {
+	ps := &System_Snmp_Notifications_Receiver_VersionPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "version"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Version (leaf): SNMP version used for this receiver. Only V1
+// and V2C are supported by this module. If
+// omitted, the implementation-defined receiver
+// version is used.
+//
+//	Defining module:      "openconfig-snmp"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/version"
+//	Path from root:       "/system/snmp/notifications/receivers/receiver/*/version"
+func (n *System_Snmp_Notifications_ReceiverPathAny) Version() *System_Snmp_Notifications_Receiver_VersionPathAny {
+	ps := &System_Snmp_Notifications_Receiver_VersionPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "version"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_Snmp_Notifications_ReceiverPath) State() ygnmi.SingletonQuery[*oc.System_Snmp_Notifications_Receiver] {
+	return ygnmi.NewSingletonQuery[*oc.System_Snmp_Notifications_Receiver](
+		"System_Snmp_Notifications_Receiver",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_Snmp_Notifications_ReceiverPathAny) State() ygnmi.WildcardQuery[*oc.System_Snmp_Notifications_Receiver] {
+	return ygnmi.NewWildcardQuery[*oc.System_Snmp_Notifications_Receiver](
+		"System_Snmp_Notifications_Receiver",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *System_Snmp_Notifications_ReceiverPath) Config() ygnmi.ConfigQuery[*oc.System_Snmp_Notifications_Receiver] {
+	return ygnmi.NewConfigQuery[*oc.System_Snmp_Notifications_Receiver](
+		"System_Snmp_Notifications_Receiver",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *System_Snmp_Notifications_ReceiverPathAny) Config() ygnmi.WildcardQuery[*oc.System_Snmp_Notifications_Receiver] {
+	return ygnmi.NewWildcardQuery[*oc.System_Snmp_Notifications_Receiver](
+		"System_Snmp_Notifications_Receiver",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_Snmp_Notifications_ReceiverPathMap) State() ygnmi.SingletonQuery[map[string]*oc.System_Snmp_Notifications_Receiver] {
+	return ygnmi.NewSingletonQuery[map[string]*oc.System_Snmp_Notifications_Receiver](
+		"System_Snmp_Notifications",
+		true,
+		false,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[string]*oc.System_Snmp_Notifications_Receiver, bool) {
+			ret := gs.(*oc.System_Snmp_Notifications).Receiver
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp_Notifications) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-system:receivers"},
+			PostRelPath: []string{"openconfig-system:receiver"},
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *System_Snmp_Notifications_ReceiverPathMapAny) State() ygnmi.WildcardQuery[map[string]*oc.System_Snmp_Notifications_Receiver] {
+	return ygnmi.NewWildcardQuery[map[string]*oc.System_Snmp_Notifications_Receiver](
+		"System_Snmp_Notifications",
+		true,
+		false,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[string]*oc.System_Snmp_Notifications_Receiver, bool) {
+			ret := gs.(*oc.System_Snmp_Notifications).Receiver
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp_Notifications) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-system:receivers"},
+			PostRelPath: []string{"openconfig-system:receiver"},
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *System_Snmp_Notifications_ReceiverPathMap) Config() ygnmi.ConfigQuery[map[string]*oc.System_Snmp_Notifications_Receiver] {
+	return ygnmi.NewConfigQuery[map[string]*oc.System_Snmp_Notifications_Receiver](
+		"System_Snmp_Notifications",
+		false,
+		true,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[string]*oc.System_Snmp_Notifications_Receiver, bool) {
+			ret := gs.(*oc.System_Snmp_Notifications).Receiver
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp_Notifications) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-system:receivers"},
+			PostRelPath: []string{"openconfig-system:receiver"},
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *System_Snmp_Notifications_ReceiverPathMapAny) Config() ygnmi.WildcardQuery[map[string]*oc.System_Snmp_Notifications_Receiver] {
+	return ygnmi.NewWildcardQuery[map[string]*oc.System_Snmp_Notifications_Receiver](
+		"System_Snmp_Notifications",
+		false,
+		true,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[string]*oc.System_Snmp_Notifications_Receiver, bool) {
+			ret := gs.(*oc.System_Snmp_Notifications).Receiver
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_Snmp_Notifications) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-system:receivers"},
+			PostRelPath: []string{"openconfig-system:receiver"},
+		},
+	)
+}
+
 // System_SshServer_ActiveHostCertificateCreatedOnPath represents the /openconfig-system/system/ssh-server/state/active-host-certificate-created-on YANG schema element.
 type System_SshServer_ActiveHostCertificateCreatedOnPath struct {
 	*ygnmi.NodePath
@@ -67251,6 +73438,187 @@ func (n *System_SshServer_EnablePathAny) Config() ygnmi.WildcardQuery[bool] {
 			ret := gs.(*oc.System_SshServer).Enable
 			if ret == nil {
 				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_SshServer) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// System_SshServer_HostCertificatePath represents the /openconfig-system/system/ssh-server/state/host-certificate YANG schema element.
+type System_SshServer_HostCertificatePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// System_SshServer_HostCertificatePathAny represents the wildcard version of the /openconfig-system/system/ssh-server/state/host-certificate YANG schema element.
+type System_SshServer_HostCertificatePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *System_SshServer_HostCertificatePath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-terminal"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/host-certificate"
+//	Path from root:       "/system/ssh-server/state/host-certificate"
+func (n *System_SshServer_HostCertificatePath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewSingletonQuery[string](
+		"System_SshServer",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "host-certificate"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_SshServer).HostCertificate
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_SshServer) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-terminal"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "state/host-certificate"
+//	Path from root:       "/system/ssh-server/state/host-certificate"
+func (n *System_SshServer_HostCertificatePathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"System_SshServer",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "host-certificate"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_SshServer).HostCertificate
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_SshServer) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-terminal"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "config/host-certificate"
+//	Path from root:       "/system/ssh-server/config/host-certificate"
+func (n *System_SshServer_HostCertificatePath) Config() ygnmi.ConfigQuery[string] {
+	return ygnmi.NewConfigQuery[string](
+		"System_SshServer",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "host-certificate"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_SshServer).HostCertificate
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.System_SshServer) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-system-terminal"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "config/host-certificate"
+//	Path from root:       "/system/ssh-server/config/host-certificate"
+func (n *System_SshServer_HostCertificatePathAny) Config() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"System_SshServer",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "host-certificate"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.System_SshServer).HostCertificate
+			if ret == nil {
+				var zero string
 				return zero, false
 			}
 			return *ret, true
@@ -68353,6 +74721,42 @@ func (n *System_SshServerPathAny) Enable() *System_SshServer_EnablePathAny {
 	ps := &System_SshServer_EnablePathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"*", "enable"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// HostCertificate (leaf): SSH Host Certificate string. This is the full content of an openssh host certificate
+//
+//	Defining module:      "openconfig-system-terminal"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/host-certificate"
+//	Path from root:       "/system/ssh-server/*/host-certificate"
+func (n *System_SshServerPath) HostCertificate() *System_SshServer_HostCertificatePath {
+	ps := &System_SshServer_HostCertificatePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "host-certificate"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// HostCertificate (leaf): SSH Host Certificate string. This is the full content of an openssh host certificate
+//
+//	Defining module:      "openconfig-system-terminal"
+//	Instantiating module: "openconfig-system"
+//	Path from parent:     "*/host-certificate"
+//	Path from root:       "/system/ssh-server/*/host-certificate"
+func (n *System_SshServerPathAny) HostCertificate() *System_SshServer_HostCertificatePathAny {
+	ps := &System_SshServer_HostCertificatePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "host-certificate"},
 			map[string]interface{}{},
 			n,
 		),

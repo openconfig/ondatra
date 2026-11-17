@@ -4889,6 +4889,175 @@ func (n *NetworkInstance_Protocol_Isis_Global_Af_SafiNamePathAny) Config() ygnmi
 	)
 }
 
+// NetworkInstance_Protocol_Isis_Global_Af_SuppressInterfaceReachabilityPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/afi-safi/af/state/suppress-interface-reachability YANG schema element.
+type NetworkInstance_Protocol_Isis_Global_Af_SuppressInterfaceReachabilityPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// NetworkInstance_Protocol_Isis_Global_Af_SuppressInterfaceReachabilityPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/afi-safi/af/state/suppress-interface-reachability YANG schema element.
+type NetworkInstance_Protocol_Isis_Global_Af_SuppressInterfaceReachabilityPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *NetworkInstance_Protocol_Isis_Global_Af_SuppressInterfaceReachabilityPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-isis-routing"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/suppress-interface-reachability"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/isis/global/afi-safi/af/state/suppress-interface-reachability"
+func (n *NetworkInstance_Protocol_Isis_Global_Af_SuppressInterfaceReachabilityPath) State() ygnmi.SingletonQuery[oc.E_Isis_SuppressInterfaceIpMode] {
+	return ygnmi.NewSingletonQuery[oc.E_Isis_SuppressInterfaceIpMode](
+		"NetworkInstance_Protocol_Isis_Global_Af",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "suppress-interface-reachability"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Isis_SuppressInterfaceIpMode, bool) {
+			ret := gs.(*oc.NetworkInstance_Protocol_Isis_Global_Af).SuppressInterfaceReachability
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Protocol_Isis_Global_Af) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-isis-routing"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/suppress-interface-reachability"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/isis/global/afi-safi/af/state/suppress-interface-reachability"
+func (n *NetworkInstance_Protocol_Isis_Global_Af_SuppressInterfaceReachabilityPathAny) State() ygnmi.WildcardQuery[oc.E_Isis_SuppressInterfaceIpMode] {
+	return ygnmi.NewWildcardQuery[oc.E_Isis_SuppressInterfaceIpMode](
+		"NetworkInstance_Protocol_Isis_Global_Af",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "suppress-interface-reachability"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Isis_SuppressInterfaceIpMode, bool) {
+			ret := gs.(*oc.NetworkInstance_Protocol_Isis_Global_Af).SuppressInterfaceReachability
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Protocol_Isis_Global_Af) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-isis-routing"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "config/suppress-interface-reachability"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/isis/global/afi-safi/af/config/suppress-interface-reachability"
+func (n *NetworkInstance_Protocol_Isis_Global_Af_SuppressInterfaceReachabilityPath) Config() ygnmi.ConfigQuery[oc.E_Isis_SuppressInterfaceIpMode] {
+	return ygnmi.NewConfigQuery[oc.E_Isis_SuppressInterfaceIpMode](
+		"NetworkInstance_Protocol_Isis_Global_Af",
+		false,
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "suppress-interface-reachability"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Isis_SuppressInterfaceIpMode, bool) {
+			ret := gs.(*oc.NetworkInstance_Protocol_Isis_Global_Af).SuppressInterfaceReachability
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Protocol_Isis_Global_Af) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-isis-routing"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "config/suppress-interface-reachability"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/isis/global/afi-safi/af/config/suppress-interface-reachability"
+func (n *NetworkInstance_Protocol_Isis_Global_Af_SuppressInterfaceReachabilityPathAny) Config() ygnmi.WildcardQuery[oc.E_Isis_SuppressInterfaceIpMode] {
+	return ygnmi.NewWildcardQuery[oc.E_Isis_SuppressInterfaceIpMode](
+		"NetworkInstance_Protocol_Isis_Global_Af",
+		false,
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "suppress-interface-reachability"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Isis_SuppressInterfaceIpMode, bool) {
+			ret := gs.(*oc.NetworkInstance_Protocol_Isis_Global_Af).SuppressInterfaceReachability
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Protocol_Isis_Global_Af) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
 // NetworkInstance_Protocol_Isis_Global_AfPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/afi-safi/af YANG schema element.
 type NetworkInstance_Protocol_Isis_Global_AfPath struct {
 	*ygnmi.NodePath
@@ -5129,6 +5298,44 @@ func (n *NetworkInstance_Protocol_Isis_Global_AfPathAny) SafiName() *NetworkInst
 	ps := &NetworkInstance_Protocol_Isis_Global_Af_SafiNamePathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"*", "safi-name"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// SuppressInterfaceReachability (leaf): Controls IP reachability (TLVs 135/236) advertisement for all
+// interfaces enabled for this address-family.
+//
+//	Defining module:      "openconfig-isis-routing"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "*/suppress-interface-reachability"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/isis/global/afi-safi/af/*/suppress-interface-reachability"
+func (n *NetworkInstance_Protocol_Isis_Global_AfPath) SuppressInterfaceReachability() *NetworkInstance_Protocol_Isis_Global_Af_SuppressInterfaceReachabilityPath {
+	ps := &NetworkInstance_Protocol_Isis_Global_Af_SuppressInterfaceReachabilityPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "suppress-interface-reachability"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// SuppressInterfaceReachability (leaf): Controls IP reachability (TLVs 135/236) advertisement for all
+// interfaces enabled for this address-family.
+//
+//	Defining module:      "openconfig-isis-routing"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "*/suppress-interface-reachability"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/isis/global/afi-safi/af/*/suppress-interface-reachability"
+func (n *NetworkInstance_Protocol_Isis_Global_AfPathAny) SuppressInterfaceReachability() *NetworkInstance_Protocol_Isis_Global_Af_SuppressInterfaceReachabilityPathAny {
+	ps := &NetworkInstance_Protocol_Isis_Global_Af_SuppressInterfaceReachabilityPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "suppress-interface-reachability"},
 			map[string]interface{}{},
 			n,
 		),
@@ -30602,6 +30809,187 @@ func (n *NetworkInstance_Protocol_Isis_Interface_Level_Af_SafiNamePathAny) Confi
 	)
 }
 
+// NetworkInstance_Protocol_Isis_Interface_Level_Af_SuppressReachabilityPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/afi-safi/af/state/suppress-reachability YANG schema element.
+type NetworkInstance_Protocol_Isis_Interface_Level_Af_SuppressReachabilityPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// NetworkInstance_Protocol_Isis_Interface_Level_Af_SuppressReachabilityPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/afi-safi/af/state/suppress-reachability YANG schema element.
+type NetworkInstance_Protocol_Isis_Interface_Level_Af_SuppressReachabilityPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *NetworkInstance_Protocol_Isis_Interface_Level_Af_SuppressReachabilityPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-isis-routing"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/suppress-reachability"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/afi-safi/af/state/suppress-reachability"
+func (n *NetworkInstance_Protocol_Isis_Interface_Level_Af_SuppressReachabilityPath) State() ygnmi.SingletonQuery[bool] {
+	return ygnmi.NewSingletonQuery[bool](
+		"NetworkInstance_Protocol_Isis_Interface_Level_Af",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "suppress-reachability"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.NetworkInstance_Protocol_Isis_Interface_Level_Af).SuppressReachability
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Protocol_Isis_Interface_Level_Af) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-isis-routing"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/suppress-reachability"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/afi-safi/af/state/suppress-reachability"
+func (n *NetworkInstance_Protocol_Isis_Interface_Level_Af_SuppressReachabilityPathAny) State() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewWildcardQuery[bool](
+		"NetworkInstance_Protocol_Isis_Interface_Level_Af",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "suppress-reachability"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.NetworkInstance_Protocol_Isis_Interface_Level_Af).SuppressReachability
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Protocol_Isis_Interface_Level_Af) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-isis-routing"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "config/suppress-reachability"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/afi-safi/af/config/suppress-reachability"
+func (n *NetworkInstance_Protocol_Isis_Interface_Level_Af_SuppressReachabilityPath) Config() ygnmi.ConfigQuery[bool] {
+	return ygnmi.NewConfigQuery[bool](
+		"NetworkInstance_Protocol_Isis_Interface_Level_Af",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "suppress-reachability"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.NetworkInstance_Protocol_Isis_Interface_Level_Af).SuppressReachability
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Protocol_Isis_Interface_Level_Af) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-isis-routing"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "config/suppress-reachability"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/afi-safi/af/config/suppress-reachability"
+func (n *NetworkInstance_Protocol_Isis_Interface_Level_Af_SuppressReachabilityPathAny) Config() ygnmi.WildcardQuery[bool] {
+	return ygnmi.NewWildcardQuery[bool](
+		"NetworkInstance_Protocol_Isis_Interface_Level_Af",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "suppress-reachability"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (bool, bool) {
+			ret := gs.(*oc.NetworkInstance_Protocol_Isis_Interface_Level_Af).SuppressReachability
+			if ret == nil {
+				var zero bool
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Protocol_Isis_Interface_Level_Af) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
 // NetworkInstance_Protocol_Isis_Interface_Level_AfPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/afi-safi/af YANG schema element.
 type NetworkInstance_Protocol_Isis_Interface_Level_AfPath struct {
 	*ygnmi.NodePath
@@ -30810,6 +31198,48 @@ func (n *NetworkInstance_Protocol_Isis_Interface_Level_AfPathAny) SegmentRouting
 			map[string]interface{}{},
 			n,
 		),
+	}
+	return ps
+}
+
+// SuppressReachability (leaf): Controls IP reachability (TLVs 135/236) advertisement for this interface.
+// When set to true, advertisement of the interface's IP prefix is suppressed.
+// When set to false, advertisement of the interface's IP prefix is not suppressed.
+// If not specified, the behavior is inherited from the level or global configuration.
+//
+//	Defining module:      "openconfig-isis-routing"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "*/suppress-reachability"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/afi-safi/af/*/suppress-reachability"
+func (n *NetworkInstance_Protocol_Isis_Interface_Level_AfPath) SuppressReachability() *NetworkInstance_Protocol_Isis_Interface_Level_Af_SuppressReachabilityPath {
+	ps := &NetworkInstance_Protocol_Isis_Interface_Level_Af_SuppressReachabilityPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "suppress-reachability"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// SuppressReachability (leaf): Controls IP reachability (TLVs 135/236) advertisement for this interface.
+// When set to true, advertisement of the interface's IP prefix is suppressed.
+// When set to false, advertisement of the interface's IP prefix is not suppressed.
+// If not specified, the behavior is inherited from the level or global configuration.
+//
+//	Defining module:      "openconfig-isis-routing"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "*/suppress-reachability"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/afi-safi/af/*/suppress-reachability"
+func (n *NetworkInstance_Protocol_Isis_Interface_Level_AfPathAny) SuppressReachability() *NetworkInstance_Protocol_Isis_Interface_Level_Af_SuppressReachabilityPathAny {
+	ps := &NetworkInstance_Protocol_Isis_Interface_Level_Af_SuppressReachabilityPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "suppress-reachability"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
 	}
 	return ps
 }
@@ -44889,6 +45319,128 @@ func (n *NetworkInstance_Protocol_Isis_LevelPathMap) PathOriginName() string {
 	return "openconfig"
 }
 
+// AfAny (list): Address-family/Subsequent Address-family list per level.
+//
+//	Defining module:      "openconfig-isis-routing"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "afi-safi/af"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/isis/levels/level/afi-safi/af"
+func (n *NetworkInstance_Protocol_Isis_LevelPath) AfAny() *NetworkInstance_Protocol_Isis_Level_AfPathAny {
+	ps := &NetworkInstance_Protocol_Isis_Level_AfPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"afi-safi", "af"},
+			map[string]interface{}{"afi-name": "*", "safi-name": "*"},
+			n,
+		),
+	}
+	return ps
+}
+
+// AfAny (list): Address-family/Subsequent Address-family list per level.
+//
+//	Defining module:      "openconfig-isis-routing"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "afi-safi/af"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/isis/levels/level/afi-safi/af"
+func (n *NetworkInstance_Protocol_Isis_LevelPathAny) AfAny() *NetworkInstance_Protocol_Isis_Level_AfPathAny {
+	ps := &NetworkInstance_Protocol_Isis_Level_AfPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"afi-safi", "af"},
+			map[string]interface{}{"afi-name": "*", "safi-name": "*"},
+			n,
+		),
+	}
+	return ps
+}
+
+// WithAfiName sets NetworkInstance_Protocol_Isis_Level_AfPathAny's key "afi-name" to the specified value.
+// AfiName: oc.E_IsisTypes_AFI_TYPE
+func (n *NetworkInstance_Protocol_Isis_Level_AfPathAny) WithAfiName(AfiName oc.E_IsisTypes_AFI_TYPE) *NetworkInstance_Protocol_Isis_Level_AfPathAny {
+	ygnmi.ModifyKey(n.NodePath, "afi-name", AfiName)
+	return n
+}
+
+// WithSafiName sets NetworkInstance_Protocol_Isis_Level_AfPathAny's key "safi-name" to the specified value.
+// SafiName: oc.E_IsisTypes_SAFI_TYPE
+func (n *NetworkInstance_Protocol_Isis_Level_AfPathAny) WithSafiName(SafiName oc.E_IsisTypes_SAFI_TYPE) *NetworkInstance_Protocol_Isis_Level_AfPathAny {
+	ygnmi.ModifyKey(n.NodePath, "safi-name", SafiName)
+	return n
+}
+
+// Af (list): Address-family/Subsequent Address-family list per level.
+//
+//	Defining module:      "openconfig-isis-routing"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "afi-safi/af"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/isis/levels/level/afi-safi/af"
+//
+//	AfiName: oc.E_IsisTypes_AFI_TYPE
+//	SafiName: oc.E_IsisTypes_SAFI_TYPE
+func (n *NetworkInstance_Protocol_Isis_LevelPath) Af(AfiName oc.E_IsisTypes_AFI_TYPE, SafiName oc.E_IsisTypes_SAFI_TYPE) *NetworkInstance_Protocol_Isis_Level_AfPath {
+	ps := &NetworkInstance_Protocol_Isis_Level_AfPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"afi-safi", "af"},
+			map[string]interface{}{"afi-name": AfiName, "safi-name": SafiName},
+			n,
+		),
+	}
+	return ps
+}
+
+// Af (list): Address-family/Subsequent Address-family list per level.
+//
+//	Defining module:      "openconfig-isis-routing"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "afi-safi/af"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/isis/levels/level/afi-safi/af"
+//
+//	AfiName: oc.E_IsisTypes_AFI_TYPE
+//	SafiName: oc.E_IsisTypes_SAFI_TYPE
+func (n *NetworkInstance_Protocol_Isis_LevelPathAny) Af(AfiName oc.E_IsisTypes_AFI_TYPE, SafiName oc.E_IsisTypes_SAFI_TYPE) *NetworkInstance_Protocol_Isis_Level_AfPathAny {
+	ps := &NetworkInstance_Protocol_Isis_Level_AfPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"afi-safi", "af"},
+			map[string]interface{}{"afi-name": AfiName, "safi-name": SafiName},
+			n,
+		),
+	}
+	return ps
+}
+
+// AfMap (list): Address-family/Subsequent Address-family list per level.
+//
+//	Defining module:      "openconfig-isis-routing"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "afi-safi/af"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/isis/levels/level/afi-safi/af"
+func (n *NetworkInstance_Protocol_Isis_LevelPath) AfMap() *NetworkInstance_Protocol_Isis_Level_AfPathMap {
+	ps := &NetworkInstance_Protocol_Isis_Level_AfPathMap{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"afi-safi"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// AfMap (list): Address-family/Subsequent Address-family list per level.
+//
+//	Defining module:      "openconfig-isis-routing"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "afi-safi/af"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/isis/levels/level/afi-safi/af"
+func (n *NetworkInstance_Protocol_Isis_LevelPathAny) AfMap() *NetworkInstance_Protocol_Isis_Level_AfPathMapAny {
+	ps := &NetworkInstance_Protocol_Isis_Level_AfPathMapAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"afi-safi"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
 // Authentication (container): This container defines ISIS authentication.
 //
 //	Defining module:      "openconfig-isis"
@@ -45537,6 +46089,879 @@ func (n *NetworkInstance_Protocol_Isis_LevelPathMapAny) Config() ygnmi.WildcardQ
 		&ygnmi.CompressionInfo{
 			PreRelPath:  []string{"openconfig-network-instance:levels"},
 			PostRelPath: []string{"openconfig-network-instance:level"},
+		},
+	)
+}
+
+// NetworkInstance_Protocol_Isis_Level_Af_AfiNamePath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/afi-safi/af/state/afi-name YANG schema element.
+type NetworkInstance_Protocol_Isis_Level_Af_AfiNamePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// NetworkInstance_Protocol_Isis_Level_Af_AfiNamePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/afi-safi/af/state/afi-name YANG schema element.
+type NetworkInstance_Protocol_Isis_Level_Af_AfiNamePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *NetworkInstance_Protocol_Isis_Level_Af_AfiNamePath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-isis-routing"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/afi-name"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/isis/levels/level/afi-safi/af/state/afi-name"
+func (n *NetworkInstance_Protocol_Isis_Level_Af_AfiNamePath) State() ygnmi.SingletonQuery[oc.E_IsisTypes_AFI_TYPE] {
+	return ygnmi.NewSingletonQuery[oc.E_IsisTypes_AFI_TYPE](
+		"NetworkInstance_Protocol_Isis_Level_Af",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "afi-name"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_IsisTypes_AFI_TYPE, bool) {
+			ret := gs.(*oc.NetworkInstance_Protocol_Isis_Level_Af).AfiName
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Protocol_Isis_Level_Af) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-isis-routing"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/afi-name"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/isis/levels/level/afi-safi/af/state/afi-name"
+func (n *NetworkInstance_Protocol_Isis_Level_Af_AfiNamePathAny) State() ygnmi.WildcardQuery[oc.E_IsisTypes_AFI_TYPE] {
+	return ygnmi.NewWildcardQuery[oc.E_IsisTypes_AFI_TYPE](
+		"NetworkInstance_Protocol_Isis_Level_Af",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "afi-name"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_IsisTypes_AFI_TYPE, bool) {
+			ret := gs.(*oc.NetworkInstance_Protocol_Isis_Level_Af).AfiName
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Protocol_Isis_Level_Af) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-isis-routing"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "config/afi-name"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/isis/levels/level/afi-safi/af/config/afi-name"
+func (n *NetworkInstance_Protocol_Isis_Level_Af_AfiNamePath) Config() ygnmi.ConfigQuery[oc.E_IsisTypes_AFI_TYPE] {
+	return ygnmi.NewConfigQuery[oc.E_IsisTypes_AFI_TYPE](
+		"NetworkInstance_Protocol_Isis_Level_Af",
+		false,
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "afi-name"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_IsisTypes_AFI_TYPE, bool) {
+			ret := gs.(*oc.NetworkInstance_Protocol_Isis_Level_Af).AfiName
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Protocol_Isis_Level_Af) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-isis-routing"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "config/afi-name"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/isis/levels/level/afi-safi/af/config/afi-name"
+func (n *NetworkInstance_Protocol_Isis_Level_Af_AfiNamePathAny) Config() ygnmi.WildcardQuery[oc.E_IsisTypes_AFI_TYPE] {
+	return ygnmi.NewWildcardQuery[oc.E_IsisTypes_AFI_TYPE](
+		"NetworkInstance_Protocol_Isis_Level_Af",
+		false,
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "afi-name"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_IsisTypes_AFI_TYPE, bool) {
+			ret := gs.(*oc.NetworkInstance_Protocol_Isis_Level_Af).AfiName
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Protocol_Isis_Level_Af) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// NetworkInstance_Protocol_Isis_Level_Af_SafiNamePath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/afi-safi/af/state/safi-name YANG schema element.
+type NetworkInstance_Protocol_Isis_Level_Af_SafiNamePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// NetworkInstance_Protocol_Isis_Level_Af_SafiNamePathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/afi-safi/af/state/safi-name YANG schema element.
+type NetworkInstance_Protocol_Isis_Level_Af_SafiNamePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *NetworkInstance_Protocol_Isis_Level_Af_SafiNamePath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-isis-routing"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/safi-name"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/isis/levels/level/afi-safi/af/state/safi-name"
+func (n *NetworkInstance_Protocol_Isis_Level_Af_SafiNamePath) State() ygnmi.SingletonQuery[oc.E_IsisTypes_SAFI_TYPE] {
+	return ygnmi.NewSingletonQuery[oc.E_IsisTypes_SAFI_TYPE](
+		"NetworkInstance_Protocol_Isis_Level_Af",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "safi-name"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_IsisTypes_SAFI_TYPE, bool) {
+			ret := gs.(*oc.NetworkInstance_Protocol_Isis_Level_Af).SafiName
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Protocol_Isis_Level_Af) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-isis-routing"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/safi-name"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/isis/levels/level/afi-safi/af/state/safi-name"
+func (n *NetworkInstance_Protocol_Isis_Level_Af_SafiNamePathAny) State() ygnmi.WildcardQuery[oc.E_IsisTypes_SAFI_TYPE] {
+	return ygnmi.NewWildcardQuery[oc.E_IsisTypes_SAFI_TYPE](
+		"NetworkInstance_Protocol_Isis_Level_Af",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "safi-name"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_IsisTypes_SAFI_TYPE, bool) {
+			ret := gs.(*oc.NetworkInstance_Protocol_Isis_Level_Af).SafiName
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Protocol_Isis_Level_Af) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-isis-routing"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "config/safi-name"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/isis/levels/level/afi-safi/af/config/safi-name"
+func (n *NetworkInstance_Protocol_Isis_Level_Af_SafiNamePath) Config() ygnmi.ConfigQuery[oc.E_IsisTypes_SAFI_TYPE] {
+	return ygnmi.NewConfigQuery[oc.E_IsisTypes_SAFI_TYPE](
+		"NetworkInstance_Protocol_Isis_Level_Af",
+		false,
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "safi-name"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_IsisTypes_SAFI_TYPE, bool) {
+			ret := gs.(*oc.NetworkInstance_Protocol_Isis_Level_Af).SafiName
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Protocol_Isis_Level_Af) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-isis-routing"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "config/safi-name"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/isis/levels/level/afi-safi/af/config/safi-name"
+func (n *NetworkInstance_Protocol_Isis_Level_Af_SafiNamePathAny) Config() ygnmi.WildcardQuery[oc.E_IsisTypes_SAFI_TYPE] {
+	return ygnmi.NewWildcardQuery[oc.E_IsisTypes_SAFI_TYPE](
+		"NetworkInstance_Protocol_Isis_Level_Af",
+		false,
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "safi-name"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_IsisTypes_SAFI_TYPE, bool) {
+			ret := gs.(*oc.NetworkInstance_Protocol_Isis_Level_Af).SafiName
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Protocol_Isis_Level_Af) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// NetworkInstance_Protocol_Isis_Level_Af_SuppressInterfaceReachabilityPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/afi-safi/af/state/suppress-interface-reachability YANG schema element.
+type NetworkInstance_Protocol_Isis_Level_Af_SuppressInterfaceReachabilityPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// NetworkInstance_Protocol_Isis_Level_Af_SuppressInterfaceReachabilityPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/afi-safi/af/state/suppress-interface-reachability YANG schema element.
+type NetworkInstance_Protocol_Isis_Level_Af_SuppressInterfaceReachabilityPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *NetworkInstance_Protocol_Isis_Level_Af_SuppressInterfaceReachabilityPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-isis-routing"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/suppress-interface-reachability"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/isis/levels/level/afi-safi/af/state/suppress-interface-reachability"
+func (n *NetworkInstance_Protocol_Isis_Level_Af_SuppressInterfaceReachabilityPath) State() ygnmi.SingletonQuery[oc.E_Isis_SuppressInterfaceIpMode] {
+	return ygnmi.NewSingletonQuery[oc.E_Isis_SuppressInterfaceIpMode](
+		"NetworkInstance_Protocol_Isis_Level_Af",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "suppress-interface-reachability"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Isis_SuppressInterfaceIpMode, bool) {
+			ret := gs.(*oc.NetworkInstance_Protocol_Isis_Level_Af).SuppressInterfaceReachability
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Protocol_Isis_Level_Af) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-isis-routing"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "state/suppress-interface-reachability"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/isis/levels/level/afi-safi/af/state/suppress-interface-reachability"
+func (n *NetworkInstance_Protocol_Isis_Level_Af_SuppressInterfaceReachabilityPathAny) State() ygnmi.WildcardQuery[oc.E_Isis_SuppressInterfaceIpMode] {
+	return ygnmi.NewWildcardQuery[oc.E_Isis_SuppressInterfaceIpMode](
+		"NetworkInstance_Protocol_Isis_Level_Af",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "suppress-interface-reachability"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Isis_SuppressInterfaceIpMode, bool) {
+			ret := gs.(*oc.NetworkInstance_Protocol_Isis_Level_Af).SuppressInterfaceReachability
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Protocol_Isis_Level_Af) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-isis-routing"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "config/suppress-interface-reachability"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/isis/levels/level/afi-safi/af/config/suppress-interface-reachability"
+func (n *NetworkInstance_Protocol_Isis_Level_Af_SuppressInterfaceReachabilityPath) Config() ygnmi.ConfigQuery[oc.E_Isis_SuppressInterfaceIpMode] {
+	return ygnmi.NewConfigQuery[oc.E_Isis_SuppressInterfaceIpMode](
+		"NetworkInstance_Protocol_Isis_Level_Af",
+		false,
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "suppress-interface-reachability"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Isis_SuppressInterfaceIpMode, bool) {
+			ret := gs.(*oc.NetworkInstance_Protocol_Isis_Level_Af).SuppressInterfaceReachability
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Protocol_Isis_Level_Af) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-isis-routing"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "config/suppress-interface-reachability"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/isis/levels/level/afi-safi/af/config/suppress-interface-reachability"
+func (n *NetworkInstance_Protocol_Isis_Level_Af_SuppressInterfaceReachabilityPathAny) Config() ygnmi.WildcardQuery[oc.E_Isis_SuppressInterfaceIpMode] {
+	return ygnmi.NewWildcardQuery[oc.E_Isis_SuppressInterfaceIpMode](
+		"NetworkInstance_Protocol_Isis_Level_Af",
+		false,
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "suppress-interface-reachability"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Isis_SuppressInterfaceIpMode, bool) {
+			ret := gs.(*oc.NetworkInstance_Protocol_Isis_Level_Af).SuppressInterfaceReachability
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Protocol_Isis_Level_Af) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// NetworkInstance_Protocol_Isis_Level_AfPath represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/afi-safi/af YANG schema element.
+type NetworkInstance_Protocol_Isis_Level_AfPath struct {
+	*ygnmi.NodePath
+}
+
+// NetworkInstance_Protocol_Isis_Level_AfPathAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/afi-safi/af YANG schema element.
+type NetworkInstance_Protocol_Isis_Level_AfPathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *NetworkInstance_Protocol_Isis_Level_AfPath) PathOriginName() string {
+	return "openconfig"
+}
+
+// NetworkInstance_Protocol_Isis_Level_AfPathMap represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/afi-safi/af YANG schema element.
+type NetworkInstance_Protocol_Isis_Level_AfPathMap struct {
+	*ygnmi.NodePath
+}
+
+// NetworkInstance_Protocol_Isis_Level_AfPathMapAny represents the wildcard version of the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/afi-safi/af YANG schema element.
+type NetworkInstance_Protocol_Isis_Level_AfPathMapAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *NetworkInstance_Protocol_Isis_Level_AfPathMap) PathOriginName() string {
+	return "openconfig"
+}
+
+// AfiName (leaf): Address-family type.
+//
+//	Defining module:      "openconfig-isis-routing"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "*/afi-name"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/isis/levels/level/afi-safi/af/*/afi-name"
+func (n *NetworkInstance_Protocol_Isis_Level_AfPath) AfiName() *NetworkInstance_Protocol_Isis_Level_Af_AfiNamePath {
+	ps := &NetworkInstance_Protocol_Isis_Level_Af_AfiNamePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "afi-name"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// AfiName (leaf): Address-family type.
+//
+//	Defining module:      "openconfig-isis-routing"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "*/afi-name"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/isis/levels/level/afi-safi/af/*/afi-name"
+func (n *NetworkInstance_Protocol_Isis_Level_AfPathAny) AfiName() *NetworkInstance_Protocol_Isis_Level_Af_AfiNamePathAny {
+	ps := &NetworkInstance_Protocol_Isis_Level_Af_AfiNamePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "afi-name"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// SafiName (leaf): Subsequent address-family type.
+//
+//	Defining module:      "openconfig-isis-routing"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "*/safi-name"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/isis/levels/level/afi-safi/af/*/safi-name"
+func (n *NetworkInstance_Protocol_Isis_Level_AfPath) SafiName() *NetworkInstance_Protocol_Isis_Level_Af_SafiNamePath {
+	ps := &NetworkInstance_Protocol_Isis_Level_Af_SafiNamePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "safi-name"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// SafiName (leaf): Subsequent address-family type.
+//
+//	Defining module:      "openconfig-isis-routing"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "*/safi-name"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/isis/levels/level/afi-safi/af/*/safi-name"
+func (n *NetworkInstance_Protocol_Isis_Level_AfPathAny) SafiName() *NetworkInstance_Protocol_Isis_Level_Af_SafiNamePathAny {
+	ps := &NetworkInstance_Protocol_Isis_Level_Af_SafiNamePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "safi-name"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// SuppressInterfaceReachability (leaf): Controls IP reachability (TLVs 135/236) advertisement for interfaces
+// enabled in this level.
+// If not specified, the value is inherited from the global address-family configuration.
+//
+//	Defining module:      "openconfig-isis-routing"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "*/suppress-interface-reachability"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/isis/levels/level/afi-safi/af/*/suppress-interface-reachability"
+func (n *NetworkInstance_Protocol_Isis_Level_AfPath) SuppressInterfaceReachability() *NetworkInstance_Protocol_Isis_Level_Af_SuppressInterfaceReachabilityPath {
+	ps := &NetworkInstance_Protocol_Isis_Level_Af_SuppressInterfaceReachabilityPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "suppress-interface-reachability"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// SuppressInterfaceReachability (leaf): Controls IP reachability (TLVs 135/236) advertisement for interfaces
+// enabled in this level.
+// If not specified, the value is inherited from the global address-family configuration.
+//
+//	Defining module:      "openconfig-isis-routing"
+//	Instantiating module: "openconfig-network-instance"
+//	Path from parent:     "*/suppress-interface-reachability"
+//	Path from root:       "/network-instances/network-instance/protocols/protocol/isis/levels/level/afi-safi/af/*/suppress-interface-reachability"
+func (n *NetworkInstance_Protocol_Isis_Level_AfPathAny) SuppressInterfaceReachability() *NetworkInstance_Protocol_Isis_Level_Af_SuppressInterfaceReachabilityPathAny {
+	ps := &NetworkInstance_Protocol_Isis_Level_Af_SuppressInterfaceReachabilityPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "suppress-interface-reachability"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *NetworkInstance_Protocol_Isis_Level_AfPath) State() ygnmi.SingletonQuery[*oc.NetworkInstance_Protocol_Isis_Level_Af] {
+	return ygnmi.NewSingletonQuery[*oc.NetworkInstance_Protocol_Isis_Level_Af](
+		"NetworkInstance_Protocol_Isis_Level_Af",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *NetworkInstance_Protocol_Isis_Level_AfPathAny) State() ygnmi.WildcardQuery[*oc.NetworkInstance_Protocol_Isis_Level_Af] {
+	return ygnmi.NewWildcardQuery[*oc.NetworkInstance_Protocol_Isis_Level_Af](
+		"NetworkInstance_Protocol_Isis_Level_Af",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *NetworkInstance_Protocol_Isis_Level_AfPath) Config() ygnmi.ConfigQuery[*oc.NetworkInstance_Protocol_Isis_Level_Af] {
+	return ygnmi.NewConfigQuery[*oc.NetworkInstance_Protocol_Isis_Level_Af](
+		"NetworkInstance_Protocol_Isis_Level_Af",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *NetworkInstance_Protocol_Isis_Level_AfPathAny) Config() ygnmi.WildcardQuery[*oc.NetworkInstance_Protocol_Isis_Level_Af] {
+	return ygnmi.NewWildcardQuery[*oc.NetworkInstance_Protocol_Isis_Level_Af](
+		"NetworkInstance_Protocol_Isis_Level_Af",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *NetworkInstance_Protocol_Isis_Level_AfPathMap) State() ygnmi.SingletonQuery[map[oc.NetworkInstance_Protocol_Isis_Level_Af_Key]*oc.NetworkInstance_Protocol_Isis_Level_Af] {
+	return ygnmi.NewSingletonQuery[map[oc.NetworkInstance_Protocol_Isis_Level_Af_Key]*oc.NetworkInstance_Protocol_Isis_Level_Af](
+		"NetworkInstance_Protocol_Isis_Level",
+		true,
+		false,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[oc.NetworkInstance_Protocol_Isis_Level_Af_Key]*oc.NetworkInstance_Protocol_Isis_Level_Af, bool) {
+			ret := gs.(*oc.NetworkInstance_Protocol_Isis_Level).Af
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Protocol_Isis_Level) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-network-instance:afi-safi"},
+			PostRelPath: []string{"openconfig-network-instance:af"},
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *NetworkInstance_Protocol_Isis_Level_AfPathMapAny) State() ygnmi.WildcardQuery[map[oc.NetworkInstance_Protocol_Isis_Level_Af_Key]*oc.NetworkInstance_Protocol_Isis_Level_Af] {
+	return ygnmi.NewWildcardQuery[map[oc.NetworkInstance_Protocol_Isis_Level_Af_Key]*oc.NetworkInstance_Protocol_Isis_Level_Af](
+		"NetworkInstance_Protocol_Isis_Level",
+		true,
+		false,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[oc.NetworkInstance_Protocol_Isis_Level_Af_Key]*oc.NetworkInstance_Protocol_Isis_Level_Af, bool) {
+			ret := gs.(*oc.NetworkInstance_Protocol_Isis_Level).Af
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Protocol_Isis_Level) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-network-instance:afi-safi"},
+			PostRelPath: []string{"openconfig-network-instance:af"},
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *NetworkInstance_Protocol_Isis_Level_AfPathMap) Config() ygnmi.ConfigQuery[map[oc.NetworkInstance_Protocol_Isis_Level_Af_Key]*oc.NetworkInstance_Protocol_Isis_Level_Af] {
+	return ygnmi.NewConfigQuery[map[oc.NetworkInstance_Protocol_Isis_Level_Af_Key]*oc.NetworkInstance_Protocol_Isis_Level_Af](
+		"NetworkInstance_Protocol_Isis_Level",
+		false,
+		true,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[oc.NetworkInstance_Protocol_Isis_Level_Af_Key]*oc.NetworkInstance_Protocol_Isis_Level_Af, bool) {
+			ret := gs.(*oc.NetworkInstance_Protocol_Isis_Level).Af
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Protocol_Isis_Level) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-network-instance:afi-safi"},
+			PostRelPath: []string{"openconfig-network-instance:af"},
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *NetworkInstance_Protocol_Isis_Level_AfPathMapAny) Config() ygnmi.WildcardQuery[map[oc.NetworkInstance_Protocol_Isis_Level_Af_Key]*oc.NetworkInstance_Protocol_Isis_Level_Af] {
+	return ygnmi.NewWildcardQuery[map[oc.NetworkInstance_Protocol_Isis_Level_Af_Key]*oc.NetworkInstance_Protocol_Isis_Level_Af](
+		"NetworkInstance_Protocol_Isis_Level",
+		false,
+		true,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[oc.NetworkInstance_Protocol_Isis_Level_Af_Key]*oc.NetworkInstance_Protocol_Isis_Level_Af, bool) {
+			ret := gs.(*oc.NetworkInstance_Protocol_Isis_Level).Af
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.NetworkInstance_Protocol_Isis_Level) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-network-instance:afi-safi"},
+			PostRelPath: []string{"openconfig-network-instance:af"},
 		},
 	)
 }

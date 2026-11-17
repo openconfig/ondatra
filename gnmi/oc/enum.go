@@ -999,6 +999,33 @@ const (
 	BgpPolicy_BgpOriginAttrType_INCOMPLETE E_BgpPolicy_BgpOriginAttrType = 3
 )
 
+// E_BgpPolicy_BgpSetAigpAction is a derived int64 type which is used to represent
+// the enumerated node BgpPolicy_BgpSetAigpAction. An additional value named
+// BgpPolicy_BgpSetAigpAction_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_BgpPolicy_BgpSetAigpAction int64
+
+// IsYANGGoEnum ensures that BgpPolicy_BgpSetAigpAction implements the yang.GoEnum
+// interface. This ensures that BgpPolicy_BgpSetAigpAction can be identified as a
+// mapped type for a YANG enumeration.
+func (E_BgpPolicy_BgpSetAigpAction) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  BgpPolicy_BgpSetAigpAction.
+func (E_BgpPolicy_BgpSetAigpAction) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_BgpPolicy_BgpSetAigpAction.
+func (e E_BgpPolicy_BgpSetAigpAction) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_BgpPolicy_BgpSetAigpAction")
+}
+
+const (
+	// BgpPolicy_BgpSetAigpAction_UNSET corresponds to the value UNSET of BgpPolicy_BgpSetAigpAction
+	BgpPolicy_BgpSetAigpAction_UNSET E_BgpPolicy_BgpSetAigpAction = 0
+	// BgpPolicy_BgpSetAigpAction_SET corresponds to the value SET of BgpPolicy_BgpSetAigpAction
+	BgpPolicy_BgpSetAigpAction_SET E_BgpPolicy_BgpSetAigpAction = 1
+)
+
 // E_BgpPolicy_BgpSetCommunityOptionType is a derived int64 type which is used to represent
 // the enumerated node BgpPolicy_BgpSetCommunityOptionType. An additional value named
 // BgpPolicy_BgpSetCommunityOptionType_UNSET is added to the enumeration which is used as
@@ -1718,6 +1745,43 @@ const (
 	Cpu_Index_ALL E_Cpu_Index = 1
 )
 
+// E_DecapMplsLabelStack_Label is a derived int64 type which is used to represent
+// the enumerated node DecapMplsLabelStack_Label. An additional value named
+// DecapMplsLabelStack_Label_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_DecapMplsLabelStack_Label int64
+
+// IsYANGGoEnum ensures that DecapMplsLabelStack_Label implements the yang.GoEnum
+// interface. This ensures that DecapMplsLabelStack_Label can be identified as a
+// mapped type for a YANG enumeration.
+func (E_DecapMplsLabelStack_Label) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  DecapMplsLabelStack_Label.
+func (E_DecapMplsLabelStack_Label) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_DecapMplsLabelStack_Label.
+func (e E_DecapMplsLabelStack_Label) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_DecapMplsLabelStack_Label")
+}
+
+const (
+	// DecapMplsLabelStack_Label_UNSET corresponds to the value UNSET of DecapMplsLabelStack_Label
+	DecapMplsLabelStack_Label_UNSET E_DecapMplsLabelStack_Label = 0
+	// DecapMplsLabelStack_Label_IPV4_EXPLICIT_NULL corresponds to the value IPV4_EXPLICIT_NULL of DecapMplsLabelStack_Label
+	DecapMplsLabelStack_Label_IPV4_EXPLICIT_NULL E_DecapMplsLabelStack_Label = 1
+	// DecapMplsLabelStack_Label_ROUTER_ALERT corresponds to the value ROUTER_ALERT of DecapMplsLabelStack_Label
+	DecapMplsLabelStack_Label_ROUTER_ALERT E_DecapMplsLabelStack_Label = 2
+	// DecapMplsLabelStack_Label_IPV6_EXPLICIT_NULL corresponds to the value IPV6_EXPLICIT_NULL of DecapMplsLabelStack_Label
+	DecapMplsLabelStack_Label_IPV6_EXPLICIT_NULL E_DecapMplsLabelStack_Label = 3
+	// DecapMplsLabelStack_Label_IMPLICIT_NULL corresponds to the value IMPLICIT_NULL of DecapMplsLabelStack_Label
+	DecapMplsLabelStack_Label_IMPLICIT_NULL E_DecapMplsLabelStack_Label = 4
+	// DecapMplsLabelStack_Label_ENTROPY_LABEL_INDICATOR corresponds to the value ENTROPY_LABEL_INDICATOR of DecapMplsLabelStack_Label
+	DecapMplsLabelStack_Label_ENTROPY_LABEL_INDICATOR E_DecapMplsLabelStack_Label = 8
+	// DecapMplsLabelStack_Label_NO_LABEL corresponds to the value NO_LABEL of DecapMplsLabelStack_Label
+	DecapMplsLabelStack_Label_NO_LABEL E_DecapMplsLabelStack_Label = 9
+)
+
 // E_DefaultMetric_Flags is a derived int64 type which is used to represent
 // the enumerated node DefaultMetric_Flags. An additional value named
 // DefaultMetric_Flags_UNSET is added to the enumeration which is used as
@@ -1817,6 +1881,43 @@ const (
 	Egress_PushLabel_ENTROPY_LABEL_INDICATOR E_Egress_PushLabel = 8
 	// Egress_PushLabel_NO_LABEL corresponds to the value NO_LABEL of Egress_PushLabel
 	Egress_PushLabel_NO_LABEL E_Egress_PushLabel = 9
+)
+
+// E_EncapMplsLabelStack_Label is a derived int64 type which is used to represent
+// the enumerated node EncapMplsLabelStack_Label. An additional value named
+// EncapMplsLabelStack_Label_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_EncapMplsLabelStack_Label int64
+
+// IsYANGGoEnum ensures that EncapMplsLabelStack_Label implements the yang.GoEnum
+// interface. This ensures that EncapMplsLabelStack_Label can be identified as a
+// mapped type for a YANG enumeration.
+func (E_EncapMplsLabelStack_Label) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  EncapMplsLabelStack_Label.
+func (E_EncapMplsLabelStack_Label) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_EncapMplsLabelStack_Label.
+func (e E_EncapMplsLabelStack_Label) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_EncapMplsLabelStack_Label")
+}
+
+const (
+	// EncapMplsLabelStack_Label_UNSET corresponds to the value UNSET of EncapMplsLabelStack_Label
+	EncapMplsLabelStack_Label_UNSET E_EncapMplsLabelStack_Label = 0
+	// EncapMplsLabelStack_Label_IPV4_EXPLICIT_NULL corresponds to the value IPV4_EXPLICIT_NULL of EncapMplsLabelStack_Label
+	EncapMplsLabelStack_Label_IPV4_EXPLICIT_NULL E_EncapMplsLabelStack_Label = 1
+	// EncapMplsLabelStack_Label_ROUTER_ALERT corresponds to the value ROUTER_ALERT of EncapMplsLabelStack_Label
+	EncapMplsLabelStack_Label_ROUTER_ALERT E_EncapMplsLabelStack_Label = 2
+	// EncapMplsLabelStack_Label_IPV6_EXPLICIT_NULL corresponds to the value IPV6_EXPLICIT_NULL of EncapMplsLabelStack_Label
+	EncapMplsLabelStack_Label_IPV6_EXPLICIT_NULL E_EncapMplsLabelStack_Label = 3
+	// EncapMplsLabelStack_Label_IMPLICIT_NULL corresponds to the value IMPLICIT_NULL of EncapMplsLabelStack_Label
+	EncapMplsLabelStack_Label_IMPLICIT_NULL E_EncapMplsLabelStack_Label = 4
+	// EncapMplsLabelStack_Label_ENTROPY_LABEL_INDICATOR corresponds to the value ENTROPY_LABEL_INDICATOR of EncapMplsLabelStack_Label
+	EncapMplsLabelStack_Label_ENTROPY_LABEL_INDICATOR E_EncapMplsLabelStack_Label = 8
+	// EncapMplsLabelStack_Label_NO_LABEL corresponds to the value NO_LABEL of EncapMplsLabelStack_Label
+	EncapMplsLabelStack_Label_NO_LABEL E_EncapMplsLabelStack_Label = 9
 )
 
 // E_EndpointPeer_PeerState is a derived int64 type which is used to represent
@@ -4251,6 +4352,12 @@ const (
 	IfEthernet_INTERFACE_FEC_FEC_RS544 E_IfEthernet_INTERFACE_FEC = 4
 	// IfEthernet_INTERFACE_FEC_FEC_RS544_2X_INTERLEAVE corresponds to the value FEC_RS544_2X_INTERLEAVE of IfEthernet_INTERFACE_FEC
 	IfEthernet_INTERFACE_FEC_FEC_RS544_2X_INTERLEAVE E_IfEthernet_INTERFACE_FEC = 5
+	// IfEthernet_INTERFACE_FEC_FEC_RS544_2X_INTERLEAVE_CL172 corresponds to the value FEC_RS544_2X_INTERLEAVE_CL172 of IfEthernet_INTERFACE_FEC
+	IfEthernet_INTERFACE_FEC_FEC_RS544_2X_INTERLEAVE_CL172 E_IfEthernet_INTERFACE_FEC = 6
+	// IfEthernet_INTERFACE_FEC_FEC_RS544_2X_INTERLEAVE_ETC corresponds to the value FEC_RS544_2X_INTERLEAVE_ETC of IfEthernet_INTERFACE_FEC
+	IfEthernet_INTERFACE_FEC_FEC_RS544_2X_INTERLEAVE_ETC E_IfEthernet_INTERFACE_FEC = 7
+	// IfEthernet_INTERFACE_FEC_FEC_RS544_LOW_LATENCY corresponds to the value FEC_RS544_LOW_LATENCY of IfEthernet_INTERFACE_FEC
+	IfEthernet_INTERFACE_FEC_FEC_RS544_LOW_LATENCY E_IfEthernet_INTERFACE_FEC = 8
 )
 
 // E_IfIp_IpAddressOrigin is a derived int64 type which is used to represent
@@ -5615,6 +5722,39 @@ const (
 	Isis_MetricStyle_WIDE_METRIC E_Isis_MetricStyle = 2
 )
 
+// E_Isis_SuppressInterfaceIpMode is a derived int64 type which is used to represent
+// the enumerated node Isis_SuppressInterfaceIpMode. An additional value named
+// Isis_SuppressInterfaceIpMode_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_Isis_SuppressInterfaceIpMode int64
+
+// IsYANGGoEnum ensures that Isis_SuppressInterfaceIpMode implements the yang.GoEnum
+// interface. This ensures that Isis_SuppressInterfaceIpMode can be identified as a
+// mapped type for a YANG enumeration.
+func (E_Isis_SuppressInterfaceIpMode) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  Isis_SuppressInterfaceIpMode.
+func (E_Isis_SuppressInterfaceIpMode) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_Isis_SuppressInterfaceIpMode.
+func (e E_Isis_SuppressInterfaceIpMode) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_Isis_SuppressInterfaceIpMode")
+}
+
+const (
+	// Isis_SuppressInterfaceIpMode_UNSET corresponds to the value UNSET of Isis_SuppressInterfaceIpMode
+	Isis_SuppressInterfaceIpMode_UNSET E_Isis_SuppressInterfaceIpMode = 0
+	// Isis_SuppressInterfaceIpMode_NONE corresponds to the value NONE of Isis_SuppressInterfaceIpMode
+	Isis_SuppressInterfaceIpMode_NONE E_Isis_SuppressInterfaceIpMode = 1
+	// Isis_SuppressInterfaceIpMode_ALL corresponds to the value ALL of Isis_SuppressInterfaceIpMode
+	Isis_SuppressInterfaceIpMode_ALL E_Isis_SuppressInterfaceIpMode = 2
+	// Isis_SuppressInterfaceIpMode_NON_PASSIVE corresponds to the value NON_PASSIVE of Isis_SuppressInterfaceIpMode
+	Isis_SuppressInterfaceIpMode_NON_PASSIVE E_Isis_SuppressInterfaceIpMode = 3
+	// Isis_SuppressInterfaceIpMode_NON_PASSIVE_POINT_TO_POINT corresponds to the value NON_PASSIVE_POINT_TO_POINT of Isis_SuppressInterfaceIpMode
+	Isis_SuppressInterfaceIpMode_NON_PASSIVE_POINT_TO_POINT E_Isis_SuppressInterfaceIpMode = 4
+)
+
 // E_KeychainTypes_AUTH_TYPE is a derived int64 type which is used to represent
 // the enumerated node KeychainTypes_AUTH_TYPE. An additional value named
 // KeychainTypes_AUTH_TYPE_UNSET is added to the enumeration which is used as
@@ -6713,6 +6853,37 @@ const (
 	Messages_SyslogSeverity_DEBUG E_Messages_SyslogSeverity = 8
 )
 
+// E_Mka_Status is a derived int64 type which is used to represent
+// the enumerated node Mka_Status. An additional value named
+// Mka_Status_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_Mka_Status int64
+
+// IsYANGGoEnum ensures that Mka_Status implements the yang.GoEnum
+// interface. This ensures that Mka_Status can be identified as a
+// mapped type for a YANG enumeration.
+func (E_Mka_Status) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  Mka_Status.
+func (E_Mka_Status) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_Mka_Status.
+func (e E_Mka_Status) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_Mka_Status")
+}
+
+const (
+	// Mka_Status_UNSET corresponds to the value UNSET of Mka_Status
+	Mka_Status_UNSET E_Mka_Status = 0
+	// Mka_Status_ACTIVE corresponds to the value ACTIVE of Mka_Status
+	Mka_Status_ACTIVE E_Mka_Status = 1
+	// Mka_Status_INACTIVE corresponds to the value INACTIVE of Mka_Status
+	Mka_Status_INACTIVE E_Mka_Status = 2
+	// Mka_Status_PENDING corresponds to the value PENDING of Mka_Status
+	Mka_Status_PENDING E_Mka_Status = 3
+)
+
 // E_MplsLdp_LabelAdvertisementMode is a derived int64 type which is used to represent
 // the enumerated node MplsLdp_LabelAdvertisementMode. An additional value named
 // MplsLdp_LabelAdvertisementMode_UNSET is added to the enumeration which is used as
@@ -7201,10 +7372,12 @@ func (e E_MplsTypes_TUNNEL_TYPE) String() string {
 const (
 	// MplsTypes_TUNNEL_TYPE_UNSET corresponds to the value UNSET of MplsTypes_TUNNEL_TYPE
 	MplsTypes_TUNNEL_TYPE_UNSET E_MplsTypes_TUNNEL_TYPE = 0
+	// MplsTypes_TUNNEL_TYPE_BYPASS_P2P corresponds to the value BYPASS_P2P of MplsTypes_TUNNEL_TYPE
+	MplsTypes_TUNNEL_TYPE_BYPASS_P2P E_MplsTypes_TUNNEL_TYPE = 1
 	// MplsTypes_TUNNEL_TYPE_P2MP corresponds to the value P2MP of MplsTypes_TUNNEL_TYPE
-	MplsTypes_TUNNEL_TYPE_P2MP E_MplsTypes_TUNNEL_TYPE = 1
+	MplsTypes_TUNNEL_TYPE_P2MP E_MplsTypes_TUNNEL_TYPE = 2
 	// MplsTypes_TUNNEL_TYPE_P2P corresponds to the value P2P of MplsTypes_TUNNEL_TYPE
-	MplsTypes_TUNNEL_TYPE_P2P E_MplsTypes_TUNNEL_TYPE = 2
+	MplsTypes_TUNNEL_TYPE_P2P E_MplsTypes_TUNNEL_TYPE = 3
 )
 
 // E_Mpls_CspfTieBreaking is a derived int64 type which is used to represent
@@ -7601,6 +7774,47 @@ const (
 	Neighbor_NeighborStatus_DOWN E_Neighbor_NeighborStatus = 2
 )
 
+// E_NetworkInstanceTypes_CONNECTION_POINT_OPER_STATUS is a derived int64 type which is used to represent
+// the enumerated node NetworkInstanceTypes_CONNECTION_POINT_OPER_STATUS. An additional value named
+// NetworkInstanceTypes_CONNECTION_POINT_OPER_STATUS_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_NetworkInstanceTypes_CONNECTION_POINT_OPER_STATUS int64
+
+// IsYANGGoEnum ensures that NetworkInstanceTypes_CONNECTION_POINT_OPER_STATUS implements the yang.GoEnum
+// interface. This ensures that NetworkInstanceTypes_CONNECTION_POINT_OPER_STATUS can be identified as a
+// mapped type for a YANG enumeration.
+func (E_NetworkInstanceTypes_CONNECTION_POINT_OPER_STATUS) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  NetworkInstanceTypes_CONNECTION_POINT_OPER_STATUS.
+func (E_NetworkInstanceTypes_CONNECTION_POINT_OPER_STATUS) ΛMap() map[string]map[int64]ygot.EnumDefinition {
+	return ΛEnum
+}
+
+// String returns a logging-friendly string for E_NetworkInstanceTypes_CONNECTION_POINT_OPER_STATUS.
+func (e E_NetworkInstanceTypes_CONNECTION_POINT_OPER_STATUS) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_NetworkInstanceTypes_CONNECTION_POINT_OPER_STATUS")
+}
+
+const (
+	// NetworkInstanceTypes_CONNECTION_POINT_OPER_STATUS_UNSET corresponds to the value UNSET of NetworkInstanceTypes_CONNECTION_POINT_OPER_STATUS
+	NetworkInstanceTypes_CONNECTION_POINT_OPER_STATUS_UNSET E_NetworkInstanceTypes_CONNECTION_POINT_OPER_STATUS = 0
+	// NetworkInstanceTypes_CONNECTION_POINT_OPER_STATUS_ADMIN_DOWN corresponds to the value ADMIN_DOWN of NetworkInstanceTypes_CONNECTION_POINT_OPER_STATUS
+	NetworkInstanceTypes_CONNECTION_POINT_OPER_STATUS_ADMIN_DOWN E_NetworkInstanceTypes_CONNECTION_POINT_OPER_STATUS = 1
+	// NetworkInstanceTypes_CONNECTION_POINT_OPER_STATUS_CONFIG_CONFLICT corresponds to the value CONFIG_CONFLICT of NetworkInstanceTypes_CONNECTION_POINT_OPER_STATUS
+	NetworkInstanceTypes_CONNECTION_POINT_OPER_STATUS_CONFIG_CONFLICT E_NetworkInstanceTypes_CONNECTION_POINT_OPER_STATUS = 2
+	// NetworkInstanceTypes_CONNECTION_POINT_OPER_STATUS_DOWN corresponds to the value DOWN of NetworkInstanceTypes_CONNECTION_POINT_OPER_STATUS
+	NetworkInstanceTypes_CONNECTION_POINT_OPER_STATUS_DOWN E_NetworkInstanceTypes_CONNECTION_POINT_OPER_STATUS = 3
+	// NetworkInstanceTypes_CONNECTION_POINT_OPER_STATUS_PARTIALLY_UP corresponds to the value PARTIALLY_UP of NetworkInstanceTypes_CONNECTION_POINT_OPER_STATUS
+	NetworkInstanceTypes_CONNECTION_POINT_OPER_STATUS_PARTIALLY_UP E_NetworkInstanceTypes_CONNECTION_POINT_OPER_STATUS = 4
+	// NetworkInstanceTypes_CONNECTION_POINT_OPER_STATUS_STANDBY corresponds to the value STANDBY of NetworkInstanceTypes_CONNECTION_POINT_OPER_STATUS
+	NetworkInstanceTypes_CONNECTION_POINT_OPER_STATUS_STANDBY E_NetworkInstanceTypes_CONNECTION_POINT_OPER_STATUS = 5
+	// NetworkInstanceTypes_CONNECTION_POINT_OPER_STATUS_UNPROGRAMMED corresponds to the value UNPROGRAMMED of NetworkInstanceTypes_CONNECTION_POINT_OPER_STATUS
+	NetworkInstanceTypes_CONNECTION_POINT_OPER_STATUS_UNPROGRAMMED E_NetworkInstanceTypes_CONNECTION_POINT_OPER_STATUS = 6
+	// NetworkInstanceTypes_CONNECTION_POINT_OPER_STATUS_UP corresponds to the value UP of NetworkInstanceTypes_CONNECTION_POINT_OPER_STATUS
+	NetworkInstanceTypes_CONNECTION_POINT_OPER_STATUS_UP E_NetworkInstanceTypes_CONNECTION_POINT_OPER_STATUS = 7
+)
+
 // E_NetworkInstanceTypes_ENCAPSULATION is a derived int64 type which is used to represent
 // the enumerated node NetworkInstanceTypes_ENCAPSULATION. An additional value named
 // NetworkInstanceTypes_ENCAPSULATION_UNSET is added to the enumeration which is used as
@@ -7661,6 +7875,8 @@ const (
 	NetworkInstanceTypes_ENDPOINT_TYPE_LOCAL E_NetworkInstanceTypes_ENDPOINT_TYPE = 1
 	// NetworkInstanceTypes_ENDPOINT_TYPE_REMOTE corresponds to the value REMOTE of NetworkInstanceTypes_ENDPOINT_TYPE
 	NetworkInstanceTypes_ENDPOINT_TYPE_REMOTE E_NetworkInstanceTypes_ENDPOINT_TYPE = 2
+	// NetworkInstanceTypes_ENDPOINT_TYPE_STATIC corresponds to the value STATIC of NetworkInstanceTypes_ENDPOINT_TYPE
+	NetworkInstanceTypes_ENDPOINT_TYPE_STATIC E_NetworkInstanceTypes_ENDPOINT_TYPE = 3
 )
 
 // E_NetworkInstanceTypes_LABEL_ALLOCATION_MODE is a derived int64 type which is used to represent
@@ -9046,6 +9262,37 @@ const (
 	Ospf_LsaGeneration_TimerType_EXPONENTIAL_BACKOFF E_Ospf_LsaGeneration_TimerType = 2
 )
 
+// E_Ospf_SendDefaultRoute_MetricType is a derived int64 type which is used to represent
+// the enumerated node Ospf_SendDefaultRoute_MetricType. An additional value named
+// Ospf_SendDefaultRoute_MetricType_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_Ospf_SendDefaultRoute_MetricType int64
+
+// IsYANGGoEnum ensures that Ospf_SendDefaultRoute_MetricType implements the yang.GoEnum
+// interface. This ensures that Ospf_SendDefaultRoute_MetricType can be identified as a
+// mapped type for a YANG enumeration.
+func (E_Ospf_SendDefaultRoute_MetricType) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  Ospf_SendDefaultRoute_MetricType.
+func (E_Ospf_SendDefaultRoute_MetricType) ΛMap() map[string]map[int64]ygot.EnumDefinition {
+	return ΛEnum
+}
+
+// String returns a logging-friendly string for E_Ospf_SendDefaultRoute_MetricType.
+func (e E_Ospf_SendDefaultRoute_MetricType) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_Ospf_SendDefaultRoute_MetricType")
+}
+
+const (
+	// Ospf_SendDefaultRoute_MetricType_UNSET corresponds to the value UNSET of Ospf_SendDefaultRoute_MetricType
+	Ospf_SendDefaultRoute_MetricType_UNSET E_Ospf_SendDefaultRoute_MetricType = 0
+	// Ospf_SendDefaultRoute_MetricType_EXTERNAL_TYPE_1 corresponds to the value EXTERNAL_TYPE_1 of Ospf_SendDefaultRoute_MetricType
+	Ospf_SendDefaultRoute_MetricType_EXTERNAL_TYPE_1 E_Ospf_SendDefaultRoute_MetricType = 1
+	// Ospf_SendDefaultRoute_MetricType_EXTERNAL_TYPE_2 corresponds to the value EXTERNAL_TYPE_2 of Ospf_SendDefaultRoute_MetricType
+	Ospf_SendDefaultRoute_MetricType_EXTERNAL_TYPE_2 E_Ospf_SendDefaultRoute_MetricType = 2
+)
+
 // E_Ospfv2_LsaGeneration_TimerType is a derived int64 type which is used to represent
 // the enumerated node Ospfv2_LsaGeneration_TimerType. An additional value named
 // Ospfv2_LsaGeneration_TimerType_UNSET is added to the enumeration which is used as
@@ -9075,6 +9322,37 @@ const (
 	Ospfv2_LsaGeneration_TimerType_LINEAR_BACKOFF E_Ospfv2_LsaGeneration_TimerType = 1
 	// Ospfv2_LsaGeneration_TimerType_EXPONENTIAL_BACKOFF corresponds to the value EXPONENTIAL_BACKOFF of Ospfv2_LsaGeneration_TimerType
 	Ospfv2_LsaGeneration_TimerType_EXPONENTIAL_BACKOFF E_Ospfv2_LsaGeneration_TimerType = 2
+)
+
+// E_Ospfv2_SendDefaultRoute_MetricType is a derived int64 type which is used to represent
+// the enumerated node Ospfv2_SendDefaultRoute_MetricType. An additional value named
+// Ospfv2_SendDefaultRoute_MetricType_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_Ospfv2_SendDefaultRoute_MetricType int64
+
+// IsYANGGoEnum ensures that Ospfv2_SendDefaultRoute_MetricType implements the yang.GoEnum
+// interface. This ensures that Ospfv2_SendDefaultRoute_MetricType can be identified as a
+// mapped type for a YANG enumeration.
+func (E_Ospfv2_SendDefaultRoute_MetricType) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  Ospfv2_SendDefaultRoute_MetricType.
+func (E_Ospfv2_SendDefaultRoute_MetricType) ΛMap() map[string]map[int64]ygot.EnumDefinition {
+	return ΛEnum
+}
+
+// String returns a logging-friendly string for E_Ospfv2_SendDefaultRoute_MetricType.
+func (e E_Ospfv2_SendDefaultRoute_MetricType) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_Ospfv2_SendDefaultRoute_MetricType")
+}
+
+const (
+	// Ospfv2_SendDefaultRoute_MetricType_UNSET corresponds to the value UNSET of Ospfv2_SendDefaultRoute_MetricType
+	Ospfv2_SendDefaultRoute_MetricType_UNSET E_Ospfv2_SendDefaultRoute_MetricType = 0
+	// Ospfv2_SendDefaultRoute_MetricType_EXTERNAL_TYPE_1 corresponds to the value EXTERNAL_TYPE_1 of Ospfv2_SendDefaultRoute_MetricType
+	Ospfv2_SendDefaultRoute_MetricType_EXTERNAL_TYPE_1 E_Ospfv2_SendDefaultRoute_MetricType = 1
+	// Ospfv2_SendDefaultRoute_MetricType_EXTERNAL_TYPE_2 corresponds to the value EXTERNAL_TYPE_2 of Ospfv2_SendDefaultRoute_MetricType
+	Ospfv2_SendDefaultRoute_MetricType_EXTERNAL_TYPE_2 E_Ospfv2_SendDefaultRoute_MetricType = 2
 )
 
 // E_Ospfv2_SrSidType is a derived int64 type which is used to represent
@@ -9674,22 +9952,26 @@ const (
 	PlatformTypes_OPENCONFIG_HARDWARE_COMPONENT_INTEGRATED_CIRCUIT E_PlatformTypes_OPENCONFIG_HARDWARE_COMPONENT = 11
 	// PlatformTypes_OPENCONFIG_HARDWARE_COMPONENT_LINECARD corresponds to the value LINECARD of PlatformTypes_OPENCONFIG_HARDWARE_COMPONENT
 	PlatformTypes_OPENCONFIG_HARDWARE_COMPONENT_LINECARD E_PlatformTypes_OPENCONFIG_HARDWARE_COMPONENT = 12
+	// PlatformTypes_OPENCONFIG_HARDWARE_COMPONENT_MIDPLANE corresponds to the value MIDPLANE of PlatformTypes_OPENCONFIG_HARDWARE_COMPONENT
+	PlatformTypes_OPENCONFIG_HARDWARE_COMPONENT_MIDPLANE E_PlatformTypes_OPENCONFIG_HARDWARE_COMPONENT = 13
 	// PlatformTypes_OPENCONFIG_HARDWARE_COMPONENT_OPTICAL_CHANNEL corresponds to the value OPTICAL_CHANNEL of PlatformTypes_OPENCONFIG_HARDWARE_COMPONENT
-	PlatformTypes_OPENCONFIG_HARDWARE_COMPONENT_OPTICAL_CHANNEL E_PlatformTypes_OPENCONFIG_HARDWARE_COMPONENT = 13
+	PlatformTypes_OPENCONFIG_HARDWARE_COMPONENT_OPTICAL_CHANNEL E_PlatformTypes_OPENCONFIG_HARDWARE_COMPONENT = 14
+	// PlatformTypes_OPENCONFIG_HARDWARE_COMPONENT_PACKAGED_TRANSCEIVER corresponds to the value PACKAGED_TRANSCEIVER of PlatformTypes_OPENCONFIG_HARDWARE_COMPONENT
+	PlatformTypes_OPENCONFIG_HARDWARE_COMPONENT_PACKAGED_TRANSCEIVER E_PlatformTypes_OPENCONFIG_HARDWARE_COMPONENT = 15
 	// PlatformTypes_OPENCONFIG_HARDWARE_COMPONENT_PORT corresponds to the value PORT of PlatformTypes_OPENCONFIG_HARDWARE_COMPONENT
-	PlatformTypes_OPENCONFIG_HARDWARE_COMPONENT_PORT E_PlatformTypes_OPENCONFIG_HARDWARE_COMPONENT = 14
+	PlatformTypes_OPENCONFIG_HARDWARE_COMPONENT_PORT E_PlatformTypes_OPENCONFIG_HARDWARE_COMPONENT = 16
 	// PlatformTypes_OPENCONFIG_HARDWARE_COMPONENT_POWER_SUPPLY corresponds to the value POWER_SUPPLY of PlatformTypes_OPENCONFIG_HARDWARE_COMPONENT
-	PlatformTypes_OPENCONFIG_HARDWARE_COMPONENT_POWER_SUPPLY E_PlatformTypes_OPENCONFIG_HARDWARE_COMPONENT = 15
+	PlatformTypes_OPENCONFIG_HARDWARE_COMPONENT_POWER_SUPPLY E_PlatformTypes_OPENCONFIG_HARDWARE_COMPONENT = 17
 	// PlatformTypes_OPENCONFIG_HARDWARE_COMPONENT_SENSOR corresponds to the value SENSOR of PlatformTypes_OPENCONFIG_HARDWARE_COMPONENT
-	PlatformTypes_OPENCONFIG_HARDWARE_COMPONENT_SENSOR E_PlatformTypes_OPENCONFIG_HARDWARE_COMPONENT = 16
+	PlatformTypes_OPENCONFIG_HARDWARE_COMPONENT_SENSOR E_PlatformTypes_OPENCONFIG_HARDWARE_COMPONENT = 18
 	// PlatformTypes_OPENCONFIG_HARDWARE_COMPONENT_STORAGE corresponds to the value STORAGE of PlatformTypes_OPENCONFIG_HARDWARE_COMPONENT
-	PlatformTypes_OPENCONFIG_HARDWARE_COMPONENT_STORAGE E_PlatformTypes_OPENCONFIG_HARDWARE_COMPONENT = 17
+	PlatformTypes_OPENCONFIG_HARDWARE_COMPONENT_STORAGE E_PlatformTypes_OPENCONFIG_HARDWARE_COMPONENT = 19
 	// PlatformTypes_OPENCONFIG_HARDWARE_COMPONENT_TRANSCEIVER corresponds to the value TRANSCEIVER of PlatformTypes_OPENCONFIG_HARDWARE_COMPONENT
-	PlatformTypes_OPENCONFIG_HARDWARE_COMPONENT_TRANSCEIVER E_PlatformTypes_OPENCONFIG_HARDWARE_COMPONENT = 18
+	PlatformTypes_OPENCONFIG_HARDWARE_COMPONENT_TRANSCEIVER E_PlatformTypes_OPENCONFIG_HARDWARE_COMPONENT = 20
 	// PlatformTypes_OPENCONFIG_HARDWARE_COMPONENT_USB_PORT corresponds to the value USB_PORT of PlatformTypes_OPENCONFIG_HARDWARE_COMPONENT
-	PlatformTypes_OPENCONFIG_HARDWARE_COMPONENT_USB_PORT E_PlatformTypes_OPENCONFIG_HARDWARE_COMPONENT = 19
+	PlatformTypes_OPENCONFIG_HARDWARE_COMPONENT_USB_PORT E_PlatformTypes_OPENCONFIG_HARDWARE_COMPONENT = 21
 	// PlatformTypes_OPENCONFIG_HARDWARE_COMPONENT_WIFI_ACCESS_POINT corresponds to the value WIFI_ACCESS_POINT of PlatformTypes_OPENCONFIG_HARDWARE_COMPONENT
-	PlatformTypes_OPENCONFIG_HARDWARE_COMPONENT_WIFI_ACCESS_POINT E_PlatformTypes_OPENCONFIG_HARDWARE_COMPONENT = 20
+	PlatformTypes_OPENCONFIG_HARDWARE_COMPONENT_WIFI_ACCESS_POINT E_PlatformTypes_OPENCONFIG_HARDWARE_COMPONENT = 22
 )
 
 // E_PlatformTypes_OPENCONFIG_SOFTWARE_COMPONENT is a derived int64 type which is used to represent
@@ -9727,6 +10009,39 @@ const (
 	PlatformTypes_OPENCONFIG_SOFTWARE_COMPONENT_OPERATING_SYSTEM_UPDATE E_PlatformTypes_OPENCONFIG_SOFTWARE_COMPONENT = 4
 	// PlatformTypes_OPENCONFIG_SOFTWARE_COMPONENT_SOFTWARE_MODULE corresponds to the value SOFTWARE_MODULE of PlatformTypes_OPENCONFIG_SOFTWARE_COMPONENT
 	PlatformTypes_OPENCONFIG_SOFTWARE_COMPONENT_SOFTWARE_MODULE E_PlatformTypes_OPENCONFIG_SOFTWARE_COMPONENT = 5
+)
+
+// E_Platform_ComponentPowerOperType is a derived int64 type which is used to represent
+// the enumerated node Platform_ComponentPowerOperType. An additional value named
+// Platform_ComponentPowerOperType_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_Platform_ComponentPowerOperType int64
+
+// IsYANGGoEnum ensures that Platform_ComponentPowerOperType implements the yang.GoEnum
+// interface. This ensures that Platform_ComponentPowerOperType can be identified as a
+// mapped type for a YANG enumeration.
+func (E_Platform_ComponentPowerOperType) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  Platform_ComponentPowerOperType.
+func (E_Platform_ComponentPowerOperType) ΛMap() map[string]map[int64]ygot.EnumDefinition {
+	return ΛEnum
+}
+
+// String returns a logging-friendly string for E_Platform_ComponentPowerOperType.
+func (e E_Platform_ComponentPowerOperType) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_Platform_ComponentPowerOperType")
+}
+
+const (
+	// Platform_ComponentPowerOperType_UNSET corresponds to the value UNSET of Platform_ComponentPowerOperType
+	Platform_ComponentPowerOperType_UNSET E_Platform_ComponentPowerOperType = 0
+	// Platform_ComponentPowerOperType_POWER_ENABLED corresponds to the value POWER_ENABLED of Platform_ComponentPowerOperType
+	Platform_ComponentPowerOperType_POWER_ENABLED E_Platform_ComponentPowerOperType = 1
+	// Platform_ComponentPowerOperType_POWER_DISABLED corresponds to the value POWER_DISABLED of Platform_ComponentPowerOperType
+	Platform_ComponentPowerOperType_POWER_DISABLED E_Platform_ComponentPowerOperType = 2
+	// Platform_ComponentPowerOperType_POWER_TRANSITIONING corresponds to the value POWER_TRANSITIONING of Platform_ComponentPowerOperType
+	Platform_ComponentPowerOperType_POWER_TRANSITIONING E_Platform_ComponentPowerOperType = 3
 )
 
 // E_Platform_ComponentPowerType is a derived int64 type which is used to represent
@@ -9890,6 +10205,39 @@ const (
 	PolicyForwardingEntry_MplsLabel_NO_LABEL E_PolicyForwardingEntry_MplsLabel = 9
 )
 
+// E_PolicyForwarding_FORWARDING_ACTION is a derived int64 type which is used to represent
+// the enumerated node PolicyForwarding_FORWARDING_ACTION. An additional value named
+// PolicyForwarding_FORWARDING_ACTION_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_PolicyForwarding_FORWARDING_ACTION int64
+
+// IsYANGGoEnum ensures that PolicyForwarding_FORWARDING_ACTION implements the yang.GoEnum
+// interface. This ensures that PolicyForwarding_FORWARDING_ACTION can be identified as a
+// mapped type for a YANG enumeration.
+func (E_PolicyForwarding_FORWARDING_ACTION) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  PolicyForwarding_FORWARDING_ACTION.
+func (E_PolicyForwarding_FORWARDING_ACTION) ΛMap() map[string]map[int64]ygot.EnumDefinition {
+	return ΛEnum
+}
+
+// String returns a logging-friendly string for E_PolicyForwarding_FORWARDING_ACTION.
+func (e E_PolicyForwarding_FORWARDING_ACTION) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_PolicyForwarding_FORWARDING_ACTION")
+}
+
+const (
+	// PolicyForwarding_FORWARDING_ACTION_UNSET corresponds to the value UNSET of PolicyForwarding_FORWARDING_ACTION
+	PolicyForwarding_FORWARDING_ACTION_UNSET E_PolicyForwarding_FORWARDING_ACTION = 0
+	// PolicyForwarding_FORWARDING_ACTION_DROP corresponds to the value DROP of PolicyForwarding_FORWARDING_ACTION
+	PolicyForwarding_FORWARDING_ACTION_DROP E_PolicyForwarding_FORWARDING_ACTION = 1
+	// PolicyForwarding_FORWARDING_ACTION_FORWARD corresponds to the value FORWARD of PolicyForwarding_FORWARDING_ACTION
+	PolicyForwarding_FORWARDING_ACTION_FORWARD E_PolicyForwarding_FORWARDING_ACTION = 2
+	// PolicyForwarding_FORWARDING_ACTION_REJECT corresponds to the value REJECT of PolicyForwarding_FORWARDING_ACTION
+	PolicyForwarding_FORWARDING_ACTION_REJECT E_PolicyForwarding_FORWARDING_ACTION = 3
+)
+
 // E_PolicyTypes_ATTRIBUTE_COMPARISON is a derived int64 type which is used to represent
 // the enumerated node PolicyTypes_ATTRIBUTE_COMPARISON. An additional value named
 // PolicyTypes_ATTRIBUTE_COMPARISON_UNSET is added to the enumeration which is used as
@@ -10003,6 +10351,35 @@ const (
 	Policy_Instance_SANDBOX E_Policy_Instance = 3
 )
 
+// E_Policy_SecurityPolicy is a derived int64 type which is used to represent
+// the enumerated node Policy_SecurityPolicy. An additional value named
+// Policy_SecurityPolicy_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_Policy_SecurityPolicy int64
+
+// IsYANGGoEnum ensures that Policy_SecurityPolicy implements the yang.GoEnum
+// interface. This ensures that Policy_SecurityPolicy can be identified as a
+// mapped type for a YANG enumeration.
+func (E_Policy_SecurityPolicy) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  Policy_SecurityPolicy.
+func (E_Policy_SecurityPolicy) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_Policy_SecurityPolicy.
+func (e E_Policy_SecurityPolicy) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_Policy_SecurityPolicy")
+}
+
+const (
+	// Policy_SecurityPolicy_UNSET corresponds to the value UNSET of Policy_SecurityPolicy
+	Policy_SecurityPolicy_UNSET E_Policy_SecurityPolicy = 0
+	// Policy_SecurityPolicy_SHOULD_SECURE corresponds to the value SHOULD_SECURE of Policy_SecurityPolicy
+	Policy_SecurityPolicy_SHOULD_SECURE E_Policy_SecurityPolicy = 1
+	// Policy_SecurityPolicy_MUST_SECURE corresponds to the value MUST_SECURE of Policy_SecurityPolicy
+	Policy_SecurityPolicy_MUST_SECURE E_Policy_SecurityPolicy = 2
+)
+
 // E_Policy_Type is a derived int64 type which is used to represent
 // the enumerated node Policy_Type. An additional value named
 // Policy_Type_UNSET is added to the enumeration which is used as
@@ -10030,6 +10407,8 @@ const (
 	Policy_Type_PBR_POLICY E_Policy_Type = 1
 	// Policy_Type_VRF_SELECTION_POLICY corresponds to the value VRF_SELECTION_POLICY of Policy_Type
 	Policy_Type_VRF_SELECTION_POLICY E_Policy_Type = 2
+	// Policy_Type_MATCH_ACTION_POLICY corresponds to the value MATCH_ACTION_POLICY of Policy_Type
+	Policy_Type_MATCH_ACTION_POLICY E_Policy_Type = 3
 )
 
 // E_PortSet_ExcludePort is a derived int64 type which is used to represent
@@ -10367,6 +10746,8 @@ const (
 	ProxyArp_Mode_REMOTE_ONLY E_ProxyArp_Mode = 2
 	// ProxyArp_Mode_ALL corresponds to the value ALL of ProxyArp_Mode
 	ProxyArp_Mode_ALL E_ProxyArp_Mode = 3
+	// ProxyArp_Mode_MANUAL corresponds to the value MANUAL of ProxyArp_Mode
+	ProxyArp_Mode_MANUAL E_ProxyArp_Mode = 4
 )
 
 // E_QosTypes_QOS_SCHEDULER_TYPE is a derived int64 type which is used to represent
@@ -10798,6 +11179,39 @@ const (
 	RouterAdvertisement_Mode_ALL E_RouterAdvertisement_Mode = 1
 	// RouterAdvertisement_Mode_DISABLE_UNSOLICITED_RA corresponds to the value DISABLE_UNSOLICITED_RA of RouterAdvertisement_Mode
 	RouterAdvertisement_Mode_DISABLE_UNSOLICITED_RA E_RouterAdvertisement_Mode = 2
+)
+
+// E_RouterAdvertisement_RouterPreference is a derived int64 type which is used to represent
+// the enumerated node RouterAdvertisement_RouterPreference. An additional value named
+// RouterAdvertisement_RouterPreference_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_RouterAdvertisement_RouterPreference int64
+
+// IsYANGGoEnum ensures that RouterAdvertisement_RouterPreference implements the yang.GoEnum
+// interface. This ensures that RouterAdvertisement_RouterPreference can be identified as a
+// mapped type for a YANG enumeration.
+func (E_RouterAdvertisement_RouterPreference) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  RouterAdvertisement_RouterPreference.
+func (E_RouterAdvertisement_RouterPreference) ΛMap() map[string]map[int64]ygot.EnumDefinition {
+	return ΛEnum
+}
+
+// String returns a logging-friendly string for E_RouterAdvertisement_RouterPreference.
+func (e E_RouterAdvertisement_RouterPreference) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_RouterAdvertisement_RouterPreference")
+}
+
+const (
+	// RouterAdvertisement_RouterPreference_UNSET corresponds to the value UNSET of RouterAdvertisement_RouterPreference
+	RouterAdvertisement_RouterPreference_UNSET E_RouterAdvertisement_RouterPreference = 0
+	// RouterAdvertisement_RouterPreference_HIGH corresponds to the value HIGH of RouterAdvertisement_RouterPreference
+	RouterAdvertisement_RouterPreference_HIGH E_RouterAdvertisement_RouterPreference = 1
+	// RouterAdvertisement_RouterPreference_MEDIUM corresponds to the value MEDIUM of RouterAdvertisement_RouterPreference
+	RouterAdvertisement_RouterPreference_MEDIUM E_RouterAdvertisement_RouterPreference = 2
+	// RouterAdvertisement_RouterPreference_LOW corresponds to the value LOW of RouterAdvertisement_RouterPreference
+	RouterAdvertisement_RouterPreference_LOW E_RouterAdvertisement_RouterPreference = 3
 )
 
 // E_RouterInformation_Tlv_Type is a derived int64 type which is used to represent
@@ -11510,6 +11924,124 @@ const (
 	Sid_Value_NO_LABEL E_Sid_Value = 9
 )
 
+// E_Snmp_SNMP_NOTIFICATION_EVENT is a derived int64 type which is used to represent
+// the enumerated node Snmp_SNMP_NOTIFICATION_EVENT. An additional value named
+// Snmp_SNMP_NOTIFICATION_EVENT_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_Snmp_SNMP_NOTIFICATION_EVENT int64
+
+// IsYANGGoEnum ensures that Snmp_SNMP_NOTIFICATION_EVENT implements the yang.GoEnum
+// interface. This ensures that Snmp_SNMP_NOTIFICATION_EVENT can be identified as a
+// mapped type for a YANG enumeration.
+func (E_Snmp_SNMP_NOTIFICATION_EVENT) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  Snmp_SNMP_NOTIFICATION_EVENT.
+func (E_Snmp_SNMP_NOTIFICATION_EVENT) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_Snmp_SNMP_NOTIFICATION_EVENT.
+func (e E_Snmp_SNMP_NOTIFICATION_EVENT) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_Snmp_SNMP_NOTIFICATION_EVENT")
+}
+
+const (
+	// Snmp_SNMP_NOTIFICATION_EVENT_UNSET corresponds to the value UNSET of Snmp_SNMP_NOTIFICATION_EVENT
+	Snmp_SNMP_NOTIFICATION_EVENT_UNSET E_Snmp_SNMP_NOTIFICATION_EVENT = 0
+	// Snmp_SNMP_NOTIFICATION_EVENT_ALL corresponds to the value ALL of Snmp_SNMP_NOTIFICATION_EVENT
+	Snmp_SNMP_NOTIFICATION_EVENT_ALL E_Snmp_SNMP_NOTIFICATION_EVENT = 1
+	// Snmp_SNMP_NOTIFICATION_EVENT_AUTHENTICATION corresponds to the value AUTHENTICATION of Snmp_SNMP_NOTIFICATION_EVENT
+	Snmp_SNMP_NOTIFICATION_EVENT_AUTHENTICATION E_Snmp_SNMP_NOTIFICATION_EVENT = 2
+	// Snmp_SNMP_NOTIFICATION_EVENT_LINE_STATUS corresponds to the value LINE_STATUS of Snmp_SNMP_NOTIFICATION_EVENT
+	Snmp_SNMP_NOTIFICATION_EVENT_LINE_STATUS E_Snmp_SNMP_NOTIFICATION_EVENT = 3
+)
+
+// E_Snmp_SnmpAccessMode is a derived int64 type which is used to represent
+// the enumerated node Snmp_SnmpAccessMode. An additional value named
+// Snmp_SnmpAccessMode_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_Snmp_SnmpAccessMode int64
+
+// IsYANGGoEnum ensures that Snmp_SnmpAccessMode implements the yang.GoEnum
+// interface. This ensures that Snmp_SnmpAccessMode can be identified as a
+// mapped type for a YANG enumeration.
+func (E_Snmp_SnmpAccessMode) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  Snmp_SnmpAccessMode.
+func (E_Snmp_SnmpAccessMode) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_Snmp_SnmpAccessMode.
+func (e E_Snmp_SnmpAccessMode) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_Snmp_SnmpAccessMode")
+}
+
+const (
+	// Snmp_SnmpAccessMode_UNSET corresponds to the value UNSET of Snmp_SnmpAccessMode
+	Snmp_SnmpAccessMode_UNSET E_Snmp_SnmpAccessMode = 0
+	// Snmp_SnmpAccessMode_READ_ONLY corresponds to the value READ_ONLY of Snmp_SnmpAccessMode
+	Snmp_SnmpAccessMode_READ_ONLY E_Snmp_SnmpAccessMode = 1
+	// Snmp_SnmpAccessMode_READ_WRITE corresponds to the value READ_WRITE of Snmp_SnmpAccessMode
+	Snmp_SnmpAccessMode_READ_WRITE E_Snmp_SnmpAccessMode = 2
+)
+
+// E_Snmp_SnmpNotificationType is a derived int64 type which is used to represent
+// the enumerated node Snmp_SnmpNotificationType. An additional value named
+// Snmp_SnmpNotificationType_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_Snmp_SnmpNotificationType int64
+
+// IsYANGGoEnum ensures that Snmp_SnmpNotificationType implements the yang.GoEnum
+// interface. This ensures that Snmp_SnmpNotificationType can be identified as a
+// mapped type for a YANG enumeration.
+func (E_Snmp_SnmpNotificationType) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  Snmp_SnmpNotificationType.
+func (E_Snmp_SnmpNotificationType) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_Snmp_SnmpNotificationType.
+func (e E_Snmp_SnmpNotificationType) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_Snmp_SnmpNotificationType")
+}
+
+const (
+	// Snmp_SnmpNotificationType_UNSET corresponds to the value UNSET of Snmp_SnmpNotificationType
+	Snmp_SnmpNotificationType_UNSET E_Snmp_SnmpNotificationType = 0
+	// Snmp_SnmpNotificationType_TRAP corresponds to the value TRAP of Snmp_SnmpNotificationType
+	Snmp_SnmpNotificationType_TRAP E_Snmp_SnmpNotificationType = 1
+	// Snmp_SnmpNotificationType_INFORM corresponds to the value INFORM of Snmp_SnmpNotificationType
+	Snmp_SnmpNotificationType_INFORM E_Snmp_SnmpNotificationType = 2
+)
+
+// E_Snmp_SnmpVersion is a derived int64 type which is used to represent
+// the enumerated node Snmp_SnmpVersion. An additional value named
+// Snmp_SnmpVersion_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_Snmp_SnmpVersion int64
+
+// IsYANGGoEnum ensures that Snmp_SnmpVersion implements the yang.GoEnum
+// interface. This ensures that Snmp_SnmpVersion can be identified as a
+// mapped type for a YANG enumeration.
+func (E_Snmp_SnmpVersion) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  Snmp_SnmpVersion.
+func (E_Snmp_SnmpVersion) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_Snmp_SnmpVersion.
+func (e E_Snmp_SnmpVersion) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_Snmp_SnmpVersion")
+}
+
+const (
+	// Snmp_SnmpVersion_UNSET corresponds to the value UNSET of Snmp_SnmpVersion
+	Snmp_SnmpVersion_UNSET E_Snmp_SnmpVersion = 0
+	// Snmp_SnmpVersion_V1 corresponds to the value V1 of Snmp_SnmpVersion
+	Snmp_SnmpVersion_V1 E_Snmp_SnmpVersion = 1
+	// Snmp_SnmpVersion_V2C corresponds to the value V2C of Snmp_SnmpVersion
+	Snmp_SnmpVersion_V2C E_Snmp_SnmpVersion = 2
+)
+
 // E_SrgbDescriptor_Label is a derived int64 type which is used to represent
 // the enumerated node SrgbDescriptor_Label. An additional value named
 // SrgbDescriptor_Label_UNSET is added to the enumeration which is used as
@@ -11677,6 +12209,80 @@ const (
 	SshServer_ProtocolVersion_V1 E_SshServer_ProtocolVersion = 2
 	// SshServer_ProtocolVersion_V1_V2 corresponds to the value V1_V2 of SshServer_ProtocolVersion
 	SshServer_ProtocolVersion_V1_V2 E_SshServer_ProtocolVersion = 3
+)
+
+// E_Static_LocalLabel is a derived int64 type which is used to represent
+// the enumerated node Static_LocalLabel. An additional value named
+// Static_LocalLabel_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_Static_LocalLabel int64
+
+// IsYANGGoEnum ensures that Static_LocalLabel implements the yang.GoEnum
+// interface. This ensures that Static_LocalLabel can be identified as a
+// mapped type for a YANG enumeration.
+func (E_Static_LocalLabel) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  Static_LocalLabel.
+func (E_Static_LocalLabel) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_Static_LocalLabel.
+func (e E_Static_LocalLabel) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_Static_LocalLabel")
+}
+
+const (
+	// Static_LocalLabel_UNSET corresponds to the value UNSET of Static_LocalLabel
+	Static_LocalLabel_UNSET E_Static_LocalLabel = 0
+	// Static_LocalLabel_IPV4_EXPLICIT_NULL corresponds to the value IPV4_EXPLICIT_NULL of Static_LocalLabel
+	Static_LocalLabel_IPV4_EXPLICIT_NULL E_Static_LocalLabel = 1
+	// Static_LocalLabel_ROUTER_ALERT corresponds to the value ROUTER_ALERT of Static_LocalLabel
+	Static_LocalLabel_ROUTER_ALERT E_Static_LocalLabel = 2
+	// Static_LocalLabel_IPV6_EXPLICIT_NULL corresponds to the value IPV6_EXPLICIT_NULL of Static_LocalLabel
+	Static_LocalLabel_IPV6_EXPLICIT_NULL E_Static_LocalLabel = 3
+	// Static_LocalLabel_IMPLICIT_NULL corresponds to the value IMPLICIT_NULL of Static_LocalLabel
+	Static_LocalLabel_IMPLICIT_NULL E_Static_LocalLabel = 4
+	// Static_LocalLabel_ENTROPY_LABEL_INDICATOR corresponds to the value ENTROPY_LABEL_INDICATOR of Static_LocalLabel
+	Static_LocalLabel_ENTROPY_LABEL_INDICATOR E_Static_LocalLabel = 8
+	// Static_LocalLabel_NO_LABEL corresponds to the value NO_LABEL of Static_LocalLabel
+	Static_LocalLabel_NO_LABEL E_Static_LocalLabel = 9
+)
+
+// E_Static_NeighborLabel is a derived int64 type which is used to represent
+// the enumerated node Static_NeighborLabel. An additional value named
+// Static_NeighborLabel_UNSET is added to the enumeration which is used as
+// the nil value, indicating that the enumeration was not explicitly set by
+// the program importing the generated structures.
+type E_Static_NeighborLabel int64
+
+// IsYANGGoEnum ensures that Static_NeighborLabel implements the yang.GoEnum
+// interface. This ensures that Static_NeighborLabel can be identified as a
+// mapped type for a YANG enumeration.
+func (E_Static_NeighborLabel) IsYANGGoEnum() {}
+
+// ΛMap returns the value lookup map associated with  Static_NeighborLabel.
+func (E_Static_NeighborLabel) ΛMap() map[string]map[int64]ygot.EnumDefinition { return ΛEnum }
+
+// String returns a logging-friendly string for E_Static_NeighborLabel.
+func (e E_Static_NeighborLabel) String() string {
+	return ygot.EnumLogString(e, int64(e), "E_Static_NeighborLabel")
+}
+
+const (
+	// Static_NeighborLabel_UNSET corresponds to the value UNSET of Static_NeighborLabel
+	Static_NeighborLabel_UNSET E_Static_NeighborLabel = 0
+	// Static_NeighborLabel_IPV4_EXPLICIT_NULL corresponds to the value IPV4_EXPLICIT_NULL of Static_NeighborLabel
+	Static_NeighborLabel_IPV4_EXPLICIT_NULL E_Static_NeighborLabel = 1
+	// Static_NeighborLabel_ROUTER_ALERT corresponds to the value ROUTER_ALERT of Static_NeighborLabel
+	Static_NeighborLabel_ROUTER_ALERT E_Static_NeighborLabel = 2
+	// Static_NeighborLabel_IPV6_EXPLICIT_NULL corresponds to the value IPV6_EXPLICIT_NULL of Static_NeighborLabel
+	Static_NeighborLabel_IPV6_EXPLICIT_NULL E_Static_NeighborLabel = 3
+	// Static_NeighborLabel_IMPLICIT_NULL corresponds to the value IMPLICIT_NULL of Static_NeighborLabel
+	Static_NeighborLabel_IMPLICIT_NULL E_Static_NeighborLabel = 4
+	// Static_NeighborLabel_ENTROPY_LABEL_INDICATOR corresponds to the value ENTROPY_LABEL_INDICATOR of Static_NeighborLabel
+	Static_NeighborLabel_ENTROPY_LABEL_INDICATOR E_Static_NeighborLabel = 8
+	// Static_NeighborLabel_NO_LABEL corresponds to the value NO_LABEL of Static_NeighborLabel
+	Static_NeighborLabel_NO_LABEL E_Static_NeighborLabel = 9
 )
 
 // E_SubTlv_LinkType is a derived int64 type which is used to represent
@@ -12340,40 +12946,58 @@ const (
 	TransportTypes_ETHERNET_PMD_TYPE_ETH_10GBASE_SR E_TransportTypes_ETHERNET_PMD_TYPE = 18
 	// TransportTypes_ETHERNET_PMD_TYPE_ETH_10GBASE_ZR corresponds to the value ETH_10GBASE_ZR of TransportTypes_ETHERNET_PMD_TYPE
 	TransportTypes_ETHERNET_PMD_TYPE_ETH_10GBASE_ZR E_TransportTypes_ETHERNET_PMD_TYPE = 19
+	// TransportTypes_ETHERNET_PMD_TYPE_ETH_1600GBASE_ZR corresponds to the value ETH_1600GBASE_ZR of TransportTypes_ETHERNET_PMD_TYPE
+	TransportTypes_ETHERNET_PMD_TYPE_ETH_1600GBASE_ZR E_TransportTypes_ETHERNET_PMD_TYPE = 20
+	// TransportTypes_ETHERNET_PMD_TYPE_ETH_1600GBASE_ZR_PLUS corresponds to the value ETH_1600GBASE_ZR_PLUS of TransportTypes_ETHERNET_PMD_TYPE
+	TransportTypes_ETHERNET_PMD_TYPE_ETH_1600GBASE_ZR_PLUS E_TransportTypes_ETHERNET_PMD_TYPE = 21
 	// TransportTypes_ETHERNET_PMD_TYPE_ETH_25GBASE_LR corresponds to the value ETH_25GBASE_LR of TransportTypes_ETHERNET_PMD_TYPE
-	TransportTypes_ETHERNET_PMD_TYPE_ETH_25GBASE_LR E_TransportTypes_ETHERNET_PMD_TYPE = 20
+	TransportTypes_ETHERNET_PMD_TYPE_ETH_25GBASE_LR E_TransportTypes_ETHERNET_PMD_TYPE = 22
 	// TransportTypes_ETHERNET_PMD_TYPE_ETH_25GBASE_SR corresponds to the value ETH_25GBASE_SR of TransportTypes_ETHERNET_PMD_TYPE
-	TransportTypes_ETHERNET_PMD_TYPE_ETH_25GBASE_SR E_TransportTypes_ETHERNET_PMD_TYPE = 21
+	TransportTypes_ETHERNET_PMD_TYPE_ETH_25GBASE_SR E_TransportTypes_ETHERNET_PMD_TYPE = 23
+	// TransportTypes_ETHERNET_PMD_TYPE_ETH_3200GBASE_ZR corresponds to the value ETH_3200GBASE_ZR of TransportTypes_ETHERNET_PMD_TYPE
+	TransportTypes_ETHERNET_PMD_TYPE_ETH_3200GBASE_ZR E_TransportTypes_ETHERNET_PMD_TYPE = 24
+	// TransportTypes_ETHERNET_PMD_TYPE_ETH_3200GBASE_ZR_PLUS corresponds to the value ETH_3200GBASE_ZR_PLUS of TransportTypes_ETHERNET_PMD_TYPE
+	TransportTypes_ETHERNET_PMD_TYPE_ETH_3200GBASE_ZR_PLUS E_TransportTypes_ETHERNET_PMD_TYPE = 25
 	// TransportTypes_ETHERNET_PMD_TYPE_ETH_400GBASE_DR4 corresponds to the value ETH_400GBASE_DR4 of TransportTypes_ETHERNET_PMD_TYPE
-	TransportTypes_ETHERNET_PMD_TYPE_ETH_400GBASE_DR4 E_TransportTypes_ETHERNET_PMD_TYPE = 22
+	TransportTypes_ETHERNET_PMD_TYPE_ETH_400GBASE_DR4 E_TransportTypes_ETHERNET_PMD_TYPE = 26
 	// TransportTypes_ETHERNET_PMD_TYPE_ETH_400GBASE_FR4 corresponds to the value ETH_400GBASE_FR4 of TransportTypes_ETHERNET_PMD_TYPE
-	TransportTypes_ETHERNET_PMD_TYPE_ETH_400GBASE_FR4 E_TransportTypes_ETHERNET_PMD_TYPE = 23
+	TransportTypes_ETHERNET_PMD_TYPE_ETH_400GBASE_FR4 E_TransportTypes_ETHERNET_PMD_TYPE = 27
 	// TransportTypes_ETHERNET_PMD_TYPE_ETH_400GBASE_LR4 corresponds to the value ETH_400GBASE_LR4 of TransportTypes_ETHERNET_PMD_TYPE
-	TransportTypes_ETHERNET_PMD_TYPE_ETH_400GBASE_LR4 E_TransportTypes_ETHERNET_PMD_TYPE = 24
+	TransportTypes_ETHERNET_PMD_TYPE_ETH_400GBASE_LR4 E_TransportTypes_ETHERNET_PMD_TYPE = 28
 	// TransportTypes_ETHERNET_PMD_TYPE_ETH_400GBASE_LR8 corresponds to the value ETH_400GBASE_LR8 of TransportTypes_ETHERNET_PMD_TYPE
-	TransportTypes_ETHERNET_PMD_TYPE_ETH_400GBASE_LR8 E_TransportTypes_ETHERNET_PMD_TYPE = 25
+	TransportTypes_ETHERNET_PMD_TYPE_ETH_400GBASE_LR8 E_TransportTypes_ETHERNET_PMD_TYPE = 29
 	// TransportTypes_ETHERNET_PMD_TYPE_ETH_400GBASE_ZR corresponds to the value ETH_400GBASE_ZR of TransportTypes_ETHERNET_PMD_TYPE
-	TransportTypes_ETHERNET_PMD_TYPE_ETH_400GBASE_ZR E_TransportTypes_ETHERNET_PMD_TYPE = 26
+	TransportTypes_ETHERNET_PMD_TYPE_ETH_400GBASE_ZR E_TransportTypes_ETHERNET_PMD_TYPE = 30
 	// TransportTypes_ETHERNET_PMD_TYPE_ETH_400GMSA_PSM4 corresponds to the value ETH_400GMSA_PSM4 of TransportTypes_ETHERNET_PMD_TYPE
-	TransportTypes_ETHERNET_PMD_TYPE_ETH_400GMSA_PSM4 E_TransportTypes_ETHERNET_PMD_TYPE = 27
+	TransportTypes_ETHERNET_PMD_TYPE_ETH_400GMSA_PSM4 E_TransportTypes_ETHERNET_PMD_TYPE = 31
 	// TransportTypes_ETHERNET_PMD_TYPE_ETH_40GBASE_CR4 corresponds to the value ETH_40GBASE_CR4 of TransportTypes_ETHERNET_PMD_TYPE
-	TransportTypes_ETHERNET_PMD_TYPE_ETH_40GBASE_CR4 E_TransportTypes_ETHERNET_PMD_TYPE = 28
+	TransportTypes_ETHERNET_PMD_TYPE_ETH_40GBASE_CR4 E_TransportTypes_ETHERNET_PMD_TYPE = 32
 	// TransportTypes_ETHERNET_PMD_TYPE_ETH_40GBASE_ER4 corresponds to the value ETH_40GBASE_ER4 of TransportTypes_ETHERNET_PMD_TYPE
-	TransportTypes_ETHERNET_PMD_TYPE_ETH_40GBASE_ER4 E_TransportTypes_ETHERNET_PMD_TYPE = 29
+	TransportTypes_ETHERNET_PMD_TYPE_ETH_40GBASE_ER4 E_TransportTypes_ETHERNET_PMD_TYPE = 33
 	// TransportTypes_ETHERNET_PMD_TYPE_ETH_40GBASE_LR4 corresponds to the value ETH_40GBASE_LR4 of TransportTypes_ETHERNET_PMD_TYPE
-	TransportTypes_ETHERNET_PMD_TYPE_ETH_40GBASE_LR4 E_TransportTypes_ETHERNET_PMD_TYPE = 30
+	TransportTypes_ETHERNET_PMD_TYPE_ETH_40GBASE_LR4 E_TransportTypes_ETHERNET_PMD_TYPE = 34
 	// TransportTypes_ETHERNET_PMD_TYPE_ETH_40GBASE_PSM4 corresponds to the value ETH_40GBASE_PSM4 of TransportTypes_ETHERNET_PMD_TYPE
-	TransportTypes_ETHERNET_PMD_TYPE_ETH_40GBASE_PSM4 E_TransportTypes_ETHERNET_PMD_TYPE = 31
+	TransportTypes_ETHERNET_PMD_TYPE_ETH_40GBASE_PSM4 E_TransportTypes_ETHERNET_PMD_TYPE = 35
 	// TransportTypes_ETHERNET_PMD_TYPE_ETH_40GBASE_SR4 corresponds to the value ETH_40GBASE_SR4 of TransportTypes_ETHERNET_PMD_TYPE
-	TransportTypes_ETHERNET_PMD_TYPE_ETH_40GBASE_SR4 E_TransportTypes_ETHERNET_PMD_TYPE = 32
+	TransportTypes_ETHERNET_PMD_TYPE_ETH_40GBASE_SR4 E_TransportTypes_ETHERNET_PMD_TYPE = 36
 	// TransportTypes_ETHERNET_PMD_TYPE_ETH_4X10GBASE_LR corresponds to the value ETH_4X10GBASE_LR of TransportTypes_ETHERNET_PMD_TYPE
-	TransportTypes_ETHERNET_PMD_TYPE_ETH_4X10GBASE_LR E_TransportTypes_ETHERNET_PMD_TYPE = 33
+	TransportTypes_ETHERNET_PMD_TYPE_ETH_4X10GBASE_LR E_TransportTypes_ETHERNET_PMD_TYPE = 37
 	// TransportTypes_ETHERNET_PMD_TYPE_ETH_4X10GBASE_SR corresponds to the value ETH_4X10GBASE_SR of TransportTypes_ETHERNET_PMD_TYPE
-	TransportTypes_ETHERNET_PMD_TYPE_ETH_4X10GBASE_SR E_TransportTypes_ETHERNET_PMD_TYPE = 34
+	TransportTypes_ETHERNET_PMD_TYPE_ETH_4X10GBASE_SR E_TransportTypes_ETHERNET_PMD_TYPE = 38
+	// TransportTypes_ETHERNET_PMD_TYPE_ETH_800GBASE_2XDR4 corresponds to the value ETH_800GBASE_2XDR4 of TransportTypes_ETHERNET_PMD_TYPE
+	TransportTypes_ETHERNET_PMD_TYPE_ETH_800GBASE_2XDR4 E_TransportTypes_ETHERNET_PMD_TYPE = 39
+	// TransportTypes_ETHERNET_PMD_TYPE_ETH_800GBASE_2XFR4 corresponds to the value ETH_800GBASE_2XFR4 of TransportTypes_ETHERNET_PMD_TYPE
+	TransportTypes_ETHERNET_PMD_TYPE_ETH_800GBASE_2XFR4 E_TransportTypes_ETHERNET_PMD_TYPE = 40
+	// TransportTypes_ETHERNET_PMD_TYPE_ETH_800GBASE_2XLR4 corresponds to the value ETH_800GBASE_2XLR4 of TransportTypes_ETHERNET_PMD_TYPE
+	TransportTypes_ETHERNET_PMD_TYPE_ETH_800GBASE_2XLR4 E_TransportTypes_ETHERNET_PMD_TYPE = 41
+	// TransportTypes_ETHERNET_PMD_TYPE_ETH_800GBASE_2XPLR4 corresponds to the value ETH_800GBASE_2XPLR4 of TransportTypes_ETHERNET_PMD_TYPE
+	TransportTypes_ETHERNET_PMD_TYPE_ETH_800GBASE_2XPLR4 E_TransportTypes_ETHERNET_PMD_TYPE = 42
+	// TransportTypes_ETHERNET_PMD_TYPE_ETH_800GBASE_DR8 corresponds to the value ETH_800GBASE_DR8 of TransportTypes_ETHERNET_PMD_TYPE
+	TransportTypes_ETHERNET_PMD_TYPE_ETH_800GBASE_DR8 E_TransportTypes_ETHERNET_PMD_TYPE = 43
 	// TransportTypes_ETHERNET_PMD_TYPE_ETH_800GBASE_ZR corresponds to the value ETH_800GBASE_ZR of TransportTypes_ETHERNET_PMD_TYPE
-	TransportTypes_ETHERNET_PMD_TYPE_ETH_800GBASE_ZR E_TransportTypes_ETHERNET_PMD_TYPE = 35
+	TransportTypes_ETHERNET_PMD_TYPE_ETH_800GBASE_ZR E_TransportTypes_ETHERNET_PMD_TYPE = 44
 	// TransportTypes_ETHERNET_PMD_TYPE_ETH_UNDEFINED corresponds to the value ETH_UNDEFINED of TransportTypes_ETHERNET_PMD_TYPE
-	TransportTypes_ETHERNET_PMD_TYPE_ETH_UNDEFINED E_TransportTypes_ETHERNET_PMD_TYPE = 36
+	TransportTypes_ETHERNET_PMD_TYPE_ETH_UNDEFINED E_TransportTypes_ETHERNET_PMD_TYPE = 45
 )
 
 // E_TransportTypes_FIBER_CONNECTOR_TYPE is a derived int64 type which is used to represent
@@ -12737,58 +13361,62 @@ const (
 	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_10GE_LAN E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 3
 	// TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_10GE_WAN corresponds to the value PROT_10GE_WAN of TransportTypes_TRIBUTARY_PROTOCOL_TYPE
 	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_10GE_WAN E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 4
+	// TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_1600GE corresponds to the value PROT_1600GE of TransportTypes_TRIBUTARY_PROTOCOL_TYPE
+	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_1600GE E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 5
 	// TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_1GE corresponds to the value PROT_1GE of TransportTypes_TRIBUTARY_PROTOCOL_TYPE
-	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_1GE E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 5
+	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_1GE E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 6
+	// TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_3200GE corresponds to the value PROT_3200GE of TransportTypes_TRIBUTARY_PROTOCOL_TYPE
+	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_3200GE E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 7
 	// TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_400GE corresponds to the value PROT_400GE of TransportTypes_TRIBUTARY_PROTOCOL_TYPE
-	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_400GE E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 6
+	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_400GE E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 8
 	// TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_40GE corresponds to the value PROT_40GE of TransportTypes_TRIBUTARY_PROTOCOL_TYPE
-	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_40GE E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 7
+	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_40GE E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 9
 	// TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_800GE corresponds to the value PROT_800GE of TransportTypes_TRIBUTARY_PROTOCOL_TYPE
-	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_800GE E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 8
+	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_800GE E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 10
 	// TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_FLEXO corresponds to the value PROT_FLEXO of TransportTypes_TRIBUTARY_PROTOCOL_TYPE
-	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_FLEXO E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 9
+	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_FLEXO E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 11
 	// TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_OC192 corresponds to the value PROT_OC192 of TransportTypes_TRIBUTARY_PROTOCOL_TYPE
-	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_OC192 E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 10
+	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_OC192 E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 12
 	// TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_OC48 corresponds to the value PROT_OC48 of TransportTypes_TRIBUTARY_PROTOCOL_TYPE
-	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_OC48 E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 11
+	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_OC48 E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 13
 	// TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_OC768 corresponds to the value PROT_OC768 of TransportTypes_TRIBUTARY_PROTOCOL_TYPE
-	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_OC768 E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 12
+	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_OC768 E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 14
 	// TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_ODU2 corresponds to the value PROT_ODU2 of TransportTypes_TRIBUTARY_PROTOCOL_TYPE
-	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_ODU2 E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 13
+	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_ODU2 E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 15
 	// TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_ODU2E corresponds to the value PROT_ODU2E of TransportTypes_TRIBUTARY_PROTOCOL_TYPE
-	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_ODU2E E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 14
+	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_ODU2E E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 16
 	// TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_ODU3 corresponds to the value PROT_ODU3 of TransportTypes_TRIBUTARY_PROTOCOL_TYPE
-	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_ODU3 E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 15
+	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_ODU3 E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 17
 	// TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_ODU4 corresponds to the value PROT_ODU4 of TransportTypes_TRIBUTARY_PROTOCOL_TYPE
-	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_ODU4 E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 16
+	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_ODU4 E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 18
 	// TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_ODUCN corresponds to the value PROT_ODUCN of TransportTypes_TRIBUTARY_PROTOCOL_TYPE
-	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_ODUCN E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 17
+	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_ODUCN E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 19
 	// TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_ODUFLEX_CBR corresponds to the value PROT_ODUFLEX_CBR of TransportTypes_TRIBUTARY_PROTOCOL_TYPE
-	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_ODUFLEX_CBR E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 18
+	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_ODUFLEX_CBR E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 20
 	// TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_ODUFLEX_GFP corresponds to the value PROT_ODUFLEX_GFP of TransportTypes_TRIBUTARY_PROTOCOL_TYPE
-	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_ODUFLEX_GFP E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 19
+	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_ODUFLEX_GFP E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 21
 	// TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_OTSIG corresponds to the value PROT_OTSIG of TransportTypes_TRIBUTARY_PROTOCOL_TYPE
-	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_OTSIG E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 20
+	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_OTSIG E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 22
 	// TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_OTSI_A corresponds to the value PROT_OTSI_A of TransportTypes_TRIBUTARY_PROTOCOL_TYPE
-	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_OTSI_A E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 21
+	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_OTSI_A E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 23
 	// TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_OTU1E corresponds to the value PROT_OTU1E of TransportTypes_TRIBUTARY_PROTOCOL_TYPE
-	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_OTU1E E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 22
+	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_OTU1E E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 24
 	// TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_OTU2 corresponds to the value PROT_OTU2 of TransportTypes_TRIBUTARY_PROTOCOL_TYPE
-	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_OTU2 E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 23
+	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_OTU2 E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 25
 	// TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_OTU2E corresponds to the value PROT_OTU2E of TransportTypes_TRIBUTARY_PROTOCOL_TYPE
-	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_OTU2E E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 24
+	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_OTU2E E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 26
 	// TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_OTU3 corresponds to the value PROT_OTU3 of TransportTypes_TRIBUTARY_PROTOCOL_TYPE
-	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_OTU3 E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 25
+	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_OTU3 E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 27
 	// TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_OTU4 corresponds to the value PROT_OTU4 of TransportTypes_TRIBUTARY_PROTOCOL_TYPE
-	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_OTU4 E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 26
+	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_OTU4 E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 28
 	// TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_OTUCN corresponds to the value PROT_OTUCN of TransportTypes_TRIBUTARY_PROTOCOL_TYPE
-	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_OTUCN E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 27
+	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_OTUCN E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 29
 	// TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_STM16 corresponds to the value PROT_STM16 of TransportTypes_TRIBUTARY_PROTOCOL_TYPE
-	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_STM16 E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 28
+	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_STM16 E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 30
 	// TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_STM256 corresponds to the value PROT_STM256 of TransportTypes_TRIBUTARY_PROTOCOL_TYPE
-	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_STM256 E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 29
+	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_STM256 E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 31
 	// TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_STM64 corresponds to the value PROT_STM64 of TransportTypes_TRIBUTARY_PROTOCOL_TYPE
-	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_STM64 E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 30
+	TransportTypes_TRIBUTARY_PROTOCOL_TYPE_PROT_STM64 E_TransportTypes_TRIBUTARY_PROTOCOL_TYPE = 32
 )
 
 // E_TransportTypes_TRIBUTARY_RATE_CLASS_TYPE is a derived int64 type which is used to represent

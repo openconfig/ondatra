@@ -2990,7 +2990,7 @@ func (n *InterfacePathAny) Aggregation() *Interface_AggregationPathAny {
 	return ps
 }
 
-// Counters (container): A collection of interface specific statistics entitites which are
+// Counters (container): A collection of interface specific statistics entities which are
 // not common to subinterfaces.
 //
 //	Defining module:      "openconfig-interfaces"
@@ -3008,7 +3008,7 @@ func (n *InterfacePath) Counters() *Interface_CountersPath {
 	return ps
 }
 
-// Counters (container): A collection of interface specific statistics entitites which are
+// Counters (container): A collection of interface specific statistics entities which are
 // not common to subinterfaces.
 //
 //	Defining module:      "openconfig-interfaces"
@@ -5331,7 +5331,7 @@ func (n *Interface_AggregationPathAny) Member() *Interface_Aggregation_MemberPat
 	return ps
 }
 
-// MinLinks (leaf): Specifies the mininum number of member
+// MinLinks (leaf): Specifies the minimum number of member
 // interfaces that must be active for the aggregate interface
 // to be available
 //
@@ -5351,7 +5351,7 @@ func (n *Interface_AggregationPath) MinLinks() *Interface_Aggregation_MinLinksPa
 	return ps
 }
 
-// MinLinks (leaf): Specifies the mininum number of member
+// MinLinks (leaf): Specifies the minimum number of member
 // interfaces that must be active for the aggregate interface
 // to be available
 //
@@ -6585,6 +6585,105 @@ func (n *Interface_Counters_CarrierTransitionsPathAny) State() ygnmi.WildcardQue
 	)
 }
 
+// Interface_Counters_DroppedTrimPktsPath represents the /openconfig-interfaces/interfaces/interface/state/counters/dropped-trim-pkts YANG schema element.
+type Interface_Counters_DroppedTrimPktsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Counters_DroppedTrimPktsPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/state/counters/dropped-trim-pkts YANG schema element.
+type Interface_Counters_DroppedTrimPktsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Interface_Counters_DroppedTrimPktsPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-elements"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "dropped-trim-pkts"
+//	Path from root:       "/interfaces/interface/state/counters/dropped-trim-pkts"
+func (n *Interface_Counters_DroppedTrimPktsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Interface_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"dropped-trim-pkts"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Counters).DroppedTrimPkts
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-elements"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "dropped-trim-pkts"
+//	Path from root:       "/interfaces/interface/state/counters/dropped-trim-pkts"
+func (n *Interface_Counters_DroppedTrimPktsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Interface_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"dropped-trim-pkts"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Counters).DroppedTrimPkts
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
 // Interface_Counters_InBroadcastPktsPath represents the /openconfig-interfaces/interfaces/interface/state/counters/in-broadcast-pkts YANG schema element.
 type Interface_Counters_InBroadcastPktsPath struct {
 	*ygnmi.NodePath
@@ -6962,6 +7061,204 @@ func (n *Interface_Counters_InFcsErrorsPathAny) State() ygnmi.WildcardQuery[uint
 		),
 		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
 			ret := gs.(*oc.Interface_Counters).InFcsErrors
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_Counters_InLinkDownDiscardsPath represents the /openconfig-interfaces/interfaces/interface/state/counters/in-link-down-discards YANG schema element.
+type Interface_Counters_InLinkDownDiscardsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Counters_InLinkDownDiscardsPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/state/counters/in-link-down-discards YANG schema element.
+type Interface_Counters_InLinkDownDiscardsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Interface_Counters_InLinkDownDiscardsPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-interfaces"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "in-link-down-discards"
+//	Path from root:       "/interfaces/interface/state/counters/in-link-down-discards"
+func (n *Interface_Counters_InLinkDownDiscardsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Interface_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"in-link-down-discards"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Counters).InLinkDownDiscards
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-interfaces"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "in-link-down-discards"
+//	Path from root:       "/interfaces/interface/state/counters/in-link-down-discards"
+func (n *Interface_Counters_InLinkDownDiscardsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Interface_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"in-link-down-discards"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Counters).InLinkDownDiscards
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_Counters_InLowTtlDiscardsPath represents the /openconfig-interfaces/interfaces/interface/state/counters/in-low-ttl-discards YANG schema element.
+type Interface_Counters_InLowTtlDiscardsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Counters_InLowTtlDiscardsPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/state/counters/in-low-ttl-discards YANG schema element.
+type Interface_Counters_InLowTtlDiscardsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Interface_Counters_InLowTtlDiscardsPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-interfaces"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "in-low-ttl-discards"
+//	Path from root:       "/interfaces/interface/state/counters/in-low-ttl-discards"
+func (n *Interface_Counters_InLowTtlDiscardsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Interface_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"in-low-ttl-discards"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Counters).InLowTtlDiscards
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-interfaces"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "in-low-ttl-discards"
+//	Path from root:       "/interfaces/interface/state/counters/in-low-ttl-discards"
+func (n *Interface_Counters_InLowTtlDiscardsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Interface_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"in-low-ttl-discards"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Counters).InLowTtlDiscards
 			if ret == nil {
 				var zero uint64
 				return zero, false
@@ -8367,6 +8664,105 @@ func (n *Interface_Counters_OutPktsPathAny) State() ygnmi.WildcardQuery[uint64] 
 	)
 }
 
+// Interface_Counters_OutTrimPktsPath represents the /openconfig-interfaces/interfaces/interface/state/counters/out-trim-pkts YANG schema element.
+type Interface_Counters_OutTrimPktsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Counters_OutTrimPktsPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/state/counters/out-trim-pkts YANG schema element.
+type Interface_Counters_OutTrimPktsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Interface_Counters_OutTrimPktsPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-elements"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "out-trim-pkts"
+//	Path from root:       "/interfaces/interface/state/counters/out-trim-pkts"
+func (n *Interface_Counters_OutTrimPktsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Interface_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"out-trim-pkts"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Counters).OutTrimPkts
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-elements"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "out-trim-pkts"
+//	Path from root:       "/interfaces/interface/state/counters/out-trim-pkts"
+func (n *Interface_Counters_OutTrimPktsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Interface_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"out-trim-pkts"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Counters).OutTrimPkts
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
 // Interface_Counters_OutUnicastPktsPath represents the /openconfig-interfaces/interfaces/interface/state/counters/out-unicast-pkts YANG schema element.
 type Interface_Counters_OutUnicastPktsPath struct {
 	*ygnmi.NodePath
@@ -8565,6 +8961,105 @@ func (n *Interface_Counters_ResetsPathAny) State() ygnmi.WildcardQuery[uint64] {
 	)
 }
 
+// Interface_Counters_TrimPktsPath represents the /openconfig-interfaces/interfaces/interface/state/counters/trim-pkts YANG schema element.
+type Interface_Counters_TrimPktsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Counters_TrimPktsPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/state/counters/trim-pkts YANG schema element.
+type Interface_Counters_TrimPktsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Interface_Counters_TrimPktsPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-elements"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "trim-pkts"
+//	Path from root:       "/interfaces/interface/state/counters/trim-pkts"
+func (n *Interface_Counters_TrimPktsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Interface_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"trim-pkts"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Counters).TrimPkts
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-elements"
+//	Instantiating module: "openconfig-qos"
+//	Path from parent:     "trim-pkts"
+//	Path from root:       "/interfaces/interface/state/counters/trim-pkts"
+func (n *Interface_Counters_TrimPktsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Interface_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"trim-pkts"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Counters).TrimPkts
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
 // Interface_CountersPath represents the /openconfig-interfaces/interfaces/interface/state/counters YANG schema element.
 type Interface_CountersPath struct {
 	*ygnmi.NodePath
@@ -8620,6 +9115,44 @@ func (n *Interface_CountersPathAny) CarrierTransitions() *Interface_Counters_Car
 	ps := &Interface_Counters_CarrierTransitionsPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"carrier-transitions"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// DroppedTrimPkts (leaf): The number of packets that were trimmed but dropped due to a
+// failed shared buffer admission on the trim queue.
+//
+//	Defining module:      "openconfig-qos-elements"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "dropped-trim-pkts"
+//	Path from root:       "/interfaces/interface/state/counters/dropped-trim-pkts"
+func (n *Interface_CountersPath) DroppedTrimPkts() *Interface_Counters_DroppedTrimPktsPath {
+	ps := &Interface_Counters_DroppedTrimPktsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"dropped-trim-pkts"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// DroppedTrimPkts (leaf): The number of packets that were trimmed but dropped due to a
+// failed shared buffer admission on the trim queue.
+//
+//	Defining module:      "openconfig-qos-elements"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "dropped-trim-pkts"
+//	Path from root:       "/interfaces/interface/state/counters/dropped-trim-pkts"
+func (n *Interface_CountersPathAny) DroppedTrimPkts() *Interface_Counters_DroppedTrimPktsPathAny {
+	ps := &Interface_Counters_DroppedTrimPktsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"dropped-trim-pkts"},
 			map[string]interface{}{},
 			n,
 		),
@@ -8822,6 +9355,112 @@ func (n *Interface_CountersPathAny) InFcsErrors() *Interface_Counters_InFcsError
 	ps := &Interface_Counters_InFcsErrorsPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"in-fcs-errors"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// InLinkDownDiscards (leaf): The number of inbound packets received on the interface or
+// subinterface that were dropped because the egress interface or
+// next-hop link selected by forwarding or routing was down.  The
+// in-discards leaf must also be incremented as the packet was
+// discarded and for backwards compatibility.
+//
+// Discontinuities in the value of this counter can occur
+// at re-initialization of the management system, and at
+// other times as indicated by the value of 'last-clear'.
+//
+//	Defining module:      "openconfig-interfaces"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "in-link-down-discards"
+//	Path from root:       "/interfaces/interface/state/counters/in-link-down-discards"
+func (n *Interface_CountersPath) InLinkDownDiscards() *Interface_Counters_InLinkDownDiscardsPath {
+	ps := &Interface_Counters_InLinkDownDiscardsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"in-link-down-discards"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// InLinkDownDiscards (leaf): The number of inbound packets received on the interface or
+// subinterface that were dropped because the egress interface or
+// next-hop link selected by forwarding or routing was down.  The
+// in-discards leaf must also be incremented as the packet was
+// discarded and for backwards compatibility.
+//
+// Discontinuities in the value of this counter can occur
+// at re-initialization of the management system, and at
+// other times as indicated by the value of 'last-clear'.
+//
+//	Defining module:      "openconfig-interfaces"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "in-link-down-discards"
+//	Path from root:       "/interfaces/interface/state/counters/in-link-down-discards"
+func (n *Interface_CountersPathAny) InLinkDownDiscards() *Interface_Counters_InLinkDownDiscardsPathAny {
+	ps := &Interface_Counters_InLinkDownDiscardsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"in-link-down-discards"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// InLowTtlDiscards (leaf): The number of inbound packets received on the interface or
+// subinterface that were dropped due to an expired Time-To-Live
+// (TTL) or Hop Limit during transit forwarding, indicating TTL
+// expiration or routing loops.  The in-discards leaf must also
+// be incremented as the packet was discarded and for backwards
+// compatibility.
+//
+// Discontinuities in the value of this counter can occur
+// at re-initialization of the management system, and at
+// other times as indicated by the value of 'last-clear'.
+//
+//	Defining module:      "openconfig-interfaces"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "in-low-ttl-discards"
+//	Path from root:       "/interfaces/interface/state/counters/in-low-ttl-discards"
+func (n *Interface_CountersPath) InLowTtlDiscards() *Interface_Counters_InLowTtlDiscardsPath {
+	ps := &Interface_Counters_InLowTtlDiscardsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"in-low-ttl-discards"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// InLowTtlDiscards (leaf): The number of inbound packets received on the interface or
+// subinterface that were dropped due to an expired Time-To-Live
+// (TTL) or Hop Limit during transit forwarding, indicating TTL
+// expiration or routing loops.  The in-discards leaf must also
+// be incremented as the packet was discarded and for backwards
+// compatibility.
+//
+// Discontinuities in the value of this counter can occur
+// at re-initialization of the management system, and at
+// other times as indicated by the value of 'last-clear'.
+//
+//	Defining module:      "openconfig-interfaces"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "in-low-ttl-discards"
+//	Path from root:       "/interfaces/interface/state/counters/in-low-ttl-discards"
+func (n *Interface_CountersPathAny) InLowTtlDiscards() *Interface_Counters_InLowTtlDiscardsPathAny {
+	ps := &Interface_Counters_InLowTtlDiscardsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"in-low-ttl-discards"},
 			map[string]interface{}{},
 			n,
 		),
@@ -9540,6 +10179,44 @@ func (n *Interface_CountersPathAny) OutPkts() *Interface_Counters_OutPktsPathAny
 	return ps
 }
 
+// OutTrimPkts (leaf): The number of packets that were trimmed and successfully
+// transmitted.
+//
+//	Defining module:      "openconfig-qos-elements"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "out-trim-pkts"
+//	Path from root:       "/interfaces/interface/state/counters/out-trim-pkts"
+func (n *Interface_CountersPath) OutTrimPkts() *Interface_Counters_OutTrimPktsPath {
+	ps := &Interface_Counters_OutTrimPktsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"out-trim-pkts"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// OutTrimPkts (leaf): The number of packets that were trimmed and successfully
+// transmitted.
+//
+//	Defining module:      "openconfig-qos-elements"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "out-trim-pkts"
+//	Path from root:       "/interfaces/interface/state/counters/out-trim-pkts"
+func (n *Interface_CountersPathAny) OutTrimPkts() *Interface_Counters_OutTrimPktsPathAny {
+	ps := &Interface_Counters_OutTrimPktsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"out-trim-pkts"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
 // OutUnicastPkts (leaf): The total number of packets that higher-level protocols
 // requested be transmitted, and that were not addressed
 // to a multicast or broadcast address at this sub-layer,
@@ -9591,7 +10268,7 @@ func (n *Interface_CountersPathAny) OutUnicastPkts() *Interface_Counters_OutUnic
 }
 
 // Resets (leaf): Number of times the interface hardware has been reset.  The
-// triggers and effects of this event are hardware-specifc.
+// triggers and effects of this event are hardware-specific.
 //
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-interfaces"
@@ -9610,7 +10287,7 @@ func (n *Interface_CountersPath) Resets() *Interface_Counters_ResetsPath {
 }
 
 // Resets (leaf): Number of times the interface hardware has been reset.  The
-// triggers and effects of this event are hardware-specifc.
+// triggers and effects of this event are hardware-specific.
 //
 //	Defining module:      "openconfig-interfaces"
 //	Instantiating module: "openconfig-interfaces"
@@ -9620,6 +10297,48 @@ func (n *Interface_CountersPathAny) Resets() *Interface_Counters_ResetsPathAny {
 	ps := &Interface_Counters_ResetsPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"resets"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// TrimPkts (leaf): The total number of packets that were trimmed.
+// This counter includes both packets that were
+// transmitted after trimming and those that were
+// subsequently dropped.
+//
+//	Defining module:      "openconfig-qos-elements"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "trim-pkts"
+//	Path from root:       "/interfaces/interface/state/counters/trim-pkts"
+func (n *Interface_CountersPath) TrimPkts() *Interface_Counters_TrimPktsPath {
+	ps := &Interface_Counters_TrimPktsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"trim-pkts"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// TrimPkts (leaf): The total number of packets that were trimmed.
+// This counter includes both packets that were
+// transmitted after trimming and those that were
+// subsequently dropped.
+//
+//	Defining module:      "openconfig-qos-elements"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "trim-pkts"
+//	Path from root:       "/interfaces/interface/state/counters/trim-pkts"
+func (n *Interface_CountersPathAny) TrimPkts() *Interface_Counters_TrimPktsPathAny {
+	ps := &Interface_Counters_TrimPktsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"trim-pkts"},
 			map[string]interface{}{},
 			n,
 		),
@@ -14316,6 +15035,105 @@ func (n *Interface_Ethernet_Counters_OutMacPauseFramesPathAny) State() ygnmi.Wil
 	)
 }
 
+// Interface_Ethernet_Counters_OutVlanFilterDiscardsPath represents the /openconfig-interfaces/interfaces/interface/ethernet/state/counters/out-vlan-filter-discards YANG schema element.
+type Interface_Ethernet_Counters_OutVlanFilterDiscardsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Ethernet_Counters_OutVlanFilterDiscardsPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/ethernet/state/counters/out-vlan-filter-discards YANG schema element.
+type Interface_Ethernet_Counters_OutVlanFilterDiscardsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Interface_Ethernet_Counters_OutVlanFilterDiscardsPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ethernet"
+//	Instantiating module: "openconfig-if-ethernet"
+//	Path from parent:     "out-vlan-filter-discards"
+//	Path from root:       "/interfaces/interface/ethernet/state/counters/out-vlan-filter-discards"
+func (n *Interface_Ethernet_Counters_OutVlanFilterDiscardsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Interface_Ethernet_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"out-vlan-filter-discards"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Ethernet_Counters).OutVlanFilterDiscards
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Ethernet_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ethernet"
+//	Instantiating module: "openconfig-if-ethernet"
+//	Path from parent:     "out-vlan-filter-discards"
+//	Path from root:       "/interfaces/interface/ethernet/state/counters/out-vlan-filter-discards"
+func (n *Interface_Ethernet_Counters_OutVlanFilterDiscardsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Interface_Ethernet_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"out-vlan-filter-discards"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Ethernet_Counters).OutVlanFilterDiscards
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Ethernet_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
 // Interface_Ethernet_CountersPath represents the /openconfig-interfaces/interfaces/interface/ethernet/state/counters YANG schema element.
 type Interface_Ethernet_CountersPath struct {
 	*ygnmi.NodePath
@@ -15259,6 +16077,54 @@ func (n *Interface_Ethernet_CountersPathAny) OutMacPauseFrames() *Interface_Ethe
 	ps := &Interface_Ethernet_Counters_OutMacPauseFramesPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"out-mac-pause-frames"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// OutVlanFilterDiscards (leaf): The number of outbound packets that were dropped due to
+// VLAN egress filtering being enabled on the interface, where
+// the packet's VLAN tag did not match the allowed VLANs.
+//
+// Discontinuities in the value of this counter can occur
+// at re-initialization of the management system, and at
+// other times as indicated by the value of 'last-clear'.
+//
+//	Defining module:      "openconfig-if-ethernet"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "out-vlan-filter-discards"
+//	Path from root:       "/interfaces/interface/ethernet/state/counters/out-vlan-filter-discards"
+func (n *Interface_Ethernet_CountersPath) OutVlanFilterDiscards() *Interface_Ethernet_Counters_OutVlanFilterDiscardsPath {
+	ps := &Interface_Ethernet_Counters_OutVlanFilterDiscardsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"out-vlan-filter-discards"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// OutVlanFilterDiscards (leaf): The number of outbound packets that were dropped due to
+// VLAN egress filtering being enabled on the interface, where
+// the packet's VLAN tag did not match the allowed VLANs.
+//
+// Discontinuities in the value of this counter can occur
+// at re-initialization of the management system, and at
+// other times as indicated by the value of 'last-clear'.
+//
+//	Defining module:      "openconfig-if-ethernet"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "out-vlan-filter-discards"
+//	Path from root:       "/interfaces/interface/ethernet/state/counters/out-vlan-filter-discards"
+func (n *Interface_Ethernet_CountersPathAny) OutVlanFilterDiscards() *Interface_Ethernet_Counters_OutVlanFilterDiscardsPathAny {
+	ps := &Interface_Ethernet_Counters_OutVlanFilterDiscardsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"out-vlan-filter-discards"},
 			map[string]interface{}{},
 			n,
 		),
@@ -30934,6 +31800,118 @@ func (n *Interface_RoutedVlan_Ipv4_ProxyArpPath) PathOriginName() string {
 	return "openconfig"
 }
 
+// ManualIpRangeAny (list): A configured IPv4 ip-range entry for proxy ARP manual
+// mode.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "manual-ip-ranges/manual-ip-range"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv4/proxy-arp/manual-ip-ranges/manual-ip-range"
+func (n *Interface_RoutedVlan_Ipv4_ProxyArpPath) ManualIpRangeAny() *Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRangePathAny {
+	ps := &Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRangePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"manual-ip-ranges", "manual-ip-range"},
+			map[string]interface{}{"ip-range": "*"},
+			n,
+		),
+	}
+	return ps
+}
+
+// ManualIpRangeAny (list): A configured IPv4 ip-range entry for proxy ARP manual
+// mode.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "manual-ip-ranges/manual-ip-range"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv4/proxy-arp/manual-ip-ranges/manual-ip-range"
+func (n *Interface_RoutedVlan_Ipv4_ProxyArpPathAny) ManualIpRangeAny() *Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRangePathAny {
+	ps := &Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRangePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"manual-ip-ranges", "manual-ip-range"},
+			map[string]interface{}{"ip-range": "*"},
+			n,
+		),
+	}
+	return ps
+}
+
+// ManualIpRange (list): A configured IPv4 ip-range entry for proxy ARP manual
+// mode.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "manual-ip-ranges/manual-ip-range"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv4/proxy-arp/manual-ip-ranges/manual-ip-range"
+//
+//	IpRange: string
+func (n *Interface_RoutedVlan_Ipv4_ProxyArpPath) ManualIpRange(IpRange string) *Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRangePath {
+	ps := &Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRangePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"manual-ip-ranges", "manual-ip-range"},
+			map[string]interface{}{"ip-range": IpRange},
+			n,
+		),
+	}
+	return ps
+}
+
+// ManualIpRange (list): A configured IPv4 ip-range entry for proxy ARP manual
+// mode.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "manual-ip-ranges/manual-ip-range"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv4/proxy-arp/manual-ip-ranges/manual-ip-range"
+//
+//	IpRange: string
+func (n *Interface_RoutedVlan_Ipv4_ProxyArpPathAny) ManualIpRange(IpRange string) *Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRangePathAny {
+	ps := &Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRangePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"manual-ip-ranges", "manual-ip-range"},
+			map[string]interface{}{"ip-range": IpRange},
+			n,
+		),
+	}
+	return ps
+}
+
+// ManualIpRangeMap (list): A configured IPv4 ip-range entry for proxy ARP manual
+// mode.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "manual-ip-ranges/manual-ip-range"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv4/proxy-arp/manual-ip-ranges/manual-ip-range"
+func (n *Interface_RoutedVlan_Ipv4_ProxyArpPath) ManualIpRangeMap() *Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRangePathMap {
+	ps := &Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRangePathMap{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"manual-ip-ranges"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// ManualIpRangeMap (list): A configured IPv4 ip-range entry for proxy ARP manual
+// mode.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "manual-ip-ranges/manual-ip-range"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv4/proxy-arp/manual-ip-ranges/manual-ip-range"
+func (n *Interface_RoutedVlan_Ipv4_ProxyArpPathAny) ManualIpRangeMap() *Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRangePathMapAny {
+	ps := &Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRangePathMapAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"manual-ip-ranges"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
 // Mode (leaf): When set to a value other than DISABLE, the local system should
 // respond to ARP requests that are for target addresses other than
 // those that are configured on the local subinterface using its own
@@ -30941,7 +31919,10 @@ func (n *Interface_RoutedVlan_Ipv4_ProxyArpPath) PathOriginName() string {
 // value is specified, replies are only sent when the target address
 // falls outside the locally configured subnets on the interface,
 // whereas with the ALL value, all requests, regardless of their
-// target address are replied to.
+// target address are replied to. If MANUAL is specified, replies
+// are only sent for target addresses matching entries in the
+// manual-ip-ranges list, or that match the IP address assigned to
+// the receiving interface.
 //
 //	Defining module:      "openconfig-if-ip"
 //	Instantiating module: "openconfig-interfaces"
@@ -30966,7 +31947,10 @@ func (n *Interface_RoutedVlan_Ipv4_ProxyArpPath) Mode() *Interface_RoutedVlan_Ip
 // value is specified, replies are only sent when the target address
 // falls outside the locally configured subnets on the interface,
 // whereas with the ALL value, all requests, regardless of their
-// target address are replied to.
+// target address are replied to. If MANUAL is specified, replies
+// are only sent for target addresses matching entries in the
+// manual-ip-ranges list, or that match the IP address assigned to
+// the receiving interface.
 //
 //	Defining module:      "openconfig-if-ip"
 //	Instantiating module: "openconfig-interfaces"
@@ -31081,6 +32065,481 @@ func (n *Interface_RoutedVlan_Ipv4_ProxyArpPathAny) Config() ygnmi.WildcardQuery
 		},
 		nil,
 		nil,
+	)
+}
+
+// Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRange_IpRangePath represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv4/proxy-arp/manual-ip-ranges/manual-ip-range/state/ip-range YANG schema element.
+type Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRange_IpRangePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRange_IpRangePathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv4/proxy-arp/manual-ip-ranges/manual-ip-range/state/ip-range YANG schema element.
+type Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRange_IpRangePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRange_IpRangePath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/ip-range"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv4/proxy-arp/manual-ip-ranges/manual-ip-range/state/ip-range"
+func (n *Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRange_IpRangePath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewSingletonQuery[string](
+		"Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRange",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "ip-range"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRange).IpRange
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRange) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/ip-range"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv4/proxy-arp/manual-ip-ranges/manual-ip-range/state/ip-range"
+func (n *Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRange_IpRangePathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRange",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "ip-range"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRange).IpRange
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRange) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/ip-range"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv4/proxy-arp/manual-ip-ranges/manual-ip-range/config/ip-range"
+func (n *Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRange_IpRangePath) Config() ygnmi.ConfigQuery[string] {
+	return ygnmi.NewConfigQuery[string](
+		"Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRange",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "ip-range"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRange).IpRange
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRange) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/ip-range"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv4/proxy-arp/manual-ip-ranges/manual-ip-range/config/ip-range"
+func (n *Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRange_IpRangePathAny) Config() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRange",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "ip-range"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRange).IpRange
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRange) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRangePath represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv4/proxy-arp/manual-ip-ranges/manual-ip-range YANG schema element.
+type Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRangePath struct {
+	*ygnmi.NodePath
+}
+
+// Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRangePathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv4/proxy-arp/manual-ip-ranges/manual-ip-range YANG schema element.
+type Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRangePathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRangePath) PathOriginName() string {
+	return "openconfig"
+}
+
+// Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRangePathMap represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv4/proxy-arp/manual-ip-ranges/manual-ip-range YANG schema element.
+type Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRangePathMap struct {
+	*ygnmi.NodePath
+}
+
+// Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRangePathMapAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv4/proxy-arp/manual-ip-ranges/manual-ip-range YANG schema element.
+type Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRangePathMapAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRangePathMap) PathOriginName() string {
+	return "openconfig"
+}
+
+// IpRange (leaf): IPv4 ip-range: single IP (CIDR notation, e.g. 10.0.0.0/24) or
+// address range (start-end notation, e.g. 10.0.0.1-10.0.0.5)
+// for which proxy ARP replies are sent when mode is MANUAL.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/ip-range"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv4/proxy-arp/manual-ip-ranges/manual-ip-range/*/ip-range"
+func (n *Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRangePath) IpRange() *Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRange_IpRangePath {
+	ps := &Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRange_IpRangePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "ip-range"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// IpRange (leaf): IPv4 ip-range: single IP (CIDR notation, e.g. 10.0.0.0/24) or
+// address range (start-end notation, e.g. 10.0.0.1-10.0.0.5)
+// for which proxy ARP replies are sent when mode is MANUAL.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/ip-range"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv4/proxy-arp/manual-ip-ranges/manual-ip-range/*/ip-range"
+func (n *Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRangePathAny) IpRange() *Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRange_IpRangePathAny {
+	ps := &Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRange_IpRangePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "ip-range"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRangePath) State() ygnmi.SingletonQuery[*oc.Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRange] {
+	return ygnmi.NewSingletonQuery[*oc.Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRange](
+		"Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRange",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRangePathAny) State() ygnmi.WildcardQuery[*oc.Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRange] {
+	return ygnmi.NewWildcardQuery[*oc.Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRange](
+		"Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRange",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRangePath) Config() ygnmi.ConfigQuery[*oc.Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRange] {
+	return ygnmi.NewConfigQuery[*oc.Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRange](
+		"Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRange",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRangePathAny) Config() ygnmi.WildcardQuery[*oc.Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRange] {
+	return ygnmi.NewWildcardQuery[*oc.Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRange](
+		"Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRange",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRangePathMap) State() ygnmi.SingletonQuery[map[string]*oc.Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRange] {
+	return ygnmi.NewSingletonQuery[map[string]*oc.Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRange](
+		"Interface_RoutedVlan_Ipv4_ProxyArp",
+		true,
+		false,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[string]*oc.Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRange, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv4_ProxyArp).ManualIpRange
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv4_ProxyArp) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-if-ip:manual-ip-ranges"},
+			PostRelPath: []string{"openconfig-if-ip:manual-ip-range"},
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRangePathMapAny) State() ygnmi.WildcardQuery[map[string]*oc.Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRange] {
+	return ygnmi.NewWildcardQuery[map[string]*oc.Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRange](
+		"Interface_RoutedVlan_Ipv4_ProxyArp",
+		true,
+		false,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[string]*oc.Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRange, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv4_ProxyArp).ManualIpRange
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv4_ProxyArp) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-if-ip:manual-ip-ranges"},
+			PostRelPath: []string{"openconfig-if-ip:manual-ip-range"},
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRangePathMap) Config() ygnmi.ConfigQuery[map[string]*oc.Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRange] {
+	return ygnmi.NewConfigQuery[map[string]*oc.Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRange](
+		"Interface_RoutedVlan_Ipv4_ProxyArp",
+		false,
+		true,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[string]*oc.Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRange, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv4_ProxyArp).ManualIpRange
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv4_ProxyArp) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-if-ip:manual-ip-ranges"},
+			PostRelPath: []string{"openconfig-if-ip:manual-ip-range"},
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRangePathMapAny) Config() ygnmi.WildcardQuery[map[string]*oc.Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRange] {
+	return ygnmi.NewWildcardQuery[map[string]*oc.Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRange](
+		"Interface_RoutedVlan_Ipv4_ProxyArp",
+		false,
+		true,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[string]*oc.Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRange, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv4_ProxyArp).ManualIpRange
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv4_ProxyArp) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-if-ip:manual-ip-ranges"},
+			PostRelPath: []string{"openconfig-if-ip:manual-ip-range"},
+		},
 	)
 }
 
@@ -34648,6 +36107,42 @@ func (n *Interface_RoutedVlan_Ipv6PathAny) Enabled() *Interface_RoutedVlan_Ipv6_
 			n,
 		),
 		parent: n,
+	}
+	return ps
+}
+
+// Icmp (container): Top-level container for ICMPv6 operational state on the
+// interface.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "icmp"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/icmp"
+func (n *Interface_RoutedVlan_Ipv6Path) Icmp() *Interface_RoutedVlan_Ipv6_IcmpPath {
+	ps := &Interface_RoutedVlan_Ipv6_IcmpPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"icmp"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// Icmp (container): Top-level container for ICMPv6 operational state on the
+// interface.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "icmp"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/icmp"
+func (n *Interface_RoutedVlan_Ipv6PathAny) Icmp() *Interface_RoutedVlan_Ipv6_IcmpPathAny {
+	ps := &Interface_RoutedVlan_Ipv6_IcmpPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"icmp"},
+			map[string]interface{}{},
+			n,
+		),
 	}
 	return ps
 }
@@ -41666,6 +43161,1471 @@ func (n *Interface_RoutedVlan_Ipv6_CountersPathAny) State() ygnmi.WildcardQuery[
 	)
 }
 
+// Interface_RoutedVlan_Ipv6_IcmpPath represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/icmp YANG schema element.
+type Interface_RoutedVlan_Ipv6_IcmpPath struct {
+	*ygnmi.NodePath
+}
+
+// Interface_RoutedVlan_Ipv6_IcmpPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/icmp YANG schema element.
+type Interface_RoutedVlan_Ipv6_IcmpPathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Interface_RoutedVlan_Ipv6_IcmpPath) PathOriginName() string {
+	return "openconfig"
+}
+
+// Counters (container): Counters for ICMPv6 messages received and sent on the
+// interface. Counters are maintained for the IPv6 interface on
+// which an ICMPv6 message is received, or from which it is
+// transmitted.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "state/counters"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/icmp/state/counters"
+func (n *Interface_RoutedVlan_Ipv6_IcmpPath) Counters() *Interface_RoutedVlan_Ipv6_Icmp_CountersPath {
+	ps := &Interface_RoutedVlan_Ipv6_Icmp_CountersPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "counters"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// Counters (container): Counters for ICMPv6 messages received and sent on the
+// interface. Counters are maintained for the IPv6 interface on
+// which an ICMPv6 message is received, or from which it is
+// transmitted.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "state/counters"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/icmp/state/counters"
+func (n *Interface_RoutedVlan_Ipv6_IcmpPathAny) Counters() *Interface_RoutedVlan_Ipv6_Icmp_CountersPathAny {
+	ps := &Interface_RoutedVlan_Ipv6_Icmp_CountersPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "counters"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Interface_RoutedVlan_Ipv6_IcmpPath) State() ygnmi.SingletonQuery[*oc.Interface_RoutedVlan_Ipv6_Icmp] {
+	return ygnmi.NewSingletonQuery[*oc.Interface_RoutedVlan_Ipv6_Icmp](
+		"Interface_RoutedVlan_Ipv6_Icmp",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Interface_RoutedVlan_Ipv6_IcmpPathAny) State() ygnmi.WildcardQuery[*oc.Interface_RoutedVlan_Ipv6_Icmp] {
+	return ygnmi.NewWildcardQuery[*oc.Interface_RoutedVlan_Ipv6_Icmp](
+		"Interface_RoutedVlan_Ipv6_Icmp",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *Interface_RoutedVlan_Ipv6_IcmpPath) Config() ygnmi.ConfigQuery[*oc.Interface_RoutedVlan_Ipv6_Icmp] {
+	return ygnmi.NewConfigQuery[*oc.Interface_RoutedVlan_Ipv6_Icmp](
+		"Interface_RoutedVlan_Ipv6_Icmp",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *Interface_RoutedVlan_Ipv6_IcmpPathAny) Config() ygnmi.WildcardQuery[*oc.Interface_RoutedVlan_Ipv6_Icmp] {
+	return ygnmi.NewWildcardQuery[*oc.Interface_RoutedVlan_Ipv6_Icmp](
+		"Interface_RoutedVlan_Ipv6_Icmp",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_RoutedVlan_Ipv6_Icmp_Counters_InChecksumErrorsPath represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/icmp/state/counters/in-checksum-errors YANG schema element.
+type Interface_RoutedVlan_Ipv6_Icmp_Counters_InChecksumErrorsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_RoutedVlan_Ipv6_Icmp_Counters_InChecksumErrorsPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/icmp/state/counters/in-checksum-errors YANG schema element.
+type Interface_RoutedVlan_Ipv6_Icmp_Counters_InChecksumErrorsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Interface_RoutedVlan_Ipv6_Icmp_Counters_InChecksumErrorsPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "in-checksum-errors"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/icmp/state/counters/in-checksum-errors"
+func (n *Interface_RoutedVlan_Ipv6_Icmp_Counters_InChecksumErrorsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Interface_RoutedVlan_Ipv6_Icmp_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"in-checksum-errors"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_Icmp_Counters).InChecksumErrors
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_Icmp_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "in-checksum-errors"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/icmp/state/counters/in-checksum-errors"
+func (n *Interface_RoutedVlan_Ipv6_Icmp_Counters_InChecksumErrorsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Interface_RoutedVlan_Ipv6_Icmp_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"in-checksum-errors"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_Icmp_Counters).InChecksumErrors
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_Icmp_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_RoutedVlan_Ipv6_Icmp_Counters_InEchoRequestsPath represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/icmp/state/counters/in-echo-requests YANG schema element.
+type Interface_RoutedVlan_Ipv6_Icmp_Counters_InEchoRequestsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_RoutedVlan_Ipv6_Icmp_Counters_InEchoRequestsPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/icmp/state/counters/in-echo-requests YANG schema element.
+type Interface_RoutedVlan_Ipv6_Icmp_Counters_InEchoRequestsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Interface_RoutedVlan_Ipv6_Icmp_Counters_InEchoRequestsPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "in-echo-requests"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/icmp/state/counters/in-echo-requests"
+func (n *Interface_RoutedVlan_Ipv6_Icmp_Counters_InEchoRequestsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Interface_RoutedVlan_Ipv6_Icmp_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"in-echo-requests"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_Icmp_Counters).InEchoRequests
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_Icmp_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "in-echo-requests"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/icmp/state/counters/in-echo-requests"
+func (n *Interface_RoutedVlan_Ipv6_Icmp_Counters_InEchoRequestsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Interface_RoutedVlan_Ipv6_Icmp_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"in-echo-requests"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_Icmp_Counters).InEchoRequests
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_Icmp_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_RoutedVlan_Ipv6_Icmp_Counters_InErrorsPath represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/icmp/state/counters/in-errors YANG schema element.
+type Interface_RoutedVlan_Ipv6_Icmp_Counters_InErrorsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_RoutedVlan_Ipv6_Icmp_Counters_InErrorsPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/icmp/state/counters/in-errors YANG schema element.
+type Interface_RoutedVlan_Ipv6_Icmp_Counters_InErrorsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Interface_RoutedVlan_Ipv6_Icmp_Counters_InErrorsPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "in-errors"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/icmp/state/counters/in-errors"
+func (n *Interface_RoutedVlan_Ipv6_Icmp_Counters_InErrorsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Interface_RoutedVlan_Ipv6_Icmp_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"in-errors"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_Icmp_Counters).InErrors
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_Icmp_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "in-errors"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/icmp/state/counters/in-errors"
+func (n *Interface_RoutedVlan_Ipv6_Icmp_Counters_InErrorsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Interface_RoutedVlan_Ipv6_Icmp_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"in-errors"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_Icmp_Counters).InErrors
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_Icmp_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_RoutedVlan_Ipv6_Icmp_Counters_InNeighborAdvertisementsPath represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/icmp/state/counters/in-neighbor-advertisements YANG schema element.
+type Interface_RoutedVlan_Ipv6_Icmp_Counters_InNeighborAdvertisementsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_RoutedVlan_Ipv6_Icmp_Counters_InNeighborAdvertisementsPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/icmp/state/counters/in-neighbor-advertisements YANG schema element.
+type Interface_RoutedVlan_Ipv6_Icmp_Counters_InNeighborAdvertisementsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Interface_RoutedVlan_Ipv6_Icmp_Counters_InNeighborAdvertisementsPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "in-neighbor-advertisements"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/icmp/state/counters/in-neighbor-advertisements"
+func (n *Interface_RoutedVlan_Ipv6_Icmp_Counters_InNeighborAdvertisementsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Interface_RoutedVlan_Ipv6_Icmp_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"in-neighbor-advertisements"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_Icmp_Counters).InNeighborAdvertisements
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_Icmp_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "in-neighbor-advertisements"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/icmp/state/counters/in-neighbor-advertisements"
+func (n *Interface_RoutedVlan_Ipv6_Icmp_Counters_InNeighborAdvertisementsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Interface_RoutedVlan_Ipv6_Icmp_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"in-neighbor-advertisements"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_Icmp_Counters).InNeighborAdvertisements
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_Icmp_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_RoutedVlan_Ipv6_Icmp_Counters_InNeighborSolicitationsPath represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/icmp/state/counters/in-neighbor-solicitations YANG schema element.
+type Interface_RoutedVlan_Ipv6_Icmp_Counters_InNeighborSolicitationsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_RoutedVlan_Ipv6_Icmp_Counters_InNeighborSolicitationsPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/icmp/state/counters/in-neighbor-solicitations YANG schema element.
+type Interface_RoutedVlan_Ipv6_Icmp_Counters_InNeighborSolicitationsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Interface_RoutedVlan_Ipv6_Icmp_Counters_InNeighborSolicitationsPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "in-neighbor-solicitations"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/icmp/state/counters/in-neighbor-solicitations"
+func (n *Interface_RoutedVlan_Ipv6_Icmp_Counters_InNeighborSolicitationsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Interface_RoutedVlan_Ipv6_Icmp_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"in-neighbor-solicitations"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_Icmp_Counters).InNeighborSolicitations
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_Icmp_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "in-neighbor-solicitations"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/icmp/state/counters/in-neighbor-solicitations"
+func (n *Interface_RoutedVlan_Ipv6_Icmp_Counters_InNeighborSolicitationsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Interface_RoutedVlan_Ipv6_Icmp_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"in-neighbor-solicitations"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_Icmp_Counters).InNeighborSolicitations
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_Icmp_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_RoutedVlan_Ipv6_Icmp_Counters_OutEchoRepliesPath represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/icmp/state/counters/out-echo-replies YANG schema element.
+type Interface_RoutedVlan_Ipv6_Icmp_Counters_OutEchoRepliesPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_RoutedVlan_Ipv6_Icmp_Counters_OutEchoRepliesPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/icmp/state/counters/out-echo-replies YANG schema element.
+type Interface_RoutedVlan_Ipv6_Icmp_Counters_OutEchoRepliesPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Interface_RoutedVlan_Ipv6_Icmp_Counters_OutEchoRepliesPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "out-echo-replies"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/icmp/state/counters/out-echo-replies"
+func (n *Interface_RoutedVlan_Ipv6_Icmp_Counters_OutEchoRepliesPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Interface_RoutedVlan_Ipv6_Icmp_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"out-echo-replies"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_Icmp_Counters).OutEchoReplies
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_Icmp_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "out-echo-replies"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/icmp/state/counters/out-echo-replies"
+func (n *Interface_RoutedVlan_Ipv6_Icmp_Counters_OutEchoRepliesPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Interface_RoutedVlan_Ipv6_Icmp_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"out-echo-replies"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_Icmp_Counters).OutEchoReplies
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_Icmp_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_RoutedVlan_Ipv6_Icmp_Counters_OutErrorsPath represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/icmp/state/counters/out-errors YANG schema element.
+type Interface_RoutedVlan_Ipv6_Icmp_Counters_OutErrorsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_RoutedVlan_Ipv6_Icmp_Counters_OutErrorsPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/icmp/state/counters/out-errors YANG schema element.
+type Interface_RoutedVlan_Ipv6_Icmp_Counters_OutErrorsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Interface_RoutedVlan_Ipv6_Icmp_Counters_OutErrorsPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "out-errors"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/icmp/state/counters/out-errors"
+func (n *Interface_RoutedVlan_Ipv6_Icmp_Counters_OutErrorsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Interface_RoutedVlan_Ipv6_Icmp_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"out-errors"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_Icmp_Counters).OutErrors
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_Icmp_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "out-errors"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/icmp/state/counters/out-errors"
+func (n *Interface_RoutedVlan_Ipv6_Icmp_Counters_OutErrorsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Interface_RoutedVlan_Ipv6_Icmp_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"out-errors"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_Icmp_Counters).OutErrors
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_Icmp_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_RoutedVlan_Ipv6_Icmp_Counters_OutNeighborAdvertisementsPath represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/icmp/state/counters/out-neighbor-advertisements YANG schema element.
+type Interface_RoutedVlan_Ipv6_Icmp_Counters_OutNeighborAdvertisementsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_RoutedVlan_Ipv6_Icmp_Counters_OutNeighborAdvertisementsPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/icmp/state/counters/out-neighbor-advertisements YANG schema element.
+type Interface_RoutedVlan_Ipv6_Icmp_Counters_OutNeighborAdvertisementsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Interface_RoutedVlan_Ipv6_Icmp_Counters_OutNeighborAdvertisementsPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "out-neighbor-advertisements"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/icmp/state/counters/out-neighbor-advertisements"
+func (n *Interface_RoutedVlan_Ipv6_Icmp_Counters_OutNeighborAdvertisementsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Interface_RoutedVlan_Ipv6_Icmp_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"out-neighbor-advertisements"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_Icmp_Counters).OutNeighborAdvertisements
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_Icmp_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "out-neighbor-advertisements"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/icmp/state/counters/out-neighbor-advertisements"
+func (n *Interface_RoutedVlan_Ipv6_Icmp_Counters_OutNeighborAdvertisementsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Interface_RoutedVlan_Ipv6_Icmp_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"out-neighbor-advertisements"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_Icmp_Counters).OutNeighborAdvertisements
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_Icmp_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_RoutedVlan_Ipv6_Icmp_Counters_OutNeighborSolicitationsPath represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/icmp/state/counters/out-neighbor-solicitations YANG schema element.
+type Interface_RoutedVlan_Ipv6_Icmp_Counters_OutNeighborSolicitationsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_RoutedVlan_Ipv6_Icmp_Counters_OutNeighborSolicitationsPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/icmp/state/counters/out-neighbor-solicitations YANG schema element.
+type Interface_RoutedVlan_Ipv6_Icmp_Counters_OutNeighborSolicitationsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Interface_RoutedVlan_Ipv6_Icmp_Counters_OutNeighborSolicitationsPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "out-neighbor-solicitations"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/icmp/state/counters/out-neighbor-solicitations"
+func (n *Interface_RoutedVlan_Ipv6_Icmp_Counters_OutNeighborSolicitationsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Interface_RoutedVlan_Ipv6_Icmp_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"out-neighbor-solicitations"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_Icmp_Counters).OutNeighborSolicitations
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_Icmp_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "out-neighbor-solicitations"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/icmp/state/counters/out-neighbor-solicitations"
+func (n *Interface_RoutedVlan_Ipv6_Icmp_Counters_OutNeighborSolicitationsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Interface_RoutedVlan_Ipv6_Icmp_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"out-neighbor-solicitations"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_Icmp_Counters).OutNeighborSolicitations
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_Icmp_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_RoutedVlan_Ipv6_Icmp_CountersPath represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/icmp/state/counters YANG schema element.
+type Interface_RoutedVlan_Ipv6_Icmp_CountersPath struct {
+	*ygnmi.NodePath
+}
+
+// Interface_RoutedVlan_Ipv6_Icmp_CountersPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/icmp/state/counters YANG schema element.
+type Interface_RoutedVlan_Ipv6_Icmp_CountersPathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Interface_RoutedVlan_Ipv6_Icmp_CountersPath) PathOriginName() string {
+	return "openconfig"
+}
+
+// InChecksumErrors (leaf): The number of ICMPv6 messages received on the interface
+// that were discarded because of an invalid ICMPv6 checksum.
+// This counter is a subset of in-errors.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "in-checksum-errors"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/icmp/state/counters/in-checksum-errors"
+func (n *Interface_RoutedVlan_Ipv6_Icmp_CountersPath) InChecksumErrors() *Interface_RoutedVlan_Ipv6_Icmp_Counters_InChecksumErrorsPath {
+	ps := &Interface_RoutedVlan_Ipv6_Icmp_Counters_InChecksumErrorsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"in-checksum-errors"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// InChecksumErrors (leaf): The number of ICMPv6 messages received on the interface
+// that were discarded because of an invalid ICMPv6 checksum.
+// This counter is a subset of in-errors.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "in-checksum-errors"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/icmp/state/counters/in-checksum-errors"
+func (n *Interface_RoutedVlan_Ipv6_Icmp_CountersPathAny) InChecksumErrors() *Interface_RoutedVlan_Ipv6_Icmp_Counters_InChecksumErrorsPathAny {
+	ps := &Interface_RoutedVlan_Ipv6_Icmp_Counters_InChecksumErrorsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"in-checksum-errors"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// InEchoRequests (leaf): The number of ICMPv6 Echo Request messages received on the
+// interface.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "in-echo-requests"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/icmp/state/counters/in-echo-requests"
+func (n *Interface_RoutedVlan_Ipv6_Icmp_CountersPath) InEchoRequests() *Interface_RoutedVlan_Ipv6_Icmp_Counters_InEchoRequestsPath {
+	ps := &Interface_RoutedVlan_Ipv6_Icmp_Counters_InEchoRequestsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"in-echo-requests"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// InEchoRequests (leaf): The number of ICMPv6 Echo Request messages received on the
+// interface.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "in-echo-requests"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/icmp/state/counters/in-echo-requests"
+func (n *Interface_RoutedVlan_Ipv6_Icmp_CountersPathAny) InEchoRequests() *Interface_RoutedVlan_Ipv6_Icmp_Counters_InEchoRequestsPathAny {
+	ps := &Interface_RoutedVlan_Ipv6_Icmp_Counters_InEchoRequestsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"in-echo-requests"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// InErrors (leaf): The number of ICMPv6 messages received on the interface
+// that were discarded because of ICMPv6-specific errors, such
+// as an invalid ICMPv6 checksum, an invalid length or an
+// unknown message type.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "in-errors"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/icmp/state/counters/in-errors"
+func (n *Interface_RoutedVlan_Ipv6_Icmp_CountersPath) InErrors() *Interface_RoutedVlan_Ipv6_Icmp_Counters_InErrorsPath {
+	ps := &Interface_RoutedVlan_Ipv6_Icmp_Counters_InErrorsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"in-errors"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// InErrors (leaf): The number of ICMPv6 messages received on the interface
+// that were discarded because of ICMPv6-specific errors, such
+// as an invalid ICMPv6 checksum, an invalid length or an
+// unknown message type.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "in-errors"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/icmp/state/counters/in-errors"
+func (n *Interface_RoutedVlan_Ipv6_Icmp_CountersPathAny) InErrors() *Interface_RoutedVlan_Ipv6_Icmp_Counters_InErrorsPathAny {
+	ps := &Interface_RoutedVlan_Ipv6_Icmp_Counters_InErrorsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"in-errors"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// InNeighborAdvertisements (leaf): The number of ICMPv6 Neighbor Advertisement messages
+// received on the interface.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "in-neighbor-advertisements"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/icmp/state/counters/in-neighbor-advertisements"
+func (n *Interface_RoutedVlan_Ipv6_Icmp_CountersPath) InNeighborAdvertisements() *Interface_RoutedVlan_Ipv6_Icmp_Counters_InNeighborAdvertisementsPath {
+	ps := &Interface_RoutedVlan_Ipv6_Icmp_Counters_InNeighborAdvertisementsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"in-neighbor-advertisements"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// InNeighborAdvertisements (leaf): The number of ICMPv6 Neighbor Advertisement messages
+// received on the interface.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "in-neighbor-advertisements"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/icmp/state/counters/in-neighbor-advertisements"
+func (n *Interface_RoutedVlan_Ipv6_Icmp_CountersPathAny) InNeighborAdvertisements() *Interface_RoutedVlan_Ipv6_Icmp_Counters_InNeighborAdvertisementsPathAny {
+	ps := &Interface_RoutedVlan_Ipv6_Icmp_Counters_InNeighborAdvertisementsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"in-neighbor-advertisements"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// InNeighborSolicitations (leaf): The number of ICMPv6 Neighbor Solicitation messages
+// received on the interface.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "in-neighbor-solicitations"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/icmp/state/counters/in-neighbor-solicitations"
+func (n *Interface_RoutedVlan_Ipv6_Icmp_CountersPath) InNeighborSolicitations() *Interface_RoutedVlan_Ipv6_Icmp_Counters_InNeighborSolicitationsPath {
+	ps := &Interface_RoutedVlan_Ipv6_Icmp_Counters_InNeighborSolicitationsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"in-neighbor-solicitations"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// InNeighborSolicitations (leaf): The number of ICMPv6 Neighbor Solicitation messages
+// received on the interface.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "in-neighbor-solicitations"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/icmp/state/counters/in-neighbor-solicitations"
+func (n *Interface_RoutedVlan_Ipv6_Icmp_CountersPathAny) InNeighborSolicitations() *Interface_RoutedVlan_Ipv6_Icmp_Counters_InNeighborSolicitationsPathAny {
+	ps := &Interface_RoutedVlan_Ipv6_Icmp_Counters_InNeighborSolicitationsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"in-neighbor-solicitations"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// OutEchoReplies (leaf): The number of ICMPv6 Echo Reply messages sent on the
+// interface.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "out-echo-replies"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/icmp/state/counters/out-echo-replies"
+func (n *Interface_RoutedVlan_Ipv6_Icmp_CountersPath) OutEchoReplies() *Interface_RoutedVlan_Ipv6_Icmp_Counters_OutEchoRepliesPath {
+	ps := &Interface_RoutedVlan_Ipv6_Icmp_Counters_OutEchoRepliesPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"out-echo-replies"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// OutEchoReplies (leaf): The number of ICMPv6 Echo Reply messages sent on the
+// interface.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "out-echo-replies"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/icmp/state/counters/out-echo-replies"
+func (n *Interface_RoutedVlan_Ipv6_Icmp_CountersPathAny) OutEchoReplies() *Interface_RoutedVlan_Ipv6_Icmp_Counters_OutEchoRepliesPathAny {
+	ps := &Interface_RoutedVlan_Ipv6_Icmp_Counters_OutEchoRepliesPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"out-echo-replies"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// OutErrors (leaf): The number of ICMPv6 messages that the interface did not
+// send due to problems discovered within ICMPv6, such as a
+// lack of buffers. This value does not include errors
+// discovered outside the ICMPv6 layer, such as the inability
+// of IPv6 to route the resulting datagram.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "out-errors"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/icmp/state/counters/out-errors"
+func (n *Interface_RoutedVlan_Ipv6_Icmp_CountersPath) OutErrors() *Interface_RoutedVlan_Ipv6_Icmp_Counters_OutErrorsPath {
+	ps := &Interface_RoutedVlan_Ipv6_Icmp_Counters_OutErrorsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"out-errors"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// OutErrors (leaf): The number of ICMPv6 messages that the interface did not
+// send due to problems discovered within ICMPv6, such as a
+// lack of buffers. This value does not include errors
+// discovered outside the ICMPv6 layer, such as the inability
+// of IPv6 to route the resulting datagram.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "out-errors"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/icmp/state/counters/out-errors"
+func (n *Interface_RoutedVlan_Ipv6_Icmp_CountersPathAny) OutErrors() *Interface_RoutedVlan_Ipv6_Icmp_Counters_OutErrorsPathAny {
+	ps := &Interface_RoutedVlan_Ipv6_Icmp_Counters_OutErrorsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"out-errors"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// OutNeighborAdvertisements (leaf): The number of ICMPv6 Neighbor Advertisement messages sent
+// on the interface.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "out-neighbor-advertisements"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/icmp/state/counters/out-neighbor-advertisements"
+func (n *Interface_RoutedVlan_Ipv6_Icmp_CountersPath) OutNeighborAdvertisements() *Interface_RoutedVlan_Ipv6_Icmp_Counters_OutNeighborAdvertisementsPath {
+	ps := &Interface_RoutedVlan_Ipv6_Icmp_Counters_OutNeighborAdvertisementsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"out-neighbor-advertisements"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// OutNeighborAdvertisements (leaf): The number of ICMPv6 Neighbor Advertisement messages sent
+// on the interface.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "out-neighbor-advertisements"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/icmp/state/counters/out-neighbor-advertisements"
+func (n *Interface_RoutedVlan_Ipv6_Icmp_CountersPathAny) OutNeighborAdvertisements() *Interface_RoutedVlan_Ipv6_Icmp_Counters_OutNeighborAdvertisementsPathAny {
+	ps := &Interface_RoutedVlan_Ipv6_Icmp_Counters_OutNeighborAdvertisementsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"out-neighbor-advertisements"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// OutNeighborSolicitations (leaf): The number of ICMPv6 Neighbor Solicitation messages sent on
+// the interface.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "out-neighbor-solicitations"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/icmp/state/counters/out-neighbor-solicitations"
+func (n *Interface_RoutedVlan_Ipv6_Icmp_CountersPath) OutNeighborSolicitations() *Interface_RoutedVlan_Ipv6_Icmp_Counters_OutNeighborSolicitationsPath {
+	ps := &Interface_RoutedVlan_Ipv6_Icmp_Counters_OutNeighborSolicitationsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"out-neighbor-solicitations"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// OutNeighborSolicitations (leaf): The number of ICMPv6 Neighbor Solicitation messages sent on
+// the interface.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "out-neighbor-solicitations"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/icmp/state/counters/out-neighbor-solicitations"
+func (n *Interface_RoutedVlan_Ipv6_Icmp_CountersPathAny) OutNeighborSolicitations() *Interface_RoutedVlan_Ipv6_Icmp_Counters_OutNeighborSolicitationsPathAny {
+	ps := &Interface_RoutedVlan_Ipv6_Icmp_Counters_OutNeighborSolicitationsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"out-neighbor-solicitations"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Interface_RoutedVlan_Ipv6_Icmp_CountersPath) State() ygnmi.SingletonQuery[*oc.Interface_RoutedVlan_Ipv6_Icmp_Counters] {
+	return ygnmi.NewSingletonQuery[*oc.Interface_RoutedVlan_Ipv6_Icmp_Counters](
+		"Interface_RoutedVlan_Ipv6_Icmp_Counters",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Interface_RoutedVlan_Ipv6_Icmp_CountersPathAny) State() ygnmi.WildcardQuery[*oc.Interface_RoutedVlan_Ipv6_Icmp_Counters] {
+	return ygnmi.NewWildcardQuery[*oc.Interface_RoutedVlan_Ipv6_Icmp_Counters](
+		"Interface_RoutedVlan_Ipv6_Icmp_Counters",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
 // Interface_RoutedVlan_Ipv6_Neighbor_IpPath represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/neighbors/neighbor/state/ip YANG schema element.
 type Interface_RoutedVlan_Ipv6_Neighbor_IpPath struct {
 	*ygnmi.NodePath
@@ -43823,6 +46783,356 @@ func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_OtherConfigPathAny) Confi
 	)
 }
 
+// Interface_RoutedVlan_Ipv6_RouterAdvertisement_ReachableTimePath represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/router-advertisement/state/reachable-time YANG schema element.
+type Interface_RoutedVlan_Ipv6_RouterAdvertisement_ReachableTimePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_RoutedVlan_Ipv6_RouterAdvertisement_ReachableTimePathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/router-advertisement/state/reachable-time YANG schema element.
+type Interface_RoutedVlan_Ipv6_RouterAdvertisement_ReachableTimePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_ReachableTimePath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/reachable-time"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/state/reachable-time"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_ReachableTimePath) State() ygnmi.SingletonQuery[uint32] {
+	return ygnmi.NewSingletonQuery[uint32](
+		"Interface_RoutedVlan_Ipv6_RouterAdvertisement",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "reachable-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement).ReachableTime
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/reachable-time"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/state/reachable-time"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_ReachableTimePathAny) State() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewWildcardQuery[uint32](
+		"Interface_RoutedVlan_Ipv6_RouterAdvertisement",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "reachable-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement).ReachableTime
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/reachable-time"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/config/reachable-time"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_ReachableTimePath) Config() ygnmi.ConfigQuery[uint32] {
+	return ygnmi.NewConfigQuery[uint32](
+		"Interface_RoutedVlan_Ipv6_RouterAdvertisement",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "reachable-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement).ReachableTime
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/reachable-time"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/config/reachable-time"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_ReachableTimePathAny) Config() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewWildcardQuery[uint32](
+		"Interface_RoutedVlan_Ipv6_RouterAdvertisement",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "reachable-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement).ReachableTime
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_RoutedVlan_Ipv6_RouterAdvertisement_RouterPreferencePath represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/router-advertisement/state/router-preference YANG schema element.
+type Interface_RoutedVlan_Ipv6_RouterAdvertisement_RouterPreferencePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_RoutedVlan_Ipv6_RouterAdvertisement_RouterPreferencePathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/router-advertisement/state/router-preference YANG schema element.
+type Interface_RoutedVlan_Ipv6_RouterAdvertisement_RouterPreferencePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_RouterPreferencePath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/router-preference"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/state/router-preference"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_RouterPreferencePath) State() ygnmi.SingletonQuery[oc.E_RouterAdvertisement_RouterPreference] {
+	return ygnmi.NewSingletonQuery[oc.E_RouterAdvertisement_RouterPreference](
+		"Interface_RoutedVlan_Ipv6_RouterAdvertisement",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "router-preference"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_RouterAdvertisement_RouterPreference, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement).RouterPreference
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/router-preference"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/state/router-preference"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_RouterPreferencePathAny) State() ygnmi.WildcardQuery[oc.E_RouterAdvertisement_RouterPreference] {
+	return ygnmi.NewWildcardQuery[oc.E_RouterAdvertisement_RouterPreference](
+		"Interface_RoutedVlan_Ipv6_RouterAdvertisement",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "router-preference"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_RouterAdvertisement_RouterPreference, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement).RouterPreference
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/router-preference"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/config/router-preference"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_RouterPreferencePath) Config() ygnmi.ConfigQuery[oc.E_RouterAdvertisement_RouterPreference] {
+	return ygnmi.NewConfigQuery[oc.E_RouterAdvertisement_RouterPreference](
+		"Interface_RoutedVlan_Ipv6_RouterAdvertisement",
+		false,
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "router-preference"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_RouterAdvertisement_RouterPreference, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement).RouterPreference
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/router-preference"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/config/router-preference"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_RouterPreferencePathAny) Config() ygnmi.WildcardQuery[oc.E_RouterAdvertisement_RouterPreference] {
+	return ygnmi.NewWildcardQuery[oc.E_RouterAdvertisement_RouterPreference](
+		"Interface_RoutedVlan_Ipv6_RouterAdvertisement",
+		false,
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "router-preference"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_RouterAdvertisement_RouterPreference, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement).RouterPreference
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
 // Interface_RoutedVlan_Ipv6_RouterAdvertisement_SuppressPath represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/router-advertisement/state/suppress YANG schema element.
 type Interface_RoutedVlan_Ipv6_RouterAdvertisement_SuppressPath struct {
 	*ygnmi.NodePath
@@ -44017,6 +47327,42 @@ type Interface_RoutedVlan_Ipv6_RouterAdvertisementPathAny struct {
 // PathOrigin returns the name of the origin for the path object.
 func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisementPath) PathOriginName() string {
 	return "openconfig"
+}
+
+// Counters (container): Counters for ICMPv6 Router Solicitation and Router
+// Advertisement messages received and sent on the interface.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "state/counters"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/state/counters"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisementPath) Counters() *Interface_RoutedVlan_Ipv6_RouterAdvertisement_CountersPath {
+	ps := &Interface_RoutedVlan_Ipv6_RouterAdvertisement_CountersPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "counters"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// Counters (container): Counters for ICMPv6 Router Solicitation and Router
+// Advertisement messages received and sent on the interface.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "state/counters"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/state/counters"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisementPathAny) Counters() *Interface_RoutedVlan_Ipv6_RouterAdvertisement_CountersPathAny {
+	ps := &Interface_RoutedVlan_Ipv6_RouterAdvertisement_CountersPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "counters"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
 }
 
 // DnsServerAny (list): List of DNS servers that are to be advertised on the interface
@@ -44521,6 +47867,86 @@ func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisementPathAny) PrefixMap() *Inte
 	return ps
 }
 
+// ReachableTime (leaf): The time, in milliseconds, that a node assumes a neighbor is
+// reachable after having received a reachability confirmation.  Set
+// to 0 to indicate that reachable time is unspecified by this router.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/reachable-time"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/*/reachable-time"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisementPath) ReachableTime() *Interface_RoutedVlan_Ipv6_RouterAdvertisement_ReachableTimePath {
+	ps := &Interface_RoutedVlan_Ipv6_RouterAdvertisement_ReachableTimePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "reachable-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// ReachableTime (leaf): The time, in milliseconds, that a node assumes a neighbor is
+// reachable after having received a reachability confirmation.  Set
+// to 0 to indicate that reachable time is unspecified by this router.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/reachable-time"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/*/reachable-time"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisementPathAny) ReachableTime() *Interface_RoutedVlan_Ipv6_RouterAdvertisement_ReachableTimePathAny {
+	ps := &Interface_RoutedVlan_Ipv6_RouterAdvertisement_ReachableTimePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "reachable-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// RouterPreference (leaf): Default Router Preference (Prf) advertised in the router
+// advertisement messages. Indicates whether this router is preferred
+// over other routers on the link.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/router-preference"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/*/router-preference"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisementPath) RouterPreference() *Interface_RoutedVlan_Ipv6_RouterAdvertisement_RouterPreferencePath {
+	ps := &Interface_RoutedVlan_Ipv6_RouterAdvertisement_RouterPreferencePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "router-preference"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// RouterPreference (leaf): Default Router Preference (Prf) advertised in the router
+// advertisement messages. Indicates whether this router is preferred
+// over other routers on the link.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/router-preference"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/*/router-preference"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisementPathAny) RouterPreference() *Interface_RoutedVlan_Ipv6_RouterAdvertisement_RouterPreferencePathAny {
+	ps := &Interface_RoutedVlan_Ipv6_RouterAdvertisement_RouterPreferencePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "router-preference"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
 // Suppress (leaf): When set to true, router advertisement neighbor discovery
 // messages are not transmitted on this interface.
 //
@@ -44640,6 +48066,619 @@ func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisementPathAny) Config() ygnmi.Wi
 		"Interface_RoutedVlan_Ipv6_RouterAdvertisement",
 		false,
 		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters_InRouterAdvertisementsPath represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/router-advertisement/state/counters/in-router-advertisements YANG schema element.
+type Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters_InRouterAdvertisementsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters_InRouterAdvertisementsPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/router-advertisement/state/counters/in-router-advertisements YANG schema element.
+type Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters_InRouterAdvertisementsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters_InRouterAdvertisementsPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "in-router-advertisements"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/state/counters/in-router-advertisements"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters_InRouterAdvertisementsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"in-router-advertisements"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters).InRouterAdvertisements
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "in-router-advertisements"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/state/counters/in-router-advertisements"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters_InRouterAdvertisementsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"in-router-advertisements"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters).InRouterAdvertisements
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters_InRouterSolicitationsPath represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/router-advertisement/state/counters/in-router-solicitations YANG schema element.
+type Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters_InRouterSolicitationsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters_InRouterSolicitationsPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/router-advertisement/state/counters/in-router-solicitations YANG schema element.
+type Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters_InRouterSolicitationsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters_InRouterSolicitationsPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "in-router-solicitations"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/state/counters/in-router-solicitations"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters_InRouterSolicitationsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"in-router-solicitations"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters).InRouterSolicitations
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "in-router-solicitations"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/state/counters/in-router-solicitations"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters_InRouterSolicitationsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"in-router-solicitations"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters).InRouterSolicitations
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters_OutRouterAdvertisementsPath represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/router-advertisement/state/counters/out-router-advertisements YANG schema element.
+type Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters_OutRouterAdvertisementsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters_OutRouterAdvertisementsPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/router-advertisement/state/counters/out-router-advertisements YANG schema element.
+type Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters_OutRouterAdvertisementsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters_OutRouterAdvertisementsPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "out-router-advertisements"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/state/counters/out-router-advertisements"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters_OutRouterAdvertisementsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"out-router-advertisements"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters).OutRouterAdvertisements
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "out-router-advertisements"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/state/counters/out-router-advertisements"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters_OutRouterAdvertisementsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"out-router-advertisements"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters).OutRouterAdvertisements
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters_OutRouterSolicitationsPath represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/router-advertisement/state/counters/out-router-solicitations YANG schema element.
+type Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters_OutRouterSolicitationsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters_OutRouterSolicitationsPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/router-advertisement/state/counters/out-router-solicitations YANG schema element.
+type Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters_OutRouterSolicitationsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters_OutRouterSolicitationsPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "out-router-solicitations"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/state/counters/out-router-solicitations"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters_OutRouterSolicitationsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"out-router-solicitations"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters).OutRouterSolicitations
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "out-router-solicitations"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/state/counters/out-router-solicitations"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters_OutRouterSolicitationsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"out-router-solicitations"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters).OutRouterSolicitations
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_RoutedVlan_Ipv6_RouterAdvertisement_CountersPath represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/router-advertisement/state/counters YANG schema element.
+type Interface_RoutedVlan_Ipv6_RouterAdvertisement_CountersPath struct {
+	*ygnmi.NodePath
+}
+
+// Interface_RoutedVlan_Ipv6_RouterAdvertisement_CountersPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/router-advertisement/state/counters YANG schema element.
+type Interface_RoutedVlan_Ipv6_RouterAdvertisement_CountersPathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_CountersPath) PathOriginName() string {
+	return "openconfig"
+}
+
+// InRouterAdvertisements (leaf): The number of ICMPv6 Router Advertisement messages received
+// on the interface.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "in-router-advertisements"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/state/counters/in-router-advertisements"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_CountersPath) InRouterAdvertisements() *Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters_InRouterAdvertisementsPath {
+	ps := &Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters_InRouterAdvertisementsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"in-router-advertisements"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// InRouterAdvertisements (leaf): The number of ICMPv6 Router Advertisement messages received
+// on the interface.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "in-router-advertisements"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/state/counters/in-router-advertisements"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_CountersPathAny) InRouterAdvertisements() *Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters_InRouterAdvertisementsPathAny {
+	ps := &Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters_InRouterAdvertisementsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"in-router-advertisements"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// InRouterSolicitations (leaf): The number of ICMPv6 Router Solicitation messages received
+// on the interface.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "in-router-solicitations"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/state/counters/in-router-solicitations"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_CountersPath) InRouterSolicitations() *Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters_InRouterSolicitationsPath {
+	ps := &Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters_InRouterSolicitationsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"in-router-solicitations"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// InRouterSolicitations (leaf): The number of ICMPv6 Router Solicitation messages received
+// on the interface.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "in-router-solicitations"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/state/counters/in-router-solicitations"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_CountersPathAny) InRouterSolicitations() *Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters_InRouterSolicitationsPathAny {
+	ps := &Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters_InRouterSolicitationsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"in-router-solicitations"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// OutRouterAdvertisements (leaf): The number of ICMPv6 Router Advertisement messages sent on
+// the interface.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "out-router-advertisements"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/state/counters/out-router-advertisements"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_CountersPath) OutRouterAdvertisements() *Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters_OutRouterAdvertisementsPath {
+	ps := &Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters_OutRouterAdvertisementsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"out-router-advertisements"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// OutRouterAdvertisements (leaf): The number of ICMPv6 Router Advertisement messages sent on
+// the interface.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "out-router-advertisements"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/state/counters/out-router-advertisements"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_CountersPathAny) OutRouterAdvertisements() *Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters_OutRouterAdvertisementsPathAny {
+	ps := &Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters_OutRouterAdvertisementsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"out-router-advertisements"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// OutRouterSolicitations (leaf): The number of ICMPv6 Router Solicitation messages sent on
+// the interface.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "out-router-solicitations"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/state/counters/out-router-solicitations"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_CountersPath) OutRouterSolicitations() *Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters_OutRouterSolicitationsPath {
+	ps := &Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters_OutRouterSolicitationsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"out-router-solicitations"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// OutRouterSolicitations (leaf): The number of ICMPv6 Router Solicitation messages sent on
+// the interface.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "out-router-solicitations"
+//	Path from root:       "/interfaces/interface/routed-vlan/ipv6/router-advertisement/state/counters/out-router-solicitations"
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_CountersPathAny) OutRouterSolicitations() *Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters_OutRouterSolicitationsPathAny {
+	ps := &Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters_OutRouterSolicitationsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"out-router-solicitations"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_CountersPath) State() ygnmi.SingletonQuery[*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters] {
+	return ygnmi.NewSingletonQuery[*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters](
+		"Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Interface_RoutedVlan_Ipv6_RouterAdvertisement_CountersPathAny) State() ygnmi.WildcardQuery[*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters] {
+	return ygnmi.NewWildcardQuery[*oc.Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters](
+		"Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters",
+		true,
+		false,
 		false,
 		false,
 		true,
@@ -50843,7 +54882,7 @@ func (n *Interface_SubinterfacePathAny) AdminStatus() *Interface_Subinterface_Ad
 	return ps
 }
 
-// Counters (container): A collection of interface specific statistics entitites which are
+// Counters (container): A collection of interface specific statistics entities which are
 // not common to subinterfaces.
 //
 //	Defining module:      "openconfig-interfaces"
@@ -50861,7 +54900,7 @@ func (n *Interface_SubinterfacePath) Counters() *Interface_Subinterface_Counters
 	return ps
 }
 
-// Counters (container): A collection of interface specific statistics entitites which are
+// Counters (container): A collection of interface specific statistics entities which are
 // not common to subinterfaces.
 //
 //	Defining module:      "openconfig-interfaces"
@@ -52165,6 +56204,204 @@ func (n *Interface_Subinterface_Counters_InFcsErrorsPathAny) State() ygnmi.Wildc
 		),
 		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
 			ret := gs.(*oc.Interface_Subinterface_Counters).InFcsErrors
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_Subinterface_Counters_InLinkDownDiscardsPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/state/counters/in-link-down-discards YANG schema element.
+type Interface_Subinterface_Counters_InLinkDownDiscardsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Subinterface_Counters_InLinkDownDiscardsPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/state/counters/in-link-down-discards YANG schema element.
+type Interface_Subinterface_Counters_InLinkDownDiscardsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Interface_Subinterface_Counters_InLinkDownDiscardsPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-interfaces"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "in-link-down-discards"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/state/counters/in-link-down-discards"
+func (n *Interface_Subinterface_Counters_InLinkDownDiscardsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Interface_Subinterface_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"in-link-down-discards"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Counters).InLinkDownDiscards
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-interfaces"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "in-link-down-discards"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/state/counters/in-link-down-discards"
+func (n *Interface_Subinterface_Counters_InLinkDownDiscardsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Interface_Subinterface_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"in-link-down-discards"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Counters).InLinkDownDiscards
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_Subinterface_Counters_InLowTtlDiscardsPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/state/counters/in-low-ttl-discards YANG schema element.
+type Interface_Subinterface_Counters_InLowTtlDiscardsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Subinterface_Counters_InLowTtlDiscardsPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/state/counters/in-low-ttl-discards YANG schema element.
+type Interface_Subinterface_Counters_InLowTtlDiscardsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Interface_Subinterface_Counters_InLowTtlDiscardsPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-interfaces"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "in-low-ttl-discards"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/state/counters/in-low-ttl-discards"
+func (n *Interface_Subinterface_Counters_InLowTtlDiscardsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Interface_Subinterface_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"in-low-ttl-discards"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Counters).InLowTtlDiscards
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-interfaces"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "in-low-ttl-discards"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/state/counters/in-low-ttl-discards"
+func (n *Interface_Subinterface_Counters_InLowTtlDiscardsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Interface_Subinterface_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"in-low-ttl-discards"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Counters).InLowTtlDiscards
 			if ret == nil {
 				var zero uint64
 				return zero, false
@@ -53720,6 +57957,112 @@ func (n *Interface_Subinterface_CountersPathAny) InFcsErrors() *Interface_Subint
 	ps := &Interface_Subinterface_Counters_InFcsErrorsPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"in-fcs-errors"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// InLinkDownDiscards (leaf): The number of inbound packets received on the interface or
+// subinterface that were dropped because the egress interface or
+// next-hop link selected by forwarding or routing was down.  The
+// in-discards leaf must also be incremented as the packet was
+// discarded and for backwards compatibility.
+//
+// Discontinuities in the value of this counter can occur
+// at re-initialization of the management system, and at
+// other times as indicated by the value of 'last-clear'.
+//
+//	Defining module:      "openconfig-interfaces"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "in-link-down-discards"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/state/counters/in-link-down-discards"
+func (n *Interface_Subinterface_CountersPath) InLinkDownDiscards() *Interface_Subinterface_Counters_InLinkDownDiscardsPath {
+	ps := &Interface_Subinterface_Counters_InLinkDownDiscardsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"in-link-down-discards"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// InLinkDownDiscards (leaf): The number of inbound packets received on the interface or
+// subinterface that were dropped because the egress interface or
+// next-hop link selected by forwarding or routing was down.  The
+// in-discards leaf must also be incremented as the packet was
+// discarded and for backwards compatibility.
+//
+// Discontinuities in the value of this counter can occur
+// at re-initialization of the management system, and at
+// other times as indicated by the value of 'last-clear'.
+//
+//	Defining module:      "openconfig-interfaces"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "in-link-down-discards"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/state/counters/in-link-down-discards"
+func (n *Interface_Subinterface_CountersPathAny) InLinkDownDiscards() *Interface_Subinterface_Counters_InLinkDownDiscardsPathAny {
+	ps := &Interface_Subinterface_Counters_InLinkDownDiscardsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"in-link-down-discards"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// InLowTtlDiscards (leaf): The number of inbound packets received on the interface or
+// subinterface that were dropped due to an expired Time-To-Live
+// (TTL) or Hop Limit during transit forwarding, indicating TTL
+// expiration or routing loops.  The in-discards leaf must also
+// be incremented as the packet was discarded and for backwards
+// compatibility.
+//
+// Discontinuities in the value of this counter can occur
+// at re-initialization of the management system, and at
+// other times as indicated by the value of 'last-clear'.
+//
+//	Defining module:      "openconfig-interfaces"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "in-low-ttl-discards"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/state/counters/in-low-ttl-discards"
+func (n *Interface_Subinterface_CountersPath) InLowTtlDiscards() *Interface_Subinterface_Counters_InLowTtlDiscardsPath {
+	ps := &Interface_Subinterface_Counters_InLowTtlDiscardsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"in-low-ttl-discards"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// InLowTtlDiscards (leaf): The number of inbound packets received on the interface or
+// subinterface that were dropped due to an expired Time-To-Live
+// (TTL) or Hop Limit during transit forwarding, indicating TTL
+// expiration or routing loops.  The in-discards leaf must also
+// be incremented as the packet was discarded and for backwards
+// compatibility.
+//
+// Discontinuities in the value of this counter can occur
+// at re-initialization of the management system, and at
+// other times as indicated by the value of 'last-clear'.
+//
+//	Defining module:      "openconfig-interfaces"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "in-low-ttl-discards"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/state/counters/in-low-ttl-discards"
+func (n *Interface_Subinterface_CountersPathAny) InLowTtlDiscards() *Interface_Subinterface_Counters_InLowTtlDiscardsPathAny {
+	ps := &Interface_Subinterface_Counters_InLowTtlDiscardsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"in-low-ttl-discards"},
 			map[string]interface{}{},
 			n,
 		),
@@ -63064,6 +67407,118 @@ func (n *Interface_Subinterface_Ipv4_ProxyArpPath) PathOriginName() string {
 	return "openconfig"
 }
 
+// ManualIpRangeAny (list): A configured IPv4 ip-range entry for proxy ARP manual
+// mode.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "manual-ip-ranges/manual-ip-range"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv4/proxy-arp/manual-ip-ranges/manual-ip-range"
+func (n *Interface_Subinterface_Ipv4_ProxyArpPath) ManualIpRangeAny() *Interface_Subinterface_Ipv4_ProxyArp_ManualIpRangePathAny {
+	ps := &Interface_Subinterface_Ipv4_ProxyArp_ManualIpRangePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"manual-ip-ranges", "manual-ip-range"},
+			map[string]interface{}{"ip-range": "*"},
+			n,
+		),
+	}
+	return ps
+}
+
+// ManualIpRangeAny (list): A configured IPv4 ip-range entry for proxy ARP manual
+// mode.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "manual-ip-ranges/manual-ip-range"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv4/proxy-arp/manual-ip-ranges/manual-ip-range"
+func (n *Interface_Subinterface_Ipv4_ProxyArpPathAny) ManualIpRangeAny() *Interface_Subinterface_Ipv4_ProxyArp_ManualIpRangePathAny {
+	ps := &Interface_Subinterface_Ipv4_ProxyArp_ManualIpRangePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"manual-ip-ranges", "manual-ip-range"},
+			map[string]interface{}{"ip-range": "*"},
+			n,
+		),
+	}
+	return ps
+}
+
+// ManualIpRange (list): A configured IPv4 ip-range entry for proxy ARP manual
+// mode.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "manual-ip-ranges/manual-ip-range"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv4/proxy-arp/manual-ip-ranges/manual-ip-range"
+//
+//	IpRange: string
+func (n *Interface_Subinterface_Ipv4_ProxyArpPath) ManualIpRange(IpRange string) *Interface_Subinterface_Ipv4_ProxyArp_ManualIpRangePath {
+	ps := &Interface_Subinterface_Ipv4_ProxyArp_ManualIpRangePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"manual-ip-ranges", "manual-ip-range"},
+			map[string]interface{}{"ip-range": IpRange},
+			n,
+		),
+	}
+	return ps
+}
+
+// ManualIpRange (list): A configured IPv4 ip-range entry for proxy ARP manual
+// mode.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "manual-ip-ranges/manual-ip-range"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv4/proxy-arp/manual-ip-ranges/manual-ip-range"
+//
+//	IpRange: string
+func (n *Interface_Subinterface_Ipv4_ProxyArpPathAny) ManualIpRange(IpRange string) *Interface_Subinterface_Ipv4_ProxyArp_ManualIpRangePathAny {
+	ps := &Interface_Subinterface_Ipv4_ProxyArp_ManualIpRangePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"manual-ip-ranges", "manual-ip-range"},
+			map[string]interface{}{"ip-range": IpRange},
+			n,
+		),
+	}
+	return ps
+}
+
+// ManualIpRangeMap (list): A configured IPv4 ip-range entry for proxy ARP manual
+// mode.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "manual-ip-ranges/manual-ip-range"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv4/proxy-arp/manual-ip-ranges/manual-ip-range"
+func (n *Interface_Subinterface_Ipv4_ProxyArpPath) ManualIpRangeMap() *Interface_Subinterface_Ipv4_ProxyArp_ManualIpRangePathMap {
+	ps := &Interface_Subinterface_Ipv4_ProxyArp_ManualIpRangePathMap{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"manual-ip-ranges"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// ManualIpRangeMap (list): A configured IPv4 ip-range entry for proxy ARP manual
+// mode.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "manual-ip-ranges/manual-ip-range"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv4/proxy-arp/manual-ip-ranges/manual-ip-range"
+func (n *Interface_Subinterface_Ipv4_ProxyArpPathAny) ManualIpRangeMap() *Interface_Subinterface_Ipv4_ProxyArp_ManualIpRangePathMapAny {
+	ps := &Interface_Subinterface_Ipv4_ProxyArp_ManualIpRangePathMapAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"manual-ip-ranges"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
 // Mode (leaf): When set to a value other than DISABLE, the local system should
 // respond to ARP requests that are for target addresses other than
 // those that are configured on the local subinterface using its own
@@ -63071,7 +67526,10 @@ func (n *Interface_Subinterface_Ipv4_ProxyArpPath) PathOriginName() string {
 // value is specified, replies are only sent when the target address
 // falls outside the locally configured subnets on the interface,
 // whereas with the ALL value, all requests, regardless of their
-// target address are replied to.
+// target address are replied to. If MANUAL is specified, replies
+// are only sent for target addresses matching entries in the
+// manual-ip-ranges list, or that match the IP address assigned to
+// the receiving interface.
 //
 //	Defining module:      "openconfig-if-ip"
 //	Instantiating module: "openconfig-interfaces"
@@ -63096,7 +67554,10 @@ func (n *Interface_Subinterface_Ipv4_ProxyArpPath) Mode() *Interface_Subinterfac
 // value is specified, replies are only sent when the target address
 // falls outside the locally configured subnets on the interface,
 // whereas with the ALL value, all requests, regardless of their
-// target address are replied to.
+// target address are replied to. If MANUAL is specified, replies
+// are only sent for target addresses matching entries in the
+// manual-ip-ranges list, or that match the IP address assigned to
+// the receiving interface.
 //
 //	Defining module:      "openconfig-if-ip"
 //	Instantiating module: "openconfig-interfaces"
@@ -63211,6 +67672,481 @@ func (n *Interface_Subinterface_Ipv4_ProxyArpPathAny) Config() ygnmi.WildcardQue
 		},
 		nil,
 		nil,
+	)
+}
+
+// Interface_Subinterface_Ipv4_ProxyArp_ManualIpRange_IpRangePath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/proxy-arp/manual-ip-ranges/manual-ip-range/state/ip-range YANG schema element.
+type Interface_Subinterface_Ipv4_ProxyArp_ManualIpRange_IpRangePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Subinterface_Ipv4_ProxyArp_ManualIpRange_IpRangePathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/proxy-arp/manual-ip-ranges/manual-ip-range/state/ip-range YANG schema element.
+type Interface_Subinterface_Ipv4_ProxyArp_ManualIpRange_IpRangePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Interface_Subinterface_Ipv4_ProxyArp_ManualIpRange_IpRangePath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/ip-range"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv4/proxy-arp/manual-ip-ranges/manual-ip-range/state/ip-range"
+func (n *Interface_Subinterface_Ipv4_ProxyArp_ManualIpRange_IpRangePath) State() ygnmi.SingletonQuery[string] {
+	return ygnmi.NewSingletonQuery[string](
+		"Interface_Subinterface_Ipv4_ProxyArp_ManualIpRange",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "ip-range"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv4_ProxyArp_ManualIpRange).IpRange
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv4_ProxyArp_ManualIpRange) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/ip-range"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv4/proxy-arp/manual-ip-ranges/manual-ip-range/state/ip-range"
+func (n *Interface_Subinterface_Ipv4_ProxyArp_ManualIpRange_IpRangePathAny) State() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"Interface_Subinterface_Ipv4_ProxyArp_ManualIpRange",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "ip-range"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv4_ProxyArp_ManualIpRange).IpRange
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv4_ProxyArp_ManualIpRange) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/ip-range"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv4/proxy-arp/manual-ip-ranges/manual-ip-range/config/ip-range"
+func (n *Interface_Subinterface_Ipv4_ProxyArp_ManualIpRange_IpRangePath) Config() ygnmi.ConfigQuery[string] {
+	return ygnmi.NewConfigQuery[string](
+		"Interface_Subinterface_Ipv4_ProxyArp_ManualIpRange",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "ip-range"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv4_ProxyArp_ManualIpRange).IpRange
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv4_ProxyArp_ManualIpRange) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/ip-range"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv4/proxy-arp/manual-ip-ranges/manual-ip-range/config/ip-range"
+func (n *Interface_Subinterface_Ipv4_ProxyArp_ManualIpRange_IpRangePathAny) Config() ygnmi.WildcardQuery[string] {
+	return ygnmi.NewWildcardQuery[string](
+		"Interface_Subinterface_Ipv4_ProxyArp_ManualIpRange",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "ip-range"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (string, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv4_ProxyArp_ManualIpRange).IpRange
+			if ret == nil {
+				var zero string
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv4_ProxyArp_ManualIpRange) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_Subinterface_Ipv4_ProxyArp_ManualIpRangePath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/proxy-arp/manual-ip-ranges/manual-ip-range YANG schema element.
+type Interface_Subinterface_Ipv4_ProxyArp_ManualIpRangePath struct {
+	*ygnmi.NodePath
+}
+
+// Interface_Subinterface_Ipv4_ProxyArp_ManualIpRangePathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/proxy-arp/manual-ip-ranges/manual-ip-range YANG schema element.
+type Interface_Subinterface_Ipv4_ProxyArp_ManualIpRangePathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Interface_Subinterface_Ipv4_ProxyArp_ManualIpRangePath) PathOriginName() string {
+	return "openconfig"
+}
+
+// Interface_Subinterface_Ipv4_ProxyArp_ManualIpRangePathMap represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/proxy-arp/manual-ip-ranges/manual-ip-range YANG schema element.
+type Interface_Subinterface_Ipv4_ProxyArp_ManualIpRangePathMap struct {
+	*ygnmi.NodePath
+}
+
+// Interface_Subinterface_Ipv4_ProxyArp_ManualIpRangePathMapAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/proxy-arp/manual-ip-ranges/manual-ip-range YANG schema element.
+type Interface_Subinterface_Ipv4_ProxyArp_ManualIpRangePathMapAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Interface_Subinterface_Ipv4_ProxyArp_ManualIpRangePathMap) PathOriginName() string {
+	return "openconfig"
+}
+
+// IpRange (leaf): IPv4 ip-range: single IP (CIDR notation, e.g. 10.0.0.0/24) or
+// address range (start-end notation, e.g. 10.0.0.1-10.0.0.5)
+// for which proxy ARP replies are sent when mode is MANUAL.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/ip-range"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv4/proxy-arp/manual-ip-ranges/manual-ip-range/*/ip-range"
+func (n *Interface_Subinterface_Ipv4_ProxyArp_ManualIpRangePath) IpRange() *Interface_Subinterface_Ipv4_ProxyArp_ManualIpRange_IpRangePath {
+	ps := &Interface_Subinterface_Ipv4_ProxyArp_ManualIpRange_IpRangePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "ip-range"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// IpRange (leaf): IPv4 ip-range: single IP (CIDR notation, e.g. 10.0.0.0/24) or
+// address range (start-end notation, e.g. 10.0.0.1-10.0.0.5)
+// for which proxy ARP replies are sent when mode is MANUAL.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/ip-range"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv4/proxy-arp/manual-ip-ranges/manual-ip-range/*/ip-range"
+func (n *Interface_Subinterface_Ipv4_ProxyArp_ManualIpRangePathAny) IpRange() *Interface_Subinterface_Ipv4_ProxyArp_ManualIpRange_IpRangePathAny {
+	ps := &Interface_Subinterface_Ipv4_ProxyArp_ManualIpRange_IpRangePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "ip-range"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Interface_Subinterface_Ipv4_ProxyArp_ManualIpRangePath) State() ygnmi.SingletonQuery[*oc.Interface_Subinterface_Ipv4_ProxyArp_ManualIpRange] {
+	return ygnmi.NewSingletonQuery[*oc.Interface_Subinterface_Ipv4_ProxyArp_ManualIpRange](
+		"Interface_Subinterface_Ipv4_ProxyArp_ManualIpRange",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Interface_Subinterface_Ipv4_ProxyArp_ManualIpRangePathAny) State() ygnmi.WildcardQuery[*oc.Interface_Subinterface_Ipv4_ProxyArp_ManualIpRange] {
+	return ygnmi.NewWildcardQuery[*oc.Interface_Subinterface_Ipv4_ProxyArp_ManualIpRange](
+		"Interface_Subinterface_Ipv4_ProxyArp_ManualIpRange",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *Interface_Subinterface_Ipv4_ProxyArp_ManualIpRangePath) Config() ygnmi.ConfigQuery[*oc.Interface_Subinterface_Ipv4_ProxyArp_ManualIpRange] {
+	return ygnmi.NewConfigQuery[*oc.Interface_Subinterface_Ipv4_ProxyArp_ManualIpRange](
+		"Interface_Subinterface_Ipv4_ProxyArp_ManualIpRange",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *Interface_Subinterface_Ipv4_ProxyArp_ManualIpRangePathAny) Config() ygnmi.WildcardQuery[*oc.Interface_Subinterface_Ipv4_ProxyArp_ManualIpRange] {
+	return ygnmi.NewWildcardQuery[*oc.Interface_Subinterface_Ipv4_ProxyArp_ManualIpRange](
+		"Interface_Subinterface_Ipv4_ProxyArp_ManualIpRange",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Interface_Subinterface_Ipv4_ProxyArp_ManualIpRangePathMap) State() ygnmi.SingletonQuery[map[string]*oc.Interface_Subinterface_Ipv4_ProxyArp_ManualIpRange] {
+	return ygnmi.NewSingletonQuery[map[string]*oc.Interface_Subinterface_Ipv4_ProxyArp_ManualIpRange](
+		"Interface_Subinterface_Ipv4_ProxyArp",
+		true,
+		false,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[string]*oc.Interface_Subinterface_Ipv4_ProxyArp_ManualIpRange, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv4_ProxyArp).ManualIpRange
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv4_ProxyArp) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-if-ip:manual-ip-ranges"},
+			PostRelPath: []string{"openconfig-if-ip:manual-ip-range"},
+		},
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Interface_Subinterface_Ipv4_ProxyArp_ManualIpRangePathMapAny) State() ygnmi.WildcardQuery[map[string]*oc.Interface_Subinterface_Ipv4_ProxyArp_ManualIpRange] {
+	return ygnmi.NewWildcardQuery[map[string]*oc.Interface_Subinterface_Ipv4_ProxyArp_ManualIpRange](
+		"Interface_Subinterface_Ipv4_ProxyArp",
+		true,
+		false,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[string]*oc.Interface_Subinterface_Ipv4_ProxyArp_ManualIpRange, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv4_ProxyArp).ManualIpRange
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv4_ProxyArp) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-if-ip:manual-ip-ranges"},
+			PostRelPath: []string{"openconfig-if-ip:manual-ip-range"},
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *Interface_Subinterface_Ipv4_ProxyArp_ManualIpRangePathMap) Config() ygnmi.ConfigQuery[map[string]*oc.Interface_Subinterface_Ipv4_ProxyArp_ManualIpRange] {
+	return ygnmi.NewConfigQuery[map[string]*oc.Interface_Subinterface_Ipv4_ProxyArp_ManualIpRange](
+		"Interface_Subinterface_Ipv4_ProxyArp",
+		false,
+		true,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[string]*oc.Interface_Subinterface_Ipv4_ProxyArp_ManualIpRange, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv4_ProxyArp).ManualIpRange
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv4_ProxyArp) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-if-ip:manual-ip-ranges"},
+			PostRelPath: []string{"openconfig-if-ip:manual-ip-range"},
+		},
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *Interface_Subinterface_Ipv4_ProxyArp_ManualIpRangePathMapAny) Config() ygnmi.WildcardQuery[map[string]*oc.Interface_Subinterface_Ipv4_ProxyArp_ManualIpRange] {
+	return ygnmi.NewWildcardQuery[map[string]*oc.Interface_Subinterface_Ipv4_ProxyArp_ManualIpRange](
+		"Interface_Subinterface_Ipv4_ProxyArp",
+		false,
+		true,
+		false,
+		false,
+		true,
+		true,
+		n,
+		func(gs ygot.ValidatedGoStruct) (map[string]*oc.Interface_Subinterface_Ipv4_ProxyArp_ManualIpRange, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv4_ProxyArp).ManualIpRange
+			return ret, ret != nil
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv4_ProxyArp) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		&ygnmi.CompressionInfo{
+			PreRelPath:  []string{"openconfig-if-ip:manual-ip-ranges"},
+			PostRelPath: []string{"openconfig-if-ip:manual-ip-range"},
+		},
 	)
 }
 
@@ -66812,6 +71748,42 @@ func (n *Interface_Subinterface_Ipv6PathAny) Enabled() *Interface_Subinterface_I
 			n,
 		),
 		parent: n,
+	}
+	return ps
+}
+
+// Icmp (container): Top-level container for ICMPv6 operational state on the
+// interface.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "icmp"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/icmp"
+func (n *Interface_Subinterface_Ipv6Path) Icmp() *Interface_Subinterface_Ipv6_IcmpPath {
+	ps := &Interface_Subinterface_Ipv6_IcmpPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"icmp"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// Icmp (container): Top-level container for ICMPv6 operational state on the
+// interface.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "icmp"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/icmp"
+func (n *Interface_Subinterface_Ipv6PathAny) Icmp() *Interface_Subinterface_Ipv6_IcmpPathAny {
+	ps := &Interface_Subinterface_Ipv6_IcmpPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"icmp"},
+			map[string]interface{}{},
+			n,
+		),
 	}
 	return ps
 }
@@ -74837,6 +79809,1471 @@ func (n *Interface_Subinterface_Ipv6_CountersPathAny) State() ygnmi.WildcardQuer
 	)
 }
 
+// Interface_Subinterface_Ipv6_IcmpPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/icmp YANG schema element.
+type Interface_Subinterface_Ipv6_IcmpPath struct {
+	*ygnmi.NodePath
+}
+
+// Interface_Subinterface_Ipv6_IcmpPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/icmp YANG schema element.
+type Interface_Subinterface_Ipv6_IcmpPathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Interface_Subinterface_Ipv6_IcmpPath) PathOriginName() string {
+	return "openconfig"
+}
+
+// Counters (container): Counters for ICMPv6 messages received and sent on the
+// interface. Counters are maintained for the IPv6 interface on
+// which an ICMPv6 message is received, or from which it is
+// transmitted.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "state/counters"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/icmp/state/counters"
+func (n *Interface_Subinterface_Ipv6_IcmpPath) Counters() *Interface_Subinterface_Ipv6_Icmp_CountersPath {
+	ps := &Interface_Subinterface_Ipv6_Icmp_CountersPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "counters"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// Counters (container): Counters for ICMPv6 messages received and sent on the
+// interface. Counters are maintained for the IPv6 interface on
+// which an ICMPv6 message is received, or from which it is
+// transmitted.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "state/counters"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/icmp/state/counters"
+func (n *Interface_Subinterface_Ipv6_IcmpPathAny) Counters() *Interface_Subinterface_Ipv6_Icmp_CountersPathAny {
+	ps := &Interface_Subinterface_Ipv6_Icmp_CountersPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "counters"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Interface_Subinterface_Ipv6_IcmpPath) State() ygnmi.SingletonQuery[*oc.Interface_Subinterface_Ipv6_Icmp] {
+	return ygnmi.NewSingletonQuery[*oc.Interface_Subinterface_Ipv6_Icmp](
+		"Interface_Subinterface_Ipv6_Icmp",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Interface_Subinterface_Ipv6_IcmpPathAny) State() ygnmi.WildcardQuery[*oc.Interface_Subinterface_Ipv6_Icmp] {
+	return ygnmi.NewWildcardQuery[*oc.Interface_Subinterface_Ipv6_Icmp](
+		"Interface_Subinterface_Ipv6_Icmp",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *Interface_Subinterface_Ipv6_IcmpPath) Config() ygnmi.ConfigQuery[*oc.Interface_Subinterface_Ipv6_Icmp] {
+	return ygnmi.NewConfigQuery[*oc.Interface_Subinterface_Ipv6_Icmp](
+		"Interface_Subinterface_Ipv6_Icmp",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+func (n *Interface_Subinterface_Ipv6_IcmpPathAny) Config() ygnmi.WildcardQuery[*oc.Interface_Subinterface_Ipv6_Icmp] {
+	return ygnmi.NewWildcardQuery[*oc.Interface_Subinterface_Ipv6_Icmp](
+		"Interface_Subinterface_Ipv6_Icmp",
+		false,
+		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_Subinterface_Ipv6_Icmp_Counters_InChecksumErrorsPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/icmp/state/counters/in-checksum-errors YANG schema element.
+type Interface_Subinterface_Ipv6_Icmp_Counters_InChecksumErrorsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Subinterface_Ipv6_Icmp_Counters_InChecksumErrorsPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/icmp/state/counters/in-checksum-errors YANG schema element.
+type Interface_Subinterface_Ipv6_Icmp_Counters_InChecksumErrorsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Interface_Subinterface_Ipv6_Icmp_Counters_InChecksumErrorsPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "in-checksum-errors"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/icmp/state/counters/in-checksum-errors"
+func (n *Interface_Subinterface_Ipv6_Icmp_Counters_InChecksumErrorsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Interface_Subinterface_Ipv6_Icmp_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"in-checksum-errors"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_Icmp_Counters).InChecksumErrors
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_Icmp_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "in-checksum-errors"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/icmp/state/counters/in-checksum-errors"
+func (n *Interface_Subinterface_Ipv6_Icmp_Counters_InChecksumErrorsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Interface_Subinterface_Ipv6_Icmp_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"in-checksum-errors"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_Icmp_Counters).InChecksumErrors
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_Icmp_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_Subinterface_Ipv6_Icmp_Counters_InEchoRequestsPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/icmp/state/counters/in-echo-requests YANG schema element.
+type Interface_Subinterface_Ipv6_Icmp_Counters_InEchoRequestsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Subinterface_Ipv6_Icmp_Counters_InEchoRequestsPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/icmp/state/counters/in-echo-requests YANG schema element.
+type Interface_Subinterface_Ipv6_Icmp_Counters_InEchoRequestsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Interface_Subinterface_Ipv6_Icmp_Counters_InEchoRequestsPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "in-echo-requests"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/icmp/state/counters/in-echo-requests"
+func (n *Interface_Subinterface_Ipv6_Icmp_Counters_InEchoRequestsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Interface_Subinterface_Ipv6_Icmp_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"in-echo-requests"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_Icmp_Counters).InEchoRequests
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_Icmp_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "in-echo-requests"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/icmp/state/counters/in-echo-requests"
+func (n *Interface_Subinterface_Ipv6_Icmp_Counters_InEchoRequestsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Interface_Subinterface_Ipv6_Icmp_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"in-echo-requests"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_Icmp_Counters).InEchoRequests
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_Icmp_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_Subinterface_Ipv6_Icmp_Counters_InErrorsPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/icmp/state/counters/in-errors YANG schema element.
+type Interface_Subinterface_Ipv6_Icmp_Counters_InErrorsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Subinterface_Ipv6_Icmp_Counters_InErrorsPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/icmp/state/counters/in-errors YANG schema element.
+type Interface_Subinterface_Ipv6_Icmp_Counters_InErrorsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Interface_Subinterface_Ipv6_Icmp_Counters_InErrorsPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "in-errors"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/icmp/state/counters/in-errors"
+func (n *Interface_Subinterface_Ipv6_Icmp_Counters_InErrorsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Interface_Subinterface_Ipv6_Icmp_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"in-errors"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_Icmp_Counters).InErrors
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_Icmp_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "in-errors"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/icmp/state/counters/in-errors"
+func (n *Interface_Subinterface_Ipv6_Icmp_Counters_InErrorsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Interface_Subinterface_Ipv6_Icmp_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"in-errors"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_Icmp_Counters).InErrors
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_Icmp_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_Subinterface_Ipv6_Icmp_Counters_InNeighborAdvertisementsPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/icmp/state/counters/in-neighbor-advertisements YANG schema element.
+type Interface_Subinterface_Ipv6_Icmp_Counters_InNeighborAdvertisementsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Subinterface_Ipv6_Icmp_Counters_InNeighborAdvertisementsPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/icmp/state/counters/in-neighbor-advertisements YANG schema element.
+type Interface_Subinterface_Ipv6_Icmp_Counters_InNeighborAdvertisementsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Interface_Subinterface_Ipv6_Icmp_Counters_InNeighborAdvertisementsPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "in-neighbor-advertisements"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/icmp/state/counters/in-neighbor-advertisements"
+func (n *Interface_Subinterface_Ipv6_Icmp_Counters_InNeighborAdvertisementsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Interface_Subinterface_Ipv6_Icmp_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"in-neighbor-advertisements"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_Icmp_Counters).InNeighborAdvertisements
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_Icmp_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "in-neighbor-advertisements"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/icmp/state/counters/in-neighbor-advertisements"
+func (n *Interface_Subinterface_Ipv6_Icmp_Counters_InNeighborAdvertisementsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Interface_Subinterface_Ipv6_Icmp_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"in-neighbor-advertisements"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_Icmp_Counters).InNeighborAdvertisements
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_Icmp_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_Subinterface_Ipv6_Icmp_Counters_InNeighborSolicitationsPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/icmp/state/counters/in-neighbor-solicitations YANG schema element.
+type Interface_Subinterface_Ipv6_Icmp_Counters_InNeighborSolicitationsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Subinterface_Ipv6_Icmp_Counters_InNeighborSolicitationsPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/icmp/state/counters/in-neighbor-solicitations YANG schema element.
+type Interface_Subinterface_Ipv6_Icmp_Counters_InNeighborSolicitationsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Interface_Subinterface_Ipv6_Icmp_Counters_InNeighborSolicitationsPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "in-neighbor-solicitations"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/icmp/state/counters/in-neighbor-solicitations"
+func (n *Interface_Subinterface_Ipv6_Icmp_Counters_InNeighborSolicitationsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Interface_Subinterface_Ipv6_Icmp_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"in-neighbor-solicitations"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_Icmp_Counters).InNeighborSolicitations
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_Icmp_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "in-neighbor-solicitations"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/icmp/state/counters/in-neighbor-solicitations"
+func (n *Interface_Subinterface_Ipv6_Icmp_Counters_InNeighborSolicitationsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Interface_Subinterface_Ipv6_Icmp_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"in-neighbor-solicitations"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_Icmp_Counters).InNeighborSolicitations
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_Icmp_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_Subinterface_Ipv6_Icmp_Counters_OutEchoRepliesPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/icmp/state/counters/out-echo-replies YANG schema element.
+type Interface_Subinterface_Ipv6_Icmp_Counters_OutEchoRepliesPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Subinterface_Ipv6_Icmp_Counters_OutEchoRepliesPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/icmp/state/counters/out-echo-replies YANG schema element.
+type Interface_Subinterface_Ipv6_Icmp_Counters_OutEchoRepliesPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Interface_Subinterface_Ipv6_Icmp_Counters_OutEchoRepliesPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "out-echo-replies"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/icmp/state/counters/out-echo-replies"
+func (n *Interface_Subinterface_Ipv6_Icmp_Counters_OutEchoRepliesPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Interface_Subinterface_Ipv6_Icmp_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"out-echo-replies"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_Icmp_Counters).OutEchoReplies
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_Icmp_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "out-echo-replies"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/icmp/state/counters/out-echo-replies"
+func (n *Interface_Subinterface_Ipv6_Icmp_Counters_OutEchoRepliesPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Interface_Subinterface_Ipv6_Icmp_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"out-echo-replies"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_Icmp_Counters).OutEchoReplies
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_Icmp_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_Subinterface_Ipv6_Icmp_Counters_OutErrorsPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/icmp/state/counters/out-errors YANG schema element.
+type Interface_Subinterface_Ipv6_Icmp_Counters_OutErrorsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Subinterface_Ipv6_Icmp_Counters_OutErrorsPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/icmp/state/counters/out-errors YANG schema element.
+type Interface_Subinterface_Ipv6_Icmp_Counters_OutErrorsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Interface_Subinterface_Ipv6_Icmp_Counters_OutErrorsPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "out-errors"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/icmp/state/counters/out-errors"
+func (n *Interface_Subinterface_Ipv6_Icmp_Counters_OutErrorsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Interface_Subinterface_Ipv6_Icmp_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"out-errors"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_Icmp_Counters).OutErrors
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_Icmp_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "out-errors"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/icmp/state/counters/out-errors"
+func (n *Interface_Subinterface_Ipv6_Icmp_Counters_OutErrorsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Interface_Subinterface_Ipv6_Icmp_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"out-errors"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_Icmp_Counters).OutErrors
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_Icmp_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_Subinterface_Ipv6_Icmp_Counters_OutNeighborAdvertisementsPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/icmp/state/counters/out-neighbor-advertisements YANG schema element.
+type Interface_Subinterface_Ipv6_Icmp_Counters_OutNeighborAdvertisementsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Subinterface_Ipv6_Icmp_Counters_OutNeighborAdvertisementsPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/icmp/state/counters/out-neighbor-advertisements YANG schema element.
+type Interface_Subinterface_Ipv6_Icmp_Counters_OutNeighborAdvertisementsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Interface_Subinterface_Ipv6_Icmp_Counters_OutNeighborAdvertisementsPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "out-neighbor-advertisements"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/icmp/state/counters/out-neighbor-advertisements"
+func (n *Interface_Subinterface_Ipv6_Icmp_Counters_OutNeighborAdvertisementsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Interface_Subinterface_Ipv6_Icmp_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"out-neighbor-advertisements"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_Icmp_Counters).OutNeighborAdvertisements
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_Icmp_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "out-neighbor-advertisements"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/icmp/state/counters/out-neighbor-advertisements"
+func (n *Interface_Subinterface_Ipv6_Icmp_Counters_OutNeighborAdvertisementsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Interface_Subinterface_Ipv6_Icmp_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"out-neighbor-advertisements"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_Icmp_Counters).OutNeighborAdvertisements
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_Icmp_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_Subinterface_Ipv6_Icmp_Counters_OutNeighborSolicitationsPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/icmp/state/counters/out-neighbor-solicitations YANG schema element.
+type Interface_Subinterface_Ipv6_Icmp_Counters_OutNeighborSolicitationsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Subinterface_Ipv6_Icmp_Counters_OutNeighborSolicitationsPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/icmp/state/counters/out-neighbor-solicitations YANG schema element.
+type Interface_Subinterface_Ipv6_Icmp_Counters_OutNeighborSolicitationsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Interface_Subinterface_Ipv6_Icmp_Counters_OutNeighborSolicitationsPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "out-neighbor-solicitations"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/icmp/state/counters/out-neighbor-solicitations"
+func (n *Interface_Subinterface_Ipv6_Icmp_Counters_OutNeighborSolicitationsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Interface_Subinterface_Ipv6_Icmp_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"out-neighbor-solicitations"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_Icmp_Counters).OutNeighborSolicitations
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_Icmp_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "out-neighbor-solicitations"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/icmp/state/counters/out-neighbor-solicitations"
+func (n *Interface_Subinterface_Ipv6_Icmp_Counters_OutNeighborSolicitationsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Interface_Subinterface_Ipv6_Icmp_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"out-neighbor-solicitations"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_Icmp_Counters).OutNeighborSolicitations
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_Icmp_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_Subinterface_Ipv6_Icmp_CountersPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/icmp/state/counters YANG schema element.
+type Interface_Subinterface_Ipv6_Icmp_CountersPath struct {
+	*ygnmi.NodePath
+}
+
+// Interface_Subinterface_Ipv6_Icmp_CountersPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/icmp/state/counters YANG schema element.
+type Interface_Subinterface_Ipv6_Icmp_CountersPathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Interface_Subinterface_Ipv6_Icmp_CountersPath) PathOriginName() string {
+	return "openconfig"
+}
+
+// InChecksumErrors (leaf): The number of ICMPv6 messages received on the interface
+// that were discarded because of an invalid ICMPv6 checksum.
+// This counter is a subset of in-errors.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "in-checksum-errors"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/icmp/state/counters/in-checksum-errors"
+func (n *Interface_Subinterface_Ipv6_Icmp_CountersPath) InChecksumErrors() *Interface_Subinterface_Ipv6_Icmp_Counters_InChecksumErrorsPath {
+	ps := &Interface_Subinterface_Ipv6_Icmp_Counters_InChecksumErrorsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"in-checksum-errors"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// InChecksumErrors (leaf): The number of ICMPv6 messages received on the interface
+// that were discarded because of an invalid ICMPv6 checksum.
+// This counter is a subset of in-errors.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "in-checksum-errors"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/icmp/state/counters/in-checksum-errors"
+func (n *Interface_Subinterface_Ipv6_Icmp_CountersPathAny) InChecksumErrors() *Interface_Subinterface_Ipv6_Icmp_Counters_InChecksumErrorsPathAny {
+	ps := &Interface_Subinterface_Ipv6_Icmp_Counters_InChecksumErrorsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"in-checksum-errors"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// InEchoRequests (leaf): The number of ICMPv6 Echo Request messages received on the
+// interface.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "in-echo-requests"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/icmp/state/counters/in-echo-requests"
+func (n *Interface_Subinterface_Ipv6_Icmp_CountersPath) InEchoRequests() *Interface_Subinterface_Ipv6_Icmp_Counters_InEchoRequestsPath {
+	ps := &Interface_Subinterface_Ipv6_Icmp_Counters_InEchoRequestsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"in-echo-requests"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// InEchoRequests (leaf): The number of ICMPv6 Echo Request messages received on the
+// interface.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "in-echo-requests"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/icmp/state/counters/in-echo-requests"
+func (n *Interface_Subinterface_Ipv6_Icmp_CountersPathAny) InEchoRequests() *Interface_Subinterface_Ipv6_Icmp_Counters_InEchoRequestsPathAny {
+	ps := &Interface_Subinterface_Ipv6_Icmp_Counters_InEchoRequestsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"in-echo-requests"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// InErrors (leaf): The number of ICMPv6 messages received on the interface
+// that were discarded because of ICMPv6-specific errors, such
+// as an invalid ICMPv6 checksum, an invalid length or an
+// unknown message type.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "in-errors"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/icmp/state/counters/in-errors"
+func (n *Interface_Subinterface_Ipv6_Icmp_CountersPath) InErrors() *Interface_Subinterface_Ipv6_Icmp_Counters_InErrorsPath {
+	ps := &Interface_Subinterface_Ipv6_Icmp_Counters_InErrorsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"in-errors"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// InErrors (leaf): The number of ICMPv6 messages received on the interface
+// that were discarded because of ICMPv6-specific errors, such
+// as an invalid ICMPv6 checksum, an invalid length or an
+// unknown message type.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "in-errors"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/icmp/state/counters/in-errors"
+func (n *Interface_Subinterface_Ipv6_Icmp_CountersPathAny) InErrors() *Interface_Subinterface_Ipv6_Icmp_Counters_InErrorsPathAny {
+	ps := &Interface_Subinterface_Ipv6_Icmp_Counters_InErrorsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"in-errors"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// InNeighborAdvertisements (leaf): The number of ICMPv6 Neighbor Advertisement messages
+// received on the interface.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "in-neighbor-advertisements"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/icmp/state/counters/in-neighbor-advertisements"
+func (n *Interface_Subinterface_Ipv6_Icmp_CountersPath) InNeighborAdvertisements() *Interface_Subinterface_Ipv6_Icmp_Counters_InNeighborAdvertisementsPath {
+	ps := &Interface_Subinterface_Ipv6_Icmp_Counters_InNeighborAdvertisementsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"in-neighbor-advertisements"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// InNeighborAdvertisements (leaf): The number of ICMPv6 Neighbor Advertisement messages
+// received on the interface.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "in-neighbor-advertisements"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/icmp/state/counters/in-neighbor-advertisements"
+func (n *Interface_Subinterface_Ipv6_Icmp_CountersPathAny) InNeighborAdvertisements() *Interface_Subinterface_Ipv6_Icmp_Counters_InNeighborAdvertisementsPathAny {
+	ps := &Interface_Subinterface_Ipv6_Icmp_Counters_InNeighborAdvertisementsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"in-neighbor-advertisements"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// InNeighborSolicitations (leaf): The number of ICMPv6 Neighbor Solicitation messages
+// received on the interface.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "in-neighbor-solicitations"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/icmp/state/counters/in-neighbor-solicitations"
+func (n *Interface_Subinterface_Ipv6_Icmp_CountersPath) InNeighborSolicitations() *Interface_Subinterface_Ipv6_Icmp_Counters_InNeighborSolicitationsPath {
+	ps := &Interface_Subinterface_Ipv6_Icmp_Counters_InNeighborSolicitationsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"in-neighbor-solicitations"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// InNeighborSolicitations (leaf): The number of ICMPv6 Neighbor Solicitation messages
+// received on the interface.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "in-neighbor-solicitations"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/icmp/state/counters/in-neighbor-solicitations"
+func (n *Interface_Subinterface_Ipv6_Icmp_CountersPathAny) InNeighborSolicitations() *Interface_Subinterface_Ipv6_Icmp_Counters_InNeighborSolicitationsPathAny {
+	ps := &Interface_Subinterface_Ipv6_Icmp_Counters_InNeighborSolicitationsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"in-neighbor-solicitations"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// OutEchoReplies (leaf): The number of ICMPv6 Echo Reply messages sent on the
+// interface.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "out-echo-replies"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/icmp/state/counters/out-echo-replies"
+func (n *Interface_Subinterface_Ipv6_Icmp_CountersPath) OutEchoReplies() *Interface_Subinterface_Ipv6_Icmp_Counters_OutEchoRepliesPath {
+	ps := &Interface_Subinterface_Ipv6_Icmp_Counters_OutEchoRepliesPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"out-echo-replies"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// OutEchoReplies (leaf): The number of ICMPv6 Echo Reply messages sent on the
+// interface.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "out-echo-replies"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/icmp/state/counters/out-echo-replies"
+func (n *Interface_Subinterface_Ipv6_Icmp_CountersPathAny) OutEchoReplies() *Interface_Subinterface_Ipv6_Icmp_Counters_OutEchoRepliesPathAny {
+	ps := &Interface_Subinterface_Ipv6_Icmp_Counters_OutEchoRepliesPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"out-echo-replies"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// OutErrors (leaf): The number of ICMPv6 messages that the interface did not
+// send due to problems discovered within ICMPv6, such as a
+// lack of buffers. This value does not include errors
+// discovered outside the ICMPv6 layer, such as the inability
+// of IPv6 to route the resulting datagram.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "out-errors"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/icmp/state/counters/out-errors"
+func (n *Interface_Subinterface_Ipv6_Icmp_CountersPath) OutErrors() *Interface_Subinterface_Ipv6_Icmp_Counters_OutErrorsPath {
+	ps := &Interface_Subinterface_Ipv6_Icmp_Counters_OutErrorsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"out-errors"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// OutErrors (leaf): The number of ICMPv6 messages that the interface did not
+// send due to problems discovered within ICMPv6, such as a
+// lack of buffers. This value does not include errors
+// discovered outside the ICMPv6 layer, such as the inability
+// of IPv6 to route the resulting datagram.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "out-errors"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/icmp/state/counters/out-errors"
+func (n *Interface_Subinterface_Ipv6_Icmp_CountersPathAny) OutErrors() *Interface_Subinterface_Ipv6_Icmp_Counters_OutErrorsPathAny {
+	ps := &Interface_Subinterface_Ipv6_Icmp_Counters_OutErrorsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"out-errors"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// OutNeighborAdvertisements (leaf): The number of ICMPv6 Neighbor Advertisement messages sent
+// on the interface.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "out-neighbor-advertisements"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/icmp/state/counters/out-neighbor-advertisements"
+func (n *Interface_Subinterface_Ipv6_Icmp_CountersPath) OutNeighborAdvertisements() *Interface_Subinterface_Ipv6_Icmp_Counters_OutNeighborAdvertisementsPath {
+	ps := &Interface_Subinterface_Ipv6_Icmp_Counters_OutNeighborAdvertisementsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"out-neighbor-advertisements"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// OutNeighborAdvertisements (leaf): The number of ICMPv6 Neighbor Advertisement messages sent
+// on the interface.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "out-neighbor-advertisements"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/icmp/state/counters/out-neighbor-advertisements"
+func (n *Interface_Subinterface_Ipv6_Icmp_CountersPathAny) OutNeighborAdvertisements() *Interface_Subinterface_Ipv6_Icmp_Counters_OutNeighborAdvertisementsPathAny {
+	ps := &Interface_Subinterface_Ipv6_Icmp_Counters_OutNeighborAdvertisementsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"out-neighbor-advertisements"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// OutNeighborSolicitations (leaf): The number of ICMPv6 Neighbor Solicitation messages sent on
+// the interface.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "out-neighbor-solicitations"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/icmp/state/counters/out-neighbor-solicitations"
+func (n *Interface_Subinterface_Ipv6_Icmp_CountersPath) OutNeighborSolicitations() *Interface_Subinterface_Ipv6_Icmp_Counters_OutNeighborSolicitationsPath {
+	ps := &Interface_Subinterface_Ipv6_Icmp_Counters_OutNeighborSolicitationsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"out-neighbor-solicitations"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// OutNeighborSolicitations (leaf): The number of ICMPv6 Neighbor Solicitation messages sent on
+// the interface.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "out-neighbor-solicitations"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/icmp/state/counters/out-neighbor-solicitations"
+func (n *Interface_Subinterface_Ipv6_Icmp_CountersPathAny) OutNeighborSolicitations() *Interface_Subinterface_Ipv6_Icmp_Counters_OutNeighborSolicitationsPathAny {
+	ps := &Interface_Subinterface_Ipv6_Icmp_Counters_OutNeighborSolicitationsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"out-neighbor-solicitations"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Interface_Subinterface_Ipv6_Icmp_CountersPath) State() ygnmi.SingletonQuery[*oc.Interface_Subinterface_Ipv6_Icmp_Counters] {
+	return ygnmi.NewSingletonQuery[*oc.Interface_Subinterface_Ipv6_Icmp_Counters](
+		"Interface_Subinterface_Ipv6_Icmp_Counters",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Interface_Subinterface_Ipv6_Icmp_CountersPathAny) State() ygnmi.WildcardQuery[*oc.Interface_Subinterface_Ipv6_Icmp_Counters] {
+	return ygnmi.NewWildcardQuery[*oc.Interface_Subinterface_Ipv6_Icmp_Counters](
+		"Interface_Subinterface_Ipv6_Icmp_Counters",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
 // Interface_Subinterface_Ipv6_Neighbor_IpPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/neighbors/neighbor/state/ip YANG schema element.
 type Interface_Subinterface_Ipv6_Neighbor_IpPath struct {
 	*ygnmi.NodePath
@@ -76994,6 +83431,356 @@ func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_OtherConfigPathAny) Con
 	)
 }
 
+// Interface_Subinterface_Ipv6_RouterAdvertisement_ReachableTimePath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/state/reachable-time YANG schema element.
+type Interface_Subinterface_Ipv6_RouterAdvertisement_ReachableTimePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Subinterface_Ipv6_RouterAdvertisement_ReachableTimePathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/state/reachable-time YANG schema element.
+type Interface_Subinterface_Ipv6_RouterAdvertisement_ReachableTimePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_ReachableTimePath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/reachable-time"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/state/reachable-time"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_ReachableTimePath) State() ygnmi.SingletonQuery[uint32] {
+	return ygnmi.NewSingletonQuery[uint32](
+		"Interface_Subinterface_Ipv6_RouterAdvertisement",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "reachable-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_RouterAdvertisement).ReachableTime
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_RouterAdvertisement) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/reachable-time"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/state/reachable-time"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_ReachableTimePathAny) State() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewWildcardQuery[uint32](
+		"Interface_Subinterface_Ipv6_RouterAdvertisement",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "reachable-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_RouterAdvertisement).ReachableTime
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_RouterAdvertisement) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/reachable-time"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/config/reachable-time"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_ReachableTimePath) Config() ygnmi.ConfigQuery[uint32] {
+	return ygnmi.NewConfigQuery[uint32](
+		"Interface_Subinterface_Ipv6_RouterAdvertisement",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "reachable-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_RouterAdvertisement).ReachableTime
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_RouterAdvertisement) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/reachable-time"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/config/reachable-time"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_ReachableTimePathAny) Config() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewWildcardQuery[uint32](
+		"Interface_Subinterface_Ipv6_RouterAdvertisement",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "reachable-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_RouterAdvertisement).ReachableTime
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_RouterAdvertisement) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_Subinterface_Ipv6_RouterAdvertisement_RouterPreferencePath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/state/router-preference YANG schema element.
+type Interface_Subinterface_Ipv6_RouterAdvertisement_RouterPreferencePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Subinterface_Ipv6_RouterAdvertisement_RouterPreferencePathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/state/router-preference YANG schema element.
+type Interface_Subinterface_Ipv6_RouterAdvertisement_RouterPreferencePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_RouterPreferencePath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/router-preference"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/state/router-preference"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_RouterPreferencePath) State() ygnmi.SingletonQuery[oc.E_RouterAdvertisement_RouterPreference] {
+	return ygnmi.NewSingletonQuery[oc.E_RouterAdvertisement_RouterPreference](
+		"Interface_Subinterface_Ipv6_RouterAdvertisement",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "router-preference"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_RouterAdvertisement_RouterPreference, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_RouterAdvertisement).RouterPreference
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_RouterAdvertisement) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "state/router-preference"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/state/router-preference"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_RouterPreferencePathAny) State() ygnmi.WildcardQuery[oc.E_RouterAdvertisement_RouterPreference] {
+	return ygnmi.NewWildcardQuery[oc.E_RouterAdvertisement_RouterPreference](
+		"Interface_Subinterface_Ipv6_RouterAdvertisement",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "router-preference"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_RouterAdvertisement_RouterPreference, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_RouterAdvertisement).RouterPreference
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_RouterAdvertisement) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/router-preference"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/config/router-preference"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_RouterPreferencePath) Config() ygnmi.ConfigQuery[oc.E_RouterAdvertisement_RouterPreference] {
+	return ygnmi.NewConfigQuery[oc.E_RouterAdvertisement_RouterPreference](
+		"Interface_Subinterface_Ipv6_RouterAdvertisement",
+		false,
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "router-preference"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_RouterAdvertisement_RouterPreference, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_RouterAdvertisement).RouterPreference
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_RouterAdvertisement) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "config/router-preference"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/config/router-preference"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_RouterPreferencePathAny) Config() ygnmi.WildcardQuery[oc.E_RouterAdvertisement_RouterPreference] {
+	return ygnmi.NewWildcardQuery[oc.E_RouterAdvertisement_RouterPreference](
+		"Interface_Subinterface_Ipv6_RouterAdvertisement",
+		false,
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "router-preference"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_RouterAdvertisement_RouterPreference, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_RouterAdvertisement).RouterPreference
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_RouterAdvertisement) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
 // Interface_Subinterface_Ipv6_RouterAdvertisement_SuppressPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/state/suppress YANG schema element.
 type Interface_Subinterface_Ipv6_RouterAdvertisement_SuppressPath struct {
 	*ygnmi.NodePath
@@ -77188,6 +83975,42 @@ type Interface_Subinterface_Ipv6_RouterAdvertisementPathAny struct {
 // PathOrigin returns the name of the origin for the path object.
 func (n *Interface_Subinterface_Ipv6_RouterAdvertisementPath) PathOriginName() string {
 	return "openconfig"
+}
+
+// Counters (container): Counters for ICMPv6 Router Solicitation and Router
+// Advertisement messages received and sent on the interface.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "state/counters"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/state/counters"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisementPath) Counters() *Interface_Subinterface_Ipv6_RouterAdvertisement_CountersPath {
+	ps := &Interface_Subinterface_Ipv6_RouterAdvertisement_CountersPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "counters"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// Counters (container): Counters for ICMPv6 Router Solicitation and Router
+// Advertisement messages received and sent on the interface.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "state/counters"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/state/counters"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisementPathAny) Counters() *Interface_Subinterface_Ipv6_RouterAdvertisement_CountersPathAny {
+	ps := &Interface_Subinterface_Ipv6_RouterAdvertisement_CountersPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "counters"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
 }
 
 // DnsServerAny (list): List of DNS servers that are to be advertised on the interface
@@ -77692,6 +84515,86 @@ func (n *Interface_Subinterface_Ipv6_RouterAdvertisementPathAny) PrefixMap() *In
 	return ps
 }
 
+// ReachableTime (leaf): The time, in milliseconds, that a node assumes a neighbor is
+// reachable after having received a reachability confirmation.  Set
+// to 0 to indicate that reachable time is unspecified by this router.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/reachable-time"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/*/reachable-time"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisementPath) ReachableTime() *Interface_Subinterface_Ipv6_RouterAdvertisement_ReachableTimePath {
+	ps := &Interface_Subinterface_Ipv6_RouterAdvertisement_ReachableTimePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "reachable-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// ReachableTime (leaf): The time, in milliseconds, that a node assumes a neighbor is
+// reachable after having received a reachability confirmation.  Set
+// to 0 to indicate that reachable time is unspecified by this router.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/reachable-time"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/*/reachable-time"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisementPathAny) ReachableTime() *Interface_Subinterface_Ipv6_RouterAdvertisement_ReachableTimePathAny {
+	ps := &Interface_Subinterface_Ipv6_RouterAdvertisement_ReachableTimePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "reachable-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// RouterPreference (leaf): Default Router Preference (Prf) advertised in the router
+// advertisement messages. Indicates whether this router is preferred
+// over other routers on the link.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/router-preference"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/*/router-preference"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisementPath) RouterPreference() *Interface_Subinterface_Ipv6_RouterAdvertisement_RouterPreferencePath {
+	ps := &Interface_Subinterface_Ipv6_RouterAdvertisement_RouterPreferencePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "router-preference"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// RouterPreference (leaf): Default Router Preference (Prf) advertised in the router
+// advertisement messages. Indicates whether this router is preferred
+// over other routers on the link.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "*/router-preference"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/*/router-preference"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisementPathAny) RouterPreference() *Interface_Subinterface_Ipv6_RouterAdvertisement_RouterPreferencePathAny {
+	ps := &Interface_Subinterface_Ipv6_RouterAdvertisement_RouterPreferencePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "router-preference"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
 // Suppress (leaf): When set to true, router advertisement neighbor discovery
 // messages are not transmitted on this interface.
 //
@@ -77811,6 +84714,619 @@ func (n *Interface_Subinterface_Ipv6_RouterAdvertisementPathAny) Config() ygnmi.
 		"Interface_Subinterface_Ipv6_RouterAdvertisement",
 		false,
 		true,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_Subinterface_Ipv6_RouterAdvertisement_Counters_InRouterAdvertisementsPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/state/counters/in-router-advertisements YANG schema element.
+type Interface_Subinterface_Ipv6_RouterAdvertisement_Counters_InRouterAdvertisementsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Subinterface_Ipv6_RouterAdvertisement_Counters_InRouterAdvertisementsPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/state/counters/in-router-advertisements YANG schema element.
+type Interface_Subinterface_Ipv6_RouterAdvertisement_Counters_InRouterAdvertisementsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_Counters_InRouterAdvertisementsPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "in-router-advertisements"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/state/counters/in-router-advertisements"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_Counters_InRouterAdvertisementsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Interface_Subinterface_Ipv6_RouterAdvertisement_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"in-router-advertisements"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_RouterAdvertisement_Counters).InRouterAdvertisements
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_RouterAdvertisement_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "in-router-advertisements"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/state/counters/in-router-advertisements"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_Counters_InRouterAdvertisementsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Interface_Subinterface_Ipv6_RouterAdvertisement_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"in-router-advertisements"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_RouterAdvertisement_Counters).InRouterAdvertisements
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_RouterAdvertisement_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_Subinterface_Ipv6_RouterAdvertisement_Counters_InRouterSolicitationsPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/state/counters/in-router-solicitations YANG schema element.
+type Interface_Subinterface_Ipv6_RouterAdvertisement_Counters_InRouterSolicitationsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Subinterface_Ipv6_RouterAdvertisement_Counters_InRouterSolicitationsPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/state/counters/in-router-solicitations YANG schema element.
+type Interface_Subinterface_Ipv6_RouterAdvertisement_Counters_InRouterSolicitationsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_Counters_InRouterSolicitationsPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "in-router-solicitations"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/state/counters/in-router-solicitations"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_Counters_InRouterSolicitationsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Interface_Subinterface_Ipv6_RouterAdvertisement_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"in-router-solicitations"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_RouterAdvertisement_Counters).InRouterSolicitations
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_RouterAdvertisement_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "in-router-solicitations"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/state/counters/in-router-solicitations"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_Counters_InRouterSolicitationsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Interface_Subinterface_Ipv6_RouterAdvertisement_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"in-router-solicitations"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_RouterAdvertisement_Counters).InRouterSolicitations
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_RouterAdvertisement_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_Subinterface_Ipv6_RouterAdvertisement_Counters_OutRouterAdvertisementsPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/state/counters/out-router-advertisements YANG schema element.
+type Interface_Subinterface_Ipv6_RouterAdvertisement_Counters_OutRouterAdvertisementsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Subinterface_Ipv6_RouterAdvertisement_Counters_OutRouterAdvertisementsPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/state/counters/out-router-advertisements YANG schema element.
+type Interface_Subinterface_Ipv6_RouterAdvertisement_Counters_OutRouterAdvertisementsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_Counters_OutRouterAdvertisementsPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "out-router-advertisements"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/state/counters/out-router-advertisements"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_Counters_OutRouterAdvertisementsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Interface_Subinterface_Ipv6_RouterAdvertisement_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"out-router-advertisements"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_RouterAdvertisement_Counters).OutRouterAdvertisements
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_RouterAdvertisement_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "out-router-advertisements"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/state/counters/out-router-advertisements"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_Counters_OutRouterAdvertisementsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Interface_Subinterface_Ipv6_RouterAdvertisement_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"out-router-advertisements"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_RouterAdvertisement_Counters).OutRouterAdvertisements
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_RouterAdvertisement_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_Subinterface_Ipv6_RouterAdvertisement_Counters_OutRouterSolicitationsPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/state/counters/out-router-solicitations YANG schema element.
+type Interface_Subinterface_Ipv6_RouterAdvertisement_Counters_OutRouterSolicitationsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Interface_Subinterface_Ipv6_RouterAdvertisement_Counters_OutRouterSolicitationsPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/state/counters/out-router-solicitations YANG schema element.
+type Interface_Subinterface_Ipv6_RouterAdvertisement_Counters_OutRouterSolicitationsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_Counters_OutRouterSolicitationsPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "out-router-solicitations"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/state/counters/out-router-solicitations"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_Counters_OutRouterSolicitationsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Interface_Subinterface_Ipv6_RouterAdvertisement_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"out-router-solicitations"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_RouterAdvertisement_Counters).OutRouterSolicitations
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_RouterAdvertisement_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-if-ip"
+//	Path from parent:     "out-router-solicitations"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/state/counters/out-router-solicitations"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_Counters_OutRouterSolicitationsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Interface_Subinterface_Ipv6_RouterAdvertisement_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"out-router-solicitations"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Interface_Subinterface_Ipv6_RouterAdvertisement_Counters).OutRouterSolicitations
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Interface_Subinterface_Ipv6_RouterAdvertisement_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Interface_Subinterface_Ipv6_RouterAdvertisement_CountersPath represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/state/counters YANG schema element.
+type Interface_Subinterface_Ipv6_RouterAdvertisement_CountersPath struct {
+	*ygnmi.NodePath
+}
+
+// Interface_Subinterface_Ipv6_RouterAdvertisement_CountersPathAny represents the wildcard version of the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/state/counters YANG schema element.
+type Interface_Subinterface_Ipv6_RouterAdvertisement_CountersPathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_CountersPath) PathOriginName() string {
+	return "openconfig"
+}
+
+// InRouterAdvertisements (leaf): The number of ICMPv6 Router Advertisement messages received
+// on the interface.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "in-router-advertisements"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/state/counters/in-router-advertisements"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_CountersPath) InRouterAdvertisements() *Interface_Subinterface_Ipv6_RouterAdvertisement_Counters_InRouterAdvertisementsPath {
+	ps := &Interface_Subinterface_Ipv6_RouterAdvertisement_Counters_InRouterAdvertisementsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"in-router-advertisements"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// InRouterAdvertisements (leaf): The number of ICMPv6 Router Advertisement messages received
+// on the interface.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "in-router-advertisements"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/state/counters/in-router-advertisements"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_CountersPathAny) InRouterAdvertisements() *Interface_Subinterface_Ipv6_RouterAdvertisement_Counters_InRouterAdvertisementsPathAny {
+	ps := &Interface_Subinterface_Ipv6_RouterAdvertisement_Counters_InRouterAdvertisementsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"in-router-advertisements"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// InRouterSolicitations (leaf): The number of ICMPv6 Router Solicitation messages received
+// on the interface.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "in-router-solicitations"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/state/counters/in-router-solicitations"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_CountersPath) InRouterSolicitations() *Interface_Subinterface_Ipv6_RouterAdvertisement_Counters_InRouterSolicitationsPath {
+	ps := &Interface_Subinterface_Ipv6_RouterAdvertisement_Counters_InRouterSolicitationsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"in-router-solicitations"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// InRouterSolicitations (leaf): The number of ICMPv6 Router Solicitation messages received
+// on the interface.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "in-router-solicitations"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/state/counters/in-router-solicitations"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_CountersPathAny) InRouterSolicitations() *Interface_Subinterface_Ipv6_RouterAdvertisement_Counters_InRouterSolicitationsPathAny {
+	ps := &Interface_Subinterface_Ipv6_RouterAdvertisement_Counters_InRouterSolicitationsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"in-router-solicitations"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// OutRouterAdvertisements (leaf): The number of ICMPv6 Router Advertisement messages sent on
+// the interface.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "out-router-advertisements"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/state/counters/out-router-advertisements"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_CountersPath) OutRouterAdvertisements() *Interface_Subinterface_Ipv6_RouterAdvertisement_Counters_OutRouterAdvertisementsPath {
+	ps := &Interface_Subinterface_Ipv6_RouterAdvertisement_Counters_OutRouterAdvertisementsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"out-router-advertisements"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// OutRouterAdvertisements (leaf): The number of ICMPv6 Router Advertisement messages sent on
+// the interface.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "out-router-advertisements"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/state/counters/out-router-advertisements"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_CountersPathAny) OutRouterAdvertisements() *Interface_Subinterface_Ipv6_RouterAdvertisement_Counters_OutRouterAdvertisementsPathAny {
+	ps := &Interface_Subinterface_Ipv6_RouterAdvertisement_Counters_OutRouterAdvertisementsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"out-router-advertisements"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// OutRouterSolicitations (leaf): The number of ICMPv6 Router Solicitation messages sent on
+// the interface.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "out-router-solicitations"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/state/counters/out-router-solicitations"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_CountersPath) OutRouterSolicitations() *Interface_Subinterface_Ipv6_RouterAdvertisement_Counters_OutRouterSolicitationsPath {
+	ps := &Interface_Subinterface_Ipv6_RouterAdvertisement_Counters_OutRouterSolicitationsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"out-router-solicitations"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// OutRouterSolicitations (leaf): The number of ICMPv6 Router Solicitation messages sent on
+// the interface.
+//
+//	Defining module:      "openconfig-if-ip"
+//	Instantiating module: "openconfig-interfaces"
+//	Path from parent:     "out-router-solicitations"
+//	Path from root:       "/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/state/counters/out-router-solicitations"
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_CountersPathAny) OutRouterSolicitations() *Interface_Subinterface_Ipv6_RouterAdvertisement_Counters_OutRouterSolicitationsPathAny {
+	ps := &Interface_Subinterface_Ipv6_RouterAdvertisement_Counters_OutRouterSolicitationsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"out-router-solicitations"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_CountersPath) State() ygnmi.SingletonQuery[*oc.Interface_Subinterface_Ipv6_RouterAdvertisement_Counters] {
+	return ygnmi.NewSingletonQuery[*oc.Interface_Subinterface_Ipv6_RouterAdvertisement_Counters](
+		"Interface_Subinterface_Ipv6_RouterAdvertisement_Counters",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Interface_Subinterface_Ipv6_RouterAdvertisement_CountersPathAny) State() ygnmi.WildcardQuery[*oc.Interface_Subinterface_Ipv6_RouterAdvertisement_Counters] {
+	return ygnmi.NewWildcardQuery[*oc.Interface_Subinterface_Ipv6_RouterAdvertisement_Counters](
+		"Interface_Subinterface_Ipv6_RouterAdvertisement_Counters",
+		true,
+		false,
 		false,
 		false,
 		true,

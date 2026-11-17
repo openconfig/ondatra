@@ -7904,6 +7904,187 @@ func (n *Acl_AclSet_AclEntry_Ipv6_DscpSetPathAny) Config() ygnmi.WildcardQuery[[
 	)
 }
 
+// Acl_AclSet_AclEntry_Ipv6_FlowLabelPath represents the /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv6/state/flow-label YANG schema element.
+type Acl_AclSet_AclEntry_Ipv6_FlowLabelPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Acl_AclSet_AclEntry_Ipv6_FlowLabelPathAny represents the wildcard version of the /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv6/state/flow-label YANG schema element.
+type Acl_AclSet_AclEntry_Ipv6_FlowLabelPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Acl_AclSet_AclEntry_Ipv6_FlowLabelPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "state/flow-label"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv6/state/flow-label"
+func (n *Acl_AclSet_AclEntry_Ipv6_FlowLabelPath) State() ygnmi.SingletonQuery[uint32] {
+	return ygnmi.NewSingletonQuery[uint32](
+		"Acl_AclSet_AclEntry_Ipv6",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "flow-label"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.Acl_AclSet_AclEntry_Ipv6).FlowLabel
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Acl_AclSet_AclEntry_Ipv6) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "state/flow-label"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv6/state/flow-label"
+func (n *Acl_AclSet_AclEntry_Ipv6_FlowLabelPathAny) State() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewWildcardQuery[uint32](
+		"Acl_AclSet_AclEntry_Ipv6",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "flow-label"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.Acl_AclSet_AclEntry_Ipv6).FlowLabel
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Acl_AclSet_AclEntry_Ipv6) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "config/flow-label"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv6/config/flow-label"
+func (n *Acl_AclSet_AclEntry_Ipv6_FlowLabelPath) Config() ygnmi.ConfigQuery[uint32] {
+	return ygnmi.NewConfigQuery[uint32](
+		"Acl_AclSet_AclEntry_Ipv6",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "flow-label"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.Acl_AclSet_AclEntry_Ipv6).FlowLabel
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Acl_AclSet_AclEntry_Ipv6) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "config/flow-label"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv6/config/flow-label"
+func (n *Acl_AclSet_AclEntry_Ipv6_FlowLabelPathAny) Config() ygnmi.WildcardQuery[uint32] {
+	return ygnmi.NewWildcardQuery[uint32](
+		"Acl_AclSet_AclEntry_Ipv6",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "flow-label"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint32, bool) {
+			ret := gs.(*oc.Acl_AclSet_AclEntry_Ipv6).FlowLabel
+			if ret == nil {
+				var zero uint32
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Acl_AclSet_AclEntry_Ipv6) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
 // Acl_AclSet_AclEntry_Ipv6_HopLimitPath represents the /openconfig-acl/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv6/state/hop-limit YANG schema element.
 type Acl_AclSet_AclEntry_Ipv6_HopLimitPath struct {
 	*ygnmi.NodePath
@@ -9067,7 +9248,9 @@ func (n *Acl_AclSet_AclEntry_Ipv6PathAny) DestinationAddressPrefixSet() *Acl_Acl
 	return ps
 }
 
-// DestinationFlowLabel (leaf): Destination IPv6 Flow label.
+// DestinationFlowLabel (leaf): Deprecated: use flow-label instead.  The IPv6 header contains a
+// single flow-label field; there is no distinct source or
+// destination flow-label.
 //
 //	Defining module:      "openconfig-packet-match"
 //	Instantiating module: "openconfig-acl"
@@ -9085,7 +9268,9 @@ func (n *Acl_AclSet_AclEntry_Ipv6Path) DestinationFlowLabel() *Acl_AclSet_AclEnt
 	return ps
 }
 
-// DestinationFlowLabel (leaf): Destination IPv6 Flow label.
+// DestinationFlowLabel (leaf): Deprecated: use flow-label instead.  The IPv6 header contains a
+// single flow-label field; there is no distinct source or
+// destination flow-label.
 //
 //	Defining module:      "openconfig-packet-match"
 //	Instantiating module: "openconfig-acl"
@@ -9173,6 +9358,42 @@ func (n *Acl_AclSet_AclEntry_Ipv6PathAny) DscpSet() *Acl_AclSet_AclEntry_Ipv6_Ds
 	ps := &Acl_AclSet_AclEntry_Ipv6_DscpSetPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"*", "dscp-set"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// FlowLabel (leaf): IPv6 Flow label.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "*/flow-label"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv6/*/flow-label"
+func (n *Acl_AclSet_AclEntry_Ipv6Path) FlowLabel() *Acl_AclSet_AclEntry_Ipv6_FlowLabelPath {
+	ps := &Acl_AclSet_AclEntry_Ipv6_FlowLabelPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "flow-label"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// FlowLabel (leaf): IPv6 Flow label.
+//
+//	Defining module:      "openconfig-packet-match"
+//	Instantiating module: "openconfig-acl"
+//	Path from parent:     "*/flow-label"
+//	Path from root:       "/acl/acl-sets/acl-set/acl-entries/acl-entry/ipv6/*/flow-label"
+func (n *Acl_AclSet_AclEntry_Ipv6PathAny) FlowLabel() *Acl_AclSet_AclEntry_Ipv6_FlowLabelPathAny {
+	ps := &Acl_AclSet_AclEntry_Ipv6_FlowLabelPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "flow-label"},
 			map[string]interface{}{},
 			n,
 		),
@@ -9411,7 +9632,9 @@ func (n *Acl_AclSet_AclEntry_Ipv6PathAny) SourceAddressPrefixSet() *Acl_AclSet_A
 	return ps
 }
 
-// SourceFlowLabel (leaf): Source IPv6 Flow label.
+// SourceFlowLabel (leaf): Deprecated: use flow-label instead.  The IPv6 header contains a
+// single flow-label field; there is no distinct source or
+// destination flow-label.
 //
 //	Defining module:      "openconfig-packet-match"
 //	Instantiating module: "openconfig-acl"
@@ -9429,7 +9652,9 @@ func (n *Acl_AclSet_AclEntry_Ipv6Path) SourceFlowLabel() *Acl_AclSet_AclEntry_Ip
 	return ps
 }
 
-// SourceFlowLabel (leaf): Source IPv6 Flow label.
+// SourceFlowLabel (leaf): Deprecated: use flow-label instead.  The IPv6 header contains a
+// single flow-label field; there is no distinct source or
+// destination flow-label.
 //
 //	Defining module:      "openconfig-packet-match"
 //	Instantiating module: "openconfig-acl"

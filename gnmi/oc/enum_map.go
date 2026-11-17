@@ -280,6 +280,9 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		2: {Name: "EGP"},
 		3: {Name: "INCOMPLETE"},
 	},
+	"E_BgpPolicy_BgpSetAigpAction": {
+		1: {Name: "SET"},
+	},
 	"E_BgpPolicy_BgpSetCommunityOptionType": {
 		1: {Name: "ADD"},
 		2: {Name: "REMOVE"},
@@ -437,6 +440,14 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 	"E_Cpu_Index": {
 		1: {Name: "ALL"},
 	},
+	"E_DecapMplsLabelStack_Label": {
+		1: {Name: "IPV4_EXPLICIT_NULL"},
+		2: {Name: "ROUTER_ALERT"},
+		3: {Name: "IPV6_EXPLICIT_NULL"},
+		4: {Name: "IMPLICIT_NULL"},
+		8: {Name: "ENTROPY_LABEL_INDICATOR"},
+		9: {Name: "NO_LABEL"},
+	},
 	"E_DefaultMetric_Flags": {
 		1: {Name: "INTERNAL"},
 	},
@@ -449,6 +460,14 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		9: {Name: "NO_LABEL"},
 	},
 	"E_Egress_PushLabel": {
+		1: {Name: "IPV4_EXPLICIT_NULL"},
+		2: {Name: "ROUTER_ALERT"},
+		3: {Name: "IPV6_EXPLICIT_NULL"},
+		4: {Name: "IMPLICIT_NULL"},
+		8: {Name: "ENTROPY_LABEL_INDICATOR"},
+		9: {Name: "NO_LABEL"},
+	},
+	"E_EncapMplsLabelStack_Label": {
 		1: {Name: "IPV4_EXPLICIT_NULL"},
 		2: {Name: "ROUTER_ALERT"},
 		3: {Name: "IPV6_EXPLICIT_NULL"},
@@ -1184,6 +1203,9 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		3: {Name: "FEC_RS528", DefiningModule: "openconfig-if-ethernet"},
 		4: {Name: "FEC_RS544", DefiningModule: "openconfig-if-ethernet"},
 		5: {Name: "FEC_RS544_2X_INTERLEAVE", DefiningModule: "openconfig-if-ethernet"},
+		6: {Name: "FEC_RS544_2X_INTERLEAVE_CL172", DefiningModule: "openconfig-if-ethernet"},
+		7: {Name: "FEC_RS544_2X_INTERLEAVE_ETC", DefiningModule: "openconfig-if-ethernet"},
+		8: {Name: "FEC_RS544_LOW_LATENCY", DefiningModule: "openconfig-if-ethernet"},
 	},
 	"E_IfIp_IpAddressOrigin": {
 		1: {Name: "OTHER"},
@@ -1440,6 +1462,12 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		1: {Name: "NARROW_METRIC"},
 		2: {Name: "WIDE_METRIC"},
 	},
+	"E_Isis_SuppressInterfaceIpMode": {
+		1: {Name: "NONE"},
+		2: {Name: "ALL"},
+		3: {Name: "NON_PASSIVE"},
+		4: {Name: "NON_PASSIVE_POINT_TO_POINT"},
+	},
 	"E_KeychainTypes_AUTH_TYPE": {
 		1: {Name: "KEYCHAIN", DefiningModule: "openconfig-keychain-types"},
 		2: {Name: "SIMPLE_KEY", DefiningModule: "openconfig-keychain-types"},
@@ -1644,6 +1672,11 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		7: {Name: "INFORMATIONAL"},
 		8: {Name: "DEBUG"},
 	},
+	"E_Mka_Status": {
+		1: {Name: "ACTIVE"},
+		2: {Name: "INACTIVE"},
+		3: {Name: "PENDING"},
+	},
 	"E_MplsLdp_LabelAdvertisementMode": {
 		1: {Name: "DOWNSTREAM_UNSOLICITED"},
 		2: {Name: "DOWNSTREAM_ON_DEMAND"},
@@ -1714,8 +1747,9 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		2: {Name: "ADMIN_UP", DefiningModule: "openconfig-mpls-types"},
 	},
 	"E_MplsTypes_TUNNEL_TYPE": {
-		1: {Name: "P2MP", DefiningModule: "openconfig-mpls-types"},
-		2: {Name: "P2P", DefiningModule: "openconfig-mpls-types"},
+		1: {Name: "BYPASS_P2P", DefiningModule: "openconfig-mpls-types"},
+		2: {Name: "P2MP", DefiningModule: "openconfig-mpls-types"},
+		3: {Name: "P2P", DefiningModule: "openconfig-mpls-types"},
 	},
 	"E_Mpls_CspfTieBreaking": {
 		1: {Name: "RANDOM"},
@@ -1787,6 +1821,15 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		1: {Name: "UP"},
 		2: {Name: "DOWN"},
 	},
+	"E_NetworkInstanceTypes_CONNECTION_POINT_OPER_STATUS": {
+		1: {Name: "ADMIN_DOWN", DefiningModule: "openconfig-network-instance-types"},
+		2: {Name: "CONFIG_CONFLICT", DefiningModule: "openconfig-network-instance-types"},
+		3: {Name: "DOWN", DefiningModule: "openconfig-network-instance-types"},
+		4: {Name: "PARTIALLY_UP", DefiningModule: "openconfig-network-instance-types"},
+		5: {Name: "STANDBY", DefiningModule: "openconfig-network-instance-types"},
+		6: {Name: "UNPROGRAMMED", DefiningModule: "openconfig-network-instance-types"},
+		7: {Name: "UP", DefiningModule: "openconfig-network-instance-types"},
+	},
 	"E_NetworkInstanceTypes_ENCAPSULATION": {
 		1: {Name: "MPLS", DefiningModule: "openconfig-network-instance-types"},
 		2: {Name: "VXLAN", DefiningModule: "openconfig-network-instance-types"},
@@ -1794,6 +1837,7 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 	"E_NetworkInstanceTypes_ENDPOINT_TYPE": {
 		1: {Name: "LOCAL", DefiningModule: "openconfig-network-instance-types"},
 		2: {Name: "REMOTE", DefiningModule: "openconfig-network-instance-types"},
+		3: {Name: "STATIC", DefiningModule: "openconfig-network-instance-types"},
 	},
 	"E_NetworkInstanceTypes_LABEL_ALLOCATION_MODE": {
 		1: {Name: "INSTANCE_LABEL", DefiningModule: "openconfig-network-instance-types"},
@@ -2036,9 +2080,17 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		1: {Name: "LINEAR_BACKOFF"},
 		2: {Name: "EXPONENTIAL_BACKOFF"},
 	},
+	"E_Ospf_SendDefaultRoute_MetricType": {
+		1: {Name: "EXTERNAL_TYPE_1"},
+		2: {Name: "EXTERNAL_TYPE_2"},
+	},
 	"E_Ospfv2_LsaGeneration_TimerType": {
 		1: {Name: "LINEAR_BACKOFF"},
 		2: {Name: "EXPONENTIAL_BACKOFF"},
+	},
+	"E_Ospfv2_SendDefaultRoute_MetricType": {
+		1: {Name: "EXTERNAL_TYPE_1"},
+		2: {Name: "EXTERNAL_TYPE_2"},
 	},
 	"E_Ospfv2_SrSidType": {
 		1: {Name: "LABEL"},
@@ -2151,14 +2203,16 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		10: {Name: "FRU", DefiningModule: "openconfig-platform-types"},
 		11: {Name: "INTEGRATED_CIRCUIT", DefiningModule: "openconfig-platform-types"},
 		12: {Name: "LINECARD", DefiningModule: "openconfig-platform-types"},
-		13: {Name: "OPTICAL_CHANNEL", DefiningModule: "openconfig-transport-types"},
-		14: {Name: "PORT", DefiningModule: "openconfig-platform-types"},
-		15: {Name: "POWER_SUPPLY", DefiningModule: "openconfig-platform-types"},
-		16: {Name: "SENSOR", DefiningModule: "openconfig-platform-types"},
-		17: {Name: "STORAGE", DefiningModule: "openconfig-platform-types"},
-		18: {Name: "TRANSCEIVER", DefiningModule: "openconfig-platform-types"},
-		19: {Name: "USB_PORT", DefiningModule: "openconfig-platform-types"},
-		20: {Name: "WIFI_ACCESS_POINT", DefiningModule: "openconfig-platform-types"},
+		13: {Name: "MIDPLANE", DefiningModule: "openconfig-platform-types"},
+		14: {Name: "OPTICAL_CHANNEL", DefiningModule: "openconfig-transport-types"},
+		15: {Name: "PACKAGED_TRANSCEIVER", DefiningModule: "openconfig-platform-types"},
+		16: {Name: "PORT", DefiningModule: "openconfig-platform-types"},
+		17: {Name: "POWER_SUPPLY", DefiningModule: "openconfig-platform-types"},
+		18: {Name: "SENSOR", DefiningModule: "openconfig-platform-types"},
+		19: {Name: "STORAGE", DefiningModule: "openconfig-platform-types"},
+		20: {Name: "TRANSCEIVER", DefiningModule: "openconfig-platform-types"},
+		21: {Name: "USB_PORT", DefiningModule: "openconfig-platform-types"},
+		22: {Name: "WIFI_ACCESS_POINT", DefiningModule: "openconfig-platform-types"},
 	},
 	"E_PlatformTypes_OPENCONFIG_SOFTWARE_COMPONENT": {
 		1: {Name: "BIOS", DefiningModule: "openconfig-platform-types"},
@@ -2166,6 +2220,11 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		3: {Name: "OPERATING_SYSTEM", DefiningModule: "openconfig-platform-types"},
 		4: {Name: "OPERATING_SYSTEM_UPDATE", DefiningModule: "openconfig-platform-types"},
 		5: {Name: "SOFTWARE_MODULE", DefiningModule: "openconfig-platform-types"},
+	},
+	"E_Platform_ComponentPowerOperType": {
+		1: {Name: "POWER_ENABLED"},
+		2: {Name: "POWER_DISABLED"},
+		3: {Name: "POWER_TRANSITIONING"},
 	},
 	"E_Platform_ComponentPowerType": {
 		1: {Name: "POWER_ENABLED"},
@@ -2193,6 +2252,11 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		8: {Name: "ENTROPY_LABEL_INDICATOR"},
 		9: {Name: "NO_LABEL"},
 	},
+	"E_PolicyForwarding_FORWARDING_ACTION": {
+		1: {Name: "DROP", DefiningModule: "openconfig-policy-forwarding"},
+		2: {Name: "FORWARD", DefiningModule: "openconfig-policy-forwarding"},
+		3: {Name: "REJECT", DefiningModule: "openconfig-policy-forwarding"},
+	},
 	"E_PolicyTypes_ATTRIBUTE_COMPARISON": {
 		1: {Name: "ATTRIBUTE_EQ", DefiningModule: "openconfig-policy-types"},
 		2: {Name: "ATTRIBUTE_GE", DefiningModule: "openconfig-policy-types"},
@@ -2216,9 +2280,14 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		2: {Name: "ACTIVE"},
 		3: {Name: "SANDBOX"},
 	},
+	"E_Policy_SecurityPolicy": {
+		1: {Name: "SHOULD_SECURE"},
+		2: {Name: "MUST_SECURE"},
+	},
 	"E_Policy_Type": {
 		1: {Name: "PBR_POLICY"},
 		2: {Name: "VRF_SELECTION_POLICY"},
+		3: {Name: "MATCH_ACTION_POLICY"},
 	},
 	"E_PortSet_ExcludePort": {
 		1: {Name: "ANY"},
@@ -2272,6 +2341,7 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		1: {Name: "DISABLE"},
 		2: {Name: "REMOTE_ONLY"},
 		3: {Name: "ALL"},
+		4: {Name: "MANUAL"},
 	},
 	"E_QosTypes_QOS_SCHEDULER_TYPE": {
 		1: {Name: "ONE_RATE_TWO_COLOR", DefiningModule: "openconfig-qos-types"},
@@ -2345,6 +2415,11 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 	"E_RouterAdvertisement_Mode": {
 		1: {Name: "ALL"},
 		2: {Name: "DISABLE_UNSOLICITED_RA"},
+	},
+	"E_RouterAdvertisement_RouterPreference": {
+		1: {Name: "HIGH"},
+		2: {Name: "MEDIUM"},
+		3: {Name: "LOW"},
 	},
 	"E_RouterInformation_Tlv_Type": {
 		1: {Name: "UNKNOWN"},
@@ -2462,6 +2537,23 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		8: {Name: "ENTROPY_LABEL_INDICATOR"},
 		9: {Name: "NO_LABEL"},
 	},
+	"E_Snmp_SNMP_NOTIFICATION_EVENT": {
+		1: {Name: "ALL", DefiningModule: "openconfig-snmp"},
+		2: {Name: "AUTHENTICATION", DefiningModule: "openconfig-snmp"},
+		3: {Name: "LINE_STATUS", DefiningModule: "openconfig-snmp"},
+	},
+	"E_Snmp_SnmpAccessMode": {
+		1: {Name: "READ_ONLY"},
+		2: {Name: "READ_WRITE"},
+	},
+	"E_Snmp_SnmpNotificationType": {
+		1: {Name: "TRAP"},
+		2: {Name: "INFORM"},
+	},
+	"E_Snmp_SnmpVersion": {
+		1: {Name: "V1"},
+		2: {Name: "V2C"},
+	},
 	"E_SrgbDescriptor_Label": {
 		1: {Name: "IPV4_EXPLICIT_NULL"},
 		2: {Name: "ROUTER_ALERT"},
@@ -2492,6 +2584,22 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		1: {Name: "V2"},
 		2: {Name: "V1"},
 		3: {Name: "V1_V2"},
+	},
+	"E_Static_LocalLabel": {
+		1: {Name: "IPV4_EXPLICIT_NULL"},
+		2: {Name: "ROUTER_ALERT"},
+		3: {Name: "IPV6_EXPLICIT_NULL"},
+		4: {Name: "IMPLICIT_NULL"},
+		8: {Name: "ENTROPY_LABEL_INDICATOR"},
+		9: {Name: "NO_LABEL"},
+	},
+	"E_Static_NeighborLabel": {
+		1: {Name: "IPV4_EXPLICIT_NULL"},
+		2: {Name: "ROUTER_ALERT"},
+		3: {Name: "IPV6_EXPLICIT_NULL"},
+		4: {Name: "IMPLICIT_NULL"},
+		8: {Name: "ENTROPY_LABEL_INDICATOR"},
+		9: {Name: "NO_LABEL"},
 	},
 	"E_SubTlv_LinkType": {
 		1: {Name: "POINT_TO_POINT"},
@@ -2639,23 +2747,32 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		17: {Name: "ETH_10GBASE_LRM", DefiningModule: "openconfig-transport-types"},
 		18: {Name: "ETH_10GBASE_SR", DefiningModule: "openconfig-transport-types"},
 		19: {Name: "ETH_10GBASE_ZR", DefiningModule: "openconfig-transport-types"},
-		20: {Name: "ETH_25GBASE_LR", DefiningModule: "openconfig-transport-types"},
-		21: {Name: "ETH_25GBASE_SR", DefiningModule: "openconfig-transport-types"},
-		22: {Name: "ETH_400GBASE_DR4", DefiningModule: "openconfig-transport-types"},
-		23: {Name: "ETH_400GBASE_FR4", DefiningModule: "openconfig-transport-types"},
-		24: {Name: "ETH_400GBASE_LR4", DefiningModule: "openconfig-transport-types"},
-		25: {Name: "ETH_400GBASE_LR8", DefiningModule: "openconfig-transport-types"},
-		26: {Name: "ETH_400GBASE_ZR", DefiningModule: "openconfig-transport-types"},
-		27: {Name: "ETH_400GMSA_PSM4", DefiningModule: "openconfig-transport-types"},
-		28: {Name: "ETH_40GBASE_CR4", DefiningModule: "openconfig-transport-types"},
-		29: {Name: "ETH_40GBASE_ER4", DefiningModule: "openconfig-transport-types"},
-		30: {Name: "ETH_40GBASE_LR4", DefiningModule: "openconfig-transport-types"},
-		31: {Name: "ETH_40GBASE_PSM4", DefiningModule: "openconfig-transport-types"},
-		32: {Name: "ETH_40GBASE_SR4", DefiningModule: "openconfig-transport-types"},
-		33: {Name: "ETH_4X10GBASE_LR", DefiningModule: "openconfig-transport-types"},
-		34: {Name: "ETH_4X10GBASE_SR", DefiningModule: "openconfig-transport-types"},
-		35: {Name: "ETH_800GBASE_ZR", DefiningModule: "openconfig-transport-types"},
-		36: {Name: "ETH_UNDEFINED", DefiningModule: "openconfig-transport-types"},
+		20: {Name: "ETH_1600GBASE_ZR", DefiningModule: "openconfig-transport-types"},
+		21: {Name: "ETH_1600GBASE_ZR_PLUS", DefiningModule: "openconfig-transport-types"},
+		22: {Name: "ETH_25GBASE_LR", DefiningModule: "openconfig-transport-types"},
+		23: {Name: "ETH_25GBASE_SR", DefiningModule: "openconfig-transport-types"},
+		24: {Name: "ETH_3200GBASE_ZR", DefiningModule: "openconfig-transport-types"},
+		25: {Name: "ETH_3200GBASE_ZR_PLUS", DefiningModule: "openconfig-transport-types"},
+		26: {Name: "ETH_400GBASE_DR4", DefiningModule: "openconfig-transport-types"},
+		27: {Name: "ETH_400GBASE_FR4", DefiningModule: "openconfig-transport-types"},
+		28: {Name: "ETH_400GBASE_LR4", DefiningModule: "openconfig-transport-types"},
+		29: {Name: "ETH_400GBASE_LR8", DefiningModule: "openconfig-transport-types"},
+		30: {Name: "ETH_400GBASE_ZR", DefiningModule: "openconfig-transport-types"},
+		31: {Name: "ETH_400GMSA_PSM4", DefiningModule: "openconfig-transport-types"},
+		32: {Name: "ETH_40GBASE_CR4", DefiningModule: "openconfig-transport-types"},
+		33: {Name: "ETH_40GBASE_ER4", DefiningModule: "openconfig-transport-types"},
+		34: {Name: "ETH_40GBASE_LR4", DefiningModule: "openconfig-transport-types"},
+		35: {Name: "ETH_40GBASE_PSM4", DefiningModule: "openconfig-transport-types"},
+		36: {Name: "ETH_40GBASE_SR4", DefiningModule: "openconfig-transport-types"},
+		37: {Name: "ETH_4X10GBASE_LR", DefiningModule: "openconfig-transport-types"},
+		38: {Name: "ETH_4X10GBASE_SR", DefiningModule: "openconfig-transport-types"},
+		39: {Name: "ETH_800GBASE_2XDR4", DefiningModule: "openconfig-transport-types"},
+		40: {Name: "ETH_800GBASE_2XFR4", DefiningModule: "openconfig-transport-types"},
+		41: {Name: "ETH_800GBASE_2XLR4", DefiningModule: "openconfig-transport-types"},
+		42: {Name: "ETH_800GBASE_2XPLR4", DefiningModule: "openconfig-transport-types"},
+		43: {Name: "ETH_800GBASE_DR8", DefiningModule: "openconfig-transport-types"},
+		44: {Name: "ETH_800GBASE_ZR", DefiningModule: "openconfig-transport-types"},
+		45: {Name: "ETH_UNDEFINED", DefiningModule: "openconfig-transport-types"},
 	},
 	"E_TransportTypes_FIBER_CONNECTOR_TYPE": {
 		1: {Name: "AOC_CONNECTOR", DefiningModule: "openconfig-transport-types"},
@@ -2734,32 +2851,34 @@ var ΛEnum = map[string]map[int64]ygot.EnumDefinition{
 		2:  {Name: "PROT_100G_MLG", DefiningModule: "openconfig-transport-types"},
 		3:  {Name: "PROT_10GE_LAN", DefiningModule: "openconfig-transport-types"},
 		4:  {Name: "PROT_10GE_WAN", DefiningModule: "openconfig-transport-types"},
-		5:  {Name: "PROT_1GE", DefiningModule: "openconfig-transport-types"},
-		6:  {Name: "PROT_400GE", DefiningModule: "openconfig-transport-types"},
-		7:  {Name: "PROT_40GE", DefiningModule: "openconfig-transport-types"},
-		8:  {Name: "PROT_800GE", DefiningModule: "openconfig-transport-types"},
-		9:  {Name: "PROT_FLEXO", DefiningModule: "openconfig-transport-types"},
-		10: {Name: "PROT_OC192", DefiningModule: "openconfig-transport-types"},
-		11: {Name: "PROT_OC48", DefiningModule: "openconfig-transport-types"},
-		12: {Name: "PROT_OC768", DefiningModule: "openconfig-transport-types"},
-		13: {Name: "PROT_ODU2", DefiningModule: "openconfig-transport-types"},
-		14: {Name: "PROT_ODU2E", DefiningModule: "openconfig-transport-types"},
-		15: {Name: "PROT_ODU3", DefiningModule: "openconfig-transport-types"},
-		16: {Name: "PROT_ODU4", DefiningModule: "openconfig-transport-types"},
-		17: {Name: "PROT_ODUCN", DefiningModule: "openconfig-transport-types"},
-		18: {Name: "PROT_ODUFLEX_CBR", DefiningModule: "openconfig-transport-types"},
-		19: {Name: "PROT_ODUFLEX_GFP", DefiningModule: "openconfig-transport-types"},
-		20: {Name: "PROT_OTSIG", DefiningModule: "openconfig-transport-types"},
-		21: {Name: "PROT_OTSI_A", DefiningModule: "openconfig-transport-types"},
-		22: {Name: "PROT_OTU1E", DefiningModule: "openconfig-transport-types"},
-		23: {Name: "PROT_OTU2", DefiningModule: "openconfig-transport-types"},
-		24: {Name: "PROT_OTU2E", DefiningModule: "openconfig-transport-types"},
-		25: {Name: "PROT_OTU3", DefiningModule: "openconfig-transport-types"},
-		26: {Name: "PROT_OTU4", DefiningModule: "openconfig-transport-types"},
-		27: {Name: "PROT_OTUCN", DefiningModule: "openconfig-transport-types"},
-		28: {Name: "PROT_STM16", DefiningModule: "openconfig-transport-types"},
-		29: {Name: "PROT_STM256", DefiningModule: "openconfig-transport-types"},
-		30: {Name: "PROT_STM64", DefiningModule: "openconfig-transport-types"},
+		5:  {Name: "PROT_1600GE", DefiningModule: "openconfig-transport-types"},
+		6:  {Name: "PROT_1GE", DefiningModule: "openconfig-transport-types"},
+		7:  {Name: "PROT_3200GE", DefiningModule: "openconfig-transport-types"},
+		8:  {Name: "PROT_400GE", DefiningModule: "openconfig-transport-types"},
+		9:  {Name: "PROT_40GE", DefiningModule: "openconfig-transport-types"},
+		10: {Name: "PROT_800GE", DefiningModule: "openconfig-transport-types"},
+		11: {Name: "PROT_FLEXO", DefiningModule: "openconfig-transport-types"},
+		12: {Name: "PROT_OC192", DefiningModule: "openconfig-transport-types"},
+		13: {Name: "PROT_OC48", DefiningModule: "openconfig-transport-types"},
+		14: {Name: "PROT_OC768", DefiningModule: "openconfig-transport-types"},
+		15: {Name: "PROT_ODU2", DefiningModule: "openconfig-transport-types"},
+		16: {Name: "PROT_ODU2E", DefiningModule: "openconfig-transport-types"},
+		17: {Name: "PROT_ODU3", DefiningModule: "openconfig-transport-types"},
+		18: {Name: "PROT_ODU4", DefiningModule: "openconfig-transport-types"},
+		19: {Name: "PROT_ODUCN", DefiningModule: "openconfig-transport-types"},
+		20: {Name: "PROT_ODUFLEX_CBR", DefiningModule: "openconfig-transport-types"},
+		21: {Name: "PROT_ODUFLEX_GFP", DefiningModule: "openconfig-transport-types"},
+		22: {Name: "PROT_OTSIG", DefiningModule: "openconfig-transport-types"},
+		23: {Name: "PROT_OTSI_A", DefiningModule: "openconfig-transport-types"},
+		24: {Name: "PROT_OTU1E", DefiningModule: "openconfig-transport-types"},
+		25: {Name: "PROT_OTU2", DefiningModule: "openconfig-transport-types"},
+		26: {Name: "PROT_OTU2E", DefiningModule: "openconfig-transport-types"},
+		27: {Name: "PROT_OTU3", DefiningModule: "openconfig-transport-types"},
+		28: {Name: "PROT_OTU4", DefiningModule: "openconfig-transport-types"},
+		29: {Name: "PROT_OTUCN", DefiningModule: "openconfig-transport-types"},
+		30: {Name: "PROT_STM16", DefiningModule: "openconfig-transport-types"},
+		31: {Name: "PROT_STM256", DefiningModule: "openconfig-transport-types"},
+		32: {Name: "PROT_STM64", DefiningModule: "openconfig-transport-types"},
 	},
 	"E_TransportTypes_TRIBUTARY_RATE_CLASS_TYPE": {
 		1:  {Name: "TRIB_RATE_1000G", DefiningModule: "openconfig-transport-types"},
@@ -3046,11 +3165,17 @@ func initΛEnumTypes() {
 		"/components/component/controller-card/state/power-admin-state": {
 			reflect.TypeOf((E_Platform_ComponentPowerType)(0)),
 		},
+		"/components/component/controller-card/state/power-oper-state": {
+			reflect.TypeOf((E_Platform_ComponentPowerOperType)(0)),
+		},
 		"/components/component/fabric/config/power-admin-state": {
 			reflect.TypeOf((E_Platform_ComponentPowerType)(0)),
 		},
 		"/components/component/fabric/state/power-admin-state": {
 			reflect.TypeOf((E_Platform_ComponentPowerType)(0)),
+		},
+		"/components/component/fabric/state/power-oper-state": {
+			reflect.TypeOf((E_Platform_ComponentPowerOperType)(0)),
 		},
 		"/components/component/fan/thresholds/threshold/state/severity": {
 			reflect.TypeOf((E_AlarmTypes_OPENCONFIG_ALARM_SEVERITY)(0)),
@@ -3102,6 +3227,9 @@ func initΛEnumTypes() {
 		},
 		"/components/component/linecard/state/power-admin-state": {
 			reflect.TypeOf((E_Platform_ComponentPowerType)(0)),
+		},
+		"/components/component/linecard/state/power-oper-state": {
+			reflect.TypeOf((E_Platform_ComponentPowerOperType)(0)),
 		},
 		"/components/component/port/breakout-mode/groups/group/config/breakout-speed": {
 			reflect.TypeOf((E_IfEthernet_ETHERNET_SPEED)(0)),
@@ -3338,8 +3466,14 @@ func initΛEnumTypes() {
 		"/interfaces/interface/routed-vlan/ipv6/router-advertisement/config/mode": {
 			reflect.TypeOf((E_RouterAdvertisement_Mode)(0)),
 		},
+		"/interfaces/interface/routed-vlan/ipv6/router-advertisement/config/router-preference": {
+			reflect.TypeOf((E_RouterAdvertisement_RouterPreference)(0)),
+		},
 		"/interfaces/interface/routed-vlan/ipv6/router-advertisement/state/mode": {
 			reflect.TypeOf((E_RouterAdvertisement_Mode)(0)),
+		},
+		"/interfaces/interface/routed-vlan/ipv6/router-advertisement/state/router-preference": {
+			reflect.TypeOf((E_RouterAdvertisement_RouterPreference)(0)),
 		},
 		"/interfaces/interface/routed-vlan/ipv6/state/learn-unsolicited": {
 			reflect.TypeOf((E_Ipv6_LearnUnsolicited)(0)),
@@ -3413,8 +3547,14 @@ func initΛEnumTypes() {
 		"/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/config/mode": {
 			reflect.TypeOf((E_RouterAdvertisement_Mode)(0)),
 		},
+		"/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/config/router-preference": {
+			reflect.TypeOf((E_RouterAdvertisement_RouterPreference)(0)),
+		},
 		"/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/state/mode": {
 			reflect.TypeOf((E_RouterAdvertisement_Mode)(0)),
+		},
+		"/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/state/router-preference": {
+			reflect.TypeOf((E_RouterAdvertisement_RouterPreference)(0)),
 		},
 		"/interfaces/interface/subinterfaces/subinterface/ipv6/state/learn-unsolicited": {
 			reflect.TypeOf((E_Ipv6_LearnUnsolicited)(0)),
@@ -3515,17 +3655,29 @@ func initΛEnumTypes() {
 		"/lldp/state/suppress-tlv-advertisement": {
 			reflect.TypeOf((E_LldpTypes_LLDP_TLV)(0)),
 		},
+		"/macsec/interfaces/interface/mka/state/status": {
+			reflect.TypeOf((E_Mka_Status)(0)),
+		},
+		"/macsec/interfaces/interface/state/status": {
+			reflect.TypeOf((E_Mka_Status)(0)),
+		},
 		"/macsec/mka/policies/policy/config/confidentiality-offset": {
 			reflect.TypeOf((E_Macsec_ConfidentialityOffset)(0)),
 		},
 		"/macsec/mka/policies/policy/config/macsec-cipher-suite": {
 			reflect.TypeOf((E_Macsec_MacsecCipherSuite)(0)),
 		},
+		"/macsec/mka/policies/policy/config/security-policy": {
+			reflect.TypeOf((E_Policy_SecurityPolicy)(0)),
+		},
 		"/macsec/mka/policies/policy/state/confidentiality-offset": {
 			reflect.TypeOf((E_Macsec_ConfidentialityOffset)(0)),
 		},
 		"/macsec/mka/policies/policy/state/macsec-cipher-suite": {
 			reflect.TypeOf((E_Macsec_MacsecCipherSuite)(0)),
+		},
+		"/macsec/mka/policies/policy/state/security-policy": {
+			reflect.TypeOf((E_Policy_SecurityPolicy)(0)),
 		},
 		"/network-instances/network-instance/afts/aft-summaries/ipv4-unicast/protocols/protocol/state/origin-protocol": {
 			reflect.TypeOf((E_PolicyTypes_INSTALL_PROTOCOL_TYPE)(0)),
@@ -3545,11 +3697,17 @@ func initΛEnumTypes() {
 		"/network-instances/network-instance/afts/ipv6-unicast/ipv6-entry/state/origin-protocol": {
 			reflect.TypeOf((E_PolicyTypes_INSTALL_PROTOCOL_TYPE)(0)),
 		},
+		"/network-instances/network-instance/afts/mpls/label-entry/decap-mpls-label-stacks/decap-mpls-label-stack/state/label": {
+			reflect.TypeOf((E_DecapMplsLabelStack_Label)(0)),
+		},
 		"/network-instances/network-instance/afts/mpls/label-entry/state/label": {
 			reflect.TypeOf((E_LabelEntry_Label)(0)),
 		},
 		"/network-instances/network-instance/afts/mpls/label-entry/state/popped-mpls-label-stack": {
 			reflect.TypeOf((E_LabelEntry_PoppedMplsLabelStack)(0)),
+		},
+		"/network-instances/network-instance/afts/next-hops/next-hop/encap-headers/encap-header/mpls/encap-mpls-label-stacks/encap-mpls-label-stack/state/label": {
+			reflect.TypeOf((E_EncapMplsLabelStack_Label)(0)),
 		},
 		"/network-instances/network-instance/afts/next-hops/next-hop/encap-headers/encap-header/mpls/state/mpls-label-stack": {
 			reflect.TypeOf((E_Mpls_MplsLabelStack)(0)),
@@ -3584,6 +3742,18 @@ func initΛEnumTypes() {
 		"/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/state/type": {
 			reflect.TypeOf((E_NetworkInstanceTypes_ENDPOINT_TYPE)(0)),
 		},
+		"/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/static/config/local-label": {
+			reflect.TypeOf((E_Static_LocalLabel)(0)),
+		},
+		"/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/static/config/neighbor-label": {
+			reflect.TypeOf((E_Static_NeighborLabel)(0)),
+		},
+		"/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/static/state/local-label": {
+			reflect.TypeOf((E_Static_LocalLabel)(0)),
+		},
+		"/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/static/state/neighbor-label": {
+			reflect.TypeOf((E_Static_NeighborLabel)(0)),
+		},
 		"/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/endpoint-peers/endpoint-peer/state/peer-state": {
 			reflect.TypeOf((E_EndpointPeer_PeerState)(0)),
 		},
@@ -3607,6 +3777,9 @@ func initΛEnumTypes() {
 		},
 		"/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/vxlan/local-endpoint-vnis/local-endpoint-vni/state/vni-type": {
 			reflect.TypeOf((E_EndpointVni_VniType)(0)),
+		},
+		"/network-instances/network-instance/connection-points/connection-point/state/oper-status": {
+			reflect.TypeOf((E_NetworkInstanceTypes_CONNECTION_POINT_OPER_STATUS)(0)),
 		},
 		"/network-instances/network-instance/encapsulation/config/encapsulation-type": {
 			reflect.TypeOf((E_NetworkInstanceTypes_ENCAPSULATION)(0)),
@@ -3986,6 +4159,15 @@ func initΛEnumTypes() {
 		"/network-instances/network-instance/policy-forwarding/policies/policy/config/type": {
 			reflect.TypeOf((E_Policy_Type)(0)),
 		},
+		"/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/forwarding/config/forwarding-action": {
+			reflect.TypeOf((E_PolicyForwarding_FORWARDING_ACTION)(0)),
+		},
+		"/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/forwarding/state/forwarding-action": {
+			reflect.TypeOf((E_PolicyForwarding_FORWARDING_ACTION)(0)),
+		},
+		"/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/config/address-family": {
+			reflect.TypeOf((E_Types_ADDRESS_FAMILY)(0)),
+		},
 		"/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/ipv4/config/fragment-offsets": {
 			reflect.TypeOf((E_Ipv4_FragmentOffsets)(0)),
 		},
@@ -4033,6 +4215,9 @@ func initΛEnumTypes() {
 		},
 		"/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/l2/state/ethertype": {
 			reflect.TypeOf((E_PacketMatchTypes_ETHERTYPE)(0)),
+		},
+		"/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/state/address-family": {
+			reflect.TypeOf((E_Types_ADDRESS_FAMILY)(0)),
 		},
 		"/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/transport/config/builtin-detail": {
 			reflect.TypeOf((E_Transport_BuiltinDetail)(0)),
@@ -4385,6 +4570,9 @@ func initΛEnumTypes() {
 		"/network-instances/network-instance/protocols/protocol/isis/global/afi-safi/af/config/safi-name": {
 			reflect.TypeOf((E_IsisTypes_SAFI_TYPE)(0)),
 		},
+		"/network-instances/network-instance/protocols/protocol/isis/global/afi-safi/af/config/suppress-interface-reachability": {
+			reflect.TypeOf((E_Isis_SuppressInterfaceIpMode)(0)),
+		},
 		"/network-instances/network-instance/protocols/protocol/isis/global/afi-safi/af/multi-topology/config/afi-name": {
 			reflect.TypeOf((E_IsisTypes_AFI_TYPE)(0)),
 		},
@@ -4402,6 +4590,9 @@ func initΛEnumTypes() {
 		},
 		"/network-instances/network-instance/protocols/protocol/isis/global/afi-safi/af/state/safi-name": {
 			reflect.TypeOf((E_IsisTypes_SAFI_TYPE)(0)),
+		},
+		"/network-instances/network-instance/protocols/protocol/isis/global/afi-safi/af/state/suppress-interface-reachability": {
+			reflect.TypeOf((E_Isis_SuppressInterfaceIpMode)(0)),
 		},
 		"/network-instances/network-instance/protocols/protocol/isis/global/config/hello-padding": {
 			reflect.TypeOf((E_Isis_HelloPaddingType)(0)),
@@ -4564,6 +4755,24 @@ func initΛEnumTypes() {
 		},
 		"/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/weighted-ecmp/state/load-balancing-weight": {
 			reflect.TypeOf((E_WeightedEcmp_LoadBalancingWeight)(0)),
+		},
+		"/network-instances/network-instance/protocols/protocol/isis/levels/level/afi-safi/af/config/afi-name": {
+			reflect.TypeOf((E_IsisTypes_AFI_TYPE)(0)),
+		},
+		"/network-instances/network-instance/protocols/protocol/isis/levels/level/afi-safi/af/config/safi-name": {
+			reflect.TypeOf((E_IsisTypes_SAFI_TYPE)(0)),
+		},
+		"/network-instances/network-instance/protocols/protocol/isis/levels/level/afi-safi/af/config/suppress-interface-reachability": {
+			reflect.TypeOf((E_Isis_SuppressInterfaceIpMode)(0)),
+		},
+		"/network-instances/network-instance/protocols/protocol/isis/levels/level/afi-safi/af/state/afi-name": {
+			reflect.TypeOf((E_IsisTypes_AFI_TYPE)(0)),
+		},
+		"/network-instances/network-instance/protocols/protocol/isis/levels/level/afi-safi/af/state/safi-name": {
+			reflect.TypeOf((E_IsisTypes_SAFI_TYPE)(0)),
+		},
+		"/network-instances/network-instance/protocols/protocol/isis/levels/level/afi-safi/af/state/suppress-interface-reachability": {
+			reflect.TypeOf((E_Isis_SuppressInterfaceIpMode)(0)),
 		},
 		"/network-instances/network-instance/protocols/protocol/isis/levels/level/authentication/config/auth-mode": {
 			reflect.TypeOf((E_IsisTypes_AUTH_MODE)(0)),
@@ -4941,6 +5150,12 @@ func initΛEnumTypes() {
 		"/network-instances/network-instance/protocols/protocol/ospfv2/global/inter-area-propagation-policies/inter-area-propagation-policy/state/default-import-policy": {
 			reflect.TypeOf((E_RoutingPolicy_DefaultPolicyType)(0)),
 		},
+		"/network-instances/network-instance/protocols/protocol/ospfv2/global/send-default-route/config/metric-type": {
+			reflect.TypeOf((E_Ospfv2_SendDefaultRoute_MetricType)(0)),
+		},
+		"/network-instances/network-instance/protocols/protocol/ospfv2/global/send-default-route/state/metric-type": {
+			reflect.TypeOf((E_Ospfv2_SendDefaultRoute_MetricType)(0)),
+		},
 		"/network-instances/network-instance/protocols/protocol/ospfv2/global/state/summary-route-cost-mode": {
 			reflect.TypeOf((E_Global_SummaryRouteCostMode)(0)),
 		},
@@ -4994,6 +5209,12 @@ func initΛEnumTypes() {
 		},
 		"/network-instances/network-instance/protocols/protocol/ospfv3/global/inter-area-propagation-policies/inter-area-propagation-policy/state/default-import-policy": {
 			reflect.TypeOf((E_RoutingPolicy_DefaultPolicyType)(0)),
+		},
+		"/network-instances/network-instance/protocols/protocol/ospfv3/global/send-default-route/config/metric-type": {
+			reflect.TypeOf((E_Ospf_SendDefaultRoute_MetricType)(0)),
+		},
+		"/network-instances/network-instance/protocols/protocol/ospfv3/global/send-default-route/state/metric-type": {
+			reflect.TypeOf((E_Ospf_SendDefaultRoute_MetricType)(0)),
 		},
 		"/network-instances/network-instance/protocols/protocol/ospfv3/global/state/abr-capability": {
 			reflect.TypeOf((E_OspfTypes_OSPF_ABR_TYPE)(0)),
@@ -5063,6 +5284,9 @@ func initΛEnumTypes() {
 		},
 		"/network-instances/network-instance/segment-routing/srlbs/srlb/state/dataplane-type": {
 			reflect.TypeOf((E_SegmentRouting_SrDataplaneType)(0)),
+		},
+		"/network-instances/network-instance/segment-routing/te-policies/te-policy/candidate-paths/candidate-path/segment-lists/segment-list/next-hops/next-hop/encap-mpls-label-stacks/encap-mpls-label-stack/state/label": {
+			reflect.TypeOf((E_EncapMplsLabelStack_Label)(0)),
 		},
 		"/network-instances/network-instance/segment-routing/te-policies/te-policy/candidate-paths/candidate-path/segment-lists/segment-list/next-hops/next-hop/state/decapsulate-header": {
 			reflect.TypeOf((E_Aft_EncapsulationHeaderType)(0)),
@@ -5454,6 +5678,9 @@ func initΛEnumTypes() {
 		"/routing-policy/defined-sets/prefix-sets/prefix-set/state/mode": {
 			reflect.TypeOf((E_PrefixSet_Mode)(0)),
 		},
+		"/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/config/set-aigp-action": {
+			reflect.TypeOf((E_BgpPolicy_BgpSetAigpAction)(0)),
+		},
 		"/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/config/set-med": {
 			reflect.TypeOf((E_BgpActions_SetMed)(0)),
 		},
@@ -5501,6 +5728,9 @@ func initΛEnumTypes() {
 		},
 		"/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/set-ext-community/state/options": {
 			reflect.TypeOf((E_BgpPolicy_BgpSetCommunityOptionType)(0)),
+		},
+		"/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/state/set-aigp-action": {
+			reflect.TypeOf((E_BgpPolicy_BgpSetAigpAction)(0)),
 		},
 		"/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/state/set-med": {
 			reflect.TypeOf((E_BgpActions_SetMed)(0)),
@@ -5797,6 +6027,48 @@ func initΛEnumTypes() {
 		},
 		"/system/ntp/servers/server/state/association-type": {
 			reflect.TypeOf((E_Server_AssociationType)(0)),
+		},
+		"/system/snmp/communities/community/access-lists/access-list/config/type": {
+			reflect.TypeOf((E_Acl_ACL_TYPE)(0)),
+		},
+		"/system/snmp/communities/community/access-lists/access-list/state/type": {
+			reflect.TypeOf((E_Acl_ACL_TYPE)(0)),
+		},
+		"/system/snmp/communities/community/config/access-mode": {
+			reflect.TypeOf((E_Snmp_SnmpAccessMode)(0)),
+		},
+		"/system/snmp/communities/community/config/version": {
+			reflect.TypeOf((E_Snmp_SnmpVersion)(0)),
+		},
+		"/system/snmp/communities/community/state/access-mode": {
+			reflect.TypeOf((E_Snmp_SnmpAccessMode)(0)),
+		},
+		"/system/snmp/communities/community/state/version": {
+			reflect.TypeOf((E_Snmp_SnmpVersion)(0)),
+		},
+		"/system/snmp/notifications/config/event-type": {
+			reflect.TypeOf((E_Snmp_SNMP_NOTIFICATION_EVENT)(0)),
+		},
+		"/system/snmp/notifications/receivers/receiver/config/event-type": {
+			reflect.TypeOf((E_Snmp_SNMP_NOTIFICATION_EVENT)(0)),
+		},
+		"/system/snmp/notifications/receivers/receiver/config/notification-type": {
+			reflect.TypeOf((E_Snmp_SnmpNotificationType)(0)),
+		},
+		"/system/snmp/notifications/receivers/receiver/config/version": {
+			reflect.TypeOf((E_Snmp_SnmpVersion)(0)),
+		},
+		"/system/snmp/notifications/receivers/receiver/state/event-type": {
+			reflect.TypeOf((E_Snmp_SNMP_NOTIFICATION_EVENT)(0)),
+		},
+		"/system/snmp/notifications/receivers/receiver/state/notification-type": {
+			reflect.TypeOf((E_Snmp_SnmpNotificationType)(0)),
+		},
+		"/system/snmp/notifications/receivers/receiver/state/version": {
+			reflect.TypeOf((E_Snmp_SnmpVersion)(0)),
+		},
+		"/system/snmp/notifications/state/event-type": {
+			reflect.TypeOf((E_Snmp_SNMP_NOTIFICATION_EVENT)(0)),
 		},
 		"/system/ssh-server/config/protocol-version": {
 			reflect.TypeOf((E_SshServer_ProtocolVersion)(0)),

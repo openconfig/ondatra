@@ -937,6 +937,99 @@ func (n *Macsec_Interface_ReplayProtectionPathAny) Config() ygnmi.WildcardQuery[
 	)
 }
 
+// Macsec_Interface_StatusPath represents the /openconfig-macsec/macsec/interfaces/interface/state/status YANG schema element.
+type Macsec_Interface_StatusPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Macsec_Interface_StatusPathAny represents the wildcard version of the /openconfig-macsec/macsec/interfaces/interface/state/status YANG schema element.
+type Macsec_Interface_StatusPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Macsec_Interface_StatusPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-macsec"
+//	Instantiating module: "openconfig-macsec"
+//	Path from parent:     "state/status"
+//	Path from root:       "/macsec/interfaces/interface/state/status"
+func (n *Macsec_Interface_StatusPath) State() ygnmi.SingletonQuery[oc.E_Mka_Status] {
+	return ygnmi.NewSingletonQuery[oc.E_Mka_Status](
+		"Macsec_Interface",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "status"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Mka_Status, bool) {
+			ret := gs.(*oc.Macsec_Interface).Status
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Macsec_Interface) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-macsec"
+//	Instantiating module: "openconfig-macsec"
+//	Path from parent:     "state/status"
+//	Path from root:       "/macsec/interfaces/interface/state/status"
+func (n *Macsec_Interface_StatusPathAny) State() ygnmi.WildcardQuery[oc.E_Mka_Status] {
+	return ygnmi.NewWildcardQuery[oc.E_Mka_Status](
+		"Macsec_Interface",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "status"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Mka_Status, bool) {
+			ret := gs.(*oc.Macsec_Interface).Status
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Macsec_Interface) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
 // Macsec_InterfacePath represents the /openconfig-macsec/macsec/interfaces/interface YANG schema element.
 type Macsec_InterfacePath struct {
 	*ygnmi.NodePath
@@ -1355,6 +1448,42 @@ func (n *Macsec_InterfacePathAny) ScsaTxMap() *Macsec_Interface_ScsaTxPathMapAny
 			map[string]interface{}{},
 			n,
 		),
+	}
+	return ps
+}
+
+// Status (leaf): Status of MACsec on an interface.
+//
+//	Defining module:      "openconfig-macsec"
+//	Instantiating module: "openconfig-macsec"
+//	Path from parent:     "state/status"
+//	Path from root:       "/macsec/interfaces/interface/state/status"
+func (n *Macsec_InterfacePath) Status() *Macsec_Interface_StatusPath {
+	ps := &Macsec_Interface_StatusPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "status"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Status (leaf): Status of MACsec on an interface.
+//
+//	Defining module:      "openconfig-macsec"
+//	Instantiating module: "openconfig-macsec"
+//	Path from parent:     "state/status"
+//	Path from root:       "/macsec/interfaces/interface/state/status"
+func (n *Macsec_InterfacePathAny) Status() *Macsec_Interface_StatusPathAny {
+	ps := &Macsec_Interface_StatusPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "status"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
 	}
 	return ps
 }
@@ -2848,6 +2977,99 @@ func (n *Macsec_Interface_Mka_MkaPolicyPathAny) Config() ygnmi.WildcardQuery[str
 	)
 }
 
+// Macsec_Interface_Mka_StatusPath represents the /openconfig-macsec/macsec/interfaces/interface/mka/state/status YANG schema element.
+type Macsec_Interface_Mka_StatusPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Macsec_Interface_Mka_StatusPathAny represents the wildcard version of the /openconfig-macsec/macsec/interfaces/interface/mka/state/status YANG schema element.
+type Macsec_Interface_Mka_StatusPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Macsec_Interface_Mka_StatusPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-macsec"
+//	Instantiating module: "openconfig-macsec"
+//	Path from parent:     "state/status"
+//	Path from root:       "/macsec/interfaces/interface/mka/state/status"
+func (n *Macsec_Interface_Mka_StatusPath) State() ygnmi.SingletonQuery[oc.E_Mka_Status] {
+	return ygnmi.NewSingletonQuery[oc.E_Mka_Status](
+		"Macsec_Interface_Mka",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "status"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Mka_Status, bool) {
+			ret := gs.(*oc.Macsec_Interface_Mka).Status
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Macsec_Interface_Mka) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-macsec"
+//	Instantiating module: "openconfig-macsec"
+//	Path from parent:     "state/status"
+//	Path from root:       "/macsec/interfaces/interface/mka/state/status"
+func (n *Macsec_Interface_Mka_StatusPathAny) State() ygnmi.WildcardQuery[oc.E_Mka_Status] {
+	return ygnmi.NewWildcardQuery[oc.E_Mka_Status](
+		"Macsec_Interface_Mka",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "status"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Mka_Status, bool) {
+			ret := gs.(*oc.Macsec_Interface_Mka).Status
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Macsec_Interface_Mka) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
 // Macsec_Interface_MkaPath represents the /openconfig-macsec/macsec/interfaces/interface/mka YANG schema element.
 type Macsec_Interface_MkaPath struct {
 	*ygnmi.NodePath
@@ -2961,6 +3183,42 @@ func (n *Macsec_Interface_MkaPathAny) MkaPolicy() *Macsec_Interface_Mka_MkaPolic
 	ps := &Macsec_Interface_Mka_MkaPolicyPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"*", "mka-policy"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Status (leaf): Status of MACsec on an interface.
+//
+//	Defining module:      "openconfig-macsec"
+//	Instantiating module: "openconfig-macsec"
+//	Path from parent:     "state/status"
+//	Path from root:       "/macsec/interfaces/interface/mka/state/status"
+func (n *Macsec_Interface_MkaPath) Status() *Macsec_Interface_Mka_StatusPath {
+	ps := &Macsec_Interface_Mka_StatusPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "status"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Status (leaf): Status of MACsec on an interface.
+//
+//	Defining module:      "openconfig-macsec"
+//	Instantiating module: "openconfig-macsec"
+//	Path from parent:     "state/status"
+//	Path from root:       "/macsec/interfaces/interface/mka/state/status"
+func (n *Macsec_Interface_MkaPathAny) Status() *Macsec_Interface_Mka_StatusPathAny {
+	ps := &Macsec_Interface_Mka_StatusPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "status"},
 			map[string]interface{}{},
 			n,
 		),
@@ -9259,6 +9517,175 @@ func (n *Macsec_Mka_Policy_SakRekeyOnLivePeerLossPathAny) Config() ygnmi.Wildcar
 	)
 }
 
+// Macsec_Mka_Policy_SecurityPolicyPath represents the /openconfig-macsec/macsec/mka/policies/policy/state/security-policy YANG schema element.
+type Macsec_Mka_Policy_SecurityPolicyPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Macsec_Mka_Policy_SecurityPolicyPathAny represents the wildcard version of the /openconfig-macsec/macsec/mka/policies/policy/state/security-policy YANG schema element.
+type Macsec_Mka_Policy_SecurityPolicyPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Macsec_Mka_Policy_SecurityPolicyPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-macsec"
+//	Instantiating module: "openconfig-macsec"
+//	Path from parent:     "state/security-policy"
+//	Path from root:       "/macsec/mka/policies/policy/state/security-policy"
+func (n *Macsec_Mka_Policy_SecurityPolicyPath) State() ygnmi.SingletonQuery[oc.E_Policy_SecurityPolicy] {
+	return ygnmi.NewSingletonQuery[oc.E_Policy_SecurityPolicy](
+		"Macsec_Mka_Policy",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "security-policy"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Policy_SecurityPolicy, bool) {
+			ret := gs.(*oc.Macsec_Mka_Policy).SecurityPolicy
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Macsec_Mka_Policy) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-macsec"
+//	Instantiating module: "openconfig-macsec"
+//	Path from parent:     "state/security-policy"
+//	Path from root:       "/macsec/mka/policies/policy/state/security-policy"
+func (n *Macsec_Mka_Policy_SecurityPolicyPathAny) State() ygnmi.WildcardQuery[oc.E_Policy_SecurityPolicy] {
+	return ygnmi.NewWildcardQuery[oc.E_Policy_SecurityPolicy](
+		"Macsec_Mka_Policy",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "security-policy"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Policy_SecurityPolicy, bool) {
+			ret := gs.(*oc.Macsec_Mka_Policy).SecurityPolicy
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Macsec_Mka_Policy) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-macsec"
+//	Instantiating module: "openconfig-macsec"
+//	Path from parent:     "config/security-policy"
+//	Path from root:       "/macsec/mka/policies/policy/config/security-policy"
+func (n *Macsec_Mka_Policy_SecurityPolicyPath) Config() ygnmi.ConfigQuery[oc.E_Policy_SecurityPolicy] {
+	return ygnmi.NewConfigQuery[oc.E_Policy_SecurityPolicy](
+		"Macsec_Mka_Policy",
+		false,
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "security-policy"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Policy_SecurityPolicy, bool) {
+			ret := gs.(*oc.Macsec_Mka_Policy).SecurityPolicy
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Macsec_Mka_Policy) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-macsec"
+//	Instantiating module: "openconfig-macsec"
+//	Path from parent:     "config/security-policy"
+//	Path from root:       "/macsec/mka/policies/policy/config/security-policy"
+func (n *Macsec_Mka_Policy_SecurityPolicyPathAny) Config() ygnmi.WildcardQuery[oc.E_Policy_SecurityPolicy] {
+	return ygnmi.NewWildcardQuery[oc.E_Policy_SecurityPolicy](
+		"Macsec_Mka_Policy",
+		false,
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "security-policy"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Policy_SecurityPolicy, bool) {
+			ret := gs.(*oc.Macsec_Mka_Policy).SecurityPolicy
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Macsec_Mka_Policy) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
 // Macsec_Mka_Policy_UseUpdatedEthHeaderPath represents the /openconfig-macsec/macsec/mka/policies/policy/state/use-updated-eth-header YANG schema element.
 type Macsec_Mka_Policy_UseUpdatedEthHeaderPath struct {
 	*ygnmi.NodePath
@@ -9780,8 +10207,15 @@ func (n *Macsec_Mka_PolicyPathAny) SakRekeyInterval() *Macsec_Mka_Policy_SakReke
 	return ps
 }
 
-// SakRekeyOnLivePeerLoss (leaf): Rekey on peer loss
+// SakRekeyOnLivePeerLoss (leaf): When set to true, the loss of a peer triggers a SAK rekey only if the
 //
+//	MKA session still has other live peers. If the peer loss results in no
+//	live peers remaining in the MKA session, an automatic rekey is not
+//	triggered. Instead, the security-policy leaf configuration determines
+//	the subsequent behavior. Based on the security-policy leaf configuration,
+//	the system may retain the currently active SAK to allow encrypted traffic
+//	exchange, or it may immediately remove the SAK to halt or allow unencrypted
+//	transmission.
 //	Defining module:      "openconfig-macsec"
 //	Instantiating module: "openconfig-macsec"
 //	Path from parent:     "*/sak-rekey-on-live-peer-loss"
@@ -9798,8 +10232,15 @@ func (n *Macsec_Mka_PolicyPath) SakRekeyOnLivePeerLoss() *Macsec_Mka_Policy_SakR
 	return ps
 }
 
-// SakRekeyOnLivePeerLoss (leaf): Rekey on peer loss
+// SakRekeyOnLivePeerLoss (leaf): When set to true, the loss of a peer triggers a SAK rekey only if the
 //
+//	MKA session still has other live peers. If the peer loss results in no
+//	live peers remaining in the MKA session, an automatic rekey is not
+//	triggered. Instead, the security-policy leaf configuration determines
+//	the subsequent behavior. Based on the security-policy leaf configuration,
+//	the system may retain the currently active SAK to allow encrypted traffic
+//	exchange, or it may immediately remove the SAK to halt or allow unencrypted
+//	transmission.
 //	Defining module:      "openconfig-macsec"
 //	Instantiating module: "openconfig-macsec"
 //	Path from parent:     "*/sak-rekey-on-live-peer-loss"
@@ -9808,6 +10249,44 @@ func (n *Macsec_Mka_PolicyPathAny) SakRekeyOnLivePeerLoss() *Macsec_Mka_Policy_S
 	ps := &Macsec_Mka_Policy_SakRekeyOnLivePeerLossPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"*", "sak-rekey-on-live-peer-loss"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// SecurityPolicy (leaf): List of options for how to handle unencrypted frames on an interface configured
+// to use MACSec.
+//
+//	Defining module:      "openconfig-macsec"
+//	Instantiating module: "openconfig-macsec"
+//	Path from parent:     "*/security-policy"
+//	Path from root:       "/macsec/mka/policies/policy/*/security-policy"
+func (n *Macsec_Mka_PolicyPath) SecurityPolicy() *Macsec_Mka_Policy_SecurityPolicyPath {
+	ps := &Macsec_Mka_Policy_SecurityPolicyPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "security-policy"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// SecurityPolicy (leaf): List of options for how to handle unencrypted frames on an interface configured
+// to use MACSec.
+//
+//	Defining module:      "openconfig-macsec"
+//	Instantiating module: "openconfig-macsec"
+//	Path from parent:     "*/security-policy"
+//	Path from root:       "/macsec/mka/policies/policy/*/security-policy"
+func (n *Macsec_Mka_PolicyPathAny) SecurityPolicy() *Macsec_Mka_Policy_SecurityPolicyPathAny {
+	ps := &Macsec_Mka_Policy_SecurityPolicyPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "security-policy"},
 			map[string]interface{}{},
 			n,
 		),

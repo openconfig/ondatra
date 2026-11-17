@@ -8725,6 +8725,99 @@ func (n *Component_ControllerCard_PowerAdminStatePathAny) Config() ygnmi.Wildcar
 	)
 }
 
+// Component_ControllerCard_PowerOperStatePath represents the /openconfig-platform/components/component/controller-card/state/power-oper-state YANG schema element.
+type Component_ControllerCard_PowerOperStatePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_ControllerCard_PowerOperStatePathAny represents the wildcard version of the /openconfig-platform/components/component/controller-card/state/power-oper-state YANG schema element.
+type Component_ControllerCard_PowerOperStatePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Component_ControllerCard_PowerOperStatePath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform-controller-card"
+//	Path from parent:     "state/power-oper-state"
+//	Path from root:       "/components/component/controller-card/state/power-oper-state"
+func (n *Component_ControllerCard_PowerOperStatePath) State() ygnmi.SingletonQuery[oc.E_Platform_ComponentPowerOperType] {
+	return ygnmi.NewSingletonQuery[oc.E_Platform_ComponentPowerOperType](
+		"Component_ControllerCard",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "power-oper-state"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Platform_ComponentPowerOperType, bool) {
+			ret := gs.(*oc.Component_ControllerCard).PowerOperState
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_ControllerCard) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform-controller-card"
+//	Path from parent:     "state/power-oper-state"
+//	Path from root:       "/components/component/controller-card/state/power-oper-state"
+func (n *Component_ControllerCard_PowerOperStatePathAny) State() ygnmi.WildcardQuery[oc.E_Platform_ComponentPowerOperType] {
+	return ygnmi.NewWildcardQuery[oc.E_Platform_ComponentPowerOperType](
+		"Component_ControllerCard",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "power-oper-state"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Platform_ComponentPowerOperType, bool) {
+			ret := gs.(*oc.Component_ControllerCard).PowerOperState
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_ControllerCard) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
 // Component_ControllerCardPath represents the /openconfig-platform/components/component/controller-card YANG schema element.
 type Component_ControllerCardPath struct {
 	*ygnmi.NodePath
@@ -8776,6 +8869,66 @@ func (n *Component_ControllerCardPathAny) PowerAdminState() *Component_Controlle
 	ps := &Component_ControllerCard_PowerAdminStatePathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"*", "power-admin-state"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// PowerOperState (leaf): The operational power state of the component.  Whereas
+// power-admin-state reflects the configured (intended) power
+// state, power-oper-state reflects the actual, applied power
+// state as observed by the system.
+//
+// While a power change is in progress, for example when a
+// component is being powered down but has not yet fully powered
+// off, this leaf reports POWER_TRANSITIONING and does not report
+// POWER_DISABLED until the component has fully powered off.  This
+// provides a consistent operational view across telemetry and
+// other management interfaces and allows management systems to
+// avoid initiating a subsequent power operation before the
+// current transition has completed.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/power-oper-state"
+//	Path from root:       "/components/component/controller-card/state/power-oper-state"
+func (n *Component_ControllerCardPath) PowerOperState() *Component_ControllerCard_PowerOperStatePath {
+	ps := &Component_ControllerCard_PowerOperStatePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "power-oper-state"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// PowerOperState (leaf): The operational power state of the component.  Whereas
+// power-admin-state reflects the configured (intended) power
+// state, power-oper-state reflects the actual, applied power
+// state as observed by the system.
+//
+// While a power change is in progress, for example when a
+// component is being powered down but has not yet fully powered
+// off, this leaf reports POWER_TRANSITIONING and does not report
+// POWER_DISABLED until the component has fully powered off.  This
+// provides a consistent operational view across telemetry and
+// other management interfaces and allows management systems to
+// avoid initiating a subsequent power operation before the
+// current transition has completed.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/power-oper-state"
+//	Path from root:       "/components/component/controller-card/state/power-oper-state"
+func (n *Component_ControllerCardPathAny) PowerOperState() *Component_ControllerCard_PowerOperStatePathAny {
+	ps := &Component_ControllerCard_PowerOperStatePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "power-oper-state"},
 			map[string]interface{}{},
 			n,
 		),
@@ -10282,6 +10435,99 @@ func (n *Component_Fabric_PowerAdminStatePathAny) Config() ygnmi.WildcardQuery[o
 	)
 }
 
+// Component_Fabric_PowerOperStatePath represents the /openconfig-platform/components/component/fabric/state/power-oper-state YANG schema element.
+type Component_Fabric_PowerOperStatePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Fabric_PowerOperStatePathAny represents the wildcard version of the /openconfig-platform/components/component/fabric/state/power-oper-state YANG schema element.
+type Component_Fabric_PowerOperStatePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Component_Fabric_PowerOperStatePath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform-fabric"
+//	Path from parent:     "state/power-oper-state"
+//	Path from root:       "/components/component/fabric/state/power-oper-state"
+func (n *Component_Fabric_PowerOperStatePath) State() ygnmi.SingletonQuery[oc.E_Platform_ComponentPowerOperType] {
+	return ygnmi.NewSingletonQuery[oc.E_Platform_ComponentPowerOperType](
+		"Component_Fabric",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "power-oper-state"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Platform_ComponentPowerOperType, bool) {
+			ret := gs.(*oc.Component_Fabric).PowerOperState
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Fabric) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform-fabric"
+//	Path from parent:     "state/power-oper-state"
+//	Path from root:       "/components/component/fabric/state/power-oper-state"
+func (n *Component_Fabric_PowerOperStatePathAny) State() ygnmi.WildcardQuery[oc.E_Platform_ComponentPowerOperType] {
+	return ygnmi.NewWildcardQuery[oc.E_Platform_ComponentPowerOperType](
+		"Component_Fabric",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "power-oper-state"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Platform_ComponentPowerOperType, bool) {
+			ret := gs.(*oc.Component_Fabric).PowerOperState
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Fabric) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
 // Component_FabricPath represents the /openconfig-platform/components/component/fabric YANG schema element.
 type Component_FabricPath struct {
 	*ygnmi.NodePath
@@ -10333,6 +10579,66 @@ func (n *Component_FabricPathAny) PowerAdminState() *Component_Fabric_PowerAdmin
 	ps := &Component_Fabric_PowerAdminStatePathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"*", "power-admin-state"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// PowerOperState (leaf): The operational power state of the component.  Whereas
+// power-admin-state reflects the configured (intended) power
+// state, power-oper-state reflects the actual, applied power
+// state as observed by the system.
+//
+// While a power change is in progress, for example when a
+// component is being powered down but has not yet fully powered
+// off, this leaf reports POWER_TRANSITIONING and does not report
+// POWER_DISABLED until the component has fully powered off.  This
+// provides a consistent operational view across telemetry and
+// other management interfaces and allows management systems to
+// avoid initiating a subsequent power operation before the
+// current transition has completed.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/power-oper-state"
+//	Path from root:       "/components/component/fabric/state/power-oper-state"
+func (n *Component_FabricPath) PowerOperState() *Component_Fabric_PowerOperStatePath {
+	ps := &Component_Fabric_PowerOperStatePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "power-oper-state"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// PowerOperState (leaf): The operational power state of the component.  Whereas
+// power-admin-state reflects the configured (intended) power
+// state, power-oper-state reflects the actual, applied power
+// state as observed by the system.
+//
+// While a power change is in progress, for example when a
+// component is being powered down but has not yet fully powered
+// off, this leaf reports POWER_TRANSITIONING and does not report
+// POWER_DISABLED until the component has fully powered off.  This
+// provides a consistent operational view across telemetry and
+// other management interfaces and allows management systems to
+// avoid initiating a subsequent power operation before the
+// current transition has completed.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/power-oper-state"
+//	Path from root:       "/components/component/fabric/state/power-oper-state"
+func (n *Component_FabricPathAny) PowerOperState() *Component_Fabric_PowerOperStatePathAny {
+	ps := &Component_Fabric_PowerOperStatePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "power-oper-state"},
 			map[string]interface{}{},
 			n,
 		),
@@ -17054,6 +17360,105 @@ func (n *Component_IntegratedCircuit_PipelineCounters_Drop_PacketProcessingAggre
 	)
 }
 
+// Component_IntegratedCircuit_PipelineCounters_Drop_TrimPktsPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/state/trim-pkts YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_TrimPktsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Drop_TrimPktsPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/state/trim-pkts YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Drop_TrimPktsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_TrimPktsPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/trim-pkts"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/state/trim-pkts"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_TrimPktsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Drop",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "trim-pkts"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Drop).TrimPkts
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_IntegratedCircuit_PipelineCounters_Drop) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/trim-pkts"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/state/trim-pkts"
+func (n *Component_IntegratedCircuit_PipelineCounters_Drop_TrimPktsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Drop",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "trim-pkts"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Drop).TrimPkts
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_IntegratedCircuit_PipelineCounters_Drop) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
 // Component_IntegratedCircuit_PipelineCounters_Drop_UrpfAggregatePath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/drop/state/urpf-aggregate YANG schema element.
 type Component_IntegratedCircuit_PipelineCounters_Drop_UrpfAggregatePath struct {
 	*ygnmi.NodePath
@@ -17616,6 +18021,46 @@ func (n *Component_IntegratedCircuit_PipelineCounters_DropPathAny) QueueingBlock
 			map[string]interface{}{},
 			n,
 		),
+	}
+	return ps
+}
+
+// TrimPkts (leaf): The number of packets that were trimmed but dropped due to a
+// failed shared buffer admission on the trim queue at
+// integrated-circuit level.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/trim-pkts"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/state/trim-pkts"
+func (n *Component_IntegratedCircuit_PipelineCounters_DropPath) TrimPkts() *Component_IntegratedCircuit_PipelineCounters_Drop_TrimPktsPath {
+	ps := &Component_IntegratedCircuit_PipelineCounters_Drop_TrimPktsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "trim-pkts"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// TrimPkts (leaf): The number of packets that were trimmed but dropped due to a
+// failed shared buffer admission on the trim queue at
+// integrated-circuit level.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/trim-pkts"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/drop/state/trim-pkts"
+func (n *Component_IntegratedCircuit_PipelineCounters_DropPathAny) TrimPkts() *Component_IntegratedCircuit_PipelineCounters_Drop_TrimPktsPathAny {
+	ps := &Component_IntegratedCircuit_PipelineCounters_Drop_TrimPktsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "trim-pkts"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
 	}
 	return ps
 }
@@ -24200,9 +24645,10 @@ func (n *Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockErrorPat
 	return ps
 }
 
-// Active (leaf): The error is currently in an active state. When the system detects
-// that the specified threshold is exceeded, this value should be set to
-// true.
+// Active (leaf): The error is currently in an active state.  This leaf
+// transitions to true when './count' becomes greater than or equal
+// to './threshold' (count >= threshold), and transitions back to
+// false when './count' is strictly less than './threshold'.
 //
 //	Defining module:      "openconfig-platform-pipeline-counters"
 //	Instantiating module: "openconfig-platform"
@@ -24220,9 +24666,10 @@ func (n *Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockErrorPat
 	return ps
 }
 
-// Active (leaf): The error is currently in an active state. When the system detects
-// that the specified threshold is exceeded, this value should be set to
-// true.
+// Active (leaf): The error is currently in an active state.  This leaf
+// transitions to true when './count' becomes greater than or equal
+// to './threshold' (count >= threshold), and transitions back to
+// false when './count' is strictly less than './threshold'.
 //
 //	Defining module:      "openconfig-platform-pipeline-counters"
 //	Instantiating module: "openconfig-platform"
@@ -24352,8 +24799,10 @@ func (n *Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockErrorPat
 	return ps
 }
 
-// Threshold (leaf): Number of errors before a recovery action is automatically
-// taken by the system.
+// Threshold (leaf): Error count value at or above which the system automatically
+// takes the recovery action(s) listed in './action'.  The action
+// is taken when './count' is greater than or equal to this value
+// (count >= threshold).
 //
 //	Defining module:      "openconfig-platform-pipeline-counters"
 //	Instantiating module: "openconfig-platform"
@@ -24371,8 +24820,10 @@ func (n *Component_IntegratedCircuit_PipelineCounters_Errors_FabricBlockErrorPat
 	return ps
 }
 
-// Threshold (leaf): Number of errors before a recovery action is automatically
-// taken by the system.
+// Threshold (leaf): Error count value at or above which the system automatically
+// takes the recovery action(s) listed in './action'.  The action
+// is taken when './count' is greater than or equal to this value
+// (count >= threshold).
 //
 //	Defining module:      "openconfig-platform-pipeline-counters"
 //	Instantiating module: "openconfig-platform"
@@ -25264,9 +25715,10 @@ func (n *Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceErrorP
 	return ps
 }
 
-// Active (leaf): The error is currently in an active state. When the system detects
-// that the specified threshold is exceeded, this value should be set to
-// true.
+// Active (leaf): The error is currently in an active state.  This leaf
+// transitions to true when './count' becomes greater than or equal
+// to './threshold' (count >= threshold), and transitions back to
+// false when './count' is strictly less than './threshold'.
 //
 //	Defining module:      "openconfig-platform-pipeline-counters"
 //	Instantiating module: "openconfig-platform"
@@ -25284,9 +25736,10 @@ func (n *Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceErrorP
 	return ps
 }
 
-// Active (leaf): The error is currently in an active state. When the system detects
-// that the specified threshold is exceeded, this value should be set to
-// true.
+// Active (leaf): The error is currently in an active state.  This leaf
+// transitions to true when './count' becomes greater than or equal
+// to './threshold' (count >= threshold), and transitions back to
+// false when './count' is strictly less than './threshold'.
 //
 //	Defining module:      "openconfig-platform-pipeline-counters"
 //	Instantiating module: "openconfig-platform"
@@ -25416,8 +25869,10 @@ func (n *Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceErrorP
 	return ps
 }
 
-// Threshold (leaf): Number of errors before a recovery action is automatically
-// taken by the system.
+// Threshold (leaf): Error count value at or above which the system automatically
+// takes the recovery action(s) listed in './action'.  The action
+// is taken when './count' is greater than or equal to this value
+// (count >= threshold).
 //
 //	Defining module:      "openconfig-platform-pipeline-counters"
 //	Instantiating module: "openconfig-platform"
@@ -25435,8 +25890,10 @@ func (n *Component_IntegratedCircuit_PipelineCounters_Errors_HostInterfaceErrorP
 	return ps
 }
 
-// Threshold (leaf): Number of errors before a recovery action is automatically
-// taken by the system.
+// Threshold (leaf): Error count value at or above which the system automatically
+// takes the recovery action(s) listed in './action'.  The action
+// is taken when './count' is greater than or equal to this value
+// (count >= threshold).
 //
 //	Defining module:      "openconfig-platform-pipeline-counters"
 //	Instantiating module: "openconfig-platform"
@@ -26328,9 +26785,10 @@ func (n *Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError
 	return ps
 }
 
-// Active (leaf): The error is currently in an active state. When the system detects
-// that the specified threshold is exceeded, this value should be set to
-// true.
+// Active (leaf): The error is currently in an active state.  This leaf
+// transitions to true when './count' becomes greater than or equal
+// to './threshold' (count >= threshold), and transitions back to
+// false when './count' is strictly less than './threshold'.
 //
 //	Defining module:      "openconfig-platform-pipeline-counters"
 //	Instantiating module: "openconfig-platform"
@@ -26348,9 +26806,10 @@ func (n *Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError
 	return ps
 }
 
-// Active (leaf): The error is currently in an active state. When the system detects
-// that the specified threshold is exceeded, this value should be set to
-// true.
+// Active (leaf): The error is currently in an active state.  This leaf
+// transitions to true when './count' becomes greater than or equal
+// to './threshold' (count >= threshold), and transitions back to
+// false when './count' is strictly less than './threshold'.
 //
 //	Defining module:      "openconfig-platform-pipeline-counters"
 //	Instantiating module: "openconfig-platform"
@@ -26480,8 +26939,10 @@ func (n *Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError
 	return ps
 }
 
-// Threshold (leaf): Number of errors before a recovery action is automatically
-// taken by the system.
+// Threshold (leaf): Error count value at or above which the system automatically
+// takes the recovery action(s) listed in './action'.  The action
+// is taken when './count' is greater than or equal to this value
+// (count >= threshold).
 //
 //	Defining module:      "openconfig-platform-pipeline-counters"
 //	Instantiating module: "openconfig-platform"
@@ -26499,8 +26960,10 @@ func (n *Component_IntegratedCircuit_PipelineCounters_Errors_InterfaceBlockError
 	return ps
 }
 
-// Threshold (leaf): Number of errors before a recovery action is automatically
-// taken by the system.
+// Threshold (leaf): Error count value at or above which the system automatically
+// takes the recovery action(s) listed in './action'.  The action
+// is taken when './count' is greater than or equal to this value
+// (count >= threshold).
 //
 //	Defining module:      "openconfig-platform-pipeline-counters"
 //	Instantiating module: "openconfig-platform"
@@ -27392,9 +27855,10 @@ func (n *Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockErrorPat
 	return ps
 }
 
-// Active (leaf): The error is currently in an active state. When the system detects
-// that the specified threshold is exceeded, this value should be set to
-// true.
+// Active (leaf): The error is currently in an active state.  This leaf
+// transitions to true when './count' becomes greater than or equal
+// to './threshold' (count >= threshold), and transitions back to
+// false when './count' is strictly less than './threshold'.
 //
 //	Defining module:      "openconfig-platform-pipeline-counters"
 //	Instantiating module: "openconfig-platform"
@@ -27412,9 +27876,10 @@ func (n *Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockErrorPat
 	return ps
 }
 
-// Active (leaf): The error is currently in an active state. When the system detects
-// that the specified threshold is exceeded, this value should be set to
-// true.
+// Active (leaf): The error is currently in an active state.  This leaf
+// transitions to true when './count' becomes greater than or equal
+// to './threshold' (count >= threshold), and transitions back to
+// false when './count' is strictly less than './threshold'.
 //
 //	Defining module:      "openconfig-platform-pipeline-counters"
 //	Instantiating module: "openconfig-platform"
@@ -27544,8 +28009,10 @@ func (n *Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockErrorPat
 	return ps
 }
 
-// Threshold (leaf): Number of errors before a recovery action is automatically
-// taken by the system.
+// Threshold (leaf): Error count value at or above which the system automatically
+// takes the recovery action(s) listed in './action'.  The action
+// is taken when './count' is greater than or equal to this value
+// (count >= threshold).
 //
 //	Defining module:      "openconfig-platform-pipeline-counters"
 //	Instantiating module: "openconfig-platform"
@@ -27563,8 +28030,10 @@ func (n *Component_IntegratedCircuit_PipelineCounters_Errors_LookupBlockErrorPat
 	return ps
 }
 
-// Threshold (leaf): Number of errors before a recovery action is automatically
-// taken by the system.
+// Threshold (leaf): Error count value at or above which the system automatically
+// takes the recovery action(s) listed in './action'.  The action
+// is taken when './count' is greater than or equal to this value
+// (count >= threshold).
 //
 //	Defining module:      "openconfig-platform-pipeline-counters"
 //	Instantiating module: "openconfig-platform"
@@ -28456,9 +28925,10 @@ func (n *Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockErrorP
 	return ps
 }
 
-// Active (leaf): The error is currently in an active state. When the system detects
-// that the specified threshold is exceeded, this value should be set to
-// true.
+// Active (leaf): The error is currently in an active state.  This leaf
+// transitions to true when './count' becomes greater than or equal
+// to './threshold' (count >= threshold), and transitions back to
+// false when './count' is strictly less than './threshold'.
 //
 //	Defining module:      "openconfig-platform-pipeline-counters"
 //	Instantiating module: "openconfig-platform"
@@ -28476,9 +28946,10 @@ func (n *Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockErrorP
 	return ps
 }
 
-// Active (leaf): The error is currently in an active state. When the system detects
-// that the specified threshold is exceeded, this value should be set to
-// true.
+// Active (leaf): The error is currently in an active state.  This leaf
+// transitions to true when './count' becomes greater than or equal
+// to './threshold' (count >= threshold), and transitions back to
+// false when './count' is strictly less than './threshold'.
 //
 //	Defining module:      "openconfig-platform-pipeline-counters"
 //	Instantiating module: "openconfig-platform"
@@ -28608,8 +29079,10 @@ func (n *Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockErrorP
 	return ps
 }
 
-// Threshold (leaf): Number of errors before a recovery action is automatically
-// taken by the system.
+// Threshold (leaf): Error count value at or above which the system automatically
+// takes the recovery action(s) listed in './action'.  The action
+// is taken when './count' is greater than or equal to this value
+// (count >= threshold).
 //
 //	Defining module:      "openconfig-platform-pipeline-counters"
 //	Instantiating module: "openconfig-platform"
@@ -28627,8 +29100,10 @@ func (n *Component_IntegratedCircuit_PipelineCounters_Errors_QueueingBlockErrorP
 	return ps
 }
 
-// Threshold (leaf): Number of errors before a recovery action is automatically
-// taken by the system.
+// Threshold (leaf): Error count value at or above which the system automatically
+// takes the recovery action(s) listed in './action'.  The action
+// is taken when './count' is greater than or equal to this value
+// (count >= threshold).
 //
 //	Defining module:      "openconfig-platform-pipeline-counters"
 //	Instantiating module: "openconfig-platform"
@@ -28946,6 +29421,40 @@ func (n *Component_IntegratedCircuit_PipelineCounters_PacketPathAny) QueueingBlo
 	ps := &Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlockPathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"queueing-block"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// Trim (container): Packet trimming counters for entire device.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "trim"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/trim"
+func (n *Component_IntegratedCircuit_PipelineCounters_PacketPath) Trim() *Component_IntegratedCircuit_PipelineCounters_Packet_TrimPath {
+	ps := &Component_IntegratedCircuit_PipelineCounters_Packet_TrimPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"trim"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// Trim (container): Packet trimming counters for entire device.
+//
+//	Defining module:      "openconfig-platform-pipeline-counters"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "trim"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/trim"
+func (n *Component_IntegratedCircuit_PipelineCounters_PacketPathAny) Trim() *Component_IntegratedCircuit_PipelineCounters_Packet_TrimPathAny {
+	ps := &Component_IntegratedCircuit_PipelineCounters_Packet_TrimPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"trim"},
 			map[string]interface{}{},
 			n,
 		),
@@ -36221,6 +36730,349 @@ func (n *Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlockPathAn
 	)
 }
 
+// Component_IntegratedCircuit_PipelineCounters_Packet_Trim_OutTrimPktsPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/trim/state/out-trim-pkts YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_Trim_OutTrimPktsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_Trim_OutTrimPktsPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/trim/state/out-trim-pkts YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_Trim_OutTrimPktsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_Trim_OutTrimPktsPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-elements"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/out-trim-pkts"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/trim/state/out-trim-pkts"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_Trim_OutTrimPktsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_Trim",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "out-trim-pkts"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_Trim).OutTrimPkts
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_Trim) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-elements"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/out-trim-pkts"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/trim/state/out-trim-pkts"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_Trim_OutTrimPktsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_Trim",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "out-trim-pkts"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_Trim).OutTrimPkts
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_Trim) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_Trim_TrimPktsPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/trim/state/trim-pkts YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_Trim_TrimPktsPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_Trim_TrimPktsPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/trim/state/trim-pkts YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_Trim_TrimPktsPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_Trim_TrimPktsPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-elements"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/trim-pkts"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/trim/state/trim-pkts"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_Trim_TrimPktsPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_Trim",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "trim-pkts"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_Trim).TrimPkts
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_Trim) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-qos-elements"
+//	Instantiating module: "openconfig-platform-pipeline-counters"
+//	Path from parent:     "state/trim-pkts"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/trim/state/trim-pkts"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_Trim_TrimPktsPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_Trim",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "trim-pkts"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_IntegratedCircuit_PipelineCounters_Packet_Trim).TrimPkts
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_IntegratedCircuit_PipelineCounters_Packet_Trim) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_TrimPath represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/trim YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_TrimPath struct {
+	*ygnmi.NodePath
+}
+
+// Component_IntegratedCircuit_PipelineCounters_Packet_TrimPathAny represents the wildcard version of the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/trim YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_TrimPathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_TrimPath) PathOriginName() string {
+	return "openconfig"
+}
+
+// OutTrimPkts (leaf): The number of packets that were trimmed and successfully
+// transmitted.
+//
+//	Defining module:      "openconfig-qos-elements"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/out-trim-pkts"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/trim/state/out-trim-pkts"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_TrimPath) OutTrimPkts() *Component_IntegratedCircuit_PipelineCounters_Packet_Trim_OutTrimPktsPath {
+	ps := &Component_IntegratedCircuit_PipelineCounters_Packet_Trim_OutTrimPktsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "out-trim-pkts"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// OutTrimPkts (leaf): The number of packets that were trimmed and successfully
+// transmitted.
+//
+//	Defining module:      "openconfig-qos-elements"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/out-trim-pkts"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/trim/state/out-trim-pkts"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_TrimPathAny) OutTrimPkts() *Component_IntegratedCircuit_PipelineCounters_Packet_Trim_OutTrimPktsPathAny {
+	ps := &Component_IntegratedCircuit_PipelineCounters_Packet_Trim_OutTrimPktsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "out-trim-pkts"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// TrimPkts (leaf): The total number of packets that were trimmed.
+// This counter includes both packets that were
+// transmitted after trimming and those that were
+// subsequently dropped.
+//
+//	Defining module:      "openconfig-qos-elements"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/trim-pkts"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/trim/state/trim-pkts"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_TrimPath) TrimPkts() *Component_IntegratedCircuit_PipelineCounters_Packet_Trim_TrimPktsPath {
+	ps := &Component_IntegratedCircuit_PipelineCounters_Packet_Trim_TrimPktsPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "trim-pkts"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// TrimPkts (leaf): The total number of packets that were trimmed.
+// This counter includes both packets that were
+// transmitted after trimming and those that were
+// subsequently dropped.
+//
+//	Defining module:      "openconfig-qos-elements"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/trim-pkts"
+//	Path from root:       "/components/component/integrated-circuit/pipeline-counters/packet/trim/state/trim-pkts"
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_TrimPathAny) TrimPkts() *Component_IntegratedCircuit_PipelineCounters_Packet_Trim_TrimPktsPathAny {
+	ps := &Component_IntegratedCircuit_PipelineCounters_Packet_Trim_TrimPktsPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "trim-pkts"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_TrimPath) State() ygnmi.SingletonQuery[*oc.Component_IntegratedCircuit_PipelineCounters_Packet_Trim] {
+	return ygnmi.NewSingletonQuery[*oc.Component_IntegratedCircuit_PipelineCounters_Packet_Trim](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_Trim",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_IntegratedCircuit_PipelineCounters_Packet_TrimPathAny) State() ygnmi.WildcardQuery[*oc.Component_IntegratedCircuit_PipelineCounters_Packet_Trim] {
+	return ygnmi.NewWildcardQuery[*oc.Component_IntegratedCircuit_PipelineCounters_Packet_Trim](
+		"Component_IntegratedCircuit_PipelineCounters_Packet_Trim",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
 // Component_IntegratedCircuit_UtilizationPath represents the /openconfig-platform/components/component/integrated-circuit/utilization YANG schema element.
 type Component_IntegratedCircuit_UtilizationPath struct {
 	*ygnmi.NodePath
@@ -39169,6 +40021,99 @@ func (n *Component_Linecard_PowerAdminStatePathAny) Config() ygnmi.WildcardQuery
 	)
 }
 
+// Component_Linecard_PowerOperStatePath represents the /openconfig-platform/components/component/linecard/state/power-oper-state YANG schema element.
+type Component_Linecard_PowerOperStatePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Linecard_PowerOperStatePathAny represents the wildcard version of the /openconfig-platform/components/component/linecard/state/power-oper-state YANG schema element.
+type Component_Linecard_PowerOperStatePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Component_Linecard_PowerOperStatePath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform-linecard"
+//	Path from parent:     "state/power-oper-state"
+//	Path from root:       "/components/component/linecard/state/power-oper-state"
+func (n *Component_Linecard_PowerOperStatePath) State() ygnmi.SingletonQuery[oc.E_Platform_ComponentPowerOperType] {
+	return ygnmi.NewSingletonQuery[oc.E_Platform_ComponentPowerOperType](
+		"Component_Linecard",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "power-oper-state"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Platform_ComponentPowerOperType, bool) {
+			ret := gs.(*oc.Component_Linecard).PowerOperState
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Linecard) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform-linecard"
+//	Path from parent:     "state/power-oper-state"
+//	Path from root:       "/components/component/linecard/state/power-oper-state"
+func (n *Component_Linecard_PowerOperStatePathAny) State() ygnmi.WildcardQuery[oc.E_Platform_ComponentPowerOperType] {
+	return ygnmi.NewWildcardQuery[oc.E_Platform_ComponentPowerOperType](
+		"Component_Linecard",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "power-oper-state"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_Platform_ComponentPowerOperType, bool) {
+			ret := gs.(*oc.Component_Linecard).PowerOperState
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Linecard) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
 // Component_Linecard_SlotIdPath represents the /openconfig-platform/components/component/linecard/state/slot-id YANG schema element.
 type Component_Linecard_SlotIdPath struct {
 	*ygnmi.NodePath
@@ -39319,6 +40264,66 @@ func (n *Component_LinecardPathAny) PowerAdminState() *Component_Linecard_PowerA
 	ps := &Component_Linecard_PowerAdminStatePathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"*", "power-admin-state"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// PowerOperState (leaf): The operational power state of the component.  Whereas
+// power-admin-state reflects the configured (intended) power
+// state, power-oper-state reflects the actual, applied power
+// state as observed by the system.
+//
+// While a power change is in progress, for example when a
+// component is being powered down but has not yet fully powered
+// off, this leaf reports POWER_TRANSITIONING and does not report
+// POWER_DISABLED until the component has fully powered off.  This
+// provides a consistent operational view across telemetry and
+// other management interfaces and allows management systems to
+// avoid initiating a subsequent power operation before the
+// current transition has completed.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/power-oper-state"
+//	Path from root:       "/components/component/linecard/state/power-oper-state"
+func (n *Component_LinecardPath) PowerOperState() *Component_Linecard_PowerOperStatePath {
+	ps := &Component_Linecard_PowerOperStatePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "power-oper-state"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// PowerOperState (leaf): The operational power state of the component.  Whereas
+// power-admin-state reflects the configured (intended) power
+// state, power-oper-state reflects the actual, applied power
+// state as observed by the system.
+//
+// While a power change is in progress, for example when a
+// component is being powered down but has not yet fully powered
+// off, this leaf reports POWER_TRANSITIONING and does not report
+// POWER_DISABLED until the component has fully powered off.  This
+// provides a consistent operational view across telemetry and
+// other management interfaces and allows management systems to
+// avoid initiating a subsequent power operation before the
+// current transition has completed.
+//
+//	Defining module:      "openconfig-platform-common"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/power-oper-state"
+//	Path from root:       "/components/component/linecard/state/power-oper-state"
+func (n *Component_LinecardPathAny) PowerOperState() *Component_Linecard_PowerOperStatePathAny {
+	ps := &Component_Linecard_PowerOperStatePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "power-oper-state"},
 			map[string]interface{}{},
 			n,
 		),
@@ -86678,6 +87683,42 @@ func (n *Component_Transceiver_ChannelPathAny) AssociatedOpticalChannel() *Compo
 	return ps
 }
 
+// Counters (container): Top-level container for counters per optical physical
+// channel.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/counters"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/counters"
+func (n *Component_Transceiver_ChannelPath) Counters() *Component_Transceiver_Channel_CountersPath {
+	ps := &Component_Transceiver_Channel_CountersPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "counters"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// Counters (container): Top-level container for counters per optical physical
+// channel.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/counters"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/counters"
+func (n *Component_Transceiver_ChannelPathAny) Counters() *Component_Transceiver_Channel_CountersPathAny {
+	ps := &Component_Transceiver_Channel_CountersPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "counters"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
 // Description (leaf): Text description for the client physical channel
 //
 //	Defining module:      "openconfig-platform-transceiver"
@@ -86710,6 +87751,42 @@ func (n *Component_Transceiver_ChannelPathAny) Description() *Component_Transcei
 			n,
 		),
 		parent: n,
+	}
+	return ps
+}
+
+// HostSnr (container): The Signal-to-Noise Ratio (SNR) measured on the host-side
+// (electrical) interface.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/host-snr"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/host-snr"
+func (n *Component_Transceiver_ChannelPath) HostSnr() *Component_Transceiver_Channel_HostSnrPath {
+	ps := &Component_Transceiver_Channel_HostSnrPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "host-snr"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// HostSnr (container): The Signal-to-Noise Ratio (SNR) measured on the host-side
+// (electrical) interface.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/host-snr"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/host-snr"
+func (n *Component_Transceiver_ChannelPathAny) HostSnr() *Component_Transceiver_Channel_HostSnrPathAny {
+	ps := &Component_Transceiver_Channel_HostSnrPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "host-snr"},
+			map[string]interface{}{},
+			n,
+		),
 	}
 	return ps
 }
@@ -86945,6 +88022,42 @@ func (n *Component_Transceiver_ChannelPathAny) LaserTemperature() *Component_Tra
 	ps := &Component_Transceiver_Channel_LaserTemperaturePathAny{
 		NodePath: ygnmi.NewNodePath(
 			[]string{"state", "laser-temperature"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// MediaSnr (container): The Signal-to-Noise Ratio (SNR) measured on the media-side
+// (optical) interface.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/media-snr"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/media-snr"
+func (n *Component_Transceiver_ChannelPath) MediaSnr() *Component_Transceiver_Channel_MediaSnrPath {
+	ps := &Component_Transceiver_Channel_MediaSnrPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "media-snr"},
+			map[string]interface{}{},
+			n,
+		),
+	}
+	return ps
+}
+
+// MediaSnr (container): The Signal-to-Noise Ratio (SNR) measured on the media-side
+// (optical) interface.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "state/media-snr"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/media-snr"
+func (n *Component_Transceiver_ChannelPathAny) MediaSnr() *Component_Transceiver_Channel_MediaSnrPathAny {
+	ps := &Component_Transceiver_Channel_MediaSnrPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"state", "media-snr"},
 			map[string]interface{}{},
 			n,
 		),
@@ -87563,6 +88676,1776 @@ func (n *Component_Transceiver_ChannelPathMapAny) Config() ygnmi.WildcardQuery[m
 			PreRelPath:  []string{"openconfig-platform-transceiver:physical-channels"},
 			PostRelPath: []string{"openconfig-platform-transceiver:channel"},
 		},
+	)
+}
+
+// Component_Transceiver_Channel_Counters_RxLolCountPath represents the /openconfig-platform/components/component/transceiver/physical-channels/channel/state/counters/rx-lol-count YANG schema element.
+type Component_Transceiver_Channel_Counters_RxLolCountPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Transceiver_Channel_Counters_RxLolCountPathAny represents the wildcard version of the /openconfig-platform/components/component/transceiver/physical-channels/channel/state/counters/rx-lol-count YANG schema element.
+type Component_Transceiver_Channel_Counters_RxLolCountPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Component_Transceiver_Channel_Counters_RxLolCountPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform-transceiver"
+//	Path from parent:     "rx-lol-count"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/counters/rx-lol-count"
+func (n *Component_Transceiver_Channel_Counters_RxLolCountPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Component_Transceiver_Channel_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"rx-lol-count"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_Transceiver_Channel_Counters).RxLolCount
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Transceiver_Channel_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform-transceiver"
+//	Path from parent:     "rx-lol-count"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/counters/rx-lol-count"
+func (n *Component_Transceiver_Channel_Counters_RxLolCountPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Component_Transceiver_Channel_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"rx-lol-count"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_Transceiver_Channel_Counters).RxLolCount
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Transceiver_Channel_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Component_Transceiver_Channel_Counters_RxLosCountPath represents the /openconfig-platform/components/component/transceiver/physical-channels/channel/state/counters/rx-los-count YANG schema element.
+type Component_Transceiver_Channel_Counters_RxLosCountPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Transceiver_Channel_Counters_RxLosCountPathAny represents the wildcard version of the /openconfig-platform/components/component/transceiver/physical-channels/channel/state/counters/rx-los-count YANG schema element.
+type Component_Transceiver_Channel_Counters_RxLosCountPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Component_Transceiver_Channel_Counters_RxLosCountPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform-transceiver"
+//	Path from parent:     "rx-los-count"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/counters/rx-los-count"
+func (n *Component_Transceiver_Channel_Counters_RxLosCountPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Component_Transceiver_Channel_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"rx-los-count"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_Transceiver_Channel_Counters).RxLosCount
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Transceiver_Channel_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform-transceiver"
+//	Path from parent:     "rx-los-count"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/counters/rx-los-count"
+func (n *Component_Transceiver_Channel_Counters_RxLosCountPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Component_Transceiver_Channel_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"rx-los-count"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_Transceiver_Channel_Counters).RxLosCount
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Transceiver_Channel_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Component_Transceiver_Channel_Counters_TxFaultCountPath represents the /openconfig-platform/components/component/transceiver/physical-channels/channel/state/counters/tx-fault-count YANG schema element.
+type Component_Transceiver_Channel_Counters_TxFaultCountPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Transceiver_Channel_Counters_TxFaultCountPathAny represents the wildcard version of the /openconfig-platform/components/component/transceiver/physical-channels/channel/state/counters/tx-fault-count YANG schema element.
+type Component_Transceiver_Channel_Counters_TxFaultCountPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Component_Transceiver_Channel_Counters_TxFaultCountPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform-transceiver"
+//	Path from parent:     "tx-fault-count"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/counters/tx-fault-count"
+func (n *Component_Transceiver_Channel_Counters_TxFaultCountPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Component_Transceiver_Channel_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"tx-fault-count"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_Transceiver_Channel_Counters).TxFaultCount
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Transceiver_Channel_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform-transceiver"
+//	Path from parent:     "tx-fault-count"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/counters/tx-fault-count"
+func (n *Component_Transceiver_Channel_Counters_TxFaultCountPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Component_Transceiver_Channel_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"tx-fault-count"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_Transceiver_Channel_Counters).TxFaultCount
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Transceiver_Channel_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Component_Transceiver_Channel_Counters_TxLolCountPath represents the /openconfig-platform/components/component/transceiver/physical-channels/channel/state/counters/tx-lol-count YANG schema element.
+type Component_Transceiver_Channel_Counters_TxLolCountPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Transceiver_Channel_Counters_TxLolCountPathAny represents the wildcard version of the /openconfig-platform/components/component/transceiver/physical-channels/channel/state/counters/tx-lol-count YANG schema element.
+type Component_Transceiver_Channel_Counters_TxLolCountPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Component_Transceiver_Channel_Counters_TxLolCountPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform-transceiver"
+//	Path from parent:     "tx-lol-count"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/counters/tx-lol-count"
+func (n *Component_Transceiver_Channel_Counters_TxLolCountPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Component_Transceiver_Channel_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"tx-lol-count"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_Transceiver_Channel_Counters).TxLolCount
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Transceiver_Channel_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform-transceiver"
+//	Path from parent:     "tx-lol-count"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/counters/tx-lol-count"
+func (n *Component_Transceiver_Channel_Counters_TxLolCountPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Component_Transceiver_Channel_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"tx-lol-count"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_Transceiver_Channel_Counters).TxLolCount
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Transceiver_Channel_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Component_Transceiver_Channel_Counters_TxLosCountPath represents the /openconfig-platform/components/component/transceiver/physical-channels/channel/state/counters/tx-los-count YANG schema element.
+type Component_Transceiver_Channel_Counters_TxLosCountPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Transceiver_Channel_Counters_TxLosCountPathAny represents the wildcard version of the /openconfig-platform/components/component/transceiver/physical-channels/channel/state/counters/tx-los-count YANG schema element.
+type Component_Transceiver_Channel_Counters_TxLosCountPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Component_Transceiver_Channel_Counters_TxLosCountPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform-transceiver"
+//	Path from parent:     "tx-los-count"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/counters/tx-los-count"
+func (n *Component_Transceiver_Channel_Counters_TxLosCountPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Component_Transceiver_Channel_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"tx-los-count"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_Transceiver_Channel_Counters).TxLosCount
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Transceiver_Channel_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform-transceiver"
+//	Path from parent:     "tx-los-count"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/counters/tx-los-count"
+func (n *Component_Transceiver_Channel_Counters_TxLosCountPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Component_Transceiver_Channel_Counters",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"tx-los-count"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_Transceiver_Channel_Counters).TxLosCount
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Transceiver_Channel_Counters) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Component_Transceiver_Channel_CountersPath represents the /openconfig-platform/components/component/transceiver/physical-channels/channel/state/counters YANG schema element.
+type Component_Transceiver_Channel_CountersPath struct {
+	*ygnmi.NodePath
+}
+
+// Component_Transceiver_Channel_CountersPathAny represents the wildcard version of the /openconfig-platform/components/component/transceiver/physical-channels/channel/state/counters YANG schema element.
+type Component_Transceiver_Channel_CountersPathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Component_Transceiver_Channel_CountersPath) PathOriginName() string {
+	return "openconfig"
+}
+
+// RxLolCount (leaf): Total number of receiver Clock and Data Recovery (CDR)
+// Loss of Lock (LOL) events.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "rx-lol-count"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/counters/rx-lol-count"
+func (n *Component_Transceiver_Channel_CountersPath) RxLolCount() *Component_Transceiver_Channel_Counters_RxLolCountPath {
+	ps := &Component_Transceiver_Channel_Counters_RxLolCountPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"rx-lol-count"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// RxLolCount (leaf): Total number of receiver Clock and Data Recovery (CDR)
+// Loss of Lock (LOL) events.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "rx-lol-count"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/counters/rx-lol-count"
+func (n *Component_Transceiver_Channel_CountersPathAny) RxLolCount() *Component_Transceiver_Channel_Counters_RxLolCountPathAny {
+	ps := &Component_Transceiver_Channel_Counters_RxLolCountPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"rx-lol-count"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// RxLosCount (leaf): Total number of receiver Loss of Signal (LOS) events.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "rx-los-count"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/counters/rx-los-count"
+func (n *Component_Transceiver_Channel_CountersPath) RxLosCount() *Component_Transceiver_Channel_Counters_RxLosCountPath {
+	ps := &Component_Transceiver_Channel_Counters_RxLosCountPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"rx-los-count"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// RxLosCount (leaf): Total number of receiver Loss of Signal (LOS) events.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "rx-los-count"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/counters/rx-los-count"
+func (n *Component_Transceiver_Channel_CountersPathAny) RxLosCount() *Component_Transceiver_Channel_Counters_RxLosCountPathAny {
+	ps := &Component_Transceiver_Channel_Counters_RxLosCountPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"rx-los-count"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// TxFaultCount (leaf): Total number of transmitter fault conditions detected
+// on this lane.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "tx-fault-count"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/counters/tx-fault-count"
+func (n *Component_Transceiver_Channel_CountersPath) TxFaultCount() *Component_Transceiver_Channel_Counters_TxFaultCountPath {
+	ps := &Component_Transceiver_Channel_Counters_TxFaultCountPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"tx-fault-count"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// TxFaultCount (leaf): Total number of transmitter fault conditions detected
+// on this lane.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "tx-fault-count"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/counters/tx-fault-count"
+func (n *Component_Transceiver_Channel_CountersPathAny) TxFaultCount() *Component_Transceiver_Channel_Counters_TxFaultCountPathAny {
+	ps := &Component_Transceiver_Channel_Counters_TxFaultCountPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"tx-fault-count"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// TxLolCount (leaf): Total number of transmitter Clock and Data Recovery (CDR)
+// Loss of Lock (LOL) events.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "tx-lol-count"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/counters/tx-lol-count"
+func (n *Component_Transceiver_Channel_CountersPath) TxLolCount() *Component_Transceiver_Channel_Counters_TxLolCountPath {
+	ps := &Component_Transceiver_Channel_Counters_TxLolCountPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"tx-lol-count"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// TxLolCount (leaf): Total number of transmitter Clock and Data Recovery (CDR)
+// Loss of Lock (LOL) events.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "tx-lol-count"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/counters/tx-lol-count"
+func (n *Component_Transceiver_Channel_CountersPathAny) TxLolCount() *Component_Transceiver_Channel_Counters_TxLolCountPathAny {
+	ps := &Component_Transceiver_Channel_Counters_TxLolCountPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"tx-lol-count"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// TxLosCount (leaf): Total number of transmitter Loss of Signal (LOS) events.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "tx-los-count"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/counters/tx-los-count"
+func (n *Component_Transceiver_Channel_CountersPath) TxLosCount() *Component_Transceiver_Channel_Counters_TxLosCountPath {
+	ps := &Component_Transceiver_Channel_Counters_TxLosCountPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"tx-los-count"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// TxLosCount (leaf): Total number of transmitter Loss of Signal (LOS) events.
+//
+//	Defining module:      "openconfig-platform-transceiver"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "tx-los-count"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/counters/tx-los-count"
+func (n *Component_Transceiver_Channel_CountersPathAny) TxLosCount() *Component_Transceiver_Channel_Counters_TxLosCountPathAny {
+	ps := &Component_Transceiver_Channel_Counters_TxLosCountPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"tx-los-count"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_Transceiver_Channel_CountersPath) State() ygnmi.SingletonQuery[*oc.Component_Transceiver_Channel_Counters] {
+	return ygnmi.NewSingletonQuery[*oc.Component_Transceiver_Channel_Counters](
+		"Component_Transceiver_Channel_Counters",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_Transceiver_Channel_CountersPathAny) State() ygnmi.WildcardQuery[*oc.Component_Transceiver_Channel_Counters] {
+	return ygnmi.NewWildcardQuery[*oc.Component_Transceiver_Channel_Counters](
+		"Component_Transceiver_Channel_Counters",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Component_Transceiver_Channel_HostSnr_AvgPath represents the /openconfig-platform/components/component/transceiver/physical-channels/channel/state/host-snr/avg YANG schema element.
+type Component_Transceiver_Channel_HostSnr_AvgPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Transceiver_Channel_HostSnr_AvgPathAny represents the wildcard version of the /openconfig-platform/components/component/transceiver/physical-channels/channel/state/host-snr/avg YANG schema element.
+type Component_Transceiver_Channel_HostSnr_AvgPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Component_Transceiver_Channel_HostSnr_AvgPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform-transceiver"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/host-snr/avg"
+func (n *Component_Transceiver_Channel_HostSnr_AvgPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewSingletonQuery[float64](
+		"Component_Transceiver_Channel_HostSnr",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"avg"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_Transceiver_Channel_HostSnr).Avg
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Transceiver_Channel_HostSnr) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform-transceiver"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/host-snr/avg"
+func (n *Component_Transceiver_Channel_HostSnr_AvgPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewWildcardQuery[float64](
+		"Component_Transceiver_Channel_HostSnr",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"avg"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_Transceiver_Channel_HostSnr).Avg
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Transceiver_Channel_HostSnr) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Component_Transceiver_Channel_HostSnr_InstantPath represents the /openconfig-platform/components/component/transceiver/physical-channels/channel/state/host-snr/instant YANG schema element.
+type Component_Transceiver_Channel_HostSnr_InstantPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Transceiver_Channel_HostSnr_InstantPathAny represents the wildcard version of the /openconfig-platform/components/component/transceiver/physical-channels/channel/state/host-snr/instant YANG schema element.
+type Component_Transceiver_Channel_HostSnr_InstantPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Component_Transceiver_Channel_HostSnr_InstantPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform-transceiver"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/host-snr/instant"
+func (n *Component_Transceiver_Channel_HostSnr_InstantPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewSingletonQuery[float64](
+		"Component_Transceiver_Channel_HostSnr",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"instant"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_Transceiver_Channel_HostSnr).Instant
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Transceiver_Channel_HostSnr) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform-transceiver"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/host-snr/instant"
+func (n *Component_Transceiver_Channel_HostSnr_InstantPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewWildcardQuery[float64](
+		"Component_Transceiver_Channel_HostSnr",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"instant"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_Transceiver_Channel_HostSnr).Instant
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Transceiver_Channel_HostSnr) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Component_Transceiver_Channel_HostSnr_IntervalPath represents the /openconfig-platform/components/component/transceiver/physical-channels/channel/state/host-snr/interval YANG schema element.
+type Component_Transceiver_Channel_HostSnr_IntervalPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Transceiver_Channel_HostSnr_IntervalPathAny represents the wildcard version of the /openconfig-platform/components/component/transceiver/physical-channels/channel/state/host-snr/interval YANG schema element.
+type Component_Transceiver_Channel_HostSnr_IntervalPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Component_Transceiver_Channel_HostSnr_IntervalPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform-transceiver"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/host-snr/interval"
+func (n *Component_Transceiver_Channel_HostSnr_IntervalPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Component_Transceiver_Channel_HostSnr",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"interval"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_Transceiver_Channel_HostSnr).Interval
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Transceiver_Channel_HostSnr) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform-transceiver"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/host-snr/interval"
+func (n *Component_Transceiver_Channel_HostSnr_IntervalPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Component_Transceiver_Channel_HostSnr",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"interval"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_Transceiver_Channel_HostSnr).Interval
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Transceiver_Channel_HostSnr) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Component_Transceiver_Channel_HostSnr_MaxPath represents the /openconfig-platform/components/component/transceiver/physical-channels/channel/state/host-snr/max YANG schema element.
+type Component_Transceiver_Channel_HostSnr_MaxPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Transceiver_Channel_HostSnr_MaxPathAny represents the wildcard version of the /openconfig-platform/components/component/transceiver/physical-channels/channel/state/host-snr/max YANG schema element.
+type Component_Transceiver_Channel_HostSnr_MaxPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Component_Transceiver_Channel_HostSnr_MaxPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform-transceiver"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/host-snr/max"
+func (n *Component_Transceiver_Channel_HostSnr_MaxPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewSingletonQuery[float64](
+		"Component_Transceiver_Channel_HostSnr",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"max"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_Transceiver_Channel_HostSnr).Max
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Transceiver_Channel_HostSnr) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform-transceiver"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/host-snr/max"
+func (n *Component_Transceiver_Channel_HostSnr_MaxPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewWildcardQuery[float64](
+		"Component_Transceiver_Channel_HostSnr",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"max"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_Transceiver_Channel_HostSnr).Max
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Transceiver_Channel_HostSnr) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Component_Transceiver_Channel_HostSnr_MaxTimePath represents the /openconfig-platform/components/component/transceiver/physical-channels/channel/state/host-snr/max-time YANG schema element.
+type Component_Transceiver_Channel_HostSnr_MaxTimePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Transceiver_Channel_HostSnr_MaxTimePathAny represents the wildcard version of the /openconfig-platform/components/component/transceiver/physical-channels/channel/state/host-snr/max-time YANG schema element.
+type Component_Transceiver_Channel_HostSnr_MaxTimePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Component_Transceiver_Channel_HostSnr_MaxTimePath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform-transceiver"
+//	Path from parent:     "max-time"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/host-snr/max-time"
+func (n *Component_Transceiver_Channel_HostSnr_MaxTimePath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Component_Transceiver_Channel_HostSnr",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"max-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_Transceiver_Channel_HostSnr).MaxTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Transceiver_Channel_HostSnr) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform-transceiver"
+//	Path from parent:     "max-time"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/host-snr/max-time"
+func (n *Component_Transceiver_Channel_HostSnr_MaxTimePathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Component_Transceiver_Channel_HostSnr",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"max-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_Transceiver_Channel_HostSnr).MaxTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Transceiver_Channel_HostSnr) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Component_Transceiver_Channel_HostSnr_MinPath represents the /openconfig-platform/components/component/transceiver/physical-channels/channel/state/host-snr/min YANG schema element.
+type Component_Transceiver_Channel_HostSnr_MinPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Transceiver_Channel_HostSnr_MinPathAny represents the wildcard version of the /openconfig-platform/components/component/transceiver/physical-channels/channel/state/host-snr/min YANG schema element.
+type Component_Transceiver_Channel_HostSnr_MinPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Component_Transceiver_Channel_HostSnr_MinPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform-transceiver"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/host-snr/min"
+func (n *Component_Transceiver_Channel_HostSnr_MinPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewSingletonQuery[float64](
+		"Component_Transceiver_Channel_HostSnr",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"min"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_Transceiver_Channel_HostSnr).Min
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Transceiver_Channel_HostSnr) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform-transceiver"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/host-snr/min"
+func (n *Component_Transceiver_Channel_HostSnr_MinPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewWildcardQuery[float64](
+		"Component_Transceiver_Channel_HostSnr",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"min"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_Transceiver_Channel_HostSnr).Min
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Transceiver_Channel_HostSnr) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Component_Transceiver_Channel_HostSnr_MinTimePath represents the /openconfig-platform/components/component/transceiver/physical-channels/channel/state/host-snr/min-time YANG schema element.
+type Component_Transceiver_Channel_HostSnr_MinTimePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Transceiver_Channel_HostSnr_MinTimePathAny represents the wildcard version of the /openconfig-platform/components/component/transceiver/physical-channels/channel/state/host-snr/min-time YANG schema element.
+type Component_Transceiver_Channel_HostSnr_MinTimePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Component_Transceiver_Channel_HostSnr_MinTimePath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform-transceiver"
+//	Path from parent:     "min-time"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/host-snr/min-time"
+func (n *Component_Transceiver_Channel_HostSnr_MinTimePath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Component_Transceiver_Channel_HostSnr",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"min-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_Transceiver_Channel_HostSnr).MinTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Transceiver_Channel_HostSnr) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform-transceiver"
+//	Path from parent:     "min-time"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/host-snr/min-time"
+func (n *Component_Transceiver_Channel_HostSnr_MinTimePathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Component_Transceiver_Channel_HostSnr",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"min-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_Transceiver_Channel_HostSnr).MinTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Transceiver_Channel_HostSnr) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Component_Transceiver_Channel_HostSnrPath represents the /openconfig-platform/components/component/transceiver/physical-channels/channel/state/host-snr YANG schema element.
+type Component_Transceiver_Channel_HostSnrPath struct {
+	*ygnmi.NodePath
+}
+
+// Component_Transceiver_Channel_HostSnrPathAny represents the wildcard version of the /openconfig-platform/components/component/transceiver/physical-channels/channel/state/host-snr YANG schema element.
+type Component_Transceiver_Channel_HostSnrPathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Component_Transceiver_Channel_HostSnrPath) PathOriginName() string {
+	return "openconfig"
+}
+
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/host-snr/avg"
+func (n *Component_Transceiver_Channel_HostSnrPath) Avg() *Component_Transceiver_Channel_HostSnr_AvgPath {
+	ps := &Component_Transceiver_Channel_HostSnr_AvgPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/host-snr/avg"
+func (n *Component_Transceiver_Channel_HostSnrPathAny) Avg() *Component_Transceiver_Channel_HostSnr_AvgPathAny {
+	ps := &Component_Transceiver_Channel_HostSnr_AvgPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Instant (leaf): The instantaneous value of the statistic.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/host-snr/instant"
+func (n *Component_Transceiver_Channel_HostSnrPath) Instant() *Component_Transceiver_Channel_HostSnr_InstantPath {
+	ps := &Component_Transceiver_Channel_HostSnr_InstantPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"instant"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Instant (leaf): The instantaneous value of the statistic.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/host-snr/instant"
+func (n *Component_Transceiver_Channel_HostSnrPathAny) Instant() *Component_Transceiver_Channel_HostSnr_InstantPathAny {
+	ps := &Component_Transceiver_Channel_HostSnr_InstantPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"instant"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/host-snr/interval"
+func (n *Component_Transceiver_Channel_HostSnrPath) Interval() *Component_Transceiver_Channel_HostSnr_IntervalPath {
+	ps := &Component_Transceiver_Channel_HostSnr_IntervalPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"interval"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/host-snr/interval"
+func (n *Component_Transceiver_Channel_HostSnrPathAny) Interval() *Component_Transceiver_Channel_HostSnr_IntervalPathAny {
+	ps := &Component_Transceiver_Channel_HostSnr_IntervalPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"interval"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Max (leaf): The maximum value of the statistic over the time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/host-snr/max"
+func (n *Component_Transceiver_Channel_HostSnrPath) Max() *Component_Transceiver_Channel_HostSnr_MaxPath {
+	ps := &Component_Transceiver_Channel_HostSnr_MaxPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Max (leaf): The maximum value of the statistic over the time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/host-snr/max"
+func (n *Component_Transceiver_Channel_HostSnrPathAny) Max() *Component_Transceiver_Channel_HostSnr_MaxPathAny {
+	ps := &Component_Transceiver_Channel_HostSnr_MaxPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "max-time"
+//		Path from root:       "/components/component/transceiver/physical-channels/channel/state/host-snr/max-time"
+func (n *Component_Transceiver_Channel_HostSnrPath) MaxTime() *Component_Transceiver_Channel_HostSnr_MaxTimePath {
+	ps := &Component_Transceiver_Channel_HostSnr_MaxTimePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "max-time"
+//		Path from root:       "/components/component/transceiver/physical-channels/channel/state/host-snr/max-time"
+func (n *Component_Transceiver_Channel_HostSnrPathAny) MaxTime() *Component_Transceiver_Channel_HostSnr_MaxTimePathAny {
+	ps := &Component_Transceiver_Channel_HostSnr_MaxTimePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Min (leaf): The minimum value of the statistic over the time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/host-snr/min"
+func (n *Component_Transceiver_Channel_HostSnrPath) Min() *Component_Transceiver_Channel_HostSnr_MinPath {
+	ps := &Component_Transceiver_Channel_HostSnr_MinPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Min (leaf): The minimum value of the statistic over the time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/host-snr/min"
+func (n *Component_Transceiver_Channel_HostSnrPathAny) Min() *Component_Transceiver_Channel_HostSnr_MinPathAny {
+	ps := &Component_Transceiver_Channel_HostSnr_MinPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "min-time"
+//		Path from root:       "/components/component/transceiver/physical-channels/channel/state/host-snr/min-time"
+func (n *Component_Transceiver_Channel_HostSnrPath) MinTime() *Component_Transceiver_Channel_HostSnr_MinTimePath {
+	ps := &Component_Transceiver_Channel_HostSnr_MinTimePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "min-time"
+//		Path from root:       "/components/component/transceiver/physical-channels/channel/state/host-snr/min-time"
+func (n *Component_Transceiver_Channel_HostSnrPathAny) MinTime() *Component_Transceiver_Channel_HostSnr_MinTimePathAny {
+	ps := &Component_Transceiver_Channel_HostSnr_MinTimePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_Transceiver_Channel_HostSnrPath) State() ygnmi.SingletonQuery[*oc.Component_Transceiver_Channel_HostSnr] {
+	return ygnmi.NewSingletonQuery[*oc.Component_Transceiver_Channel_HostSnr](
+		"Component_Transceiver_Channel_HostSnr",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_Transceiver_Channel_HostSnrPathAny) State() ygnmi.WildcardQuery[*oc.Component_Transceiver_Channel_HostSnr] {
+	return ygnmi.NewWildcardQuery[*oc.Component_Transceiver_Channel_HostSnr](
+		"Component_Transceiver_Channel_HostSnr",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
 	)
 }
 
@@ -90627,6 +93510,1030 @@ func (n *Component_Transceiver_Channel_LaserTemperaturePath) State() ygnmi.Singl
 func (n *Component_Transceiver_Channel_LaserTemperaturePathAny) State() ygnmi.WildcardQuery[*oc.Component_Transceiver_Channel_LaserTemperature] {
 	return ygnmi.NewWildcardQuery[*oc.Component_Transceiver_Channel_LaserTemperature](
 		"Component_Transceiver_Channel_LaserTemperature",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Component_Transceiver_Channel_MediaSnr_AvgPath represents the /openconfig-platform/components/component/transceiver/physical-channels/channel/state/media-snr/avg YANG schema element.
+type Component_Transceiver_Channel_MediaSnr_AvgPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Transceiver_Channel_MediaSnr_AvgPathAny represents the wildcard version of the /openconfig-platform/components/component/transceiver/physical-channels/channel/state/media-snr/avg YANG schema element.
+type Component_Transceiver_Channel_MediaSnr_AvgPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Component_Transceiver_Channel_MediaSnr_AvgPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform-transceiver"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/media-snr/avg"
+func (n *Component_Transceiver_Channel_MediaSnr_AvgPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewSingletonQuery[float64](
+		"Component_Transceiver_Channel_MediaSnr",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"avg"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_Transceiver_Channel_MediaSnr).Avg
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Transceiver_Channel_MediaSnr) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform-transceiver"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/media-snr/avg"
+func (n *Component_Transceiver_Channel_MediaSnr_AvgPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewWildcardQuery[float64](
+		"Component_Transceiver_Channel_MediaSnr",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"avg"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_Transceiver_Channel_MediaSnr).Avg
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Transceiver_Channel_MediaSnr) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Component_Transceiver_Channel_MediaSnr_InstantPath represents the /openconfig-platform/components/component/transceiver/physical-channels/channel/state/media-snr/instant YANG schema element.
+type Component_Transceiver_Channel_MediaSnr_InstantPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Transceiver_Channel_MediaSnr_InstantPathAny represents the wildcard version of the /openconfig-platform/components/component/transceiver/physical-channels/channel/state/media-snr/instant YANG schema element.
+type Component_Transceiver_Channel_MediaSnr_InstantPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Component_Transceiver_Channel_MediaSnr_InstantPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform-transceiver"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/media-snr/instant"
+func (n *Component_Transceiver_Channel_MediaSnr_InstantPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewSingletonQuery[float64](
+		"Component_Transceiver_Channel_MediaSnr",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"instant"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_Transceiver_Channel_MediaSnr).Instant
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Transceiver_Channel_MediaSnr) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform-transceiver"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/media-snr/instant"
+func (n *Component_Transceiver_Channel_MediaSnr_InstantPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewWildcardQuery[float64](
+		"Component_Transceiver_Channel_MediaSnr",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"instant"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_Transceiver_Channel_MediaSnr).Instant
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Transceiver_Channel_MediaSnr) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Component_Transceiver_Channel_MediaSnr_IntervalPath represents the /openconfig-platform/components/component/transceiver/physical-channels/channel/state/media-snr/interval YANG schema element.
+type Component_Transceiver_Channel_MediaSnr_IntervalPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Transceiver_Channel_MediaSnr_IntervalPathAny represents the wildcard version of the /openconfig-platform/components/component/transceiver/physical-channels/channel/state/media-snr/interval YANG schema element.
+type Component_Transceiver_Channel_MediaSnr_IntervalPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Component_Transceiver_Channel_MediaSnr_IntervalPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform-transceiver"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/media-snr/interval"
+func (n *Component_Transceiver_Channel_MediaSnr_IntervalPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Component_Transceiver_Channel_MediaSnr",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"interval"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_Transceiver_Channel_MediaSnr).Interval
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Transceiver_Channel_MediaSnr) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform-transceiver"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/media-snr/interval"
+func (n *Component_Transceiver_Channel_MediaSnr_IntervalPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Component_Transceiver_Channel_MediaSnr",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"interval"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_Transceiver_Channel_MediaSnr).Interval
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Transceiver_Channel_MediaSnr) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Component_Transceiver_Channel_MediaSnr_MaxPath represents the /openconfig-platform/components/component/transceiver/physical-channels/channel/state/media-snr/max YANG schema element.
+type Component_Transceiver_Channel_MediaSnr_MaxPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Transceiver_Channel_MediaSnr_MaxPathAny represents the wildcard version of the /openconfig-platform/components/component/transceiver/physical-channels/channel/state/media-snr/max YANG schema element.
+type Component_Transceiver_Channel_MediaSnr_MaxPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Component_Transceiver_Channel_MediaSnr_MaxPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform-transceiver"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/media-snr/max"
+func (n *Component_Transceiver_Channel_MediaSnr_MaxPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewSingletonQuery[float64](
+		"Component_Transceiver_Channel_MediaSnr",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"max"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_Transceiver_Channel_MediaSnr).Max
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Transceiver_Channel_MediaSnr) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform-transceiver"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/media-snr/max"
+func (n *Component_Transceiver_Channel_MediaSnr_MaxPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewWildcardQuery[float64](
+		"Component_Transceiver_Channel_MediaSnr",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"max"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_Transceiver_Channel_MediaSnr).Max
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Transceiver_Channel_MediaSnr) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Component_Transceiver_Channel_MediaSnr_MaxTimePath represents the /openconfig-platform/components/component/transceiver/physical-channels/channel/state/media-snr/max-time YANG schema element.
+type Component_Transceiver_Channel_MediaSnr_MaxTimePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Transceiver_Channel_MediaSnr_MaxTimePathAny represents the wildcard version of the /openconfig-platform/components/component/transceiver/physical-channels/channel/state/media-snr/max-time YANG schema element.
+type Component_Transceiver_Channel_MediaSnr_MaxTimePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Component_Transceiver_Channel_MediaSnr_MaxTimePath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform-transceiver"
+//	Path from parent:     "max-time"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/media-snr/max-time"
+func (n *Component_Transceiver_Channel_MediaSnr_MaxTimePath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Component_Transceiver_Channel_MediaSnr",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"max-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_Transceiver_Channel_MediaSnr).MaxTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Transceiver_Channel_MediaSnr) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform-transceiver"
+//	Path from parent:     "max-time"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/media-snr/max-time"
+func (n *Component_Transceiver_Channel_MediaSnr_MaxTimePathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Component_Transceiver_Channel_MediaSnr",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"max-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_Transceiver_Channel_MediaSnr).MaxTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Transceiver_Channel_MediaSnr) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Component_Transceiver_Channel_MediaSnr_MinPath represents the /openconfig-platform/components/component/transceiver/physical-channels/channel/state/media-snr/min YANG schema element.
+type Component_Transceiver_Channel_MediaSnr_MinPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Transceiver_Channel_MediaSnr_MinPathAny represents the wildcard version of the /openconfig-platform/components/component/transceiver/physical-channels/channel/state/media-snr/min YANG schema element.
+type Component_Transceiver_Channel_MediaSnr_MinPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Component_Transceiver_Channel_MediaSnr_MinPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform-transceiver"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/media-snr/min"
+func (n *Component_Transceiver_Channel_MediaSnr_MinPath) State() ygnmi.SingletonQuery[float64] {
+	return ygnmi.NewSingletonQuery[float64](
+		"Component_Transceiver_Channel_MediaSnr",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"min"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_Transceiver_Channel_MediaSnr).Min
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Transceiver_Channel_MediaSnr) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform-transceiver"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/media-snr/min"
+func (n *Component_Transceiver_Channel_MediaSnr_MinPathAny) State() ygnmi.WildcardQuery[float64] {
+	return ygnmi.NewWildcardQuery[float64](
+		"Component_Transceiver_Channel_MediaSnr",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"min"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (float64, bool) {
+			ret := gs.(*oc.Component_Transceiver_Channel_MediaSnr).Min
+			if ret == nil {
+				var zero float64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Transceiver_Channel_MediaSnr) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Component_Transceiver_Channel_MediaSnr_MinTimePath represents the /openconfig-platform/components/component/transceiver/physical-channels/channel/state/media-snr/min-time YANG schema element.
+type Component_Transceiver_Channel_MediaSnr_MinTimePath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// Component_Transceiver_Channel_MediaSnr_MinTimePathAny represents the wildcard version of the /openconfig-platform/components/component/transceiver/physical-channels/channel/state/media-snr/min-time YANG schema element.
+type Component_Transceiver_Channel_MediaSnr_MinTimePathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Component_Transceiver_Channel_MediaSnr_MinTimePath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform-transceiver"
+//	Path from parent:     "min-time"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/media-snr/min-time"
+func (n *Component_Transceiver_Channel_MediaSnr_MinTimePath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"Component_Transceiver_Channel_MediaSnr",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"min-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_Transceiver_Channel_MediaSnr).MinTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Transceiver_Channel_MediaSnr) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform-transceiver"
+//	Path from parent:     "min-time"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/media-snr/min-time"
+func (n *Component_Transceiver_Channel_MediaSnr_MinTimePathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"Component_Transceiver_Channel_MediaSnr",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"min-time"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.Component_Transceiver_Channel_MediaSnr).MinTime
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct { return new(oc.Component_Transceiver_Channel_MediaSnr) },
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Component_Transceiver_Channel_MediaSnrPath represents the /openconfig-platform/components/component/transceiver/physical-channels/channel/state/media-snr YANG schema element.
+type Component_Transceiver_Channel_MediaSnrPath struct {
+	*ygnmi.NodePath
+}
+
+// Component_Transceiver_Channel_MediaSnrPathAny represents the wildcard version of the /openconfig-platform/components/component/transceiver/physical-channels/channel/state/media-snr YANG schema element.
+type Component_Transceiver_Channel_MediaSnrPathAny struct {
+	*ygnmi.NodePath
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *Component_Transceiver_Channel_MediaSnrPath) PathOriginName() string {
+	return "openconfig"
+}
+
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/media-snr/avg"
+func (n *Component_Transceiver_Channel_MediaSnrPath) Avg() *Component_Transceiver_Channel_MediaSnr_AvgPath {
+	ps := &Component_Transceiver_Channel_MediaSnr_AvgPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Avg (leaf): The arithmetic mean value of the statistic over the
+// time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "avg"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/media-snr/avg"
+func (n *Component_Transceiver_Channel_MediaSnrPathAny) Avg() *Component_Transceiver_Channel_MediaSnr_AvgPathAny {
+	ps := &Component_Transceiver_Channel_MediaSnr_AvgPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"avg"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Instant (leaf): The instantaneous value of the statistic.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/media-snr/instant"
+func (n *Component_Transceiver_Channel_MediaSnrPath) Instant() *Component_Transceiver_Channel_MediaSnr_InstantPath {
+	ps := &Component_Transceiver_Channel_MediaSnr_InstantPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"instant"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Instant (leaf): The instantaneous value of the statistic.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "instant"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/media-snr/instant"
+func (n *Component_Transceiver_Channel_MediaSnrPathAny) Instant() *Component_Transceiver_Channel_MediaSnr_InstantPathAny {
+	ps := &Component_Transceiver_Channel_MediaSnr_InstantPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"instant"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/media-snr/interval"
+func (n *Component_Transceiver_Channel_MediaSnrPath) Interval() *Component_Transceiver_Channel_MediaSnr_IntervalPath {
+	ps := &Component_Transceiver_Channel_MediaSnr_IntervalPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"interval"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Interval (leaf): If supported by the system, this reports the time interval
+// over which the min/max/average statistics are computed by
+// the system.
+//
+//	Defining module:      "openconfig-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "interval"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/media-snr/interval"
+func (n *Component_Transceiver_Channel_MediaSnrPathAny) Interval() *Component_Transceiver_Channel_MediaSnr_IntervalPathAny {
+	ps := &Component_Transceiver_Channel_MediaSnr_IntervalPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"interval"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Max (leaf): The maximum value of the statistic over the time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/media-snr/max"
+func (n *Component_Transceiver_Channel_MediaSnrPath) Max() *Component_Transceiver_Channel_MediaSnr_MaxPath {
+	ps := &Component_Transceiver_Channel_MediaSnr_MaxPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Max (leaf): The maximum value of the statistic over the time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "max"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/media-snr/max"
+func (n *Component_Transceiver_Channel_MediaSnrPathAny) Max() *Component_Transceiver_Channel_MediaSnr_MaxPathAny {
+	ps := &Component_Transceiver_Channel_MediaSnr_MaxPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "max-time"
+//		Path from root:       "/components/component/transceiver/physical-channels/channel/state/media-snr/max-time"
+func (n *Component_Transceiver_Channel_MediaSnrPath) MaxTime() *Component_Transceiver_Channel_MediaSnr_MaxTimePath {
+	ps := &Component_Transceiver_Channel_MediaSnr_MaxTimePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// MaxTime (leaf): The absolute time at which the maximum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "max-time"
+//		Path from root:       "/components/component/transceiver/physical-channels/channel/state/media-snr/max-time"
+func (n *Component_Transceiver_Channel_MediaSnrPathAny) MaxTime() *Component_Transceiver_Channel_MediaSnr_MaxTimePathAny {
+	ps := &Component_Transceiver_Channel_MediaSnr_MaxTimePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"max-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Min (leaf): The minimum value of the statistic over the time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/media-snr/min"
+func (n *Component_Transceiver_Channel_MediaSnrPath) Min() *Component_Transceiver_Channel_MediaSnr_MinPath {
+	ps := &Component_Transceiver_Channel_MediaSnr_MinPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// Min (leaf): The minimum value of the statistic over the time interval.
+//
+//	Defining module:      "openconfig-transport-types"
+//	Instantiating module: "openconfig-platform"
+//	Path from parent:     "min"
+//	Path from root:       "/components/component/transceiver/physical-channels/channel/state/media-snr/min"
+func (n *Component_Transceiver_Channel_MediaSnrPathAny) Min() *Component_Transceiver_Channel_MediaSnr_MinPathAny {
+	ps := &Component_Transceiver_Channel_MediaSnr_MinPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "min-time"
+//		Path from root:       "/components/component/transceiver/physical-channels/channel/state/media-snr/min-time"
+func (n *Component_Transceiver_Channel_MediaSnrPath) MinTime() *Component_Transceiver_Channel_MediaSnr_MinTimePath {
+	ps := &Component_Transceiver_Channel_MediaSnr_MinTimePath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// MinTime (leaf): The absolute time at which the minimum value occurred.
+// The value is the timestamp in nanoseconds relative to
+//
+//	 the Unix Epoch (Jan 1, 1970 00:00:00 UTC).
+//		Defining module:      "openconfig-types"
+//		Instantiating module: "openconfig-platform"
+//		Path from parent:     "min-time"
+//		Path from root:       "/components/component/transceiver/physical-channels/channel/state/media-snr/min-time"
+func (n *Component_Transceiver_Channel_MediaSnrPathAny) MinTime() *Component_Transceiver_Channel_MediaSnr_MinTimePathAny {
+	ps := &Component_Transceiver_Channel_MediaSnr_MinTimePathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"min-time"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_Transceiver_Channel_MediaSnrPath) State() ygnmi.SingletonQuery[*oc.Component_Transceiver_Channel_MediaSnr] {
+	return ygnmi.NewSingletonQuery[*oc.Component_Transceiver_Channel_MediaSnr](
+		"Component_Transceiver_Channel_MediaSnr",
+		true,
+		false,
+		false,
+		false,
+		true,
+		false,
+		n,
+		nil,
+		nil,
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+func (n *Component_Transceiver_Channel_MediaSnrPathAny) State() ygnmi.WildcardQuery[*oc.Component_Transceiver_Channel_MediaSnr] {
+	return ygnmi.NewWildcardQuery[*oc.Component_Transceiver_Channel_MediaSnr](
+		"Component_Transceiver_Channel_MediaSnr",
 		true,
 		false,
 		false,

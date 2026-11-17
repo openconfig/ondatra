@@ -1795,6 +1795,7 @@ type Acl_AclSet_AclEntry_Ipv6 struct {
 	DestinationFlowLabel        *uint32                                 `path:"state/destination-flow-label" module:"openconfig-acl/openconfig-acl" shadow-path:"config/destination-flow-label" shadow-module:"openconfig-acl/openconfig-acl"`
 	Dscp                        *uint8                                  `path:"state/dscp" module:"openconfig-acl/openconfig-acl" shadow-path:"config/dscp" shadow-module:"openconfig-acl/openconfig-acl"`
 	DscpSet                     []uint8                                 `path:"state/dscp-set" module:"openconfig-acl/openconfig-acl" shadow-path:"config/dscp-set" shadow-module:"openconfig-acl/openconfig-acl"`
+	FlowLabel                   *uint32                                 `path:"state/flow-label" module:"openconfig-acl/openconfig-acl" shadow-path:"config/flow-label" shadow-module:"openconfig-acl/openconfig-acl"`
 	HopLimit                    *uint8                                  `path:"state/hop-limit" module:"openconfig-acl/openconfig-acl" shadow-path:"config/hop-limit" shadow-module:"openconfig-acl/openconfig-acl"`
 	Icmpv6                      *Acl_AclSet_AclEntry_Ipv6_Icmpv6        `path:"icmpv6" module:"openconfig-acl"`
 	Length                      *uint16                                 `path:"state/length" module:"openconfig-acl/openconfig-acl" shadow-path:"config/length" shadow-module:"openconfig-acl/openconfig-acl"`
@@ -1907,6 +1908,22 @@ func (t *Acl_AclSet_AclEntry_Ipv6) GetDscpSet() []uint8 {
 		return nil
 	}
 	return t.DscpSet
+}
+
+// GetFlowLabel retrieves the value of the leaf FlowLabel from the Acl_AclSet_AclEntry_Ipv6
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if FlowLabel is set, it can
+// safely use t.GetFlowLabel() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.FlowLabel == nil' before retrieving the leaf's value.
+func (t *Acl_AclSet_AclEntry_Ipv6) GetFlowLabel() uint32 {
+	if t == nil || t.FlowLabel == nil {
+		return 0
+	}
+	return *t.FlowLabel
 }
 
 // GetHopLimit retrieves the value of the leaf HopLimit from the Acl_AclSet_AclEntry_Ipv6
@@ -2033,6 +2050,12 @@ func (t *Acl_AclSet_AclEntry_Ipv6) SetDscp(v uint8) {
 // struct.
 func (t *Acl_AclSet_AclEntry_Ipv6) SetDscpSet(v []uint8) {
 	t.DscpSet = v
+}
+
+// SetFlowLabel sets the value of the leaf FlowLabel in the Acl_AclSet_AclEntry_Ipv6
+// struct.
+func (t *Acl_AclSet_AclEntry_Ipv6) SetFlowLabel(v uint32) {
+	t.FlowLabel = &v
 }
 
 // SetHopLimit sets the value of the leaf HopLimit in the Acl_AclSet_AclEntry_Ipv6
@@ -6518,7 +6541,8 @@ func (*Component_Chassis_Utilization_Resource) ΛBelongingModule() string {
 
 // Component_ControllerCard represents the /openconfig-platform/components/component/controller-card YANG schema element.
 type Component_ControllerCard struct {
-	PowerAdminState E_Platform_ComponentPowerType `path:"state/power-admin-state" module:"openconfig-platform/openconfig-platform-controller-card" shadow-path:"config/power-admin-state" shadow-module:"openconfig-platform/openconfig-platform-controller-card"`
+	PowerAdminState E_Platform_ComponentPowerType     `path:"state/power-admin-state" module:"openconfig-platform/openconfig-platform-controller-card" shadow-path:"config/power-admin-state" shadow-module:"openconfig-platform/openconfig-platform-controller-card"`
+	PowerOperState  E_Platform_ComponentPowerOperType `path:"state/power-oper-state" module:"openconfig-platform/openconfig-platform-controller-card"`
 }
 
 // IsYANGGoStruct ensures that Component_ControllerCard implements the yang.GoStruct
@@ -6542,10 +6566,32 @@ func (t *Component_ControllerCard) GetPowerAdminState() E_Platform_ComponentPowe
 	return t.PowerAdminState
 }
 
+// GetPowerOperState retrieves the value of the leaf PowerOperState from the Component_ControllerCard
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if PowerOperState is set, it can
+// safely use t.GetPowerOperState() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.PowerOperState == nil' before retrieving the leaf's value.
+func (t *Component_ControllerCard) GetPowerOperState() E_Platform_ComponentPowerOperType {
+	if t == nil || t.PowerOperState == 0 {
+		return 0
+	}
+	return t.PowerOperState
+}
+
 // SetPowerAdminState sets the value of the leaf PowerAdminState in the Component_ControllerCard
 // struct.
 func (t *Component_ControllerCard) SetPowerAdminState(v E_Platform_ComponentPowerType) {
 	t.PowerAdminState = v
+}
+
+// SetPowerOperState sets the value of the leaf PowerOperState in the Component_ControllerCard
+// struct.
+func (t *Component_ControllerCard) SetPowerOperState(v E_Platform_ComponentPowerOperType) {
+	t.PowerOperState = v
 }
 
 // PopulateDefaults recursively populates unset leaf fields in the Component_ControllerCard
@@ -6853,7 +6899,8 @@ func (*Component_Cpu_Utilization) ΛBelongingModule() string {
 
 // Component_Fabric represents the /openconfig-platform/components/component/fabric YANG schema element.
 type Component_Fabric struct {
-	PowerAdminState E_Platform_ComponentPowerType `path:"state/power-admin-state" module:"openconfig-platform/openconfig-platform-fabric" shadow-path:"config/power-admin-state" shadow-module:"openconfig-platform/openconfig-platform-fabric"`
+	PowerAdminState E_Platform_ComponentPowerType     `path:"state/power-admin-state" module:"openconfig-platform/openconfig-platform-fabric" shadow-path:"config/power-admin-state" shadow-module:"openconfig-platform/openconfig-platform-fabric"`
+	PowerOperState  E_Platform_ComponentPowerOperType `path:"state/power-oper-state" module:"openconfig-platform/openconfig-platform-fabric"`
 }
 
 // IsYANGGoStruct ensures that Component_Fabric implements the yang.GoStruct
@@ -6877,10 +6924,32 @@ func (t *Component_Fabric) GetPowerAdminState() E_Platform_ComponentPowerType {
 	return t.PowerAdminState
 }
 
+// GetPowerOperState retrieves the value of the leaf PowerOperState from the Component_Fabric
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if PowerOperState is set, it can
+// safely use t.GetPowerOperState() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.PowerOperState == nil' before retrieving the leaf's value.
+func (t *Component_Fabric) GetPowerOperState() E_Platform_ComponentPowerOperType {
+	if t == nil || t.PowerOperState == 0 {
+		return 0
+	}
+	return t.PowerOperState
+}
+
 // SetPowerAdminState sets the value of the leaf PowerAdminState in the Component_Fabric
 // struct.
 func (t *Component_Fabric) SetPowerAdminState(v E_Platform_ComponentPowerType) {
 	t.PowerAdminState = v
+}
+
+// SetPowerOperState sets the value of the leaf PowerOperState in the Component_Fabric
+// struct.
+func (t *Component_Fabric) SetPowerOperState(v E_Platform_ComponentPowerOperType) {
+	t.PowerOperState = v
 }
 
 // PopulateDefaults recursively populates unset leaf fields in the Component_Fabric
@@ -8724,6 +8793,7 @@ type Component_IntegratedCircuit_PipelineCounters_Drop struct {
 	NoRoute                   *uint64                                                               `path:"state/no-route" module:"openconfig-platform-pipeline-counters/openconfig-platform-pipeline-counters"`
 	PacketProcessingAggregate *uint64                                                               `path:"state/packet-processing-aggregate" module:"openconfig-platform-pipeline-counters/openconfig-platform-pipeline-counters"`
 	QueueingBlock             *Component_IntegratedCircuit_PipelineCounters_Drop_QueueingBlock      `path:"queueing-block" module:"openconfig-platform-pipeline-counters"`
+	TrimPkts                  *uint64                                                               `path:"state/trim-pkts" module:"openconfig-platform-pipeline-counters/openconfig-platform-pipeline-counters"`
 	UrpfAggregate             *uint64                                                               `path:"state/urpf-aggregate" module:"openconfig-platform-pipeline-counters/openconfig-platform-pipeline-counters"`
 	Vendor                    *Component_IntegratedCircuit_PipelineCounters_Drop_Vendor             `path:"vendor" module:"openconfig-platform-pipeline-counters"`
 }
@@ -8917,6 +8987,22 @@ func (t *Component_IntegratedCircuit_PipelineCounters_Drop) GetPacketProcessingA
 	return *t.PacketProcessingAggregate
 }
 
+// GetTrimPkts retrieves the value of the leaf TrimPkts from the Component_IntegratedCircuit_PipelineCounters_Drop
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if TrimPkts is set, it can
+// safely use t.GetTrimPkts() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.TrimPkts == nil' before retrieving the leaf's value.
+func (t *Component_IntegratedCircuit_PipelineCounters_Drop) GetTrimPkts() uint64 {
+	if t == nil || t.TrimPkts == nil {
+		return 0
+	}
+	return *t.TrimPkts
+}
+
 // GetUrpfAggregate retrieves the value of the leaf UrpfAggregate from the Component_IntegratedCircuit_PipelineCounters_Drop
 // struct. If the field is unset but has a default value in the YANG schema,
 // then the default value will be returned.
@@ -8955,6 +9041,12 @@ func (t *Component_IntegratedCircuit_PipelineCounters_Drop) SetNoRoute(v uint64)
 // struct.
 func (t *Component_IntegratedCircuit_PipelineCounters_Drop) SetPacketProcessingAggregate(v uint64) {
 	t.PacketProcessingAggregate = &v
+}
+
+// SetTrimPkts sets the value of the leaf TrimPkts in the Component_IntegratedCircuit_PipelineCounters_Drop
+// struct.
+func (t *Component_IntegratedCircuit_PipelineCounters_Drop) SetTrimPkts(v uint64) {
+	t.TrimPkts = &v
 }
 
 // SetUrpfAggregate sets the value of the leaf UrpfAggregate in the Component_IntegratedCircuit_PipelineCounters_Drop
@@ -11718,6 +11810,7 @@ type Component_IntegratedCircuit_PipelineCounters_Packet struct {
 	InterfaceBlock     *Component_IntegratedCircuit_PipelineCounters_Packet_InterfaceBlock     `path:"interface-block" module:"openconfig-platform-pipeline-counters"`
 	LookupBlock        *Component_IntegratedCircuit_PipelineCounters_Packet_LookupBlock        `path:"lookup-block" module:"openconfig-platform-pipeline-counters"`
 	QueueingBlock      *Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock      `path:"queueing-block" module:"openconfig-platform-pipeline-counters"`
+	Trim               *Component_IntegratedCircuit_PipelineCounters_Packet_Trim               `path:"trim" module:"openconfig-platform-pipeline-counters"`
 }
 
 // IsYANGGoStruct ensures that Component_IntegratedCircuit_PipelineCounters_Packet implements the yang.GoStruct
@@ -11775,6 +11868,16 @@ func (t *Component_IntegratedCircuit_PipelineCounters_Packet) GetOrCreateQueuein
 	return t.QueueingBlock
 }
 
+// GetOrCreateTrim retrieves the value of the Trim field
+// or returns the existing field if it already exists.
+func (t *Component_IntegratedCircuit_PipelineCounters_Packet) GetOrCreateTrim() *Component_IntegratedCircuit_PipelineCounters_Packet_Trim {
+	if t.Trim != nil {
+		return t.Trim
+	}
+	t.Trim = &Component_IntegratedCircuit_PipelineCounters_Packet_Trim{}
+	return t.Trim
+}
+
 // GetFabricBlock returns the value of the FabricBlock struct pointer
 // from Component_IntegratedCircuit_PipelineCounters_Packet. If the receiver or the field FabricBlock is nil, nil
 // is returned such that the Get* methods can be safely chained.
@@ -11825,6 +11928,16 @@ func (t *Component_IntegratedCircuit_PipelineCounters_Packet) GetQueueingBlock()
 	return nil
 }
 
+// GetTrim returns the value of the Trim struct pointer
+// from Component_IntegratedCircuit_PipelineCounters_Packet. If the receiver or the field Trim is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *Component_IntegratedCircuit_PipelineCounters_Packet) GetTrim() *Component_IntegratedCircuit_PipelineCounters_Packet_Trim {
+	if t != nil && t.Trim != nil {
+		return t.Trim
+	}
+	return nil
+}
+
 // PopulateDefaults recursively populates unset leaf fields in the Component_IntegratedCircuit_PipelineCounters_Packet
 // with default values as specified in the YANG schema, instantiating any nil
 // container fields.
@@ -11838,6 +11951,7 @@ func (t *Component_IntegratedCircuit_PipelineCounters_Packet) PopulateDefaults()
 	t.InterfaceBlock.PopulateDefaults()
 	t.LookupBlock.PopulateDefaults()
 	t.QueueingBlock.PopulateDefaults()
+	t.Trim.PopulateDefaults()
 }
 
 // Validate validates s against the YANG schema corresponding to its type.
@@ -13212,6 +13326,96 @@ func (*Component_IntegratedCircuit_PipelineCounters_Packet_QueueingBlock) ΛBelo
 	return "openconfig-platform-pipeline-counters"
 }
 
+// Component_IntegratedCircuit_PipelineCounters_Packet_Trim represents the /openconfig-platform/components/component/integrated-circuit/pipeline-counters/packet/trim YANG schema element.
+type Component_IntegratedCircuit_PipelineCounters_Packet_Trim struct {
+	OutTrimPkts *uint64 `path:"state/out-trim-pkts" module:"openconfig-platform-pipeline-counters/openconfig-platform-pipeline-counters"`
+	TrimPkts    *uint64 `path:"state/trim-pkts" module:"openconfig-platform-pipeline-counters/openconfig-platform-pipeline-counters"`
+}
+
+// IsYANGGoStruct ensures that Component_IntegratedCircuit_PipelineCounters_Packet_Trim implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*Component_IntegratedCircuit_PipelineCounters_Packet_Trim) IsYANGGoStruct() {}
+
+// GetOutTrimPkts retrieves the value of the leaf OutTrimPkts from the Component_IntegratedCircuit_PipelineCounters_Packet_Trim
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if OutTrimPkts is set, it can
+// safely use t.GetOutTrimPkts() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.OutTrimPkts == nil' before retrieving the leaf's value.
+func (t *Component_IntegratedCircuit_PipelineCounters_Packet_Trim) GetOutTrimPkts() uint64 {
+	if t == nil || t.OutTrimPkts == nil {
+		return 0
+	}
+	return *t.OutTrimPkts
+}
+
+// GetTrimPkts retrieves the value of the leaf TrimPkts from the Component_IntegratedCircuit_PipelineCounters_Packet_Trim
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if TrimPkts is set, it can
+// safely use t.GetTrimPkts() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.TrimPkts == nil' before retrieving the leaf's value.
+func (t *Component_IntegratedCircuit_PipelineCounters_Packet_Trim) GetTrimPkts() uint64 {
+	if t == nil || t.TrimPkts == nil {
+		return 0
+	}
+	return *t.TrimPkts
+}
+
+// SetOutTrimPkts sets the value of the leaf OutTrimPkts in the Component_IntegratedCircuit_PipelineCounters_Packet_Trim
+// struct.
+func (t *Component_IntegratedCircuit_PipelineCounters_Packet_Trim) SetOutTrimPkts(v uint64) {
+	t.OutTrimPkts = &v
+}
+
+// SetTrimPkts sets the value of the leaf TrimPkts in the Component_IntegratedCircuit_PipelineCounters_Packet_Trim
+// struct.
+func (t *Component_IntegratedCircuit_PipelineCounters_Packet_Trim) SetTrimPkts(v uint64) {
+	t.TrimPkts = &v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the Component_IntegratedCircuit_PipelineCounters_Packet_Trim
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *Component_IntegratedCircuit_PipelineCounters_Packet_Trim) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *Component_IntegratedCircuit_PipelineCounters_Packet_Trim) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["Component_IntegratedCircuit_PipelineCounters_Packet_Trim"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *Component_IntegratedCircuit_PipelineCounters_Packet_Trim) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *Component_IntegratedCircuit_PipelineCounters_Packet_Trim) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of Component_IntegratedCircuit_PipelineCounters_Packet_Trim.
+func (*Component_IntegratedCircuit_PipelineCounters_Packet_Trim) ΛBelongingModule() string {
+	return "openconfig-platform-pipeline-counters"
+}
+
 // Component_IntegratedCircuit_Utilization represents the /openconfig-platform/components/component/integrated-circuit/utilization YANG schema element.
 type Component_IntegratedCircuit_Utilization struct {
 	Resource map[string]*Component_IntegratedCircuit_Utilization_Resource `path:"resources/resource" module:"openconfig-platform/openconfig-platform"`
@@ -13852,9 +14056,10 @@ func (*Component_LastSwitchoverReason) ΛBelongingModule() string {
 
 // Component_Linecard represents the /openconfig-platform/components/component/linecard YANG schema element.
 type Component_Linecard struct {
-	PowerAdminState E_Platform_ComponentPowerType   `path:"state/power-admin-state" module:"openconfig-platform-linecard/openconfig-platform-linecard" shadow-path:"config/power-admin-state" shadow-module:"openconfig-platform-linecard/openconfig-platform-linecard"`
-	SlotId          *string                         `path:"state/slot-id" module:"openconfig-platform-linecard/openconfig-platform-linecard"`
-	Utilization     *Component_Linecard_Utilization `path:"utilization" module:"openconfig-platform-linecard"`
+	PowerAdminState E_Platform_ComponentPowerType     `path:"state/power-admin-state" module:"openconfig-platform-linecard/openconfig-platform-linecard" shadow-path:"config/power-admin-state" shadow-module:"openconfig-platform-linecard/openconfig-platform-linecard"`
+	PowerOperState  E_Platform_ComponentPowerOperType `path:"state/power-oper-state" module:"openconfig-platform-linecard/openconfig-platform-linecard"`
+	SlotId          *string                           `path:"state/slot-id" module:"openconfig-platform-linecard/openconfig-platform-linecard"`
+	Utilization     *Component_Linecard_Utilization   `path:"utilization" module:"openconfig-platform-linecard"`
 }
 
 // IsYANGGoStruct ensures that Component_Linecard implements the yang.GoStruct
@@ -13898,6 +14103,22 @@ func (t *Component_Linecard) GetPowerAdminState() E_Platform_ComponentPowerType 
 	return t.PowerAdminState
 }
 
+// GetPowerOperState retrieves the value of the leaf PowerOperState from the Component_Linecard
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if PowerOperState is set, it can
+// safely use t.GetPowerOperState() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.PowerOperState == nil' before retrieving the leaf's value.
+func (t *Component_Linecard) GetPowerOperState() E_Platform_ComponentPowerOperType {
+	if t == nil || t.PowerOperState == 0 {
+		return 0
+	}
+	return t.PowerOperState
+}
+
 // GetSlotId retrieves the value of the leaf SlotId from the Component_Linecard
 // struct. If the field is unset but has a default value in the YANG schema,
 // then the default value will be returned.
@@ -13918,6 +14139,12 @@ func (t *Component_Linecard) GetSlotId() string {
 // struct.
 func (t *Component_Linecard) SetPowerAdminState(v E_Platform_ComponentPowerType) {
 	t.PowerAdminState = v
+}
+
+// SetPowerOperState sets the value of the leaf PowerOperState in the Component_Linecard
+// struct.
+func (t *Component_Linecard) SetPowerOperState(v E_Platform_ComponentPowerOperType) {
+	t.PowerOperState = v
 }
 
 // SetSlotId sets the value of the leaf SlotId in the Component_Linecard
@@ -23598,12 +23825,15 @@ func (*Component_Transceiver) ΛBelongingModule() string {
 // Component_Transceiver_Channel represents the /openconfig-platform/components/component/transceiver/physical-channels/channel YANG schema element.
 type Component_Transceiver_Channel struct {
 	AssociatedOpticalChannel *string                                                 `path:"state/associated-optical-channel" module:"openconfig-platform-transceiver/openconfig-platform-transceiver" shadow-path:"config/associated-optical-channel" shadow-module:"openconfig-platform-transceiver/openconfig-platform-transceiver"`
+	Counters                 *Component_Transceiver_Channel_Counters                 `path:"state/counters" module:"openconfig-platform-transceiver/openconfig-platform-transceiver"`
 	Description              *string                                                 `path:"state/description" module:"openconfig-platform-transceiver/openconfig-platform-transceiver" shadow-path:"config/description" shadow-module:"openconfig-platform-transceiver/openconfig-platform-transceiver"`
+	HostSnr                  *Component_Transceiver_Channel_HostSnr                  `path:"state/host-snr" module:"openconfig-platform-transceiver/openconfig-platform-transceiver"`
 	Index                    *uint16                                                 `path:"state/index|index" module:"openconfig-platform-transceiver/openconfig-platform-transceiver|openconfig-platform-transceiver" shadow-path:"config/index|index" shadow-module:"openconfig-platform-transceiver/openconfig-platform-transceiver|openconfig-platform-transceiver"`
 	InputPower               *Component_Transceiver_Channel_InputPower               `path:"state/input-power" module:"openconfig-platform-transceiver/openconfig-platform-transceiver"`
 	LaserAge                 *uint8                                                  `path:"state/laser-age" module:"openconfig-platform-transceiver/openconfig-platform-transceiver"`
 	LaserBiasCurrent         *Component_Transceiver_Channel_LaserBiasCurrent         `path:"state/laser-bias-current" module:"openconfig-platform-transceiver/openconfig-platform-transceiver"`
 	LaserTemperature         *Component_Transceiver_Channel_LaserTemperature         `path:"state/laser-temperature" module:"openconfig-platform-transceiver/openconfig-platform-transceiver"`
+	MediaSnr                 *Component_Transceiver_Channel_MediaSnr                 `path:"state/media-snr" module:"openconfig-platform-transceiver/openconfig-platform-transceiver"`
 	OutputFrequency          *uint64                                                 `path:"state/output-frequency" module:"openconfig-platform-transceiver/openconfig-platform-transceiver"`
 	OutputPower              *Component_Transceiver_Channel_OutputPower              `path:"state/output-power" module:"openconfig-platform-transceiver/openconfig-platform-transceiver"`
 	RxCdrLol                 *bool                                                   `path:"state/rx-cdr-lol" module:"openconfig-platform-transceiver/openconfig-platform-transceiver"`
@@ -23619,6 +23849,26 @@ type Component_Transceiver_Channel struct {
 // interface. This allows functions that need to handle this struct to
 // identify it as being generated by ygen.
 func (*Component_Transceiver_Channel) IsYANGGoStruct() {}
+
+// GetOrCreateCounters retrieves the value of the Counters field
+// or returns the existing field if it already exists.
+func (t *Component_Transceiver_Channel) GetOrCreateCounters() *Component_Transceiver_Channel_Counters {
+	if t.Counters != nil {
+		return t.Counters
+	}
+	t.Counters = &Component_Transceiver_Channel_Counters{}
+	return t.Counters
+}
+
+// GetOrCreateHostSnr retrieves the value of the HostSnr field
+// or returns the existing field if it already exists.
+func (t *Component_Transceiver_Channel) GetOrCreateHostSnr() *Component_Transceiver_Channel_HostSnr {
+	if t.HostSnr != nil {
+		return t.HostSnr
+	}
+	t.HostSnr = &Component_Transceiver_Channel_HostSnr{}
+	return t.HostSnr
+}
 
 // GetOrCreateInputPower retrieves the value of the InputPower field
 // or returns the existing field if it already exists.
@@ -23648,6 +23898,16 @@ func (t *Component_Transceiver_Channel) GetOrCreateLaserTemperature() *Component
 	}
 	t.LaserTemperature = &Component_Transceiver_Channel_LaserTemperature{}
 	return t.LaserTemperature
+}
+
+// GetOrCreateMediaSnr retrieves the value of the MediaSnr field
+// or returns the existing field if it already exists.
+func (t *Component_Transceiver_Channel) GetOrCreateMediaSnr() *Component_Transceiver_Channel_MediaSnr {
+	if t.MediaSnr != nil {
+		return t.MediaSnr
+	}
+	t.MediaSnr = &Component_Transceiver_Channel_MediaSnr{}
+	return t.MediaSnr
 }
 
 // GetOrCreateOutputPower retrieves the value of the OutputPower field
@@ -23680,6 +23940,26 @@ func (t *Component_Transceiver_Channel) GetOrCreateTecCurrent() *Component_Trans
 	return t.TecCurrent
 }
 
+// GetCounters returns the value of the Counters struct pointer
+// from Component_Transceiver_Channel. If the receiver or the field Counters is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *Component_Transceiver_Channel) GetCounters() *Component_Transceiver_Channel_Counters {
+	if t != nil && t.Counters != nil {
+		return t.Counters
+	}
+	return nil
+}
+
+// GetHostSnr returns the value of the HostSnr struct pointer
+// from Component_Transceiver_Channel. If the receiver or the field HostSnr is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *Component_Transceiver_Channel) GetHostSnr() *Component_Transceiver_Channel_HostSnr {
+	if t != nil && t.HostSnr != nil {
+		return t.HostSnr
+	}
+	return nil
+}
+
 // GetInputPower returns the value of the InputPower struct pointer
 // from Component_Transceiver_Channel. If the receiver or the field InputPower is nil, nil
 // is returned such that the Get* methods can be safely chained.
@@ -23706,6 +23986,16 @@ func (t *Component_Transceiver_Channel) GetLaserBiasCurrent() *Component_Transce
 func (t *Component_Transceiver_Channel) GetLaserTemperature() *Component_Transceiver_Channel_LaserTemperature {
 	if t != nil && t.LaserTemperature != nil {
 		return t.LaserTemperature
+	}
+	return nil
+}
+
+// GetMediaSnr returns the value of the MediaSnr struct pointer
+// from Component_Transceiver_Channel. If the receiver or the field MediaSnr is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *Component_Transceiver_Channel) GetMediaSnr() *Component_Transceiver_Channel_MediaSnr {
+	if t != nil && t.MediaSnr != nil {
+		return t.MediaSnr
 	}
 	return nil
 }
@@ -23968,9 +24258,12 @@ func (t *Component_Transceiver_Channel) PopulateDefaults() {
 		return
 	}
 	ygot.BuildEmptyTree(t)
+	t.Counters.PopulateDefaults()
+	t.HostSnr.PopulateDefaults()
 	t.InputPower.PopulateDefaults()
 	t.LaserBiasCurrent.PopulateDefaults()
 	t.LaserTemperature.PopulateDefaults()
+	t.MediaSnr.PopulateDefaults()
 	t.OutputPower.PopulateDefaults()
 	t.TargetFrequencyDeviation.PopulateDefaults()
 	t.TecCurrent.PopulateDefaults()
@@ -24007,6 +24300,370 @@ func (t *Component_Transceiver_Channel) ΛEnumTypeMap() map[string][]reflect.Typ
 // ΛBelongingModule returns the name of the module that defines the namespace
 // of Component_Transceiver_Channel.
 func (*Component_Transceiver_Channel) ΛBelongingModule() string {
+	return "openconfig-platform-transceiver"
+}
+
+// Component_Transceiver_Channel_Counters represents the /openconfig-platform/components/component/transceiver/physical-channels/channel/state/counters YANG schema element.
+type Component_Transceiver_Channel_Counters struct {
+	RxLolCount   *uint64 `path:"rx-lol-count" module:"openconfig-platform-transceiver"`
+	RxLosCount   *uint64 `path:"rx-los-count" module:"openconfig-platform-transceiver"`
+	TxFaultCount *uint64 `path:"tx-fault-count" module:"openconfig-platform-transceiver"`
+	TxLolCount   *uint64 `path:"tx-lol-count" module:"openconfig-platform-transceiver"`
+	TxLosCount   *uint64 `path:"tx-los-count" module:"openconfig-platform-transceiver"`
+}
+
+// IsYANGGoStruct ensures that Component_Transceiver_Channel_Counters implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*Component_Transceiver_Channel_Counters) IsYANGGoStruct() {}
+
+// GetRxLolCount retrieves the value of the leaf RxLolCount from the Component_Transceiver_Channel_Counters
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if RxLolCount is set, it can
+// safely use t.GetRxLolCount() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.RxLolCount == nil' before retrieving the leaf's value.
+func (t *Component_Transceiver_Channel_Counters) GetRxLolCount() uint64 {
+	if t == nil || t.RxLolCount == nil {
+		return 0
+	}
+	return *t.RxLolCount
+}
+
+// GetRxLosCount retrieves the value of the leaf RxLosCount from the Component_Transceiver_Channel_Counters
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if RxLosCount is set, it can
+// safely use t.GetRxLosCount() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.RxLosCount == nil' before retrieving the leaf's value.
+func (t *Component_Transceiver_Channel_Counters) GetRxLosCount() uint64 {
+	if t == nil || t.RxLosCount == nil {
+		return 0
+	}
+	return *t.RxLosCount
+}
+
+// GetTxFaultCount retrieves the value of the leaf TxFaultCount from the Component_Transceiver_Channel_Counters
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if TxFaultCount is set, it can
+// safely use t.GetTxFaultCount() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.TxFaultCount == nil' before retrieving the leaf's value.
+func (t *Component_Transceiver_Channel_Counters) GetTxFaultCount() uint64 {
+	if t == nil || t.TxFaultCount == nil {
+		return 0
+	}
+	return *t.TxFaultCount
+}
+
+// GetTxLolCount retrieves the value of the leaf TxLolCount from the Component_Transceiver_Channel_Counters
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if TxLolCount is set, it can
+// safely use t.GetTxLolCount() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.TxLolCount == nil' before retrieving the leaf's value.
+func (t *Component_Transceiver_Channel_Counters) GetTxLolCount() uint64 {
+	if t == nil || t.TxLolCount == nil {
+		return 0
+	}
+	return *t.TxLolCount
+}
+
+// GetTxLosCount retrieves the value of the leaf TxLosCount from the Component_Transceiver_Channel_Counters
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if TxLosCount is set, it can
+// safely use t.GetTxLosCount() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.TxLosCount == nil' before retrieving the leaf's value.
+func (t *Component_Transceiver_Channel_Counters) GetTxLosCount() uint64 {
+	if t == nil || t.TxLosCount == nil {
+		return 0
+	}
+	return *t.TxLosCount
+}
+
+// SetRxLolCount sets the value of the leaf RxLolCount in the Component_Transceiver_Channel_Counters
+// struct.
+func (t *Component_Transceiver_Channel_Counters) SetRxLolCount(v uint64) {
+	t.RxLolCount = &v
+}
+
+// SetRxLosCount sets the value of the leaf RxLosCount in the Component_Transceiver_Channel_Counters
+// struct.
+func (t *Component_Transceiver_Channel_Counters) SetRxLosCount(v uint64) {
+	t.RxLosCount = &v
+}
+
+// SetTxFaultCount sets the value of the leaf TxFaultCount in the Component_Transceiver_Channel_Counters
+// struct.
+func (t *Component_Transceiver_Channel_Counters) SetTxFaultCount(v uint64) {
+	t.TxFaultCount = &v
+}
+
+// SetTxLolCount sets the value of the leaf TxLolCount in the Component_Transceiver_Channel_Counters
+// struct.
+func (t *Component_Transceiver_Channel_Counters) SetTxLolCount(v uint64) {
+	t.TxLolCount = &v
+}
+
+// SetTxLosCount sets the value of the leaf TxLosCount in the Component_Transceiver_Channel_Counters
+// struct.
+func (t *Component_Transceiver_Channel_Counters) SetTxLosCount(v uint64) {
+	t.TxLosCount = &v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the Component_Transceiver_Channel_Counters
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *Component_Transceiver_Channel_Counters) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *Component_Transceiver_Channel_Counters) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["Component_Transceiver_Channel_Counters"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *Component_Transceiver_Channel_Counters) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *Component_Transceiver_Channel_Counters) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of Component_Transceiver_Channel_Counters.
+func (*Component_Transceiver_Channel_Counters) ΛBelongingModule() string {
+	return "openconfig-platform-transceiver"
+}
+
+// Component_Transceiver_Channel_HostSnr represents the /openconfig-platform/components/component/transceiver/physical-channels/channel/state/host-snr YANG schema element.
+type Component_Transceiver_Channel_HostSnr struct {
+	Avg      *float64 `path:"avg" module:"openconfig-platform-transceiver"`
+	Instant  *float64 `path:"instant" module:"openconfig-platform-transceiver"`
+	Interval *uint64  `path:"interval" module:"openconfig-platform-transceiver"`
+	Max      *float64 `path:"max" module:"openconfig-platform-transceiver"`
+	MaxTime  *uint64  `path:"max-time" module:"openconfig-platform-transceiver"`
+	Min      *float64 `path:"min" module:"openconfig-platform-transceiver"`
+	MinTime  *uint64  `path:"min-time" module:"openconfig-platform-transceiver"`
+}
+
+// IsYANGGoStruct ensures that Component_Transceiver_Channel_HostSnr implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*Component_Transceiver_Channel_HostSnr) IsYANGGoStruct() {}
+
+// GetAvg retrieves the value of the leaf Avg from the Component_Transceiver_Channel_HostSnr
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Avg is set, it can
+// safely use t.GetAvg() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Avg == nil' before retrieving the leaf's value.
+func (t *Component_Transceiver_Channel_HostSnr) GetAvg() float64 {
+	if t == nil || t.Avg == nil {
+		return 0.0
+	}
+	return *t.Avg
+}
+
+// GetInstant retrieves the value of the leaf Instant from the Component_Transceiver_Channel_HostSnr
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Instant is set, it can
+// safely use t.GetInstant() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Instant == nil' before retrieving the leaf's value.
+func (t *Component_Transceiver_Channel_HostSnr) GetInstant() float64 {
+	if t == nil || t.Instant == nil {
+		return 0.0
+	}
+	return *t.Instant
+}
+
+// GetInterval retrieves the value of the leaf Interval from the Component_Transceiver_Channel_HostSnr
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Interval is set, it can
+// safely use t.GetInterval() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Interval == nil' before retrieving the leaf's value.
+func (t *Component_Transceiver_Channel_HostSnr) GetInterval() uint64 {
+	if t == nil || t.Interval == nil {
+		return 0
+	}
+	return *t.Interval
+}
+
+// GetMax retrieves the value of the leaf Max from the Component_Transceiver_Channel_HostSnr
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Max is set, it can
+// safely use t.GetMax() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Max == nil' before retrieving the leaf's value.
+func (t *Component_Transceiver_Channel_HostSnr) GetMax() float64 {
+	if t == nil || t.Max == nil {
+		return 0.0
+	}
+	return *t.Max
+}
+
+// GetMaxTime retrieves the value of the leaf MaxTime from the Component_Transceiver_Channel_HostSnr
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if MaxTime is set, it can
+// safely use t.GetMaxTime() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.MaxTime == nil' before retrieving the leaf's value.
+func (t *Component_Transceiver_Channel_HostSnr) GetMaxTime() uint64 {
+	if t == nil || t.MaxTime == nil {
+		return 0
+	}
+	return *t.MaxTime
+}
+
+// GetMin retrieves the value of the leaf Min from the Component_Transceiver_Channel_HostSnr
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Min is set, it can
+// safely use t.GetMin() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Min == nil' before retrieving the leaf's value.
+func (t *Component_Transceiver_Channel_HostSnr) GetMin() float64 {
+	if t == nil || t.Min == nil {
+		return 0.0
+	}
+	return *t.Min
+}
+
+// GetMinTime retrieves the value of the leaf MinTime from the Component_Transceiver_Channel_HostSnr
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if MinTime is set, it can
+// safely use t.GetMinTime() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.MinTime == nil' before retrieving the leaf's value.
+func (t *Component_Transceiver_Channel_HostSnr) GetMinTime() uint64 {
+	if t == nil || t.MinTime == nil {
+		return 0
+	}
+	return *t.MinTime
+}
+
+// SetAvg sets the value of the leaf Avg in the Component_Transceiver_Channel_HostSnr
+// struct.
+func (t *Component_Transceiver_Channel_HostSnr) SetAvg(v float64) {
+	t.Avg = &v
+}
+
+// SetInstant sets the value of the leaf Instant in the Component_Transceiver_Channel_HostSnr
+// struct.
+func (t *Component_Transceiver_Channel_HostSnr) SetInstant(v float64) {
+	t.Instant = &v
+}
+
+// SetInterval sets the value of the leaf Interval in the Component_Transceiver_Channel_HostSnr
+// struct.
+func (t *Component_Transceiver_Channel_HostSnr) SetInterval(v uint64) {
+	t.Interval = &v
+}
+
+// SetMax sets the value of the leaf Max in the Component_Transceiver_Channel_HostSnr
+// struct.
+func (t *Component_Transceiver_Channel_HostSnr) SetMax(v float64) {
+	t.Max = &v
+}
+
+// SetMaxTime sets the value of the leaf MaxTime in the Component_Transceiver_Channel_HostSnr
+// struct.
+func (t *Component_Transceiver_Channel_HostSnr) SetMaxTime(v uint64) {
+	t.MaxTime = &v
+}
+
+// SetMin sets the value of the leaf Min in the Component_Transceiver_Channel_HostSnr
+// struct.
+func (t *Component_Transceiver_Channel_HostSnr) SetMin(v float64) {
+	t.Min = &v
+}
+
+// SetMinTime sets the value of the leaf MinTime in the Component_Transceiver_Channel_HostSnr
+// struct.
+func (t *Component_Transceiver_Channel_HostSnr) SetMinTime(v uint64) {
+	t.MinTime = &v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the Component_Transceiver_Channel_HostSnr
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *Component_Transceiver_Channel_HostSnr) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *Component_Transceiver_Channel_HostSnr) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["Component_Transceiver_Channel_HostSnr"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *Component_Transceiver_Channel_HostSnr) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *Component_Transceiver_Channel_HostSnr) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of Component_Transceiver_Channel_HostSnr.
+func (*Component_Transceiver_Channel_HostSnr) ΛBelongingModule() string {
 	return "openconfig-platform-transceiver"
 }
 
@@ -24622,6 +25279,211 @@ func (t *Component_Transceiver_Channel_LaserTemperature) ΛEnumTypeMap() map[str
 // ΛBelongingModule returns the name of the module that defines the namespace
 // of Component_Transceiver_Channel_LaserTemperature.
 func (*Component_Transceiver_Channel_LaserTemperature) ΛBelongingModule() string {
+	return "openconfig-platform-transceiver"
+}
+
+// Component_Transceiver_Channel_MediaSnr represents the /openconfig-platform/components/component/transceiver/physical-channels/channel/state/media-snr YANG schema element.
+type Component_Transceiver_Channel_MediaSnr struct {
+	Avg      *float64 `path:"avg" module:"openconfig-platform-transceiver"`
+	Instant  *float64 `path:"instant" module:"openconfig-platform-transceiver"`
+	Interval *uint64  `path:"interval" module:"openconfig-platform-transceiver"`
+	Max      *float64 `path:"max" module:"openconfig-platform-transceiver"`
+	MaxTime  *uint64  `path:"max-time" module:"openconfig-platform-transceiver"`
+	Min      *float64 `path:"min" module:"openconfig-platform-transceiver"`
+	MinTime  *uint64  `path:"min-time" module:"openconfig-platform-transceiver"`
+}
+
+// IsYANGGoStruct ensures that Component_Transceiver_Channel_MediaSnr implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*Component_Transceiver_Channel_MediaSnr) IsYANGGoStruct() {}
+
+// GetAvg retrieves the value of the leaf Avg from the Component_Transceiver_Channel_MediaSnr
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Avg is set, it can
+// safely use t.GetAvg() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Avg == nil' before retrieving the leaf's value.
+func (t *Component_Transceiver_Channel_MediaSnr) GetAvg() float64 {
+	if t == nil || t.Avg == nil {
+		return 0.0
+	}
+	return *t.Avg
+}
+
+// GetInstant retrieves the value of the leaf Instant from the Component_Transceiver_Channel_MediaSnr
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Instant is set, it can
+// safely use t.GetInstant() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Instant == nil' before retrieving the leaf's value.
+func (t *Component_Transceiver_Channel_MediaSnr) GetInstant() float64 {
+	if t == nil || t.Instant == nil {
+		return 0.0
+	}
+	return *t.Instant
+}
+
+// GetInterval retrieves the value of the leaf Interval from the Component_Transceiver_Channel_MediaSnr
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Interval is set, it can
+// safely use t.GetInterval() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Interval == nil' before retrieving the leaf's value.
+func (t *Component_Transceiver_Channel_MediaSnr) GetInterval() uint64 {
+	if t == nil || t.Interval == nil {
+		return 0
+	}
+	return *t.Interval
+}
+
+// GetMax retrieves the value of the leaf Max from the Component_Transceiver_Channel_MediaSnr
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Max is set, it can
+// safely use t.GetMax() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Max == nil' before retrieving the leaf's value.
+func (t *Component_Transceiver_Channel_MediaSnr) GetMax() float64 {
+	if t == nil || t.Max == nil {
+		return 0.0
+	}
+	return *t.Max
+}
+
+// GetMaxTime retrieves the value of the leaf MaxTime from the Component_Transceiver_Channel_MediaSnr
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if MaxTime is set, it can
+// safely use t.GetMaxTime() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.MaxTime == nil' before retrieving the leaf's value.
+func (t *Component_Transceiver_Channel_MediaSnr) GetMaxTime() uint64 {
+	if t == nil || t.MaxTime == nil {
+		return 0
+	}
+	return *t.MaxTime
+}
+
+// GetMin retrieves the value of the leaf Min from the Component_Transceiver_Channel_MediaSnr
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Min is set, it can
+// safely use t.GetMin() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Min == nil' before retrieving the leaf's value.
+func (t *Component_Transceiver_Channel_MediaSnr) GetMin() float64 {
+	if t == nil || t.Min == nil {
+		return 0.0
+	}
+	return *t.Min
+}
+
+// GetMinTime retrieves the value of the leaf MinTime from the Component_Transceiver_Channel_MediaSnr
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if MinTime is set, it can
+// safely use t.GetMinTime() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.MinTime == nil' before retrieving the leaf's value.
+func (t *Component_Transceiver_Channel_MediaSnr) GetMinTime() uint64 {
+	if t == nil || t.MinTime == nil {
+		return 0
+	}
+	return *t.MinTime
+}
+
+// SetAvg sets the value of the leaf Avg in the Component_Transceiver_Channel_MediaSnr
+// struct.
+func (t *Component_Transceiver_Channel_MediaSnr) SetAvg(v float64) {
+	t.Avg = &v
+}
+
+// SetInstant sets the value of the leaf Instant in the Component_Transceiver_Channel_MediaSnr
+// struct.
+func (t *Component_Transceiver_Channel_MediaSnr) SetInstant(v float64) {
+	t.Instant = &v
+}
+
+// SetInterval sets the value of the leaf Interval in the Component_Transceiver_Channel_MediaSnr
+// struct.
+func (t *Component_Transceiver_Channel_MediaSnr) SetInterval(v uint64) {
+	t.Interval = &v
+}
+
+// SetMax sets the value of the leaf Max in the Component_Transceiver_Channel_MediaSnr
+// struct.
+func (t *Component_Transceiver_Channel_MediaSnr) SetMax(v float64) {
+	t.Max = &v
+}
+
+// SetMaxTime sets the value of the leaf MaxTime in the Component_Transceiver_Channel_MediaSnr
+// struct.
+func (t *Component_Transceiver_Channel_MediaSnr) SetMaxTime(v uint64) {
+	t.MaxTime = &v
+}
+
+// SetMin sets the value of the leaf Min in the Component_Transceiver_Channel_MediaSnr
+// struct.
+func (t *Component_Transceiver_Channel_MediaSnr) SetMin(v float64) {
+	t.Min = &v
+}
+
+// SetMinTime sets the value of the leaf MinTime in the Component_Transceiver_Channel_MediaSnr
+// struct.
+func (t *Component_Transceiver_Channel_MediaSnr) SetMinTime(v uint64) {
+	t.MinTime = &v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the Component_Transceiver_Channel_MediaSnr
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *Component_Transceiver_Channel_MediaSnr) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *Component_Transceiver_Channel_MediaSnr) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["Component_Transceiver_Channel_MediaSnr"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *Component_Transceiver_Channel_MediaSnr) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *Component_Transceiver_Channel_MediaSnr) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of Component_Transceiver_Channel_MediaSnr.
+func (*Component_Transceiver_Channel_MediaSnr) ΛBelongingModule() string {
 	return "openconfig-platform-transceiver"
 }
 
@@ -33233,10 +34095,13 @@ func (*Interface_Aggregation_SwitchedVlan) ΛBelongingModule() string {
 // Interface_Counters represents the /openconfig-interfaces/interfaces/interface/state/counters YANG schema element.
 type Interface_Counters struct {
 	CarrierTransitions   *uint64 `path:"carrier-transitions" module:"openconfig-interfaces"`
+	DroppedTrimPkts      *uint64 `path:"dropped-trim-pkts" module:"openconfig-qos"`
 	InBroadcastPkts      *uint64 `path:"in-broadcast-pkts" module:"openconfig-interfaces"`
 	InDiscards           *uint64 `path:"in-discards" module:"openconfig-interfaces"`
 	InErrors             *uint64 `path:"in-errors" module:"openconfig-interfaces"`
 	InFcsErrors          *uint64 `path:"in-fcs-errors" module:"openconfig-interfaces"`
+	InLinkDownDiscards   *uint64 `path:"in-link-down-discards" module:"openconfig-interfaces"`
+	InLowTtlDiscards     *uint64 `path:"in-low-ttl-discards" module:"openconfig-interfaces"`
 	InMulticastPkts      *uint64 `path:"in-multicast-pkts" module:"openconfig-interfaces"`
 	InOctets             *uint64 `path:"in-octets" module:"openconfig-interfaces"`
 	InPkts               *uint64 `path:"in-pkts" module:"openconfig-interfaces"`
@@ -33251,8 +34116,10 @@ type Interface_Counters struct {
 	OutMulticastPkts     *uint64 `path:"out-multicast-pkts" module:"openconfig-interfaces"`
 	OutOctets            *uint64 `path:"out-octets" module:"openconfig-interfaces"`
 	OutPkts              *uint64 `path:"out-pkts" module:"openconfig-interfaces"`
+	OutTrimPkts          *uint64 `path:"out-trim-pkts" module:"openconfig-qos"`
 	OutUnicastPkts       *uint64 `path:"out-unicast-pkts" module:"openconfig-interfaces"`
 	Resets               *uint64 `path:"resets" module:"openconfig-interfaces"`
+	TrimPkts             *uint64 `path:"trim-pkts" module:"openconfig-qos"`
 }
 
 // IsYANGGoStruct ensures that Interface_Counters implements the yang.GoStruct
@@ -33274,6 +34141,22 @@ func (t *Interface_Counters) GetCarrierTransitions() uint64 {
 		return 0
 	}
 	return *t.CarrierTransitions
+}
+
+// GetDroppedTrimPkts retrieves the value of the leaf DroppedTrimPkts from the Interface_Counters
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if DroppedTrimPkts is set, it can
+// safely use t.GetDroppedTrimPkts() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.DroppedTrimPkts == nil' before retrieving the leaf's value.
+func (t *Interface_Counters) GetDroppedTrimPkts() uint64 {
+	if t == nil || t.DroppedTrimPkts == nil {
+		return 0
+	}
+	return *t.DroppedTrimPkts
 }
 
 // GetInBroadcastPkts retrieves the value of the leaf InBroadcastPkts from the Interface_Counters
@@ -33338,6 +34221,38 @@ func (t *Interface_Counters) GetInFcsErrors() uint64 {
 		return 0
 	}
 	return *t.InFcsErrors
+}
+
+// GetInLinkDownDiscards retrieves the value of the leaf InLinkDownDiscards from the Interface_Counters
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if InLinkDownDiscards is set, it can
+// safely use t.GetInLinkDownDiscards() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.InLinkDownDiscards == nil' before retrieving the leaf's value.
+func (t *Interface_Counters) GetInLinkDownDiscards() uint64 {
+	if t == nil || t.InLinkDownDiscards == nil {
+		return 0
+	}
+	return *t.InLinkDownDiscards
+}
+
+// GetInLowTtlDiscards retrieves the value of the leaf InLowTtlDiscards from the Interface_Counters
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if InLowTtlDiscards is set, it can
+// safely use t.GetInLowTtlDiscards() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.InLowTtlDiscards == nil' before retrieving the leaf's value.
+func (t *Interface_Counters) GetInLowTtlDiscards() uint64 {
+	if t == nil || t.InLowTtlDiscards == nil {
+		return 0
+	}
+	return *t.InLowTtlDiscards
 }
 
 // GetInMulticastPkts retrieves the value of the leaf InMulticastPkts from the Interface_Counters
@@ -33564,6 +34479,22 @@ func (t *Interface_Counters) GetOutPkts() uint64 {
 	return *t.OutPkts
 }
 
+// GetOutTrimPkts retrieves the value of the leaf OutTrimPkts from the Interface_Counters
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if OutTrimPkts is set, it can
+// safely use t.GetOutTrimPkts() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.OutTrimPkts == nil' before retrieving the leaf's value.
+func (t *Interface_Counters) GetOutTrimPkts() uint64 {
+	if t == nil || t.OutTrimPkts == nil {
+		return 0
+	}
+	return *t.OutTrimPkts
+}
+
 // GetOutUnicastPkts retrieves the value of the leaf OutUnicastPkts from the Interface_Counters
 // struct. If the field is unset but has a default value in the YANG schema,
 // then the default value will be returned.
@@ -33596,10 +34527,32 @@ func (t *Interface_Counters) GetResets() uint64 {
 	return *t.Resets
 }
 
+// GetTrimPkts retrieves the value of the leaf TrimPkts from the Interface_Counters
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if TrimPkts is set, it can
+// safely use t.GetTrimPkts() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.TrimPkts == nil' before retrieving the leaf's value.
+func (t *Interface_Counters) GetTrimPkts() uint64 {
+	if t == nil || t.TrimPkts == nil {
+		return 0
+	}
+	return *t.TrimPkts
+}
+
 // SetCarrierTransitions sets the value of the leaf CarrierTransitions in the Interface_Counters
 // struct.
 func (t *Interface_Counters) SetCarrierTransitions(v uint64) {
 	t.CarrierTransitions = &v
+}
+
+// SetDroppedTrimPkts sets the value of the leaf DroppedTrimPkts in the Interface_Counters
+// struct.
+func (t *Interface_Counters) SetDroppedTrimPkts(v uint64) {
+	t.DroppedTrimPkts = &v
 }
 
 // SetInBroadcastPkts sets the value of the leaf InBroadcastPkts in the Interface_Counters
@@ -33624,6 +34577,18 @@ func (t *Interface_Counters) SetInErrors(v uint64) {
 // struct.
 func (t *Interface_Counters) SetInFcsErrors(v uint64) {
 	t.InFcsErrors = &v
+}
+
+// SetInLinkDownDiscards sets the value of the leaf InLinkDownDiscards in the Interface_Counters
+// struct.
+func (t *Interface_Counters) SetInLinkDownDiscards(v uint64) {
+	t.InLinkDownDiscards = &v
+}
+
+// SetInLowTtlDiscards sets the value of the leaf InLowTtlDiscards in the Interface_Counters
+// struct.
+func (t *Interface_Counters) SetInLowTtlDiscards(v uint64) {
+	t.InLowTtlDiscards = &v
 }
 
 // SetInMulticastPkts sets the value of the leaf InMulticastPkts in the Interface_Counters
@@ -33710,6 +34675,12 @@ func (t *Interface_Counters) SetOutPkts(v uint64) {
 	t.OutPkts = &v
 }
 
+// SetOutTrimPkts sets the value of the leaf OutTrimPkts in the Interface_Counters
+// struct.
+func (t *Interface_Counters) SetOutTrimPkts(v uint64) {
+	t.OutTrimPkts = &v
+}
+
 // SetOutUnicastPkts sets the value of the leaf OutUnicastPkts in the Interface_Counters
 // struct.
 func (t *Interface_Counters) SetOutUnicastPkts(v uint64) {
@@ -33720,6 +34691,12 @@ func (t *Interface_Counters) SetOutUnicastPkts(v uint64) {
 // struct.
 func (t *Interface_Counters) SetResets(v uint64) {
 	t.Resets = &v
+}
+
+// SetTrimPkts sets the value of the leaf TrimPkts in the Interface_Counters
+// struct.
+func (t *Interface_Counters) SetTrimPkts(v uint64) {
+	t.TrimPkts = &v
 }
 
 // PopulateDefaults recursively populates unset leaf fields in the Interface_Counters
@@ -34175,6 +35152,7 @@ type Interface_Ethernet_Counters struct {
 	OutMacControlFrames    *uint64                                     `path:"out-mac-control-frames" module:"openconfig-if-ethernet"`
 	OutMacErrorsTx         *uint64                                     `path:"out-mac-errors-tx" module:"openconfig-if-ethernet"`
 	OutMacPauseFrames      *uint64                                     `path:"out-mac-pause-frames" module:"openconfig-if-ethernet"`
+	OutVlanFilterDiscards  *uint64                                     `path:"out-vlan-filter-discards" module:"openconfig-if-ethernet"`
 }
 
 // IsYANGGoStruct ensures that Interface_Ethernet_Counters implements the yang.GoStruct
@@ -34554,6 +35532,22 @@ func (t *Interface_Ethernet_Counters) GetOutMacPauseFrames() uint64 {
 	return *t.OutMacPauseFrames
 }
 
+// GetOutVlanFilterDiscards retrieves the value of the leaf OutVlanFilterDiscards from the Interface_Ethernet_Counters
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if OutVlanFilterDiscards is set, it can
+// safely use t.GetOutVlanFilterDiscards() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.OutVlanFilterDiscards == nil' before retrieving the leaf's value.
+func (t *Interface_Ethernet_Counters) GetOutVlanFilterDiscards() uint64 {
+	if t == nil || t.OutVlanFilterDiscards == nil {
+		return 0
+	}
+	return *t.OutVlanFilterDiscards
+}
+
 // SetFecCorrectedBlocks sets the value of the leaf FecCorrectedBlocks in the Interface_Ethernet_Counters
 // struct.
 func (t *Interface_Ethernet_Counters) SetFecCorrectedBlocks(v uint64) {
@@ -34684,6 +35678,12 @@ func (t *Interface_Ethernet_Counters) SetOutMacErrorsTx(v uint64) {
 // struct.
 func (t *Interface_Ethernet_Counters) SetOutMacPauseFrames(v uint64) {
 	t.OutMacPauseFrames = &v
+}
+
+// SetOutVlanFilterDiscards sets the value of the leaf OutVlanFilterDiscards in the Interface_Ethernet_Counters
+// struct.
+func (t *Interface_Ethernet_Counters) SetOutVlanFilterDiscards(v uint64) {
+	t.OutVlanFilterDiscards = &v
 }
 
 // PopulateDefaults recursively populates unset leaf fields in the Interface_Ethernet_Counters
@@ -37715,13 +38715,141 @@ func (*Interface_RoutedVlan_Ipv4_Neighbor) ΛBelongingModule() string {
 
 // Interface_RoutedVlan_Ipv4_ProxyArp represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv4/proxy-arp YANG schema element.
 type Interface_RoutedVlan_Ipv4_ProxyArp struct {
-	Mode E_ProxyArp_Mode `path:"state/mode" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/mode" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
+	ManualIpRange map[string]*Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRange `path:"manual-ip-ranges/manual-ip-range" module:"openconfig-if-ip/openconfig-if-ip"`
+	Mode          E_ProxyArp_Mode                                              `path:"state/mode" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/mode" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
 }
 
 // IsYANGGoStruct ensures that Interface_RoutedVlan_Ipv4_ProxyArp implements the yang.GoStruct
 // interface. This allows functions that need to handle this struct to
 // identify it as being generated by ygen.
 func (*Interface_RoutedVlan_Ipv4_ProxyArp) IsYANGGoStruct() {}
+
+// NewManualIpRange creates a new entry in the ManualIpRange list of the
+// Interface_RoutedVlan_Ipv4_ProxyArp struct. The keys of the list are populated from the input
+// arguments.
+func (t *Interface_RoutedVlan_Ipv4_ProxyArp) NewManualIpRange(IpRange string) (*Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRange, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.ManualIpRange == nil {
+		t.ManualIpRange = make(map[string]*Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRange)
+	}
+
+	key := IpRange
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.ManualIpRange[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list ManualIpRange", key)
+	}
+
+	t.ManualIpRange[key] = &Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRange{
+		IpRange: &IpRange,
+	}
+
+	return t.ManualIpRange[key], nil
+}
+
+// RenameManualIpRange renames an entry in the list ManualIpRange within
+// the Interface_RoutedVlan_Ipv4_ProxyArp struct. The entry with key oldK is renamed to newK updating
+// the key within the value.
+func (t *Interface_RoutedVlan_Ipv4_ProxyArp) RenameManualIpRange(oldK, newK string) error {
+	if _, ok := t.ManualIpRange[newK]; ok {
+		return fmt.Errorf("key %v already exists in ManualIpRange", newK)
+	}
+
+	e, ok := t.ManualIpRange[oldK]
+	if !ok {
+		return fmt.Errorf("key %v not found in ManualIpRange", oldK)
+	}
+	e.IpRange = &newK
+
+	t.ManualIpRange[newK] = e
+	delete(t.ManualIpRange, oldK)
+	return nil
+}
+
+// GetOrCreateManualIpRangeMap returns the list (map) from Interface_RoutedVlan_Ipv4_ProxyArp.
+//
+// It initializes the field if not already initialized.
+func (t *Interface_RoutedVlan_Ipv4_ProxyArp) GetOrCreateManualIpRangeMap() map[string]*Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRange {
+	if t.ManualIpRange == nil {
+		t.ManualIpRange = make(map[string]*Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRange)
+	}
+	return t.ManualIpRange
+}
+
+// GetOrCreateManualIpRange retrieves the value with the specified keys from
+// the receiver Interface_RoutedVlan_Ipv4_ProxyArp. If the entry does not exist, then it is created.
+// It returns the existing or new list member.
+func (t *Interface_RoutedVlan_Ipv4_ProxyArp) GetOrCreateManualIpRange(IpRange string) *Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRange {
+
+	key := IpRange
+
+	if v, ok := t.ManualIpRange[key]; ok {
+		return v
+	}
+	// Panic if we receive an error, since we should have retrieved an existing
+	// list member. This allows chaining of GetOrCreate methods.
+	v, err := t.NewManualIpRange(IpRange)
+	if err != nil {
+		panic(fmt.Sprintf("GetOrCreateManualIpRange got unexpected error: %v", err))
+	}
+	return v
+}
+
+// GetManualIpRange retrieves the value with the specified key from
+// the ManualIpRange map field of Interface_RoutedVlan_Ipv4_ProxyArp. If the receiver is nil, or
+// the specified key is not present in the list, nil is returned such that Get*
+// methods may be safely chained.
+func (t *Interface_RoutedVlan_Ipv4_ProxyArp) GetManualIpRange(IpRange string) *Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRange {
+
+	if t == nil {
+		return nil
+	}
+
+	key := IpRange
+
+	if lm, ok := t.ManualIpRange[key]; ok {
+		return lm
+	}
+	return nil
+}
+
+// DeleteManualIpRange deletes the value with the specified keys from
+// the receiver Interface_RoutedVlan_Ipv4_ProxyArp. If there is no such element, the function
+// is a no-op.
+func (t *Interface_RoutedVlan_Ipv4_ProxyArp) DeleteManualIpRange(IpRange string) {
+	key := IpRange
+
+	delete(t.ManualIpRange, key)
+}
+
+// AppendManualIpRange appends the supplied Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRange struct to the
+// list ManualIpRange of Interface_RoutedVlan_Ipv4_ProxyArp. If the key value(s) specified in
+// the supplied Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRange already exist in the list, an error is
+// returned.
+func (t *Interface_RoutedVlan_Ipv4_ProxyArp) AppendManualIpRange(v *Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRange) error {
+	if v.IpRange == nil {
+		return fmt.Errorf("invalid nil key received for IpRange")
+	}
+
+	key := *v.IpRange
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.ManualIpRange == nil {
+		t.ManualIpRange = make(map[string]*Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRange)
+	}
+
+	if _, ok := t.ManualIpRange[key]; ok {
+		return fmt.Errorf("duplicate key for list ManualIpRange %v", key)
+	}
+
+	t.ManualIpRange[key] = v
+	return nil
+}
 
 // GetMode retrieves the value of the leaf Mode from the Interface_RoutedVlan_Ipv4_ProxyArp
 // struct. If the field is unset but has a default value in the YANG schema,
@@ -37756,6 +38884,9 @@ func (t *Interface_RoutedVlan_Ipv4_ProxyArp) PopulateDefaults() {
 	if t.Mode == 0 {
 		t.Mode = ProxyArp_Mode_DISABLE
 	}
+	for _, e := range t.ManualIpRange {
+		e.PopulateDefaults()
+	}
 }
 
 // Validate validates s against the YANG schema corresponding to its type.
@@ -37780,6 +38911,84 @@ func (t *Interface_RoutedVlan_Ipv4_ProxyArp) ΛEnumTypeMap() map[string][]reflec
 // ΛBelongingModule returns the name of the module that defines the namespace
 // of Interface_RoutedVlan_Ipv4_ProxyArp.
 func (*Interface_RoutedVlan_Ipv4_ProxyArp) ΛBelongingModule() string {
+	return "openconfig-if-ip"
+}
+
+// Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRange represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv4/proxy-arp/manual-ip-ranges/manual-ip-range YANG schema element.
+type Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRange struct {
+	IpRange *string `path:"state/ip-range|ip-range" module:"openconfig-if-ip/openconfig-if-ip|openconfig-if-ip" shadow-path:"config/ip-range|ip-range" shadow-module:"openconfig-if-ip/openconfig-if-ip|openconfig-if-ip"`
+}
+
+// IsYANGGoStruct ensures that Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRange implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRange) IsYANGGoStruct() {}
+
+// GetIpRange retrieves the value of the leaf IpRange from the Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRange
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if IpRange is set, it can
+// safely use t.GetIpRange() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.IpRange == nil' before retrieving the leaf's value.
+func (t *Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRange) GetIpRange() string {
+	if t == nil || t.IpRange == nil {
+		return ""
+	}
+	return *t.IpRange
+}
+
+// SetIpRange sets the value of the leaf IpRange in the Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRange
+// struct.
+func (t *Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRange) SetIpRange(v string) {
+	t.IpRange = &v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRange
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRange) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// ΛListKeyMap returns the keys of the Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRange struct, which is a YANG list entry.
+func (t *Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRange) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.IpRange == nil {
+		return nil, fmt.Errorf("nil value for key IpRange")
+	}
+
+	return map[string]interface{}{
+		"ip-range": *t.IpRange,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRange) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRange"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRange) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRange) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRange.
+func (*Interface_RoutedVlan_Ipv4_ProxyArp_ManualIpRange) ΛBelongingModule() string {
 	return "openconfig-if-ip"
 }
 
@@ -38159,6 +39368,7 @@ type Interface_RoutedVlan_Ipv6 struct {
 	DhcpClient             *bool                                          `path:"state/dhcp-client" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/dhcp-client" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
 	DupAddrDetectTransmits *uint32                                        `path:"state/dup-addr-detect-transmits" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/dup-addr-detect-transmits" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
 	Enabled                *bool                                          `path:"state/enabled" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/enabled" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
+	Icmp                   *Interface_RoutedVlan_Ipv6_Icmp                `path:"icmp" module:"openconfig-if-ip"`
 	LearnUnsolicited       E_Ipv6_LearnUnsolicited                        `path:"state/learn-unsolicited" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/learn-unsolicited" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
 	Mtu                    *uint32                                        `path:"state/mtu" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/mtu" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
 	Neighbor               map[string]*Interface_RoutedVlan_Ipv6_Neighbor `path:"neighbors/neighbor" module:"openconfig-if-ip/openconfig-if-ip"`
@@ -38436,6 +39646,16 @@ func (t *Interface_RoutedVlan_Ipv6) GetOrCreateCounters() *Interface_RoutedVlan_
 	return t.Counters
 }
 
+// GetOrCreateIcmp retrieves the value of the Icmp field
+// or returns the existing field if it already exists.
+func (t *Interface_RoutedVlan_Ipv6) GetOrCreateIcmp() *Interface_RoutedVlan_Ipv6_Icmp {
+	if t.Icmp != nil {
+		return t.Icmp
+	}
+	t.Icmp = &Interface_RoutedVlan_Ipv6_Icmp{}
+	return t.Icmp
+}
+
 // GetOrCreateRouterAdvertisement retrieves the value of the RouterAdvertisement field
 // or returns the existing field if it already exists.
 func (t *Interface_RoutedVlan_Ipv6) GetOrCreateRouterAdvertisement() *Interface_RoutedVlan_Ipv6_RouterAdvertisement {
@@ -38472,6 +39692,16 @@ func (t *Interface_RoutedVlan_Ipv6) GetOrCreateUrpf() *Interface_RoutedVlan_Ipv6
 func (t *Interface_RoutedVlan_Ipv6) GetCounters() *Interface_RoutedVlan_Ipv6_Counters {
 	if t != nil && t.Counters != nil {
 		return t.Counters
+	}
+	return nil
+}
+
+// GetIcmp returns the value of the Icmp struct pointer
+// from Interface_RoutedVlan_Ipv6. If the receiver or the field Icmp is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *Interface_RoutedVlan_Ipv6) GetIcmp() *Interface_RoutedVlan_Ipv6_Icmp {
+	if t != nil && t.Icmp != nil {
+		return t.Icmp
 	}
 	return nil
 }
@@ -38640,6 +39870,7 @@ func (t *Interface_RoutedVlan_Ipv6) PopulateDefaults() {
 		t.LearnUnsolicited = Ipv6_LearnUnsolicited_NONE
 	}
 	t.Counters.PopulateDefaults()
+	t.Icmp.PopulateDefaults()
 	t.RouterAdvertisement.PopulateDefaults()
 	t.Unnumbered.PopulateDefaults()
 	t.Urpf.PopulateDefaults()
@@ -39834,6 +41065,323 @@ func (*Interface_RoutedVlan_Ipv6_Counters) ΛBelongingModule() string {
 	return "openconfig-if-ip"
 }
 
+// Interface_RoutedVlan_Ipv6_Icmp represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/icmp YANG schema element.
+type Interface_RoutedVlan_Ipv6_Icmp struct {
+	Counters *Interface_RoutedVlan_Ipv6_Icmp_Counters `path:"state/counters" module:"openconfig-if-ip/openconfig-if-ip"`
+}
+
+// IsYANGGoStruct ensures that Interface_RoutedVlan_Ipv6_Icmp implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*Interface_RoutedVlan_Ipv6_Icmp) IsYANGGoStruct() {}
+
+// GetOrCreateCounters retrieves the value of the Counters field
+// or returns the existing field if it already exists.
+func (t *Interface_RoutedVlan_Ipv6_Icmp) GetOrCreateCounters() *Interface_RoutedVlan_Ipv6_Icmp_Counters {
+	if t.Counters != nil {
+		return t.Counters
+	}
+	t.Counters = &Interface_RoutedVlan_Ipv6_Icmp_Counters{}
+	return t.Counters
+}
+
+// GetCounters returns the value of the Counters struct pointer
+// from Interface_RoutedVlan_Ipv6_Icmp. If the receiver or the field Counters is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *Interface_RoutedVlan_Ipv6_Icmp) GetCounters() *Interface_RoutedVlan_Ipv6_Icmp_Counters {
+	if t != nil && t.Counters != nil {
+		return t.Counters
+	}
+	return nil
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the Interface_RoutedVlan_Ipv6_Icmp
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *Interface_RoutedVlan_Ipv6_Icmp) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+	t.Counters.PopulateDefaults()
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *Interface_RoutedVlan_Ipv6_Icmp) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["Interface_RoutedVlan_Ipv6_Icmp"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *Interface_RoutedVlan_Ipv6_Icmp) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *Interface_RoutedVlan_Ipv6_Icmp) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of Interface_RoutedVlan_Ipv6_Icmp.
+func (*Interface_RoutedVlan_Ipv6_Icmp) ΛBelongingModule() string {
+	return "openconfig-if-ip"
+}
+
+// Interface_RoutedVlan_Ipv6_Icmp_Counters represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/icmp/state/counters YANG schema element.
+type Interface_RoutedVlan_Ipv6_Icmp_Counters struct {
+	InChecksumErrors          *uint64 `path:"in-checksum-errors" module:"openconfig-if-ip"`
+	InEchoRequests            *uint64 `path:"in-echo-requests" module:"openconfig-if-ip"`
+	InErrors                  *uint64 `path:"in-errors" module:"openconfig-if-ip"`
+	InNeighborAdvertisements  *uint64 `path:"in-neighbor-advertisements" module:"openconfig-if-ip"`
+	InNeighborSolicitations   *uint64 `path:"in-neighbor-solicitations" module:"openconfig-if-ip"`
+	OutEchoReplies            *uint64 `path:"out-echo-replies" module:"openconfig-if-ip"`
+	OutErrors                 *uint64 `path:"out-errors" module:"openconfig-if-ip"`
+	OutNeighborAdvertisements *uint64 `path:"out-neighbor-advertisements" module:"openconfig-if-ip"`
+	OutNeighborSolicitations  *uint64 `path:"out-neighbor-solicitations" module:"openconfig-if-ip"`
+}
+
+// IsYANGGoStruct ensures that Interface_RoutedVlan_Ipv6_Icmp_Counters implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*Interface_RoutedVlan_Ipv6_Icmp_Counters) IsYANGGoStruct() {}
+
+// GetInChecksumErrors retrieves the value of the leaf InChecksumErrors from the Interface_RoutedVlan_Ipv6_Icmp_Counters
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if InChecksumErrors is set, it can
+// safely use t.GetInChecksumErrors() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.InChecksumErrors == nil' before retrieving the leaf's value.
+func (t *Interface_RoutedVlan_Ipv6_Icmp_Counters) GetInChecksumErrors() uint64 {
+	if t == nil || t.InChecksumErrors == nil {
+		return 0
+	}
+	return *t.InChecksumErrors
+}
+
+// GetInEchoRequests retrieves the value of the leaf InEchoRequests from the Interface_RoutedVlan_Ipv6_Icmp_Counters
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if InEchoRequests is set, it can
+// safely use t.GetInEchoRequests() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.InEchoRequests == nil' before retrieving the leaf's value.
+func (t *Interface_RoutedVlan_Ipv6_Icmp_Counters) GetInEchoRequests() uint64 {
+	if t == nil || t.InEchoRequests == nil {
+		return 0
+	}
+	return *t.InEchoRequests
+}
+
+// GetInErrors retrieves the value of the leaf InErrors from the Interface_RoutedVlan_Ipv6_Icmp_Counters
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if InErrors is set, it can
+// safely use t.GetInErrors() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.InErrors == nil' before retrieving the leaf's value.
+func (t *Interface_RoutedVlan_Ipv6_Icmp_Counters) GetInErrors() uint64 {
+	if t == nil || t.InErrors == nil {
+		return 0
+	}
+	return *t.InErrors
+}
+
+// GetInNeighborAdvertisements retrieves the value of the leaf InNeighborAdvertisements from the Interface_RoutedVlan_Ipv6_Icmp_Counters
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if InNeighborAdvertisements is set, it can
+// safely use t.GetInNeighborAdvertisements() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.InNeighborAdvertisements == nil' before retrieving the leaf's value.
+func (t *Interface_RoutedVlan_Ipv6_Icmp_Counters) GetInNeighborAdvertisements() uint64 {
+	if t == nil || t.InNeighborAdvertisements == nil {
+		return 0
+	}
+	return *t.InNeighborAdvertisements
+}
+
+// GetInNeighborSolicitations retrieves the value of the leaf InNeighborSolicitations from the Interface_RoutedVlan_Ipv6_Icmp_Counters
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if InNeighborSolicitations is set, it can
+// safely use t.GetInNeighborSolicitations() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.InNeighborSolicitations == nil' before retrieving the leaf's value.
+func (t *Interface_RoutedVlan_Ipv6_Icmp_Counters) GetInNeighborSolicitations() uint64 {
+	if t == nil || t.InNeighborSolicitations == nil {
+		return 0
+	}
+	return *t.InNeighborSolicitations
+}
+
+// GetOutEchoReplies retrieves the value of the leaf OutEchoReplies from the Interface_RoutedVlan_Ipv6_Icmp_Counters
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if OutEchoReplies is set, it can
+// safely use t.GetOutEchoReplies() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.OutEchoReplies == nil' before retrieving the leaf's value.
+func (t *Interface_RoutedVlan_Ipv6_Icmp_Counters) GetOutEchoReplies() uint64 {
+	if t == nil || t.OutEchoReplies == nil {
+		return 0
+	}
+	return *t.OutEchoReplies
+}
+
+// GetOutErrors retrieves the value of the leaf OutErrors from the Interface_RoutedVlan_Ipv6_Icmp_Counters
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if OutErrors is set, it can
+// safely use t.GetOutErrors() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.OutErrors == nil' before retrieving the leaf's value.
+func (t *Interface_RoutedVlan_Ipv6_Icmp_Counters) GetOutErrors() uint64 {
+	if t == nil || t.OutErrors == nil {
+		return 0
+	}
+	return *t.OutErrors
+}
+
+// GetOutNeighborAdvertisements retrieves the value of the leaf OutNeighborAdvertisements from the Interface_RoutedVlan_Ipv6_Icmp_Counters
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if OutNeighborAdvertisements is set, it can
+// safely use t.GetOutNeighborAdvertisements() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.OutNeighborAdvertisements == nil' before retrieving the leaf's value.
+func (t *Interface_RoutedVlan_Ipv6_Icmp_Counters) GetOutNeighborAdvertisements() uint64 {
+	if t == nil || t.OutNeighborAdvertisements == nil {
+		return 0
+	}
+	return *t.OutNeighborAdvertisements
+}
+
+// GetOutNeighborSolicitations retrieves the value of the leaf OutNeighborSolicitations from the Interface_RoutedVlan_Ipv6_Icmp_Counters
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if OutNeighborSolicitations is set, it can
+// safely use t.GetOutNeighborSolicitations() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.OutNeighborSolicitations == nil' before retrieving the leaf's value.
+func (t *Interface_RoutedVlan_Ipv6_Icmp_Counters) GetOutNeighborSolicitations() uint64 {
+	if t == nil || t.OutNeighborSolicitations == nil {
+		return 0
+	}
+	return *t.OutNeighborSolicitations
+}
+
+// SetInChecksumErrors sets the value of the leaf InChecksumErrors in the Interface_RoutedVlan_Ipv6_Icmp_Counters
+// struct.
+func (t *Interface_RoutedVlan_Ipv6_Icmp_Counters) SetInChecksumErrors(v uint64) {
+	t.InChecksumErrors = &v
+}
+
+// SetInEchoRequests sets the value of the leaf InEchoRequests in the Interface_RoutedVlan_Ipv6_Icmp_Counters
+// struct.
+func (t *Interface_RoutedVlan_Ipv6_Icmp_Counters) SetInEchoRequests(v uint64) {
+	t.InEchoRequests = &v
+}
+
+// SetInErrors sets the value of the leaf InErrors in the Interface_RoutedVlan_Ipv6_Icmp_Counters
+// struct.
+func (t *Interface_RoutedVlan_Ipv6_Icmp_Counters) SetInErrors(v uint64) {
+	t.InErrors = &v
+}
+
+// SetInNeighborAdvertisements sets the value of the leaf InNeighborAdvertisements in the Interface_RoutedVlan_Ipv6_Icmp_Counters
+// struct.
+func (t *Interface_RoutedVlan_Ipv6_Icmp_Counters) SetInNeighborAdvertisements(v uint64) {
+	t.InNeighborAdvertisements = &v
+}
+
+// SetInNeighborSolicitations sets the value of the leaf InNeighborSolicitations in the Interface_RoutedVlan_Ipv6_Icmp_Counters
+// struct.
+func (t *Interface_RoutedVlan_Ipv6_Icmp_Counters) SetInNeighborSolicitations(v uint64) {
+	t.InNeighborSolicitations = &v
+}
+
+// SetOutEchoReplies sets the value of the leaf OutEchoReplies in the Interface_RoutedVlan_Ipv6_Icmp_Counters
+// struct.
+func (t *Interface_RoutedVlan_Ipv6_Icmp_Counters) SetOutEchoReplies(v uint64) {
+	t.OutEchoReplies = &v
+}
+
+// SetOutErrors sets the value of the leaf OutErrors in the Interface_RoutedVlan_Ipv6_Icmp_Counters
+// struct.
+func (t *Interface_RoutedVlan_Ipv6_Icmp_Counters) SetOutErrors(v uint64) {
+	t.OutErrors = &v
+}
+
+// SetOutNeighborAdvertisements sets the value of the leaf OutNeighborAdvertisements in the Interface_RoutedVlan_Ipv6_Icmp_Counters
+// struct.
+func (t *Interface_RoutedVlan_Ipv6_Icmp_Counters) SetOutNeighborAdvertisements(v uint64) {
+	t.OutNeighborAdvertisements = &v
+}
+
+// SetOutNeighborSolicitations sets the value of the leaf OutNeighborSolicitations in the Interface_RoutedVlan_Ipv6_Icmp_Counters
+// struct.
+func (t *Interface_RoutedVlan_Ipv6_Icmp_Counters) SetOutNeighborSolicitations(v uint64) {
+	t.OutNeighborSolicitations = &v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the Interface_RoutedVlan_Ipv6_Icmp_Counters
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *Interface_RoutedVlan_Ipv6_Icmp_Counters) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *Interface_RoutedVlan_Ipv6_Icmp_Counters) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["Interface_RoutedVlan_Ipv6_Icmp_Counters"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *Interface_RoutedVlan_Ipv6_Icmp_Counters) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *Interface_RoutedVlan_Ipv6_Icmp_Counters) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of Interface_RoutedVlan_Ipv6_Icmp_Counters.
+func (*Interface_RoutedVlan_Ipv6_Icmp_Counters) ΛBelongingModule() string {
+	return "openconfig-if-ip"
+}
+
 // Interface_RoutedVlan_Ipv6_Neighbor represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/neighbors/neighbor YANG schema element.
 type Interface_RoutedVlan_Ipv6_Neighbor struct {
 	Ip               *string                  `path:"state/ip|ip" module:"openconfig-if-ip/openconfig-if-ip|openconfig-if-ip" shadow-path:"config/ip|ip" shadow-module:"openconfig-if-ip/openconfig-if-ip|openconfig-if-ip"`
@@ -40006,15 +41554,18 @@ func (*Interface_RoutedVlan_Ipv6_Neighbor) ΛBelongingModule() string {
 
 // Interface_RoutedVlan_Ipv6_RouterAdvertisement represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/router-advertisement YANG schema element.
 type Interface_RoutedVlan_Ipv6_RouterAdvertisement struct {
-	DnsServer   map[string]*Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServer `path:"dns-servers/dns-server" module:"openconfig-if-ip/openconfig-if-ip"`
-	Enable      *bool                                                               `path:"state/enable" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/enable" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
-	Interval    *uint32                                                             `path:"state/interval" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/interval" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
-	Lifetime    *uint32                                                             `path:"state/lifetime" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/lifetime" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
-	Managed     *bool                                                               `path:"state/managed" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/managed" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
-	Mode        E_RouterAdvertisement_Mode                                          `path:"state/mode" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/mode" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
-	OtherConfig *bool                                                               `path:"state/other-config" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/other-config" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
-	Prefix      map[string]*Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix    `path:"prefixes/prefix" module:"openconfig-if-ip/openconfig-if-ip"`
-	Suppress    *bool                                                               `path:"state/suppress" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/suppress" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
+	Counters         *Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters             `path:"state/counters" module:"openconfig-if-ip/openconfig-if-ip"`
+	DnsServer        map[string]*Interface_RoutedVlan_Ipv6_RouterAdvertisement_DnsServer `path:"dns-servers/dns-server" module:"openconfig-if-ip/openconfig-if-ip"`
+	Enable           *bool                                                               `path:"state/enable" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/enable" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
+	Interval         *uint32                                                             `path:"state/interval" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/interval" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
+	Lifetime         *uint32                                                             `path:"state/lifetime" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/lifetime" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
+	Managed          *bool                                                               `path:"state/managed" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/managed" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
+	Mode             E_RouterAdvertisement_Mode                                          `path:"state/mode" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/mode" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
+	OtherConfig      *bool                                                               `path:"state/other-config" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/other-config" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
+	Prefix           map[string]*Interface_RoutedVlan_Ipv6_RouterAdvertisement_Prefix    `path:"prefixes/prefix" module:"openconfig-if-ip/openconfig-if-ip"`
+	ReachableTime    *uint32                                                             `path:"state/reachable-time" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/reachable-time" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
+	RouterPreference E_RouterAdvertisement_RouterPreference                              `path:"state/router-preference" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/router-preference" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
+	Suppress         *bool                                                               `path:"state/suppress" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/suppress" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
 }
 
 // IsYANGGoStruct ensures that Interface_RoutedVlan_Ipv6_RouterAdvertisement implements the yang.GoStruct
@@ -40276,6 +41827,26 @@ func (t *Interface_RoutedVlan_Ipv6_RouterAdvertisement) AppendPrefix(v *Interfac
 	return nil
 }
 
+// GetOrCreateCounters retrieves the value of the Counters field
+// or returns the existing field if it already exists.
+func (t *Interface_RoutedVlan_Ipv6_RouterAdvertisement) GetOrCreateCounters() *Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters {
+	if t.Counters != nil {
+		return t.Counters
+	}
+	t.Counters = &Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters{}
+	return t.Counters
+}
+
+// GetCounters returns the value of the Counters struct pointer
+// from Interface_RoutedVlan_Ipv6_RouterAdvertisement. If the receiver or the field Counters is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *Interface_RoutedVlan_Ipv6_RouterAdvertisement) GetCounters() *Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters {
+	if t != nil && t.Counters != nil {
+		return t.Counters
+	}
+	return nil
+}
+
 // GetEnable retrieves the value of the leaf Enable from the Interface_RoutedVlan_Ipv6_RouterAdvertisement
 // struct. If the field is unset but has a default value in the YANG schema,
 // then the default value will be returned.
@@ -40372,6 +41943,38 @@ func (t *Interface_RoutedVlan_Ipv6_RouterAdvertisement) GetOtherConfig() bool {
 	return *t.OtherConfig
 }
 
+// GetReachableTime retrieves the value of the leaf ReachableTime from the Interface_RoutedVlan_Ipv6_RouterAdvertisement
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if ReachableTime is set, it can
+// safely use t.GetReachableTime() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.ReachableTime == nil' before retrieving the leaf's value.
+func (t *Interface_RoutedVlan_Ipv6_RouterAdvertisement) GetReachableTime() uint32 {
+	if t == nil || t.ReachableTime == nil {
+		return 0
+	}
+	return *t.ReachableTime
+}
+
+// GetRouterPreference retrieves the value of the leaf RouterPreference from the Interface_RoutedVlan_Ipv6_RouterAdvertisement
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if RouterPreference is set, it can
+// safely use t.GetRouterPreference() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.RouterPreference == nil' before retrieving the leaf's value.
+func (t *Interface_RoutedVlan_Ipv6_RouterAdvertisement) GetRouterPreference() E_RouterAdvertisement_RouterPreference {
+	if t == nil || t.RouterPreference == 0 {
+		return RouterAdvertisement_RouterPreference_MEDIUM
+	}
+	return t.RouterPreference
+}
+
 // GetSuppress retrieves the value of the leaf Suppress from the Interface_RoutedVlan_Ipv6_RouterAdvertisement
 // struct. If the field is unset but has a default value in the YANG schema,
 // then the default value will be returned.
@@ -40424,6 +42027,18 @@ func (t *Interface_RoutedVlan_Ipv6_RouterAdvertisement) SetOtherConfig(v bool) {
 	t.OtherConfig = &v
 }
 
+// SetReachableTime sets the value of the leaf ReachableTime in the Interface_RoutedVlan_Ipv6_RouterAdvertisement
+// struct.
+func (t *Interface_RoutedVlan_Ipv6_RouterAdvertisement) SetReachableTime(v uint32) {
+	t.ReachableTime = &v
+}
+
+// SetRouterPreference sets the value of the leaf RouterPreference in the Interface_RoutedVlan_Ipv6_RouterAdvertisement
+// struct.
+func (t *Interface_RoutedVlan_Ipv6_RouterAdvertisement) SetRouterPreference(v E_RouterAdvertisement_RouterPreference) {
+	t.RouterPreference = v
+}
+
 // SetSuppress sets the value of the leaf Suppress in the Interface_RoutedVlan_Ipv6_RouterAdvertisement
 // struct.
 func (t *Interface_RoutedVlan_Ipv6_RouterAdvertisement) SetSuppress(v bool) {
@@ -40453,10 +42068,18 @@ func (t *Interface_RoutedVlan_Ipv6_RouterAdvertisement) PopulateDefaults() {
 		var v bool = false
 		t.OtherConfig = &v
 	}
+	if t.ReachableTime == nil {
+		var v uint32 = 0
+		t.ReachableTime = &v
+	}
+	if t.RouterPreference == 0 {
+		t.RouterPreference = RouterAdvertisement_RouterPreference_MEDIUM
+	}
 	if t.Suppress == nil {
 		var v bool = false
 		t.Suppress = &v
 	}
+	t.Counters.PopulateDefaults()
 	for _, e := range t.DnsServer {
 		e.PopulateDefaults()
 	}
@@ -40487,6 +42110,142 @@ func (t *Interface_RoutedVlan_Ipv6_RouterAdvertisement) ΛEnumTypeMap() map[stri
 // ΛBelongingModule returns the name of the module that defines the namespace
 // of Interface_RoutedVlan_Ipv6_RouterAdvertisement.
 func (*Interface_RoutedVlan_Ipv6_RouterAdvertisement) ΛBelongingModule() string {
+	return "openconfig-if-ip"
+}
+
+// Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters represents the /openconfig-interfaces/interfaces/interface/routed-vlan/ipv6/router-advertisement/state/counters YANG schema element.
+type Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters struct {
+	InRouterAdvertisements  *uint64 `path:"in-router-advertisements" module:"openconfig-if-ip"`
+	InRouterSolicitations   *uint64 `path:"in-router-solicitations" module:"openconfig-if-ip"`
+	OutRouterAdvertisements *uint64 `path:"out-router-advertisements" module:"openconfig-if-ip"`
+	OutRouterSolicitations  *uint64 `path:"out-router-solicitations" module:"openconfig-if-ip"`
+}
+
+// IsYANGGoStruct ensures that Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters) IsYANGGoStruct() {}
+
+// GetInRouterAdvertisements retrieves the value of the leaf InRouterAdvertisements from the Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if InRouterAdvertisements is set, it can
+// safely use t.GetInRouterAdvertisements() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.InRouterAdvertisements == nil' before retrieving the leaf's value.
+func (t *Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters) GetInRouterAdvertisements() uint64 {
+	if t == nil || t.InRouterAdvertisements == nil {
+		return 0
+	}
+	return *t.InRouterAdvertisements
+}
+
+// GetInRouterSolicitations retrieves the value of the leaf InRouterSolicitations from the Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if InRouterSolicitations is set, it can
+// safely use t.GetInRouterSolicitations() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.InRouterSolicitations == nil' before retrieving the leaf's value.
+func (t *Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters) GetInRouterSolicitations() uint64 {
+	if t == nil || t.InRouterSolicitations == nil {
+		return 0
+	}
+	return *t.InRouterSolicitations
+}
+
+// GetOutRouterAdvertisements retrieves the value of the leaf OutRouterAdvertisements from the Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if OutRouterAdvertisements is set, it can
+// safely use t.GetOutRouterAdvertisements() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.OutRouterAdvertisements == nil' before retrieving the leaf's value.
+func (t *Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters) GetOutRouterAdvertisements() uint64 {
+	if t == nil || t.OutRouterAdvertisements == nil {
+		return 0
+	}
+	return *t.OutRouterAdvertisements
+}
+
+// GetOutRouterSolicitations retrieves the value of the leaf OutRouterSolicitations from the Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if OutRouterSolicitations is set, it can
+// safely use t.GetOutRouterSolicitations() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.OutRouterSolicitations == nil' before retrieving the leaf's value.
+func (t *Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters) GetOutRouterSolicitations() uint64 {
+	if t == nil || t.OutRouterSolicitations == nil {
+		return 0
+	}
+	return *t.OutRouterSolicitations
+}
+
+// SetInRouterAdvertisements sets the value of the leaf InRouterAdvertisements in the Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters
+// struct.
+func (t *Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters) SetInRouterAdvertisements(v uint64) {
+	t.InRouterAdvertisements = &v
+}
+
+// SetInRouterSolicitations sets the value of the leaf InRouterSolicitations in the Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters
+// struct.
+func (t *Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters) SetInRouterSolicitations(v uint64) {
+	t.InRouterSolicitations = &v
+}
+
+// SetOutRouterAdvertisements sets the value of the leaf OutRouterAdvertisements in the Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters
+// struct.
+func (t *Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters) SetOutRouterAdvertisements(v uint64) {
+	t.OutRouterAdvertisements = &v
+}
+
+// SetOutRouterSolicitations sets the value of the leaf OutRouterSolicitations in the Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters
+// struct.
+func (t *Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters) SetOutRouterSolicitations(v uint64) {
+	t.OutRouterSolicitations = &v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters.
+func (*Interface_RoutedVlan_Ipv6_RouterAdvertisement_Counters) ΛBelongingModule() string {
 	return "openconfig-if-ip"
 }
 
@@ -41604,6 +43363,8 @@ type Interface_Subinterface_Counters struct {
 	InDiscards         *uint64 `path:"in-discards" module:"openconfig-interfaces"`
 	InErrors           *uint64 `path:"in-errors" module:"openconfig-interfaces"`
 	InFcsErrors        *uint64 `path:"in-fcs-errors" module:"openconfig-interfaces"`
+	InLinkDownDiscards *uint64 `path:"in-link-down-discards" module:"openconfig-interfaces"`
+	InLowTtlDiscards   *uint64 `path:"in-low-ttl-discards" module:"openconfig-interfaces"`
 	InMulticastPkts    *uint64 `path:"in-multicast-pkts" module:"openconfig-interfaces"`
 	InOctets           *uint64 `path:"in-octets" module:"openconfig-interfaces"`
 	InPkts             *uint64 `path:"in-pkts" module:"openconfig-interfaces"`
@@ -41702,6 +43463,38 @@ func (t *Interface_Subinterface_Counters) GetInFcsErrors() uint64 {
 		return 0
 	}
 	return *t.InFcsErrors
+}
+
+// GetInLinkDownDiscards retrieves the value of the leaf InLinkDownDiscards from the Interface_Subinterface_Counters
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if InLinkDownDiscards is set, it can
+// safely use t.GetInLinkDownDiscards() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.InLinkDownDiscards == nil' before retrieving the leaf's value.
+func (t *Interface_Subinterface_Counters) GetInLinkDownDiscards() uint64 {
+	if t == nil || t.InLinkDownDiscards == nil {
+		return 0
+	}
+	return *t.InLinkDownDiscards
+}
+
+// GetInLowTtlDiscards retrieves the value of the leaf InLowTtlDiscards from the Interface_Subinterface_Counters
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if InLowTtlDiscards is set, it can
+// safely use t.GetInLowTtlDiscards() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.InLowTtlDiscards == nil' before retrieving the leaf's value.
+func (t *Interface_Subinterface_Counters) GetInLowTtlDiscards() uint64 {
+	if t == nil || t.InLowTtlDiscards == nil {
+		return 0
+	}
+	return *t.InLowTtlDiscards
 }
 
 // GetInMulticastPkts retrieves the value of the leaf InMulticastPkts from the Interface_Subinterface_Counters
@@ -41940,6 +43733,18 @@ func (t *Interface_Subinterface_Counters) SetInErrors(v uint64) {
 // struct.
 func (t *Interface_Subinterface_Counters) SetInFcsErrors(v uint64) {
 	t.InFcsErrors = &v
+}
+
+// SetInLinkDownDiscards sets the value of the leaf InLinkDownDiscards in the Interface_Subinterface_Counters
+// struct.
+func (t *Interface_Subinterface_Counters) SetInLinkDownDiscards(v uint64) {
+	t.InLinkDownDiscards = &v
+}
+
+// SetInLowTtlDiscards sets the value of the leaf InLowTtlDiscards in the Interface_Subinterface_Counters
+// struct.
+func (t *Interface_Subinterface_Counters) SetInLowTtlDiscards(v uint64) {
+	t.InLowTtlDiscards = &v
 }
 
 // SetInMulticastPkts sets the value of the leaf InMulticastPkts in the Interface_Subinterface_Counters
@@ -43787,13 +45592,141 @@ func (*Interface_Subinterface_Ipv4_Neighbor) ΛBelongingModule() string {
 
 // Interface_Subinterface_Ipv4_ProxyArp represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/proxy-arp YANG schema element.
 type Interface_Subinterface_Ipv4_ProxyArp struct {
-	Mode E_ProxyArp_Mode `path:"state/mode" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/mode" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
+	ManualIpRange map[string]*Interface_Subinterface_Ipv4_ProxyArp_ManualIpRange `path:"manual-ip-ranges/manual-ip-range" module:"openconfig-if-ip/openconfig-if-ip"`
+	Mode          E_ProxyArp_Mode                                                `path:"state/mode" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/mode" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
 }
 
 // IsYANGGoStruct ensures that Interface_Subinterface_Ipv4_ProxyArp implements the yang.GoStruct
 // interface. This allows functions that need to handle this struct to
 // identify it as being generated by ygen.
 func (*Interface_Subinterface_Ipv4_ProxyArp) IsYANGGoStruct() {}
+
+// NewManualIpRange creates a new entry in the ManualIpRange list of the
+// Interface_Subinterface_Ipv4_ProxyArp struct. The keys of the list are populated from the input
+// arguments.
+func (t *Interface_Subinterface_Ipv4_ProxyArp) NewManualIpRange(IpRange string) (*Interface_Subinterface_Ipv4_ProxyArp_ManualIpRange, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.ManualIpRange == nil {
+		t.ManualIpRange = make(map[string]*Interface_Subinterface_Ipv4_ProxyArp_ManualIpRange)
+	}
+
+	key := IpRange
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.ManualIpRange[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list ManualIpRange", key)
+	}
+
+	t.ManualIpRange[key] = &Interface_Subinterface_Ipv4_ProxyArp_ManualIpRange{
+		IpRange: &IpRange,
+	}
+
+	return t.ManualIpRange[key], nil
+}
+
+// RenameManualIpRange renames an entry in the list ManualIpRange within
+// the Interface_Subinterface_Ipv4_ProxyArp struct. The entry with key oldK is renamed to newK updating
+// the key within the value.
+func (t *Interface_Subinterface_Ipv4_ProxyArp) RenameManualIpRange(oldK, newK string) error {
+	if _, ok := t.ManualIpRange[newK]; ok {
+		return fmt.Errorf("key %v already exists in ManualIpRange", newK)
+	}
+
+	e, ok := t.ManualIpRange[oldK]
+	if !ok {
+		return fmt.Errorf("key %v not found in ManualIpRange", oldK)
+	}
+	e.IpRange = &newK
+
+	t.ManualIpRange[newK] = e
+	delete(t.ManualIpRange, oldK)
+	return nil
+}
+
+// GetOrCreateManualIpRangeMap returns the list (map) from Interface_Subinterface_Ipv4_ProxyArp.
+//
+// It initializes the field if not already initialized.
+func (t *Interface_Subinterface_Ipv4_ProxyArp) GetOrCreateManualIpRangeMap() map[string]*Interface_Subinterface_Ipv4_ProxyArp_ManualIpRange {
+	if t.ManualIpRange == nil {
+		t.ManualIpRange = make(map[string]*Interface_Subinterface_Ipv4_ProxyArp_ManualIpRange)
+	}
+	return t.ManualIpRange
+}
+
+// GetOrCreateManualIpRange retrieves the value with the specified keys from
+// the receiver Interface_Subinterface_Ipv4_ProxyArp. If the entry does not exist, then it is created.
+// It returns the existing or new list member.
+func (t *Interface_Subinterface_Ipv4_ProxyArp) GetOrCreateManualIpRange(IpRange string) *Interface_Subinterface_Ipv4_ProxyArp_ManualIpRange {
+
+	key := IpRange
+
+	if v, ok := t.ManualIpRange[key]; ok {
+		return v
+	}
+	// Panic if we receive an error, since we should have retrieved an existing
+	// list member. This allows chaining of GetOrCreate methods.
+	v, err := t.NewManualIpRange(IpRange)
+	if err != nil {
+		panic(fmt.Sprintf("GetOrCreateManualIpRange got unexpected error: %v", err))
+	}
+	return v
+}
+
+// GetManualIpRange retrieves the value with the specified key from
+// the ManualIpRange map field of Interface_Subinterface_Ipv4_ProxyArp. If the receiver is nil, or
+// the specified key is not present in the list, nil is returned such that Get*
+// methods may be safely chained.
+func (t *Interface_Subinterface_Ipv4_ProxyArp) GetManualIpRange(IpRange string) *Interface_Subinterface_Ipv4_ProxyArp_ManualIpRange {
+
+	if t == nil {
+		return nil
+	}
+
+	key := IpRange
+
+	if lm, ok := t.ManualIpRange[key]; ok {
+		return lm
+	}
+	return nil
+}
+
+// DeleteManualIpRange deletes the value with the specified keys from
+// the receiver Interface_Subinterface_Ipv4_ProxyArp. If there is no such element, the function
+// is a no-op.
+func (t *Interface_Subinterface_Ipv4_ProxyArp) DeleteManualIpRange(IpRange string) {
+	key := IpRange
+
+	delete(t.ManualIpRange, key)
+}
+
+// AppendManualIpRange appends the supplied Interface_Subinterface_Ipv4_ProxyArp_ManualIpRange struct to the
+// list ManualIpRange of Interface_Subinterface_Ipv4_ProxyArp. If the key value(s) specified in
+// the supplied Interface_Subinterface_Ipv4_ProxyArp_ManualIpRange already exist in the list, an error is
+// returned.
+func (t *Interface_Subinterface_Ipv4_ProxyArp) AppendManualIpRange(v *Interface_Subinterface_Ipv4_ProxyArp_ManualIpRange) error {
+	if v.IpRange == nil {
+		return fmt.Errorf("invalid nil key received for IpRange")
+	}
+
+	key := *v.IpRange
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.ManualIpRange == nil {
+		t.ManualIpRange = make(map[string]*Interface_Subinterface_Ipv4_ProxyArp_ManualIpRange)
+	}
+
+	if _, ok := t.ManualIpRange[key]; ok {
+		return fmt.Errorf("duplicate key for list ManualIpRange %v", key)
+	}
+
+	t.ManualIpRange[key] = v
+	return nil
+}
 
 // GetMode retrieves the value of the leaf Mode from the Interface_Subinterface_Ipv4_ProxyArp
 // struct. If the field is unset but has a default value in the YANG schema,
@@ -43828,6 +45761,9 @@ func (t *Interface_Subinterface_Ipv4_ProxyArp) PopulateDefaults() {
 	if t.Mode == 0 {
 		t.Mode = ProxyArp_Mode_DISABLE
 	}
+	for _, e := range t.ManualIpRange {
+		e.PopulateDefaults()
+	}
 }
 
 // Validate validates s against the YANG schema corresponding to its type.
@@ -43852,6 +45788,84 @@ func (t *Interface_Subinterface_Ipv4_ProxyArp) ΛEnumTypeMap() map[string][]refl
 // ΛBelongingModule returns the name of the module that defines the namespace
 // of Interface_Subinterface_Ipv4_ProxyArp.
 func (*Interface_Subinterface_Ipv4_ProxyArp) ΛBelongingModule() string {
+	return "openconfig-if-ip"
+}
+
+// Interface_Subinterface_Ipv4_ProxyArp_ManualIpRange represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv4/proxy-arp/manual-ip-ranges/manual-ip-range YANG schema element.
+type Interface_Subinterface_Ipv4_ProxyArp_ManualIpRange struct {
+	IpRange *string `path:"state/ip-range|ip-range" module:"openconfig-if-ip/openconfig-if-ip|openconfig-if-ip" shadow-path:"config/ip-range|ip-range" shadow-module:"openconfig-if-ip/openconfig-if-ip|openconfig-if-ip"`
+}
+
+// IsYANGGoStruct ensures that Interface_Subinterface_Ipv4_ProxyArp_ManualIpRange implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*Interface_Subinterface_Ipv4_ProxyArp_ManualIpRange) IsYANGGoStruct() {}
+
+// GetIpRange retrieves the value of the leaf IpRange from the Interface_Subinterface_Ipv4_ProxyArp_ManualIpRange
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if IpRange is set, it can
+// safely use t.GetIpRange() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.IpRange == nil' before retrieving the leaf's value.
+func (t *Interface_Subinterface_Ipv4_ProxyArp_ManualIpRange) GetIpRange() string {
+	if t == nil || t.IpRange == nil {
+		return ""
+	}
+	return *t.IpRange
+}
+
+// SetIpRange sets the value of the leaf IpRange in the Interface_Subinterface_Ipv4_ProxyArp_ManualIpRange
+// struct.
+func (t *Interface_Subinterface_Ipv4_ProxyArp_ManualIpRange) SetIpRange(v string) {
+	t.IpRange = &v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the Interface_Subinterface_Ipv4_ProxyArp_ManualIpRange
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *Interface_Subinterface_Ipv4_ProxyArp_ManualIpRange) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// ΛListKeyMap returns the keys of the Interface_Subinterface_Ipv4_ProxyArp_ManualIpRange struct, which is a YANG list entry.
+func (t *Interface_Subinterface_Ipv4_ProxyArp_ManualIpRange) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.IpRange == nil {
+		return nil, fmt.Errorf("nil value for key IpRange")
+	}
+
+	return map[string]interface{}{
+		"ip-range": *t.IpRange,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *Interface_Subinterface_Ipv4_ProxyArp_ManualIpRange) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["Interface_Subinterface_Ipv4_ProxyArp_ManualIpRange"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *Interface_Subinterface_Ipv4_ProxyArp_ManualIpRange) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *Interface_Subinterface_Ipv4_ProxyArp_ManualIpRange) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of Interface_Subinterface_Ipv4_ProxyArp_ManualIpRange.
+func (*Interface_Subinterface_Ipv4_ProxyArp_ManualIpRange) ΛBelongingModule() string {
 	return "openconfig-if-ip"
 }
 
@@ -44232,6 +46246,7 @@ type Interface_Subinterface_Ipv6 struct {
 	DhcpClient             *bool                                            `path:"state/dhcp-client" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/dhcp-client" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
 	DupAddrDetectTransmits *uint32                                          `path:"state/dup-addr-detect-transmits" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/dup-addr-detect-transmits" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
 	Enabled                *bool                                            `path:"state/enabled" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/enabled" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
+	Icmp                   *Interface_Subinterface_Ipv6_Icmp                `path:"icmp" module:"openconfig-if-ip"`
 	LearnUnsolicited       E_Ipv6_LearnUnsolicited                          `path:"state/learn-unsolicited" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/learn-unsolicited" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
 	Mtu                    *uint32                                          `path:"state/mtu" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/mtu" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
 	Neighbor               map[string]*Interface_Subinterface_Ipv6_Neighbor `path:"neighbors/neighbor" module:"openconfig-if-ip/openconfig-if-ip"`
@@ -44519,6 +46534,16 @@ func (t *Interface_Subinterface_Ipv6) GetOrCreateCounters() *Interface_Subinterf
 	return t.Counters
 }
 
+// GetOrCreateIcmp retrieves the value of the Icmp field
+// or returns the existing field if it already exists.
+func (t *Interface_Subinterface_Ipv6) GetOrCreateIcmp() *Interface_Subinterface_Ipv6_Icmp {
+	if t.Icmp != nil {
+		return t.Icmp
+	}
+	t.Icmp = &Interface_Subinterface_Ipv6_Icmp{}
+	return t.Icmp
+}
+
 // GetOrCreateRouterAdvertisement retrieves the value of the RouterAdvertisement field
 // or returns the existing field if it already exists.
 func (t *Interface_Subinterface_Ipv6) GetOrCreateRouterAdvertisement() *Interface_Subinterface_Ipv6_RouterAdvertisement {
@@ -44565,6 +46590,16 @@ func (t *Interface_Subinterface_Ipv6) GetAutoconf() *Interface_Subinterface_Ipv6
 func (t *Interface_Subinterface_Ipv6) GetCounters() *Interface_Subinterface_Ipv6_Counters {
 	if t != nil && t.Counters != nil {
 		return t.Counters
+	}
+	return nil
+}
+
+// GetIcmp returns the value of the Icmp struct pointer
+// from Interface_Subinterface_Ipv6. If the receiver or the field Icmp is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *Interface_Subinterface_Ipv6) GetIcmp() *Interface_Subinterface_Ipv6_Icmp {
+	if t != nil && t.Icmp != nil {
+		return t.Icmp
 	}
 	return nil
 }
@@ -44734,6 +46769,7 @@ func (t *Interface_Subinterface_Ipv6) PopulateDefaults() {
 	}
 	t.Autoconf.PopulateDefaults()
 	t.Counters.PopulateDefaults()
+	t.Icmp.PopulateDefaults()
 	t.RouterAdvertisement.PopulateDefaults()
 	t.Unnumbered.PopulateDefaults()
 	t.Urpf.PopulateDefaults()
@@ -46080,6 +48116,323 @@ func (*Interface_Subinterface_Ipv6_Counters) ΛBelongingModule() string {
 	return "openconfig-if-ip"
 }
 
+// Interface_Subinterface_Ipv6_Icmp represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/icmp YANG schema element.
+type Interface_Subinterface_Ipv6_Icmp struct {
+	Counters *Interface_Subinterface_Ipv6_Icmp_Counters `path:"state/counters" module:"openconfig-if-ip/openconfig-if-ip"`
+}
+
+// IsYANGGoStruct ensures that Interface_Subinterface_Ipv6_Icmp implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*Interface_Subinterface_Ipv6_Icmp) IsYANGGoStruct() {}
+
+// GetOrCreateCounters retrieves the value of the Counters field
+// or returns the existing field if it already exists.
+func (t *Interface_Subinterface_Ipv6_Icmp) GetOrCreateCounters() *Interface_Subinterface_Ipv6_Icmp_Counters {
+	if t.Counters != nil {
+		return t.Counters
+	}
+	t.Counters = &Interface_Subinterface_Ipv6_Icmp_Counters{}
+	return t.Counters
+}
+
+// GetCounters returns the value of the Counters struct pointer
+// from Interface_Subinterface_Ipv6_Icmp. If the receiver or the field Counters is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *Interface_Subinterface_Ipv6_Icmp) GetCounters() *Interface_Subinterface_Ipv6_Icmp_Counters {
+	if t != nil && t.Counters != nil {
+		return t.Counters
+	}
+	return nil
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the Interface_Subinterface_Ipv6_Icmp
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *Interface_Subinterface_Ipv6_Icmp) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+	t.Counters.PopulateDefaults()
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *Interface_Subinterface_Ipv6_Icmp) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["Interface_Subinterface_Ipv6_Icmp"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *Interface_Subinterface_Ipv6_Icmp) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *Interface_Subinterface_Ipv6_Icmp) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of Interface_Subinterface_Ipv6_Icmp.
+func (*Interface_Subinterface_Ipv6_Icmp) ΛBelongingModule() string {
+	return "openconfig-if-ip"
+}
+
+// Interface_Subinterface_Ipv6_Icmp_Counters represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/icmp/state/counters YANG schema element.
+type Interface_Subinterface_Ipv6_Icmp_Counters struct {
+	InChecksumErrors          *uint64 `path:"in-checksum-errors" module:"openconfig-if-ip"`
+	InEchoRequests            *uint64 `path:"in-echo-requests" module:"openconfig-if-ip"`
+	InErrors                  *uint64 `path:"in-errors" module:"openconfig-if-ip"`
+	InNeighborAdvertisements  *uint64 `path:"in-neighbor-advertisements" module:"openconfig-if-ip"`
+	InNeighborSolicitations   *uint64 `path:"in-neighbor-solicitations" module:"openconfig-if-ip"`
+	OutEchoReplies            *uint64 `path:"out-echo-replies" module:"openconfig-if-ip"`
+	OutErrors                 *uint64 `path:"out-errors" module:"openconfig-if-ip"`
+	OutNeighborAdvertisements *uint64 `path:"out-neighbor-advertisements" module:"openconfig-if-ip"`
+	OutNeighborSolicitations  *uint64 `path:"out-neighbor-solicitations" module:"openconfig-if-ip"`
+}
+
+// IsYANGGoStruct ensures that Interface_Subinterface_Ipv6_Icmp_Counters implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*Interface_Subinterface_Ipv6_Icmp_Counters) IsYANGGoStruct() {}
+
+// GetInChecksumErrors retrieves the value of the leaf InChecksumErrors from the Interface_Subinterface_Ipv6_Icmp_Counters
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if InChecksumErrors is set, it can
+// safely use t.GetInChecksumErrors() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.InChecksumErrors == nil' before retrieving the leaf's value.
+func (t *Interface_Subinterface_Ipv6_Icmp_Counters) GetInChecksumErrors() uint64 {
+	if t == nil || t.InChecksumErrors == nil {
+		return 0
+	}
+	return *t.InChecksumErrors
+}
+
+// GetInEchoRequests retrieves the value of the leaf InEchoRequests from the Interface_Subinterface_Ipv6_Icmp_Counters
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if InEchoRequests is set, it can
+// safely use t.GetInEchoRequests() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.InEchoRequests == nil' before retrieving the leaf's value.
+func (t *Interface_Subinterface_Ipv6_Icmp_Counters) GetInEchoRequests() uint64 {
+	if t == nil || t.InEchoRequests == nil {
+		return 0
+	}
+	return *t.InEchoRequests
+}
+
+// GetInErrors retrieves the value of the leaf InErrors from the Interface_Subinterface_Ipv6_Icmp_Counters
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if InErrors is set, it can
+// safely use t.GetInErrors() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.InErrors == nil' before retrieving the leaf's value.
+func (t *Interface_Subinterface_Ipv6_Icmp_Counters) GetInErrors() uint64 {
+	if t == nil || t.InErrors == nil {
+		return 0
+	}
+	return *t.InErrors
+}
+
+// GetInNeighborAdvertisements retrieves the value of the leaf InNeighborAdvertisements from the Interface_Subinterface_Ipv6_Icmp_Counters
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if InNeighborAdvertisements is set, it can
+// safely use t.GetInNeighborAdvertisements() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.InNeighborAdvertisements == nil' before retrieving the leaf's value.
+func (t *Interface_Subinterface_Ipv6_Icmp_Counters) GetInNeighborAdvertisements() uint64 {
+	if t == nil || t.InNeighborAdvertisements == nil {
+		return 0
+	}
+	return *t.InNeighborAdvertisements
+}
+
+// GetInNeighborSolicitations retrieves the value of the leaf InNeighborSolicitations from the Interface_Subinterface_Ipv6_Icmp_Counters
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if InNeighborSolicitations is set, it can
+// safely use t.GetInNeighborSolicitations() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.InNeighborSolicitations == nil' before retrieving the leaf's value.
+func (t *Interface_Subinterface_Ipv6_Icmp_Counters) GetInNeighborSolicitations() uint64 {
+	if t == nil || t.InNeighborSolicitations == nil {
+		return 0
+	}
+	return *t.InNeighborSolicitations
+}
+
+// GetOutEchoReplies retrieves the value of the leaf OutEchoReplies from the Interface_Subinterface_Ipv6_Icmp_Counters
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if OutEchoReplies is set, it can
+// safely use t.GetOutEchoReplies() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.OutEchoReplies == nil' before retrieving the leaf's value.
+func (t *Interface_Subinterface_Ipv6_Icmp_Counters) GetOutEchoReplies() uint64 {
+	if t == nil || t.OutEchoReplies == nil {
+		return 0
+	}
+	return *t.OutEchoReplies
+}
+
+// GetOutErrors retrieves the value of the leaf OutErrors from the Interface_Subinterface_Ipv6_Icmp_Counters
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if OutErrors is set, it can
+// safely use t.GetOutErrors() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.OutErrors == nil' before retrieving the leaf's value.
+func (t *Interface_Subinterface_Ipv6_Icmp_Counters) GetOutErrors() uint64 {
+	if t == nil || t.OutErrors == nil {
+		return 0
+	}
+	return *t.OutErrors
+}
+
+// GetOutNeighborAdvertisements retrieves the value of the leaf OutNeighborAdvertisements from the Interface_Subinterface_Ipv6_Icmp_Counters
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if OutNeighborAdvertisements is set, it can
+// safely use t.GetOutNeighborAdvertisements() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.OutNeighborAdvertisements == nil' before retrieving the leaf's value.
+func (t *Interface_Subinterface_Ipv6_Icmp_Counters) GetOutNeighborAdvertisements() uint64 {
+	if t == nil || t.OutNeighborAdvertisements == nil {
+		return 0
+	}
+	return *t.OutNeighborAdvertisements
+}
+
+// GetOutNeighborSolicitations retrieves the value of the leaf OutNeighborSolicitations from the Interface_Subinterface_Ipv6_Icmp_Counters
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if OutNeighborSolicitations is set, it can
+// safely use t.GetOutNeighborSolicitations() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.OutNeighborSolicitations == nil' before retrieving the leaf's value.
+func (t *Interface_Subinterface_Ipv6_Icmp_Counters) GetOutNeighborSolicitations() uint64 {
+	if t == nil || t.OutNeighborSolicitations == nil {
+		return 0
+	}
+	return *t.OutNeighborSolicitations
+}
+
+// SetInChecksumErrors sets the value of the leaf InChecksumErrors in the Interface_Subinterface_Ipv6_Icmp_Counters
+// struct.
+func (t *Interface_Subinterface_Ipv6_Icmp_Counters) SetInChecksumErrors(v uint64) {
+	t.InChecksumErrors = &v
+}
+
+// SetInEchoRequests sets the value of the leaf InEchoRequests in the Interface_Subinterface_Ipv6_Icmp_Counters
+// struct.
+func (t *Interface_Subinterface_Ipv6_Icmp_Counters) SetInEchoRequests(v uint64) {
+	t.InEchoRequests = &v
+}
+
+// SetInErrors sets the value of the leaf InErrors in the Interface_Subinterface_Ipv6_Icmp_Counters
+// struct.
+func (t *Interface_Subinterface_Ipv6_Icmp_Counters) SetInErrors(v uint64) {
+	t.InErrors = &v
+}
+
+// SetInNeighborAdvertisements sets the value of the leaf InNeighborAdvertisements in the Interface_Subinterface_Ipv6_Icmp_Counters
+// struct.
+func (t *Interface_Subinterface_Ipv6_Icmp_Counters) SetInNeighborAdvertisements(v uint64) {
+	t.InNeighborAdvertisements = &v
+}
+
+// SetInNeighborSolicitations sets the value of the leaf InNeighborSolicitations in the Interface_Subinterface_Ipv6_Icmp_Counters
+// struct.
+func (t *Interface_Subinterface_Ipv6_Icmp_Counters) SetInNeighborSolicitations(v uint64) {
+	t.InNeighborSolicitations = &v
+}
+
+// SetOutEchoReplies sets the value of the leaf OutEchoReplies in the Interface_Subinterface_Ipv6_Icmp_Counters
+// struct.
+func (t *Interface_Subinterface_Ipv6_Icmp_Counters) SetOutEchoReplies(v uint64) {
+	t.OutEchoReplies = &v
+}
+
+// SetOutErrors sets the value of the leaf OutErrors in the Interface_Subinterface_Ipv6_Icmp_Counters
+// struct.
+func (t *Interface_Subinterface_Ipv6_Icmp_Counters) SetOutErrors(v uint64) {
+	t.OutErrors = &v
+}
+
+// SetOutNeighborAdvertisements sets the value of the leaf OutNeighborAdvertisements in the Interface_Subinterface_Ipv6_Icmp_Counters
+// struct.
+func (t *Interface_Subinterface_Ipv6_Icmp_Counters) SetOutNeighborAdvertisements(v uint64) {
+	t.OutNeighborAdvertisements = &v
+}
+
+// SetOutNeighborSolicitations sets the value of the leaf OutNeighborSolicitations in the Interface_Subinterface_Ipv6_Icmp_Counters
+// struct.
+func (t *Interface_Subinterface_Ipv6_Icmp_Counters) SetOutNeighborSolicitations(v uint64) {
+	t.OutNeighborSolicitations = &v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the Interface_Subinterface_Ipv6_Icmp_Counters
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *Interface_Subinterface_Ipv6_Icmp_Counters) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *Interface_Subinterface_Ipv6_Icmp_Counters) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["Interface_Subinterface_Ipv6_Icmp_Counters"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *Interface_Subinterface_Ipv6_Icmp_Counters) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *Interface_Subinterface_Ipv6_Icmp_Counters) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of Interface_Subinterface_Ipv6_Icmp_Counters.
+func (*Interface_Subinterface_Ipv6_Icmp_Counters) ΛBelongingModule() string {
+	return "openconfig-if-ip"
+}
+
 // Interface_Subinterface_Ipv6_Neighbor represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/neighbors/neighbor YANG schema element.
 type Interface_Subinterface_Ipv6_Neighbor struct {
 	Ip               *string                  `path:"state/ip|ip" module:"openconfig-if-ip/openconfig-if-ip|openconfig-if-ip" shadow-path:"config/ip|ip" shadow-module:"openconfig-if-ip/openconfig-if-ip|openconfig-if-ip"`
@@ -46252,15 +48605,18 @@ func (*Interface_Subinterface_Ipv6_Neighbor) ΛBelongingModule() string {
 
 // Interface_Subinterface_Ipv6_RouterAdvertisement represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement YANG schema element.
 type Interface_Subinterface_Ipv6_RouterAdvertisement struct {
-	DnsServer   map[string]*Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServer `path:"dns-servers/dns-server" module:"openconfig-if-ip/openconfig-if-ip"`
-	Enable      *bool                                                                 `path:"state/enable" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/enable" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
-	Interval    *uint32                                                               `path:"state/interval" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/interval" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
-	Lifetime    *uint32                                                               `path:"state/lifetime" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/lifetime" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
-	Managed     *bool                                                                 `path:"state/managed" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/managed" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
-	Mode        E_RouterAdvertisement_Mode                                            `path:"state/mode" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/mode" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
-	OtherConfig *bool                                                                 `path:"state/other-config" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/other-config" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
-	Prefix      map[string]*Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix    `path:"prefixes/prefix" module:"openconfig-if-ip/openconfig-if-ip"`
-	Suppress    *bool                                                                 `path:"state/suppress" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/suppress" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
+	Counters         *Interface_Subinterface_Ipv6_RouterAdvertisement_Counters             `path:"state/counters" module:"openconfig-if-ip/openconfig-if-ip"`
+	DnsServer        map[string]*Interface_Subinterface_Ipv6_RouterAdvertisement_DnsServer `path:"dns-servers/dns-server" module:"openconfig-if-ip/openconfig-if-ip"`
+	Enable           *bool                                                                 `path:"state/enable" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/enable" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
+	Interval         *uint32                                                               `path:"state/interval" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/interval" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
+	Lifetime         *uint32                                                               `path:"state/lifetime" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/lifetime" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
+	Managed          *bool                                                                 `path:"state/managed" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/managed" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
+	Mode             E_RouterAdvertisement_Mode                                            `path:"state/mode" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/mode" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
+	OtherConfig      *bool                                                                 `path:"state/other-config" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/other-config" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
+	Prefix           map[string]*Interface_Subinterface_Ipv6_RouterAdvertisement_Prefix    `path:"prefixes/prefix" module:"openconfig-if-ip/openconfig-if-ip"`
+	ReachableTime    *uint32                                                               `path:"state/reachable-time" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/reachable-time" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
+	RouterPreference E_RouterAdvertisement_RouterPreference                                `path:"state/router-preference" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/router-preference" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
+	Suppress         *bool                                                                 `path:"state/suppress" module:"openconfig-if-ip/openconfig-if-ip" shadow-path:"config/suppress" shadow-module:"openconfig-if-ip/openconfig-if-ip"`
 }
 
 // IsYANGGoStruct ensures that Interface_Subinterface_Ipv6_RouterAdvertisement implements the yang.GoStruct
@@ -46522,6 +48878,26 @@ func (t *Interface_Subinterface_Ipv6_RouterAdvertisement) AppendPrefix(v *Interf
 	return nil
 }
 
+// GetOrCreateCounters retrieves the value of the Counters field
+// or returns the existing field if it already exists.
+func (t *Interface_Subinterface_Ipv6_RouterAdvertisement) GetOrCreateCounters() *Interface_Subinterface_Ipv6_RouterAdvertisement_Counters {
+	if t.Counters != nil {
+		return t.Counters
+	}
+	t.Counters = &Interface_Subinterface_Ipv6_RouterAdvertisement_Counters{}
+	return t.Counters
+}
+
+// GetCounters returns the value of the Counters struct pointer
+// from Interface_Subinterface_Ipv6_RouterAdvertisement. If the receiver or the field Counters is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *Interface_Subinterface_Ipv6_RouterAdvertisement) GetCounters() *Interface_Subinterface_Ipv6_RouterAdvertisement_Counters {
+	if t != nil && t.Counters != nil {
+		return t.Counters
+	}
+	return nil
+}
+
 // GetEnable retrieves the value of the leaf Enable from the Interface_Subinterface_Ipv6_RouterAdvertisement
 // struct. If the field is unset but has a default value in the YANG schema,
 // then the default value will be returned.
@@ -46618,6 +48994,38 @@ func (t *Interface_Subinterface_Ipv6_RouterAdvertisement) GetOtherConfig() bool 
 	return *t.OtherConfig
 }
 
+// GetReachableTime retrieves the value of the leaf ReachableTime from the Interface_Subinterface_Ipv6_RouterAdvertisement
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if ReachableTime is set, it can
+// safely use t.GetReachableTime() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.ReachableTime == nil' before retrieving the leaf's value.
+func (t *Interface_Subinterface_Ipv6_RouterAdvertisement) GetReachableTime() uint32 {
+	if t == nil || t.ReachableTime == nil {
+		return 0
+	}
+	return *t.ReachableTime
+}
+
+// GetRouterPreference retrieves the value of the leaf RouterPreference from the Interface_Subinterface_Ipv6_RouterAdvertisement
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if RouterPreference is set, it can
+// safely use t.GetRouterPreference() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.RouterPreference == nil' before retrieving the leaf's value.
+func (t *Interface_Subinterface_Ipv6_RouterAdvertisement) GetRouterPreference() E_RouterAdvertisement_RouterPreference {
+	if t == nil || t.RouterPreference == 0 {
+		return RouterAdvertisement_RouterPreference_MEDIUM
+	}
+	return t.RouterPreference
+}
+
 // GetSuppress retrieves the value of the leaf Suppress from the Interface_Subinterface_Ipv6_RouterAdvertisement
 // struct. If the field is unset but has a default value in the YANG schema,
 // then the default value will be returned.
@@ -46670,6 +49078,18 @@ func (t *Interface_Subinterface_Ipv6_RouterAdvertisement) SetOtherConfig(v bool)
 	t.OtherConfig = &v
 }
 
+// SetReachableTime sets the value of the leaf ReachableTime in the Interface_Subinterface_Ipv6_RouterAdvertisement
+// struct.
+func (t *Interface_Subinterface_Ipv6_RouterAdvertisement) SetReachableTime(v uint32) {
+	t.ReachableTime = &v
+}
+
+// SetRouterPreference sets the value of the leaf RouterPreference in the Interface_Subinterface_Ipv6_RouterAdvertisement
+// struct.
+func (t *Interface_Subinterface_Ipv6_RouterAdvertisement) SetRouterPreference(v E_RouterAdvertisement_RouterPreference) {
+	t.RouterPreference = v
+}
+
 // SetSuppress sets the value of the leaf Suppress in the Interface_Subinterface_Ipv6_RouterAdvertisement
 // struct.
 func (t *Interface_Subinterface_Ipv6_RouterAdvertisement) SetSuppress(v bool) {
@@ -46699,10 +49119,18 @@ func (t *Interface_Subinterface_Ipv6_RouterAdvertisement) PopulateDefaults() {
 		var v bool = false
 		t.OtherConfig = &v
 	}
+	if t.ReachableTime == nil {
+		var v uint32 = 0
+		t.ReachableTime = &v
+	}
+	if t.RouterPreference == 0 {
+		t.RouterPreference = RouterAdvertisement_RouterPreference_MEDIUM
+	}
 	if t.Suppress == nil {
 		var v bool = false
 		t.Suppress = &v
 	}
+	t.Counters.PopulateDefaults()
 	for _, e := range t.DnsServer {
 		e.PopulateDefaults()
 	}
@@ -46733,6 +49161,142 @@ func (t *Interface_Subinterface_Ipv6_RouterAdvertisement) ΛEnumTypeMap() map[st
 // ΛBelongingModule returns the name of the module that defines the namespace
 // of Interface_Subinterface_Ipv6_RouterAdvertisement.
 func (*Interface_Subinterface_Ipv6_RouterAdvertisement) ΛBelongingModule() string {
+	return "openconfig-if-ip"
+}
+
+// Interface_Subinterface_Ipv6_RouterAdvertisement_Counters represents the /openconfig-interfaces/interfaces/interface/subinterfaces/subinterface/ipv6/router-advertisement/state/counters YANG schema element.
+type Interface_Subinterface_Ipv6_RouterAdvertisement_Counters struct {
+	InRouterAdvertisements  *uint64 `path:"in-router-advertisements" module:"openconfig-if-ip"`
+	InRouterSolicitations   *uint64 `path:"in-router-solicitations" module:"openconfig-if-ip"`
+	OutRouterAdvertisements *uint64 `path:"out-router-advertisements" module:"openconfig-if-ip"`
+	OutRouterSolicitations  *uint64 `path:"out-router-solicitations" module:"openconfig-if-ip"`
+}
+
+// IsYANGGoStruct ensures that Interface_Subinterface_Ipv6_RouterAdvertisement_Counters implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*Interface_Subinterface_Ipv6_RouterAdvertisement_Counters) IsYANGGoStruct() {}
+
+// GetInRouterAdvertisements retrieves the value of the leaf InRouterAdvertisements from the Interface_Subinterface_Ipv6_RouterAdvertisement_Counters
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if InRouterAdvertisements is set, it can
+// safely use t.GetInRouterAdvertisements() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.InRouterAdvertisements == nil' before retrieving the leaf's value.
+func (t *Interface_Subinterface_Ipv6_RouterAdvertisement_Counters) GetInRouterAdvertisements() uint64 {
+	if t == nil || t.InRouterAdvertisements == nil {
+		return 0
+	}
+	return *t.InRouterAdvertisements
+}
+
+// GetInRouterSolicitations retrieves the value of the leaf InRouterSolicitations from the Interface_Subinterface_Ipv6_RouterAdvertisement_Counters
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if InRouterSolicitations is set, it can
+// safely use t.GetInRouterSolicitations() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.InRouterSolicitations == nil' before retrieving the leaf's value.
+func (t *Interface_Subinterface_Ipv6_RouterAdvertisement_Counters) GetInRouterSolicitations() uint64 {
+	if t == nil || t.InRouterSolicitations == nil {
+		return 0
+	}
+	return *t.InRouterSolicitations
+}
+
+// GetOutRouterAdvertisements retrieves the value of the leaf OutRouterAdvertisements from the Interface_Subinterface_Ipv6_RouterAdvertisement_Counters
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if OutRouterAdvertisements is set, it can
+// safely use t.GetOutRouterAdvertisements() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.OutRouterAdvertisements == nil' before retrieving the leaf's value.
+func (t *Interface_Subinterface_Ipv6_RouterAdvertisement_Counters) GetOutRouterAdvertisements() uint64 {
+	if t == nil || t.OutRouterAdvertisements == nil {
+		return 0
+	}
+	return *t.OutRouterAdvertisements
+}
+
+// GetOutRouterSolicitations retrieves the value of the leaf OutRouterSolicitations from the Interface_Subinterface_Ipv6_RouterAdvertisement_Counters
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if OutRouterSolicitations is set, it can
+// safely use t.GetOutRouterSolicitations() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.OutRouterSolicitations == nil' before retrieving the leaf's value.
+func (t *Interface_Subinterface_Ipv6_RouterAdvertisement_Counters) GetOutRouterSolicitations() uint64 {
+	if t == nil || t.OutRouterSolicitations == nil {
+		return 0
+	}
+	return *t.OutRouterSolicitations
+}
+
+// SetInRouterAdvertisements sets the value of the leaf InRouterAdvertisements in the Interface_Subinterface_Ipv6_RouterAdvertisement_Counters
+// struct.
+func (t *Interface_Subinterface_Ipv6_RouterAdvertisement_Counters) SetInRouterAdvertisements(v uint64) {
+	t.InRouterAdvertisements = &v
+}
+
+// SetInRouterSolicitations sets the value of the leaf InRouterSolicitations in the Interface_Subinterface_Ipv6_RouterAdvertisement_Counters
+// struct.
+func (t *Interface_Subinterface_Ipv6_RouterAdvertisement_Counters) SetInRouterSolicitations(v uint64) {
+	t.InRouterSolicitations = &v
+}
+
+// SetOutRouterAdvertisements sets the value of the leaf OutRouterAdvertisements in the Interface_Subinterface_Ipv6_RouterAdvertisement_Counters
+// struct.
+func (t *Interface_Subinterface_Ipv6_RouterAdvertisement_Counters) SetOutRouterAdvertisements(v uint64) {
+	t.OutRouterAdvertisements = &v
+}
+
+// SetOutRouterSolicitations sets the value of the leaf OutRouterSolicitations in the Interface_Subinterface_Ipv6_RouterAdvertisement_Counters
+// struct.
+func (t *Interface_Subinterface_Ipv6_RouterAdvertisement_Counters) SetOutRouterSolicitations(v uint64) {
+	t.OutRouterSolicitations = &v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the Interface_Subinterface_Ipv6_RouterAdvertisement_Counters
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *Interface_Subinterface_Ipv6_RouterAdvertisement_Counters) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *Interface_Subinterface_Ipv6_RouterAdvertisement_Counters) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["Interface_Subinterface_Ipv6_RouterAdvertisement_Counters"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *Interface_Subinterface_Ipv6_RouterAdvertisement_Counters) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *Interface_Subinterface_Ipv6_RouterAdvertisement_Counters) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of Interface_Subinterface_Ipv6_RouterAdvertisement_Counters.
+func (*Interface_Subinterface_Ipv6_RouterAdvertisement_Counters) ΛBelongingModule() string {
 	return "openconfig-if-ip"
 }
 
@@ -49644,13 +52208,14 @@ func (*Lacp) ΛBelongingModule() string {
 
 // Lacp_Interface represents the /openconfig-lacp/lacp/interfaces/interface YANG schema element.
 type Lacp_Interface struct {
-	Fallback       *bool                             `path:"state/fallback" module:"openconfig-lacp/openconfig-lacp" shadow-path:"config/fallback" shadow-module:"openconfig-lacp/openconfig-lacp"`
-	Interval       E_Lacp_LacpPeriodType             `path:"state/interval" module:"openconfig-lacp/openconfig-lacp" shadow-path:"config/interval" shadow-module:"openconfig-lacp/openconfig-lacp"`
-	LacpMode       E_Lacp_LacpActivityType           `path:"state/lacp-mode" module:"openconfig-lacp/openconfig-lacp" shadow-path:"config/lacp-mode" shadow-module:"openconfig-lacp/openconfig-lacp"`
-	Member         map[string]*Lacp_Interface_Member `path:"members/member" module:"openconfig-lacp/openconfig-lacp"`
-	Name           *string                           `path:"state/name|name" module:"openconfig-lacp/openconfig-lacp|openconfig-lacp" shadow-path:"config/name|name" shadow-module:"openconfig-lacp/openconfig-lacp|openconfig-lacp"`
-	SystemIdMac    *string                           `path:"state/system-id-mac" module:"openconfig-lacp/openconfig-lacp" shadow-path:"config/system-id-mac" shadow-module:"openconfig-lacp/openconfig-lacp"`
-	SystemPriority *uint16                           `path:"state/system-priority" module:"openconfig-lacp/openconfig-lacp" shadow-path:"config/system-priority" shadow-module:"openconfig-lacp/openconfig-lacp"`
+	Fallback        *bool                             `path:"state/fallback" module:"openconfig-lacp/openconfig-lacp" shadow-path:"config/fallback" shadow-module:"openconfig-lacp/openconfig-lacp"`
+	FallbackTimeout *uint16                           `path:"state/fallback-timeout" module:"openconfig-lacp/openconfig-lacp" shadow-path:"config/fallback-timeout" shadow-module:"openconfig-lacp/openconfig-lacp"`
+	Interval        E_Lacp_LacpPeriodType             `path:"state/interval" module:"openconfig-lacp/openconfig-lacp" shadow-path:"config/interval" shadow-module:"openconfig-lacp/openconfig-lacp"`
+	LacpMode        E_Lacp_LacpActivityType           `path:"state/lacp-mode" module:"openconfig-lacp/openconfig-lacp" shadow-path:"config/lacp-mode" shadow-module:"openconfig-lacp/openconfig-lacp"`
+	Member          map[string]*Lacp_Interface_Member `path:"members/member" module:"openconfig-lacp/openconfig-lacp"`
+	Name            *string                           `path:"state/name|name" module:"openconfig-lacp/openconfig-lacp|openconfig-lacp" shadow-path:"config/name|name" shadow-module:"openconfig-lacp/openconfig-lacp|openconfig-lacp"`
+	SystemIdMac     *string                           `path:"state/system-id-mac" module:"openconfig-lacp/openconfig-lacp" shadow-path:"config/system-id-mac" shadow-module:"openconfig-lacp/openconfig-lacp"`
+	SystemPriority  *uint16                           `path:"state/system-priority" module:"openconfig-lacp/openconfig-lacp" shadow-path:"config/system-priority" shadow-module:"openconfig-lacp/openconfig-lacp"`
 }
 
 // IsYANGGoStruct ensures that Lacp_Interface implements the yang.GoStruct
@@ -49801,6 +52366,22 @@ func (t *Lacp_Interface) GetFallback() bool {
 	return *t.Fallback
 }
 
+// GetFallbackTimeout retrieves the value of the leaf FallbackTimeout from the Lacp_Interface
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if FallbackTimeout is set, it can
+// safely use t.GetFallbackTimeout() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.FallbackTimeout == nil' before retrieving the leaf's value.
+func (t *Lacp_Interface) GetFallbackTimeout() uint16 {
+	if t == nil || t.FallbackTimeout == nil {
+		return 0
+	}
+	return *t.FallbackTimeout
+}
+
 // GetInterval retrieves the value of the leaf Interval from the Lacp_Interface
 // struct. If the field is unset but has a default value in the YANG schema,
 // then the default value will be returned.
@@ -49885,6 +52466,12 @@ func (t *Lacp_Interface) GetSystemPriority() uint16 {
 // struct.
 func (t *Lacp_Interface) SetFallback(v bool) {
 	t.Fallback = &v
+}
+
+// SetFallbackTimeout sets the value of the leaf FallbackTimeout in the Lacp_Interface
+// struct.
+func (t *Lacp_Interface) SetFallbackTimeout(v uint16) {
+	t.FallbackTimeout = &v
 }
 
 // SetInterval sets the value of the leaf Interval in the Lacp_Interface
@@ -50631,6 +53218,8 @@ type Lldp struct {
 	SuppressTlvAdvertisement []E_LldpTypes_LLDP_TLV       `path:"state/suppress-tlv-advertisement" module:"openconfig-lldp/openconfig-lldp" shadow-path:"config/suppress-tlv-advertisement" shadow-module:"openconfig-lldp/openconfig-lldp"`
 	SystemDescription        *string                      `path:"state/system-description" module:"openconfig-lldp/openconfig-lldp" shadow-path:"config/system-description" shadow-module:"openconfig-lldp/openconfig-lldp"`
 	SystemName               *string                      `path:"state/system-name" module:"openconfig-lldp/openconfig-lldp" shadow-path:"config/system-name" shadow-module:"openconfig-lldp/openconfig-lldp"`
+	Tlv                      map[string]*Lldp_Tlv         `path:"custom-tlvs/tlv" module:"openconfig-lldp/openconfig-lldp"`
+	Ttl                      *uint16                      `path:"state/ttl" module:"openconfig-lldp/openconfig-lldp" shadow-path:"config/ttl" shadow-module:"openconfig-lldp/openconfig-lldp"`
 }
 
 // IsYANGGoStruct ensures that Lldp implements the yang.GoStruct
@@ -50892,6 +53481,133 @@ func (t *Lldp) AppendMgmtAddress(v *Lldp_MgmtAddress) error {
 	return nil
 }
 
+// NewTlv creates a new entry in the Tlv list of the
+// Lldp struct. The keys of the list are populated from the input
+// arguments.
+func (t *Lldp) NewTlv(Name string) (*Lldp_Tlv, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.Tlv == nil {
+		t.Tlv = make(map[string]*Lldp_Tlv)
+	}
+
+	key := Name
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.Tlv[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Tlv", key)
+	}
+
+	t.Tlv[key] = &Lldp_Tlv{
+		Name: &Name,
+	}
+
+	return t.Tlv[key], nil
+}
+
+// RenameTlv renames an entry in the list Tlv within
+// the Lldp struct. The entry with key oldK is renamed to newK updating
+// the key within the value.
+func (t *Lldp) RenameTlv(oldK, newK string) error {
+	if _, ok := t.Tlv[newK]; ok {
+		return fmt.Errorf("key %v already exists in Tlv", newK)
+	}
+
+	e, ok := t.Tlv[oldK]
+	if !ok {
+		return fmt.Errorf("key %v not found in Tlv", oldK)
+	}
+	e.Name = &newK
+
+	t.Tlv[newK] = e
+	delete(t.Tlv, oldK)
+	return nil
+}
+
+// GetOrCreateTlvMap returns the list (map) from Lldp.
+//
+// It initializes the field if not already initialized.
+func (t *Lldp) GetOrCreateTlvMap() map[string]*Lldp_Tlv {
+	if t.Tlv == nil {
+		t.Tlv = make(map[string]*Lldp_Tlv)
+	}
+	return t.Tlv
+}
+
+// GetOrCreateTlv retrieves the value with the specified keys from
+// the receiver Lldp. If the entry does not exist, then it is created.
+// It returns the existing or new list member.
+func (t *Lldp) GetOrCreateTlv(Name string) *Lldp_Tlv {
+
+	key := Name
+
+	if v, ok := t.Tlv[key]; ok {
+		return v
+	}
+	// Panic if we receive an error, since we should have retrieved an existing
+	// list member. This allows chaining of GetOrCreate methods.
+	v, err := t.NewTlv(Name)
+	if err != nil {
+		panic(fmt.Sprintf("GetOrCreateTlv got unexpected error: %v", err))
+	}
+	return v
+}
+
+// GetTlv retrieves the value with the specified key from
+// the Tlv map field of Lldp. If the receiver is nil, or
+// the specified key is not present in the list, nil is returned such that Get*
+// methods may be safely chained.
+func (t *Lldp) GetTlv(Name string) *Lldp_Tlv {
+
+	if t == nil {
+		return nil
+	}
+
+	key := Name
+
+	if lm, ok := t.Tlv[key]; ok {
+		return lm
+	}
+	return nil
+}
+
+// DeleteTlv deletes the value with the specified keys from
+// the receiver Lldp. If there is no such element, the function
+// is a no-op.
+func (t *Lldp) DeleteTlv(Name string) {
+	key := Name
+
+	delete(t.Tlv, key)
+}
+
+// AppendTlv appends the supplied Lldp_Tlv struct to the
+// list Tlv of Lldp. If the key value(s) specified in
+// the supplied Lldp_Tlv already exist in the list, an error is
+// returned.
+func (t *Lldp) AppendTlv(v *Lldp_Tlv) error {
+	if v.Name == nil {
+		return fmt.Errorf("invalid nil key received for Name")
+	}
+
+	key := *v.Name
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.Tlv == nil {
+		t.Tlv = make(map[string]*Lldp_Tlv)
+	}
+
+	if _, ok := t.Tlv[key]; ok {
+		return fmt.Errorf("duplicate key for list Tlv %v", key)
+	}
+
+	t.Tlv[key] = v
+	return nil
+}
+
 // GetOrCreateCounters retrieves the value of the Counters field
 // or returns the existing field if it already exists.
 func (t *Lldp) GetOrCreateCounters() *Lldp_Counters {
@@ -51040,6 +53756,22 @@ func (t *Lldp) GetSystemName() string {
 	return *t.SystemName
 }
 
+// GetTtl retrieves the value of the leaf Ttl from the Lldp
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Ttl is set, it can
+// safely use t.GetTtl() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Ttl == nil' before retrieving the leaf's value.
+func (t *Lldp) GetTtl() uint16 {
+	if t == nil || t.Ttl == nil {
+		return 0
+	}
+	return *t.Ttl
+}
+
 // SetChassisId sets the value of the leaf ChassisId in the Lldp
 // struct.
 func (t *Lldp) SetChassisId(v string) {
@@ -51088,6 +53820,12 @@ func (t *Lldp) SetSystemName(v string) {
 	t.SystemName = &v
 }
 
+// SetTtl sets the value of the leaf Ttl in the Lldp
+// struct.
+func (t *Lldp) SetTtl(v uint16) {
+	t.Ttl = &v
+}
+
 // PopulateDefaults recursively populates unset leaf fields in the Lldp
 // with default values as specified in the YANG schema, instantiating any nil
 // container fields.
@@ -51105,6 +53843,9 @@ func (t *Lldp) PopulateDefaults() {
 		e.PopulateDefaults()
 	}
 	for _, e := range t.MgmtAddress {
+		e.PopulateDefaults()
+	}
+	for _, e := range t.Tlv {
 		e.PopulateDefaults()
 	}
 }
@@ -51383,10 +54124,14 @@ func (*Lldp_Counters) ΛBelongingModule() string {
 
 // Lldp_Interface represents the /openconfig-lldp/lldp/interfaces/interface YANG schema element.
 type Lldp_Interface struct {
-	Counters *Lldp_Interface_Counters            `path:"state/counters" module:"openconfig-lldp/openconfig-lldp"`
-	Enabled  *bool                               `path:"state/enabled" module:"openconfig-lldp/openconfig-lldp" shadow-path:"config/enabled" shadow-module:"openconfig-lldp/openconfig-lldp"`
-	Name     *string                             `path:"state/name|name" module:"openconfig-lldp/openconfig-lldp|openconfig-lldp" shadow-path:"config/name|name" shadow-module:"openconfig-lldp/openconfig-lldp|openconfig-lldp"`
-	Neighbor map[string]*Lldp_Interface_Neighbor `path:"neighbors/neighbor" module:"openconfig-lldp/openconfig-lldp"`
+	Counters               *Lldp_Interface_Counters            `path:"state/counters" module:"openconfig-lldp/openconfig-lldp"`
+	CustomTlvNames         []string                            `path:"state/custom-tlv-names" module:"openconfig-lldp/openconfig-lldp" shadow-path:"config/custom-tlv-names" shadow-module:"openconfig-lldp/openconfig-lldp"`
+	Enabled                *bool                               `path:"state/enabled" module:"openconfig-lldp/openconfig-lldp" shadow-path:"config/enabled" shadow-module:"openconfig-lldp/openconfig-lldp"`
+	LastGoodPacketReceived *uint64                             `path:"state/last-good-packet-received" module:"openconfig-lldp/openconfig-lldp"`
+	LastPacketTransmitted  *uint64                             `path:"state/last-packet-transmitted" module:"openconfig-lldp/openconfig-lldp"`
+	Name                   *string                             `path:"state/name|name" module:"openconfig-lldp/openconfig-lldp|openconfig-lldp" shadow-path:"config/name|name" shadow-module:"openconfig-lldp/openconfig-lldp|openconfig-lldp"`
+	Neighbor               map[string]*Lldp_Interface_Neighbor `path:"neighbors/neighbor" module:"openconfig-lldp/openconfig-lldp"`
+	PortDescription        *string                             `path:"state/port-description" module:"openconfig-lldp/openconfig-lldp" shadow-path:"config/port-description" shadow-module:"openconfig-lldp/openconfig-lldp"`
 }
 
 // IsYANGGoStruct ensures that Lldp_Interface implements the yang.GoStruct
@@ -51541,6 +54286,22 @@ func (t *Lldp_Interface) GetCounters() *Lldp_Interface_Counters {
 	return nil
 }
 
+// GetCustomTlvNames retrieves the value of the leaf CustomTlvNames from the Lldp_Interface
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if CustomTlvNames is set, it can
+// safely use t.GetCustomTlvNames() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.CustomTlvNames == nil' before retrieving the leaf's value.
+func (t *Lldp_Interface) GetCustomTlvNames() []string {
+	if t == nil || t.CustomTlvNames == nil {
+		return nil
+	}
+	return t.CustomTlvNames
+}
+
 // GetEnabled retrieves the value of the leaf Enabled from the Lldp_Interface
 // struct. If the field is unset but has a default value in the YANG schema,
 // then the default value will be returned.
@@ -51555,6 +54316,38 @@ func (t *Lldp_Interface) GetEnabled() bool {
 		return true
 	}
 	return *t.Enabled
+}
+
+// GetLastGoodPacketReceived retrieves the value of the leaf LastGoodPacketReceived from the Lldp_Interface
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if LastGoodPacketReceived is set, it can
+// safely use t.GetLastGoodPacketReceived() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.LastGoodPacketReceived == nil' before retrieving the leaf's value.
+func (t *Lldp_Interface) GetLastGoodPacketReceived() uint64 {
+	if t == nil || t.LastGoodPacketReceived == nil {
+		return 0
+	}
+	return *t.LastGoodPacketReceived
+}
+
+// GetLastPacketTransmitted retrieves the value of the leaf LastPacketTransmitted from the Lldp_Interface
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if LastPacketTransmitted is set, it can
+// safely use t.GetLastPacketTransmitted() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.LastPacketTransmitted == nil' before retrieving the leaf's value.
+func (t *Lldp_Interface) GetLastPacketTransmitted() uint64 {
+	if t == nil || t.LastPacketTransmitted == nil {
+		return 0
+	}
+	return *t.LastPacketTransmitted
 }
 
 // GetName retrieves the value of the leaf Name from the Lldp_Interface
@@ -51573,16 +54366,56 @@ func (t *Lldp_Interface) GetName() string {
 	return *t.Name
 }
 
+// GetPortDescription retrieves the value of the leaf PortDescription from the Lldp_Interface
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if PortDescription is set, it can
+// safely use t.GetPortDescription() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.PortDescription == nil' before retrieving the leaf's value.
+func (t *Lldp_Interface) GetPortDescription() string {
+	if t == nil || t.PortDescription == nil {
+		return ""
+	}
+	return *t.PortDescription
+}
+
+// SetCustomTlvNames sets the value of the leaf CustomTlvNames in the Lldp_Interface
+// struct.
+func (t *Lldp_Interface) SetCustomTlvNames(v []string) {
+	t.CustomTlvNames = v
+}
+
 // SetEnabled sets the value of the leaf Enabled in the Lldp_Interface
 // struct.
 func (t *Lldp_Interface) SetEnabled(v bool) {
 	t.Enabled = &v
 }
 
+// SetLastGoodPacketReceived sets the value of the leaf LastGoodPacketReceived in the Lldp_Interface
+// struct.
+func (t *Lldp_Interface) SetLastGoodPacketReceived(v uint64) {
+	t.LastGoodPacketReceived = &v
+}
+
+// SetLastPacketTransmitted sets the value of the leaf LastPacketTransmitted in the Lldp_Interface
+// struct.
+func (t *Lldp_Interface) SetLastPacketTransmitted(v uint64) {
+	t.LastPacketTransmitted = &v
+}
+
 // SetName sets the value of the leaf Name in the Lldp_Interface
 // struct.
 func (t *Lldp_Interface) SetName(v string) {
 	t.Name = &v
+}
+
+// SetPortDescription sets the value of the leaf PortDescription in the Lldp_Interface
+// struct.
+func (t *Lldp_Interface) SetPortDescription(v string) {
+	t.PortDescription = &v
 }
 
 // PopulateDefaults recursively populates unset leaf fields in the Lldp_Interface
@@ -51865,23 +54698,27 @@ func (*Lldp_Interface_Counters) ΛBelongingModule() string {
 
 // Lldp_Interface_Neighbor represents the /openconfig-lldp/lldp/interfaces/interface/neighbors/neighbor YANG schema element.
 type Lldp_Interface_Neighbor struct {
-	Age                   *uint64                                                                    `path:"state/age" module:"openconfig-lldp/openconfig-lldp"`
-	Capability            map[E_LldpTypes_LLDP_SYSTEM_CAPABILITY]*Lldp_Interface_Neighbor_Capability `path:"capabilities/capability" module:"openconfig-lldp/openconfig-lldp"`
-	ChassisId             *string                                                                    `path:"state/chassis-id" module:"openconfig-lldp/openconfig-lldp"`
-	ChassisIdType         E_Lldp_ChassisIdType                                                       `path:"state/chassis-id-type" module:"openconfig-lldp/openconfig-lldp"`
-	Id                    *string                                                                    `path:"state/id|id" module:"openconfig-lldp/openconfig-lldp|openconfig-lldp" shadow-path:"id" shadow-module:"openconfig-lldp"`
-	LastUpdate            *int64                                                                     `path:"state/last-update" module:"openconfig-lldp/openconfig-lldp"`
-	ManagementAddress     *string                                                                    `path:"state/management-address" module:"openconfig-lldp/openconfig-lldp"`
-	ManagementAddressType *string                                                                    `path:"state/management-address-type" module:"openconfig-lldp/openconfig-lldp"`
-	ManagementInterface   *string                                                                    `path:"state/management-interface" module:"openconfig-lldp/openconfig-lldp"`
-	MgmtAddress           map[string]*Lldp_Interface_Neighbor_MgmtAddress                            `path:"mgmt-addresses/mgmt-address" module:"openconfig-lldp/openconfig-lldp"`
-	PortDescription       *string                                                                    `path:"state/port-description" module:"openconfig-lldp/openconfig-lldp"`
-	PortId                *string                                                                    `path:"state/port-id" module:"openconfig-lldp/openconfig-lldp"`
-	PortIdType            E_Lldp_PortIdType                                                          `path:"state/port-id-type" module:"openconfig-lldp/openconfig-lldp"`
-	SystemDescription     *string                                                                    `path:"state/system-description" module:"openconfig-lldp/openconfig-lldp"`
-	SystemName            *string                                                                    `path:"state/system-name" module:"openconfig-lldp/openconfig-lldp"`
-	Tlv                   map[Lldp_Interface_Neighbor_Tlv_Key]*Lldp_Interface_Neighbor_Tlv           `path:"custom-tlvs/tlv" module:"openconfig-lldp/openconfig-lldp"`
-	Ttl                   *uint16                                                                    `path:"state/ttl" module:"openconfig-lldp/openconfig-lldp"`
+	Age                      *uint64                                                                    `path:"state/age" module:"openconfig-lldp/openconfig-lldp"`
+	Capability               map[E_LldpTypes_LLDP_SYSTEM_CAPABILITY]*Lldp_Interface_Neighbor_Capability `path:"capabilities/capability" module:"openconfig-lldp/openconfig-lldp"`
+	ChassisId                *string                                                                    `path:"state/chassis-id" module:"openconfig-lldp/openconfig-lldp"`
+	ChassisIdType            E_Lldp_ChassisIdType                                                       `path:"state/chassis-id-type" module:"openconfig-lldp/openconfig-lldp"`
+	Id                       *string                                                                    `path:"state/id|id" module:"openconfig-lldp/openconfig-lldp|openconfig-lldp" shadow-path:"id" shadow-module:"openconfig-lldp"`
+	LastUpdate               *int64                                                                     `path:"state/last-update" module:"openconfig-lldp/openconfig-lldp"`
+	LinkAggregation          *Lldp_Interface_Neighbor_LinkAggregation                                   `path:"link-aggregation" module:"openconfig-lldp"`
+	ManagementAddress        *string                                                                    `path:"state/management-address" module:"openconfig-lldp/openconfig-lldp"`
+	ManagementAddressType    *string                                                                    `path:"state/management-address-type" module:"openconfig-lldp/openconfig-lldp"`
+	ManagementInterface      *string                                                                    `path:"state/management-interface" module:"openconfig-lldp/openconfig-lldp"`
+	MaxFrameSize             *uint16                                                                    `path:"state/max-frame-size" module:"openconfig-lldp/openconfig-lldp"`
+	MedInventorySerialNumber *string                                                                    `path:"state/med-inventory-serial-number" module:"openconfig-lldp/openconfig-lldp"`
+	MgmtAddress              map[string]*Lldp_Interface_Neighbor_MgmtAddress                            `path:"mgmt-addresses/mgmt-address" module:"openconfig-lldp/openconfig-lldp"`
+	PortDescription          *string                                                                    `path:"state/port-description" module:"openconfig-lldp/openconfig-lldp"`
+	PortId                   *string                                                                    `path:"state/port-id" module:"openconfig-lldp/openconfig-lldp"`
+	PortIdType               E_Lldp_PortIdType                                                          `path:"state/port-id-type" module:"openconfig-lldp/openconfig-lldp"`
+	PortVlanId               *uint16                                                                    `path:"state/port-vlan-id" module:"openconfig-lldp/openconfig-lldp"`
+	SystemDescription        *string                                                                    `path:"state/system-description" module:"openconfig-lldp/openconfig-lldp"`
+	SystemName               *string                                                                    `path:"state/system-name" module:"openconfig-lldp/openconfig-lldp"`
+	Tlv                      map[Lldp_Interface_Neighbor_Tlv_Key]*Lldp_Interface_Neighbor_Tlv           `path:"custom-tlvs/tlv" module:"openconfig-lldp/openconfig-lldp"`
+	Ttl                      *uint16                                                                    `path:"state/ttl" module:"openconfig-lldp/openconfig-lldp"`
 }
 
 // IsYANGGoStruct ensures that Lldp_Interface_Neighbor implements the yang.GoStruct
@@ -52319,6 +55156,26 @@ func (t *Lldp_Interface_Neighbor) AppendTlv(v *Lldp_Interface_Neighbor_Tlv) erro
 	return nil
 }
 
+// GetOrCreateLinkAggregation retrieves the value of the LinkAggregation field
+// or returns the existing field if it already exists.
+func (t *Lldp_Interface_Neighbor) GetOrCreateLinkAggregation() *Lldp_Interface_Neighbor_LinkAggregation {
+	if t.LinkAggregation != nil {
+		return t.LinkAggregation
+	}
+	t.LinkAggregation = &Lldp_Interface_Neighbor_LinkAggregation{}
+	return t.LinkAggregation
+}
+
+// GetLinkAggregation returns the value of the LinkAggregation struct pointer
+// from Lldp_Interface_Neighbor. If the receiver or the field LinkAggregation is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *Lldp_Interface_Neighbor) GetLinkAggregation() *Lldp_Interface_Neighbor_LinkAggregation {
+	if t != nil && t.LinkAggregation != nil {
+		return t.LinkAggregation
+	}
+	return nil
+}
+
 // GetAge retrieves the value of the leaf Age from the Lldp_Interface_Neighbor
 // struct. If the field is unset but has a default value in the YANG schema,
 // then the default value will be returned.
@@ -52447,6 +55304,38 @@ func (t *Lldp_Interface_Neighbor) GetManagementInterface() string {
 	return *t.ManagementInterface
 }
 
+// GetMaxFrameSize retrieves the value of the leaf MaxFrameSize from the Lldp_Interface_Neighbor
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if MaxFrameSize is set, it can
+// safely use t.GetMaxFrameSize() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.MaxFrameSize == nil' before retrieving the leaf's value.
+func (t *Lldp_Interface_Neighbor) GetMaxFrameSize() uint16 {
+	if t == nil || t.MaxFrameSize == nil {
+		return 0
+	}
+	return *t.MaxFrameSize
+}
+
+// GetMedInventorySerialNumber retrieves the value of the leaf MedInventorySerialNumber from the Lldp_Interface_Neighbor
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if MedInventorySerialNumber is set, it can
+// safely use t.GetMedInventorySerialNumber() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.MedInventorySerialNumber == nil' before retrieving the leaf's value.
+func (t *Lldp_Interface_Neighbor) GetMedInventorySerialNumber() string {
+	if t == nil || t.MedInventorySerialNumber == nil {
+		return ""
+	}
+	return *t.MedInventorySerialNumber
+}
+
 // GetPortDescription retrieves the value of the leaf PortDescription from the Lldp_Interface_Neighbor
 // struct. If the field is unset but has a default value in the YANG schema,
 // then the default value will be returned.
@@ -52493,6 +55382,22 @@ func (t *Lldp_Interface_Neighbor) GetPortIdType() E_Lldp_PortIdType {
 		return 0
 	}
 	return t.PortIdType
+}
+
+// GetPortVlanId retrieves the value of the leaf PortVlanId from the Lldp_Interface_Neighbor
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if PortVlanId is set, it can
+// safely use t.GetPortVlanId() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.PortVlanId == nil' before retrieving the leaf's value.
+func (t *Lldp_Interface_Neighbor) GetPortVlanId() uint16 {
+	if t == nil || t.PortVlanId == nil {
+		return 0
+	}
+	return *t.PortVlanId
 }
 
 // GetSystemDescription retrieves the value of the leaf SystemDescription from the Lldp_Interface_Neighbor
@@ -52591,6 +55496,18 @@ func (t *Lldp_Interface_Neighbor) SetManagementInterface(v string) {
 	t.ManagementInterface = &v
 }
 
+// SetMaxFrameSize sets the value of the leaf MaxFrameSize in the Lldp_Interface_Neighbor
+// struct.
+func (t *Lldp_Interface_Neighbor) SetMaxFrameSize(v uint16) {
+	t.MaxFrameSize = &v
+}
+
+// SetMedInventorySerialNumber sets the value of the leaf MedInventorySerialNumber in the Lldp_Interface_Neighbor
+// struct.
+func (t *Lldp_Interface_Neighbor) SetMedInventorySerialNumber(v string) {
+	t.MedInventorySerialNumber = &v
+}
+
 // SetPortDescription sets the value of the leaf PortDescription in the Lldp_Interface_Neighbor
 // struct.
 func (t *Lldp_Interface_Neighbor) SetPortDescription(v string) {
@@ -52607,6 +55524,12 @@ func (t *Lldp_Interface_Neighbor) SetPortId(v string) {
 // struct.
 func (t *Lldp_Interface_Neighbor) SetPortIdType(v E_Lldp_PortIdType) {
 	t.PortIdType = v
+}
+
+// SetPortVlanId sets the value of the leaf PortVlanId in the Lldp_Interface_Neighbor
+// struct.
+func (t *Lldp_Interface_Neighbor) SetPortVlanId(v uint16) {
+	t.PortVlanId = &v
 }
 
 // SetSystemDescription sets the value of the leaf SystemDescription in the Lldp_Interface_Neighbor
@@ -52635,6 +55558,7 @@ func (t *Lldp_Interface_Neighbor) PopulateDefaults() {
 		return
 	}
 	ygot.BuildEmptyTree(t)
+	t.LinkAggregation.PopulateDefaults()
 	for _, e := range t.Capability {
 		e.PopulateDefaults()
 	}
@@ -52778,6 +55702,119 @@ func (*Lldp_Interface_Neighbor_Capability) ΛBelongingModule() string {
 	return "openconfig-lldp"
 }
 
+// Lldp_Interface_Neighbor_LinkAggregation represents the /openconfig-lldp/lldp/interfaces/interface/neighbors/neighbor/link-aggregation YANG schema element.
+type Lldp_Interface_Neighbor_LinkAggregation struct {
+	Capable *bool   `path:"state/capable" module:"openconfig-lldp/openconfig-lldp"`
+	Enabled *bool   `path:"state/enabled" module:"openconfig-lldp/openconfig-lldp"`
+	PortId  *uint32 `path:"state/port-id" module:"openconfig-lldp/openconfig-lldp"`
+}
+
+// IsYANGGoStruct ensures that Lldp_Interface_Neighbor_LinkAggregation implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*Lldp_Interface_Neighbor_LinkAggregation) IsYANGGoStruct() {}
+
+// GetCapable retrieves the value of the leaf Capable from the Lldp_Interface_Neighbor_LinkAggregation
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Capable is set, it can
+// safely use t.GetCapable() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Capable == nil' before retrieving the leaf's value.
+func (t *Lldp_Interface_Neighbor_LinkAggregation) GetCapable() bool {
+	if t == nil || t.Capable == nil {
+		return false
+	}
+	return *t.Capable
+}
+
+// GetEnabled retrieves the value of the leaf Enabled from the Lldp_Interface_Neighbor_LinkAggregation
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Enabled is set, it can
+// safely use t.GetEnabled() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Enabled == nil' before retrieving the leaf's value.
+func (t *Lldp_Interface_Neighbor_LinkAggregation) GetEnabled() bool {
+	if t == nil || t.Enabled == nil {
+		return false
+	}
+	return *t.Enabled
+}
+
+// GetPortId retrieves the value of the leaf PortId from the Lldp_Interface_Neighbor_LinkAggregation
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if PortId is set, it can
+// safely use t.GetPortId() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.PortId == nil' before retrieving the leaf's value.
+func (t *Lldp_Interface_Neighbor_LinkAggregation) GetPortId() uint32 {
+	if t == nil || t.PortId == nil {
+		return 0
+	}
+	return *t.PortId
+}
+
+// SetCapable sets the value of the leaf Capable in the Lldp_Interface_Neighbor_LinkAggregation
+// struct.
+func (t *Lldp_Interface_Neighbor_LinkAggregation) SetCapable(v bool) {
+	t.Capable = &v
+}
+
+// SetEnabled sets the value of the leaf Enabled in the Lldp_Interface_Neighbor_LinkAggregation
+// struct.
+func (t *Lldp_Interface_Neighbor_LinkAggregation) SetEnabled(v bool) {
+	t.Enabled = &v
+}
+
+// SetPortId sets the value of the leaf PortId in the Lldp_Interface_Neighbor_LinkAggregation
+// struct.
+func (t *Lldp_Interface_Neighbor_LinkAggregation) SetPortId(v uint32) {
+	t.PortId = &v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the Lldp_Interface_Neighbor_LinkAggregation
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *Lldp_Interface_Neighbor_LinkAggregation) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *Lldp_Interface_Neighbor_LinkAggregation) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["Lldp_Interface_Neighbor_LinkAggregation"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *Lldp_Interface_Neighbor_LinkAggregation) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *Lldp_Interface_Neighbor_LinkAggregation) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of Lldp_Interface_Neighbor_LinkAggregation.
+func (*Lldp_Interface_Neighbor_LinkAggregation) ΛBelongingModule() string {
+	return "openconfig-lldp"
+}
+
 // Lldp_Interface_Neighbor_MgmtAddress represents the /openconfig-lldp/lldp/interfaces/interface/neighbors/neighbor/mgmt-addresses/mgmt-address YANG schema element.
 type Lldp_Interface_Neighbor_MgmtAddress struct {
 	Address                *string                           `path:"state/address|address" module:"openconfig-lldp/openconfig-lldp|openconfig-lldp" shadow-path:"address" shadow-module:"openconfig-lldp"`
@@ -52904,6 +55941,7 @@ func (*Lldp_Interface_Neighbor_MgmtAddress) ΛBelongingModule() string {
 
 // Lldp_Interface_Neighbor_Tlv represents the /openconfig-lldp/lldp/interfaces/interface/neighbors/neighbor/custom-tlvs/tlv YANG schema element.
 type Lldp_Interface_Neighbor_Tlv struct {
+	Name       *string `path:"state/name" module:"openconfig-lldp/openconfig-lldp"`
 	Oui        *string `path:"state/oui|oui" module:"openconfig-lldp/openconfig-lldp|openconfig-lldp" shadow-path:"oui" shadow-module:"openconfig-lldp"`
 	OuiSubtype *string `path:"state/oui-subtype|oui-subtype" module:"openconfig-lldp/openconfig-lldp|openconfig-lldp" shadow-path:"oui-subtype" shadow-module:"openconfig-lldp"`
 	Type       *int32  `path:"state/type|type" module:"openconfig-lldp/openconfig-lldp|openconfig-lldp" shadow-path:"type" shadow-module:"openconfig-lldp"`
@@ -52914,6 +55952,22 @@ type Lldp_Interface_Neighbor_Tlv struct {
 // interface. This allows functions that need to handle this struct to
 // identify it as being generated by ygen.
 func (*Lldp_Interface_Neighbor_Tlv) IsYANGGoStruct() {}
+
+// GetName retrieves the value of the leaf Name from the Lldp_Interface_Neighbor_Tlv
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Name is set, it can
+// safely use t.GetName() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Name == nil' before retrieving the leaf's value.
+func (t *Lldp_Interface_Neighbor_Tlv) GetName() string {
+	if t == nil || t.Name == nil {
+		return ""
+	}
+	return *t.Name
+}
 
 // GetOui retrieves the value of the leaf Oui from the Lldp_Interface_Neighbor_Tlv
 // struct. If the field is unset but has a default value in the YANG schema,
@@ -52977,6 +56031,12 @@ func (t *Lldp_Interface_Neighbor_Tlv) GetValue() Binary {
 		return nil
 	}
 	return t.Value
+}
+
+// SetName sets the value of the leaf Name in the Lldp_Interface_Neighbor_Tlv
+// struct.
+func (t *Lldp_Interface_Neighbor_Tlv) SetName(v string) {
+	t.Name = &v
 }
 
 // SetOui sets the value of the leaf Oui in the Lldp_Interface_Neighbor_Tlv
@@ -53176,6 +56236,174 @@ func (t *Lldp_MgmtAddress) ΛEnumTypeMap() map[string][]reflect.Type { return Λ
 // ΛBelongingModule returns the name of the module that defines the namespace
 // of Lldp_MgmtAddress.
 func (*Lldp_MgmtAddress) ΛBelongingModule() string {
+	return "openconfig-lldp"
+}
+
+// Lldp_Tlv represents the /openconfig-lldp/lldp/custom-tlvs/tlv YANG schema element.
+type Lldp_Tlv struct {
+	Name       *string `path:"state/name|name" module:"openconfig-lldp/openconfig-lldp|openconfig-lldp" shadow-path:"config/name|name" shadow-module:"openconfig-lldp/openconfig-lldp|openconfig-lldp"`
+	Oui        *string `path:"state/oui" module:"openconfig-lldp/openconfig-lldp" shadow-path:"config/oui" shadow-module:"openconfig-lldp/openconfig-lldp"`
+	OuiSubtype *string `path:"state/oui-subtype" module:"openconfig-lldp/openconfig-lldp" shadow-path:"config/oui-subtype" shadow-module:"openconfig-lldp/openconfig-lldp"`
+	Type       *int32  `path:"state/type" module:"openconfig-lldp/openconfig-lldp" shadow-path:"config/type" shadow-module:"openconfig-lldp/openconfig-lldp"`
+	Value      Binary  `path:"state/value" module:"openconfig-lldp/openconfig-lldp" shadow-path:"config/value" shadow-module:"openconfig-lldp/openconfig-lldp"`
+}
+
+// IsYANGGoStruct ensures that Lldp_Tlv implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*Lldp_Tlv) IsYANGGoStruct() {}
+
+// GetName retrieves the value of the leaf Name from the Lldp_Tlv
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Name is set, it can
+// safely use t.GetName() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Name == nil' before retrieving the leaf's value.
+func (t *Lldp_Tlv) GetName() string {
+	if t == nil || t.Name == nil {
+		return ""
+	}
+	return *t.Name
+}
+
+// GetOui retrieves the value of the leaf Oui from the Lldp_Tlv
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Oui is set, it can
+// safely use t.GetOui() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Oui == nil' before retrieving the leaf's value.
+func (t *Lldp_Tlv) GetOui() string {
+	if t == nil || t.Oui == nil {
+		return ""
+	}
+	return *t.Oui
+}
+
+// GetOuiSubtype retrieves the value of the leaf OuiSubtype from the Lldp_Tlv
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if OuiSubtype is set, it can
+// safely use t.GetOuiSubtype() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.OuiSubtype == nil' before retrieving the leaf's value.
+func (t *Lldp_Tlv) GetOuiSubtype() string {
+	if t == nil || t.OuiSubtype == nil {
+		return ""
+	}
+	return *t.OuiSubtype
+}
+
+// GetType retrieves the value of the leaf Type from the Lldp_Tlv
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Type is set, it can
+// safely use t.GetType() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Type == nil' before retrieving the leaf's value.
+func (t *Lldp_Tlv) GetType() int32 {
+	if t == nil || t.Type == nil {
+		return 0
+	}
+	return *t.Type
+}
+
+// GetValue retrieves the value of the leaf Value from the Lldp_Tlv
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Value is set, it can
+// safely use t.GetValue() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Value == nil' before retrieving the leaf's value.
+func (t *Lldp_Tlv) GetValue() Binary {
+	if t == nil || t.Value == nil {
+		return nil
+	}
+	return t.Value
+}
+
+// SetName sets the value of the leaf Name in the Lldp_Tlv
+// struct.
+func (t *Lldp_Tlv) SetName(v string) {
+	t.Name = &v
+}
+
+// SetOui sets the value of the leaf Oui in the Lldp_Tlv
+// struct.
+func (t *Lldp_Tlv) SetOui(v string) {
+	t.Oui = &v
+}
+
+// SetOuiSubtype sets the value of the leaf OuiSubtype in the Lldp_Tlv
+// struct.
+func (t *Lldp_Tlv) SetOuiSubtype(v string) {
+	t.OuiSubtype = &v
+}
+
+// SetType sets the value of the leaf Type in the Lldp_Tlv
+// struct.
+func (t *Lldp_Tlv) SetType(v int32) {
+	t.Type = &v
+}
+
+// SetValue sets the value of the leaf Value in the Lldp_Tlv
+// struct.
+func (t *Lldp_Tlv) SetValue(v Binary) {
+	t.Value = v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the Lldp_Tlv
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *Lldp_Tlv) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// ΛListKeyMap returns the keys of the Lldp_Tlv struct, which is a YANG list entry.
+func (t *Lldp_Tlv) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.Name == nil {
+		return nil, fmt.Errorf("nil value for key Name")
+	}
+
+	return map[string]interface{}{
+		"name": *t.Name,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *Lldp_Tlv) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["Lldp_Tlv"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *Lldp_Tlv) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *Lldp_Tlv) ΛEnumTypeMap() map[string][]reflect.Type { return ΛEnumTypes }
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of Lldp_Tlv.
+func (*Lldp_Tlv) ΛBelongingModule() string {
 	return "openconfig-lldp"
 }
 
@@ -53383,6 +56611,7 @@ type Macsec_Interface struct {
 	ReplayProtection *uint16                             `path:"state/replay-protection" module:"openconfig-macsec/openconfig-macsec" shadow-path:"config/replay-protection" shadow-module:"openconfig-macsec/openconfig-macsec"`
 	ScsaRx           map[string]*Macsec_Interface_ScsaRx `path:"scsa-rx/scsa-rx" module:"openconfig-macsec/openconfig-macsec"`
 	ScsaTx           map[string]*Macsec_Interface_ScsaTx `path:"scsa-tx/scsa-tx" module:"openconfig-macsec/openconfig-macsec"`
+	Status           E_Mka_Status                        `path:"state/status" module:"openconfig-macsec/openconfig-macsec"`
 }
 
 // IsYANGGoStruct ensures that Macsec_Interface implements the yang.GoStruct
@@ -53732,6 +56961,22 @@ func (t *Macsec_Interface) GetReplayProtection() uint16 {
 	return *t.ReplayProtection
 }
 
+// GetStatus retrieves the value of the leaf Status from the Macsec_Interface
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Status is set, it can
+// safely use t.GetStatus() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Status == nil' before retrieving the leaf's value.
+func (t *Macsec_Interface) GetStatus() E_Mka_Status {
+	if t == nil || t.Status == 0 {
+		return 0
+	}
+	return t.Status
+}
+
 // SetEnable sets the value of the leaf Enable in the Macsec_Interface
 // struct.
 func (t *Macsec_Interface) SetEnable(v bool) {
@@ -53748,6 +56993,12 @@ func (t *Macsec_Interface) SetName(v string) {
 // struct.
 func (t *Macsec_Interface) SetReplayProtection(v uint16) {
 	t.ReplayProtection = &v
+}
+
+// SetStatus sets the value of the leaf Status in the Macsec_Interface
+// struct.
+func (t *Macsec_Interface) SetStatus(v E_Mka_Status) {
+	t.Status = v
 }
 
 // PopulateDefaults recursively populates unset leaf fields in the Macsec_Interface
@@ -53995,6 +57246,7 @@ type Macsec_Interface_Mka struct {
 	Counters  *Macsec_Interface_Mka_Counters `path:"state/counters" module:"openconfig-macsec/openconfig-macsec"`
 	KeyChain  *string                        `path:"state/key-chain" module:"openconfig-macsec/openconfig-macsec" shadow-path:"config/key-chain" shadow-module:"openconfig-macsec/openconfig-macsec"`
 	MkaPolicy *string                        `path:"state/mka-policy" module:"openconfig-macsec/openconfig-macsec" shadow-path:"config/mka-policy" shadow-module:"openconfig-macsec/openconfig-macsec"`
+	Status    E_Mka_Status                   `path:"state/status" module:"openconfig-macsec/openconfig-macsec"`
 }
 
 // IsYANGGoStruct ensures that Macsec_Interface_Mka implements the yang.GoStruct
@@ -54054,6 +57306,22 @@ func (t *Macsec_Interface_Mka) GetMkaPolicy() string {
 	return *t.MkaPolicy
 }
 
+// GetStatus retrieves the value of the leaf Status from the Macsec_Interface_Mka
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Status is set, it can
+// safely use t.GetStatus() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Status == nil' before retrieving the leaf's value.
+func (t *Macsec_Interface_Mka) GetStatus() E_Mka_Status {
+	if t == nil || t.Status == 0 {
+		return 0
+	}
+	return t.Status
+}
+
 // SetKeyChain sets the value of the leaf KeyChain in the Macsec_Interface_Mka
 // struct.
 func (t *Macsec_Interface_Mka) SetKeyChain(v string) {
@@ -54064,6 +57332,12 @@ func (t *Macsec_Interface_Mka) SetKeyChain(v string) {
 // struct.
 func (t *Macsec_Interface_Mka) SetMkaPolicy(v string) {
 	t.MkaPolicy = &v
+}
+
+// SetStatus sets the value of the leaf Status in the Macsec_Interface_Mka
+// struct.
+func (t *Macsec_Interface_Mka) SetStatus(v E_Mka_Status) {
+	t.Status = v
 }
 
 // PopulateDefaults recursively populates unset leaf fields in the Macsec_Interface_Mka
@@ -55226,6 +58500,7 @@ type Macsec_Mka_Policy struct {
 	Name                   *string                        `path:"state/name|name" module:"openconfig-macsec/openconfig-macsec|openconfig-macsec" shadow-path:"config/name|name" shadow-module:"openconfig-macsec/openconfig-macsec|openconfig-macsec"`
 	SakRekeyInterval       *uint32                        `path:"state/sak-rekey-interval" module:"openconfig-macsec/openconfig-macsec" shadow-path:"config/sak-rekey-interval" shadow-module:"openconfig-macsec/openconfig-macsec"`
 	SakRekeyOnLivePeerLoss *bool                          `path:"state/sak-rekey-on-live-peer-loss" module:"openconfig-macsec/openconfig-macsec" shadow-path:"config/sak-rekey-on-live-peer-loss" shadow-module:"openconfig-macsec/openconfig-macsec"`
+	SecurityPolicy         E_Policy_SecurityPolicy        `path:"state/security-policy" module:"openconfig-macsec/openconfig-macsec" shadow-path:"config/security-policy" shadow-module:"openconfig-macsec/openconfig-macsec"`
 	UseUpdatedEthHeader    *bool                          `path:"state/use-updated-eth-header" module:"openconfig-macsec/openconfig-macsec" shadow-path:"config/use-updated-eth-header" shadow-module:"openconfig-macsec/openconfig-macsec"`
 }
 
@@ -55378,6 +58653,22 @@ func (t *Macsec_Mka_Policy) GetSakRekeyOnLivePeerLoss() bool {
 	return *t.SakRekeyOnLivePeerLoss
 }
 
+// GetSecurityPolicy retrieves the value of the leaf SecurityPolicy from the Macsec_Mka_Policy
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if SecurityPolicy is set, it can
+// safely use t.GetSecurityPolicy() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.SecurityPolicy == nil' before retrieving the leaf's value.
+func (t *Macsec_Mka_Policy) GetSecurityPolicy() E_Policy_SecurityPolicy {
+	if t == nil || t.SecurityPolicy == 0 {
+		return 0
+	}
+	return t.SecurityPolicy
+}
+
 // GetUseUpdatedEthHeader retrieves the value of the leaf UseUpdatedEthHeader from the Macsec_Mka_Policy
 // struct. If the field is unset but has a default value in the YANG schema,
 // then the default value will be returned.
@@ -55446,6 +58737,12 @@ func (t *Macsec_Mka_Policy) SetSakRekeyInterval(v uint32) {
 // struct.
 func (t *Macsec_Mka_Policy) SetSakRekeyOnLivePeerLoss(v bool) {
 	t.SakRekeyOnLivePeerLoss = &v
+}
+
+// SetSecurityPolicy sets the value of the leaf SecurityPolicy in the Macsec_Mka_Policy
+// struct.
+func (t *Macsec_Mka_Policy) SetSecurityPolicy(v E_Policy_SecurityPolicy) {
+	t.SecurityPolicy = v
 }
 
 // SetUseUpdatedEthHeader sets the value of the leaf UseUpdatedEthHeader in the Macsec_Mka_Policy
@@ -57648,6 +60945,7 @@ func (*NetworkInstance) ΛBelongingModule() string {
 // NetworkInstance_Afts represents the /openconfig-network-instance/network-instances/network-instance/afts YANG schema element.
 type NetworkInstance_Afts struct {
 	AftSummaries          *NetworkInstance_Afts_AftSummaries                                               `path:"aft-summaries" module:"openconfig-aft-summary"`
+	BackupActivation      map[uint64]*NetworkInstance_Afts_BackupActivation                                `path:"backup-activations/backup-activation" module:"openconfig-network-instance/openconfig-network-instance"`
 	Ipv4Entry             map[string]*NetworkInstance_Afts_Ipv4Entry                                       `path:"ipv4-unicast/ipv4-entry" module:"openconfig-network-instance/openconfig-network-instance"`
 	Ipv6Entry             map[string]*NetworkInstance_Afts_Ipv6Entry                                       `path:"ipv6-unicast/ipv6-entry" module:"openconfig-network-instance/openconfig-network-instance"`
 	LabelEntry            map[NetworkInstance_Afts_LabelEntry_Label_Union]*NetworkInstance_Afts_LabelEntry `path:"mpls/label-entry" module:"openconfig-network-instance/openconfig-network-instance"`
@@ -57662,6 +60960,133 @@ type NetworkInstance_Afts struct {
 // interface. This allows functions that need to handle this struct to
 // identify it as being generated by ygen.
 func (*NetworkInstance_Afts) IsYANGGoStruct() {}
+
+// NewBackupActivation creates a new entry in the BackupActivation list of the
+// NetworkInstance_Afts struct. The keys of the list are populated from the input
+// arguments.
+func (t *NetworkInstance_Afts) NewBackupActivation(NextHopGroup uint64) (*NetworkInstance_Afts_BackupActivation, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.BackupActivation == nil {
+		t.BackupActivation = make(map[uint64]*NetworkInstance_Afts_BackupActivation)
+	}
+
+	key := NextHopGroup
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.BackupActivation[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list BackupActivation", key)
+	}
+
+	t.BackupActivation[key] = &NetworkInstance_Afts_BackupActivation{
+		NextHopGroup: &NextHopGroup,
+	}
+
+	return t.BackupActivation[key], nil
+}
+
+// RenameBackupActivation renames an entry in the list BackupActivation within
+// the NetworkInstance_Afts struct. The entry with key oldK is renamed to newK updating
+// the key within the value.
+func (t *NetworkInstance_Afts) RenameBackupActivation(oldK, newK uint64) error {
+	if _, ok := t.BackupActivation[newK]; ok {
+		return fmt.Errorf("key %v already exists in BackupActivation", newK)
+	}
+
+	e, ok := t.BackupActivation[oldK]
+	if !ok {
+		return fmt.Errorf("key %v not found in BackupActivation", oldK)
+	}
+	e.NextHopGroup = &newK
+
+	t.BackupActivation[newK] = e
+	delete(t.BackupActivation, oldK)
+	return nil
+}
+
+// GetOrCreateBackupActivationMap returns the list (map) from NetworkInstance_Afts.
+//
+// It initializes the field if not already initialized.
+func (t *NetworkInstance_Afts) GetOrCreateBackupActivationMap() map[uint64]*NetworkInstance_Afts_BackupActivation {
+	if t.BackupActivation == nil {
+		t.BackupActivation = make(map[uint64]*NetworkInstance_Afts_BackupActivation)
+	}
+	return t.BackupActivation
+}
+
+// GetOrCreateBackupActivation retrieves the value with the specified keys from
+// the receiver NetworkInstance_Afts. If the entry does not exist, then it is created.
+// It returns the existing or new list member.
+func (t *NetworkInstance_Afts) GetOrCreateBackupActivation(NextHopGroup uint64) *NetworkInstance_Afts_BackupActivation {
+
+	key := NextHopGroup
+
+	if v, ok := t.BackupActivation[key]; ok {
+		return v
+	}
+	// Panic if we receive an error, since we should have retrieved an existing
+	// list member. This allows chaining of GetOrCreate methods.
+	v, err := t.NewBackupActivation(NextHopGroup)
+	if err != nil {
+		panic(fmt.Sprintf("GetOrCreateBackupActivation got unexpected error: %v", err))
+	}
+	return v
+}
+
+// GetBackupActivation retrieves the value with the specified key from
+// the BackupActivation map field of NetworkInstance_Afts. If the receiver is nil, or
+// the specified key is not present in the list, nil is returned such that Get*
+// methods may be safely chained.
+func (t *NetworkInstance_Afts) GetBackupActivation(NextHopGroup uint64) *NetworkInstance_Afts_BackupActivation {
+
+	if t == nil {
+		return nil
+	}
+
+	key := NextHopGroup
+
+	if lm, ok := t.BackupActivation[key]; ok {
+		return lm
+	}
+	return nil
+}
+
+// DeleteBackupActivation deletes the value with the specified keys from
+// the receiver NetworkInstance_Afts. If there is no such element, the function
+// is a no-op.
+func (t *NetworkInstance_Afts) DeleteBackupActivation(NextHopGroup uint64) {
+	key := NextHopGroup
+
+	delete(t.BackupActivation, key)
+}
+
+// AppendBackupActivation appends the supplied NetworkInstance_Afts_BackupActivation struct to the
+// list BackupActivation of NetworkInstance_Afts. If the key value(s) specified in
+// the supplied NetworkInstance_Afts_BackupActivation already exist in the list, an error is
+// returned.
+func (t *NetworkInstance_Afts) AppendBackupActivation(v *NetworkInstance_Afts_BackupActivation) error {
+	if v.NextHopGroup == nil {
+		return fmt.Errorf("invalid nil key received for NextHopGroup")
+	}
+
+	key := *v.NextHopGroup
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.BackupActivation == nil {
+		t.BackupActivation = make(map[uint64]*NetworkInstance_Afts_BackupActivation)
+	}
+
+	if _, ok := t.BackupActivation[key]; ok {
+		return fmt.Errorf("duplicate key for list BackupActivation %v", key)
+	}
+
+	t.BackupActivation[key] = v
+	return nil
+}
 
 // NewIpv4Entry creates a new entry in the Ipv4Entry list of the
 // NetworkInstance_Afts struct. The keys of the list are populated from the input
@@ -58598,6 +62023,9 @@ func (t *NetworkInstance_Afts) PopulateDefaults() {
 	ygot.BuildEmptyTree(t)
 	t.AftSummaries.PopulateDefaults()
 	t.StateSynced.PopulateDefaults()
+	for _, e := range t.BackupActivation {
+		e.PopulateDefaults()
+	}
 	for _, e := range t.Ipv4Entry {
 		e.PopulateDefaults()
 	}
@@ -59402,6 +62830,84 @@ func (*NetworkInstance_Afts_AftSummaries_Ipv6Unicast_Protocol_Counters) ΛBelong
 	return "openconfig-aft-summary"
 }
 
+// NetworkInstance_Afts_BackupActivation represents the /openconfig-network-instance/network-instances/network-instance/afts/backup-activations/backup-activation YANG schema element.
+type NetworkInstance_Afts_BackupActivation struct {
+	NextHopGroup *uint64 `path:"state/next-hop-group|next-hop-group" module:"openconfig-network-instance/openconfig-network-instance|openconfig-network-instance" shadow-path:"next-hop-group" shadow-module:"openconfig-network-instance"`
+}
+
+// IsYANGGoStruct ensures that NetworkInstance_Afts_BackupActivation implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*NetworkInstance_Afts_BackupActivation) IsYANGGoStruct() {}
+
+// GetNextHopGroup retrieves the value of the leaf NextHopGroup from the NetworkInstance_Afts_BackupActivation
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if NextHopGroup is set, it can
+// safely use t.GetNextHopGroup() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.NextHopGroup == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Afts_BackupActivation) GetNextHopGroup() uint64 {
+	if t == nil || t.NextHopGroup == nil {
+		return 0
+	}
+	return *t.NextHopGroup
+}
+
+// SetNextHopGroup sets the value of the leaf NextHopGroup in the NetworkInstance_Afts_BackupActivation
+// struct.
+func (t *NetworkInstance_Afts_BackupActivation) SetNextHopGroup(v uint64) {
+	t.NextHopGroup = &v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the NetworkInstance_Afts_BackupActivation
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *NetworkInstance_Afts_BackupActivation) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// ΛListKeyMap returns the keys of the NetworkInstance_Afts_BackupActivation struct, which is a YANG list entry.
+func (t *NetworkInstance_Afts_BackupActivation) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.NextHopGroup == nil {
+		return nil, fmt.Errorf("nil value for key NextHopGroup")
+	}
+
+	return map[string]interface{}{
+		"next-hop-group": *t.NextHopGroup,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *NetworkInstance_Afts_BackupActivation) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["NetworkInstance_Afts_BackupActivation"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *NetworkInstance_Afts_BackupActivation) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *NetworkInstance_Afts_BackupActivation) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of NetworkInstance_Afts_BackupActivation.
+func (*NetworkInstance_Afts_BackupActivation) ΛBelongingModule() string {
+	return "openconfig-network-instance"
+}
+
 // NetworkInstance_Afts_Ipv4Entry represents the /openconfig-network-instance/network-instances/network-instance/afts/ipv4-unicast/ipv4-entry YANG schema element.
 type NetworkInstance_Afts_Ipv4Entry struct {
 	Counters                    *NetworkInstance_Afts_Ipv4Entry_Counters `path:"state/counters" module:"openconfig-network-instance/openconfig-network-instance"`
@@ -60060,12 +63566,13 @@ func (*NetworkInstance_Afts_Ipv6Entry_Counters) ΛBelongingModule() string {
 
 // NetworkInstance_Afts_LabelEntry represents the /openconfig-network-instance/network-instances/network-instance/afts/mpls/label-entry YANG schema element.
 type NetworkInstance_Afts_LabelEntry struct {
-	Counters                    *NetworkInstance_Afts_LabelEntry_Counters                    `path:"state/counters" module:"openconfig-network-instance/openconfig-network-instance"`
-	EntryMetadata               Binary                                                       `path:"state/entry-metadata" module:"openconfig-network-instance/openconfig-network-instance"`
-	Label                       NetworkInstance_Afts_LabelEntry_Label_Union                  `path:"state/label|label" module:"openconfig-network-instance/openconfig-network-instance|openconfig-network-instance" shadow-path:"label" shadow-module:"openconfig-network-instance"`
-	NextHopGroup                *uint64                                                      `path:"state/next-hop-group" module:"openconfig-network-instance/openconfig-aft-network-instance"`
-	NextHopGroupNetworkInstance *string                                                      `path:"state/next-hop-group-network-instance" module:"openconfig-network-instance/openconfig-aft-network-instance"`
-	PoppedMplsLabelStack        []NetworkInstance_Afts_LabelEntry_PoppedMplsLabelStack_Union `path:"state/popped-mpls-label-stack" module:"openconfig-network-instance/openconfig-network-instance"`
+	Counters                    *NetworkInstance_Afts_LabelEntry_Counters                       `path:"state/counters" module:"openconfig-network-instance/openconfig-network-instance"`
+	DecapMplsLabelStack         *NetworkInstance_Afts_LabelEntry_DecapMplsLabelStack_OrderedMap `path:"decap-mpls-label-stacks/decap-mpls-label-stack" module:"openconfig-network-instance/openconfig-network-instance"`
+	EntryMetadata               Binary                                                          `path:"state/entry-metadata" module:"openconfig-network-instance/openconfig-network-instance"`
+	Label                       NetworkInstance_Afts_LabelEntry_Label_Union                     `path:"state/label|label" module:"openconfig-network-instance/openconfig-network-instance|openconfig-network-instance" shadow-path:"label" shadow-module:"openconfig-network-instance"`
+	NextHopGroup                *uint64                                                         `path:"state/next-hop-group" module:"openconfig-network-instance/openconfig-aft-network-instance"`
+	NextHopGroupNetworkInstance *string                                                         `path:"state/next-hop-group-network-instance" module:"openconfig-network-instance/openconfig-aft-network-instance"`
+	PoppedMplsLabelStack        []NetworkInstance_Afts_LabelEntry_PoppedMplsLabelStack_Union    `path:"state/popped-mpls-label-stack" module:"openconfig-network-instance/openconfig-network-instance"`
 }
 
 // IsYANGGoStruct ensures that NetworkInstance_Afts_LabelEntry implements the yang.GoStruct
@@ -60203,6 +63710,179 @@ func (t *NetworkInstance_Afts_LabelEntry) SetPoppedMplsLabelStack(v []NetworkIns
 	t.PoppedMplsLabelStack = v
 }
 
+// GetOrCreateDecapMplsLabelStackMap returns the ordered map field
+// DecapMplsLabelStack from NetworkInstance_Afts_LabelEntry.
+//
+// It initializes the field if not already initialized.
+func (s *NetworkInstance_Afts_LabelEntry) GetOrCreateDecapMplsLabelStackMap() *NetworkInstance_Afts_LabelEntry_DecapMplsLabelStack_OrderedMap {
+	if s.DecapMplsLabelStack == nil {
+		s.DecapMplsLabelStack = &NetworkInstance_Afts_LabelEntry_DecapMplsLabelStack_OrderedMap{}
+	}
+	return s.DecapMplsLabelStack
+}
+
+// AppendNewDecapMplsLabelStack creates a new entry in the DecapMplsLabelStack
+// ordered map of the NetworkInstance_Afts_LabelEntry struct. The keys of the list are
+// populated from the input arguments.
+func (s *NetworkInstance_Afts_LabelEntry) AppendNewDecapMplsLabelStack(Id uint8) (*NetworkInstance_Afts_LabelEntry_DecapMplsLabelStack, error) {
+	if s.DecapMplsLabelStack == nil {
+		s.DecapMplsLabelStack = &NetworkInstance_Afts_LabelEntry_DecapMplsLabelStack_OrderedMap{}
+	}
+	return s.DecapMplsLabelStack.AppendNew(Id)
+}
+
+// AppendDecapMplsLabelStack appends the supplied NetworkInstance_Afts_LabelEntry_DecapMplsLabelStack struct
+// to the list DecapMplsLabelStack of NetworkInstance_Afts_LabelEntry. If the key value(s)
+// specified in the supplied NetworkInstance_Afts_LabelEntry_DecapMplsLabelStack already exist in the list, an
+// error is returned.
+func (s *NetworkInstance_Afts_LabelEntry) AppendDecapMplsLabelStack(v *NetworkInstance_Afts_LabelEntry_DecapMplsLabelStack) error {
+	if s.DecapMplsLabelStack == nil {
+		s.DecapMplsLabelStack = &NetworkInstance_Afts_LabelEntry_DecapMplsLabelStack_OrderedMap{}
+	}
+	return s.DecapMplsLabelStack.Append(v)
+}
+
+// GetDecapMplsLabelStack retrieves the value with the specified key from the
+// DecapMplsLabelStack map field of NetworkInstance_Afts_LabelEntry. If the receiver
+// is nil, or the specified key is not present in the list, nil is returned
+// such that Get* methods may be safely chained.
+func (s *NetworkInstance_Afts_LabelEntry) GetDecapMplsLabelStack(Id uint8) *NetworkInstance_Afts_LabelEntry_DecapMplsLabelStack {
+	if s == nil {
+		return nil
+	}
+	key := Id
+	return s.DecapMplsLabelStack.Get(key)
+}
+
+// DeleteDecapMplsLabelStack deletes the value with the specified keys from
+// the receiver NetworkInstance_Afts_LabelEntry. If there is no such element, the
+// function is a no-op.
+func (s *NetworkInstance_Afts_LabelEntry) DeleteDecapMplsLabelStack(Id uint8) bool {
+	key := Id
+	return s.DecapMplsLabelStack.Delete(key)
+}
+
+// NetworkInstance_Afts_LabelEntry_DecapMplsLabelStack_OrderedMap is an ordered map that represents the "ordered-by user"
+// list elements at /openconfig-network-instance/network-instances/network-instance/afts/mpls/label-entry/decap-mpls-label-stacks/decap-mpls-label-stack.
+type NetworkInstance_Afts_LabelEntry_DecapMplsLabelStack_OrderedMap struct {
+	keys     []uint8
+	valueMap map[uint8]*NetworkInstance_Afts_LabelEntry_DecapMplsLabelStack
+}
+
+// IsYANGOrderedList ensures that NetworkInstance_Afts_LabelEntry_DecapMplsLabelStack_OrderedMap implements the
+// ygot.GoOrderedMap interface.
+func (*NetworkInstance_Afts_LabelEntry_DecapMplsLabelStack_OrderedMap) IsYANGOrderedList() {}
+
+// init initializes any uninitialized values.
+func (o *NetworkInstance_Afts_LabelEntry_DecapMplsLabelStack_OrderedMap) init() {
+	if o == nil {
+		return
+	}
+	if o.valueMap == nil {
+		o.valueMap = map[uint8]*NetworkInstance_Afts_LabelEntry_DecapMplsLabelStack{}
+	}
+}
+
+// Keys returns a copy of the list's keys.
+func (o *NetworkInstance_Afts_LabelEntry_DecapMplsLabelStack_OrderedMap) Keys() []uint8 {
+	if o == nil {
+		return nil
+	}
+	return append([]uint8{}, o.keys...)
+}
+
+// Values returns the current set of the list's values in order.
+func (o *NetworkInstance_Afts_LabelEntry_DecapMplsLabelStack_OrderedMap) Values() []*NetworkInstance_Afts_LabelEntry_DecapMplsLabelStack {
+	if o == nil {
+		return nil
+	}
+	var values []*NetworkInstance_Afts_LabelEntry_DecapMplsLabelStack
+	for _, key := range o.keys {
+		values = append(values, o.valueMap[key])
+	}
+	return values
+}
+
+// Len returns a size of NetworkInstance_Afts_LabelEntry_DecapMplsLabelStack_OrderedMap
+func (o *NetworkInstance_Afts_LabelEntry_DecapMplsLabelStack_OrderedMap) Len() int {
+	if o == nil {
+		return 0
+	}
+	return len(o.keys)
+}
+
+// Get returns the value corresponding to the key. If the key is not found, nil
+// is returned.
+func (o *NetworkInstance_Afts_LabelEntry_DecapMplsLabelStack_OrderedMap) Get(key uint8) *NetworkInstance_Afts_LabelEntry_DecapMplsLabelStack {
+	if o == nil {
+		return nil
+	}
+	val, _ := o.valueMap[key]
+	return val
+}
+
+// Delete deletes an element.
+func (o *NetworkInstance_Afts_LabelEntry_DecapMplsLabelStack_OrderedMap) Delete(key uint8) bool {
+	if o == nil {
+		return false
+	}
+	if _, ok := o.valueMap[key]; !ok {
+		return false
+	}
+	for i, k := range o.keys {
+		if k == key {
+			o.keys = append(o.keys[:i], o.keys[i+1:]...)
+			delete(o.valueMap, key)
+			return true
+		}
+	}
+	return false
+}
+
+// Append appends a NetworkInstance_Afts_LabelEntry_DecapMplsLabelStack, returning an error if the key
+// already exists in the ordered list or if the key is unspecified.
+func (o *NetworkInstance_Afts_LabelEntry_DecapMplsLabelStack_OrderedMap) Append(v *NetworkInstance_Afts_LabelEntry_DecapMplsLabelStack) error {
+	if o == nil {
+		return fmt.Errorf("nil ordered map, cannot append NetworkInstance_Afts_LabelEntry_DecapMplsLabelStack")
+	}
+	if v == nil {
+		return fmt.Errorf("nil NetworkInstance_Afts_LabelEntry_DecapMplsLabelStack")
+	}
+	if v.Id == nil {
+		return fmt.Errorf("invalid nil key received for Id")
+	}
+
+	key := *v.Id
+
+	if _, ok := o.valueMap[key]; ok {
+		return fmt.Errorf("duplicate key for list Statement %v", key)
+	}
+	o.keys = append(o.keys, key)
+	o.init()
+	o.valueMap[key] = v
+	return nil
+}
+
+// AppendNew creates and appends a new NetworkInstance_Afts_LabelEntry_DecapMplsLabelStack, returning the
+// newly-initialized v. It returns an error if the v already exists.
+func (o *NetworkInstance_Afts_LabelEntry_DecapMplsLabelStack_OrderedMap) AppendNew(Id uint8) (*NetworkInstance_Afts_LabelEntry_DecapMplsLabelStack, error) {
+	if o == nil {
+		return nil, fmt.Errorf("nil ordered map, cannot append NetworkInstance_Afts_LabelEntry_DecapMplsLabelStack")
+	}
+	key := Id
+
+	if _, ok := o.valueMap[key]; ok {
+		return nil, fmt.Errorf("duplicate key for list Statement %v", key)
+	}
+	o.keys = append(o.keys, key)
+	newElement := &NetworkInstance_Afts_LabelEntry_DecapMplsLabelStack{
+		Id: &Id,
+	}
+	o.init()
+	o.valueMap[key] = newElement
+	return newElement, nil
+}
+
 // PopulateDefaults recursively populates unset leaf fields in the NetworkInstance_Afts_LabelEntry
 // with default values as specified in the YANG schema, instantiating any nil
 // container fields.
@@ -60212,6 +63892,9 @@ func (t *NetworkInstance_Afts_LabelEntry) PopulateDefaults() {
 	}
 	ygot.BuildEmptyTree(t)
 	t.Counters.PopulateDefaults()
+	for _, e := range t.DecapMplsLabelStack.Values() {
+		e.PopulateDefaults()
+	}
 }
 
 // ΛListKeyMap returns the keys of the NetworkInstance_Afts_LabelEntry struct, which is a YANG list entry.
@@ -60334,6 +64017,107 @@ func (t *NetworkInstance_Afts_LabelEntry_Counters) ΛEnumTypeMap() map[string][]
 // ΛBelongingModule returns the name of the module that defines the namespace
 // of NetworkInstance_Afts_LabelEntry_Counters.
 func (*NetworkInstance_Afts_LabelEntry_Counters) ΛBelongingModule() string {
+	return "openconfig-network-instance"
+}
+
+// NetworkInstance_Afts_LabelEntry_DecapMplsLabelStack represents the /openconfig-network-instance/network-instances/network-instance/afts/mpls/label-entry/decap-mpls-label-stacks/decap-mpls-label-stack YANG schema element.
+type NetworkInstance_Afts_LabelEntry_DecapMplsLabelStack struct {
+	Id    *uint8                                                          `path:"state/id|id" module:"openconfig-network-instance/openconfig-network-instance|openconfig-network-instance" shadow-path:"id" shadow-module:"openconfig-network-instance"`
+	Label NetworkInstance_Afts_LabelEntry_DecapMplsLabelStack_Label_Union `path:"state/label" module:"openconfig-network-instance/openconfig-network-instance"`
+}
+
+// IsYANGGoStruct ensures that NetworkInstance_Afts_LabelEntry_DecapMplsLabelStack implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*NetworkInstance_Afts_LabelEntry_DecapMplsLabelStack) IsYANGGoStruct() {}
+
+// GetId retrieves the value of the leaf Id from the NetworkInstance_Afts_LabelEntry_DecapMplsLabelStack
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Id is set, it can
+// safely use t.GetId() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Id == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Afts_LabelEntry_DecapMplsLabelStack) GetId() uint8 {
+	if t == nil || t.Id == nil {
+		return 0
+	}
+	return *t.Id
+}
+
+// GetLabel retrieves the value of the leaf Label from the NetworkInstance_Afts_LabelEntry_DecapMplsLabelStack
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Label is set, it can
+// safely use t.GetLabel() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Label == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Afts_LabelEntry_DecapMplsLabelStack) GetLabel() NetworkInstance_Afts_LabelEntry_DecapMplsLabelStack_Label_Union {
+	if t == nil || t.Label == nil {
+		return nil
+	}
+	return t.Label
+}
+
+// SetId sets the value of the leaf Id in the NetworkInstance_Afts_LabelEntry_DecapMplsLabelStack
+// struct.
+func (t *NetworkInstance_Afts_LabelEntry_DecapMplsLabelStack) SetId(v uint8) {
+	t.Id = &v
+}
+
+// SetLabel sets the value of the leaf Label in the NetworkInstance_Afts_LabelEntry_DecapMplsLabelStack
+// struct.
+func (t *NetworkInstance_Afts_LabelEntry_DecapMplsLabelStack) SetLabel(v NetworkInstance_Afts_LabelEntry_DecapMplsLabelStack_Label_Union) {
+	t.Label = v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the NetworkInstance_Afts_LabelEntry_DecapMplsLabelStack
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *NetworkInstance_Afts_LabelEntry_DecapMplsLabelStack) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// ΛListKeyMap returns the keys of the NetworkInstance_Afts_LabelEntry_DecapMplsLabelStack struct, which is a YANG list entry.
+func (t *NetworkInstance_Afts_LabelEntry_DecapMplsLabelStack) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.Id == nil {
+		return nil, fmt.Errorf("nil value for key Id")
+	}
+
+	return map[string]interface{}{
+		"id": *t.Id,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *NetworkInstance_Afts_LabelEntry_DecapMplsLabelStack) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["NetworkInstance_Afts_LabelEntry_DecapMplsLabelStack"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *NetworkInstance_Afts_LabelEntry_DecapMplsLabelStack) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *NetworkInstance_Afts_LabelEntry_DecapMplsLabelStack) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of NetworkInstance_Afts_LabelEntry_DecapMplsLabelStack.
+func (*NetworkInstance_Afts_LabelEntry_DecapMplsLabelStack) ΛBelongingModule() string {
 	return "openconfig-network-instance"
 }
 
@@ -62455,15 +66239,34 @@ func (*NetworkInstance_Afts_NextHop_EncapHeader) ΛBelongingModule() string {
 
 // NetworkInstance_Afts_NextHop_EncapHeader_Gre represents the /openconfig-network-instance/network-instances/network-instance/afts/next-hops/next-hop/encap-headers/encap-header/gre YANG schema element.
 type NetworkInstance_Afts_NextHop_EncapHeader_Gre struct {
-	DstIp *string `path:"state/dst-ip" module:"openconfig-network-instance/openconfig-network-instance"`
-	SrcIp *string `path:"state/src-ip" module:"openconfig-network-instance/openconfig-network-instance"`
-	Ttl   *uint8  `path:"state/ttl" module:"openconfig-network-instance/openconfig-network-instance"`
+	Dscp           *uint8  `path:"state/dscp" module:"openconfig-network-instance/openconfig-network-instance"`
+	DstIp          *string `path:"state/dst-ip" module:"openconfig-network-instance/openconfig-network-instance"`
+	InProfileDscp  *uint8  `path:"state/in-profile-dscp" module:"openconfig-network-instance/openconfig-network-instance"`
+	OutProfileDscp *uint8  `path:"state/out-profile-dscp" module:"openconfig-network-instance/openconfig-network-instance"`
+	SrcIp          *string `path:"state/src-ip" module:"openconfig-network-instance/openconfig-network-instance"`
+	Ttl            *uint8  `path:"state/ttl" module:"openconfig-network-instance/openconfig-network-instance"`
 }
 
 // IsYANGGoStruct ensures that NetworkInstance_Afts_NextHop_EncapHeader_Gre implements the yang.GoStruct
 // interface. This allows functions that need to handle this struct to
 // identify it as being generated by ygen.
 func (*NetworkInstance_Afts_NextHop_EncapHeader_Gre) IsYANGGoStruct() {}
+
+// GetDscp retrieves the value of the leaf Dscp from the NetworkInstance_Afts_NextHop_EncapHeader_Gre
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Dscp is set, it can
+// safely use t.GetDscp() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Dscp == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Afts_NextHop_EncapHeader_Gre) GetDscp() uint8 {
+	if t == nil || t.Dscp == nil {
+		return 0
+	}
+	return *t.Dscp
+}
 
 // GetDstIp retrieves the value of the leaf DstIp from the NetworkInstance_Afts_NextHop_EncapHeader_Gre
 // struct. If the field is unset but has a default value in the YANG schema,
@@ -62479,6 +66282,38 @@ func (t *NetworkInstance_Afts_NextHop_EncapHeader_Gre) GetDstIp() string {
 		return ""
 	}
 	return *t.DstIp
+}
+
+// GetInProfileDscp retrieves the value of the leaf InProfileDscp from the NetworkInstance_Afts_NextHop_EncapHeader_Gre
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if InProfileDscp is set, it can
+// safely use t.GetInProfileDscp() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.InProfileDscp == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Afts_NextHop_EncapHeader_Gre) GetInProfileDscp() uint8 {
+	if t == nil || t.InProfileDscp == nil {
+		return 0
+	}
+	return *t.InProfileDscp
+}
+
+// GetOutProfileDscp retrieves the value of the leaf OutProfileDscp from the NetworkInstance_Afts_NextHop_EncapHeader_Gre
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if OutProfileDscp is set, it can
+// safely use t.GetOutProfileDscp() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.OutProfileDscp == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Afts_NextHop_EncapHeader_Gre) GetOutProfileDscp() uint8 {
+	if t == nil || t.OutProfileDscp == nil {
+		return 0
+	}
+	return *t.OutProfileDscp
 }
 
 // GetSrcIp retrieves the value of the leaf SrcIp from the NetworkInstance_Afts_NextHop_EncapHeader_Gre
@@ -62513,10 +66348,28 @@ func (t *NetworkInstance_Afts_NextHop_EncapHeader_Gre) GetTtl() uint8 {
 	return *t.Ttl
 }
 
+// SetDscp sets the value of the leaf Dscp in the NetworkInstance_Afts_NextHop_EncapHeader_Gre
+// struct.
+func (t *NetworkInstance_Afts_NextHop_EncapHeader_Gre) SetDscp(v uint8) {
+	t.Dscp = &v
+}
+
 // SetDstIp sets the value of the leaf DstIp in the NetworkInstance_Afts_NextHop_EncapHeader_Gre
 // struct.
 func (t *NetworkInstance_Afts_NextHop_EncapHeader_Gre) SetDstIp(v string) {
 	t.DstIp = &v
+}
+
+// SetInProfileDscp sets the value of the leaf InProfileDscp in the NetworkInstance_Afts_NextHop_EncapHeader_Gre
+// struct.
+func (t *NetworkInstance_Afts_NextHop_EncapHeader_Gre) SetInProfileDscp(v uint8) {
+	t.InProfileDscp = &v
+}
+
+// SetOutProfileDscp sets the value of the leaf OutProfileDscp in the NetworkInstance_Afts_NextHop_EncapHeader_Gre
+// struct.
+func (t *NetworkInstance_Afts_NextHop_EncapHeader_Gre) SetOutProfileDscp(v uint8) {
+	t.OutProfileDscp = &v
 }
 
 // SetSrcIp sets the value of the leaf SrcIp in the NetworkInstance_Afts_NextHop_EncapHeader_Gre
@@ -62748,8 +66601,9 @@ func (*NetworkInstance_Afts_NextHop_EncapHeader_Ipv6) ΛBelongingModule() string
 
 // NetworkInstance_Afts_NextHop_EncapHeader_Mpls represents the /openconfig-network-instance/network-instances/network-instance/afts/next-hops/next-hop/encap-headers/encap-header/mpls YANG schema element.
 type NetworkInstance_Afts_NextHop_EncapHeader_Mpls struct {
-	MplsLabelStack []NetworkInstance_Afts_NextHop_EncapHeader_Mpls_MplsLabelStack_Union `path:"state/mpls-label-stack" module:"openconfig-network-instance/openconfig-network-instance"`
-	TrafficClass   *uint8                                                               `path:"state/traffic-class" module:"openconfig-network-instance/openconfig-network-instance"`
+	EncapMplsLabelStack *NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStack_OrderedMap `path:"encap-mpls-label-stacks/encap-mpls-label-stack" module:"openconfig-network-instance/openconfig-network-instance"`
+	MplsLabelStack      []NetworkInstance_Afts_NextHop_EncapHeader_Mpls_MplsLabelStack_Union          `path:"state/mpls-label-stack" module:"openconfig-network-instance/openconfig-network-instance"`
+	TrafficClass        *uint8                                                                        `path:"state/traffic-class" module:"openconfig-network-instance/openconfig-network-instance"`
 }
 
 // IsYANGGoStruct ensures that NetworkInstance_Afts_NextHop_EncapHeader_Mpls implements the yang.GoStruct
@@ -62801,6 +66655,180 @@ func (t *NetworkInstance_Afts_NextHop_EncapHeader_Mpls) SetTrafficClass(v uint8)
 	t.TrafficClass = &v
 }
 
+// GetOrCreateEncapMplsLabelStackMap returns the ordered map field
+// EncapMplsLabelStack from NetworkInstance_Afts_NextHop_EncapHeader_Mpls.
+//
+// It initializes the field if not already initialized.
+func (s *NetworkInstance_Afts_NextHop_EncapHeader_Mpls) GetOrCreateEncapMplsLabelStackMap() *NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStack_OrderedMap {
+	if s.EncapMplsLabelStack == nil {
+		s.EncapMplsLabelStack = &NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStack_OrderedMap{}
+	}
+	return s.EncapMplsLabelStack
+}
+
+// AppendNewEncapMplsLabelStack creates a new entry in the EncapMplsLabelStack
+// ordered map of the NetworkInstance_Afts_NextHop_EncapHeader_Mpls struct. The keys of the list are
+// populated from the input arguments.
+func (s *NetworkInstance_Afts_NextHop_EncapHeader_Mpls) AppendNewEncapMplsLabelStack(Id uint8) (*NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStack, error) {
+	if s.EncapMplsLabelStack == nil {
+		s.EncapMplsLabelStack = &NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStack_OrderedMap{}
+	}
+	return s.EncapMplsLabelStack.AppendNew(Id)
+}
+
+// AppendEncapMplsLabelStack appends the supplied NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStack struct
+// to the list EncapMplsLabelStack of NetworkInstance_Afts_NextHop_EncapHeader_Mpls. If the key value(s)
+// specified in the supplied NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStack already exist in the list, an
+// error is returned.
+func (s *NetworkInstance_Afts_NextHop_EncapHeader_Mpls) AppendEncapMplsLabelStack(v *NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStack) error {
+	if s.EncapMplsLabelStack == nil {
+		s.EncapMplsLabelStack = &NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStack_OrderedMap{}
+	}
+	return s.EncapMplsLabelStack.Append(v)
+}
+
+// GetEncapMplsLabelStack retrieves the value with the specified key from the
+// EncapMplsLabelStack map field of NetworkInstance_Afts_NextHop_EncapHeader_Mpls. If the receiver
+// is nil, or the specified key is not present in the list, nil is returned
+// such that Get* methods may be safely chained.
+func (s *NetworkInstance_Afts_NextHop_EncapHeader_Mpls) GetEncapMplsLabelStack(Id uint8) *NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStack {
+	if s == nil {
+		return nil
+	}
+	key := Id
+	return s.EncapMplsLabelStack.Get(key)
+}
+
+// DeleteEncapMplsLabelStack deletes the value with the specified keys from
+// the receiver NetworkInstance_Afts_NextHop_EncapHeader_Mpls. If there is no such element, the
+// function is a no-op.
+func (s *NetworkInstance_Afts_NextHop_EncapHeader_Mpls) DeleteEncapMplsLabelStack(Id uint8) bool {
+	key := Id
+	return s.EncapMplsLabelStack.Delete(key)
+}
+
+// NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStack_OrderedMap is an ordered map that represents the "ordered-by user"
+// list elements at /openconfig-network-instance/network-instances/network-instance/afts/next-hops/next-hop/encap-headers/encap-header/mpls/encap-mpls-label-stacks/encap-mpls-label-stack.
+type NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStack_OrderedMap struct {
+	keys     []uint8
+	valueMap map[uint8]*NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStack
+}
+
+// IsYANGOrderedList ensures that NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStack_OrderedMap implements the
+// ygot.GoOrderedMap interface.
+func (*NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStack_OrderedMap) IsYANGOrderedList() {
+}
+
+// init initializes any uninitialized values.
+func (o *NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStack_OrderedMap) init() {
+	if o == nil {
+		return
+	}
+	if o.valueMap == nil {
+		o.valueMap = map[uint8]*NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStack{}
+	}
+}
+
+// Keys returns a copy of the list's keys.
+func (o *NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStack_OrderedMap) Keys() []uint8 {
+	if o == nil {
+		return nil
+	}
+	return append([]uint8{}, o.keys...)
+}
+
+// Values returns the current set of the list's values in order.
+func (o *NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStack_OrderedMap) Values() []*NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStack {
+	if o == nil {
+		return nil
+	}
+	var values []*NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStack
+	for _, key := range o.keys {
+		values = append(values, o.valueMap[key])
+	}
+	return values
+}
+
+// Len returns a size of NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStack_OrderedMap
+func (o *NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStack_OrderedMap) Len() int {
+	if o == nil {
+		return 0
+	}
+	return len(o.keys)
+}
+
+// Get returns the value corresponding to the key. If the key is not found, nil
+// is returned.
+func (o *NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStack_OrderedMap) Get(key uint8) *NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStack {
+	if o == nil {
+		return nil
+	}
+	val, _ := o.valueMap[key]
+	return val
+}
+
+// Delete deletes an element.
+func (o *NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStack_OrderedMap) Delete(key uint8) bool {
+	if o == nil {
+		return false
+	}
+	if _, ok := o.valueMap[key]; !ok {
+		return false
+	}
+	for i, k := range o.keys {
+		if k == key {
+			o.keys = append(o.keys[:i], o.keys[i+1:]...)
+			delete(o.valueMap, key)
+			return true
+		}
+	}
+	return false
+}
+
+// Append appends a NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStack, returning an error if the key
+// already exists in the ordered list or if the key is unspecified.
+func (o *NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStack_OrderedMap) Append(v *NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStack) error {
+	if o == nil {
+		return fmt.Errorf("nil ordered map, cannot append NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStack")
+	}
+	if v == nil {
+		return fmt.Errorf("nil NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStack")
+	}
+	if v.Id == nil {
+		return fmt.Errorf("invalid nil key received for Id")
+	}
+
+	key := *v.Id
+
+	if _, ok := o.valueMap[key]; ok {
+		return fmt.Errorf("duplicate key for list Statement %v", key)
+	}
+	o.keys = append(o.keys, key)
+	o.init()
+	o.valueMap[key] = v
+	return nil
+}
+
+// AppendNew creates and appends a new NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStack, returning the
+// newly-initialized v. It returns an error if the v already exists.
+func (o *NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStack_OrderedMap) AppendNew(Id uint8) (*NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStack, error) {
+	if o == nil {
+		return nil, fmt.Errorf("nil ordered map, cannot append NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStack")
+	}
+	key := Id
+
+	if _, ok := o.valueMap[key]; ok {
+		return nil, fmt.Errorf("duplicate key for list Statement %v", key)
+	}
+	o.keys = append(o.keys, key)
+	newElement := &NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStack{
+		Id: &Id,
+	}
+	o.init()
+	o.valueMap[key] = newElement
+	return newElement, nil
+}
+
 // PopulateDefaults recursively populates unset leaf fields in the NetworkInstance_Afts_NextHop_EncapHeader_Mpls
 // with default values as specified in the YANG schema, instantiating any nil
 // container fields.
@@ -62809,6 +66837,9 @@ func (t *NetworkInstance_Afts_NextHop_EncapHeader_Mpls) PopulateDefaults() {
 		return
 	}
 	ygot.BuildEmptyTree(t)
+	for _, e := range t.EncapMplsLabelStack.Values() {
+		e.PopulateDefaults()
+	}
 }
 
 // Validate validates s against the YANG schema corresponding to its type.
@@ -62836,14 +66867,117 @@ func (*NetworkInstance_Afts_NextHop_EncapHeader_Mpls) ΛBelongingModule() string
 	return "openconfig-network-instance"
 }
 
+// NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStack represents the /openconfig-network-instance/network-instances/network-instance/afts/next-hops/next-hop/encap-headers/encap-header/mpls/encap-mpls-label-stacks/encap-mpls-label-stack YANG schema element.
+type NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStack struct {
+	Id    *uint8                                                                        `path:"state/id|id" module:"openconfig-network-instance/openconfig-network-instance|openconfig-network-instance" shadow-path:"id" shadow-module:"openconfig-network-instance"`
+	Label NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStack_Label_Union `path:"state/label" module:"openconfig-network-instance/openconfig-network-instance"`
+}
+
+// IsYANGGoStruct ensures that NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStack implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStack) IsYANGGoStruct() {}
+
+// GetId retrieves the value of the leaf Id from the NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStack
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Id is set, it can
+// safely use t.GetId() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Id == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStack) GetId() uint8 {
+	if t == nil || t.Id == nil {
+		return 0
+	}
+	return *t.Id
+}
+
+// GetLabel retrieves the value of the leaf Label from the NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStack
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Label is set, it can
+// safely use t.GetLabel() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Label == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStack) GetLabel() NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStack_Label_Union {
+	if t == nil || t.Label == nil {
+		return nil
+	}
+	return t.Label
+}
+
+// SetId sets the value of the leaf Id in the NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStack
+// struct.
+func (t *NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStack) SetId(v uint8) {
+	t.Id = &v
+}
+
+// SetLabel sets the value of the leaf Label in the NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStack
+// struct.
+func (t *NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStack) SetLabel(v NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStack_Label_Union) {
+	t.Label = v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStack
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStack) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// ΛListKeyMap returns the keys of the NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStack struct, which is a YANG list entry.
+func (t *NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStack) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.Id == nil {
+		return nil, fmt.Errorf("nil value for key Id")
+	}
+
+	return map[string]interface{}{
+		"id": *t.Id,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStack) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStack"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStack) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStack) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStack.
+func (*NetworkInstance_Afts_NextHop_EncapHeader_Mpls_EncapMplsLabelStack) ΛBelongingModule() string {
+	return "openconfig-network-instance"
+}
+
 // NetworkInstance_Afts_NextHop_EncapHeader_UdpV4 represents the /openconfig-network-instance/network-instances/network-instance/afts/next-hops/next-hop/encap-headers/encap-header/udp-v4 YANG schema element.
 type NetworkInstance_Afts_NextHop_EncapHeader_UdpV4 struct {
-	Dscp       *uint8  `path:"state/dscp" module:"openconfig-network-instance/openconfig-network-instance"`
-	DstIp      *string `path:"state/dst-ip" module:"openconfig-network-instance/openconfig-network-instance"`
-	DstUdpPort *uint16 `path:"state/dst-udp-port" module:"openconfig-network-instance/openconfig-network-instance"`
-	IpTtl      *uint8  `path:"state/ip-ttl" module:"openconfig-network-instance/openconfig-network-instance"`
-	SrcIp      *string `path:"state/src-ip" module:"openconfig-network-instance/openconfig-network-instance"`
-	SrcUdpPort *uint16 `path:"state/src-udp-port" module:"openconfig-network-instance/openconfig-network-instance"`
+	Dscp           *uint8  `path:"state/dscp" module:"openconfig-network-instance/openconfig-network-instance"`
+	DstIp          *string `path:"state/dst-ip" module:"openconfig-network-instance/openconfig-network-instance"`
+	DstUdpPort     *uint16 `path:"state/dst-udp-port" module:"openconfig-network-instance/openconfig-network-instance"`
+	InProfileDscp  *uint8  `path:"state/in-profile-dscp" module:"openconfig-network-instance/openconfig-network-instance"`
+	IpTtl          *uint8  `path:"state/ip-ttl" module:"openconfig-network-instance/openconfig-network-instance"`
+	OutProfileDscp *uint8  `path:"state/out-profile-dscp" module:"openconfig-network-instance/openconfig-network-instance"`
+	SrcIp          *string `path:"state/src-ip" module:"openconfig-network-instance/openconfig-network-instance"`
+	SrcUdpPort     *uint16 `path:"state/src-udp-port" module:"openconfig-network-instance/openconfig-network-instance"`
 }
 
 // IsYANGGoStruct ensures that NetworkInstance_Afts_NextHop_EncapHeader_UdpV4 implements the yang.GoStruct
@@ -62899,6 +67033,22 @@ func (t *NetworkInstance_Afts_NextHop_EncapHeader_UdpV4) GetDstUdpPort() uint16 
 	return *t.DstUdpPort
 }
 
+// GetInProfileDscp retrieves the value of the leaf InProfileDscp from the NetworkInstance_Afts_NextHop_EncapHeader_UdpV4
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if InProfileDscp is set, it can
+// safely use t.GetInProfileDscp() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.InProfileDscp == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Afts_NextHop_EncapHeader_UdpV4) GetInProfileDscp() uint8 {
+	if t == nil || t.InProfileDscp == nil {
+		return 0
+	}
+	return *t.InProfileDscp
+}
+
 // GetIpTtl retrieves the value of the leaf IpTtl from the NetworkInstance_Afts_NextHop_EncapHeader_UdpV4
 // struct. If the field is unset but has a default value in the YANG schema,
 // then the default value will be returned.
@@ -62913,6 +67063,22 @@ func (t *NetworkInstance_Afts_NextHop_EncapHeader_UdpV4) GetIpTtl() uint8 {
 		return 0
 	}
 	return *t.IpTtl
+}
+
+// GetOutProfileDscp retrieves the value of the leaf OutProfileDscp from the NetworkInstance_Afts_NextHop_EncapHeader_UdpV4
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if OutProfileDscp is set, it can
+// safely use t.GetOutProfileDscp() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.OutProfileDscp == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Afts_NextHop_EncapHeader_UdpV4) GetOutProfileDscp() uint8 {
+	if t == nil || t.OutProfileDscp == nil {
+		return 0
+	}
+	return *t.OutProfileDscp
 }
 
 // GetSrcIp retrieves the value of the leaf SrcIp from the NetworkInstance_Afts_NextHop_EncapHeader_UdpV4
@@ -62965,10 +67131,22 @@ func (t *NetworkInstance_Afts_NextHop_EncapHeader_UdpV4) SetDstUdpPort(v uint16)
 	t.DstUdpPort = &v
 }
 
+// SetInProfileDscp sets the value of the leaf InProfileDscp in the NetworkInstance_Afts_NextHop_EncapHeader_UdpV4
+// struct.
+func (t *NetworkInstance_Afts_NextHop_EncapHeader_UdpV4) SetInProfileDscp(v uint8) {
+	t.InProfileDscp = &v
+}
+
 // SetIpTtl sets the value of the leaf IpTtl in the NetworkInstance_Afts_NextHop_EncapHeader_UdpV4
 // struct.
 func (t *NetworkInstance_Afts_NextHop_EncapHeader_UdpV4) SetIpTtl(v uint8) {
 	t.IpTtl = &v
+}
+
+// SetOutProfileDscp sets the value of the leaf OutProfileDscp in the NetworkInstance_Afts_NextHop_EncapHeader_UdpV4
+// struct.
+func (t *NetworkInstance_Afts_NextHop_EncapHeader_UdpV4) SetOutProfileDscp(v uint8) {
+	t.OutProfileDscp = &v
 }
 
 // SetSrcIp sets the value of the leaf SrcIp in the NetworkInstance_Afts_NextHop_EncapHeader_UdpV4
@@ -63020,12 +67198,14 @@ func (*NetworkInstance_Afts_NextHop_EncapHeader_UdpV4) ΛBelongingModule() strin
 
 // NetworkInstance_Afts_NextHop_EncapHeader_UdpV6 represents the /openconfig-network-instance/network-instances/network-instance/afts/next-hops/next-hop/encap-headers/encap-header/udp-v6 YANG schema element.
 type NetworkInstance_Afts_NextHop_EncapHeader_UdpV6 struct {
-	Dscp       *uint8  `path:"state/dscp" module:"openconfig-network-instance/openconfig-network-instance"`
-	DstIp      *string `path:"state/dst-ip" module:"openconfig-network-instance/openconfig-network-instance"`
-	DstUdpPort *uint16 `path:"state/dst-udp-port" module:"openconfig-network-instance/openconfig-network-instance"`
-	IpTtl      *uint8  `path:"state/ip-ttl" module:"openconfig-network-instance/openconfig-network-instance"`
-	SrcIp      *string `path:"state/src-ip" module:"openconfig-network-instance/openconfig-network-instance"`
-	SrcUdpPort *uint16 `path:"state/src-udp-port" module:"openconfig-network-instance/openconfig-network-instance"`
+	Dscp           *uint8  `path:"state/dscp" module:"openconfig-network-instance/openconfig-network-instance"`
+	DstIp          *string `path:"state/dst-ip" module:"openconfig-network-instance/openconfig-network-instance"`
+	DstUdpPort     *uint16 `path:"state/dst-udp-port" module:"openconfig-network-instance/openconfig-network-instance"`
+	InProfileDscp  *uint8  `path:"state/in-profile-dscp" module:"openconfig-network-instance/openconfig-network-instance"`
+	IpTtl          *uint8  `path:"state/ip-ttl" module:"openconfig-network-instance/openconfig-network-instance"`
+	OutProfileDscp *uint8  `path:"state/out-profile-dscp" module:"openconfig-network-instance/openconfig-network-instance"`
+	SrcIp          *string `path:"state/src-ip" module:"openconfig-network-instance/openconfig-network-instance"`
+	SrcUdpPort     *uint16 `path:"state/src-udp-port" module:"openconfig-network-instance/openconfig-network-instance"`
 }
 
 // IsYANGGoStruct ensures that NetworkInstance_Afts_NextHop_EncapHeader_UdpV6 implements the yang.GoStruct
@@ -63081,6 +67261,22 @@ func (t *NetworkInstance_Afts_NextHop_EncapHeader_UdpV6) GetDstUdpPort() uint16 
 	return *t.DstUdpPort
 }
 
+// GetInProfileDscp retrieves the value of the leaf InProfileDscp from the NetworkInstance_Afts_NextHop_EncapHeader_UdpV6
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if InProfileDscp is set, it can
+// safely use t.GetInProfileDscp() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.InProfileDscp == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Afts_NextHop_EncapHeader_UdpV6) GetInProfileDscp() uint8 {
+	if t == nil || t.InProfileDscp == nil {
+		return 0
+	}
+	return *t.InProfileDscp
+}
+
 // GetIpTtl retrieves the value of the leaf IpTtl from the NetworkInstance_Afts_NextHop_EncapHeader_UdpV6
 // struct. If the field is unset but has a default value in the YANG schema,
 // then the default value will be returned.
@@ -63095,6 +67291,22 @@ func (t *NetworkInstance_Afts_NextHop_EncapHeader_UdpV6) GetIpTtl() uint8 {
 		return 0
 	}
 	return *t.IpTtl
+}
+
+// GetOutProfileDscp retrieves the value of the leaf OutProfileDscp from the NetworkInstance_Afts_NextHop_EncapHeader_UdpV6
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if OutProfileDscp is set, it can
+// safely use t.GetOutProfileDscp() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.OutProfileDscp == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Afts_NextHop_EncapHeader_UdpV6) GetOutProfileDscp() uint8 {
+	if t == nil || t.OutProfileDscp == nil {
+		return 0
+	}
+	return *t.OutProfileDscp
 }
 
 // GetSrcIp retrieves the value of the leaf SrcIp from the NetworkInstance_Afts_NextHop_EncapHeader_UdpV6
@@ -63147,10 +67359,22 @@ func (t *NetworkInstance_Afts_NextHop_EncapHeader_UdpV6) SetDstUdpPort(v uint16)
 	t.DstUdpPort = &v
 }
 
+// SetInProfileDscp sets the value of the leaf InProfileDscp in the NetworkInstance_Afts_NextHop_EncapHeader_UdpV6
+// struct.
+func (t *NetworkInstance_Afts_NextHop_EncapHeader_UdpV6) SetInProfileDscp(v uint8) {
+	t.InProfileDscp = &v
+}
+
 // SetIpTtl sets the value of the leaf IpTtl in the NetworkInstance_Afts_NextHop_EncapHeader_UdpV6
 // struct.
 func (t *NetworkInstance_Afts_NextHop_EncapHeader_UdpV6) SetIpTtl(v uint8) {
 	t.IpTtl = &v
+}
+
+// SetOutProfileDscp sets the value of the leaf OutProfileDscp in the NetworkInstance_Afts_NextHop_EncapHeader_UdpV6
+// struct.
+func (t *NetworkInstance_Afts_NextHop_EncapHeader_UdpV6) SetOutProfileDscp(v uint8) {
+	t.OutProfileDscp = &v
 }
 
 // SetSrcIp sets the value of the leaf SrcIp in the NetworkInstance_Afts_NextHop_EncapHeader_UdpV6
@@ -63292,15 +67516,34 @@ func (*NetworkInstance_Afts_NextHop_EncapHeader_Vxlan) ΛBelongingModule() strin
 
 // NetworkInstance_Afts_NextHop_Gre represents the /openconfig-network-instance/network-instances/network-instance/afts/next-hops/next-hop/gre YANG schema element.
 type NetworkInstance_Afts_NextHop_Gre struct {
-	DstIp *string `path:"state/dst-ip" module:"openconfig-network-instance/openconfig-network-instance"`
-	SrcIp *string `path:"state/src-ip" module:"openconfig-network-instance/openconfig-network-instance"`
-	Ttl   *uint8  `path:"state/ttl" module:"openconfig-network-instance/openconfig-network-instance"`
+	Dscp           *uint8  `path:"state/dscp" module:"openconfig-network-instance/openconfig-network-instance"`
+	DstIp          *string `path:"state/dst-ip" module:"openconfig-network-instance/openconfig-network-instance"`
+	InProfileDscp  *uint8  `path:"state/in-profile-dscp" module:"openconfig-network-instance/openconfig-network-instance"`
+	OutProfileDscp *uint8  `path:"state/out-profile-dscp" module:"openconfig-network-instance/openconfig-network-instance"`
+	SrcIp          *string `path:"state/src-ip" module:"openconfig-network-instance/openconfig-network-instance"`
+	Ttl            *uint8  `path:"state/ttl" module:"openconfig-network-instance/openconfig-network-instance"`
 }
 
 // IsYANGGoStruct ensures that NetworkInstance_Afts_NextHop_Gre implements the yang.GoStruct
 // interface. This allows functions that need to handle this struct to
 // identify it as being generated by ygen.
 func (*NetworkInstance_Afts_NextHop_Gre) IsYANGGoStruct() {}
+
+// GetDscp retrieves the value of the leaf Dscp from the NetworkInstance_Afts_NextHop_Gre
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Dscp is set, it can
+// safely use t.GetDscp() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Dscp == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Afts_NextHop_Gre) GetDscp() uint8 {
+	if t == nil || t.Dscp == nil {
+		return 0
+	}
+	return *t.Dscp
+}
 
 // GetDstIp retrieves the value of the leaf DstIp from the NetworkInstance_Afts_NextHop_Gre
 // struct. If the field is unset but has a default value in the YANG schema,
@@ -63316,6 +67559,38 @@ func (t *NetworkInstance_Afts_NextHop_Gre) GetDstIp() string {
 		return ""
 	}
 	return *t.DstIp
+}
+
+// GetInProfileDscp retrieves the value of the leaf InProfileDscp from the NetworkInstance_Afts_NextHop_Gre
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if InProfileDscp is set, it can
+// safely use t.GetInProfileDscp() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.InProfileDscp == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Afts_NextHop_Gre) GetInProfileDscp() uint8 {
+	if t == nil || t.InProfileDscp == nil {
+		return 0
+	}
+	return *t.InProfileDscp
+}
+
+// GetOutProfileDscp retrieves the value of the leaf OutProfileDscp from the NetworkInstance_Afts_NextHop_Gre
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if OutProfileDscp is set, it can
+// safely use t.GetOutProfileDscp() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.OutProfileDscp == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Afts_NextHop_Gre) GetOutProfileDscp() uint8 {
+	if t == nil || t.OutProfileDscp == nil {
+		return 0
+	}
+	return *t.OutProfileDscp
 }
 
 // GetSrcIp retrieves the value of the leaf SrcIp from the NetworkInstance_Afts_NextHop_Gre
@@ -63350,10 +67625,28 @@ func (t *NetworkInstance_Afts_NextHop_Gre) GetTtl() uint8 {
 	return *t.Ttl
 }
 
+// SetDscp sets the value of the leaf Dscp in the NetworkInstance_Afts_NextHop_Gre
+// struct.
+func (t *NetworkInstance_Afts_NextHop_Gre) SetDscp(v uint8) {
+	t.Dscp = &v
+}
+
 // SetDstIp sets the value of the leaf DstIp in the NetworkInstance_Afts_NextHop_Gre
 // struct.
 func (t *NetworkInstance_Afts_NextHop_Gre) SetDstIp(v string) {
 	t.DstIp = &v
+}
+
+// SetInProfileDscp sets the value of the leaf InProfileDscp in the NetworkInstance_Afts_NextHop_Gre
+// struct.
+func (t *NetworkInstance_Afts_NextHop_Gre) SetInProfileDscp(v uint8) {
+	t.InProfileDscp = &v
+}
+
+// SetOutProfileDscp sets the value of the leaf OutProfileDscp in the NetworkInstance_Afts_NextHop_Gre
+// struct.
+func (t *NetworkInstance_Afts_NextHop_Gre) SetOutProfileDscp(v uint8) {
+	t.OutProfileDscp = &v
 }
 
 // SetSrcIp sets the value of the leaf SrcIp in the NetworkInstance_Afts_NextHop_Gre
@@ -64128,6 +68421,7 @@ func (*NetworkInstance_Afts_StateSynced) ΛBelongingModule() string {
 type NetworkInstance_ConnectionPoint struct {
 	ConnectionPointId *string                                              `path:"state/connection-point-id|connection-point-id" module:"openconfig-network-instance/openconfig-network-instance|openconfig-network-instance" shadow-path:"config/connection-point-id|connection-point-id" shadow-module:"openconfig-network-instance/openconfig-network-instance|openconfig-network-instance"`
 	Endpoint          map[string]*NetworkInstance_ConnectionPoint_Endpoint `path:"endpoints/endpoint" module:"openconfig-network-instance/openconfig-network-instance"`
+	OperStatus        E_NetworkInstanceTypes_CONNECTION_POINT_OPER_STATUS  `path:"state/oper-status" module:"openconfig-network-instance/openconfig-network-instance"`
 }
 
 // IsYANGGoStruct ensures that NetworkInstance_ConnectionPoint implements the yang.GoStruct
@@ -64278,10 +68572,32 @@ func (t *NetworkInstance_ConnectionPoint) GetConnectionPointId() string {
 	return *t.ConnectionPointId
 }
 
+// GetOperStatus retrieves the value of the leaf OperStatus from the NetworkInstance_ConnectionPoint
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if OperStatus is set, it can
+// safely use t.GetOperStatus() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.OperStatus == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_ConnectionPoint) GetOperStatus() E_NetworkInstanceTypes_CONNECTION_POINT_OPER_STATUS {
+	if t == nil || t.OperStatus == 0 {
+		return 0
+	}
+	return t.OperStatus
+}
+
 // SetConnectionPointId sets the value of the leaf ConnectionPointId in the NetworkInstance_ConnectionPoint
 // struct.
 func (t *NetworkInstance_ConnectionPoint) SetConnectionPointId(v string) {
 	t.ConnectionPointId = &v
+}
+
+// SetOperStatus sets the value of the leaf OperStatus in the NetworkInstance_ConnectionPoint
+// struct.
+func (t *NetworkInstance_ConnectionPoint) SetOperStatus(v E_NetworkInstanceTypes_CONNECTION_POINT_OPER_STATUS) {
+	t.OperStatus = v
 }
 
 // PopulateDefaults recursively populates unset leaf fields in the NetworkInstance_ConnectionPoint
@@ -64340,6 +68656,7 @@ type NetworkInstance_ConnectionPoint_Endpoint struct {
 	Local      *NetworkInstance_ConnectionPoint_Endpoint_Local  `path:"local" module:"openconfig-network-instance"`
 	Precedence *uint16                                          `path:"state/precedence" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/precedence" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
 	Remote     *NetworkInstance_ConnectionPoint_Endpoint_Remote `path:"remote" module:"openconfig-network-instance"`
+	Static     *NetworkInstance_ConnectionPoint_Endpoint_Static `path:"static" module:"openconfig-network-instance"`
 	Type       E_NetworkInstanceTypes_ENDPOINT_TYPE             `path:"state/type" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/type" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
 	Vxlan      *NetworkInstance_ConnectionPoint_Endpoint_Vxlan  `path:"vxlan" module:"openconfig-network-instance"`
 }
@@ -64369,6 +68686,16 @@ func (t *NetworkInstance_ConnectionPoint_Endpoint) GetOrCreateRemote() *NetworkI
 	return t.Remote
 }
 
+// GetOrCreateStatic retrieves the value of the Static field
+// or returns the existing field if it already exists.
+func (t *NetworkInstance_ConnectionPoint_Endpoint) GetOrCreateStatic() *NetworkInstance_ConnectionPoint_Endpoint_Static {
+	if t.Static != nil {
+		return t.Static
+	}
+	t.Static = &NetworkInstance_ConnectionPoint_Endpoint_Static{}
+	return t.Static
+}
+
 // GetOrCreateVxlan retrieves the value of the Vxlan field
 // or returns the existing field if it already exists.
 func (t *NetworkInstance_ConnectionPoint_Endpoint) GetOrCreateVxlan() *NetworkInstance_ConnectionPoint_Endpoint_Vxlan {
@@ -64395,6 +68722,16 @@ func (t *NetworkInstance_ConnectionPoint_Endpoint) GetLocal() *NetworkInstance_C
 func (t *NetworkInstance_ConnectionPoint_Endpoint) GetRemote() *NetworkInstance_ConnectionPoint_Endpoint_Remote {
 	if t != nil && t.Remote != nil {
 		return t.Remote
+	}
+	return nil
+}
+
+// GetStatic returns the value of the Static struct pointer
+// from NetworkInstance_ConnectionPoint_Endpoint. If the receiver or the field Static is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *NetworkInstance_ConnectionPoint_Endpoint) GetStatic() *NetworkInstance_ConnectionPoint_Endpoint_Static {
+	if t != nil && t.Static != nil {
+		return t.Static
 	}
 	return nil
 }
@@ -64507,6 +68844,7 @@ func (t *NetworkInstance_ConnectionPoint_Endpoint) PopulateDefaults() {
 	ygot.BuildEmptyTree(t)
 	t.Local.PopulateDefaults()
 	t.Remote.PopulateDefaults()
+	t.Static.PopulateDefaults()
 	t.Vxlan.PopulateDefaults()
 }
 
@@ -64815,6 +69153,165 @@ func (t *NetworkInstance_ConnectionPoint_Endpoint_Remote) ΛEnumTypeMap() map[st
 // ΛBelongingModule returns the name of the module that defines the namespace
 // of NetworkInstance_ConnectionPoint_Endpoint_Remote.
 func (*NetworkInstance_ConnectionPoint_Endpoint_Remote) ΛBelongingModule() string {
+	return "openconfig-network-instance"
+}
+
+// NetworkInstance_ConnectionPoint_Endpoint_Static represents the /openconfig-network-instance/network-instances/network-instance/connection-points/connection-point/endpoints/endpoint/static YANG schema element.
+type NetworkInstance_ConnectionPoint_Endpoint_Static struct {
+	ControlWord     *bool                                                               `path:"state/control-word" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/control-word" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+	LocalLabel      NetworkInstance_ConnectionPoint_Endpoint_Static_LocalLabel_Union    `path:"state/local-label" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/local-label" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+	NeighborLabel   NetworkInstance_ConnectionPoint_Endpoint_Static_NeighborLabel_Union `path:"state/neighbor-label" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/neighbor-label" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+	NextHopGroup    *string                                                             `path:"state/next-hop-group" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/next-hop-group" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+	TunnelInterface *string                                                             `path:"state/tunnel-interface" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/tunnel-interface" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+}
+
+// IsYANGGoStruct ensures that NetworkInstance_ConnectionPoint_Endpoint_Static implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*NetworkInstance_ConnectionPoint_Endpoint_Static) IsYANGGoStruct() {}
+
+// GetControlWord retrieves the value of the leaf ControlWord from the NetworkInstance_ConnectionPoint_Endpoint_Static
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if ControlWord is set, it can
+// safely use t.GetControlWord() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.ControlWord == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_ConnectionPoint_Endpoint_Static) GetControlWord() bool {
+	if t == nil || t.ControlWord == nil {
+		return false
+	}
+	return *t.ControlWord
+}
+
+// GetLocalLabel retrieves the value of the leaf LocalLabel from the NetworkInstance_ConnectionPoint_Endpoint_Static
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if LocalLabel is set, it can
+// safely use t.GetLocalLabel() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.LocalLabel == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_ConnectionPoint_Endpoint_Static) GetLocalLabel() NetworkInstance_ConnectionPoint_Endpoint_Static_LocalLabel_Union {
+	if t == nil || t.LocalLabel == nil {
+		return nil
+	}
+	return t.LocalLabel
+}
+
+// GetNeighborLabel retrieves the value of the leaf NeighborLabel from the NetworkInstance_ConnectionPoint_Endpoint_Static
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if NeighborLabel is set, it can
+// safely use t.GetNeighborLabel() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.NeighborLabel == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_ConnectionPoint_Endpoint_Static) GetNeighborLabel() NetworkInstance_ConnectionPoint_Endpoint_Static_NeighborLabel_Union {
+	if t == nil || t.NeighborLabel == nil {
+		return nil
+	}
+	return t.NeighborLabel
+}
+
+// GetNextHopGroup retrieves the value of the leaf NextHopGroup from the NetworkInstance_ConnectionPoint_Endpoint_Static
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if NextHopGroup is set, it can
+// safely use t.GetNextHopGroup() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.NextHopGroup == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_ConnectionPoint_Endpoint_Static) GetNextHopGroup() string {
+	if t == nil || t.NextHopGroup == nil {
+		return ""
+	}
+	return *t.NextHopGroup
+}
+
+// GetTunnelInterface retrieves the value of the leaf TunnelInterface from the NetworkInstance_ConnectionPoint_Endpoint_Static
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if TunnelInterface is set, it can
+// safely use t.GetTunnelInterface() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.TunnelInterface == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_ConnectionPoint_Endpoint_Static) GetTunnelInterface() string {
+	if t == nil || t.TunnelInterface == nil {
+		return ""
+	}
+	return *t.TunnelInterface
+}
+
+// SetControlWord sets the value of the leaf ControlWord in the NetworkInstance_ConnectionPoint_Endpoint_Static
+// struct.
+func (t *NetworkInstance_ConnectionPoint_Endpoint_Static) SetControlWord(v bool) {
+	t.ControlWord = &v
+}
+
+// SetLocalLabel sets the value of the leaf LocalLabel in the NetworkInstance_ConnectionPoint_Endpoint_Static
+// struct.
+func (t *NetworkInstance_ConnectionPoint_Endpoint_Static) SetLocalLabel(v NetworkInstance_ConnectionPoint_Endpoint_Static_LocalLabel_Union) {
+	t.LocalLabel = v
+}
+
+// SetNeighborLabel sets the value of the leaf NeighborLabel in the NetworkInstance_ConnectionPoint_Endpoint_Static
+// struct.
+func (t *NetworkInstance_ConnectionPoint_Endpoint_Static) SetNeighborLabel(v NetworkInstance_ConnectionPoint_Endpoint_Static_NeighborLabel_Union) {
+	t.NeighborLabel = v
+}
+
+// SetNextHopGroup sets the value of the leaf NextHopGroup in the NetworkInstance_ConnectionPoint_Endpoint_Static
+// struct.
+func (t *NetworkInstance_ConnectionPoint_Endpoint_Static) SetNextHopGroup(v string) {
+	t.NextHopGroup = &v
+}
+
+// SetTunnelInterface sets the value of the leaf TunnelInterface in the NetworkInstance_ConnectionPoint_Endpoint_Static
+// struct.
+func (t *NetworkInstance_ConnectionPoint_Endpoint_Static) SetTunnelInterface(v string) {
+	t.TunnelInterface = &v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the NetworkInstance_ConnectionPoint_Endpoint_Static
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *NetworkInstance_ConnectionPoint_Endpoint_Static) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *NetworkInstance_ConnectionPoint_Endpoint_Static) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["NetworkInstance_ConnectionPoint_Endpoint_Static"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *NetworkInstance_ConnectionPoint_Endpoint_Static) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *NetworkInstance_ConnectionPoint_Endpoint_Static) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of NetworkInstance_ConnectionPoint_Endpoint_Static.
+func (*NetworkInstance_ConnectionPoint_Endpoint_Static) ΛBelongingModule() string {
 	return "openconfig-network-instance"
 }
 
@@ -87749,6 +92246,7 @@ func (*NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Interface_InterfaceRef) Λ
 // NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Interface_Protection represents the /openconfig-network-instance/network-instances/network-instance/mpls/signaling-protocols/rsvp-te/interface-attributes/interface/protection YANG schema element.
 type NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Interface_Protection struct {
 	BypassOptimizeInterval       *uint16                     `path:"state/bypass-optimize-interval" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/bypass-optimize-interval" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+	BypassTunnel                 []string                    `path:"state/bypass-tunnel" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/bypass-tunnel" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
 	LinkProtectionStyleRequested E_MplsTypes_PROTECTION_TYPE `path:"state/link-protection-style-requested" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/link-protection-style-requested" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
 }
 
@@ -87773,6 +92271,22 @@ func (t *NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Interface_Protection) Ge
 	return *t.BypassOptimizeInterval
 }
 
+// GetBypassTunnel retrieves the value of the leaf BypassTunnel from the NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Interface_Protection
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if BypassTunnel is set, it can
+// safely use t.GetBypassTunnel() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.BypassTunnel == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Interface_Protection) GetBypassTunnel() []string {
+	if t == nil || t.BypassTunnel == nil {
+		return nil
+	}
+	return t.BypassTunnel
+}
+
 // GetLinkProtectionStyleRequested retrieves the value of the leaf LinkProtectionStyleRequested from the NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Interface_Protection
 // struct. If the field is unset but has a default value in the YANG schema,
 // then the default value will be returned.
@@ -87793,6 +92307,12 @@ func (t *NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Interface_Protection) Ge
 // struct.
 func (t *NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Interface_Protection) SetBypassOptimizeInterval(v uint16) {
 	t.BypassOptimizeInterval = &v
+}
+
+// SetBypassTunnel sets the value of the leaf BypassTunnel in the NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Interface_Protection
+// struct.
+func (t *NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Interface_Protection) SetBypassTunnel(v []string) {
+	t.BypassTunnel = v
 }
 
 // SetLinkProtectionStyleRequested sets the value of the leaf LinkProtectionStyleRequested in the NetworkInstance_Mpls_SignalingProtocols_RsvpTe_Interface_Protection
@@ -92216,15 +96736,143 @@ func (*NetworkInstance_PolicyForwarding_PathSelectionGroup) ΛBelongingModule() 
 
 // NetworkInstance_PolicyForwarding_Policy represents the /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy YANG schema element.
 type NetworkInstance_PolicyForwarding_Policy struct {
-	PolicyId *string                                                  `path:"state/policy-id|policy-id" module:"openconfig-network-instance/openconfig-network-instance|openconfig-network-instance" shadow-path:"config/policy-id|policy-id" shadow-module:"openconfig-network-instance/openconfig-network-instance|openconfig-network-instance"`
-	Rule     map[uint32]*NetworkInstance_PolicyForwarding_Policy_Rule `path:"rules/rule" module:"openconfig-network-instance/openconfig-network-instance"`
-	Type     E_Policy_Type                                            `path:"state/type" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/type" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+	PolicyCounter map[string]*NetworkInstance_PolicyForwarding_Policy_PolicyCounter `path:"policy-counters/policy-counter" module:"openconfig-network-instance/openconfig-network-instance"`
+	PolicyId      *string                                                           `path:"state/policy-id|policy-id" module:"openconfig-network-instance/openconfig-network-instance|openconfig-network-instance" shadow-path:"config/policy-id|policy-id" shadow-module:"openconfig-network-instance/openconfig-network-instance|openconfig-network-instance"`
+	Rule          map[uint32]*NetworkInstance_PolicyForwarding_Policy_Rule          `path:"rules/rule" module:"openconfig-network-instance/openconfig-network-instance"`
+	Type          E_Policy_Type                                                     `path:"state/type" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/type" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
 }
 
 // IsYANGGoStruct ensures that NetworkInstance_PolicyForwarding_Policy implements the yang.GoStruct
 // interface. This allows functions that need to handle this struct to
 // identify it as being generated by ygen.
 func (*NetworkInstance_PolicyForwarding_Policy) IsYANGGoStruct() {}
+
+// NewPolicyCounter creates a new entry in the PolicyCounter list of the
+// NetworkInstance_PolicyForwarding_Policy struct. The keys of the list are populated from the input
+// arguments.
+func (t *NetworkInstance_PolicyForwarding_Policy) NewPolicyCounter(Name string) (*NetworkInstance_PolicyForwarding_Policy_PolicyCounter, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.PolicyCounter == nil {
+		t.PolicyCounter = make(map[string]*NetworkInstance_PolicyForwarding_Policy_PolicyCounter)
+	}
+
+	key := Name
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.PolicyCounter[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list PolicyCounter", key)
+	}
+
+	t.PolicyCounter[key] = &NetworkInstance_PolicyForwarding_Policy_PolicyCounter{
+		Name: &Name,
+	}
+
+	return t.PolicyCounter[key], nil
+}
+
+// RenamePolicyCounter renames an entry in the list PolicyCounter within
+// the NetworkInstance_PolicyForwarding_Policy struct. The entry with key oldK is renamed to newK updating
+// the key within the value.
+func (t *NetworkInstance_PolicyForwarding_Policy) RenamePolicyCounter(oldK, newK string) error {
+	if _, ok := t.PolicyCounter[newK]; ok {
+		return fmt.Errorf("key %v already exists in PolicyCounter", newK)
+	}
+
+	e, ok := t.PolicyCounter[oldK]
+	if !ok {
+		return fmt.Errorf("key %v not found in PolicyCounter", oldK)
+	}
+	e.Name = &newK
+
+	t.PolicyCounter[newK] = e
+	delete(t.PolicyCounter, oldK)
+	return nil
+}
+
+// GetOrCreatePolicyCounterMap returns the list (map) from NetworkInstance_PolicyForwarding_Policy.
+//
+// It initializes the field if not already initialized.
+func (t *NetworkInstance_PolicyForwarding_Policy) GetOrCreatePolicyCounterMap() map[string]*NetworkInstance_PolicyForwarding_Policy_PolicyCounter {
+	if t.PolicyCounter == nil {
+		t.PolicyCounter = make(map[string]*NetworkInstance_PolicyForwarding_Policy_PolicyCounter)
+	}
+	return t.PolicyCounter
+}
+
+// GetOrCreatePolicyCounter retrieves the value with the specified keys from
+// the receiver NetworkInstance_PolicyForwarding_Policy. If the entry does not exist, then it is created.
+// It returns the existing or new list member.
+func (t *NetworkInstance_PolicyForwarding_Policy) GetOrCreatePolicyCounter(Name string) *NetworkInstance_PolicyForwarding_Policy_PolicyCounter {
+
+	key := Name
+
+	if v, ok := t.PolicyCounter[key]; ok {
+		return v
+	}
+	// Panic if we receive an error, since we should have retrieved an existing
+	// list member. This allows chaining of GetOrCreate methods.
+	v, err := t.NewPolicyCounter(Name)
+	if err != nil {
+		panic(fmt.Sprintf("GetOrCreatePolicyCounter got unexpected error: %v", err))
+	}
+	return v
+}
+
+// GetPolicyCounter retrieves the value with the specified key from
+// the PolicyCounter map field of NetworkInstance_PolicyForwarding_Policy. If the receiver is nil, or
+// the specified key is not present in the list, nil is returned such that Get*
+// methods may be safely chained.
+func (t *NetworkInstance_PolicyForwarding_Policy) GetPolicyCounter(Name string) *NetworkInstance_PolicyForwarding_Policy_PolicyCounter {
+
+	if t == nil {
+		return nil
+	}
+
+	key := Name
+
+	if lm, ok := t.PolicyCounter[key]; ok {
+		return lm
+	}
+	return nil
+}
+
+// DeletePolicyCounter deletes the value with the specified keys from
+// the receiver NetworkInstance_PolicyForwarding_Policy. If there is no such element, the function
+// is a no-op.
+func (t *NetworkInstance_PolicyForwarding_Policy) DeletePolicyCounter(Name string) {
+	key := Name
+
+	delete(t.PolicyCounter, key)
+}
+
+// AppendPolicyCounter appends the supplied NetworkInstance_PolicyForwarding_Policy_PolicyCounter struct to the
+// list PolicyCounter of NetworkInstance_PolicyForwarding_Policy. If the key value(s) specified in
+// the supplied NetworkInstance_PolicyForwarding_Policy_PolicyCounter already exist in the list, an error is
+// returned.
+func (t *NetworkInstance_PolicyForwarding_Policy) AppendPolicyCounter(v *NetworkInstance_PolicyForwarding_Policy_PolicyCounter) error {
+	if v.Name == nil {
+		return fmt.Errorf("invalid nil key received for Name")
+	}
+
+	key := *v.Name
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.PolicyCounter == nil {
+		t.PolicyCounter = make(map[string]*NetworkInstance_PolicyForwarding_Policy_PolicyCounter)
+	}
+
+	if _, ok := t.PolicyCounter[key]; ok {
+		return fmt.Errorf("duplicate key for list PolicyCounter %v", key)
+	}
+
+	t.PolicyCounter[key] = v
+	return nil
+}
 
 // NewRule creates a new entry in the Rule list of the
 // NetworkInstance_PolicyForwarding_Policy struct. The keys of the list are populated from the input
@@ -92408,6 +97056,9 @@ func (t *NetworkInstance_PolicyForwarding_Policy) PopulateDefaults() {
 	if t.Type == 0 {
 		t.Type = Policy_Type_PBR_POLICY
 	}
+	for _, e := range t.PolicyCounter {
+		e.PopulateDefaults()
+	}
 	for _, e := range t.Rule {
 		e.PopulateDefaults()
 	}
@@ -92449,9 +97100,201 @@ func (*NetworkInstance_PolicyForwarding_Policy) ΛBelongingModule() string {
 	return "openconfig-network-instance"
 }
 
+// NetworkInstance_PolicyForwarding_Policy_PolicyCounter represents the /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/policy-counters/policy-counter YANG schema element.
+type NetworkInstance_PolicyForwarding_Policy_PolicyCounter struct {
+	Counters *NetworkInstance_PolicyForwarding_Policy_PolicyCounter_Counters `path:"state/counters" module:"openconfig-network-instance/openconfig-network-instance"`
+	Name     *string                                                         `path:"state/name|name" module:"openconfig-network-instance/openconfig-network-instance|openconfig-network-instance" shadow-path:"config/name|name" shadow-module:"openconfig-network-instance/openconfig-network-instance|openconfig-network-instance"`
+}
+
+// IsYANGGoStruct ensures that NetworkInstance_PolicyForwarding_Policy_PolicyCounter implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*NetworkInstance_PolicyForwarding_Policy_PolicyCounter) IsYANGGoStruct() {}
+
+// GetOrCreateCounters retrieves the value of the Counters field
+// or returns the existing field if it already exists.
+func (t *NetworkInstance_PolicyForwarding_Policy_PolicyCounter) GetOrCreateCounters() *NetworkInstance_PolicyForwarding_Policy_PolicyCounter_Counters {
+	if t.Counters != nil {
+		return t.Counters
+	}
+	t.Counters = &NetworkInstance_PolicyForwarding_Policy_PolicyCounter_Counters{}
+	return t.Counters
+}
+
+// GetCounters returns the value of the Counters struct pointer
+// from NetworkInstance_PolicyForwarding_Policy_PolicyCounter. If the receiver or the field Counters is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *NetworkInstance_PolicyForwarding_Policy_PolicyCounter) GetCounters() *NetworkInstance_PolicyForwarding_Policy_PolicyCounter_Counters {
+	if t != nil && t.Counters != nil {
+		return t.Counters
+	}
+	return nil
+}
+
+// GetName retrieves the value of the leaf Name from the NetworkInstance_PolicyForwarding_Policy_PolicyCounter
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Name is set, it can
+// safely use t.GetName() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Name == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_PolicyForwarding_Policy_PolicyCounter) GetName() string {
+	if t == nil || t.Name == nil {
+		return ""
+	}
+	return *t.Name
+}
+
+// SetName sets the value of the leaf Name in the NetworkInstance_PolicyForwarding_Policy_PolicyCounter
+// struct.
+func (t *NetworkInstance_PolicyForwarding_Policy_PolicyCounter) SetName(v string) {
+	t.Name = &v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the NetworkInstance_PolicyForwarding_Policy_PolicyCounter
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *NetworkInstance_PolicyForwarding_Policy_PolicyCounter) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+	t.Counters.PopulateDefaults()
+}
+
+// ΛListKeyMap returns the keys of the NetworkInstance_PolicyForwarding_Policy_PolicyCounter struct, which is a YANG list entry.
+func (t *NetworkInstance_PolicyForwarding_Policy_PolicyCounter) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.Name == nil {
+		return nil, fmt.Errorf("nil value for key Name")
+	}
+
+	return map[string]interface{}{
+		"name": *t.Name,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *NetworkInstance_PolicyForwarding_Policy_PolicyCounter) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["NetworkInstance_PolicyForwarding_Policy_PolicyCounter"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *NetworkInstance_PolicyForwarding_Policy_PolicyCounter) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *NetworkInstance_PolicyForwarding_Policy_PolicyCounter) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of NetworkInstance_PolicyForwarding_Policy_PolicyCounter.
+func (*NetworkInstance_PolicyForwarding_Policy_PolicyCounter) ΛBelongingModule() string {
+	return "openconfig-network-instance"
+}
+
+// NetworkInstance_PolicyForwarding_Policy_PolicyCounter_Counters represents the /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/policy-counters/policy-counter/state/counters YANG schema element.
+type NetworkInstance_PolicyForwarding_Policy_PolicyCounter_Counters struct {
+	Bytes   *uint64 `path:"bytes" module:"openconfig-network-instance"`
+	Packets *uint64 `path:"packets" module:"openconfig-network-instance"`
+}
+
+// IsYANGGoStruct ensures that NetworkInstance_PolicyForwarding_Policy_PolicyCounter_Counters implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*NetworkInstance_PolicyForwarding_Policy_PolicyCounter_Counters) IsYANGGoStruct() {}
+
+// GetBytes retrieves the value of the leaf Bytes from the NetworkInstance_PolicyForwarding_Policy_PolicyCounter_Counters
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Bytes is set, it can
+// safely use t.GetBytes() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Bytes == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_PolicyForwarding_Policy_PolicyCounter_Counters) GetBytes() uint64 {
+	if t == nil || t.Bytes == nil {
+		return 0
+	}
+	return *t.Bytes
+}
+
+// GetPackets retrieves the value of the leaf Packets from the NetworkInstance_PolicyForwarding_Policy_PolicyCounter_Counters
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Packets is set, it can
+// safely use t.GetPackets() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Packets == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_PolicyForwarding_Policy_PolicyCounter_Counters) GetPackets() uint64 {
+	if t == nil || t.Packets == nil {
+		return 0
+	}
+	return *t.Packets
+}
+
+// SetBytes sets the value of the leaf Bytes in the NetworkInstance_PolicyForwarding_Policy_PolicyCounter_Counters
+// struct.
+func (t *NetworkInstance_PolicyForwarding_Policy_PolicyCounter_Counters) SetBytes(v uint64) {
+	t.Bytes = &v
+}
+
+// SetPackets sets the value of the leaf Packets in the NetworkInstance_PolicyForwarding_Policy_PolicyCounter_Counters
+// struct.
+func (t *NetworkInstance_PolicyForwarding_Policy_PolicyCounter_Counters) SetPackets(v uint64) {
+	t.Packets = &v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the NetworkInstance_PolicyForwarding_Policy_PolicyCounter_Counters
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *NetworkInstance_PolicyForwarding_Policy_PolicyCounter_Counters) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *NetworkInstance_PolicyForwarding_Policy_PolicyCounter_Counters) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["NetworkInstance_PolicyForwarding_Policy_PolicyCounter_Counters"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *NetworkInstance_PolicyForwarding_Policy_PolicyCounter_Counters) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *NetworkInstance_PolicyForwarding_Policy_PolicyCounter_Counters) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of NetworkInstance_PolicyForwarding_Policy_PolicyCounter_Counters.
+func (*NetworkInstance_PolicyForwarding_Policy_PolicyCounter_Counters) ΛBelongingModule() string {
+	return "openconfig-network-instance"
+}
+
 // NetworkInstance_PolicyForwarding_Policy_Rule represents the /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule YANG schema element.
 type NetworkInstance_PolicyForwarding_Policy_Rule struct {
 	Action        *NetworkInstance_PolicyForwarding_Policy_Rule_Action    `path:"action" module:"openconfig-network-instance"`
+	AddressFamily E_Types_ADDRESS_FAMILY                                  `path:"state/address-family" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/address-family" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+	Description   *string                                                 `path:"state/description" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/description" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
 	Ipv4          *NetworkInstance_PolicyForwarding_Policy_Rule_Ipv4      `path:"ipv4" module:"openconfig-network-instance"`
 	Ipv6          *NetworkInstance_PolicyForwarding_Policy_Rule_Ipv6      `path:"ipv6" module:"openconfig-network-instance"`
 	L2            *NetworkInstance_PolicyForwarding_Policy_Rule_L2        `path:"l2" module:"openconfig-network-instance"`
@@ -92566,6 +97409,38 @@ func (t *NetworkInstance_PolicyForwarding_Policy_Rule) GetTransport() *NetworkIn
 	return nil
 }
 
+// GetAddressFamily retrieves the value of the leaf AddressFamily from the NetworkInstance_PolicyForwarding_Policy_Rule
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if AddressFamily is set, it can
+// safely use t.GetAddressFamily() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.AddressFamily == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_PolicyForwarding_Policy_Rule) GetAddressFamily() E_Types_ADDRESS_FAMILY {
+	if t == nil || t.AddressFamily == 0 {
+		return 0
+	}
+	return t.AddressFamily
+}
+
+// GetDescription retrieves the value of the leaf Description from the NetworkInstance_PolicyForwarding_Policy_Rule
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Description is set, it can
+// safely use t.GetDescription() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Description == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_PolicyForwarding_Policy_Rule) GetDescription() string {
+	if t == nil || t.Description == nil {
+		return ""
+	}
+	return *t.Description
+}
+
 // GetMatchedOctets retrieves the value of the leaf MatchedOctets from the NetworkInstance_PolicyForwarding_Policy_Rule
 // struct. If the field is unset but has a default value in the YANG schema,
 // then the default value will be returned.
@@ -92612,6 +97487,18 @@ func (t *NetworkInstance_PolicyForwarding_Policy_Rule) GetSequenceId() uint32 {
 		return 0
 	}
 	return *t.SequenceId
+}
+
+// SetAddressFamily sets the value of the leaf AddressFamily in the NetworkInstance_PolicyForwarding_Policy_Rule
+// struct.
+func (t *NetworkInstance_PolicyForwarding_Policy_Rule) SetAddressFamily(v E_Types_ADDRESS_FAMILY) {
+	t.AddressFamily = v
+}
+
+// SetDescription sets the value of the leaf Description in the NetworkInstance_PolicyForwarding_Policy_Rule
+// struct.
+func (t *NetworkInstance_PolicyForwarding_Policy_Rule) SetDescription(v string) {
+	t.Description = &v
 }
 
 // SetMatchedOctets sets the value of the leaf MatchedOctets in the NetworkInstance_PolicyForwarding_Policy_Rule
@@ -92685,6 +97572,7 @@ func (*NetworkInstance_PolicyForwarding_Policy_Rule) ΛBelongingModule() string 
 
 // NetworkInstance_PolicyForwarding_Policy_Rule_Action represents the /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action YANG schema element.
 type NetworkInstance_PolicyForwarding_Policy_Rule_Action struct {
+	Count                        *string                                                             `path:"state/count" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/count" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
 	DecapFallbackNetworkInstance *string                                                             `path:"state/decap-fallback-network-instance" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/decap-fallback-network-instance" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
 	DecapNetworkInstance         *string                                                             `path:"state/decap-network-instance" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/decap-network-instance" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
 	DecapsulateGre               *bool                                                               `path:"state/decapsulate-gre" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/decapsulate-gre" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
@@ -92692,7 +97580,12 @@ type NetworkInstance_PolicyForwarding_Policy_Rule_Action struct {
 	DecapsulateMplsInUdp         *bool                                                               `path:"state/decapsulate-mpls-in-udp" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/decapsulate-mpls-in-udp" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
 	Discard                      *bool                                                               `path:"state/discard" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/discard" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
 	EncapsulateGre               *NetworkInstance_PolicyForwarding_Policy_Rule_Action_EncapsulateGre `path:"encapsulate-gre" module:"openconfig-network-instance"`
+	Forwarding                   *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding     `path:"forwarding" module:"openconfig-network-instance"`
 	IpTtl                        *uint8                                                              `path:"state/ip-ttl" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/ip-ttl" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+	Ipv4                         *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4           `path:"ipv4" module:"openconfig-network-instance"`
+	Ipv6                         *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6           `path:"ipv6" module:"openconfig-network-instance"`
+	Log                          *bool                                                               `path:"state/log" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/log" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+	Mpls                         *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Mpls           `path:"mpls" module:"openconfig-network-instance"`
 	NetworkInstance              *string                                                             `path:"state/network-instance" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/network-instance" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
 	NextHop                      *string                                                             `path:"state/next-hop" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/next-hop" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
 	NextHopGroup                 *string                                                             `path:"state/next-hop-group" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/next-hop-group" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
@@ -92715,6 +97608,46 @@ func (t *NetworkInstance_PolicyForwarding_Policy_Rule_Action) GetOrCreateEncapsu
 	return t.EncapsulateGre
 }
 
+// GetOrCreateForwarding retrieves the value of the Forwarding field
+// or returns the existing field if it already exists.
+func (t *NetworkInstance_PolicyForwarding_Policy_Rule_Action) GetOrCreateForwarding() *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding {
+	if t.Forwarding != nil {
+		return t.Forwarding
+	}
+	t.Forwarding = &NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding{}
+	return t.Forwarding
+}
+
+// GetOrCreateIpv4 retrieves the value of the Ipv4 field
+// or returns the existing field if it already exists.
+func (t *NetworkInstance_PolicyForwarding_Policy_Rule_Action) GetOrCreateIpv4() *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4 {
+	if t.Ipv4 != nil {
+		return t.Ipv4
+	}
+	t.Ipv4 = &NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4{}
+	return t.Ipv4
+}
+
+// GetOrCreateIpv6 retrieves the value of the Ipv6 field
+// or returns the existing field if it already exists.
+func (t *NetworkInstance_PolicyForwarding_Policy_Rule_Action) GetOrCreateIpv6() *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6 {
+	if t.Ipv6 != nil {
+		return t.Ipv6
+	}
+	t.Ipv6 = &NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6{}
+	return t.Ipv6
+}
+
+// GetOrCreateMpls retrieves the value of the Mpls field
+// or returns the existing field if it already exists.
+func (t *NetworkInstance_PolicyForwarding_Policy_Rule_Action) GetOrCreateMpls() *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Mpls {
+	if t.Mpls != nil {
+		return t.Mpls
+	}
+	t.Mpls = &NetworkInstance_PolicyForwarding_Policy_Rule_Action_Mpls{}
+	return t.Mpls
+}
+
 // GetEncapsulateGre returns the value of the EncapsulateGre struct pointer
 // from NetworkInstance_PolicyForwarding_Policy_Rule_Action. If the receiver or the field EncapsulateGre is nil, nil
 // is returned such that the Get* methods can be safely chained.
@@ -92723,6 +97656,62 @@ func (t *NetworkInstance_PolicyForwarding_Policy_Rule_Action) GetEncapsulateGre(
 		return t.EncapsulateGre
 	}
 	return nil
+}
+
+// GetForwarding returns the value of the Forwarding struct pointer
+// from NetworkInstance_PolicyForwarding_Policy_Rule_Action. If the receiver or the field Forwarding is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *NetworkInstance_PolicyForwarding_Policy_Rule_Action) GetForwarding() *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding {
+	if t != nil && t.Forwarding != nil {
+		return t.Forwarding
+	}
+	return nil
+}
+
+// GetIpv4 returns the value of the Ipv4 struct pointer
+// from NetworkInstance_PolicyForwarding_Policy_Rule_Action. If the receiver or the field Ipv4 is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *NetworkInstance_PolicyForwarding_Policy_Rule_Action) GetIpv4() *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4 {
+	if t != nil && t.Ipv4 != nil {
+		return t.Ipv4
+	}
+	return nil
+}
+
+// GetIpv6 returns the value of the Ipv6 struct pointer
+// from NetworkInstance_PolicyForwarding_Policy_Rule_Action. If the receiver or the field Ipv6 is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *NetworkInstance_PolicyForwarding_Policy_Rule_Action) GetIpv6() *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6 {
+	if t != nil && t.Ipv6 != nil {
+		return t.Ipv6
+	}
+	return nil
+}
+
+// GetMpls returns the value of the Mpls struct pointer
+// from NetworkInstance_PolicyForwarding_Policy_Rule_Action. If the receiver or the field Mpls is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *NetworkInstance_PolicyForwarding_Policy_Rule_Action) GetMpls() *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Mpls {
+	if t != nil && t.Mpls != nil {
+		return t.Mpls
+	}
+	return nil
+}
+
+// GetCount retrieves the value of the leaf Count from the NetworkInstance_PolicyForwarding_Policy_Rule_Action
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Count is set, it can
+// safely use t.GetCount() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Count == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_PolicyForwarding_Policy_Rule_Action) GetCount() string {
+	if t == nil || t.Count == nil {
+		return ""
+	}
+	return *t.Count
 }
 
 // GetDecapFallbackNetworkInstance retrieves the value of the leaf DecapFallbackNetworkInstance from the NetworkInstance_PolicyForwarding_Policy_Rule_Action
@@ -92837,6 +97826,22 @@ func (t *NetworkInstance_PolicyForwarding_Policy_Rule_Action) GetIpTtl() uint8 {
 	return *t.IpTtl
 }
 
+// GetLog retrieves the value of the leaf Log from the NetworkInstance_PolicyForwarding_Policy_Rule_Action
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Log is set, it can
+// safely use t.GetLog() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Log == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_PolicyForwarding_Policy_Rule_Action) GetLog() bool {
+	if t == nil || t.Log == nil {
+		return false
+	}
+	return *t.Log
+}
+
 // GetNetworkInstance retrieves the value of the leaf NetworkInstance from the NetworkInstance_PolicyForwarding_Policy_Rule_Action
 // struct. If the field is unset but has a default value in the YANG schema,
 // then the default value will be returned.
@@ -92917,6 +97922,12 @@ func (t *NetworkInstance_PolicyForwarding_Policy_Rule_Action) GetPostDecapNetwor
 	return *t.PostDecapNetworkInstance
 }
 
+// SetCount sets the value of the leaf Count in the NetworkInstance_PolicyForwarding_Policy_Rule_Action
+// struct.
+func (t *NetworkInstance_PolicyForwarding_Policy_Rule_Action) SetCount(v string) {
+	t.Count = &v
+}
+
 // SetDecapFallbackNetworkInstance sets the value of the leaf DecapFallbackNetworkInstance in the NetworkInstance_PolicyForwarding_Policy_Rule_Action
 // struct.
 func (t *NetworkInstance_PolicyForwarding_Policy_Rule_Action) SetDecapFallbackNetworkInstance(v string) {
@@ -92957,6 +97968,12 @@ func (t *NetworkInstance_PolicyForwarding_Policy_Rule_Action) SetDiscard(v bool)
 // struct.
 func (t *NetworkInstance_PolicyForwarding_Policy_Rule_Action) SetIpTtl(v uint8) {
 	t.IpTtl = &v
+}
+
+// SetLog sets the value of the leaf Log in the NetworkInstance_PolicyForwarding_Policy_Rule_Action
+// struct.
+func (t *NetworkInstance_PolicyForwarding_Policy_Rule_Action) SetLog(v bool) {
+	t.Log = &v
 }
 
 // SetNetworkInstance sets the value of the leaf NetworkInstance in the NetworkInstance_PolicyForwarding_Policy_Rule_Action
@@ -93014,6 +98031,10 @@ func (t *NetworkInstance_PolicyForwarding_Policy_Rule_Action) PopulateDefaults()
 		t.Discard = &v
 	}
 	t.EncapsulateGre.PopulateDefaults()
+	t.Forwarding.PopulateDefaults()
+	t.Ipv4.PopulateDefaults()
+	t.Ipv6.PopulateDefaults()
+	t.Mpls.PopulateDefaults()
 }
 
 // Validate validates s against the YANG schema corresponding to its type.
@@ -93383,6 +98404,346 @@ func (t *NetworkInstance_PolicyForwarding_Policy_Rule_Action_EncapsulateGre_Targ
 // ΛBelongingModule returns the name of the module that defines the namespace
 // of NetworkInstance_PolicyForwarding_Policy_Rule_Action_EncapsulateGre_Target.
 func (*NetworkInstance_PolicyForwarding_Policy_Rule_Action_EncapsulateGre_Target) ΛBelongingModule() string {
+	return "openconfig-network-instance"
+}
+
+// NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding represents the /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/forwarding YANG schema element.
+type NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding struct {
+	ForwardingAction   E_PolicyForwarding_FORWARDING_ACTION `path:"state/forwarding-action" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/forwarding-action" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+	QosForwardingGroup *string                              `path:"state/qos-forwarding-group" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/qos-forwarding-group" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+}
+
+// IsYANGGoStruct ensures that NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding) IsYANGGoStruct() {}
+
+// GetForwardingAction retrieves the value of the leaf ForwardingAction from the NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if ForwardingAction is set, it can
+// safely use t.GetForwardingAction() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.ForwardingAction == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding) GetForwardingAction() E_PolicyForwarding_FORWARDING_ACTION {
+	if t == nil || t.ForwardingAction == 0 {
+		return PolicyForwarding_FORWARDING_ACTION_FORWARD
+	}
+	return t.ForwardingAction
+}
+
+// GetQosForwardingGroup retrieves the value of the leaf QosForwardingGroup from the NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if QosForwardingGroup is set, it can
+// safely use t.GetQosForwardingGroup() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.QosForwardingGroup == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding) GetQosForwardingGroup() string {
+	if t == nil || t.QosForwardingGroup == nil {
+		return ""
+	}
+	return *t.QosForwardingGroup
+}
+
+// SetForwardingAction sets the value of the leaf ForwardingAction in the NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding
+// struct.
+func (t *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding) SetForwardingAction(v E_PolicyForwarding_FORWARDING_ACTION) {
+	t.ForwardingAction = v
+}
+
+// SetQosForwardingGroup sets the value of the leaf QosForwardingGroup in the NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding
+// struct.
+func (t *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding) SetQosForwardingGroup(v string) {
+	t.QosForwardingGroup = &v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+	if t.ForwardingAction == 0 {
+		t.ForwardingAction = PolicyForwarding_FORWARDING_ACTION_FORWARD
+	}
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding.
+func (*NetworkInstance_PolicyForwarding_Policy_Rule_Action_Forwarding) ΛBelongingModule() string {
+	return "openconfig-network-instance"
+}
+
+// NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4 represents the /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/ipv4 YANG schema element.
+type NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4 struct {
+	Dscp *uint8 `path:"state/dscp" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/dscp" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+	Ttl  *uint8 `path:"state/ttl" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/ttl" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+}
+
+// IsYANGGoStruct ensures that NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4 implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4) IsYANGGoStruct() {}
+
+// GetDscp retrieves the value of the leaf Dscp from the NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Dscp is set, it can
+// safely use t.GetDscp() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Dscp == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4) GetDscp() uint8 {
+	if t == nil || t.Dscp == nil {
+		return 0
+	}
+	return *t.Dscp
+}
+
+// GetTtl retrieves the value of the leaf Ttl from the NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Ttl is set, it can
+// safely use t.GetTtl() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Ttl == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4) GetTtl() uint8 {
+	if t == nil || t.Ttl == nil {
+		return 0
+	}
+	return *t.Ttl
+}
+
+// SetDscp sets the value of the leaf Dscp in the NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4
+// struct.
+func (t *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4) SetDscp(v uint8) {
+	t.Dscp = &v
+}
+
+// SetTtl sets the value of the leaf Ttl in the NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4
+// struct.
+func (t *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4) SetTtl(v uint8) {
+	t.Ttl = &v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4.
+func (*NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv4) ΛBelongingModule() string {
+	return "openconfig-network-instance"
+}
+
+// NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6 represents the /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/ipv6 YANG schema element.
+type NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6 struct {
+	Dscp     *uint8 `path:"state/dscp" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/dscp" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+	HopLimit *uint8 `path:"state/hop-limit" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/hop-limit" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+}
+
+// IsYANGGoStruct ensures that NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6 implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6) IsYANGGoStruct() {}
+
+// GetDscp retrieves the value of the leaf Dscp from the NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Dscp is set, it can
+// safely use t.GetDscp() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Dscp == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6) GetDscp() uint8 {
+	if t == nil || t.Dscp == nil {
+		return 0
+	}
+	return *t.Dscp
+}
+
+// GetHopLimit retrieves the value of the leaf HopLimit from the NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if HopLimit is set, it can
+// safely use t.GetHopLimit() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.HopLimit == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6) GetHopLimit() uint8 {
+	if t == nil || t.HopLimit == nil {
+		return 0
+	}
+	return *t.HopLimit
+}
+
+// SetDscp sets the value of the leaf Dscp in the NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6
+// struct.
+func (t *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6) SetDscp(v uint8) {
+	t.Dscp = &v
+}
+
+// SetHopLimit sets the value of the leaf HopLimit in the NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6
+// struct.
+func (t *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6) SetHopLimit(v uint8) {
+	t.HopLimit = &v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6.
+func (*NetworkInstance_PolicyForwarding_Policy_Rule_Action_Ipv6) ΛBelongingModule() string {
+	return "openconfig-network-instance"
+}
+
+// NetworkInstance_PolicyForwarding_Policy_Rule_Action_Mpls represents the /openconfig-network-instance/network-instances/network-instance/policy-forwarding/policies/policy/rules/rule/action/mpls YANG schema element.
+type NetworkInstance_PolicyForwarding_Policy_Rule_Action_Mpls struct {
+	MplsTrafficClass *uint8 `path:"state/mpls-traffic-class" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/mpls-traffic-class" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+}
+
+// IsYANGGoStruct ensures that NetworkInstance_PolicyForwarding_Policy_Rule_Action_Mpls implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*NetworkInstance_PolicyForwarding_Policy_Rule_Action_Mpls) IsYANGGoStruct() {}
+
+// GetMplsTrafficClass retrieves the value of the leaf MplsTrafficClass from the NetworkInstance_PolicyForwarding_Policy_Rule_Action_Mpls
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if MplsTrafficClass is set, it can
+// safely use t.GetMplsTrafficClass() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.MplsTrafficClass == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Mpls) GetMplsTrafficClass() uint8 {
+	if t == nil || t.MplsTrafficClass == nil {
+		return 0
+	}
+	return *t.MplsTrafficClass
+}
+
+// SetMplsTrafficClass sets the value of the leaf MplsTrafficClass in the NetworkInstance_PolicyForwarding_Policy_Rule_Action_Mpls
+// struct.
+func (t *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Mpls) SetMplsTrafficClass(v uint8) {
+	t.MplsTrafficClass = &v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the NetworkInstance_PolicyForwarding_Policy_Rule_Action_Mpls
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Mpls) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Mpls) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["NetworkInstance_PolicyForwarding_Policy_Rule_Action_Mpls"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Mpls) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *NetworkInstance_PolicyForwarding_Policy_Rule_Action_Mpls) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of NetworkInstance_PolicyForwarding_Policy_Rule_Action_Mpls.
+func (*NetworkInstance_PolicyForwarding_Policy_Rule_Action_Mpls) ΛBelongingModule() string {
 	return "openconfig-network-instance"
 }
 
@@ -93779,6 +99140,7 @@ type NetworkInstance_PolicyForwarding_Policy_Rule_Ipv6 struct {
 	DestinationFlowLabel        *uint32                                                          `path:"state/destination-flow-label" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/destination-flow-label" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
 	Dscp                        *uint8                                                           `path:"state/dscp" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/dscp" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
 	DscpSet                     []uint8                                                          `path:"state/dscp-set" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/dscp-set" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+	FlowLabel                   *uint32                                                          `path:"state/flow-label" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/flow-label" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
 	HopLimit                    *uint8                                                           `path:"state/hop-limit" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/hop-limit" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
 	Icmpv6                      *NetworkInstance_PolicyForwarding_Policy_Rule_Ipv6_Icmpv6        `path:"icmpv6" module:"openconfig-network-instance"`
 	Length                      *uint16                                                          `path:"state/length" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/length" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
@@ -93891,6 +99253,22 @@ func (t *NetworkInstance_PolicyForwarding_Policy_Rule_Ipv6) GetDscpSet() []uint8
 		return nil
 	}
 	return t.DscpSet
+}
+
+// GetFlowLabel retrieves the value of the leaf FlowLabel from the NetworkInstance_PolicyForwarding_Policy_Rule_Ipv6
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if FlowLabel is set, it can
+// safely use t.GetFlowLabel() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.FlowLabel == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_PolicyForwarding_Policy_Rule_Ipv6) GetFlowLabel() uint32 {
+	if t == nil || t.FlowLabel == nil {
+		return 0
+	}
+	return *t.FlowLabel
 }
 
 // GetHopLimit retrieves the value of the leaf HopLimit from the NetworkInstance_PolicyForwarding_Policy_Rule_Ipv6
@@ -94017,6 +99395,12 @@ func (t *NetworkInstance_PolicyForwarding_Policy_Rule_Ipv6) SetDscp(v uint8) {
 // struct.
 func (t *NetworkInstance_PolicyForwarding_Policy_Rule_Ipv6) SetDscpSet(v []uint8) {
 	t.DscpSet = v
+}
+
+// SetFlowLabel sets the value of the leaf FlowLabel in the NetworkInstance_PolicyForwarding_Policy_Rule_Ipv6
+// struct.
+func (t *NetworkInstance_PolicyForwarding_Policy_Rule_Ipv6) SetFlowLabel(v uint32) {
+	t.FlowLabel = &v
 }
 
 // SetHopLimit sets the value of the leaf HopLimit in the NetworkInstance_PolicyForwarding_Policy_Rule_Ipv6
@@ -103463,6 +108847,7 @@ type NetworkInstance_Protocol_Bgp_Neighbor struct {
 	LastEstablished         *uint64                                                                     `path:"state/last-established" module:"openconfig-network-instance/openconfig-network-instance"`
 	LastPrefixLimitExceeded *uint64                                                                     `path:"state/last-prefix-limit-exceeded" module:"openconfig-network-instance/openconfig-network-instance"`
 	LocalAs                 *uint32                                                                     `path:"state/local-as" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/local-as" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+	LocalAsOptions          *NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions                       `path:"local-as-options" module:"openconfig-network-instance"`
 	LoggingOptions          *NetworkInstance_Protocol_Bgp_Neighbor_LoggingOptions                       `path:"logging-options" module:"openconfig-network-instance"`
 	Messages                *NetworkInstance_Protocol_Bgp_Neighbor_Messages                             `path:"state/messages" module:"openconfig-network-instance/openconfig-network-instance"`
 	NeighborAddress         *string                                                                     `path:"state/neighbor-address|neighbor-address" module:"openconfig-network-instance/openconfig-network-instance|openconfig-network-instance" shadow-path:"config/neighbor-address|neighbor-address" shadow-module:"openconfig-network-instance/openconfig-network-instance|openconfig-network-instance"`
@@ -103681,6 +109066,16 @@ func (t *NetworkInstance_Protocol_Bgp_Neighbor) GetOrCreateGracefulRestart() *Ne
 	return t.GracefulRestart
 }
 
+// GetOrCreateLocalAsOptions retrieves the value of the LocalAsOptions field
+// or returns the existing field if it already exists.
+func (t *NetworkInstance_Protocol_Bgp_Neighbor) GetOrCreateLocalAsOptions() *NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions {
+	if t.LocalAsOptions != nil {
+		return t.LocalAsOptions
+	}
+	t.LocalAsOptions = &NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions{}
+	return t.LocalAsOptions
+}
+
 // GetOrCreateLoggingOptions retrieves the value of the LoggingOptions field
 // or returns the existing field if it already exists.
 func (t *NetworkInstance_Protocol_Bgp_Neighbor) GetOrCreateLoggingOptions() *NetworkInstance_Protocol_Bgp_Neighbor_LoggingOptions {
@@ -103817,6 +109212,16 @@ func (t *NetworkInstance_Protocol_Bgp_Neighbor) GetErrorHandling() *NetworkInsta
 func (t *NetworkInstance_Protocol_Bgp_Neighbor) GetGracefulRestart() *NetworkInstance_Protocol_Bgp_Neighbor_GracefulRestart {
 	if t != nil && t.GracefulRestart != nil {
 		return t.GracefulRestart
+	}
+	return nil
+}
+
+// GetLocalAsOptions returns the value of the LocalAsOptions struct pointer
+// from NetworkInstance_Protocol_Bgp_Neighbor. If the receiver or the field LocalAsOptions is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *NetworkInstance_Protocol_Bgp_Neighbor) GetLocalAsOptions() *NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions {
+	if t != nil && t.LocalAsOptions != nil {
+		return t.LocalAsOptions
 	}
 	return nil
 }
@@ -104343,6 +109748,7 @@ func (t *NetworkInstance_Protocol_Bgp_Neighbor) PopulateDefaults() {
 	t.EnableBfd.PopulateDefaults()
 	t.ErrorHandling.PopulateDefaults()
 	t.GracefulRestart.PopulateDefaults()
+	t.LocalAsOptions.PopulateDefaults()
 	t.LoggingOptions.PopulateDefaults()
 	t.Messages.PopulateDefaults()
 	t.Queues.PopulateDefaults()
@@ -105684,6 +111090,7 @@ func (*NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4LabeledUnicast_PrefixLi
 
 // NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv4-unicast YANG schema element.
 type NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast struct {
+	EnableAigp              *bool                                                                          `path:"state/enable-aigp" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/enable-aigp" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
 	ExtendedNextHopEncoding *bool                                                                          `path:"state/extended-next-hop-encoding" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/extended-next-hop-encoding" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
 	PrefixLimit             *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimit         `path:"prefix-limit" module:"openconfig-network-instance"`
 	PrefixLimitReceived     *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast_PrefixLimitReceived `path:"prefix-limit-received" module:"openconfig-network-instance"`
@@ -105735,6 +111142,22 @@ func (t *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast) GetPrefixLim
 	return nil
 }
 
+// GetEnableAigp retrieves the value of the leaf EnableAigp from the NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if EnableAigp is set, it can
+// safely use t.GetEnableAigp() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.EnableAigp == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast) GetEnableAigp() bool {
+	if t == nil || t.EnableAigp == nil {
+		return false
+	}
+	return *t.EnableAigp
+}
+
 // GetExtendedNextHopEncoding retrieves the value of the leaf ExtendedNextHopEncoding from the NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast
 // struct. If the field is unset but has a default value in the YANG schema,
 // then the default value will be returned.
@@ -105765,6 +111188,12 @@ func (t *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast) GetSendDefau
 		return false
 	}
 	return *t.SendDefaultRoute
+}
+
+// SetEnableAigp sets the value of the leaf EnableAigp in the NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast
+// struct.
+func (t *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast) SetEnableAigp(v bool) {
+	t.EnableAigp = &v
 }
 
 // SetExtendedNextHopEncoding sets the value of the leaf ExtendedNextHopEncoding in the NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv4Unicast
@@ -106477,6 +111906,7 @@ func (*NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6LabeledUnicast_PrefixLi
 
 // NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/afi-safis/afi-safi/ipv6-unicast YANG schema element.
 type NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast struct {
+	EnableAigp          *bool                                                                          `path:"state/enable-aigp" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/enable-aigp" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
 	PrefixLimit         *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimit         `path:"prefix-limit" module:"openconfig-network-instance"`
 	PrefixLimitReceived *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast_PrefixLimitReceived `path:"prefix-limit-received" module:"openconfig-network-instance"`
 	SendDefaultRoute    *bool                                                                          `path:"state/send-default-route" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/send-default-route" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
@@ -106527,6 +111957,22 @@ func (t *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast) GetPrefixLim
 	return nil
 }
 
+// GetEnableAigp retrieves the value of the leaf EnableAigp from the NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if EnableAigp is set, it can
+// safely use t.GetEnableAigp() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.EnableAigp == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast) GetEnableAigp() bool {
+	if t == nil || t.EnableAigp == nil {
+		return false
+	}
+	return *t.EnableAigp
+}
+
 // GetSendDefaultRoute retrieves the value of the leaf SendDefaultRoute from the NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast
 // struct. If the field is unset but has a default value in the YANG schema,
 // then the default value will be returned.
@@ -106541,6 +111987,12 @@ func (t *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast) GetSendDefau
 		return false
 	}
 	return *t.SendDefaultRoute
+}
+
+// SetEnableAigp sets the value of the leaf EnableAigp in the NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast
+// struct.
+func (t *NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast) SetEnableAigp(v bool) {
+	t.EnableAigp = &v
 }
 
 // SetSendDefaultRoute sets the value of the leaf SendDefaultRoute in the NetworkInstance_Protocol_Bgp_Neighbor_AfiSafi_Ipv6Unicast
@@ -111131,6 +116583,142 @@ func (*NetworkInstance_Protocol_Bgp_Neighbor_GracefulRestart) ΛBelongingModule(
 	return "openconfig-network-instance"
 }
 
+// NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/local-as-options YANG schema element.
+type NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions struct {
+	DualAs    *bool   `path:"state/dual-as" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/dual-as" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+	LocalAs   *uint32 `path:"state/local-as" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/local-as" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+	NoPrepend *bool   `path:"state/no-prepend" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/no-prepend" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+	ReplaceAs *bool   `path:"state/replace-as" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/replace-as" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+}
+
+// IsYANGGoStruct ensures that NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions) IsYANGGoStruct() {}
+
+// GetDualAs retrieves the value of the leaf DualAs from the NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if DualAs is set, it can
+// safely use t.GetDualAs() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.DualAs == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions) GetDualAs() bool {
+	if t == nil || t.DualAs == nil {
+		return false
+	}
+	return *t.DualAs
+}
+
+// GetLocalAs retrieves the value of the leaf LocalAs from the NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if LocalAs is set, it can
+// safely use t.GetLocalAs() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.LocalAs == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions) GetLocalAs() uint32 {
+	if t == nil || t.LocalAs == nil {
+		return 0
+	}
+	return *t.LocalAs
+}
+
+// GetNoPrepend retrieves the value of the leaf NoPrepend from the NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if NoPrepend is set, it can
+// safely use t.GetNoPrepend() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.NoPrepend == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions) GetNoPrepend() bool {
+	if t == nil || t.NoPrepend == nil {
+		return false
+	}
+	return *t.NoPrepend
+}
+
+// GetReplaceAs retrieves the value of the leaf ReplaceAs from the NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if ReplaceAs is set, it can
+// safely use t.GetReplaceAs() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.ReplaceAs == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions) GetReplaceAs() bool {
+	if t == nil || t.ReplaceAs == nil {
+		return false
+	}
+	return *t.ReplaceAs
+}
+
+// SetDualAs sets the value of the leaf DualAs in the NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions
+// struct.
+func (t *NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions) SetDualAs(v bool) {
+	t.DualAs = &v
+}
+
+// SetLocalAs sets the value of the leaf LocalAs in the NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions
+// struct.
+func (t *NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions) SetLocalAs(v uint32) {
+	t.LocalAs = &v
+}
+
+// SetNoPrepend sets the value of the leaf NoPrepend in the NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions
+// struct.
+func (t *NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions) SetNoPrepend(v bool) {
+	t.NoPrepend = &v
+}
+
+// SetReplaceAs sets the value of the leaf ReplaceAs in the NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions
+// struct.
+func (t *NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions) SetReplaceAs(v bool) {
+	t.ReplaceAs = &v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions.
+func (*NetworkInstance_Protocol_Bgp_Neighbor_LocalAsOptions) ΛBelongingModule() string {
+	return "openconfig-network-instance"
+}
+
 // NetworkInstance_Protocol_Bgp_Neighbor_LoggingOptions represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/neighbors/neighbor/logging-options YANG schema element.
 type NetworkInstance_Protocol_Bgp_Neighbor_LoggingOptions struct {
 	LogNeighborStateChanges *bool `path:"state/log-neighbor-state-changes" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/log-neighbor-state-changes" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
@@ -112380,6 +117968,7 @@ type NetworkInstance_Protocol_Bgp_PeerGroup struct {
 	ErrorHandling     *NetworkInstance_Protocol_Bgp_PeerGroup_ErrorHandling                        `path:"error-handling" module:"openconfig-network-instance"`
 	GracefulRestart   *NetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart                      `path:"graceful-restart" module:"openconfig-network-instance"`
 	LocalAs           *uint32                                                                      `path:"state/local-as" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/local-as" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+	LocalAsOptions    *NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions                       `path:"local-as-options" module:"openconfig-network-instance"`
 	LoggingOptions    *NetworkInstance_Protocol_Bgp_PeerGroup_LoggingOptions                       `path:"logging-options" module:"openconfig-network-instance"`
 	PeerAs            *uint32                                                                      `path:"state/peer-as" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/peer-as" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
 	PeerGroupName     *string                                                                      `path:"state/peer-group-name|peer-group-name" module:"openconfig-network-instance/openconfig-network-instance|openconfig-network-instance" shadow-path:"config/peer-group-name|peer-group-name" shadow-module:"openconfig-network-instance/openconfig-network-instance|openconfig-network-instance"`
@@ -112594,6 +118183,16 @@ func (t *NetworkInstance_Protocol_Bgp_PeerGroup) GetOrCreateGracefulRestart() *N
 	return t.GracefulRestart
 }
 
+// GetOrCreateLocalAsOptions retrieves the value of the LocalAsOptions field
+// or returns the existing field if it already exists.
+func (t *NetworkInstance_Protocol_Bgp_PeerGroup) GetOrCreateLocalAsOptions() *NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions {
+	if t.LocalAsOptions != nil {
+		return t.LocalAsOptions
+	}
+	t.LocalAsOptions = &NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions{}
+	return t.LocalAsOptions
+}
+
 // GetOrCreateLoggingOptions retrieves the value of the LoggingOptions field
 // or returns the existing field if it already exists.
 func (t *NetworkInstance_Protocol_Bgp_PeerGroup) GetOrCreateLoggingOptions() *NetworkInstance_Protocol_Bgp_PeerGroup_LoggingOptions {
@@ -112710,6 +118309,16 @@ func (t *NetworkInstance_Protocol_Bgp_PeerGroup) GetErrorHandling() *NetworkInst
 func (t *NetworkInstance_Protocol_Bgp_PeerGroup) GetGracefulRestart() *NetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart {
 	if t != nil && t.GracefulRestart != nil {
 		return t.GracefulRestart
+	}
+	return nil
+}
+
+// GetLocalAsOptions returns the value of the LocalAsOptions struct pointer
+// from NetworkInstance_Protocol_Bgp_PeerGroup. If the receiver or the field LocalAsOptions is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *NetworkInstance_Protocol_Bgp_PeerGroup) GetLocalAsOptions() *NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions {
+	if t != nil && t.LocalAsOptions != nil {
+		return t.LocalAsOptions
 	}
 	return nil
 }
@@ -113050,6 +118659,7 @@ func (t *NetworkInstance_Protocol_Bgp_PeerGroup) PopulateDefaults() {
 	t.EnableBfd.PopulateDefaults()
 	t.ErrorHandling.PopulateDefaults()
 	t.GracefulRestart.PopulateDefaults()
+	t.LocalAsOptions.PopulateDefaults()
 	t.LoggingOptions.PopulateDefaults()
 	t.RouteReflector.PopulateDefaults()
 	t.Timers.PopulateDefaults()
@@ -114298,6 +119908,7 @@ func (*NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4LabeledUnicast_PrefixL
 
 // NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/ipv4-unicast YANG schema element.
 type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast struct {
+	EnableAigp              *bool                                                                           `path:"state/enable-aigp" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/enable-aigp" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
 	ExtendedNextHopEncoding *bool                                                                           `path:"state/extended-next-hop-encoding" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/extended-next-hop-encoding" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
 	PrefixLimit             *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast_PrefixLimit         `path:"prefix-limit" module:"openconfig-network-instance"`
 	PrefixLimitReceived     *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast_PrefixLimitReceived `path:"prefix-limit-received" module:"openconfig-network-instance"`
@@ -114349,6 +119960,22 @@ func (t *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast) GetPrefixLi
 	return nil
 }
 
+// GetEnableAigp retrieves the value of the leaf EnableAigp from the NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if EnableAigp is set, it can
+// safely use t.GetEnableAigp() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.EnableAigp == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast) GetEnableAigp() bool {
+	if t == nil || t.EnableAigp == nil {
+		return false
+	}
+	return *t.EnableAigp
+}
+
 // GetExtendedNextHopEncoding retrieves the value of the leaf ExtendedNextHopEncoding from the NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast
 // struct. If the field is unset but has a default value in the YANG schema,
 // then the default value will be returned.
@@ -114379,6 +120006,12 @@ func (t *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast) GetSendDefa
 		return false
 	}
 	return *t.SendDefaultRoute
+}
+
+// SetEnableAigp sets the value of the leaf EnableAigp in the NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast
+// struct.
+func (t *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast) SetEnableAigp(v bool) {
+	t.EnableAigp = &v
 }
 
 // SetExtendedNextHopEncoding sets the value of the leaf ExtendedNextHopEncoding in the NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv4Unicast
@@ -115091,6 +120724,7 @@ func (*NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6LabeledUnicast_PrefixL
 
 // NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/afi-safis/afi-safi/ipv6-unicast YANG schema element.
 type NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast struct {
+	EnableAigp          *bool                                                                           `path:"state/enable-aigp" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/enable-aigp" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
 	PrefixLimit         *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast_PrefixLimit         `path:"prefix-limit" module:"openconfig-network-instance"`
 	PrefixLimitReceived *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast_PrefixLimitReceived `path:"prefix-limit-received" module:"openconfig-network-instance"`
 	SendDefaultRoute    *bool                                                                           `path:"state/send-default-route" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/send-default-route" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
@@ -115141,6 +120775,22 @@ func (t *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast) GetPrefixLi
 	return nil
 }
 
+// GetEnableAigp retrieves the value of the leaf EnableAigp from the NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if EnableAigp is set, it can
+// safely use t.GetEnableAigp() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.EnableAigp == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast) GetEnableAigp() bool {
+	if t == nil || t.EnableAigp == nil {
+		return false
+	}
+	return *t.EnableAigp
+}
+
 // GetSendDefaultRoute retrieves the value of the leaf SendDefaultRoute from the NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast
 // struct. If the field is unset but has a default value in the YANG schema,
 // then the default value will be returned.
@@ -115155,6 +120805,12 @@ func (t *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast) GetSendDefa
 		return false
 	}
 	return *t.SendDefaultRoute
+}
+
+// SetEnableAigp sets the value of the leaf EnableAigp in the NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast
+// struct.
+func (t *NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast) SetEnableAigp(v bool) {
+	t.EnableAigp = &v
 }
 
 // SetSendDefaultRoute sets the value of the leaf SendDefaultRoute in the NetworkInstance_Protocol_Bgp_PeerGroup_AfiSafi_Ipv6Unicast
@@ -119793,6 +125449,142 @@ func (t *NetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart) ΛEnumTypeMap()
 // ΛBelongingModule returns the name of the module that defines the namespace
 // of NetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart.
 func (*NetworkInstance_Protocol_Bgp_PeerGroup_GracefulRestart) ΛBelongingModule() string {
+	return "openconfig-network-instance"
+}
+
+// NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/bgp/peer-groups/peer-group/local-as-options YANG schema element.
+type NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions struct {
+	DualAs    *bool   `path:"state/dual-as" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/dual-as" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+	LocalAs   *uint32 `path:"state/local-as" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/local-as" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+	NoPrepend *bool   `path:"state/no-prepend" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/no-prepend" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+	ReplaceAs *bool   `path:"state/replace-as" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/replace-as" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+}
+
+// IsYANGGoStruct ensures that NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions) IsYANGGoStruct() {}
+
+// GetDualAs retrieves the value of the leaf DualAs from the NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if DualAs is set, it can
+// safely use t.GetDualAs() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.DualAs == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions) GetDualAs() bool {
+	if t == nil || t.DualAs == nil {
+		return false
+	}
+	return *t.DualAs
+}
+
+// GetLocalAs retrieves the value of the leaf LocalAs from the NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if LocalAs is set, it can
+// safely use t.GetLocalAs() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.LocalAs == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions) GetLocalAs() uint32 {
+	if t == nil || t.LocalAs == nil {
+		return 0
+	}
+	return *t.LocalAs
+}
+
+// GetNoPrepend retrieves the value of the leaf NoPrepend from the NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if NoPrepend is set, it can
+// safely use t.GetNoPrepend() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.NoPrepend == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions) GetNoPrepend() bool {
+	if t == nil || t.NoPrepend == nil {
+		return false
+	}
+	return *t.NoPrepend
+}
+
+// GetReplaceAs retrieves the value of the leaf ReplaceAs from the NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if ReplaceAs is set, it can
+// safely use t.GetReplaceAs() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.ReplaceAs == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions) GetReplaceAs() bool {
+	if t == nil || t.ReplaceAs == nil {
+		return false
+	}
+	return *t.ReplaceAs
+}
+
+// SetDualAs sets the value of the leaf DualAs in the NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions
+// struct.
+func (t *NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions) SetDualAs(v bool) {
+	t.DualAs = &v
+}
+
+// SetLocalAs sets the value of the leaf LocalAs in the NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions
+// struct.
+func (t *NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions) SetLocalAs(v uint32) {
+	t.LocalAs = &v
+}
+
+// SetNoPrepend sets the value of the leaf NoPrepend in the NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions
+// struct.
+func (t *NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions) SetNoPrepend(v bool) {
+	t.NoPrepend = &v
+}
+
+// SetReplaceAs sets the value of the leaf ReplaceAs in the NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions
+// struct.
+func (t *NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions) SetReplaceAs(v bool) {
+	t.ReplaceAs = &v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions.
+func (*NetworkInstance_Protocol_Bgp_PeerGroup_LocalAsOptions) ΛBelongingModule() string {
 	return "openconfig-network-instance"
 }
 
@@ -152758,12 +158550,13 @@ func (*NetworkInstance_Protocol_Isis_Global) ΛBelongingModule() string {
 
 // NetworkInstance_Protocol_Isis_Global_Af represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/global/afi-safi/af YANG schema element.
 type NetworkInstance_Protocol_Isis_Global_Af struct {
-	AfiName       E_IsisTypes_AFI_TYPE                                   `path:"state/afi-name|afi-name" module:"openconfig-network-instance/openconfig-network-instance|openconfig-network-instance" shadow-path:"config/afi-name|afi-name" shadow-module:"openconfig-network-instance/openconfig-network-instance|openconfig-network-instance"`
-	Enabled       *bool                                                  `path:"state/enabled" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/enabled" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
-	MaxEcmpPaths  *uint8                                                 `path:"state/max-ecmp-paths" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/max-ecmp-paths" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
-	Metric        *uint32                                                `path:"state/metric" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/metric" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
-	MultiTopology *NetworkInstance_Protocol_Isis_Global_Af_MultiTopology `path:"multi-topology" module:"openconfig-network-instance"`
-	SafiName      E_IsisTypes_SAFI_TYPE                                  `path:"state/safi-name|safi-name" module:"openconfig-network-instance/openconfig-network-instance|openconfig-network-instance" shadow-path:"config/safi-name|safi-name" shadow-module:"openconfig-network-instance/openconfig-network-instance|openconfig-network-instance"`
+	AfiName                       E_IsisTypes_AFI_TYPE                                   `path:"state/afi-name|afi-name" module:"openconfig-network-instance/openconfig-network-instance|openconfig-network-instance" shadow-path:"config/afi-name|afi-name" shadow-module:"openconfig-network-instance/openconfig-network-instance|openconfig-network-instance"`
+	Enabled                       *bool                                                  `path:"state/enabled" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/enabled" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+	MaxEcmpPaths                  *uint8                                                 `path:"state/max-ecmp-paths" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/max-ecmp-paths" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+	Metric                        *uint32                                                `path:"state/metric" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/metric" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+	MultiTopology                 *NetworkInstance_Protocol_Isis_Global_Af_MultiTopology `path:"multi-topology" module:"openconfig-network-instance"`
+	SafiName                      E_IsisTypes_SAFI_TYPE                                  `path:"state/safi-name|safi-name" module:"openconfig-network-instance/openconfig-network-instance|openconfig-network-instance" shadow-path:"config/safi-name|safi-name" shadow-module:"openconfig-network-instance/openconfig-network-instance|openconfig-network-instance"`
+	SuppressInterfaceReachability E_Isis_SuppressInterfaceIpMode                         `path:"state/suppress-interface-reachability" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/suppress-interface-reachability" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
 }
 
 // IsYANGGoStruct ensures that NetworkInstance_Protocol_Isis_Global_Af implements the yang.GoStruct
@@ -152871,6 +158664,22 @@ func (t *NetworkInstance_Protocol_Isis_Global_Af) GetSafiName() E_IsisTypes_SAFI
 	return t.SafiName
 }
 
+// GetSuppressInterfaceReachability retrieves the value of the leaf SuppressInterfaceReachability from the NetworkInstance_Protocol_Isis_Global_Af
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if SuppressInterfaceReachability is set, it can
+// safely use t.GetSuppressInterfaceReachability() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.SuppressInterfaceReachability == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Protocol_Isis_Global_Af) GetSuppressInterfaceReachability() E_Isis_SuppressInterfaceIpMode {
+	if t == nil || t.SuppressInterfaceReachability == 0 {
+		return Isis_SuppressInterfaceIpMode_NONE
+	}
+	return t.SuppressInterfaceReachability
+}
+
 // SetAfiName sets the value of the leaf AfiName in the NetworkInstance_Protocol_Isis_Global_Af
 // struct.
 func (t *NetworkInstance_Protocol_Isis_Global_Af) SetAfiName(v E_IsisTypes_AFI_TYPE) {
@@ -152901,6 +158710,12 @@ func (t *NetworkInstance_Protocol_Isis_Global_Af) SetSafiName(v E_IsisTypes_SAFI
 	t.SafiName = v
 }
 
+// SetSuppressInterfaceReachability sets the value of the leaf SuppressInterfaceReachability in the NetworkInstance_Protocol_Isis_Global_Af
+// struct.
+func (t *NetworkInstance_Protocol_Isis_Global_Af) SetSuppressInterfaceReachability(v E_Isis_SuppressInterfaceIpMode) {
+	t.SuppressInterfaceReachability = v
+}
+
 // PopulateDefaults recursively populates unset leaf fields in the NetworkInstance_Protocol_Isis_Global_Af
 // with default values as specified in the YANG schema, instantiating any nil
 // container fields.
@@ -152912,6 +158727,9 @@ func (t *NetworkInstance_Protocol_Isis_Global_Af) PopulateDefaults() {
 	if t.Metric == nil {
 		var v uint32 = 10
 		t.Metric = &v
+	}
+	if t.SuppressInterfaceReachability == 0 {
+		t.SuppressInterfaceReachability = Isis_SuppressInterfaceIpMode_NONE
 	}
 	t.MultiTopology.PopulateDefaults()
 }
@@ -157942,11 +163760,12 @@ func (*NetworkInstance_Protocol_Isis_Interface_Level_Adjacency) ΛBelongingModul
 
 // NetworkInstance_Protocol_Isis_Interface_Level_Af represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/interfaces/interface/levels/level/afi-safi/af YANG schema element.
 type NetworkInstance_Protocol_Isis_Interface_Level_Af struct {
-	AfiName        E_IsisTypes_AFI_TYPE                                             `path:"state/afi-name|afi-name" module:"openconfig-network-instance/openconfig-network-instance|openconfig-network-instance" shadow-path:"config/afi-name|afi-name" shadow-module:"openconfig-network-instance/openconfig-network-instance|openconfig-network-instance"`
-	Enabled        *bool                                                            `path:"state/enabled" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/enabled" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
-	Metric         *uint32                                                          `path:"state/metric" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/metric" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
-	SafiName       E_IsisTypes_SAFI_TYPE                                            `path:"state/safi-name|safi-name" module:"openconfig-network-instance/openconfig-network-instance|openconfig-network-instance" shadow-path:"config/safi-name|safi-name" shadow-module:"openconfig-network-instance/openconfig-network-instance|openconfig-network-instance"`
-	SegmentRouting *NetworkInstance_Protocol_Isis_Interface_Level_Af_SegmentRouting `path:"segment-routing" module:"openconfig-network-instance"`
+	AfiName              E_IsisTypes_AFI_TYPE                                             `path:"state/afi-name|afi-name" module:"openconfig-network-instance/openconfig-network-instance|openconfig-network-instance" shadow-path:"config/afi-name|afi-name" shadow-module:"openconfig-network-instance/openconfig-network-instance|openconfig-network-instance"`
+	Enabled              *bool                                                            `path:"state/enabled" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/enabled" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+	Metric               *uint32                                                          `path:"state/metric" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/metric" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+	SafiName             E_IsisTypes_SAFI_TYPE                                            `path:"state/safi-name|safi-name" module:"openconfig-network-instance/openconfig-network-instance|openconfig-network-instance" shadow-path:"config/safi-name|safi-name" shadow-module:"openconfig-network-instance/openconfig-network-instance|openconfig-network-instance"`
+	SegmentRouting       *NetworkInstance_Protocol_Isis_Interface_Level_Af_SegmentRouting `path:"segment-routing" module:"openconfig-network-instance"`
+	SuppressReachability *bool                                                            `path:"state/suppress-reachability" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/suppress-reachability" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
 }
 
 // IsYANGGoStruct ensures that NetworkInstance_Protocol_Isis_Interface_Level_Af implements the yang.GoStruct
@@ -158038,6 +163857,22 @@ func (t *NetworkInstance_Protocol_Isis_Interface_Level_Af) GetSafiName() E_IsisT
 	return t.SafiName
 }
 
+// GetSuppressReachability retrieves the value of the leaf SuppressReachability from the NetworkInstance_Protocol_Isis_Interface_Level_Af
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if SuppressReachability is set, it can
+// safely use t.GetSuppressReachability() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.SuppressReachability == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Protocol_Isis_Interface_Level_Af) GetSuppressReachability() bool {
+	if t == nil || t.SuppressReachability == nil {
+		return false
+	}
+	return *t.SuppressReachability
+}
+
 // SetAfiName sets the value of the leaf AfiName in the NetworkInstance_Protocol_Isis_Interface_Level_Af
 // struct.
 func (t *NetworkInstance_Protocol_Isis_Interface_Level_Af) SetAfiName(v E_IsisTypes_AFI_TYPE) {
@@ -158060,6 +163895,12 @@ func (t *NetworkInstance_Protocol_Isis_Interface_Level_Af) SetMetric(v uint32) {
 // struct.
 func (t *NetworkInstance_Protocol_Isis_Interface_Level_Af) SetSafiName(v E_IsisTypes_SAFI_TYPE) {
 	t.SafiName = v
+}
+
+// SetSuppressReachability sets the value of the leaf SuppressReachability in the NetworkInstance_Protocol_Isis_Interface_Level_Af
+// struct.
+func (t *NetworkInstance_Protocol_Isis_Interface_Level_Af) SetSuppressReachability(v bool) {
+	t.SuppressReachability = &v
 }
 
 // PopulateDefaults recursively populates unset leaf fields in the NetworkInstance_Protocol_Isis_Interface_Level_Af
@@ -160946,22 +166787,182 @@ func (*NetworkInstance_Protocol_Isis_Interface_WeightedEcmp) ΛBelongingModule()
 
 // NetworkInstance_Protocol_Isis_Level represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level YANG schema element.
 type NetworkInstance_Protocol_Isis_Level struct {
-	Authentication      *NetworkInstance_Protocol_Isis_Level_Authentication      `path:"authentication" module:"openconfig-network-instance"`
-	AuthenticationCheck *bool                                                    `path:"state/authentication-check" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/authentication-check" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
-	Enabled             *bool                                                    `path:"state/enabled" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/enabled" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
-	GracefulRestart     *NetworkInstance_Protocol_Isis_Level_GracefulRestart     `path:"graceful-restart" module:"openconfig-network-instance"`
-	LevelNumber         *uint8                                                   `path:"state/level-number|level-number" module:"openconfig-network-instance/openconfig-network-instance|openconfig-network-instance" shadow-path:"config/level-number|level-number" shadow-module:"openconfig-network-instance/openconfig-network-instance|openconfig-network-instance"`
-	Lsp                 map[string]*NetworkInstance_Protocol_Isis_Level_Lsp      `path:"link-state-database/lsp" module:"openconfig-network-instance/openconfig-network-instance"`
-	MetricStyle         E_Isis_MetricStyle                                       `path:"state/metric-style" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/metric-style" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
-	RoutePreference     *NetworkInstance_Protocol_Isis_Level_RoutePreference     `path:"route-preference" module:"openconfig-network-instance"`
-	SystemLevelCounters *NetworkInstance_Protocol_Isis_Level_SystemLevelCounters `path:"system-level-counters" module:"openconfig-network-instance"`
-	TrafficEngineering  *NetworkInstance_Protocol_Isis_Level_TrafficEngineering  `path:"traffic-engineering" module:"openconfig-network-instance"`
+	Af                  map[NetworkInstance_Protocol_Isis_Level_Af_Key]*NetworkInstance_Protocol_Isis_Level_Af `path:"afi-safi/af" module:"openconfig-network-instance/openconfig-network-instance"`
+	Authentication      *NetworkInstance_Protocol_Isis_Level_Authentication                                    `path:"authentication" module:"openconfig-network-instance"`
+	AuthenticationCheck *bool                                                                                  `path:"state/authentication-check" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/authentication-check" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+	Enabled             *bool                                                                                  `path:"state/enabled" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/enabled" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+	GracefulRestart     *NetworkInstance_Protocol_Isis_Level_GracefulRestart                                   `path:"graceful-restart" module:"openconfig-network-instance"`
+	LevelNumber         *uint8                                                                                 `path:"state/level-number|level-number" module:"openconfig-network-instance/openconfig-network-instance|openconfig-network-instance" shadow-path:"config/level-number|level-number" shadow-module:"openconfig-network-instance/openconfig-network-instance|openconfig-network-instance"`
+	Lsp                 map[string]*NetworkInstance_Protocol_Isis_Level_Lsp                                    `path:"link-state-database/lsp" module:"openconfig-network-instance/openconfig-network-instance"`
+	MetricStyle         E_Isis_MetricStyle                                                                     `path:"state/metric-style" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/metric-style" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+	RoutePreference     *NetworkInstance_Protocol_Isis_Level_RoutePreference                                   `path:"route-preference" module:"openconfig-network-instance"`
+	SystemLevelCounters *NetworkInstance_Protocol_Isis_Level_SystemLevelCounters                               `path:"system-level-counters" module:"openconfig-network-instance"`
+	TrafficEngineering  *NetworkInstance_Protocol_Isis_Level_TrafficEngineering                                `path:"traffic-engineering" module:"openconfig-network-instance"`
 }
 
 // IsYANGGoStruct ensures that NetworkInstance_Protocol_Isis_Level implements the yang.GoStruct
 // interface. This allows functions that need to handle this struct to
 // identify it as being generated by ygen.
 func (*NetworkInstance_Protocol_Isis_Level) IsYANGGoStruct() {}
+
+// NetworkInstance_Protocol_Isis_Level_Af_Key represents the key for list Af of element /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level.
+type NetworkInstance_Protocol_Isis_Level_Af_Key struct {
+	AfiName  E_IsisTypes_AFI_TYPE  `path:"afi-name"`
+	SafiName E_IsisTypes_SAFI_TYPE `path:"safi-name"`
+}
+
+// IsYANGGoKeyStruct ensures that NetworkInstance_Protocol_Isis_Level_Af_Key partially implements the
+// yang.GoKeyStruct interface. This allows functions that need to
+// handle this key struct to identify it as being generated by gogen.
+func (NetworkInstance_Protocol_Isis_Level_Af_Key) IsYANGGoKeyStruct() {}
+
+// ΛListKeyMap returns the values of the NetworkInstance_Protocol_Isis_Level_Af_Key key struct.
+func (t NetworkInstance_Protocol_Isis_Level_Af_Key) ΛListKeyMap() (map[string]interface{}, error) {
+	return map[string]interface{}{
+		"afi-name":  t.AfiName,
+		"safi-name": t.SafiName,
+	}, nil
+}
+
+// NewAf creates a new entry in the Af list of the
+// NetworkInstance_Protocol_Isis_Level struct. The keys of the list are populated from the input
+// arguments.
+func (t *NetworkInstance_Protocol_Isis_Level) NewAf(AfiName E_IsisTypes_AFI_TYPE, SafiName E_IsisTypes_SAFI_TYPE) (*NetworkInstance_Protocol_Isis_Level_Af, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.Af == nil {
+		t.Af = make(map[NetworkInstance_Protocol_Isis_Level_Af_Key]*NetworkInstance_Protocol_Isis_Level_Af)
+	}
+
+	key := NetworkInstance_Protocol_Isis_Level_Af_Key{
+		AfiName:  AfiName,
+		SafiName: SafiName,
+	}
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.Af[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Af", key)
+	}
+
+	t.Af[key] = &NetworkInstance_Protocol_Isis_Level_Af{
+		AfiName:  AfiName,
+		SafiName: SafiName,
+	}
+
+	return t.Af[key], nil
+}
+
+// RenameAf renames an entry in the list Af within
+// the NetworkInstance_Protocol_Isis_Level struct. The entry with key oldK is renamed to newK updating
+// the key within the value.
+func (t *NetworkInstance_Protocol_Isis_Level) RenameAf(oldK, newK NetworkInstance_Protocol_Isis_Level_Af_Key) error {
+	if _, ok := t.Af[newK]; ok {
+		return fmt.Errorf("key %v already exists in Af", newK)
+	}
+
+	e, ok := t.Af[oldK]
+	if !ok {
+		return fmt.Errorf("key %v not found in Af", oldK)
+	}
+	e.AfiName = newK.AfiName
+	e.SafiName = newK.SafiName
+
+	t.Af[newK] = e
+	delete(t.Af, oldK)
+	return nil
+}
+
+// GetOrCreateAfMap returns the list (map) from NetworkInstance_Protocol_Isis_Level.
+//
+// It initializes the field if not already initialized.
+func (t *NetworkInstance_Protocol_Isis_Level) GetOrCreateAfMap() map[NetworkInstance_Protocol_Isis_Level_Af_Key]*NetworkInstance_Protocol_Isis_Level_Af {
+	if t.Af == nil {
+		t.Af = make(map[NetworkInstance_Protocol_Isis_Level_Af_Key]*NetworkInstance_Protocol_Isis_Level_Af)
+	}
+	return t.Af
+}
+
+// GetOrCreateAf retrieves the value with the specified keys from
+// the receiver NetworkInstance_Protocol_Isis_Level. If the entry does not exist, then it is created.
+// It returns the existing or new list member.
+func (t *NetworkInstance_Protocol_Isis_Level) GetOrCreateAf(AfiName E_IsisTypes_AFI_TYPE, SafiName E_IsisTypes_SAFI_TYPE) *NetworkInstance_Protocol_Isis_Level_Af {
+
+	key := NetworkInstance_Protocol_Isis_Level_Af_Key{
+		AfiName:  AfiName,
+		SafiName: SafiName,
+	}
+
+	if v, ok := t.Af[key]; ok {
+		return v
+	}
+	// Panic if we receive an error, since we should have retrieved an existing
+	// list member. This allows chaining of GetOrCreate methods.
+	v, err := t.NewAf(AfiName, SafiName)
+	if err != nil {
+		panic(fmt.Sprintf("GetOrCreateAf got unexpected error: %v", err))
+	}
+	return v
+}
+
+// GetAf retrieves the value with the specified key from
+// the Af map field of NetworkInstance_Protocol_Isis_Level. If the receiver is nil, or
+// the specified key is not present in the list, nil is returned such that Get*
+// methods may be safely chained.
+func (t *NetworkInstance_Protocol_Isis_Level) GetAf(AfiName E_IsisTypes_AFI_TYPE, SafiName E_IsisTypes_SAFI_TYPE) *NetworkInstance_Protocol_Isis_Level_Af {
+
+	if t == nil {
+		return nil
+	}
+
+	key := NetworkInstance_Protocol_Isis_Level_Af_Key{
+		AfiName:  AfiName,
+		SafiName: SafiName,
+	}
+
+	if lm, ok := t.Af[key]; ok {
+		return lm
+	}
+	return nil
+}
+
+// DeleteAf deletes the value with the specified keys from
+// the receiver NetworkInstance_Protocol_Isis_Level. If there is no such element, the function
+// is a no-op.
+func (t *NetworkInstance_Protocol_Isis_Level) DeleteAf(AfiName E_IsisTypes_AFI_TYPE, SafiName E_IsisTypes_SAFI_TYPE) {
+	key := NetworkInstance_Protocol_Isis_Level_Af_Key{
+		AfiName:  AfiName,
+		SafiName: SafiName,
+	}
+
+	delete(t.Af, key)
+}
+
+// AppendAf appends the supplied NetworkInstance_Protocol_Isis_Level_Af struct to the
+// list Af of NetworkInstance_Protocol_Isis_Level. If the key value(s) specified in
+// the supplied NetworkInstance_Protocol_Isis_Level_Af already exist in the list, an error is
+// returned.
+func (t *NetworkInstance_Protocol_Isis_Level) AppendAf(v *NetworkInstance_Protocol_Isis_Level_Af) error {
+	key := NetworkInstance_Protocol_Isis_Level_Af_Key{
+		AfiName:  v.AfiName,
+		SafiName: v.SafiName,
+	}
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.Af == nil {
+		t.Af = make(map[NetworkInstance_Protocol_Isis_Level_Af_Key]*NetworkInstance_Protocol_Isis_Level_Af)
+	}
+
+	if _, ok := t.Af[key]; ok {
+		return fmt.Errorf("duplicate key for list Af %v", key)
+	}
+
+	t.Af[key] = v
+	return nil
+}
 
 // NewLsp creates a new entry in the Lsp list of the
 // NetworkInstance_Protocol_Isis_Level struct. The keys of the list are populated from the input
@@ -161299,6 +167300,9 @@ func (t *NetworkInstance_Protocol_Isis_Level) PopulateDefaults() {
 	t.RoutePreference.PopulateDefaults()
 	t.SystemLevelCounters.PopulateDefaults()
 	t.TrafficEngineering.PopulateDefaults()
+	for _, e := range t.Af {
+		e.PopulateDefaults()
+	}
 	for _, e := range t.Lsp {
 		e.PopulateDefaults()
 	}
@@ -161337,6 +167341,128 @@ func (t *NetworkInstance_Protocol_Isis_Level) ΛEnumTypeMap() map[string][]refle
 // ΛBelongingModule returns the name of the module that defines the namespace
 // of NetworkInstance_Protocol_Isis_Level.
 func (*NetworkInstance_Protocol_Isis_Level) ΛBelongingModule() string {
+	return "openconfig-network-instance"
+}
+
+// NetworkInstance_Protocol_Isis_Level_Af represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/isis/levels/level/afi-safi/af YANG schema element.
+type NetworkInstance_Protocol_Isis_Level_Af struct {
+	AfiName                       E_IsisTypes_AFI_TYPE           `path:"state/afi-name|afi-name" module:"openconfig-network-instance/openconfig-network-instance|openconfig-network-instance" shadow-path:"config/afi-name|afi-name" shadow-module:"openconfig-network-instance/openconfig-network-instance|openconfig-network-instance"`
+	SafiName                      E_IsisTypes_SAFI_TYPE          `path:"state/safi-name|safi-name" module:"openconfig-network-instance/openconfig-network-instance|openconfig-network-instance" shadow-path:"config/safi-name|safi-name" shadow-module:"openconfig-network-instance/openconfig-network-instance|openconfig-network-instance"`
+	SuppressInterfaceReachability E_Isis_SuppressInterfaceIpMode `path:"state/suppress-interface-reachability" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/suppress-interface-reachability" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+}
+
+// IsYANGGoStruct ensures that NetworkInstance_Protocol_Isis_Level_Af implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*NetworkInstance_Protocol_Isis_Level_Af) IsYANGGoStruct() {}
+
+// GetAfiName retrieves the value of the leaf AfiName from the NetworkInstance_Protocol_Isis_Level_Af
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if AfiName is set, it can
+// safely use t.GetAfiName() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.AfiName == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Protocol_Isis_Level_Af) GetAfiName() E_IsisTypes_AFI_TYPE {
+	if t == nil || t.AfiName == 0 {
+		return 0
+	}
+	return t.AfiName
+}
+
+// GetSafiName retrieves the value of the leaf SafiName from the NetworkInstance_Protocol_Isis_Level_Af
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if SafiName is set, it can
+// safely use t.GetSafiName() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.SafiName == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Protocol_Isis_Level_Af) GetSafiName() E_IsisTypes_SAFI_TYPE {
+	if t == nil || t.SafiName == 0 {
+		return 0
+	}
+	return t.SafiName
+}
+
+// GetSuppressInterfaceReachability retrieves the value of the leaf SuppressInterfaceReachability from the NetworkInstance_Protocol_Isis_Level_Af
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if SuppressInterfaceReachability is set, it can
+// safely use t.GetSuppressInterfaceReachability() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.SuppressInterfaceReachability == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Protocol_Isis_Level_Af) GetSuppressInterfaceReachability() E_Isis_SuppressInterfaceIpMode {
+	if t == nil || t.SuppressInterfaceReachability == 0 {
+		return 0
+	}
+	return t.SuppressInterfaceReachability
+}
+
+// SetAfiName sets the value of the leaf AfiName in the NetworkInstance_Protocol_Isis_Level_Af
+// struct.
+func (t *NetworkInstance_Protocol_Isis_Level_Af) SetAfiName(v E_IsisTypes_AFI_TYPE) {
+	t.AfiName = v
+}
+
+// SetSafiName sets the value of the leaf SafiName in the NetworkInstance_Protocol_Isis_Level_Af
+// struct.
+func (t *NetworkInstance_Protocol_Isis_Level_Af) SetSafiName(v E_IsisTypes_SAFI_TYPE) {
+	t.SafiName = v
+}
+
+// SetSuppressInterfaceReachability sets the value of the leaf SuppressInterfaceReachability in the NetworkInstance_Protocol_Isis_Level_Af
+// struct.
+func (t *NetworkInstance_Protocol_Isis_Level_Af) SetSuppressInterfaceReachability(v E_Isis_SuppressInterfaceIpMode) {
+	t.SuppressInterfaceReachability = v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the NetworkInstance_Protocol_Isis_Level_Af
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *NetworkInstance_Protocol_Isis_Level_Af) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// ΛListKeyMap returns the keys of the NetworkInstance_Protocol_Isis_Level_Af struct, which is a YANG list entry.
+func (t *NetworkInstance_Protocol_Isis_Level_Af) ΛListKeyMap() (map[string]interface{}, error) {
+
+	return map[string]interface{}{
+		"afi-name":  t.AfiName,
+		"safi-name": t.SafiName,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *NetworkInstance_Protocol_Isis_Level_Af) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["NetworkInstance_Protocol_Isis_Level_Af"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *NetworkInstance_Protocol_Isis_Level_Af) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *NetworkInstance_Protocol_Isis_Level_Af) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of NetworkInstance_Protocol_Isis_Level_Af.
+func (*NetworkInstance_Protocol_Isis_Level_Af) ΛBelongingModule() string {
 	return "openconfig-network-instance"
 }
 
@@ -202232,8 +208358,13 @@ type NetworkInstance_Protocol_Ospfv2_Global struct {
 	IgpShortcuts               *bool                                                                                                                                        `path:"state/igp-shortcuts" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/igp-shortcuts" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
 	InterAreaPropagationPolicy map[NetworkInstance_Protocol_Ospfv2_Global_InterAreaPropagationPolicy_Key]*NetworkInstance_Protocol_Ospfv2_Global_InterAreaPropagationPolicy `path:"inter-area-propagation-policies/inter-area-propagation-policy" module:"openconfig-network-instance/openconfig-network-instance"`
 	LogAdjacencyChanges        *bool                                                                                                                                        `path:"state/log-adjacency-changes" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/log-adjacency-changes" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+	MaxEcmpPaths               *uint8                                                                                                                                       `path:"state/max-ecmp-paths" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/max-ecmp-paths" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
 	Mpls                       *NetworkInstance_Protocol_Ospfv2_Global_Mpls                                                                                                 `path:"mpls" module:"openconfig-network-instance"`
+	Nsr                        *NetworkInstance_Protocol_Ospfv2_Global_Nsr                                                                                                  `path:"nsr" module:"openconfig-network-instance"`
+	ReferenceBandwidth         *NetworkInstance_Protocol_Ospfv2_Global_ReferenceBandwidth                                                                                   `path:"reference-bandwidth" module:"openconfig-network-instance"`
+	RoutePreference            *NetworkInstance_Protocol_Ospfv2_Global_RoutePreference                                                                                      `path:"route-preference" module:"openconfig-network-instance"`
 	RouterId                   *string                                                                                                                                      `path:"state/router-id" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/router-id" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+	SendDefaultRoute           *NetworkInstance_Protocol_Ospfv2_Global_SendDefaultRoute                                                                                     `path:"send-default-route" module:"openconfig-network-instance"`
 	SummaryRouteCostMode       E_Global_SummaryRouteCostMode                                                                                                                `path:"state/summary-route-cost-mode" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/summary-route-cost-mode" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
 	Timers                     *NetworkInstance_Protocol_Ospfv2_Global_Timers                                                                                               `path:"timers" module:"openconfig-network-instance"`
 }
@@ -202422,6 +208553,46 @@ func (t *NetworkInstance_Protocol_Ospfv2_Global) GetOrCreateMpls() *NetworkInsta
 	return t.Mpls
 }
 
+// GetOrCreateNsr retrieves the value of the Nsr field
+// or returns the existing field if it already exists.
+func (t *NetworkInstance_Protocol_Ospfv2_Global) GetOrCreateNsr() *NetworkInstance_Protocol_Ospfv2_Global_Nsr {
+	if t.Nsr != nil {
+		return t.Nsr
+	}
+	t.Nsr = &NetworkInstance_Protocol_Ospfv2_Global_Nsr{}
+	return t.Nsr
+}
+
+// GetOrCreateReferenceBandwidth retrieves the value of the ReferenceBandwidth field
+// or returns the existing field if it already exists.
+func (t *NetworkInstance_Protocol_Ospfv2_Global) GetOrCreateReferenceBandwidth() *NetworkInstance_Protocol_Ospfv2_Global_ReferenceBandwidth {
+	if t.ReferenceBandwidth != nil {
+		return t.ReferenceBandwidth
+	}
+	t.ReferenceBandwidth = &NetworkInstance_Protocol_Ospfv2_Global_ReferenceBandwidth{}
+	return t.ReferenceBandwidth
+}
+
+// GetOrCreateRoutePreference retrieves the value of the RoutePreference field
+// or returns the existing field if it already exists.
+func (t *NetworkInstance_Protocol_Ospfv2_Global) GetOrCreateRoutePreference() *NetworkInstance_Protocol_Ospfv2_Global_RoutePreference {
+	if t.RoutePreference != nil {
+		return t.RoutePreference
+	}
+	t.RoutePreference = &NetworkInstance_Protocol_Ospfv2_Global_RoutePreference{}
+	return t.RoutePreference
+}
+
+// GetOrCreateSendDefaultRoute retrieves the value of the SendDefaultRoute field
+// or returns the existing field if it already exists.
+func (t *NetworkInstance_Protocol_Ospfv2_Global) GetOrCreateSendDefaultRoute() *NetworkInstance_Protocol_Ospfv2_Global_SendDefaultRoute {
+	if t.SendDefaultRoute != nil {
+		return t.SendDefaultRoute
+	}
+	t.SendDefaultRoute = &NetworkInstance_Protocol_Ospfv2_Global_SendDefaultRoute{}
+	return t.SendDefaultRoute
+}
+
 // GetOrCreateTimers retrieves the value of the Timers field
 // or returns the existing field if it already exists.
 func (t *NetworkInstance_Protocol_Ospfv2_Global) GetOrCreateTimers() *NetworkInstance_Protocol_Ospfv2_Global_Timers {
@@ -202448,6 +208619,46 @@ func (t *NetworkInstance_Protocol_Ospfv2_Global) GetGracefulRestart() *NetworkIn
 func (t *NetworkInstance_Protocol_Ospfv2_Global) GetMpls() *NetworkInstance_Protocol_Ospfv2_Global_Mpls {
 	if t != nil && t.Mpls != nil {
 		return t.Mpls
+	}
+	return nil
+}
+
+// GetNsr returns the value of the Nsr struct pointer
+// from NetworkInstance_Protocol_Ospfv2_Global. If the receiver or the field Nsr is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *NetworkInstance_Protocol_Ospfv2_Global) GetNsr() *NetworkInstance_Protocol_Ospfv2_Global_Nsr {
+	if t != nil && t.Nsr != nil {
+		return t.Nsr
+	}
+	return nil
+}
+
+// GetReferenceBandwidth returns the value of the ReferenceBandwidth struct pointer
+// from NetworkInstance_Protocol_Ospfv2_Global. If the receiver or the field ReferenceBandwidth is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *NetworkInstance_Protocol_Ospfv2_Global) GetReferenceBandwidth() *NetworkInstance_Protocol_Ospfv2_Global_ReferenceBandwidth {
+	if t != nil && t.ReferenceBandwidth != nil {
+		return t.ReferenceBandwidth
+	}
+	return nil
+}
+
+// GetRoutePreference returns the value of the RoutePreference struct pointer
+// from NetworkInstance_Protocol_Ospfv2_Global. If the receiver or the field RoutePreference is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *NetworkInstance_Protocol_Ospfv2_Global) GetRoutePreference() *NetworkInstance_Protocol_Ospfv2_Global_RoutePreference {
+	if t != nil && t.RoutePreference != nil {
+		return t.RoutePreference
+	}
+	return nil
+}
+
+// GetSendDefaultRoute returns the value of the SendDefaultRoute struct pointer
+// from NetworkInstance_Protocol_Ospfv2_Global. If the receiver or the field SendDefaultRoute is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *NetworkInstance_Protocol_Ospfv2_Global) GetSendDefaultRoute() *NetworkInstance_Protocol_Ospfv2_Global_SendDefaultRoute {
+	if t != nil && t.SendDefaultRoute != nil {
+		return t.SendDefaultRoute
 	}
 	return nil
 }
@@ -202510,6 +208721,22 @@ func (t *NetworkInstance_Protocol_Ospfv2_Global) GetLogAdjacencyChanges() bool {
 	return *t.LogAdjacencyChanges
 }
 
+// GetMaxEcmpPaths retrieves the value of the leaf MaxEcmpPaths from the NetworkInstance_Protocol_Ospfv2_Global
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if MaxEcmpPaths is set, it can
+// safely use t.GetMaxEcmpPaths() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.MaxEcmpPaths == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Protocol_Ospfv2_Global) GetMaxEcmpPaths() uint8 {
+	if t == nil || t.MaxEcmpPaths == nil {
+		return 0
+	}
+	return *t.MaxEcmpPaths
+}
+
 // GetRouterId retrieves the value of the leaf RouterId from the NetworkInstance_Protocol_Ospfv2_Global
 // struct. If the field is unset but has a default value in the YANG schema,
 // then the default value will be returned.
@@ -202560,6 +208787,12 @@ func (t *NetworkInstance_Protocol_Ospfv2_Global) SetLogAdjacencyChanges(v bool) 
 	t.LogAdjacencyChanges = &v
 }
 
+// SetMaxEcmpPaths sets the value of the leaf MaxEcmpPaths in the NetworkInstance_Protocol_Ospfv2_Global
+// struct.
+func (t *NetworkInstance_Protocol_Ospfv2_Global) SetMaxEcmpPaths(v uint8) {
+	t.MaxEcmpPaths = &v
+}
+
 // SetRouterId sets the value of the leaf RouterId in the NetworkInstance_Protocol_Ospfv2_Global
 // struct.
 func (t *NetworkInstance_Protocol_Ospfv2_Global) SetRouterId(v string) {
@@ -202585,6 +208818,10 @@ func (t *NetworkInstance_Protocol_Ospfv2_Global) PopulateDefaults() {
 	}
 	t.GracefulRestart.PopulateDefaults()
 	t.Mpls.PopulateDefaults()
+	t.Nsr.PopulateDefaults()
+	t.ReferenceBandwidth.PopulateDefaults()
+	t.RoutePreference.PopulateDefaults()
+	t.SendDefaultRoute.PopulateDefaults()
 	t.Timers.PopulateDefaults()
 	for _, e := range t.InterAreaPropagationPolicy {
 		e.PopulateDefaults()
@@ -203033,6 +209270,400 @@ func (*NetworkInstance_Protocol_Ospfv2_Global_Mpls_IgpLdpSync) ΛBelongingModule
 	return "openconfig-network-instance"
 }
 
+// NetworkInstance_Protocol_Ospfv2_Global_Nsr represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/global/nsr YANG schema element.
+type NetworkInstance_Protocol_Ospfv2_Global_Nsr struct {
+	Enabled *bool `path:"state/enabled" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/enabled" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+}
+
+// IsYANGGoStruct ensures that NetworkInstance_Protocol_Ospfv2_Global_Nsr implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*NetworkInstance_Protocol_Ospfv2_Global_Nsr) IsYANGGoStruct() {}
+
+// GetEnabled retrieves the value of the leaf Enabled from the NetworkInstance_Protocol_Ospfv2_Global_Nsr
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Enabled is set, it can
+// safely use t.GetEnabled() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Enabled == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Protocol_Ospfv2_Global_Nsr) GetEnabled() bool {
+	if t == nil || t.Enabled == nil {
+		return false
+	}
+	return *t.Enabled
+}
+
+// SetEnabled sets the value of the leaf Enabled in the NetworkInstance_Protocol_Ospfv2_Global_Nsr
+// struct.
+func (t *NetworkInstance_Protocol_Ospfv2_Global_Nsr) SetEnabled(v bool) {
+	t.Enabled = &v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the NetworkInstance_Protocol_Ospfv2_Global_Nsr
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *NetworkInstance_Protocol_Ospfv2_Global_Nsr) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *NetworkInstance_Protocol_Ospfv2_Global_Nsr) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["NetworkInstance_Protocol_Ospfv2_Global_Nsr"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *NetworkInstance_Protocol_Ospfv2_Global_Nsr) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *NetworkInstance_Protocol_Ospfv2_Global_Nsr) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of NetworkInstance_Protocol_Ospfv2_Global_Nsr.
+func (*NetworkInstance_Protocol_Ospfv2_Global_Nsr) ΛBelongingModule() string {
+	return "openconfig-network-instance"
+}
+
+// NetworkInstance_Protocol_Ospfv2_Global_ReferenceBandwidth represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/global/reference-bandwidth YANG schema element.
+type NetworkInstance_Protocol_Ospfv2_Global_ReferenceBandwidth struct {
+	ReferenceBandwidth *uint32 `path:"state/reference-bandwidth" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/reference-bandwidth" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+}
+
+// IsYANGGoStruct ensures that NetworkInstance_Protocol_Ospfv2_Global_ReferenceBandwidth implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*NetworkInstance_Protocol_Ospfv2_Global_ReferenceBandwidth) IsYANGGoStruct() {}
+
+// GetReferenceBandwidth retrieves the value of the leaf ReferenceBandwidth from the NetworkInstance_Protocol_Ospfv2_Global_ReferenceBandwidth
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if ReferenceBandwidth is set, it can
+// safely use t.GetReferenceBandwidth() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.ReferenceBandwidth == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Protocol_Ospfv2_Global_ReferenceBandwidth) GetReferenceBandwidth() uint32 {
+	if t == nil || t.ReferenceBandwidth == nil {
+		return 0
+	}
+	return *t.ReferenceBandwidth
+}
+
+// SetReferenceBandwidth sets the value of the leaf ReferenceBandwidth in the NetworkInstance_Protocol_Ospfv2_Global_ReferenceBandwidth
+// struct.
+func (t *NetworkInstance_Protocol_Ospfv2_Global_ReferenceBandwidth) SetReferenceBandwidth(v uint32) {
+	t.ReferenceBandwidth = &v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the NetworkInstance_Protocol_Ospfv2_Global_ReferenceBandwidth
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *NetworkInstance_Protocol_Ospfv2_Global_ReferenceBandwidth) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *NetworkInstance_Protocol_Ospfv2_Global_ReferenceBandwidth) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["NetworkInstance_Protocol_Ospfv2_Global_ReferenceBandwidth"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *NetworkInstance_Protocol_Ospfv2_Global_ReferenceBandwidth) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *NetworkInstance_Protocol_Ospfv2_Global_ReferenceBandwidth) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of NetworkInstance_Protocol_Ospfv2_Global_ReferenceBandwidth.
+func (*NetworkInstance_Protocol_Ospfv2_Global_ReferenceBandwidth) ΛBelongingModule() string {
+	return "openconfig-network-instance"
+}
+
+// NetworkInstance_Protocol_Ospfv2_Global_RoutePreference represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/global/route-preference YANG schema element.
+type NetworkInstance_Protocol_Ospfv2_Global_RoutePreference struct {
+	ExternalRoutePreference  *uint8 `path:"state/external-route-preference" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/external-route-preference" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+	InterAreaRoutePreference *uint8 `path:"state/inter-area-route-preference" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/inter-area-route-preference" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+	IntraAreaRoutePreference *uint8 `path:"state/intra-area-route-preference" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/intra-area-route-preference" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+}
+
+// IsYANGGoStruct ensures that NetworkInstance_Protocol_Ospfv2_Global_RoutePreference implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*NetworkInstance_Protocol_Ospfv2_Global_RoutePreference) IsYANGGoStruct() {}
+
+// GetExternalRoutePreference retrieves the value of the leaf ExternalRoutePreference from the NetworkInstance_Protocol_Ospfv2_Global_RoutePreference
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if ExternalRoutePreference is set, it can
+// safely use t.GetExternalRoutePreference() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.ExternalRoutePreference == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Protocol_Ospfv2_Global_RoutePreference) GetExternalRoutePreference() uint8 {
+	if t == nil || t.ExternalRoutePreference == nil {
+		return 0
+	}
+	return *t.ExternalRoutePreference
+}
+
+// GetInterAreaRoutePreference retrieves the value of the leaf InterAreaRoutePreference from the NetworkInstance_Protocol_Ospfv2_Global_RoutePreference
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if InterAreaRoutePreference is set, it can
+// safely use t.GetInterAreaRoutePreference() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.InterAreaRoutePreference == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Protocol_Ospfv2_Global_RoutePreference) GetInterAreaRoutePreference() uint8 {
+	if t == nil || t.InterAreaRoutePreference == nil {
+		return 0
+	}
+	return *t.InterAreaRoutePreference
+}
+
+// GetIntraAreaRoutePreference retrieves the value of the leaf IntraAreaRoutePreference from the NetworkInstance_Protocol_Ospfv2_Global_RoutePreference
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if IntraAreaRoutePreference is set, it can
+// safely use t.GetIntraAreaRoutePreference() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.IntraAreaRoutePreference == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Protocol_Ospfv2_Global_RoutePreference) GetIntraAreaRoutePreference() uint8 {
+	if t == nil || t.IntraAreaRoutePreference == nil {
+		return 0
+	}
+	return *t.IntraAreaRoutePreference
+}
+
+// SetExternalRoutePreference sets the value of the leaf ExternalRoutePreference in the NetworkInstance_Protocol_Ospfv2_Global_RoutePreference
+// struct.
+func (t *NetworkInstance_Protocol_Ospfv2_Global_RoutePreference) SetExternalRoutePreference(v uint8) {
+	t.ExternalRoutePreference = &v
+}
+
+// SetInterAreaRoutePreference sets the value of the leaf InterAreaRoutePreference in the NetworkInstance_Protocol_Ospfv2_Global_RoutePreference
+// struct.
+func (t *NetworkInstance_Protocol_Ospfv2_Global_RoutePreference) SetInterAreaRoutePreference(v uint8) {
+	t.InterAreaRoutePreference = &v
+}
+
+// SetIntraAreaRoutePreference sets the value of the leaf IntraAreaRoutePreference in the NetworkInstance_Protocol_Ospfv2_Global_RoutePreference
+// struct.
+func (t *NetworkInstance_Protocol_Ospfv2_Global_RoutePreference) SetIntraAreaRoutePreference(v uint8) {
+	t.IntraAreaRoutePreference = &v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the NetworkInstance_Protocol_Ospfv2_Global_RoutePreference
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *NetworkInstance_Protocol_Ospfv2_Global_RoutePreference) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *NetworkInstance_Protocol_Ospfv2_Global_RoutePreference) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["NetworkInstance_Protocol_Ospfv2_Global_RoutePreference"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *NetworkInstance_Protocol_Ospfv2_Global_RoutePreference) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *NetworkInstance_Protocol_Ospfv2_Global_RoutePreference) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of NetworkInstance_Protocol_Ospfv2_Global_RoutePreference.
+func (*NetworkInstance_Protocol_Ospfv2_Global_RoutePreference) ΛBelongingModule() string {
+	return "openconfig-network-instance"
+}
+
+// NetworkInstance_Protocol_Ospfv2_Global_SendDefaultRoute represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/global/send-default-route YANG schema element.
+type NetworkInstance_Protocol_Ospfv2_Global_SendDefaultRoute struct {
+	Always     *bool                                `path:"state/always" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/always" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+	Enabled    *bool                                `path:"state/enabled" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/enabled" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+	Metric     *uint32                              `path:"state/metric" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/metric" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+	MetricType E_Ospfv2_SendDefaultRoute_MetricType `path:"state/metric-type" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/metric-type" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+}
+
+// IsYANGGoStruct ensures that NetworkInstance_Protocol_Ospfv2_Global_SendDefaultRoute implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*NetworkInstance_Protocol_Ospfv2_Global_SendDefaultRoute) IsYANGGoStruct() {}
+
+// GetAlways retrieves the value of the leaf Always from the NetworkInstance_Protocol_Ospfv2_Global_SendDefaultRoute
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Always is set, it can
+// safely use t.GetAlways() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Always == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Protocol_Ospfv2_Global_SendDefaultRoute) GetAlways() bool {
+	if t == nil || t.Always == nil {
+		return false
+	}
+	return *t.Always
+}
+
+// GetEnabled retrieves the value of the leaf Enabled from the NetworkInstance_Protocol_Ospfv2_Global_SendDefaultRoute
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Enabled is set, it can
+// safely use t.GetEnabled() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Enabled == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Protocol_Ospfv2_Global_SendDefaultRoute) GetEnabled() bool {
+	if t == nil || t.Enabled == nil {
+		return false
+	}
+	return *t.Enabled
+}
+
+// GetMetric retrieves the value of the leaf Metric from the NetworkInstance_Protocol_Ospfv2_Global_SendDefaultRoute
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Metric is set, it can
+// safely use t.GetMetric() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Metric == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Protocol_Ospfv2_Global_SendDefaultRoute) GetMetric() uint32 {
+	if t == nil || t.Metric == nil {
+		return 0
+	}
+	return *t.Metric
+}
+
+// GetMetricType retrieves the value of the leaf MetricType from the NetworkInstance_Protocol_Ospfv2_Global_SendDefaultRoute
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if MetricType is set, it can
+// safely use t.GetMetricType() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.MetricType == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Protocol_Ospfv2_Global_SendDefaultRoute) GetMetricType() E_Ospfv2_SendDefaultRoute_MetricType {
+	if t == nil || t.MetricType == 0 {
+		return Ospfv2_SendDefaultRoute_MetricType_EXTERNAL_TYPE_2
+	}
+	return t.MetricType
+}
+
+// SetAlways sets the value of the leaf Always in the NetworkInstance_Protocol_Ospfv2_Global_SendDefaultRoute
+// struct.
+func (t *NetworkInstance_Protocol_Ospfv2_Global_SendDefaultRoute) SetAlways(v bool) {
+	t.Always = &v
+}
+
+// SetEnabled sets the value of the leaf Enabled in the NetworkInstance_Protocol_Ospfv2_Global_SendDefaultRoute
+// struct.
+func (t *NetworkInstance_Protocol_Ospfv2_Global_SendDefaultRoute) SetEnabled(v bool) {
+	t.Enabled = &v
+}
+
+// SetMetric sets the value of the leaf Metric in the NetworkInstance_Protocol_Ospfv2_Global_SendDefaultRoute
+// struct.
+func (t *NetworkInstance_Protocol_Ospfv2_Global_SendDefaultRoute) SetMetric(v uint32) {
+	t.Metric = &v
+}
+
+// SetMetricType sets the value of the leaf MetricType in the NetworkInstance_Protocol_Ospfv2_Global_SendDefaultRoute
+// struct.
+func (t *NetworkInstance_Protocol_Ospfv2_Global_SendDefaultRoute) SetMetricType(v E_Ospfv2_SendDefaultRoute_MetricType) {
+	t.MetricType = v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the NetworkInstance_Protocol_Ospfv2_Global_SendDefaultRoute
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *NetworkInstance_Protocol_Ospfv2_Global_SendDefaultRoute) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+	if t.Always == nil {
+		var v bool = false
+		t.Always = &v
+	}
+	if t.Enabled == nil {
+		var v bool = false
+		t.Enabled = &v
+	}
+	if t.MetricType == 0 {
+		t.MetricType = Ospfv2_SendDefaultRoute_MetricType_EXTERNAL_TYPE_2
+	}
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *NetworkInstance_Protocol_Ospfv2_Global_SendDefaultRoute) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["NetworkInstance_Protocol_Ospfv2_Global_SendDefaultRoute"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *NetworkInstance_Protocol_Ospfv2_Global_SendDefaultRoute) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *NetworkInstance_Protocol_Ospfv2_Global_SendDefaultRoute) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of NetworkInstance_Protocol_Ospfv2_Global_SendDefaultRoute.
+func (*NetworkInstance_Protocol_Ospfv2_Global_SendDefaultRoute) ΛBelongingModule() string {
+	return "openconfig-network-instance"
+}
+
 // NetworkInstance_Protocol_Ospfv2_Global_Timers represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv2/global/timers YANG schema element.
 type NetworkInstance_Protocol_Ospfv2_Global_Timers struct {
 	LsaGeneration *NetworkInstance_Protocol_Ospfv2_Global_Timers_LsaGeneration `path:"lsa-generation" module:"openconfig-network-instance"`
@@ -203147,6 +209778,7 @@ func (*NetworkInstance_Protocol_Ospfv2_Global_Timers) ΛBelongingModule() string
 type NetworkInstance_Protocol_Ospfv2_Global_Timers_LsaGeneration struct {
 	InitialDelay *uint32                          `path:"state/initial-delay" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/initial-delay" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
 	MaximumDelay *uint32                          `path:"state/maximum-delay" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/maximum-delay" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+	MinimumHold  *uint32                          `path:"state/minimum-hold" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/minimum-hold" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
 	TimerType    E_Ospfv2_LsaGeneration_TimerType `path:"state/timer-type" module:"openconfig-network-instance/openconfig-network-instance"`
 }
 
@@ -203187,6 +209819,22 @@ func (t *NetworkInstance_Protocol_Ospfv2_Global_Timers_LsaGeneration) GetMaximum
 	return *t.MaximumDelay
 }
 
+// GetMinimumHold retrieves the value of the leaf MinimumHold from the NetworkInstance_Protocol_Ospfv2_Global_Timers_LsaGeneration
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if MinimumHold is set, it can
+// safely use t.GetMinimumHold() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.MinimumHold == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Protocol_Ospfv2_Global_Timers_LsaGeneration) GetMinimumHold() uint32 {
+	if t == nil || t.MinimumHold == nil {
+		return 0
+	}
+	return *t.MinimumHold
+}
+
 // GetTimerType retrieves the value of the leaf TimerType from the NetworkInstance_Protocol_Ospfv2_Global_Timers_LsaGeneration
 // struct. If the field is unset but has a default value in the YANG schema,
 // then the default value will be returned.
@@ -203213,6 +209861,12 @@ func (t *NetworkInstance_Protocol_Ospfv2_Global_Timers_LsaGeneration) SetInitial
 // struct.
 func (t *NetworkInstance_Protocol_Ospfv2_Global_Timers_LsaGeneration) SetMaximumDelay(v uint32) {
 	t.MaximumDelay = &v
+}
+
+// SetMinimumHold sets the value of the leaf MinimumHold in the NetworkInstance_Protocol_Ospfv2_Global_Timers_LsaGeneration
+// struct.
+func (t *NetworkInstance_Protocol_Ospfv2_Global_Timers_LsaGeneration) SetMinimumHold(v uint32) {
+	t.MinimumHold = &v
 }
 
 // SetTimerType sets the value of the leaf TimerType in the NetworkInstance_Protocol_Ospfv2_Global_Timers_LsaGeneration
@@ -203396,6 +210050,7 @@ func (*NetworkInstance_Protocol_Ospfv2_Global_Timers_MaxMetric) ΛBelongingModul
 type NetworkInstance_Protocol_Ospfv2_Global_Timers_Spf struct {
 	InitialDelay *uint32                          `path:"state/initial-delay" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/initial-delay" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
 	MaximumDelay *uint32                          `path:"state/maximum-delay" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/maximum-delay" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+	MinimumHold  *uint32                          `path:"state/minimum-hold" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/minimum-hold" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
 	TimerType    E_Ospfv2_LsaGeneration_TimerType `path:"state/timer-type" module:"openconfig-network-instance/openconfig-network-instance"`
 }
 
@@ -203436,6 +210091,22 @@ func (t *NetworkInstance_Protocol_Ospfv2_Global_Timers_Spf) GetMaximumDelay() ui
 	return *t.MaximumDelay
 }
 
+// GetMinimumHold retrieves the value of the leaf MinimumHold from the NetworkInstance_Protocol_Ospfv2_Global_Timers_Spf
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if MinimumHold is set, it can
+// safely use t.GetMinimumHold() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.MinimumHold == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Protocol_Ospfv2_Global_Timers_Spf) GetMinimumHold() uint32 {
+	if t == nil || t.MinimumHold == nil {
+		return 0
+	}
+	return *t.MinimumHold
+}
+
 // GetTimerType retrieves the value of the leaf TimerType from the NetworkInstance_Protocol_Ospfv2_Global_Timers_Spf
 // struct. If the field is unset but has a default value in the YANG schema,
 // then the default value will be returned.
@@ -203462,6 +210133,12 @@ func (t *NetworkInstance_Protocol_Ospfv2_Global_Timers_Spf) SetInitialDelay(v ui
 // struct.
 func (t *NetworkInstance_Protocol_Ospfv2_Global_Timers_Spf) SetMaximumDelay(v uint32) {
 	t.MaximumDelay = &v
+}
+
+// SetMinimumHold sets the value of the leaf MinimumHold in the NetworkInstance_Protocol_Ospfv2_Global_Timers_Spf
+// struct.
+func (t *NetworkInstance_Protocol_Ospfv2_Global_Timers_Spf) SetMinimumHold(v uint32) {
+	t.MinimumHold = &v
 }
 
 // SetTimerType sets the value of the leaf TimerType in the NetworkInstance_Protocol_Ospfv2_Global_Timers_Spf
@@ -206427,7 +213104,12 @@ type NetworkInstance_Protocol_Ospfv3_Global struct {
 	HideTransitOnlyNetworks    *bool                                                                                                                                        `path:"state/hide-transit-only-networks" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/hide-transit-only-networks" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
 	InterAreaPropagationPolicy map[NetworkInstance_Protocol_Ospfv3_Global_InterAreaPropagationPolicy_Key]*NetworkInstance_Protocol_Ospfv3_Global_InterAreaPropagationPolicy `path:"inter-area-propagation-policies/inter-area-propagation-policy" module:"openconfig-network-instance/openconfig-network-instance"`
 	LogAdjacencyChanges        *bool                                                                                                                                        `path:"state/log-adjacency-changes" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/log-adjacency-changes" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+	MaxEcmpPaths               *uint8                                                                                                                                       `path:"state/max-ecmp-paths" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/max-ecmp-paths" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+	Nsr                        *NetworkInstance_Protocol_Ospfv3_Global_Nsr                                                                                                  `path:"nsr" module:"openconfig-network-instance"`
+	ReferenceBandwidth         *NetworkInstance_Protocol_Ospfv3_Global_ReferenceBandwidth                                                                                   `path:"reference-bandwidth" module:"openconfig-network-instance"`
+	RoutePreference            *NetworkInstance_Protocol_Ospfv3_Global_RoutePreference                                                                                      `path:"route-preference" module:"openconfig-network-instance"`
 	RouterId                   *string                                                                                                                                      `path:"state/router-id" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/router-id" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+	SendDefaultRoute           *NetworkInstance_Protocol_Ospfv3_Global_SendDefaultRoute                                                                                     `path:"send-default-route" module:"openconfig-network-instance"`
 	Timers                     *NetworkInstance_Protocol_Ospfv3_Global_Timers                                                                                               `path:"timers" module:"openconfig-network-instance"`
 }
 
@@ -206605,6 +213287,46 @@ func (t *NetworkInstance_Protocol_Ospfv3_Global) GetOrCreateGracefulRestart() *N
 	return t.GracefulRestart
 }
 
+// GetOrCreateNsr retrieves the value of the Nsr field
+// or returns the existing field if it already exists.
+func (t *NetworkInstance_Protocol_Ospfv3_Global) GetOrCreateNsr() *NetworkInstance_Protocol_Ospfv3_Global_Nsr {
+	if t.Nsr != nil {
+		return t.Nsr
+	}
+	t.Nsr = &NetworkInstance_Protocol_Ospfv3_Global_Nsr{}
+	return t.Nsr
+}
+
+// GetOrCreateReferenceBandwidth retrieves the value of the ReferenceBandwidth field
+// or returns the existing field if it already exists.
+func (t *NetworkInstance_Protocol_Ospfv3_Global) GetOrCreateReferenceBandwidth() *NetworkInstance_Protocol_Ospfv3_Global_ReferenceBandwidth {
+	if t.ReferenceBandwidth != nil {
+		return t.ReferenceBandwidth
+	}
+	t.ReferenceBandwidth = &NetworkInstance_Protocol_Ospfv3_Global_ReferenceBandwidth{}
+	return t.ReferenceBandwidth
+}
+
+// GetOrCreateRoutePreference retrieves the value of the RoutePreference field
+// or returns the existing field if it already exists.
+func (t *NetworkInstance_Protocol_Ospfv3_Global) GetOrCreateRoutePreference() *NetworkInstance_Protocol_Ospfv3_Global_RoutePreference {
+	if t.RoutePreference != nil {
+		return t.RoutePreference
+	}
+	t.RoutePreference = &NetworkInstance_Protocol_Ospfv3_Global_RoutePreference{}
+	return t.RoutePreference
+}
+
+// GetOrCreateSendDefaultRoute retrieves the value of the SendDefaultRoute field
+// or returns the existing field if it already exists.
+func (t *NetworkInstance_Protocol_Ospfv3_Global) GetOrCreateSendDefaultRoute() *NetworkInstance_Protocol_Ospfv3_Global_SendDefaultRoute {
+	if t.SendDefaultRoute != nil {
+		return t.SendDefaultRoute
+	}
+	t.SendDefaultRoute = &NetworkInstance_Protocol_Ospfv3_Global_SendDefaultRoute{}
+	return t.SendDefaultRoute
+}
+
 // GetOrCreateTimers retrieves the value of the Timers field
 // or returns the existing field if it already exists.
 func (t *NetworkInstance_Protocol_Ospfv3_Global) GetOrCreateTimers() *NetworkInstance_Protocol_Ospfv3_Global_Timers {
@@ -206621,6 +213343,46 @@ func (t *NetworkInstance_Protocol_Ospfv3_Global) GetOrCreateTimers() *NetworkIns
 func (t *NetworkInstance_Protocol_Ospfv3_Global) GetGracefulRestart() *NetworkInstance_Protocol_Ospfv3_Global_GracefulRestart {
 	if t != nil && t.GracefulRestart != nil {
 		return t.GracefulRestart
+	}
+	return nil
+}
+
+// GetNsr returns the value of the Nsr struct pointer
+// from NetworkInstance_Protocol_Ospfv3_Global. If the receiver or the field Nsr is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *NetworkInstance_Protocol_Ospfv3_Global) GetNsr() *NetworkInstance_Protocol_Ospfv3_Global_Nsr {
+	if t != nil && t.Nsr != nil {
+		return t.Nsr
+	}
+	return nil
+}
+
+// GetReferenceBandwidth returns the value of the ReferenceBandwidth struct pointer
+// from NetworkInstance_Protocol_Ospfv3_Global. If the receiver or the field ReferenceBandwidth is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *NetworkInstance_Protocol_Ospfv3_Global) GetReferenceBandwidth() *NetworkInstance_Protocol_Ospfv3_Global_ReferenceBandwidth {
+	if t != nil && t.ReferenceBandwidth != nil {
+		return t.ReferenceBandwidth
+	}
+	return nil
+}
+
+// GetRoutePreference returns the value of the RoutePreference struct pointer
+// from NetworkInstance_Protocol_Ospfv3_Global. If the receiver or the field RoutePreference is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *NetworkInstance_Protocol_Ospfv3_Global) GetRoutePreference() *NetworkInstance_Protocol_Ospfv3_Global_RoutePreference {
+	if t != nil && t.RoutePreference != nil {
+		return t.RoutePreference
+	}
+	return nil
+}
+
+// GetSendDefaultRoute returns the value of the SendDefaultRoute struct pointer
+// from NetworkInstance_Protocol_Ospfv3_Global. If the receiver or the field SendDefaultRoute is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *NetworkInstance_Protocol_Ospfv3_Global) GetSendDefaultRoute() *NetworkInstance_Protocol_Ospfv3_Global_SendDefaultRoute {
+	if t != nil && t.SendDefaultRoute != nil {
+		return t.SendDefaultRoute
 	}
 	return nil
 }
@@ -206683,6 +213445,22 @@ func (t *NetworkInstance_Protocol_Ospfv3_Global) GetLogAdjacencyChanges() bool {
 	return *t.LogAdjacencyChanges
 }
 
+// GetMaxEcmpPaths retrieves the value of the leaf MaxEcmpPaths from the NetworkInstance_Protocol_Ospfv3_Global
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if MaxEcmpPaths is set, it can
+// safely use t.GetMaxEcmpPaths() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.MaxEcmpPaths == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Protocol_Ospfv3_Global) GetMaxEcmpPaths() uint8 {
+	if t == nil || t.MaxEcmpPaths == nil {
+		return 0
+	}
+	return *t.MaxEcmpPaths
+}
+
 // GetRouterId retrieves the value of the leaf RouterId from the NetworkInstance_Protocol_Ospfv3_Global
 // struct. If the field is unset but has a default value in the YANG schema,
 // then the default value will be returned.
@@ -206717,6 +213495,12 @@ func (t *NetworkInstance_Protocol_Ospfv3_Global) SetLogAdjacencyChanges(v bool) 
 	t.LogAdjacencyChanges = &v
 }
 
+// SetMaxEcmpPaths sets the value of the leaf MaxEcmpPaths in the NetworkInstance_Protocol_Ospfv3_Global
+// struct.
+func (t *NetworkInstance_Protocol_Ospfv3_Global) SetMaxEcmpPaths(v uint8) {
+	t.MaxEcmpPaths = &v
+}
+
 // SetRouterId sets the value of the leaf RouterId in the NetworkInstance_Protocol_Ospfv3_Global
 // struct.
 func (t *NetworkInstance_Protocol_Ospfv3_Global) SetRouterId(v string) {
@@ -206732,6 +213516,10 @@ func (t *NetworkInstance_Protocol_Ospfv3_Global) PopulateDefaults() {
 	}
 	ygot.BuildEmptyTree(t)
 	t.GracefulRestart.PopulateDefaults()
+	t.Nsr.PopulateDefaults()
+	t.ReferenceBandwidth.PopulateDefaults()
+	t.RoutePreference.PopulateDefaults()
+	t.SendDefaultRoute.PopulateDefaults()
 	t.Timers.PopulateDefaults()
 	for _, e := range t.InterAreaPropagationPolicy {
 		e.PopulateDefaults()
@@ -207001,6 +213789,400 @@ func (*NetworkInstance_Protocol_Ospfv3_Global_InterAreaPropagationPolicy) ΛBelo
 	return "openconfig-network-instance"
 }
 
+// NetworkInstance_Protocol_Ospfv3_Global_Nsr represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv3/global/nsr YANG schema element.
+type NetworkInstance_Protocol_Ospfv3_Global_Nsr struct {
+	Enabled *bool `path:"state/enabled" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/enabled" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+}
+
+// IsYANGGoStruct ensures that NetworkInstance_Protocol_Ospfv3_Global_Nsr implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*NetworkInstance_Protocol_Ospfv3_Global_Nsr) IsYANGGoStruct() {}
+
+// GetEnabled retrieves the value of the leaf Enabled from the NetworkInstance_Protocol_Ospfv3_Global_Nsr
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Enabled is set, it can
+// safely use t.GetEnabled() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Enabled == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Protocol_Ospfv3_Global_Nsr) GetEnabled() bool {
+	if t == nil || t.Enabled == nil {
+		return false
+	}
+	return *t.Enabled
+}
+
+// SetEnabled sets the value of the leaf Enabled in the NetworkInstance_Protocol_Ospfv3_Global_Nsr
+// struct.
+func (t *NetworkInstance_Protocol_Ospfv3_Global_Nsr) SetEnabled(v bool) {
+	t.Enabled = &v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the NetworkInstance_Protocol_Ospfv3_Global_Nsr
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *NetworkInstance_Protocol_Ospfv3_Global_Nsr) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *NetworkInstance_Protocol_Ospfv3_Global_Nsr) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["NetworkInstance_Protocol_Ospfv3_Global_Nsr"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *NetworkInstance_Protocol_Ospfv3_Global_Nsr) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *NetworkInstance_Protocol_Ospfv3_Global_Nsr) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of NetworkInstance_Protocol_Ospfv3_Global_Nsr.
+func (*NetworkInstance_Protocol_Ospfv3_Global_Nsr) ΛBelongingModule() string {
+	return "openconfig-network-instance"
+}
+
+// NetworkInstance_Protocol_Ospfv3_Global_ReferenceBandwidth represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv3/global/reference-bandwidth YANG schema element.
+type NetworkInstance_Protocol_Ospfv3_Global_ReferenceBandwidth struct {
+	ReferenceBandwidth *uint32 `path:"state/reference-bandwidth" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/reference-bandwidth" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+}
+
+// IsYANGGoStruct ensures that NetworkInstance_Protocol_Ospfv3_Global_ReferenceBandwidth implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*NetworkInstance_Protocol_Ospfv3_Global_ReferenceBandwidth) IsYANGGoStruct() {}
+
+// GetReferenceBandwidth retrieves the value of the leaf ReferenceBandwidth from the NetworkInstance_Protocol_Ospfv3_Global_ReferenceBandwidth
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if ReferenceBandwidth is set, it can
+// safely use t.GetReferenceBandwidth() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.ReferenceBandwidth == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Protocol_Ospfv3_Global_ReferenceBandwidth) GetReferenceBandwidth() uint32 {
+	if t == nil || t.ReferenceBandwidth == nil {
+		return 0
+	}
+	return *t.ReferenceBandwidth
+}
+
+// SetReferenceBandwidth sets the value of the leaf ReferenceBandwidth in the NetworkInstance_Protocol_Ospfv3_Global_ReferenceBandwidth
+// struct.
+func (t *NetworkInstance_Protocol_Ospfv3_Global_ReferenceBandwidth) SetReferenceBandwidth(v uint32) {
+	t.ReferenceBandwidth = &v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the NetworkInstance_Protocol_Ospfv3_Global_ReferenceBandwidth
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *NetworkInstance_Protocol_Ospfv3_Global_ReferenceBandwidth) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *NetworkInstance_Protocol_Ospfv3_Global_ReferenceBandwidth) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["NetworkInstance_Protocol_Ospfv3_Global_ReferenceBandwidth"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *NetworkInstance_Protocol_Ospfv3_Global_ReferenceBandwidth) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *NetworkInstance_Protocol_Ospfv3_Global_ReferenceBandwidth) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of NetworkInstance_Protocol_Ospfv3_Global_ReferenceBandwidth.
+func (*NetworkInstance_Protocol_Ospfv3_Global_ReferenceBandwidth) ΛBelongingModule() string {
+	return "openconfig-network-instance"
+}
+
+// NetworkInstance_Protocol_Ospfv3_Global_RoutePreference represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv3/global/route-preference YANG schema element.
+type NetworkInstance_Protocol_Ospfv3_Global_RoutePreference struct {
+	ExternalRoutePreference  *uint8 `path:"state/external-route-preference" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/external-route-preference" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+	InterAreaRoutePreference *uint8 `path:"state/inter-area-route-preference" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/inter-area-route-preference" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+	IntraAreaRoutePreference *uint8 `path:"state/intra-area-route-preference" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/intra-area-route-preference" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+}
+
+// IsYANGGoStruct ensures that NetworkInstance_Protocol_Ospfv3_Global_RoutePreference implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*NetworkInstance_Protocol_Ospfv3_Global_RoutePreference) IsYANGGoStruct() {}
+
+// GetExternalRoutePreference retrieves the value of the leaf ExternalRoutePreference from the NetworkInstance_Protocol_Ospfv3_Global_RoutePreference
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if ExternalRoutePreference is set, it can
+// safely use t.GetExternalRoutePreference() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.ExternalRoutePreference == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Protocol_Ospfv3_Global_RoutePreference) GetExternalRoutePreference() uint8 {
+	if t == nil || t.ExternalRoutePreference == nil {
+		return 0
+	}
+	return *t.ExternalRoutePreference
+}
+
+// GetInterAreaRoutePreference retrieves the value of the leaf InterAreaRoutePreference from the NetworkInstance_Protocol_Ospfv3_Global_RoutePreference
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if InterAreaRoutePreference is set, it can
+// safely use t.GetInterAreaRoutePreference() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.InterAreaRoutePreference == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Protocol_Ospfv3_Global_RoutePreference) GetInterAreaRoutePreference() uint8 {
+	if t == nil || t.InterAreaRoutePreference == nil {
+		return 0
+	}
+	return *t.InterAreaRoutePreference
+}
+
+// GetIntraAreaRoutePreference retrieves the value of the leaf IntraAreaRoutePreference from the NetworkInstance_Protocol_Ospfv3_Global_RoutePreference
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if IntraAreaRoutePreference is set, it can
+// safely use t.GetIntraAreaRoutePreference() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.IntraAreaRoutePreference == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Protocol_Ospfv3_Global_RoutePreference) GetIntraAreaRoutePreference() uint8 {
+	if t == nil || t.IntraAreaRoutePreference == nil {
+		return 0
+	}
+	return *t.IntraAreaRoutePreference
+}
+
+// SetExternalRoutePreference sets the value of the leaf ExternalRoutePreference in the NetworkInstance_Protocol_Ospfv3_Global_RoutePreference
+// struct.
+func (t *NetworkInstance_Protocol_Ospfv3_Global_RoutePreference) SetExternalRoutePreference(v uint8) {
+	t.ExternalRoutePreference = &v
+}
+
+// SetInterAreaRoutePreference sets the value of the leaf InterAreaRoutePreference in the NetworkInstance_Protocol_Ospfv3_Global_RoutePreference
+// struct.
+func (t *NetworkInstance_Protocol_Ospfv3_Global_RoutePreference) SetInterAreaRoutePreference(v uint8) {
+	t.InterAreaRoutePreference = &v
+}
+
+// SetIntraAreaRoutePreference sets the value of the leaf IntraAreaRoutePreference in the NetworkInstance_Protocol_Ospfv3_Global_RoutePreference
+// struct.
+func (t *NetworkInstance_Protocol_Ospfv3_Global_RoutePreference) SetIntraAreaRoutePreference(v uint8) {
+	t.IntraAreaRoutePreference = &v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the NetworkInstance_Protocol_Ospfv3_Global_RoutePreference
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *NetworkInstance_Protocol_Ospfv3_Global_RoutePreference) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *NetworkInstance_Protocol_Ospfv3_Global_RoutePreference) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["NetworkInstance_Protocol_Ospfv3_Global_RoutePreference"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *NetworkInstance_Protocol_Ospfv3_Global_RoutePreference) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *NetworkInstance_Protocol_Ospfv3_Global_RoutePreference) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of NetworkInstance_Protocol_Ospfv3_Global_RoutePreference.
+func (*NetworkInstance_Protocol_Ospfv3_Global_RoutePreference) ΛBelongingModule() string {
+	return "openconfig-network-instance"
+}
+
+// NetworkInstance_Protocol_Ospfv3_Global_SendDefaultRoute represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv3/global/send-default-route YANG schema element.
+type NetworkInstance_Protocol_Ospfv3_Global_SendDefaultRoute struct {
+	Always     *bool                              `path:"state/always" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/always" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+	Enabled    *bool                              `path:"state/enabled" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/enabled" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+	Metric     *uint32                            `path:"state/metric" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/metric" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+	MetricType E_Ospf_SendDefaultRoute_MetricType `path:"state/metric-type" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/metric-type" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+}
+
+// IsYANGGoStruct ensures that NetworkInstance_Protocol_Ospfv3_Global_SendDefaultRoute implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*NetworkInstance_Protocol_Ospfv3_Global_SendDefaultRoute) IsYANGGoStruct() {}
+
+// GetAlways retrieves the value of the leaf Always from the NetworkInstance_Protocol_Ospfv3_Global_SendDefaultRoute
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Always is set, it can
+// safely use t.GetAlways() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Always == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Protocol_Ospfv3_Global_SendDefaultRoute) GetAlways() bool {
+	if t == nil || t.Always == nil {
+		return false
+	}
+	return *t.Always
+}
+
+// GetEnabled retrieves the value of the leaf Enabled from the NetworkInstance_Protocol_Ospfv3_Global_SendDefaultRoute
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Enabled is set, it can
+// safely use t.GetEnabled() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Enabled == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Protocol_Ospfv3_Global_SendDefaultRoute) GetEnabled() bool {
+	if t == nil || t.Enabled == nil {
+		return false
+	}
+	return *t.Enabled
+}
+
+// GetMetric retrieves the value of the leaf Metric from the NetworkInstance_Protocol_Ospfv3_Global_SendDefaultRoute
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Metric is set, it can
+// safely use t.GetMetric() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Metric == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Protocol_Ospfv3_Global_SendDefaultRoute) GetMetric() uint32 {
+	if t == nil || t.Metric == nil {
+		return 0
+	}
+	return *t.Metric
+}
+
+// GetMetricType retrieves the value of the leaf MetricType from the NetworkInstance_Protocol_Ospfv3_Global_SendDefaultRoute
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if MetricType is set, it can
+// safely use t.GetMetricType() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.MetricType == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Protocol_Ospfv3_Global_SendDefaultRoute) GetMetricType() E_Ospf_SendDefaultRoute_MetricType {
+	if t == nil || t.MetricType == 0 {
+		return Ospf_SendDefaultRoute_MetricType_EXTERNAL_TYPE_2
+	}
+	return t.MetricType
+}
+
+// SetAlways sets the value of the leaf Always in the NetworkInstance_Protocol_Ospfv3_Global_SendDefaultRoute
+// struct.
+func (t *NetworkInstance_Protocol_Ospfv3_Global_SendDefaultRoute) SetAlways(v bool) {
+	t.Always = &v
+}
+
+// SetEnabled sets the value of the leaf Enabled in the NetworkInstance_Protocol_Ospfv3_Global_SendDefaultRoute
+// struct.
+func (t *NetworkInstance_Protocol_Ospfv3_Global_SendDefaultRoute) SetEnabled(v bool) {
+	t.Enabled = &v
+}
+
+// SetMetric sets the value of the leaf Metric in the NetworkInstance_Protocol_Ospfv3_Global_SendDefaultRoute
+// struct.
+func (t *NetworkInstance_Protocol_Ospfv3_Global_SendDefaultRoute) SetMetric(v uint32) {
+	t.Metric = &v
+}
+
+// SetMetricType sets the value of the leaf MetricType in the NetworkInstance_Protocol_Ospfv3_Global_SendDefaultRoute
+// struct.
+func (t *NetworkInstance_Protocol_Ospfv3_Global_SendDefaultRoute) SetMetricType(v E_Ospf_SendDefaultRoute_MetricType) {
+	t.MetricType = v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the NetworkInstance_Protocol_Ospfv3_Global_SendDefaultRoute
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *NetworkInstance_Protocol_Ospfv3_Global_SendDefaultRoute) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+	if t.Always == nil {
+		var v bool = false
+		t.Always = &v
+	}
+	if t.Enabled == nil {
+		var v bool = false
+		t.Enabled = &v
+	}
+	if t.MetricType == 0 {
+		t.MetricType = Ospf_SendDefaultRoute_MetricType_EXTERNAL_TYPE_2
+	}
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *NetworkInstance_Protocol_Ospfv3_Global_SendDefaultRoute) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["NetworkInstance_Protocol_Ospfv3_Global_SendDefaultRoute"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *NetworkInstance_Protocol_Ospfv3_Global_SendDefaultRoute) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *NetworkInstance_Protocol_Ospfv3_Global_SendDefaultRoute) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of NetworkInstance_Protocol_Ospfv3_Global_SendDefaultRoute.
+func (*NetworkInstance_Protocol_Ospfv3_Global_SendDefaultRoute) ΛBelongingModule() string {
+	return "openconfig-network-instance"
+}
+
 // NetworkInstance_Protocol_Ospfv3_Global_Timers represents the /openconfig-network-instance/network-instances/network-instance/protocols/protocol/ospfv3/global/timers YANG schema element.
 type NetworkInstance_Protocol_Ospfv3_Global_Timers struct {
 	LsaGeneration *NetworkInstance_Protocol_Ospfv3_Global_Timers_LsaGeneration `path:"lsa-generation" module:"openconfig-network-instance"`
@@ -207115,6 +214297,7 @@ func (*NetworkInstance_Protocol_Ospfv3_Global_Timers) ΛBelongingModule() string
 type NetworkInstance_Protocol_Ospfv3_Global_Timers_LsaGeneration struct {
 	InitialDelay *uint32                        `path:"state/initial-delay" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/initial-delay" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
 	MaximumDelay *uint32                        `path:"state/maximum-delay" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/maximum-delay" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+	MinimumHold  *uint32                        `path:"state/minimum-hold" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/minimum-hold" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
 	TimerType    E_Ospf_LsaGeneration_TimerType `path:"state/timer-type" module:"openconfig-network-instance/openconfig-network-instance"`
 }
 
@@ -207155,6 +214338,22 @@ func (t *NetworkInstance_Protocol_Ospfv3_Global_Timers_LsaGeneration) GetMaximum
 	return *t.MaximumDelay
 }
 
+// GetMinimumHold retrieves the value of the leaf MinimumHold from the NetworkInstance_Protocol_Ospfv3_Global_Timers_LsaGeneration
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if MinimumHold is set, it can
+// safely use t.GetMinimumHold() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.MinimumHold == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Protocol_Ospfv3_Global_Timers_LsaGeneration) GetMinimumHold() uint32 {
+	if t == nil || t.MinimumHold == nil {
+		return 0
+	}
+	return *t.MinimumHold
+}
+
 // GetTimerType retrieves the value of the leaf TimerType from the NetworkInstance_Protocol_Ospfv3_Global_Timers_LsaGeneration
 // struct. If the field is unset but has a default value in the YANG schema,
 // then the default value will be returned.
@@ -207181,6 +214380,12 @@ func (t *NetworkInstance_Protocol_Ospfv3_Global_Timers_LsaGeneration) SetInitial
 // struct.
 func (t *NetworkInstance_Protocol_Ospfv3_Global_Timers_LsaGeneration) SetMaximumDelay(v uint32) {
 	t.MaximumDelay = &v
+}
+
+// SetMinimumHold sets the value of the leaf MinimumHold in the NetworkInstance_Protocol_Ospfv3_Global_Timers_LsaGeneration
+// struct.
+func (t *NetworkInstance_Protocol_Ospfv3_Global_Timers_LsaGeneration) SetMinimumHold(v uint32) {
+	t.MinimumHold = &v
 }
 
 // SetTimerType sets the value of the leaf TimerType in the NetworkInstance_Protocol_Ospfv3_Global_Timers_LsaGeneration
@@ -207364,6 +214569,7 @@ func (*NetworkInstance_Protocol_Ospfv3_Global_Timers_MaxMetric) ΛBelongingModul
 type NetworkInstance_Protocol_Ospfv3_Global_Timers_Spf struct {
 	InitialDelay *uint32                        `path:"state/initial-delay" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/initial-delay" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
 	MaximumDelay *uint32                        `path:"state/maximum-delay" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/maximum-delay" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+	MinimumHold  *uint32                        `path:"state/minimum-hold" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/minimum-hold" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
 	TimerType    E_Ospf_LsaGeneration_TimerType `path:"state/timer-type" module:"openconfig-network-instance/openconfig-network-instance"`
 }
 
@@ -207404,6 +214610,22 @@ func (t *NetworkInstance_Protocol_Ospfv3_Global_Timers_Spf) GetMaximumDelay() ui
 	return *t.MaximumDelay
 }
 
+// GetMinimumHold retrieves the value of the leaf MinimumHold from the NetworkInstance_Protocol_Ospfv3_Global_Timers_Spf
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if MinimumHold is set, it can
+// safely use t.GetMinimumHold() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.MinimumHold == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Protocol_Ospfv3_Global_Timers_Spf) GetMinimumHold() uint32 {
+	if t == nil || t.MinimumHold == nil {
+		return 0
+	}
+	return *t.MinimumHold
+}
+
 // GetTimerType retrieves the value of the leaf TimerType from the NetworkInstance_Protocol_Ospfv3_Global_Timers_Spf
 // struct. If the field is unset but has a default value in the YANG schema,
 // then the default value will be returned.
@@ -207430,6 +214652,12 @@ func (t *NetworkInstance_Protocol_Ospfv3_Global_Timers_Spf) SetInitialDelay(v ui
 // struct.
 func (t *NetworkInstance_Protocol_Ospfv3_Global_Timers_Spf) SetMaximumDelay(v uint32) {
 	t.MaximumDelay = &v
+}
+
+// SetMinimumHold sets the value of the leaf MinimumHold in the NetworkInstance_Protocol_Ospfv3_Global_Timers_Spf
+// struct.
+func (t *NetworkInstance_Protocol_Ospfv3_Global_Timers_Spf) SetMinimumHold(v uint32) {
+	t.MinimumHold = &v
 }
 
 // SetTimerType sets the value of the leaf TimerType in the NetworkInstance_Protocol_Ospfv3_Global_Timers_Spf
@@ -213549,17 +220777,18 @@ func (*NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_Counter
 
 // NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop represents the /openconfig-network-instance/network-instances/network-instance/segment-routing/te-policies/te-policy/candidate-paths/candidate-path/segment-lists/segment-list/next-hops/next-hop YANG schema element.
 type NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop struct {
-	Counters             *NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_Counters                    `path:"state/counters" module:"openconfig-network-instance/openconfig-network-instance"`
-	DecapsulateHeader    E_Aft_EncapsulationHeaderType                                                                          `path:"state/decapsulate-header" module:"openconfig-network-instance/openconfig-network-instance"`
-	EncapsulateHeader    E_Aft_EncapsulationHeaderType                                                                          `path:"state/encapsulate-header" module:"openconfig-network-instance/openconfig-network-instance"`
-	Index                *uint64                                                                                                `path:"state/index|index" module:"openconfig-network-instance/openconfig-network-instance|openconfig-network-instance" shadow-path:"index" shadow-module:"openconfig-network-instance"`
-	InterfaceRef         *NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_InterfaceRef                `path:"interface-ref" module:"openconfig-network-instance"`
-	IpAddress            *string                                                                                                `path:"state/ip-address" module:"openconfig-network-instance/openconfig-network-instance"`
-	MacAddress           *string                                                                                                `path:"state/mac-address" module:"openconfig-network-instance/openconfig-network-instance"`
-	OriginProtocol       E_PolicyTypes_INSTALL_PROTOCOL_TYPE                                                                    `path:"state/origin-protocol" module:"openconfig-network-instance/openconfig-network-instance"`
-	PopTopLabel          *bool                                                                                                  `path:"state/pop-top-label" module:"openconfig-network-instance/openconfig-network-instance"`
-	ProgrammedIndex      *uint64                                                                                                `path:"state/programmed-index" module:"openconfig-network-instance/openconfig-network-instance"`
-	PushedMplsLabelStack []NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_PushedMplsLabelStack_Union `path:"state/pushed-mpls-label-stack" module:"openconfig-network-instance/openconfig-network-instance"`
+	Counters             *NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_Counters                       `path:"state/counters" module:"openconfig-network-instance/openconfig-network-instance"`
+	DecapsulateHeader    E_Aft_EncapsulationHeaderType                                                                             `path:"state/decapsulate-header" module:"openconfig-network-instance/openconfig-network-instance"`
+	EncapMplsLabelStack  *NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStack_OrderedMap `path:"encap-mpls-label-stacks/encap-mpls-label-stack" module:"openconfig-network-instance/openconfig-network-instance"`
+	EncapsulateHeader    E_Aft_EncapsulationHeaderType                                                                             `path:"state/encapsulate-header" module:"openconfig-network-instance/openconfig-network-instance"`
+	Index                *uint64                                                                                                   `path:"state/index|index" module:"openconfig-network-instance/openconfig-network-instance|openconfig-network-instance" shadow-path:"index" shadow-module:"openconfig-network-instance"`
+	InterfaceRef         *NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_InterfaceRef                   `path:"interface-ref" module:"openconfig-network-instance"`
+	IpAddress            *string                                                                                                   `path:"state/ip-address" module:"openconfig-network-instance/openconfig-network-instance"`
+	MacAddress           *string                                                                                                   `path:"state/mac-address" module:"openconfig-network-instance/openconfig-network-instance"`
+	OriginProtocol       E_PolicyTypes_INSTALL_PROTOCOL_TYPE                                                                       `path:"state/origin-protocol" module:"openconfig-network-instance/openconfig-network-instance"`
+	PopTopLabel          *bool                                                                                                     `path:"state/pop-top-label" module:"openconfig-network-instance/openconfig-network-instance"`
+	ProgrammedIndex      *uint64                                                                                                   `path:"state/programmed-index" module:"openconfig-network-instance/openconfig-network-instance"`
+	PushedMplsLabelStack []NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_PushedMplsLabelStack_Union    `path:"state/pushed-mpls-label-stack" module:"openconfig-network-instance/openconfig-network-instance"`
 }
 
 // IsYANGGoStruct ensures that NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop implements the yang.GoStruct
@@ -213805,6 +221034,180 @@ func (t *NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextH
 	t.PushedMplsLabelStack = v
 }
 
+// GetOrCreateEncapMplsLabelStackMap returns the ordered map field
+// EncapMplsLabelStack from NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop.
+//
+// It initializes the field if not already initialized.
+func (s *NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop) GetOrCreateEncapMplsLabelStackMap() *NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStack_OrderedMap {
+	if s.EncapMplsLabelStack == nil {
+		s.EncapMplsLabelStack = &NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStack_OrderedMap{}
+	}
+	return s.EncapMplsLabelStack
+}
+
+// AppendNewEncapMplsLabelStack creates a new entry in the EncapMplsLabelStack
+// ordered map of the NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop struct. The keys of the list are
+// populated from the input arguments.
+func (s *NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop) AppendNewEncapMplsLabelStack(Id uint8) (*NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStack, error) {
+	if s.EncapMplsLabelStack == nil {
+		s.EncapMplsLabelStack = &NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStack_OrderedMap{}
+	}
+	return s.EncapMplsLabelStack.AppendNew(Id)
+}
+
+// AppendEncapMplsLabelStack appends the supplied NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStack struct
+// to the list EncapMplsLabelStack of NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop. If the key value(s)
+// specified in the supplied NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStack already exist in the list, an
+// error is returned.
+func (s *NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop) AppendEncapMplsLabelStack(v *NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStack) error {
+	if s.EncapMplsLabelStack == nil {
+		s.EncapMplsLabelStack = &NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStack_OrderedMap{}
+	}
+	return s.EncapMplsLabelStack.Append(v)
+}
+
+// GetEncapMplsLabelStack retrieves the value with the specified key from the
+// EncapMplsLabelStack map field of NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop. If the receiver
+// is nil, or the specified key is not present in the list, nil is returned
+// such that Get* methods may be safely chained.
+func (s *NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop) GetEncapMplsLabelStack(Id uint8) *NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStack {
+	if s == nil {
+		return nil
+	}
+	key := Id
+	return s.EncapMplsLabelStack.Get(key)
+}
+
+// DeleteEncapMplsLabelStack deletes the value with the specified keys from
+// the receiver NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop. If there is no such element, the
+// function is a no-op.
+func (s *NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop) DeleteEncapMplsLabelStack(Id uint8) bool {
+	key := Id
+	return s.EncapMplsLabelStack.Delete(key)
+}
+
+// NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStack_OrderedMap is an ordered map that represents the "ordered-by user"
+// list elements at /openconfig-network-instance/network-instances/network-instance/segment-routing/te-policies/te-policy/candidate-paths/candidate-path/segment-lists/segment-list/next-hops/next-hop/encap-mpls-label-stacks/encap-mpls-label-stack.
+type NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStack_OrderedMap struct {
+	keys     []uint8
+	valueMap map[uint8]*NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStack
+}
+
+// IsYANGOrderedList ensures that NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStack_OrderedMap implements the
+// ygot.GoOrderedMap interface.
+func (*NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStack_OrderedMap) IsYANGOrderedList() {
+}
+
+// init initializes any uninitialized values.
+func (o *NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStack_OrderedMap) init() {
+	if o == nil {
+		return
+	}
+	if o.valueMap == nil {
+		o.valueMap = map[uint8]*NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStack{}
+	}
+}
+
+// Keys returns a copy of the list's keys.
+func (o *NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStack_OrderedMap) Keys() []uint8 {
+	if o == nil {
+		return nil
+	}
+	return append([]uint8{}, o.keys...)
+}
+
+// Values returns the current set of the list's values in order.
+func (o *NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStack_OrderedMap) Values() []*NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStack {
+	if o == nil {
+		return nil
+	}
+	var values []*NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStack
+	for _, key := range o.keys {
+		values = append(values, o.valueMap[key])
+	}
+	return values
+}
+
+// Len returns a size of NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStack_OrderedMap
+func (o *NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStack_OrderedMap) Len() int {
+	if o == nil {
+		return 0
+	}
+	return len(o.keys)
+}
+
+// Get returns the value corresponding to the key. If the key is not found, nil
+// is returned.
+func (o *NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStack_OrderedMap) Get(key uint8) *NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStack {
+	if o == nil {
+		return nil
+	}
+	val, _ := o.valueMap[key]
+	return val
+}
+
+// Delete deletes an element.
+func (o *NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStack_OrderedMap) Delete(key uint8) bool {
+	if o == nil {
+		return false
+	}
+	if _, ok := o.valueMap[key]; !ok {
+		return false
+	}
+	for i, k := range o.keys {
+		if k == key {
+			o.keys = append(o.keys[:i], o.keys[i+1:]...)
+			delete(o.valueMap, key)
+			return true
+		}
+	}
+	return false
+}
+
+// Append appends a NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStack, returning an error if the key
+// already exists in the ordered list or if the key is unspecified.
+func (o *NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStack_OrderedMap) Append(v *NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStack) error {
+	if o == nil {
+		return fmt.Errorf("nil ordered map, cannot append NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStack")
+	}
+	if v == nil {
+		return fmt.Errorf("nil NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStack")
+	}
+	if v.Id == nil {
+		return fmt.Errorf("invalid nil key received for Id")
+	}
+
+	key := *v.Id
+
+	if _, ok := o.valueMap[key]; ok {
+		return fmt.Errorf("duplicate key for list Statement %v", key)
+	}
+	o.keys = append(o.keys, key)
+	o.init()
+	o.valueMap[key] = v
+	return nil
+}
+
+// AppendNew creates and appends a new NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStack, returning the
+// newly-initialized v. It returns an error if the v already exists.
+func (o *NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStack_OrderedMap) AppendNew(Id uint8) (*NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStack, error) {
+	if o == nil {
+		return nil, fmt.Errorf("nil ordered map, cannot append NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStack")
+	}
+	key := Id
+
+	if _, ok := o.valueMap[key]; ok {
+		return nil, fmt.Errorf("duplicate key for list Statement %v", key)
+	}
+	o.keys = append(o.keys, key)
+	newElement := &NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStack{
+		Id: &Id,
+	}
+	o.init()
+	o.valueMap[key] = newElement
+	return newElement, nil
+}
+
 // PopulateDefaults recursively populates unset leaf fields in the NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop
 // with default values as specified in the YANG schema, instantiating any nil
 // container fields.
@@ -213819,6 +221222,9 @@ func (t *NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextH
 	}
 	t.Counters.PopulateDefaults()
 	t.InterfaceRef.PopulateDefaults()
+	for _, e := range t.EncapMplsLabelStack.Values() {
+		e.PopulateDefaults()
+	}
 }
 
 // ΛListKeyMap returns the keys of the NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop struct, which is a YANG list entry.
@@ -213991,6 +221397,108 @@ func (t *NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextH
 // ΛBelongingModule returns the name of the module that defines the namespace
 // of NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_Counters.
 func (*NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_Counters) ΛBelongingModule() string {
+	return "openconfig-network-instance"
+}
+
+// NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStack represents the /openconfig-network-instance/network-instances/network-instance/segment-routing/te-policies/te-policy/candidate-paths/candidate-path/segment-lists/segment-list/next-hops/next-hop/encap-mpls-label-stacks/encap-mpls-label-stack YANG schema element.
+type NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStack struct {
+	Id    *uint8                                                                                                    `path:"state/id|id" module:"openconfig-network-instance/openconfig-network-instance|openconfig-network-instance" shadow-path:"id" shadow-module:"openconfig-network-instance"`
+	Label NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStack_Label_Union `path:"state/label" module:"openconfig-network-instance/openconfig-network-instance"`
+}
+
+// IsYANGGoStruct ensures that NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStack implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStack) IsYANGGoStruct() {
+}
+
+// GetId retrieves the value of the leaf Id from the NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStack
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Id is set, it can
+// safely use t.GetId() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Id == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStack) GetId() uint8 {
+	if t == nil || t.Id == nil {
+		return 0
+	}
+	return *t.Id
+}
+
+// GetLabel retrieves the value of the leaf Label from the NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStack
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Label is set, it can
+// safely use t.GetLabel() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Label == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStack) GetLabel() NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStack_Label_Union {
+	if t == nil || t.Label == nil {
+		return nil
+	}
+	return t.Label
+}
+
+// SetId sets the value of the leaf Id in the NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStack
+// struct.
+func (t *NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStack) SetId(v uint8) {
+	t.Id = &v
+}
+
+// SetLabel sets the value of the leaf Label in the NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStack
+// struct.
+func (t *NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStack) SetLabel(v NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStack_Label_Union) {
+	t.Label = v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStack
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStack) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// ΛListKeyMap returns the keys of the NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStack struct, which is a YANG list entry.
+func (t *NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStack) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.Id == nil {
+		return nil, fmt.Errorf("nil value for key Id")
+	}
+
+	return map[string]interface{}{
+		"id": *t.Id,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStack) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStack"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStack) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStack) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStack.
+func (*NetworkInstance_SegmentRouting_TePolicy_CandidatePath_SegmentList_NextHop_EncapMplsLabelStack) ΛBelongingModule() string {
 	return "openconfig-network-instance"
 }
 
@@ -215440,6 +222948,7 @@ type NetworkInstance_Static_NextHop_EncapHeader struct {
 	Mpls  *NetworkInstance_Static_NextHop_EncapHeader_Mpls  `path:"mpls" module:"openconfig-network-instance"`
 	Type  E_Aft_EncapsulationHeaderType                     `path:"state/type" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/type" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
 	UdpV4 *NetworkInstance_Static_NextHop_EncapHeader_UdpV4 `path:"udp-v4" module:"openconfig-network-instance"`
+	UdpV6 *NetworkInstance_Static_NextHop_EncapHeader_UdpV6 `path:"udp-v6" module:"openconfig-network-instance"`
 }
 
 // IsYANGGoStruct ensures that NetworkInstance_Static_NextHop_EncapHeader implements the yang.GoStruct
@@ -215477,6 +222986,16 @@ func (t *NetworkInstance_Static_NextHop_EncapHeader) GetOrCreateUdpV4() *Network
 	return t.UdpV4
 }
 
+// GetOrCreateUdpV6 retrieves the value of the UdpV6 field
+// or returns the existing field if it already exists.
+func (t *NetworkInstance_Static_NextHop_EncapHeader) GetOrCreateUdpV6() *NetworkInstance_Static_NextHop_EncapHeader_UdpV6 {
+	if t.UdpV6 != nil {
+		return t.UdpV6
+	}
+	t.UdpV6 = &NetworkInstance_Static_NextHop_EncapHeader_UdpV6{}
+	return t.UdpV6
+}
+
 // GetGre returns the value of the Gre struct pointer
 // from NetworkInstance_Static_NextHop_EncapHeader. If the receiver or the field Gre is nil, nil
 // is returned such that the Get* methods can be safely chained.
@@ -215503,6 +223022,16 @@ func (t *NetworkInstance_Static_NextHop_EncapHeader) GetMpls() *NetworkInstance_
 func (t *NetworkInstance_Static_NextHop_EncapHeader) GetUdpV4() *NetworkInstance_Static_NextHop_EncapHeader_UdpV4 {
 	if t != nil && t.UdpV4 != nil {
 		return t.UdpV4
+	}
+	return nil
+}
+
+// GetUdpV6 returns the value of the UdpV6 struct pointer
+// from NetworkInstance_Static_NextHop_EncapHeader. If the receiver or the field UdpV6 is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *NetworkInstance_Static_NextHop_EncapHeader) GetUdpV6() *NetworkInstance_Static_NextHop_EncapHeader_UdpV6 {
+	if t != nil && t.UdpV6 != nil {
+		return t.UdpV6
 	}
 	return nil
 }
@@ -215562,6 +223091,7 @@ func (t *NetworkInstance_Static_NextHop_EncapHeader) PopulateDefaults() {
 	t.Gre.PopulateDefaults()
 	t.Mpls.PopulateDefaults()
 	t.UdpV4.PopulateDefaults()
+	t.UdpV6.PopulateDefaults()
 }
 
 // ΛListKeyMap returns the keys of the NetworkInstance_Static_NextHop_EncapHeader struct, which is a YANG list entry.
@@ -215602,15 +223132,34 @@ func (*NetworkInstance_Static_NextHop_EncapHeader) ΛBelongingModule() string {
 
 // NetworkInstance_Static_NextHop_EncapHeader_Gre represents the /openconfig-network-instance/network-instances/network-instance/static/next-hops/next-hop/encap-headers/encap-header/gre YANG schema element.
 type NetworkInstance_Static_NextHop_EncapHeader_Gre struct {
-	DstIp *string `path:"state/dst-ip" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/dst-ip" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
-	SrcIp *string `path:"state/src-ip" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/src-ip" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
-	Ttl   *uint8  `path:"state/ttl" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/ttl" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+	Dscp           *uint8  `path:"state/dscp" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/dscp" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+	DstIp          *string `path:"state/dst-ip" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/dst-ip" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+	InProfileDscp  *uint8  `path:"state/in-profile-dscp" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/in-profile-dscp" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+	OutProfileDscp *uint8  `path:"state/out-profile-dscp" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/out-profile-dscp" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+	SrcIp          *string `path:"state/src-ip" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/src-ip" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+	Ttl            *uint8  `path:"state/ttl" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/ttl" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
 }
 
 // IsYANGGoStruct ensures that NetworkInstance_Static_NextHop_EncapHeader_Gre implements the yang.GoStruct
 // interface. This allows functions that need to handle this struct to
 // identify it as being generated by ygen.
 func (*NetworkInstance_Static_NextHop_EncapHeader_Gre) IsYANGGoStruct() {}
+
+// GetDscp retrieves the value of the leaf Dscp from the NetworkInstance_Static_NextHop_EncapHeader_Gre
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Dscp is set, it can
+// safely use t.GetDscp() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Dscp == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Static_NextHop_EncapHeader_Gre) GetDscp() uint8 {
+	if t == nil || t.Dscp == nil {
+		return 0
+	}
+	return *t.Dscp
+}
 
 // GetDstIp retrieves the value of the leaf DstIp from the NetworkInstance_Static_NextHop_EncapHeader_Gre
 // struct. If the field is unset but has a default value in the YANG schema,
@@ -215626,6 +223175,38 @@ func (t *NetworkInstance_Static_NextHop_EncapHeader_Gre) GetDstIp() string {
 		return ""
 	}
 	return *t.DstIp
+}
+
+// GetInProfileDscp retrieves the value of the leaf InProfileDscp from the NetworkInstance_Static_NextHop_EncapHeader_Gre
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if InProfileDscp is set, it can
+// safely use t.GetInProfileDscp() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.InProfileDscp == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Static_NextHop_EncapHeader_Gre) GetInProfileDscp() uint8 {
+	if t == nil || t.InProfileDscp == nil {
+		return 0
+	}
+	return *t.InProfileDscp
+}
+
+// GetOutProfileDscp retrieves the value of the leaf OutProfileDscp from the NetworkInstance_Static_NextHop_EncapHeader_Gre
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if OutProfileDscp is set, it can
+// safely use t.GetOutProfileDscp() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.OutProfileDscp == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Static_NextHop_EncapHeader_Gre) GetOutProfileDscp() uint8 {
+	if t == nil || t.OutProfileDscp == nil {
+		return 0
+	}
+	return *t.OutProfileDscp
 }
 
 // GetSrcIp retrieves the value of the leaf SrcIp from the NetworkInstance_Static_NextHop_EncapHeader_Gre
@@ -215660,10 +223241,28 @@ func (t *NetworkInstance_Static_NextHop_EncapHeader_Gre) GetTtl() uint8 {
 	return *t.Ttl
 }
 
+// SetDscp sets the value of the leaf Dscp in the NetworkInstance_Static_NextHop_EncapHeader_Gre
+// struct.
+func (t *NetworkInstance_Static_NextHop_EncapHeader_Gre) SetDscp(v uint8) {
+	t.Dscp = &v
+}
+
 // SetDstIp sets the value of the leaf DstIp in the NetworkInstance_Static_NextHop_EncapHeader_Gre
 // struct.
 func (t *NetworkInstance_Static_NextHop_EncapHeader_Gre) SetDstIp(v string) {
 	t.DstIp = &v
+}
+
+// SetInProfileDscp sets the value of the leaf InProfileDscp in the NetworkInstance_Static_NextHop_EncapHeader_Gre
+// struct.
+func (t *NetworkInstance_Static_NextHop_EncapHeader_Gre) SetInProfileDscp(v uint8) {
+	t.InProfileDscp = &v
+}
+
+// SetOutProfileDscp sets the value of the leaf OutProfileDscp in the NetworkInstance_Static_NextHop_EncapHeader_Gre
+// struct.
+func (t *NetworkInstance_Static_NextHop_EncapHeader_Gre) SetOutProfileDscp(v uint8) {
+	t.OutProfileDscp = &v
 }
 
 // SetSrcIp sets the value of the leaf SrcIp in the NetworkInstance_Static_NextHop_EncapHeader_Gre
@@ -215805,12 +223404,14 @@ func (*NetworkInstance_Static_NextHop_EncapHeader_Mpls) ΛBelongingModule() stri
 
 // NetworkInstance_Static_NextHop_EncapHeader_UdpV4 represents the /openconfig-network-instance/network-instances/network-instance/static/next-hops/next-hop/encap-headers/encap-header/udp-v4 YANG schema element.
 type NetworkInstance_Static_NextHop_EncapHeader_UdpV4 struct {
-	Dscp       *uint8  `path:"state/dscp" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/dscp" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
-	DstIp      *string `path:"state/dst-ip" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/dst-ip" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
-	DstUdpPort *uint16 `path:"state/dst-udp-port" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/dst-udp-port" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
-	IpTtl      *uint8  `path:"state/ip-ttl" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/ip-ttl" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
-	SrcIp      *string `path:"state/src-ip" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/src-ip" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
-	SrcUdpPort *uint16 `path:"state/src-udp-port" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/src-udp-port" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+	Dscp           *uint8  `path:"state/dscp" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/dscp" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+	DstIp          *string `path:"state/dst-ip" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/dst-ip" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+	DstUdpPort     *uint16 `path:"state/dst-udp-port" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/dst-udp-port" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+	InProfileDscp  *uint8  `path:"state/in-profile-dscp" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/in-profile-dscp" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+	IpTtl          *uint8  `path:"state/ip-ttl" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/ip-ttl" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+	OutProfileDscp *uint8  `path:"state/out-profile-dscp" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/out-profile-dscp" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+	SrcIp          *string `path:"state/src-ip" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/src-ip" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+	SrcUdpPort     *uint16 `path:"state/src-udp-port" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/src-udp-port" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
 }
 
 // IsYANGGoStruct ensures that NetworkInstance_Static_NextHop_EncapHeader_UdpV4 implements the yang.GoStruct
@@ -215866,6 +223467,22 @@ func (t *NetworkInstance_Static_NextHop_EncapHeader_UdpV4) GetDstUdpPort() uint1
 	return *t.DstUdpPort
 }
 
+// GetInProfileDscp retrieves the value of the leaf InProfileDscp from the NetworkInstance_Static_NextHop_EncapHeader_UdpV4
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if InProfileDscp is set, it can
+// safely use t.GetInProfileDscp() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.InProfileDscp == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Static_NextHop_EncapHeader_UdpV4) GetInProfileDscp() uint8 {
+	if t == nil || t.InProfileDscp == nil {
+		return 0
+	}
+	return *t.InProfileDscp
+}
+
 // GetIpTtl retrieves the value of the leaf IpTtl from the NetworkInstance_Static_NextHop_EncapHeader_UdpV4
 // struct. If the field is unset but has a default value in the YANG schema,
 // then the default value will be returned.
@@ -215880,6 +223497,22 @@ func (t *NetworkInstance_Static_NextHop_EncapHeader_UdpV4) GetIpTtl() uint8 {
 		return 0
 	}
 	return *t.IpTtl
+}
+
+// GetOutProfileDscp retrieves the value of the leaf OutProfileDscp from the NetworkInstance_Static_NextHop_EncapHeader_UdpV4
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if OutProfileDscp is set, it can
+// safely use t.GetOutProfileDscp() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.OutProfileDscp == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Static_NextHop_EncapHeader_UdpV4) GetOutProfileDscp() uint8 {
+	if t == nil || t.OutProfileDscp == nil {
+		return 0
+	}
+	return *t.OutProfileDscp
 }
 
 // GetSrcIp retrieves the value of the leaf SrcIp from the NetworkInstance_Static_NextHop_EncapHeader_UdpV4
@@ -215932,10 +223565,22 @@ func (t *NetworkInstance_Static_NextHop_EncapHeader_UdpV4) SetDstUdpPort(v uint1
 	t.DstUdpPort = &v
 }
 
+// SetInProfileDscp sets the value of the leaf InProfileDscp in the NetworkInstance_Static_NextHop_EncapHeader_UdpV4
+// struct.
+func (t *NetworkInstance_Static_NextHop_EncapHeader_UdpV4) SetInProfileDscp(v uint8) {
+	t.InProfileDscp = &v
+}
+
 // SetIpTtl sets the value of the leaf IpTtl in the NetworkInstance_Static_NextHop_EncapHeader_UdpV4
 // struct.
 func (t *NetworkInstance_Static_NextHop_EncapHeader_UdpV4) SetIpTtl(v uint8) {
 	t.IpTtl = &v
+}
+
+// SetOutProfileDscp sets the value of the leaf OutProfileDscp in the NetworkInstance_Static_NextHop_EncapHeader_UdpV4
+// struct.
+func (t *NetworkInstance_Static_NextHop_EncapHeader_UdpV4) SetOutProfileDscp(v uint8) {
+	t.OutProfileDscp = &v
 }
 
 // SetSrcIp sets the value of the leaf SrcIp in the NetworkInstance_Static_NextHop_EncapHeader_UdpV4
@@ -215982,6 +223627,234 @@ func (t *NetworkInstance_Static_NextHop_EncapHeader_UdpV4) ΛEnumTypeMap() map[s
 // ΛBelongingModule returns the name of the module that defines the namespace
 // of NetworkInstance_Static_NextHop_EncapHeader_UdpV4.
 func (*NetworkInstance_Static_NextHop_EncapHeader_UdpV4) ΛBelongingModule() string {
+	return "openconfig-network-instance"
+}
+
+// NetworkInstance_Static_NextHop_EncapHeader_UdpV6 represents the /openconfig-network-instance/network-instances/network-instance/static/next-hops/next-hop/encap-headers/encap-header/udp-v6 YANG schema element.
+type NetworkInstance_Static_NextHop_EncapHeader_UdpV6 struct {
+	Dscp           *uint8  `path:"state/dscp" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/dscp" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+	DstIp          *string `path:"state/dst-ip" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/dst-ip" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+	DstUdpPort     *uint16 `path:"state/dst-udp-port" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/dst-udp-port" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+	InProfileDscp  *uint8  `path:"state/in-profile-dscp" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/in-profile-dscp" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+	IpTtl          *uint8  `path:"state/ip-ttl" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/ip-ttl" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+	OutProfileDscp *uint8  `path:"state/out-profile-dscp" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/out-profile-dscp" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+	SrcIp          *string `path:"state/src-ip" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/src-ip" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+	SrcUdpPort     *uint16 `path:"state/src-udp-port" module:"openconfig-network-instance/openconfig-network-instance" shadow-path:"config/src-udp-port" shadow-module:"openconfig-network-instance/openconfig-network-instance"`
+}
+
+// IsYANGGoStruct ensures that NetworkInstance_Static_NextHop_EncapHeader_UdpV6 implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*NetworkInstance_Static_NextHop_EncapHeader_UdpV6) IsYANGGoStruct() {}
+
+// GetDscp retrieves the value of the leaf Dscp from the NetworkInstance_Static_NextHop_EncapHeader_UdpV6
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Dscp is set, it can
+// safely use t.GetDscp() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Dscp == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Static_NextHop_EncapHeader_UdpV6) GetDscp() uint8 {
+	if t == nil || t.Dscp == nil {
+		return 0
+	}
+	return *t.Dscp
+}
+
+// GetDstIp retrieves the value of the leaf DstIp from the NetworkInstance_Static_NextHop_EncapHeader_UdpV6
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if DstIp is set, it can
+// safely use t.GetDstIp() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.DstIp == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Static_NextHop_EncapHeader_UdpV6) GetDstIp() string {
+	if t == nil || t.DstIp == nil {
+		return ""
+	}
+	return *t.DstIp
+}
+
+// GetDstUdpPort retrieves the value of the leaf DstUdpPort from the NetworkInstance_Static_NextHop_EncapHeader_UdpV6
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if DstUdpPort is set, it can
+// safely use t.GetDstUdpPort() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.DstUdpPort == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Static_NextHop_EncapHeader_UdpV6) GetDstUdpPort() uint16 {
+	if t == nil || t.DstUdpPort == nil {
+		return 0
+	}
+	return *t.DstUdpPort
+}
+
+// GetInProfileDscp retrieves the value of the leaf InProfileDscp from the NetworkInstance_Static_NextHop_EncapHeader_UdpV6
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if InProfileDscp is set, it can
+// safely use t.GetInProfileDscp() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.InProfileDscp == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Static_NextHop_EncapHeader_UdpV6) GetInProfileDscp() uint8 {
+	if t == nil || t.InProfileDscp == nil {
+		return 0
+	}
+	return *t.InProfileDscp
+}
+
+// GetIpTtl retrieves the value of the leaf IpTtl from the NetworkInstance_Static_NextHop_EncapHeader_UdpV6
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if IpTtl is set, it can
+// safely use t.GetIpTtl() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.IpTtl == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Static_NextHop_EncapHeader_UdpV6) GetIpTtl() uint8 {
+	if t == nil || t.IpTtl == nil {
+		return 0
+	}
+	return *t.IpTtl
+}
+
+// GetOutProfileDscp retrieves the value of the leaf OutProfileDscp from the NetworkInstance_Static_NextHop_EncapHeader_UdpV6
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if OutProfileDscp is set, it can
+// safely use t.GetOutProfileDscp() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.OutProfileDscp == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Static_NextHop_EncapHeader_UdpV6) GetOutProfileDscp() uint8 {
+	if t == nil || t.OutProfileDscp == nil {
+		return 0
+	}
+	return *t.OutProfileDscp
+}
+
+// GetSrcIp retrieves the value of the leaf SrcIp from the NetworkInstance_Static_NextHop_EncapHeader_UdpV6
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if SrcIp is set, it can
+// safely use t.GetSrcIp() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.SrcIp == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Static_NextHop_EncapHeader_UdpV6) GetSrcIp() string {
+	if t == nil || t.SrcIp == nil {
+		return ""
+	}
+	return *t.SrcIp
+}
+
+// GetSrcUdpPort retrieves the value of the leaf SrcUdpPort from the NetworkInstance_Static_NextHop_EncapHeader_UdpV6
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if SrcUdpPort is set, it can
+// safely use t.GetSrcUdpPort() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.SrcUdpPort == nil' before retrieving the leaf's value.
+func (t *NetworkInstance_Static_NextHop_EncapHeader_UdpV6) GetSrcUdpPort() uint16 {
+	if t == nil || t.SrcUdpPort == nil {
+		return 0
+	}
+	return *t.SrcUdpPort
+}
+
+// SetDscp sets the value of the leaf Dscp in the NetworkInstance_Static_NextHop_EncapHeader_UdpV6
+// struct.
+func (t *NetworkInstance_Static_NextHop_EncapHeader_UdpV6) SetDscp(v uint8) {
+	t.Dscp = &v
+}
+
+// SetDstIp sets the value of the leaf DstIp in the NetworkInstance_Static_NextHop_EncapHeader_UdpV6
+// struct.
+func (t *NetworkInstance_Static_NextHop_EncapHeader_UdpV6) SetDstIp(v string) {
+	t.DstIp = &v
+}
+
+// SetDstUdpPort sets the value of the leaf DstUdpPort in the NetworkInstance_Static_NextHop_EncapHeader_UdpV6
+// struct.
+func (t *NetworkInstance_Static_NextHop_EncapHeader_UdpV6) SetDstUdpPort(v uint16) {
+	t.DstUdpPort = &v
+}
+
+// SetInProfileDscp sets the value of the leaf InProfileDscp in the NetworkInstance_Static_NextHop_EncapHeader_UdpV6
+// struct.
+func (t *NetworkInstance_Static_NextHop_EncapHeader_UdpV6) SetInProfileDscp(v uint8) {
+	t.InProfileDscp = &v
+}
+
+// SetIpTtl sets the value of the leaf IpTtl in the NetworkInstance_Static_NextHop_EncapHeader_UdpV6
+// struct.
+func (t *NetworkInstance_Static_NextHop_EncapHeader_UdpV6) SetIpTtl(v uint8) {
+	t.IpTtl = &v
+}
+
+// SetOutProfileDscp sets the value of the leaf OutProfileDscp in the NetworkInstance_Static_NextHop_EncapHeader_UdpV6
+// struct.
+func (t *NetworkInstance_Static_NextHop_EncapHeader_UdpV6) SetOutProfileDscp(v uint8) {
+	t.OutProfileDscp = &v
+}
+
+// SetSrcIp sets the value of the leaf SrcIp in the NetworkInstance_Static_NextHop_EncapHeader_UdpV6
+// struct.
+func (t *NetworkInstance_Static_NextHop_EncapHeader_UdpV6) SetSrcIp(v string) {
+	t.SrcIp = &v
+}
+
+// SetSrcUdpPort sets the value of the leaf SrcUdpPort in the NetworkInstance_Static_NextHop_EncapHeader_UdpV6
+// struct.
+func (t *NetworkInstance_Static_NextHop_EncapHeader_UdpV6) SetSrcUdpPort(v uint16) {
+	t.SrcUdpPort = &v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the NetworkInstance_Static_NextHop_EncapHeader_UdpV6
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *NetworkInstance_Static_NextHop_EncapHeader_UdpV6) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *NetworkInstance_Static_NextHop_EncapHeader_UdpV6) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["NetworkInstance_Static_NextHop_EncapHeader_UdpV6"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *NetworkInstance_Static_NextHop_EncapHeader_UdpV6) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *NetworkInstance_Static_NextHop_EncapHeader_UdpV6) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of NetworkInstance_Static_NextHop_EncapHeader_UdpV6.
+func (*NetworkInstance_Static_NextHop_EncapHeader_UdpV6) ΛBelongingModule() string {
 	return "openconfig-network-instance"
 }
 
@@ -226339,6 +234212,7 @@ type Qos struct {
 	Classifier              map[string]*Qos_Classifier              `path:"classifiers/classifier" module:"openconfig-qos/openconfig-qos"`
 	ForwardingGroup         map[string]*Qos_ForwardingGroup         `path:"forwarding-groups/forwarding-group" module:"openconfig-qos/openconfig-qos"`
 	Interface               map[string]*Qos_Interface               `path:"interfaces/interface" module:"openconfig-qos/openconfig-qos"`
+	PacketTrim              *Qos_PacketTrim                         `path:"packet-trim" module:"openconfig-qos"`
 	Queue                   map[string]*Qos_Queue                   `path:"queues/queue" module:"openconfig-qos/openconfig-qos"`
 	QueueManagementProfile  map[string]*Qos_QueueManagementProfile  `path:"queue-management-profiles/queue-management-profile" module:"openconfig-qos/openconfig-qos"`
 	SchedulerPolicy         map[string]*Qos_SchedulerPolicy         `path:"scheduler-policies/scheduler-policy" module:"openconfig-qos/openconfig-qos"`
@@ -227238,6 +235112,26 @@ func (t *Qos) AppendSchedulerPolicy(v *Qos_SchedulerPolicy) error {
 	return nil
 }
 
+// GetOrCreatePacketTrim retrieves the value of the PacketTrim field
+// or returns the existing field if it already exists.
+func (t *Qos) GetOrCreatePacketTrim() *Qos_PacketTrim {
+	if t.PacketTrim != nil {
+		return t.PacketTrim
+	}
+	t.PacketTrim = &Qos_PacketTrim{}
+	return t.PacketTrim
+}
+
+// GetPacketTrim returns the value of the PacketTrim struct pointer
+// from Qos. If the receiver or the field PacketTrim is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *Qos) GetPacketTrim() *Qos_PacketTrim {
+	if t != nil && t.PacketTrim != nil {
+		return t.PacketTrim
+	}
+	return nil
+}
+
 // PopulateDefaults recursively populates unset leaf fields in the Qos
 // with default values as specified in the YANG schema, instantiating any nil
 // container fields.
@@ -227246,6 +235140,7 @@ func (t *Qos) PopulateDefaults() {
 		return
 	}
 	ygot.BuildEmptyTree(t)
+	t.PacketTrim.PopulateDefaults()
 	for _, e := range t.BufferAllocationProfile {
 		e.PopulateDefaults()
 	}
@@ -227508,6 +235403,7 @@ type Qos_BufferAllocationProfile_Queue struct {
 	SharedBufferLimitType           E_Qos_SHARED_BUFFER_LIMIT_TYPE `path:"state/shared-buffer-limit-type" module:"openconfig-qos/openconfig-qos" shadow-path:"config/shared-buffer-limit-type" shadow-module:"openconfig-qos/openconfig-qos"`
 	StaticSharedBufferLimit         *uint32                        `path:"state/static-shared-buffer-limit" module:"openconfig-qos/openconfig-qos" shadow-path:"config/static-shared-buffer-limit" shadow-module:"openconfig-qos/openconfig-qos"`
 	StaticSharedBufferLimitTemporal *uint32                        `path:"state/static-shared-buffer-limit-temporal" module:"openconfig-qos/openconfig-qos" shadow-path:"config/static-shared-buffer-limit-temporal" shadow-module:"openconfig-qos/openconfig-qos"`
+	TrimEnable                      *bool                          `path:"state/trim-enable" module:"openconfig-qos/openconfig-qos" shadow-path:"config/trim-enable" shadow-module:"openconfig-qos/openconfig-qos"`
 	UseSharedBuffer                 *bool                          `path:"state/use-shared-buffer" module:"openconfig-qos/openconfig-qos" shadow-path:"config/use-shared-buffer" shadow-module:"openconfig-qos/openconfig-qos"`
 }
 
@@ -227628,6 +235524,22 @@ func (t *Qos_BufferAllocationProfile_Queue) GetStaticSharedBufferLimitTemporal()
 	return *t.StaticSharedBufferLimitTemporal
 }
 
+// GetTrimEnable retrieves the value of the leaf TrimEnable from the Qos_BufferAllocationProfile_Queue
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if TrimEnable is set, it can
+// safely use t.GetTrimEnable() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.TrimEnable == nil' before retrieving the leaf's value.
+func (t *Qos_BufferAllocationProfile_Queue) GetTrimEnable() bool {
+	if t == nil || t.TrimEnable == nil {
+		return false
+	}
+	return *t.TrimEnable
+}
+
 // GetUseSharedBuffer retrieves the value of the leaf UseSharedBuffer from the Qos_BufferAllocationProfile_Queue
 // struct. If the field is unset but has a default value in the YANG schema,
 // then the default value will be returned.
@@ -227684,6 +235596,12 @@ func (t *Qos_BufferAllocationProfile_Queue) SetStaticSharedBufferLimit(v uint32)
 // struct.
 func (t *Qos_BufferAllocationProfile_Queue) SetStaticSharedBufferLimitTemporal(v uint32) {
 	t.StaticSharedBufferLimitTemporal = &v
+}
+
+// SetTrimEnable sets the value of the leaf TrimEnable in the Qos_BufferAllocationProfile_Queue
+// struct.
+func (t *Qos_BufferAllocationProfile_Queue) SetTrimEnable(v bool) {
+	t.TrimEnable = &v
 }
 
 // SetUseSharedBuffer sets the value of the leaf UseSharedBuffer in the Qos_BufferAllocationProfile_Queue
@@ -228290,6 +236208,7 @@ func (*Qos_Classifier_Term_Actions_Remark) ΛBelongingModule() string {
 
 // Qos_Classifier_Term_Conditions represents the /openconfig-qos/qos/classifiers/classifier/terms/term/conditions YANG schema element.
 type Qos_Classifier_Term_Conditions struct {
+	Fabric    *Qos_Classifier_Term_Conditions_Fabric    `path:"fabric" module:"openconfig-qos"`
 	Ipv4      *Qos_Classifier_Term_Conditions_Ipv4      `path:"ipv4" module:"openconfig-qos"`
 	Ipv6      *Qos_Classifier_Term_Conditions_Ipv6      `path:"ipv6" module:"openconfig-qos"`
 	L2        *Qos_Classifier_Term_Conditions_L2        `path:"l2" module:"openconfig-qos"`
@@ -228301,6 +236220,16 @@ type Qos_Classifier_Term_Conditions struct {
 // interface. This allows functions that need to handle this struct to
 // identify it as being generated by ygen.
 func (*Qos_Classifier_Term_Conditions) IsYANGGoStruct() {}
+
+// GetOrCreateFabric retrieves the value of the Fabric field
+// or returns the existing field if it already exists.
+func (t *Qos_Classifier_Term_Conditions) GetOrCreateFabric() *Qos_Classifier_Term_Conditions_Fabric {
+	if t.Fabric != nil {
+		return t.Fabric
+	}
+	t.Fabric = &Qos_Classifier_Term_Conditions_Fabric{}
+	return t.Fabric
+}
 
 // GetOrCreateIpv4 retrieves the value of the Ipv4 field
 // or returns the existing field if it already exists.
@@ -228350,6 +236279,16 @@ func (t *Qos_Classifier_Term_Conditions) GetOrCreateTransport() *Qos_Classifier_
 	}
 	t.Transport = &Qos_Classifier_Term_Conditions_Transport{}
 	return t.Transport
+}
+
+// GetFabric returns the value of the Fabric struct pointer
+// from Qos_Classifier_Term_Conditions. If the receiver or the field Fabric is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *Qos_Classifier_Term_Conditions) GetFabric() *Qos_Classifier_Term_Conditions_Fabric {
+	if t != nil && t.Fabric != nil {
+		return t.Fabric
+	}
+	return nil
 }
 
 // GetIpv4 returns the value of the Ipv4 struct pointer
@@ -228410,6 +236349,7 @@ func (t *Qos_Classifier_Term_Conditions) PopulateDefaults() {
 		return
 	}
 	ygot.BuildEmptyTree(t)
+	t.Fabric.PopulateDefaults()
 	t.Ipv4.PopulateDefaults()
 	t.Ipv6.PopulateDefaults()
 	t.L2.PopulateDefaults()
@@ -228439,6 +236379,73 @@ func (t *Qos_Classifier_Term_Conditions) ΛEnumTypeMap() map[string][]reflect.Ty
 // ΛBelongingModule returns the name of the module that defines the namespace
 // of Qos_Classifier_Term_Conditions.
 func (*Qos_Classifier_Term_Conditions) ΛBelongingModule() string {
+	return "openconfig-qos"
+}
+
+// Qos_Classifier_Term_Conditions_Fabric represents the /openconfig-qos/qos/classifiers/classifier/terms/term/conditions/fabric YANG schema element.
+type Qos_Classifier_Term_Conditions_Fabric struct {
+	FabricPriority *uint8 `path:"state/fabric-priority" module:"openconfig-qos/openconfig-qos" shadow-path:"config/fabric-priority" shadow-module:"openconfig-qos/openconfig-qos"`
+}
+
+// IsYANGGoStruct ensures that Qos_Classifier_Term_Conditions_Fabric implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*Qos_Classifier_Term_Conditions_Fabric) IsYANGGoStruct() {}
+
+// GetFabricPriority retrieves the value of the leaf FabricPriority from the Qos_Classifier_Term_Conditions_Fabric
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if FabricPriority is set, it can
+// safely use t.GetFabricPriority() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.FabricPriority == nil' before retrieving the leaf's value.
+func (t *Qos_Classifier_Term_Conditions_Fabric) GetFabricPriority() uint8 {
+	if t == nil || t.FabricPriority == nil {
+		return 0
+	}
+	return *t.FabricPriority
+}
+
+// SetFabricPriority sets the value of the leaf FabricPriority in the Qos_Classifier_Term_Conditions_Fabric
+// struct.
+func (t *Qos_Classifier_Term_Conditions_Fabric) SetFabricPriority(v uint8) {
+	t.FabricPriority = &v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the Qos_Classifier_Term_Conditions_Fabric
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *Qos_Classifier_Term_Conditions_Fabric) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *Qos_Classifier_Term_Conditions_Fabric) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["Qos_Classifier_Term_Conditions_Fabric"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *Qos_Classifier_Term_Conditions_Fabric) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *Qos_Classifier_Term_Conditions_Fabric) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of Qos_Classifier_Term_Conditions_Fabric.
+func (*Qos_Classifier_Term_Conditions_Fabric) ΛBelongingModule() string {
 	return "openconfig-qos"
 }
 
@@ -228835,6 +236842,7 @@ type Qos_Classifier_Term_Conditions_Ipv6 struct {
 	DestinationFlowLabel        *uint32                                            `path:"state/destination-flow-label" module:"openconfig-qos/openconfig-qos" shadow-path:"config/destination-flow-label" shadow-module:"openconfig-qos/openconfig-qos"`
 	Dscp                        *uint8                                             `path:"state/dscp" module:"openconfig-qos/openconfig-qos" shadow-path:"config/dscp" shadow-module:"openconfig-qos/openconfig-qos"`
 	DscpSet                     []uint8                                            `path:"state/dscp-set" module:"openconfig-qos/openconfig-qos" shadow-path:"config/dscp-set" shadow-module:"openconfig-qos/openconfig-qos"`
+	FlowLabel                   *uint32                                            `path:"state/flow-label" module:"openconfig-qos/openconfig-qos" shadow-path:"config/flow-label" shadow-module:"openconfig-qos/openconfig-qos"`
 	HopLimit                    *uint8                                             `path:"state/hop-limit" module:"openconfig-qos/openconfig-qos" shadow-path:"config/hop-limit" shadow-module:"openconfig-qos/openconfig-qos"`
 	Icmpv6                      *Qos_Classifier_Term_Conditions_Ipv6_Icmpv6        `path:"icmpv6" module:"openconfig-qos"`
 	Length                      *uint16                                            `path:"state/length" module:"openconfig-qos/openconfig-qos" shadow-path:"config/length" shadow-module:"openconfig-qos/openconfig-qos"`
@@ -228947,6 +236955,22 @@ func (t *Qos_Classifier_Term_Conditions_Ipv6) GetDscpSet() []uint8 {
 		return nil
 	}
 	return t.DscpSet
+}
+
+// GetFlowLabel retrieves the value of the leaf FlowLabel from the Qos_Classifier_Term_Conditions_Ipv6
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if FlowLabel is set, it can
+// safely use t.GetFlowLabel() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.FlowLabel == nil' before retrieving the leaf's value.
+func (t *Qos_Classifier_Term_Conditions_Ipv6) GetFlowLabel() uint32 {
+	if t == nil || t.FlowLabel == nil {
+		return 0
+	}
+	return *t.FlowLabel
 }
 
 // GetHopLimit retrieves the value of the leaf HopLimit from the Qos_Classifier_Term_Conditions_Ipv6
@@ -229073,6 +237097,12 @@ func (t *Qos_Classifier_Term_Conditions_Ipv6) SetDscp(v uint8) {
 // struct.
 func (t *Qos_Classifier_Term_Conditions_Ipv6) SetDscpSet(v []uint8) {
 	t.DscpSet = v
+}
+
+// SetFlowLabel sets the value of the leaf FlowLabel in the Qos_Classifier_Term_Conditions_Ipv6
+// struct.
+func (t *Qos_Classifier_Term_Conditions_Ipv6) SetFlowLabel(v uint32) {
+	t.FlowLabel = &v
 }
 
 // SetHopLimit sets the value of the leaf HopLimit in the Qos_Classifier_Term_Conditions_Ipv6
@@ -233042,15 +241072,18 @@ type Qos_Interface_Output_Queue struct {
 	AvgQueueLen            *uint64 `path:"state/avg-queue-len" module:"openconfig-qos/openconfig-qos"`
 	DroppedOctets          *uint64 `path:"state/dropped-octets" module:"openconfig-qos/openconfig-qos"`
 	DroppedPkts            *uint64 `path:"state/dropped-pkts" module:"openconfig-qos/openconfig-qos"`
+	DroppedTrimPkts        *uint64 `path:"state/dropped-trim-pkts" module:"openconfig-qos/openconfig-qos"`
 	EcnMarkedOctets        *uint64 `path:"state/ecn-marked-octets" module:"openconfig-qos/openconfig-qos"`
 	EcnMarkedPkts          *uint64 `path:"state/ecn-marked-pkts" module:"openconfig-qos/openconfig-qos"`
 	EcnSelectedOctets      *uint64 `path:"state/ecn-selected-octets" module:"openconfig-qos/openconfig-qos"`
 	EcnSelectedPkts        *uint64 `path:"state/ecn-selected-pkts" module:"openconfig-qos/openconfig-qos"`
 	MaxQueueLen            *uint64 `path:"state/max-queue-len" module:"openconfig-qos/openconfig-qos"`
 	Name                   *string `path:"state/name|name" module:"openconfig-qos/openconfig-qos|openconfig-qos" shadow-path:"config/name|name" shadow-module:"openconfig-qos/openconfig-qos|openconfig-qos"`
+	OutTrimPkts            *uint64 `path:"state/out-trim-pkts" module:"openconfig-qos/openconfig-qos"`
 	QueueManagementProfile *string `path:"state/queue-management-profile" module:"openconfig-qos/openconfig-qos" shadow-path:"config/queue-management-profile" shadow-module:"openconfig-qos/openconfig-qos"`
 	TransmitOctets         *uint64 `path:"state/transmit-octets" module:"openconfig-qos/openconfig-qos"`
 	TransmitPkts           *uint64 `path:"state/transmit-pkts" module:"openconfig-qos/openconfig-qos"`
+	TrimPkts               *uint64 `path:"state/trim-pkts" module:"openconfig-qos/openconfig-qos"`
 }
 
 // IsYANGGoStruct ensures that Qos_Interface_Output_Queue implements the yang.GoStruct
@@ -233104,6 +241137,22 @@ func (t *Qos_Interface_Output_Queue) GetDroppedPkts() uint64 {
 		return 0
 	}
 	return *t.DroppedPkts
+}
+
+// GetDroppedTrimPkts retrieves the value of the leaf DroppedTrimPkts from the Qos_Interface_Output_Queue
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if DroppedTrimPkts is set, it can
+// safely use t.GetDroppedTrimPkts() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.DroppedTrimPkts == nil' before retrieving the leaf's value.
+func (t *Qos_Interface_Output_Queue) GetDroppedTrimPkts() uint64 {
+	if t == nil || t.DroppedTrimPkts == nil {
+		return 0
+	}
+	return *t.DroppedTrimPkts
 }
 
 // GetEcnMarkedOctets retrieves the value of the leaf EcnMarkedOctets from the Qos_Interface_Output_Queue
@@ -233202,6 +241251,22 @@ func (t *Qos_Interface_Output_Queue) GetName() string {
 	return *t.Name
 }
 
+// GetOutTrimPkts retrieves the value of the leaf OutTrimPkts from the Qos_Interface_Output_Queue
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if OutTrimPkts is set, it can
+// safely use t.GetOutTrimPkts() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.OutTrimPkts == nil' before retrieving the leaf's value.
+func (t *Qos_Interface_Output_Queue) GetOutTrimPkts() uint64 {
+	if t == nil || t.OutTrimPkts == nil {
+		return 0
+	}
+	return *t.OutTrimPkts
+}
+
 // GetQueueManagementProfile retrieves the value of the leaf QueueManagementProfile from the Qos_Interface_Output_Queue
 // struct. If the field is unset but has a default value in the YANG schema,
 // then the default value will be returned.
@@ -233250,6 +241315,22 @@ func (t *Qos_Interface_Output_Queue) GetTransmitPkts() uint64 {
 	return *t.TransmitPkts
 }
 
+// GetTrimPkts retrieves the value of the leaf TrimPkts from the Qos_Interface_Output_Queue
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if TrimPkts is set, it can
+// safely use t.GetTrimPkts() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.TrimPkts == nil' before retrieving the leaf's value.
+func (t *Qos_Interface_Output_Queue) GetTrimPkts() uint64 {
+	if t == nil || t.TrimPkts == nil {
+		return 0
+	}
+	return *t.TrimPkts
+}
+
 // SetAvgQueueLen sets the value of the leaf AvgQueueLen in the Qos_Interface_Output_Queue
 // struct.
 func (t *Qos_Interface_Output_Queue) SetAvgQueueLen(v uint64) {
@@ -233266,6 +241347,12 @@ func (t *Qos_Interface_Output_Queue) SetDroppedOctets(v uint64) {
 // struct.
 func (t *Qos_Interface_Output_Queue) SetDroppedPkts(v uint64) {
 	t.DroppedPkts = &v
+}
+
+// SetDroppedTrimPkts sets the value of the leaf DroppedTrimPkts in the Qos_Interface_Output_Queue
+// struct.
+func (t *Qos_Interface_Output_Queue) SetDroppedTrimPkts(v uint64) {
+	t.DroppedTrimPkts = &v
 }
 
 // SetEcnMarkedOctets sets the value of the leaf EcnMarkedOctets in the Qos_Interface_Output_Queue
@@ -233304,6 +241391,12 @@ func (t *Qos_Interface_Output_Queue) SetName(v string) {
 	t.Name = &v
 }
 
+// SetOutTrimPkts sets the value of the leaf OutTrimPkts in the Qos_Interface_Output_Queue
+// struct.
+func (t *Qos_Interface_Output_Queue) SetOutTrimPkts(v uint64) {
+	t.OutTrimPkts = &v
+}
+
 // SetQueueManagementProfile sets the value of the leaf QueueManagementProfile in the Qos_Interface_Output_Queue
 // struct.
 func (t *Qos_Interface_Output_Queue) SetQueueManagementProfile(v string) {
@@ -233320,6 +241413,12 @@ func (t *Qos_Interface_Output_Queue) SetTransmitOctets(v uint64) {
 // struct.
 func (t *Qos_Interface_Output_Queue) SetTransmitPkts(v uint64) {
 	t.TransmitPkts = &v
+}
+
+// SetTrimPkts sets the value of the leaf TrimPkts in the Qos_Interface_Output_Queue
+// struct.
+func (t *Qos_Interface_Output_Queue) SetTrimPkts(v uint64) {
+	t.TrimPkts = &v
 }
 
 // PopulateDefaults recursively populates unset leaf fields in the Qos_Interface_Output_Queue
@@ -233777,6 +241876,94 @@ func (t *Qos_Interface_Output_SchedulerPolicy_Scheduler) ΛEnumTypeMap() map[str
 // ΛBelongingModule returns the name of the module that defines the namespace
 // of Qos_Interface_Output_SchedulerPolicy_Scheduler.
 func (*Qos_Interface_Output_SchedulerPolicy_Scheduler) ΛBelongingModule() string {
+	return "openconfig-qos"
+}
+
+// Qos_PacketTrim represents the /openconfig-qos/qos/packet-trim YANG schema element.
+type Qos_PacketTrim struct {
+	FabricPriority *uint8 `path:"state/fabric-priority" module:"openconfig-qos/openconfig-qos" shadow-path:"config/fabric-priority" shadow-module:"openconfig-qos/openconfig-qos"`
+	SymmetricDscp  *uint8 `path:"state/symmetric-dscp" module:"openconfig-qos/openconfig-qos" shadow-path:"config/symmetric-dscp" shadow-module:"openconfig-qos/openconfig-qos"`
+}
+
+// IsYANGGoStruct ensures that Qos_PacketTrim implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*Qos_PacketTrim) IsYANGGoStruct() {}
+
+// GetFabricPriority retrieves the value of the leaf FabricPriority from the Qos_PacketTrim
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if FabricPriority is set, it can
+// safely use t.GetFabricPriority() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.FabricPriority == nil' before retrieving the leaf's value.
+func (t *Qos_PacketTrim) GetFabricPriority() uint8 {
+	if t == nil || t.FabricPriority == nil {
+		return 0
+	}
+	return *t.FabricPriority
+}
+
+// GetSymmetricDscp retrieves the value of the leaf SymmetricDscp from the Qos_PacketTrim
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if SymmetricDscp is set, it can
+// safely use t.GetSymmetricDscp() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.SymmetricDscp == nil' before retrieving the leaf's value.
+func (t *Qos_PacketTrim) GetSymmetricDscp() uint8 {
+	if t == nil || t.SymmetricDscp == nil {
+		return 0
+	}
+	return *t.SymmetricDscp
+}
+
+// SetFabricPriority sets the value of the leaf FabricPriority in the Qos_PacketTrim
+// struct.
+func (t *Qos_PacketTrim) SetFabricPriority(v uint8) {
+	t.FabricPriority = &v
+}
+
+// SetSymmetricDscp sets the value of the leaf SymmetricDscp in the Qos_PacketTrim
+// struct.
+func (t *Qos_PacketTrim) SetSymmetricDscp(v uint8) {
+	t.SymmetricDscp = &v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the Qos_PacketTrim
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *Qos_PacketTrim) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *Qos_PacketTrim) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["Qos_PacketTrim"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *Qos_PacketTrim) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *Qos_PacketTrim) ΛEnumTypeMap() map[string][]reflect.Type { return ΛEnumTypes }
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of Qos_PacketTrim.
+func (*Qos_PacketTrim) ΛBelongingModule() string {
 	return "openconfig-qos"
 }
 
@@ -242776,6 +250963,8 @@ func (*RoutingPolicy_PolicyDefinition_Statement_Actions) ΛBelongingModule() str
 
 // RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions represents the /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions YANG schema element.
 type RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions struct {
+	SetAigp          *uint64                                                                       `path:"state/set-aigp" module:"openconfig-bgp-policy/openconfig-bgp-policy" shadow-path:"config/set-aigp" shadow-module:"openconfig-bgp-policy/openconfig-bgp-policy"`
+	SetAigpAction    E_BgpPolicy_BgpSetAigpAction                                                  `path:"state/set-aigp-action" module:"openconfig-bgp-policy/openconfig-bgp-policy" shadow-path:"config/set-aigp-action" shadow-module:"openconfig-bgp-policy/openconfig-bgp-policy"`
 	SetAsPathPrepend *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetAsPathPrepend `path:"set-as-path-prepend" module:"openconfig-bgp-policy"`
 	SetCommunity     *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetCommunity     `path:"set-community" module:"openconfig-bgp-policy"`
 	SetExtCommunity  *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetExtCommunity  `path:"set-ext-community" module:"openconfig-bgp-policy"`
@@ -242849,6 +251038,38 @@ func (t *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions) GetSetExtC
 		return t.SetExtCommunity
 	}
 	return nil
+}
+
+// GetSetAigp retrieves the value of the leaf SetAigp from the RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if SetAigp is set, it can
+// safely use t.GetSetAigp() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.SetAigp == nil' before retrieving the leaf's value.
+func (t *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions) GetSetAigp() uint64 {
+	if t == nil || t.SetAigp == nil {
+		return 0
+	}
+	return *t.SetAigp
+}
+
+// GetSetAigpAction retrieves the value of the leaf SetAigpAction from the RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if SetAigpAction is set, it can
+// safely use t.GetSetAigpAction() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.SetAigpAction == nil' before retrieving the leaf's value.
+func (t *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions) GetSetAigpAction() E_BgpPolicy_BgpSetAigpAction {
+	if t == nil || t.SetAigpAction == 0 {
+		return 0
+	}
+	return t.SetAigpAction
 }
 
 // GetSetLocalPref retrieves the value of the leaf SetLocalPref from the RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions
@@ -242929,6 +251150,18 @@ func (t *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions) GetSetRout
 		return 0
 	}
 	return t.SetRouteOrigin
+}
+
+// SetSetAigp sets the value of the leaf SetAigp in the RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions
+// struct.
+func (t *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions) SetSetAigp(v uint64) {
+	t.SetAigp = &v
+}
+
+// SetSetAigpAction sets the value of the leaf SetAigpAction in the RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions
+// struct.
+func (t *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions) SetSetAigpAction(v E_BgpPolicy_BgpSetAigpAction) {
+	t.SetAigpAction = v
 }
 
 // SetSetLocalPref sets the value of the leaf SetLocalPref in the RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions
@@ -246966,6 +255199,7 @@ type System struct {
 	MountPoint                 map[string]*System_MountPoint          `path:"mount-points/mount-point" module:"openconfig-system/openconfig-system"`
 	Ntp                        *System_Ntp                            `path:"ntp" module:"openconfig-system"`
 	Process                    map[uint64]*System_Process             `path:"processes/process" module:"openconfig-system/openconfig-system"`
+	Snmp                       *System_Snmp                           `path:"snmp" module:"openconfig-system"`
 	SoftwareVersion            *string                                `path:"state/software-version" module:"openconfig-system/openconfig-system"`
 	SshServer                  *System_SshServer                      `path:"ssh-server" module:"openconfig-system"`
 	TelnetServer               *System_TelnetServer                   `path:"telnet-server" module:"openconfig-system"`
@@ -247739,6 +255973,16 @@ func (t *System) GetOrCreateNtp() *System_Ntp {
 	return t.Ntp
 }
 
+// GetOrCreateSnmp retrieves the value of the Snmp field
+// or returns the existing field if it already exists.
+func (t *System) GetOrCreateSnmp() *System_Snmp {
+	if t.Snmp != nil {
+		return t.Snmp
+	}
+	t.Snmp = &System_Snmp{}
+	return t.Snmp
+}
+
 // GetOrCreateSshServer retrieves the value of the SshServer field
 // or returns the existing field if it already exists.
 func (t *System) GetOrCreateSshServer() *System_SshServer {
@@ -247895,6 +256139,16 @@ func (t *System) GetMessages() *System_Messages {
 func (t *System) GetNtp() *System_Ntp {
 	if t != nil && t.Ntp != nil {
 		return t.Ntp
+	}
+	return nil
+}
+
+// GetSnmp returns the value of the Snmp struct pointer
+// from System. If the receiver or the field Snmp is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *System) GetSnmp() *System_Snmp {
+	if t != nil && t.Snmp != nil {
+		return t.Snmp
 	}
 	return nil
 }
@@ -248148,6 +256402,7 @@ func (t *System) PopulateDefaults() {
 	t.Memory.PopulateDefaults()
 	t.Messages.PopulateDefaults()
 	t.Ntp.PopulateDefaults()
+	t.Snmp.PopulateDefaults()
 	t.SshServer.PopulateDefaults()
 	t.TelnetServer.PopulateDefaults()
 	t.Utilization.PopulateDefaults()
@@ -261583,11 +269838,12 @@ func (*System_MacAddress) ΛBelongingModule() string {
 
 // System_Memory represents the /openconfig-system/system/memory YANG schema element.
 type System_Memory struct {
-	Counters *System_Memory_Counters `path:"state/counters" module:"openconfig-system/openconfig-system"`
-	Free     *uint64                 `path:"state/free" module:"openconfig-system/openconfig-system"`
-	Physical *uint64                 `path:"state/physical" module:"openconfig-system/openconfig-system"`
-	Reserved *uint64                 `path:"state/reserved" module:"openconfig-system/openconfig-system"`
-	Used     *uint64                 `path:"state/used" module:"openconfig-system/openconfig-system"`
+	Available *uint64                 `path:"state/available" module:"openconfig-system/openconfig-system"`
+	Counters  *System_Memory_Counters `path:"state/counters" module:"openconfig-system/openconfig-system"`
+	Free      *uint64                 `path:"state/free" module:"openconfig-system/openconfig-system"`
+	Physical  *uint64                 `path:"state/physical" module:"openconfig-system/openconfig-system"`
+	Reserved  *uint64                 `path:"state/reserved" module:"openconfig-system/openconfig-system"`
+	Used      *uint64                 `path:"state/used" module:"openconfig-system/openconfig-system"`
 }
 
 // IsYANGGoStruct ensures that System_Memory implements the yang.GoStruct
@@ -261613,6 +269869,22 @@ func (t *System_Memory) GetCounters() *System_Memory_Counters {
 		return t.Counters
 	}
 	return nil
+}
+
+// GetAvailable retrieves the value of the leaf Available from the System_Memory
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Available is set, it can
+// safely use t.GetAvailable() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Available == nil' before retrieving the leaf's value.
+func (t *System_Memory) GetAvailable() uint64 {
+	if t == nil || t.Available == nil {
+		return 0
+	}
+	return *t.Available
 }
 
 // GetFree retrieves the value of the leaf Free from the System_Memory
@@ -261677,6 +269949,12 @@ func (t *System_Memory) GetUsed() uint64 {
 		return 0
 	}
 	return *t.Used
+}
+
+// SetAvailable sets the value of the leaf Available in the System_Memory
+// struct.
+func (t *System_Memory) SetAvailable(v uint64) {
+	t.Available = &v
 }
 
 // SetFree sets the value of the leaf Free in the System_Memory
@@ -262322,7 +270600,11 @@ func (*System_Messages_Message) ΛBelongingModule() string {
 // System_MountPoint represents the /openconfig-system/system/mount-points/mount-point YANG schema element.
 type System_MountPoint struct {
 	Available        *uint64                      `path:"state/available" module:"openconfig-system/openconfig-system"`
+	InodesAvailable  *uint64                      `path:"state/inodes-available" module:"openconfig-system/openconfig-system"`
+	InodesTotal      *uint64                      `path:"state/inodes-total" module:"openconfig-system/openconfig-system"`
+	InodesUtilized   *uint64                      `path:"state/inodes-utilized" module:"openconfig-system/openconfig-system"`
 	Name             *string                      `path:"state/name|name" module:"openconfig-system/openconfig-system|openconfig-system" shadow-path:"name" shadow-module:"openconfig-system"`
+	ReadOnly         *bool                        `path:"state/read-only" module:"openconfig-system/openconfig-system"`
 	Size             *uint64                      `path:"state/size" module:"openconfig-system/openconfig-system"`
 	StorageComponent *string                      `path:"state/storage-component" module:"openconfig-system/openconfig-system"`
 	Type             System_MountPoint_Type_Union `path:"state/type" module:"openconfig-system/openconfig-system"`
@@ -262350,6 +270632,54 @@ func (t *System_MountPoint) GetAvailable() uint64 {
 	return *t.Available
 }
 
+// GetInodesAvailable retrieves the value of the leaf InodesAvailable from the System_MountPoint
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if InodesAvailable is set, it can
+// safely use t.GetInodesAvailable() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.InodesAvailable == nil' before retrieving the leaf's value.
+func (t *System_MountPoint) GetInodesAvailable() uint64 {
+	if t == nil || t.InodesAvailable == nil {
+		return 0
+	}
+	return *t.InodesAvailable
+}
+
+// GetInodesTotal retrieves the value of the leaf InodesTotal from the System_MountPoint
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if InodesTotal is set, it can
+// safely use t.GetInodesTotal() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.InodesTotal == nil' before retrieving the leaf's value.
+func (t *System_MountPoint) GetInodesTotal() uint64 {
+	if t == nil || t.InodesTotal == nil {
+		return 0
+	}
+	return *t.InodesTotal
+}
+
+// GetInodesUtilized retrieves the value of the leaf InodesUtilized from the System_MountPoint
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if InodesUtilized is set, it can
+// safely use t.GetInodesUtilized() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.InodesUtilized == nil' before retrieving the leaf's value.
+func (t *System_MountPoint) GetInodesUtilized() uint64 {
+	if t == nil || t.InodesUtilized == nil {
+		return 0
+	}
+	return *t.InodesUtilized
+}
+
 // GetName retrieves the value of the leaf Name from the System_MountPoint
 // struct. If the field is unset but has a default value in the YANG schema,
 // then the default value will be returned.
@@ -262364,6 +270694,22 @@ func (t *System_MountPoint) GetName() string {
 		return ""
 	}
 	return *t.Name
+}
+
+// GetReadOnly retrieves the value of the leaf ReadOnly from the System_MountPoint
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if ReadOnly is set, it can
+// safely use t.GetReadOnly() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.ReadOnly == nil' before retrieving the leaf's value.
+func (t *System_MountPoint) GetReadOnly() bool {
+	if t == nil || t.ReadOnly == nil {
+		return false
+	}
+	return *t.ReadOnly
 }
 
 // GetSize retrieves the value of the leaf Size from the System_MountPoint
@@ -262436,10 +270782,34 @@ func (t *System_MountPoint) SetAvailable(v uint64) {
 	t.Available = &v
 }
 
+// SetInodesAvailable sets the value of the leaf InodesAvailable in the System_MountPoint
+// struct.
+func (t *System_MountPoint) SetInodesAvailable(v uint64) {
+	t.InodesAvailable = &v
+}
+
+// SetInodesTotal sets the value of the leaf InodesTotal in the System_MountPoint
+// struct.
+func (t *System_MountPoint) SetInodesTotal(v uint64) {
+	t.InodesTotal = &v
+}
+
+// SetInodesUtilized sets the value of the leaf InodesUtilized in the System_MountPoint
+// struct.
+func (t *System_MountPoint) SetInodesUtilized(v uint64) {
+	t.InodesUtilized = &v
+}
+
 // SetName sets the value of the leaf Name in the System_MountPoint
 // struct.
 func (t *System_MountPoint) SetName(v string) {
 	t.Name = &v
+}
+
+// SetReadOnly sets the value of the leaf ReadOnly in the System_MountPoint
+// struct.
+func (t *System_MountPoint) SetReadOnly(v bool) {
+	t.ReadOnly = &v
 }
 
 // SetSize sets the value of the leaf Size in the System_MountPoint
@@ -263667,6 +272037,1303 @@ func (*System_Process) ΛBelongingModule() string {
 	return "openconfig-system"
 }
 
+// System_Snmp represents the /openconfig-system/system/snmp YANG schema element.
+type System_Snmp struct {
+	Community     map[string]*System_Snmp_Community `path:"communities/community" module:"openconfig-system/openconfig-system"`
+	Contact       *string                           `path:"state/contact" module:"openconfig-system/openconfig-system" shadow-path:"config/contact" shadow-module:"openconfig-system/openconfig-system"`
+	Location      *string                           `path:"state/location" module:"openconfig-system/openconfig-system" shadow-path:"config/location" shadow-module:"openconfig-system/openconfig-system"`
+	Notifications *System_Snmp_Notifications        `path:"notifications" module:"openconfig-system"`
+}
+
+// IsYANGGoStruct ensures that System_Snmp implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*System_Snmp) IsYANGGoStruct() {}
+
+// NewCommunity creates a new entry in the Community list of the
+// System_Snmp struct. The keys of the list are populated from the input
+// arguments.
+func (t *System_Snmp) NewCommunity(Name string) (*System_Snmp_Community, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.Community == nil {
+		t.Community = make(map[string]*System_Snmp_Community)
+	}
+
+	key := Name
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.Community[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Community", key)
+	}
+
+	t.Community[key] = &System_Snmp_Community{
+		Name: &Name,
+	}
+
+	return t.Community[key], nil
+}
+
+// RenameCommunity renames an entry in the list Community within
+// the System_Snmp struct. The entry with key oldK is renamed to newK updating
+// the key within the value.
+func (t *System_Snmp) RenameCommunity(oldK, newK string) error {
+	if _, ok := t.Community[newK]; ok {
+		return fmt.Errorf("key %v already exists in Community", newK)
+	}
+
+	e, ok := t.Community[oldK]
+	if !ok {
+		return fmt.Errorf("key %v not found in Community", oldK)
+	}
+	e.Name = &newK
+
+	t.Community[newK] = e
+	delete(t.Community, oldK)
+	return nil
+}
+
+// GetOrCreateCommunityMap returns the list (map) from System_Snmp.
+//
+// It initializes the field if not already initialized.
+func (t *System_Snmp) GetOrCreateCommunityMap() map[string]*System_Snmp_Community {
+	if t.Community == nil {
+		t.Community = make(map[string]*System_Snmp_Community)
+	}
+	return t.Community
+}
+
+// GetOrCreateCommunity retrieves the value with the specified keys from
+// the receiver System_Snmp. If the entry does not exist, then it is created.
+// It returns the existing or new list member.
+func (t *System_Snmp) GetOrCreateCommunity(Name string) *System_Snmp_Community {
+
+	key := Name
+
+	if v, ok := t.Community[key]; ok {
+		return v
+	}
+	// Panic if we receive an error, since we should have retrieved an existing
+	// list member. This allows chaining of GetOrCreate methods.
+	v, err := t.NewCommunity(Name)
+	if err != nil {
+		panic(fmt.Sprintf("GetOrCreateCommunity got unexpected error: %v", err))
+	}
+	return v
+}
+
+// GetCommunity retrieves the value with the specified key from
+// the Community map field of System_Snmp. If the receiver is nil, or
+// the specified key is not present in the list, nil is returned such that Get*
+// methods may be safely chained.
+func (t *System_Snmp) GetCommunity(Name string) *System_Snmp_Community {
+
+	if t == nil {
+		return nil
+	}
+
+	key := Name
+
+	if lm, ok := t.Community[key]; ok {
+		return lm
+	}
+	return nil
+}
+
+// DeleteCommunity deletes the value with the specified keys from
+// the receiver System_Snmp. If there is no such element, the function
+// is a no-op.
+func (t *System_Snmp) DeleteCommunity(Name string) {
+	key := Name
+
+	delete(t.Community, key)
+}
+
+// AppendCommunity appends the supplied System_Snmp_Community struct to the
+// list Community of System_Snmp. If the key value(s) specified in
+// the supplied System_Snmp_Community already exist in the list, an error is
+// returned.
+func (t *System_Snmp) AppendCommunity(v *System_Snmp_Community) error {
+	if v.Name == nil {
+		return fmt.Errorf("invalid nil key received for Name")
+	}
+
+	key := *v.Name
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.Community == nil {
+		t.Community = make(map[string]*System_Snmp_Community)
+	}
+
+	if _, ok := t.Community[key]; ok {
+		return fmt.Errorf("duplicate key for list Community %v", key)
+	}
+
+	t.Community[key] = v
+	return nil
+}
+
+// GetOrCreateNotifications retrieves the value of the Notifications field
+// or returns the existing field if it already exists.
+func (t *System_Snmp) GetOrCreateNotifications() *System_Snmp_Notifications {
+	if t.Notifications != nil {
+		return t.Notifications
+	}
+	t.Notifications = &System_Snmp_Notifications{}
+	return t.Notifications
+}
+
+// GetNotifications returns the value of the Notifications struct pointer
+// from System_Snmp. If the receiver or the field Notifications is nil, nil
+// is returned such that the Get* methods can be safely chained.
+func (t *System_Snmp) GetNotifications() *System_Snmp_Notifications {
+	if t != nil && t.Notifications != nil {
+		return t.Notifications
+	}
+	return nil
+}
+
+// GetContact retrieves the value of the leaf Contact from the System_Snmp
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Contact is set, it can
+// safely use t.GetContact() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Contact == nil' before retrieving the leaf's value.
+func (t *System_Snmp) GetContact() string {
+	if t == nil || t.Contact == nil {
+		return ""
+	}
+	return *t.Contact
+}
+
+// GetLocation retrieves the value of the leaf Location from the System_Snmp
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Location is set, it can
+// safely use t.GetLocation() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Location == nil' before retrieving the leaf's value.
+func (t *System_Snmp) GetLocation() string {
+	if t == nil || t.Location == nil {
+		return ""
+	}
+	return *t.Location
+}
+
+// SetContact sets the value of the leaf Contact in the System_Snmp
+// struct.
+func (t *System_Snmp) SetContact(v string) {
+	t.Contact = &v
+}
+
+// SetLocation sets the value of the leaf Location in the System_Snmp
+// struct.
+func (t *System_Snmp) SetLocation(v string) {
+	t.Location = &v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the System_Snmp
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *System_Snmp) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+	t.Notifications.PopulateDefaults()
+	for _, e := range t.Community {
+		e.PopulateDefaults()
+	}
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *System_Snmp) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["System_Snmp"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *System_Snmp) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *System_Snmp) ΛEnumTypeMap() map[string][]reflect.Type { return ΛEnumTypes }
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of System_Snmp.
+func (*System_Snmp) ΛBelongingModule() string {
+	return "openconfig-system"
+}
+
+// System_Snmp_Community represents the /openconfig-system/system/snmp/communities/community YANG schema element.
+type System_Snmp_Community struct {
+	AccessList map[System_Snmp_Community_AccessList_Key]*System_Snmp_Community_AccessList `path:"access-lists/access-list" module:"openconfig-system/openconfig-system"`
+	AccessMode E_Snmp_SnmpAccessMode                                                      `path:"state/access-mode" module:"openconfig-system/openconfig-system" shadow-path:"config/access-mode" shadow-module:"openconfig-system/openconfig-system"`
+	Manager    map[string]*System_Snmp_Community_Manager                                  `path:"managers/manager" module:"openconfig-system/openconfig-system"`
+	Name       *string                                                                    `path:"state/name|name" module:"openconfig-system/openconfig-system|openconfig-system" shadow-path:"config/name|name" shadow-module:"openconfig-system/openconfig-system|openconfig-system"`
+	Version    E_Snmp_SnmpVersion                                                         `path:"state/version" module:"openconfig-system/openconfig-system" shadow-path:"config/version" shadow-module:"openconfig-system/openconfig-system"`
+}
+
+// IsYANGGoStruct ensures that System_Snmp_Community implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*System_Snmp_Community) IsYANGGoStruct() {}
+
+// System_Snmp_Community_AccessList_Key represents the key for list AccessList of element /openconfig-system/system/snmp/communities/community.
+type System_Snmp_Community_AccessList_Key struct {
+	Name string         `path:"name"`
+	Type E_Acl_ACL_TYPE `path:"type"`
+}
+
+// IsYANGGoKeyStruct ensures that System_Snmp_Community_AccessList_Key partially implements the
+// yang.GoKeyStruct interface. This allows functions that need to
+// handle this key struct to identify it as being generated by gogen.
+func (System_Snmp_Community_AccessList_Key) IsYANGGoKeyStruct() {}
+
+// ΛListKeyMap returns the values of the System_Snmp_Community_AccessList_Key key struct.
+func (t System_Snmp_Community_AccessList_Key) ΛListKeyMap() (map[string]interface{}, error) {
+	return map[string]interface{}{
+		"name": t.Name,
+		"type": t.Type,
+	}, nil
+}
+
+// NewAccessList creates a new entry in the AccessList list of the
+// System_Snmp_Community struct. The keys of the list are populated from the input
+// arguments.
+func (t *System_Snmp_Community) NewAccessList(Name string, Type E_Acl_ACL_TYPE) (*System_Snmp_Community_AccessList, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.AccessList == nil {
+		t.AccessList = make(map[System_Snmp_Community_AccessList_Key]*System_Snmp_Community_AccessList)
+	}
+
+	key := System_Snmp_Community_AccessList_Key{
+		Name: Name,
+		Type: Type,
+	}
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.AccessList[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list AccessList", key)
+	}
+
+	t.AccessList[key] = &System_Snmp_Community_AccessList{
+		Name: &Name,
+		Type: Type,
+	}
+
+	return t.AccessList[key], nil
+}
+
+// RenameAccessList renames an entry in the list AccessList within
+// the System_Snmp_Community struct. The entry with key oldK is renamed to newK updating
+// the key within the value.
+func (t *System_Snmp_Community) RenameAccessList(oldK, newK System_Snmp_Community_AccessList_Key) error {
+	if _, ok := t.AccessList[newK]; ok {
+		return fmt.Errorf("key %v already exists in AccessList", newK)
+	}
+
+	e, ok := t.AccessList[oldK]
+	if !ok {
+		return fmt.Errorf("key %v not found in AccessList", oldK)
+	}
+	e.Name = &newK.Name
+	e.Type = newK.Type
+
+	t.AccessList[newK] = e
+	delete(t.AccessList, oldK)
+	return nil
+}
+
+// GetOrCreateAccessListMap returns the list (map) from System_Snmp_Community.
+//
+// It initializes the field if not already initialized.
+func (t *System_Snmp_Community) GetOrCreateAccessListMap() map[System_Snmp_Community_AccessList_Key]*System_Snmp_Community_AccessList {
+	if t.AccessList == nil {
+		t.AccessList = make(map[System_Snmp_Community_AccessList_Key]*System_Snmp_Community_AccessList)
+	}
+	return t.AccessList
+}
+
+// GetOrCreateAccessList retrieves the value with the specified keys from
+// the receiver System_Snmp_Community. If the entry does not exist, then it is created.
+// It returns the existing or new list member.
+func (t *System_Snmp_Community) GetOrCreateAccessList(Name string, Type E_Acl_ACL_TYPE) *System_Snmp_Community_AccessList {
+
+	key := System_Snmp_Community_AccessList_Key{
+		Name: Name,
+		Type: Type,
+	}
+
+	if v, ok := t.AccessList[key]; ok {
+		return v
+	}
+	// Panic if we receive an error, since we should have retrieved an existing
+	// list member. This allows chaining of GetOrCreate methods.
+	v, err := t.NewAccessList(Name, Type)
+	if err != nil {
+		panic(fmt.Sprintf("GetOrCreateAccessList got unexpected error: %v", err))
+	}
+	return v
+}
+
+// GetAccessList retrieves the value with the specified key from
+// the AccessList map field of System_Snmp_Community. If the receiver is nil, or
+// the specified key is not present in the list, nil is returned such that Get*
+// methods may be safely chained.
+func (t *System_Snmp_Community) GetAccessList(Name string, Type E_Acl_ACL_TYPE) *System_Snmp_Community_AccessList {
+
+	if t == nil {
+		return nil
+	}
+
+	key := System_Snmp_Community_AccessList_Key{
+		Name: Name,
+		Type: Type,
+	}
+
+	if lm, ok := t.AccessList[key]; ok {
+		return lm
+	}
+	return nil
+}
+
+// DeleteAccessList deletes the value with the specified keys from
+// the receiver System_Snmp_Community. If there is no such element, the function
+// is a no-op.
+func (t *System_Snmp_Community) DeleteAccessList(Name string, Type E_Acl_ACL_TYPE) {
+	key := System_Snmp_Community_AccessList_Key{
+		Name: Name,
+		Type: Type,
+	}
+
+	delete(t.AccessList, key)
+}
+
+// AppendAccessList appends the supplied System_Snmp_Community_AccessList struct to the
+// list AccessList of System_Snmp_Community. If the key value(s) specified in
+// the supplied System_Snmp_Community_AccessList already exist in the list, an error is
+// returned.
+func (t *System_Snmp_Community) AppendAccessList(v *System_Snmp_Community_AccessList) error {
+	if v.Name == nil {
+		return fmt.Errorf("invalid nil key for Name")
+	}
+
+	key := System_Snmp_Community_AccessList_Key{
+		Name: *v.Name,
+		Type: v.Type,
+	}
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.AccessList == nil {
+		t.AccessList = make(map[System_Snmp_Community_AccessList_Key]*System_Snmp_Community_AccessList)
+	}
+
+	if _, ok := t.AccessList[key]; ok {
+		return fmt.Errorf("duplicate key for list AccessList %v", key)
+	}
+
+	t.AccessList[key] = v
+	return nil
+}
+
+// NewManager creates a new entry in the Manager list of the
+// System_Snmp_Community struct. The keys of the list are populated from the input
+// arguments.
+func (t *System_Snmp_Community) NewManager(Prefix string) (*System_Snmp_Community_Manager, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.Manager == nil {
+		t.Manager = make(map[string]*System_Snmp_Community_Manager)
+	}
+
+	key := Prefix
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.Manager[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Manager", key)
+	}
+
+	t.Manager[key] = &System_Snmp_Community_Manager{
+		Prefix: &Prefix,
+	}
+
+	return t.Manager[key], nil
+}
+
+// RenameManager renames an entry in the list Manager within
+// the System_Snmp_Community struct. The entry with key oldK is renamed to newK updating
+// the key within the value.
+func (t *System_Snmp_Community) RenameManager(oldK, newK string) error {
+	if _, ok := t.Manager[newK]; ok {
+		return fmt.Errorf("key %v already exists in Manager", newK)
+	}
+
+	e, ok := t.Manager[oldK]
+	if !ok {
+		return fmt.Errorf("key %v not found in Manager", oldK)
+	}
+	e.Prefix = &newK
+
+	t.Manager[newK] = e
+	delete(t.Manager, oldK)
+	return nil
+}
+
+// GetOrCreateManagerMap returns the list (map) from System_Snmp_Community.
+//
+// It initializes the field if not already initialized.
+func (t *System_Snmp_Community) GetOrCreateManagerMap() map[string]*System_Snmp_Community_Manager {
+	if t.Manager == nil {
+		t.Manager = make(map[string]*System_Snmp_Community_Manager)
+	}
+	return t.Manager
+}
+
+// GetOrCreateManager retrieves the value with the specified keys from
+// the receiver System_Snmp_Community. If the entry does not exist, then it is created.
+// It returns the existing or new list member.
+func (t *System_Snmp_Community) GetOrCreateManager(Prefix string) *System_Snmp_Community_Manager {
+
+	key := Prefix
+
+	if v, ok := t.Manager[key]; ok {
+		return v
+	}
+	// Panic if we receive an error, since we should have retrieved an existing
+	// list member. This allows chaining of GetOrCreate methods.
+	v, err := t.NewManager(Prefix)
+	if err != nil {
+		panic(fmt.Sprintf("GetOrCreateManager got unexpected error: %v", err))
+	}
+	return v
+}
+
+// GetManager retrieves the value with the specified key from
+// the Manager map field of System_Snmp_Community. If the receiver is nil, or
+// the specified key is not present in the list, nil is returned such that Get*
+// methods may be safely chained.
+func (t *System_Snmp_Community) GetManager(Prefix string) *System_Snmp_Community_Manager {
+
+	if t == nil {
+		return nil
+	}
+
+	key := Prefix
+
+	if lm, ok := t.Manager[key]; ok {
+		return lm
+	}
+	return nil
+}
+
+// DeleteManager deletes the value with the specified keys from
+// the receiver System_Snmp_Community. If there is no such element, the function
+// is a no-op.
+func (t *System_Snmp_Community) DeleteManager(Prefix string) {
+	key := Prefix
+
+	delete(t.Manager, key)
+}
+
+// AppendManager appends the supplied System_Snmp_Community_Manager struct to the
+// list Manager of System_Snmp_Community. If the key value(s) specified in
+// the supplied System_Snmp_Community_Manager already exist in the list, an error is
+// returned.
+func (t *System_Snmp_Community) AppendManager(v *System_Snmp_Community_Manager) error {
+	if v.Prefix == nil {
+		return fmt.Errorf("invalid nil key received for Prefix")
+	}
+
+	key := *v.Prefix
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.Manager == nil {
+		t.Manager = make(map[string]*System_Snmp_Community_Manager)
+	}
+
+	if _, ok := t.Manager[key]; ok {
+		return fmt.Errorf("duplicate key for list Manager %v", key)
+	}
+
+	t.Manager[key] = v
+	return nil
+}
+
+// GetAccessMode retrieves the value of the leaf AccessMode from the System_Snmp_Community
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if AccessMode is set, it can
+// safely use t.GetAccessMode() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.AccessMode == nil' before retrieving the leaf's value.
+func (t *System_Snmp_Community) GetAccessMode() E_Snmp_SnmpAccessMode {
+	if t == nil || t.AccessMode == 0 {
+		return 0
+	}
+	return t.AccessMode
+}
+
+// GetName retrieves the value of the leaf Name from the System_Snmp_Community
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Name is set, it can
+// safely use t.GetName() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Name == nil' before retrieving the leaf's value.
+func (t *System_Snmp_Community) GetName() string {
+	if t == nil || t.Name == nil {
+		return ""
+	}
+	return *t.Name
+}
+
+// GetVersion retrieves the value of the leaf Version from the System_Snmp_Community
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Version is set, it can
+// safely use t.GetVersion() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Version == nil' before retrieving the leaf's value.
+func (t *System_Snmp_Community) GetVersion() E_Snmp_SnmpVersion {
+	if t == nil || t.Version == 0 {
+		return 0
+	}
+	return t.Version
+}
+
+// SetAccessMode sets the value of the leaf AccessMode in the System_Snmp_Community
+// struct.
+func (t *System_Snmp_Community) SetAccessMode(v E_Snmp_SnmpAccessMode) {
+	t.AccessMode = v
+}
+
+// SetName sets the value of the leaf Name in the System_Snmp_Community
+// struct.
+func (t *System_Snmp_Community) SetName(v string) {
+	t.Name = &v
+}
+
+// SetVersion sets the value of the leaf Version in the System_Snmp_Community
+// struct.
+func (t *System_Snmp_Community) SetVersion(v E_Snmp_SnmpVersion) {
+	t.Version = v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the System_Snmp_Community
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *System_Snmp_Community) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+	for _, e := range t.AccessList {
+		e.PopulateDefaults()
+	}
+	for _, e := range t.Manager {
+		e.PopulateDefaults()
+	}
+}
+
+// ΛListKeyMap returns the keys of the System_Snmp_Community struct, which is a YANG list entry.
+func (t *System_Snmp_Community) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.Name == nil {
+		return nil, fmt.Errorf("nil value for key Name")
+	}
+
+	return map[string]interface{}{
+		"name": *t.Name,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *System_Snmp_Community) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["System_Snmp_Community"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *System_Snmp_Community) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *System_Snmp_Community) ΛEnumTypeMap() map[string][]reflect.Type { return ΛEnumTypes }
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of System_Snmp_Community.
+func (*System_Snmp_Community) ΛBelongingModule() string {
+	return "openconfig-system"
+}
+
+// System_Snmp_Community_AccessList represents the /openconfig-system/system/snmp/communities/community/access-lists/access-list YANG schema element.
+type System_Snmp_Community_AccessList struct {
+	Name *string        `path:"state/name|name" module:"openconfig-system/openconfig-system|openconfig-system" shadow-path:"config/name|name" shadow-module:"openconfig-system/openconfig-system|openconfig-system"`
+	Type E_Acl_ACL_TYPE `path:"state/type|type" module:"openconfig-system/openconfig-system|openconfig-system" shadow-path:"config/type|type" shadow-module:"openconfig-system/openconfig-system|openconfig-system"`
+}
+
+// IsYANGGoStruct ensures that System_Snmp_Community_AccessList implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*System_Snmp_Community_AccessList) IsYANGGoStruct() {}
+
+// GetName retrieves the value of the leaf Name from the System_Snmp_Community_AccessList
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Name is set, it can
+// safely use t.GetName() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Name == nil' before retrieving the leaf's value.
+func (t *System_Snmp_Community_AccessList) GetName() string {
+	if t == nil || t.Name == nil {
+		return ""
+	}
+	return *t.Name
+}
+
+// GetType retrieves the value of the leaf Type from the System_Snmp_Community_AccessList
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Type is set, it can
+// safely use t.GetType() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Type == nil' before retrieving the leaf's value.
+func (t *System_Snmp_Community_AccessList) GetType() E_Acl_ACL_TYPE {
+	if t == nil || t.Type == 0 {
+		return 0
+	}
+	return t.Type
+}
+
+// SetName sets the value of the leaf Name in the System_Snmp_Community_AccessList
+// struct.
+func (t *System_Snmp_Community_AccessList) SetName(v string) {
+	t.Name = &v
+}
+
+// SetType sets the value of the leaf Type in the System_Snmp_Community_AccessList
+// struct.
+func (t *System_Snmp_Community_AccessList) SetType(v E_Acl_ACL_TYPE) {
+	t.Type = v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the System_Snmp_Community_AccessList
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *System_Snmp_Community_AccessList) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// ΛListKeyMap returns the keys of the System_Snmp_Community_AccessList struct, which is a YANG list entry.
+func (t *System_Snmp_Community_AccessList) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.Name == nil {
+		return nil, fmt.Errorf("nil value for key Name")
+	}
+
+	return map[string]interface{}{
+		"name": *t.Name,
+		"type": t.Type,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *System_Snmp_Community_AccessList) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["System_Snmp_Community_AccessList"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *System_Snmp_Community_AccessList) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *System_Snmp_Community_AccessList) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of System_Snmp_Community_AccessList.
+func (*System_Snmp_Community_AccessList) ΛBelongingModule() string {
+	return "openconfig-system"
+}
+
+// System_Snmp_Community_Manager represents the /openconfig-system/system/snmp/communities/community/managers/manager YANG schema element.
+type System_Snmp_Community_Manager struct {
+	Prefix *string `path:"state/prefix|prefix" module:"openconfig-system/openconfig-system|openconfig-system" shadow-path:"config/prefix|prefix" shadow-module:"openconfig-system/openconfig-system|openconfig-system"`
+}
+
+// IsYANGGoStruct ensures that System_Snmp_Community_Manager implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*System_Snmp_Community_Manager) IsYANGGoStruct() {}
+
+// GetPrefix retrieves the value of the leaf Prefix from the System_Snmp_Community_Manager
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Prefix is set, it can
+// safely use t.GetPrefix() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Prefix == nil' before retrieving the leaf's value.
+func (t *System_Snmp_Community_Manager) GetPrefix() string {
+	if t == nil || t.Prefix == nil {
+		return ""
+	}
+	return *t.Prefix
+}
+
+// SetPrefix sets the value of the leaf Prefix in the System_Snmp_Community_Manager
+// struct.
+func (t *System_Snmp_Community_Manager) SetPrefix(v string) {
+	t.Prefix = &v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the System_Snmp_Community_Manager
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *System_Snmp_Community_Manager) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// ΛListKeyMap returns the keys of the System_Snmp_Community_Manager struct, which is a YANG list entry.
+func (t *System_Snmp_Community_Manager) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.Prefix == nil {
+		return nil, fmt.Errorf("nil value for key Prefix")
+	}
+
+	return map[string]interface{}{
+		"prefix": *t.Prefix,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *System_Snmp_Community_Manager) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["System_Snmp_Community_Manager"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *System_Snmp_Community_Manager) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *System_Snmp_Community_Manager) ΛEnumTypeMap() map[string][]reflect.Type { return ΛEnumTypes }
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of System_Snmp_Community_Manager.
+func (*System_Snmp_Community_Manager) ΛBelongingModule() string {
+	return "openconfig-system"
+}
+
+// System_Snmp_Notifications represents the /openconfig-system/system/snmp/notifications YANG schema element.
+type System_Snmp_Notifications struct {
+	EventType []E_Snmp_SNMP_NOTIFICATION_EVENT               `path:"state/event-type" module:"openconfig-system/openconfig-system" shadow-path:"config/event-type" shadow-module:"openconfig-system/openconfig-system"`
+	Receiver  map[string]*System_Snmp_Notifications_Receiver `path:"receivers/receiver" module:"openconfig-system/openconfig-system"`
+}
+
+// IsYANGGoStruct ensures that System_Snmp_Notifications implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*System_Snmp_Notifications) IsYANGGoStruct() {}
+
+// NewReceiver creates a new entry in the Receiver list of the
+// System_Snmp_Notifications struct. The keys of the list are populated from the input
+// arguments.
+func (t *System_Snmp_Notifications) NewReceiver(Name string) (*System_Snmp_Notifications_Receiver, error) {
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.Receiver == nil {
+		t.Receiver = make(map[string]*System_Snmp_Notifications_Receiver)
+	}
+
+	key := Name
+
+	// Ensure that this key has not already been used in the
+	// list. Keyed YANG lists do not allow duplicate keys to
+	// be created.
+	if _, ok := t.Receiver[key]; ok {
+		return nil, fmt.Errorf("duplicate key %v for list Receiver", key)
+	}
+
+	t.Receiver[key] = &System_Snmp_Notifications_Receiver{
+		Name: &Name,
+	}
+
+	return t.Receiver[key], nil
+}
+
+// RenameReceiver renames an entry in the list Receiver within
+// the System_Snmp_Notifications struct. The entry with key oldK is renamed to newK updating
+// the key within the value.
+func (t *System_Snmp_Notifications) RenameReceiver(oldK, newK string) error {
+	if _, ok := t.Receiver[newK]; ok {
+		return fmt.Errorf("key %v already exists in Receiver", newK)
+	}
+
+	e, ok := t.Receiver[oldK]
+	if !ok {
+		return fmt.Errorf("key %v not found in Receiver", oldK)
+	}
+	e.Name = &newK
+
+	t.Receiver[newK] = e
+	delete(t.Receiver, oldK)
+	return nil
+}
+
+// GetOrCreateReceiverMap returns the list (map) from System_Snmp_Notifications.
+//
+// It initializes the field if not already initialized.
+func (t *System_Snmp_Notifications) GetOrCreateReceiverMap() map[string]*System_Snmp_Notifications_Receiver {
+	if t.Receiver == nil {
+		t.Receiver = make(map[string]*System_Snmp_Notifications_Receiver)
+	}
+	return t.Receiver
+}
+
+// GetOrCreateReceiver retrieves the value with the specified keys from
+// the receiver System_Snmp_Notifications. If the entry does not exist, then it is created.
+// It returns the existing or new list member.
+func (t *System_Snmp_Notifications) GetOrCreateReceiver(Name string) *System_Snmp_Notifications_Receiver {
+
+	key := Name
+
+	if v, ok := t.Receiver[key]; ok {
+		return v
+	}
+	// Panic if we receive an error, since we should have retrieved an existing
+	// list member. This allows chaining of GetOrCreate methods.
+	v, err := t.NewReceiver(Name)
+	if err != nil {
+		panic(fmt.Sprintf("GetOrCreateReceiver got unexpected error: %v", err))
+	}
+	return v
+}
+
+// GetReceiver retrieves the value with the specified key from
+// the Receiver map field of System_Snmp_Notifications. If the receiver is nil, or
+// the specified key is not present in the list, nil is returned such that Get*
+// methods may be safely chained.
+func (t *System_Snmp_Notifications) GetReceiver(Name string) *System_Snmp_Notifications_Receiver {
+
+	if t == nil {
+		return nil
+	}
+
+	key := Name
+
+	if lm, ok := t.Receiver[key]; ok {
+		return lm
+	}
+	return nil
+}
+
+// DeleteReceiver deletes the value with the specified keys from
+// the receiver System_Snmp_Notifications. If there is no such element, the function
+// is a no-op.
+func (t *System_Snmp_Notifications) DeleteReceiver(Name string) {
+	key := Name
+
+	delete(t.Receiver, key)
+}
+
+// AppendReceiver appends the supplied System_Snmp_Notifications_Receiver struct to the
+// list Receiver of System_Snmp_Notifications. If the key value(s) specified in
+// the supplied System_Snmp_Notifications_Receiver already exist in the list, an error is
+// returned.
+func (t *System_Snmp_Notifications) AppendReceiver(v *System_Snmp_Notifications_Receiver) error {
+	if v.Name == nil {
+		return fmt.Errorf("invalid nil key received for Name")
+	}
+
+	key := *v.Name
+
+	// Initialise the list within the receiver struct if it has not already been
+	// created.
+	if t.Receiver == nil {
+		t.Receiver = make(map[string]*System_Snmp_Notifications_Receiver)
+	}
+
+	if _, ok := t.Receiver[key]; ok {
+		return fmt.Errorf("duplicate key for list Receiver %v", key)
+	}
+
+	t.Receiver[key] = v
+	return nil
+}
+
+// GetEventType retrieves the value of the leaf EventType from the System_Snmp_Notifications
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if EventType is set, it can
+// safely use t.GetEventType() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.EventType == nil' before retrieving the leaf's value.
+func (t *System_Snmp_Notifications) GetEventType() []E_Snmp_SNMP_NOTIFICATION_EVENT {
+	if t == nil || t.EventType == nil {
+		return nil
+	}
+	return t.EventType
+}
+
+// SetEventType sets the value of the leaf EventType in the System_Snmp_Notifications
+// struct.
+func (t *System_Snmp_Notifications) SetEventType(v []E_Snmp_SNMP_NOTIFICATION_EVENT) {
+	t.EventType = v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the System_Snmp_Notifications
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *System_Snmp_Notifications) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+	for _, e := range t.Receiver {
+		e.PopulateDefaults()
+	}
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *System_Snmp_Notifications) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["System_Snmp_Notifications"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *System_Snmp_Notifications) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *System_Snmp_Notifications) ΛEnumTypeMap() map[string][]reflect.Type { return ΛEnumTypes }
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of System_Snmp_Notifications.
+func (*System_Snmp_Notifications) ΛBelongingModule() string {
+	return "openconfig-system"
+}
+
+// System_Snmp_Notifications_Receiver represents the /openconfig-system/system/snmp/notifications/receivers/receiver YANG schema element.
+type System_Snmp_Notifications_Receiver struct {
+	Address              *string                          `path:"state/address" module:"openconfig-system/openconfig-system" shadow-path:"config/address" shadow-module:"openconfig-system/openconfig-system"`
+	Community            *string                          `path:"state/community" module:"openconfig-system/openconfig-system" shadow-path:"config/community" shadow-module:"openconfig-system/openconfig-system"`
+	EventType            []E_Snmp_SNMP_NOTIFICATION_EVENT `path:"state/event-type" module:"openconfig-system/openconfig-system" shadow-path:"config/event-type" shadow-module:"openconfig-system/openconfig-system"`
+	Name                 *string                          `path:"state/name|name" module:"openconfig-system/openconfig-system|openconfig-system" shadow-path:"config/name|name" shadow-module:"openconfig-system/openconfig-system|openconfig-system"`
+	NotificationType     E_Snmp_SnmpNotificationType      `path:"state/notification-type" module:"openconfig-system/openconfig-system" shadow-path:"config/notification-type" shadow-module:"openconfig-system/openconfig-system"`
+	NotificationsDropped *uint64                          `path:"state/notifications-dropped" module:"openconfig-system/openconfig-system"`
+	NotificationsSent    *uint64                          `path:"state/notifications-sent" module:"openconfig-system/openconfig-system"`
+	Port                 *uint16                          `path:"state/port" module:"openconfig-system/openconfig-system" shadow-path:"config/port" shadow-module:"openconfig-system/openconfig-system"`
+	Version              E_Snmp_SnmpVersion               `path:"state/version" module:"openconfig-system/openconfig-system" shadow-path:"config/version" shadow-module:"openconfig-system/openconfig-system"`
+}
+
+// IsYANGGoStruct ensures that System_Snmp_Notifications_Receiver implements the yang.GoStruct
+// interface. This allows functions that need to handle this struct to
+// identify it as being generated by ygen.
+func (*System_Snmp_Notifications_Receiver) IsYANGGoStruct() {}
+
+// GetAddress retrieves the value of the leaf Address from the System_Snmp_Notifications_Receiver
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Address is set, it can
+// safely use t.GetAddress() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Address == nil' before retrieving the leaf's value.
+func (t *System_Snmp_Notifications_Receiver) GetAddress() string {
+	if t == nil || t.Address == nil {
+		return ""
+	}
+	return *t.Address
+}
+
+// GetCommunity retrieves the value of the leaf Community from the System_Snmp_Notifications_Receiver
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Community is set, it can
+// safely use t.GetCommunity() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Community == nil' before retrieving the leaf's value.
+func (t *System_Snmp_Notifications_Receiver) GetCommunity() string {
+	if t == nil || t.Community == nil {
+		return ""
+	}
+	return *t.Community
+}
+
+// GetEventType retrieves the value of the leaf EventType from the System_Snmp_Notifications_Receiver
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if EventType is set, it can
+// safely use t.GetEventType() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.EventType == nil' before retrieving the leaf's value.
+func (t *System_Snmp_Notifications_Receiver) GetEventType() []E_Snmp_SNMP_NOTIFICATION_EVENT {
+	if t == nil || t.EventType == nil {
+		return nil
+	}
+	return t.EventType
+}
+
+// GetName retrieves the value of the leaf Name from the System_Snmp_Notifications_Receiver
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Name is set, it can
+// safely use t.GetName() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Name == nil' before retrieving the leaf's value.
+func (t *System_Snmp_Notifications_Receiver) GetName() string {
+	if t == nil || t.Name == nil {
+		return ""
+	}
+	return *t.Name
+}
+
+// GetNotificationType retrieves the value of the leaf NotificationType from the System_Snmp_Notifications_Receiver
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if NotificationType is set, it can
+// safely use t.GetNotificationType() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.NotificationType == nil' before retrieving the leaf's value.
+func (t *System_Snmp_Notifications_Receiver) GetNotificationType() E_Snmp_SnmpNotificationType {
+	if t == nil || t.NotificationType == 0 {
+		return 0
+	}
+	return t.NotificationType
+}
+
+// GetNotificationsDropped retrieves the value of the leaf NotificationsDropped from the System_Snmp_Notifications_Receiver
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if NotificationsDropped is set, it can
+// safely use t.GetNotificationsDropped() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.NotificationsDropped == nil' before retrieving the leaf's value.
+func (t *System_Snmp_Notifications_Receiver) GetNotificationsDropped() uint64 {
+	if t == nil || t.NotificationsDropped == nil {
+		return 0
+	}
+	return *t.NotificationsDropped
+}
+
+// GetNotificationsSent retrieves the value of the leaf NotificationsSent from the System_Snmp_Notifications_Receiver
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if NotificationsSent is set, it can
+// safely use t.GetNotificationsSent() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.NotificationsSent == nil' before retrieving the leaf's value.
+func (t *System_Snmp_Notifications_Receiver) GetNotificationsSent() uint64 {
+	if t == nil || t.NotificationsSent == nil {
+		return 0
+	}
+	return *t.NotificationsSent
+}
+
+// GetPort retrieves the value of the leaf Port from the System_Snmp_Notifications_Receiver
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Port is set, it can
+// safely use t.GetPort() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Port == nil' before retrieving the leaf's value.
+func (t *System_Snmp_Notifications_Receiver) GetPort() uint16 {
+	if t == nil || t.Port == nil {
+		return 0
+	}
+	return *t.Port
+}
+
+// GetVersion retrieves the value of the leaf Version from the System_Snmp_Notifications_Receiver
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Version is set, it can
+// safely use t.GetVersion() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Version == nil' before retrieving the leaf's value.
+func (t *System_Snmp_Notifications_Receiver) GetVersion() E_Snmp_SnmpVersion {
+	if t == nil || t.Version == 0 {
+		return 0
+	}
+	return t.Version
+}
+
+// SetAddress sets the value of the leaf Address in the System_Snmp_Notifications_Receiver
+// struct.
+func (t *System_Snmp_Notifications_Receiver) SetAddress(v string) {
+	t.Address = &v
+}
+
+// SetCommunity sets the value of the leaf Community in the System_Snmp_Notifications_Receiver
+// struct.
+func (t *System_Snmp_Notifications_Receiver) SetCommunity(v string) {
+	t.Community = &v
+}
+
+// SetEventType sets the value of the leaf EventType in the System_Snmp_Notifications_Receiver
+// struct.
+func (t *System_Snmp_Notifications_Receiver) SetEventType(v []E_Snmp_SNMP_NOTIFICATION_EVENT) {
+	t.EventType = v
+}
+
+// SetName sets the value of the leaf Name in the System_Snmp_Notifications_Receiver
+// struct.
+func (t *System_Snmp_Notifications_Receiver) SetName(v string) {
+	t.Name = &v
+}
+
+// SetNotificationType sets the value of the leaf NotificationType in the System_Snmp_Notifications_Receiver
+// struct.
+func (t *System_Snmp_Notifications_Receiver) SetNotificationType(v E_Snmp_SnmpNotificationType) {
+	t.NotificationType = v
+}
+
+// SetNotificationsDropped sets the value of the leaf NotificationsDropped in the System_Snmp_Notifications_Receiver
+// struct.
+func (t *System_Snmp_Notifications_Receiver) SetNotificationsDropped(v uint64) {
+	t.NotificationsDropped = &v
+}
+
+// SetNotificationsSent sets the value of the leaf NotificationsSent in the System_Snmp_Notifications_Receiver
+// struct.
+func (t *System_Snmp_Notifications_Receiver) SetNotificationsSent(v uint64) {
+	t.NotificationsSent = &v
+}
+
+// SetPort sets the value of the leaf Port in the System_Snmp_Notifications_Receiver
+// struct.
+func (t *System_Snmp_Notifications_Receiver) SetPort(v uint16) {
+	t.Port = &v
+}
+
+// SetVersion sets the value of the leaf Version in the System_Snmp_Notifications_Receiver
+// struct.
+func (t *System_Snmp_Notifications_Receiver) SetVersion(v E_Snmp_SnmpVersion) {
+	t.Version = v
+}
+
+// PopulateDefaults recursively populates unset leaf fields in the System_Snmp_Notifications_Receiver
+// with default values as specified in the YANG schema, instantiating any nil
+// container fields.
+func (t *System_Snmp_Notifications_Receiver) PopulateDefaults() {
+	if t == nil {
+		return
+	}
+	ygot.BuildEmptyTree(t)
+}
+
+// ΛListKeyMap returns the keys of the System_Snmp_Notifications_Receiver struct, which is a YANG list entry.
+func (t *System_Snmp_Notifications_Receiver) ΛListKeyMap() (map[string]interface{}, error) {
+	if t.Name == nil {
+		return nil, fmt.Errorf("nil value for key Name")
+	}
+
+	return map[string]interface{}{
+		"name": *t.Name,
+	}, nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *System_Snmp_Notifications_Receiver) ΛValidate(opts ...ygot.ValidationOption) error {
+	if err := ytypes.Validate(SchemaTree["System_Snmp_Notifications_Receiver"], t, opts...); err != nil {
+		return err
+	}
+	return nil
+}
+
+// Validate validates s against the YANG schema corresponding to its type.
+func (t *System_Snmp_Notifications_Receiver) Validate(opts ...ygot.ValidationOption) error {
+	return t.ΛValidate(opts...)
+}
+
+// ΛEnumTypeMap returns a map, keyed by YANG schema path, of the enumerated types
+// that are included in the generated code.
+func (t *System_Snmp_Notifications_Receiver) ΛEnumTypeMap() map[string][]reflect.Type {
+	return ΛEnumTypes
+}
+
+// ΛBelongingModule returns the name of the module that defines the namespace
+// of System_Snmp_Notifications_Receiver.
+func (*System_Snmp_Notifications_Receiver) ΛBelongingModule() string {
+	return "openconfig-system"
+}
+
 // System_SshServer represents the /openconfig-system/system/ssh-server YANG schema element.
 type System_SshServer struct {
 	ActiveHostCertificateCreatedOn   *uint64                     `path:"state/active-host-certificate-created-on" module:"openconfig-system/openconfig-gnsi-credentialz"`
@@ -263678,6 +273345,7 @@ type System_SshServer struct {
 	ActiveTrustedUserCaKeysVersion   *string                     `path:"state/active-trusted-user-ca-keys-version" module:"openconfig-system/openconfig-gnsi-credentialz"`
 	Counters                         *System_SshServer_Counters  `path:"state/counters" module:"openconfig-system/openconfig-gnsi-credentialz"`
 	Enable                           *bool                       `path:"state/enable" module:"openconfig-system/openconfig-system" shadow-path:"config/enable" shadow-module:"openconfig-system/openconfig-system"`
+	HostCertificate                  *string                     `path:"state/host-certificate" module:"openconfig-system/openconfig-system" shadow-path:"config/host-certificate" shadow-module:"openconfig-system/openconfig-system"`
 	ProtocolVersion                  E_SshServer_ProtocolVersion `path:"state/protocol-version" module:"openconfig-system/openconfig-system" shadow-path:"config/protocol-version" shadow-module:"openconfig-system/openconfig-system"`
 	RateLimit                        *uint16                     `path:"state/rate-limit" module:"openconfig-system/openconfig-system" shadow-path:"config/rate-limit" shadow-module:"openconfig-system/openconfig-system"`
 	SessionLimit                     *uint16                     `path:"state/session-limit" module:"openconfig-system/openconfig-system" shadow-path:"config/session-limit" shadow-module:"openconfig-system/openconfig-system"`
@@ -263837,6 +273505,22 @@ func (t *System_SshServer) GetEnable() bool {
 	return *t.Enable
 }
 
+// GetHostCertificate retrieves the value of the leaf HostCertificate from the System_SshServer
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if HostCertificate is set, it can
+// safely use t.GetHostCertificate() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.HostCertificate == nil' before retrieving the leaf's value.
+func (t *System_SshServer) GetHostCertificate() string {
+	if t == nil || t.HostCertificate == nil {
+		return ""
+	}
+	return *t.HostCertificate
+}
+
 // GetProtocolVersion retrieves the value of the leaf ProtocolVersion from the System_SshServer
 // struct. If the field is unset but has a default value in the YANG schema,
 // then the default value will be returned.
@@ -263947,6 +273631,12 @@ func (t *System_SshServer) SetActiveTrustedUserCaKeysVersion(v string) {
 // struct.
 func (t *System_SshServer) SetEnable(v bool) {
 	t.Enable = &v
+}
+
+// SetHostCertificate sets the value of the leaf HostCertificate in the System_SshServer
+// struct.
+func (t *System_SshServer) SetHostCertificate(v string) {
+	t.HostCertificate = &v
 }
 
 // SetProtocolVersion sets the value of the leaf ProtocolVersion in the System_SshServer
@@ -266688,10 +276378,12 @@ func (*TerminalDevice_Channel_Ethernet_Esnr) ΛBelongingModule() string {
 
 // TerminalDevice_Channel_Ethernet_Lldp represents the /openconfig-terminal-device/terminal-device/logical-channels/channel/ethernet/lldp YANG schema element.
 type TerminalDevice_Channel_Ethernet_Lldp struct {
-	Counters *TerminalDevice_Channel_Ethernet_Lldp_Counters            `path:"state/counters" module:"openconfig-terminal-device/openconfig-terminal-device"`
-	Enabled  *bool                                                     `path:"state/enabled" module:"openconfig-terminal-device/openconfig-terminal-device" shadow-path:"config/enabled" shadow-module:"openconfig-terminal-device/openconfig-terminal-device"`
-	Neighbor map[string]*TerminalDevice_Channel_Ethernet_Lldp_Neighbor `path:"neighbors/neighbor" module:"openconfig-terminal-device/openconfig-terminal-device"`
-	Snooping *bool                                                     `path:"state/snooping" module:"openconfig-terminal-device/openconfig-terminal-device" shadow-path:"config/snooping" shadow-module:"openconfig-terminal-device/openconfig-terminal-device"`
+	Counters               *TerminalDevice_Channel_Ethernet_Lldp_Counters            `path:"state/counters" module:"openconfig-terminal-device/openconfig-terminal-device"`
+	Enabled                *bool                                                     `path:"state/enabled" module:"openconfig-terminal-device/openconfig-terminal-device" shadow-path:"config/enabled" shadow-module:"openconfig-terminal-device/openconfig-terminal-device"`
+	LastGoodPacketReceived *uint64                                                   `path:"state/last-good-packet-received" module:"openconfig-terminal-device/openconfig-terminal-device"`
+	LastPacketTransmitted  *uint64                                                   `path:"state/last-packet-transmitted" module:"openconfig-terminal-device/openconfig-terminal-device"`
+	Neighbor               map[string]*TerminalDevice_Channel_Ethernet_Lldp_Neighbor `path:"neighbors/neighbor" module:"openconfig-terminal-device/openconfig-terminal-device"`
+	Snooping               *bool                                                     `path:"state/snooping" module:"openconfig-terminal-device/openconfig-terminal-device" shadow-path:"config/snooping" shadow-module:"openconfig-terminal-device/openconfig-terminal-device"`
 }
 
 // IsYANGGoStruct ensures that TerminalDevice_Channel_Ethernet_Lldp implements the yang.GoStruct
@@ -266862,6 +276554,38 @@ func (t *TerminalDevice_Channel_Ethernet_Lldp) GetEnabled() bool {
 	return *t.Enabled
 }
 
+// GetLastGoodPacketReceived retrieves the value of the leaf LastGoodPacketReceived from the TerminalDevice_Channel_Ethernet_Lldp
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if LastGoodPacketReceived is set, it can
+// safely use t.GetLastGoodPacketReceived() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.LastGoodPacketReceived == nil' before retrieving the leaf's value.
+func (t *TerminalDevice_Channel_Ethernet_Lldp) GetLastGoodPacketReceived() uint64 {
+	if t == nil || t.LastGoodPacketReceived == nil {
+		return 0
+	}
+	return *t.LastGoodPacketReceived
+}
+
+// GetLastPacketTransmitted retrieves the value of the leaf LastPacketTransmitted from the TerminalDevice_Channel_Ethernet_Lldp
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if LastPacketTransmitted is set, it can
+// safely use t.GetLastPacketTransmitted() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.LastPacketTransmitted == nil' before retrieving the leaf's value.
+func (t *TerminalDevice_Channel_Ethernet_Lldp) GetLastPacketTransmitted() uint64 {
+	if t == nil || t.LastPacketTransmitted == nil {
+		return 0
+	}
+	return *t.LastPacketTransmitted
+}
+
 // GetSnooping retrieves the value of the leaf Snooping from the TerminalDevice_Channel_Ethernet_Lldp
 // struct. If the field is unset but has a default value in the YANG schema,
 // then the default value will be returned.
@@ -266882,6 +276606,18 @@ func (t *TerminalDevice_Channel_Ethernet_Lldp) GetSnooping() bool {
 // struct.
 func (t *TerminalDevice_Channel_Ethernet_Lldp) SetEnabled(v bool) {
 	t.Enabled = &v
+}
+
+// SetLastGoodPacketReceived sets the value of the leaf LastGoodPacketReceived in the TerminalDevice_Channel_Ethernet_Lldp
+// struct.
+func (t *TerminalDevice_Channel_Ethernet_Lldp) SetLastGoodPacketReceived(v uint64) {
+	t.LastGoodPacketReceived = &v
+}
+
+// SetLastPacketTransmitted sets the value of the leaf LastPacketTransmitted in the TerminalDevice_Channel_Ethernet_Lldp
+// struct.
+func (t *TerminalDevice_Channel_Ethernet_Lldp) SetLastPacketTransmitted(v uint64) {
+	t.LastPacketTransmitted = &v
 }
 
 // SetSnooping sets the value of the leaf Snooping in the TerminalDevice_Channel_Ethernet_Lldp
@@ -267167,21 +276903,24 @@ func (*TerminalDevice_Channel_Ethernet_Lldp_Counters) ΛBelongingModule() string
 
 // TerminalDevice_Channel_Ethernet_Lldp_Neighbor represents the /openconfig-terminal-device/terminal-device/logical-channels/channel/ethernet/lldp/neighbors/neighbor YANG schema element.
 type TerminalDevice_Channel_Ethernet_Lldp_Neighbor struct {
-	Age                   *uint64                                                                                                      `path:"state/age" module:"openconfig-terminal-device/openconfig-terminal-device"`
-	ChassisId             *string                                                                                                      `path:"state/chassis-id" module:"openconfig-terminal-device/openconfig-terminal-device"`
-	ChassisIdType         E_Lldp_ChassisIdType                                                                                         `path:"state/chassis-id-type" module:"openconfig-terminal-device/openconfig-terminal-device"`
-	Id                    *string                                                                                                      `path:"state/id|id" module:"openconfig-terminal-device/openconfig-terminal-device|openconfig-terminal-device" shadow-path:"id" shadow-module:"openconfig-terminal-device"`
-	LastUpdate            *int64                                                                                                       `path:"state/last-update" module:"openconfig-terminal-device/openconfig-terminal-device"`
-	ManagementAddress     *string                                                                                                      `path:"state/management-address" module:"openconfig-terminal-device/openconfig-terminal-device"`
-	ManagementAddressType *string                                                                                                      `path:"state/management-address-type" module:"openconfig-terminal-device/openconfig-terminal-device"`
-	ManagementInterface   *string                                                                                                      `path:"state/management-interface" module:"openconfig-terminal-device/openconfig-terminal-device"`
-	PortDescription       *string                                                                                                      `path:"state/port-description" module:"openconfig-terminal-device/openconfig-terminal-device"`
-	PortId                *string                                                                                                      `path:"state/port-id" module:"openconfig-terminal-device/openconfig-terminal-device"`
-	PortIdType            E_Lldp_PortIdType                                                                                            `path:"state/port-id-type" module:"openconfig-terminal-device/openconfig-terminal-device"`
-	SystemDescription     *string                                                                                                      `path:"state/system-description" module:"openconfig-terminal-device/openconfig-terminal-device"`
-	SystemName            *string                                                                                                      `path:"state/system-name" module:"openconfig-terminal-device/openconfig-terminal-device"`
-	Tlv                   map[TerminalDevice_Channel_Ethernet_Lldp_Neighbor_Tlv_Key]*TerminalDevice_Channel_Ethernet_Lldp_Neighbor_Tlv `path:"custom-tlvs/tlv" module:"openconfig-terminal-device/openconfig-terminal-device"`
-	Ttl                   *uint16                                                                                                      `path:"state/ttl" module:"openconfig-terminal-device/openconfig-terminal-device"`
+	Age                      *uint64                                                                                                      `path:"state/age" module:"openconfig-terminal-device/openconfig-terminal-device"`
+	ChassisId                *string                                                                                                      `path:"state/chassis-id" module:"openconfig-terminal-device/openconfig-terminal-device"`
+	ChassisIdType            E_Lldp_ChassisIdType                                                                                         `path:"state/chassis-id-type" module:"openconfig-terminal-device/openconfig-terminal-device"`
+	Id                       *string                                                                                                      `path:"state/id|id" module:"openconfig-terminal-device/openconfig-terminal-device|openconfig-terminal-device" shadow-path:"id" shadow-module:"openconfig-terminal-device"`
+	LastUpdate               *int64                                                                                                       `path:"state/last-update" module:"openconfig-terminal-device/openconfig-terminal-device"`
+	ManagementAddress        *string                                                                                                      `path:"state/management-address" module:"openconfig-terminal-device/openconfig-terminal-device"`
+	ManagementAddressType    *string                                                                                                      `path:"state/management-address-type" module:"openconfig-terminal-device/openconfig-terminal-device"`
+	ManagementInterface      *string                                                                                                      `path:"state/management-interface" module:"openconfig-terminal-device/openconfig-terminal-device"`
+	MaxFrameSize             *uint16                                                                                                      `path:"state/max-frame-size" module:"openconfig-terminal-device/openconfig-terminal-device"`
+	MedInventorySerialNumber *string                                                                                                      `path:"state/med-inventory-serial-number" module:"openconfig-terminal-device/openconfig-terminal-device"`
+	PortDescription          *string                                                                                                      `path:"state/port-description" module:"openconfig-terminal-device/openconfig-terminal-device"`
+	PortId                   *string                                                                                                      `path:"state/port-id" module:"openconfig-terminal-device/openconfig-terminal-device"`
+	PortIdType               E_Lldp_PortIdType                                                                                            `path:"state/port-id-type" module:"openconfig-terminal-device/openconfig-terminal-device"`
+	PortVlanId               *uint16                                                                                                      `path:"state/port-vlan-id" module:"openconfig-terminal-device/openconfig-terminal-device"`
+	SystemDescription        *string                                                                                                      `path:"state/system-description" module:"openconfig-terminal-device/openconfig-terminal-device"`
+	SystemName               *string                                                                                                      `path:"state/system-name" module:"openconfig-terminal-device/openconfig-terminal-device"`
+	Tlv                      map[TerminalDevice_Channel_Ethernet_Lldp_Neighbor_Tlv_Key]*TerminalDevice_Channel_Ethernet_Lldp_Neighbor_Tlv `path:"custom-tlvs/tlv" module:"openconfig-terminal-device/openconfig-terminal-device"`
+	Ttl                      *uint16                                                                                                      `path:"state/ttl" module:"openconfig-terminal-device/openconfig-terminal-device"`
 }
 
 // IsYANGGoStruct ensures that TerminalDevice_Channel_Ethernet_Lldp_Neighbor implements the yang.GoStruct
@@ -267497,6 +277236,38 @@ func (t *TerminalDevice_Channel_Ethernet_Lldp_Neighbor) GetManagementInterface()
 	return *t.ManagementInterface
 }
 
+// GetMaxFrameSize retrieves the value of the leaf MaxFrameSize from the TerminalDevice_Channel_Ethernet_Lldp_Neighbor
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if MaxFrameSize is set, it can
+// safely use t.GetMaxFrameSize() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.MaxFrameSize == nil' before retrieving the leaf's value.
+func (t *TerminalDevice_Channel_Ethernet_Lldp_Neighbor) GetMaxFrameSize() uint16 {
+	if t == nil || t.MaxFrameSize == nil {
+		return 0
+	}
+	return *t.MaxFrameSize
+}
+
+// GetMedInventorySerialNumber retrieves the value of the leaf MedInventorySerialNumber from the TerminalDevice_Channel_Ethernet_Lldp_Neighbor
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if MedInventorySerialNumber is set, it can
+// safely use t.GetMedInventorySerialNumber() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.MedInventorySerialNumber == nil' before retrieving the leaf's value.
+func (t *TerminalDevice_Channel_Ethernet_Lldp_Neighbor) GetMedInventorySerialNumber() string {
+	if t == nil || t.MedInventorySerialNumber == nil {
+		return ""
+	}
+	return *t.MedInventorySerialNumber
+}
+
 // GetPortDescription retrieves the value of the leaf PortDescription from the TerminalDevice_Channel_Ethernet_Lldp_Neighbor
 // struct. If the field is unset but has a default value in the YANG schema,
 // then the default value will be returned.
@@ -267543,6 +277314,22 @@ func (t *TerminalDevice_Channel_Ethernet_Lldp_Neighbor) GetPortIdType() E_Lldp_P
 		return 0
 	}
 	return t.PortIdType
+}
+
+// GetPortVlanId retrieves the value of the leaf PortVlanId from the TerminalDevice_Channel_Ethernet_Lldp_Neighbor
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if PortVlanId is set, it can
+// safely use t.GetPortVlanId() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.PortVlanId == nil' before retrieving the leaf's value.
+func (t *TerminalDevice_Channel_Ethernet_Lldp_Neighbor) GetPortVlanId() uint16 {
+	if t == nil || t.PortVlanId == nil {
+		return 0
+	}
+	return *t.PortVlanId
 }
 
 // GetSystemDescription retrieves the value of the leaf SystemDescription from the TerminalDevice_Channel_Ethernet_Lldp_Neighbor
@@ -267641,6 +277428,18 @@ func (t *TerminalDevice_Channel_Ethernet_Lldp_Neighbor) SetManagementInterface(v
 	t.ManagementInterface = &v
 }
 
+// SetMaxFrameSize sets the value of the leaf MaxFrameSize in the TerminalDevice_Channel_Ethernet_Lldp_Neighbor
+// struct.
+func (t *TerminalDevice_Channel_Ethernet_Lldp_Neighbor) SetMaxFrameSize(v uint16) {
+	t.MaxFrameSize = &v
+}
+
+// SetMedInventorySerialNumber sets the value of the leaf MedInventorySerialNumber in the TerminalDevice_Channel_Ethernet_Lldp_Neighbor
+// struct.
+func (t *TerminalDevice_Channel_Ethernet_Lldp_Neighbor) SetMedInventorySerialNumber(v string) {
+	t.MedInventorySerialNumber = &v
+}
+
 // SetPortDescription sets the value of the leaf PortDescription in the TerminalDevice_Channel_Ethernet_Lldp_Neighbor
 // struct.
 func (t *TerminalDevice_Channel_Ethernet_Lldp_Neighbor) SetPortDescription(v string) {
@@ -267657,6 +277456,12 @@ func (t *TerminalDevice_Channel_Ethernet_Lldp_Neighbor) SetPortId(v string) {
 // struct.
 func (t *TerminalDevice_Channel_Ethernet_Lldp_Neighbor) SetPortIdType(v E_Lldp_PortIdType) {
 	t.PortIdType = v
+}
+
+// SetPortVlanId sets the value of the leaf PortVlanId in the TerminalDevice_Channel_Ethernet_Lldp_Neighbor
+// struct.
+func (t *TerminalDevice_Channel_Ethernet_Lldp_Neighbor) SetPortVlanId(v uint16) {
+	t.PortVlanId = &v
 }
 
 // SetSystemDescription sets the value of the leaf SystemDescription in the TerminalDevice_Channel_Ethernet_Lldp_Neighbor
@@ -267728,6 +277533,7 @@ func (*TerminalDevice_Channel_Ethernet_Lldp_Neighbor) ΛBelongingModule() string
 
 // TerminalDevice_Channel_Ethernet_Lldp_Neighbor_Tlv represents the /openconfig-terminal-device/terminal-device/logical-channels/channel/ethernet/lldp/neighbors/neighbor/custom-tlvs/tlv YANG schema element.
 type TerminalDevice_Channel_Ethernet_Lldp_Neighbor_Tlv struct {
+	Name       *string `path:"state/name" module:"openconfig-terminal-device/openconfig-terminal-device"`
 	Oui        *string `path:"state/oui|oui" module:"openconfig-terminal-device/openconfig-terminal-device|openconfig-terminal-device" shadow-path:"oui" shadow-module:"openconfig-terminal-device"`
 	OuiSubtype *string `path:"state/oui-subtype|oui-subtype" module:"openconfig-terminal-device/openconfig-terminal-device|openconfig-terminal-device" shadow-path:"oui-subtype" shadow-module:"openconfig-terminal-device"`
 	Type       *int32  `path:"state/type|type" module:"openconfig-terminal-device/openconfig-terminal-device|openconfig-terminal-device" shadow-path:"type" shadow-module:"openconfig-terminal-device"`
@@ -267738,6 +277544,22 @@ type TerminalDevice_Channel_Ethernet_Lldp_Neighbor_Tlv struct {
 // interface. This allows functions that need to handle this struct to
 // identify it as being generated by ygen.
 func (*TerminalDevice_Channel_Ethernet_Lldp_Neighbor_Tlv) IsYANGGoStruct() {}
+
+// GetName retrieves the value of the leaf Name from the TerminalDevice_Channel_Ethernet_Lldp_Neighbor_Tlv
+// struct. If the field is unset but has a default value in the YANG schema,
+// then the default value will be returned.
+// Caution should be exercised whilst using this method since when without a
+// default value, it will return the Go zero value if the field is explicitly
+// unset. If the caller explicitly does not care if Name is set, it can
+// safely use t.GetName() to retrieve the value. In the case that the
+// caller has different actions based on whether the leaf is set or unset, it
+// should use 'if t.Name == nil' before retrieving the leaf's value.
+func (t *TerminalDevice_Channel_Ethernet_Lldp_Neighbor_Tlv) GetName() string {
+	if t == nil || t.Name == nil {
+		return ""
+	}
+	return *t.Name
+}
 
 // GetOui retrieves the value of the leaf Oui from the TerminalDevice_Channel_Ethernet_Lldp_Neighbor_Tlv
 // struct. If the field is unset but has a default value in the YANG schema,
@@ -267801,6 +277623,12 @@ func (t *TerminalDevice_Channel_Ethernet_Lldp_Neighbor_Tlv) GetValue() Binary {
 		return nil
 	}
 	return t.Value
+}
+
+// SetName sets the value of the leaf Name in the TerminalDevice_Channel_Ethernet_Lldp_Neighbor_Tlv
+// struct.
+func (t *TerminalDevice_Channel_Ethernet_Lldp_Neighbor_Tlv) SetName(v string) {
+	t.Name = &v
 }
 
 // SetOui sets the value of the leaf Oui in the TerminalDevice_Channel_Ethernet_Lldp_Neighbor_Tlv

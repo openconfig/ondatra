@@ -3059,12 +3059,13 @@ func (n *Keychain_Key_SendLifetimePathAny) EndTime() *Keychain_Key_SendLifetime_
 	return ps
 }
 
-// SendAndReceive (leaf): When this is set to true (the default value), the specified
-// send lifetime is also used in the receive direction.  When set
-// to false, the device should use the specified receive-lifetime
-// for the receive direction (asymmetric mode).  If send-and-receive
-// is false, and the device does not support asymmetric configuration,
-// the config should be rejected as unsupported.
+// SendAndReceive (leaf): When this is set to true (the default value), the specified send-lifetime
+// is also used in the receive direction; configuration of a distinct
+// receive-lifetime is not valid in that case and the server should reject it
+// as an invalid configuration. When set to false, the device uses the
+// configured receive-lifetime for the receive direction (asymmetric mode).
+// If send-and-receive is false and the device does not support asymmetric
+// configuration, the server should reject the config as unsupported.
 //
 //	Defining module:      "openconfig-keychain"
 //	Instantiating module: "openconfig-keychain"
@@ -3082,12 +3083,13 @@ func (n *Keychain_Key_SendLifetimePath) SendAndReceive() *Keychain_Key_SendLifet
 	return ps
 }
 
-// SendAndReceive (leaf): When this is set to true (the default value), the specified
-// send lifetime is also used in the receive direction.  When set
-// to false, the device should use the specified receive-lifetime
-// for the receive direction (asymmetric mode).  If send-and-receive
-// is false, and the device does not support asymmetric configuration,
-// the config should be rejected as unsupported.
+// SendAndReceive (leaf): When this is set to true (the default value), the specified send-lifetime
+// is also used in the receive direction; configuration of a distinct
+// receive-lifetime is not valid in that case and the server should reject it
+// as an invalid configuration. When set to false, the device uses the
+// configured receive-lifetime for the receive direction (asymmetric mode).
+// If send-and-receive is false and the device does not support asymmetric
+// configuration, the server should reject the config as unsupported.
 //
 //	Defining module:      "openconfig-keychain"
 //	Instantiating module: "openconfig-keychain"

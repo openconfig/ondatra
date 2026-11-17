@@ -7827,6 +7827,372 @@ func (n *RoutingPolicy_PolicyDefinition_Statement_ActionsPathAny) Config() ygnmi
 	)
 }
 
+// RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetAigpPath represents the /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/state/set-aigp YANG schema element.
+type RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetAigpPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetAigpPathAny represents the wildcard version of the /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/state/set-aigp YANG schema element.
+type RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetAigpPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetAigpPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-bgp-policy"
+//	Instantiating module: "openconfig-bgp-policy"
+//	Path from parent:     "state/set-aigp"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/state/set-aigp"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetAigpPath) State() ygnmi.SingletonQuery[uint64] {
+	return ygnmi.NewSingletonQuery[uint64](
+		"RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "set-aigp"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions).SetAigp
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-bgp-policy"
+//	Instantiating module: "openconfig-bgp-policy"
+//	Path from parent:     "state/set-aigp"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/state/set-aigp"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetAigpPathAny) State() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions",
+		true,
+		false,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "set-aigp"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions).SetAigp
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-bgp-policy"
+//	Instantiating module: "openconfig-bgp-policy"
+//	Path from parent:     "config/set-aigp"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/config/set-aigp"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetAigpPath) Config() ygnmi.ConfigQuery[uint64] {
+	return ygnmi.NewConfigQuery[uint64](
+		"RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "set-aigp"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions).SetAigp
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-bgp-policy"
+//	Instantiating module: "openconfig-bgp-policy"
+//	Path from parent:     "config/set-aigp"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/config/set-aigp"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetAigpPathAny) Config() ygnmi.WildcardQuery[uint64] {
+	return ygnmi.NewWildcardQuery[uint64](
+		"RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions",
+		false,
+		true,
+		true,
+		true,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "set-aigp"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (uint64, bool) {
+			ret := gs.(*oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions).SetAigp
+			if ret == nil {
+				var zero uint64
+				return zero, false
+			}
+			return *ret, true
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetAigpActionPath represents the /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/state/set-aigp-action YANG schema element.
+type RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetAigpActionPath struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetAigpActionPathAny represents the wildcard version of the /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/state/set-aigp-action YANG schema element.
+type RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetAigpActionPathAny struct {
+	*ygnmi.NodePath
+	parent ygnmi.PathStruct
+}
+
+// PathOrigin returns the name of the origin for the path object.
+func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetAigpActionPath) PathOriginName() string {
+	return ""
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-bgp-policy"
+//	Instantiating module: "openconfig-bgp-policy"
+//	Path from parent:     "state/set-aigp-action"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/state/set-aigp-action"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetAigpActionPath) State() ygnmi.SingletonQuery[oc.E_BgpPolicy_BgpSetAigpAction] {
+	return ygnmi.NewSingletonQuery[oc.E_BgpPolicy_BgpSetAigpAction](
+		"RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "set-aigp-action"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_BgpPolicy_BgpSetAigpAction, bool) {
+			ret := gs.(*oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions).SetAigpAction
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// State returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-bgp-policy"
+//	Instantiating module: "openconfig-bgp-policy"
+//	Path from parent:     "state/set-aigp-action"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/state/set-aigp-action"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetAigpActionPathAny) State() ygnmi.WildcardQuery[oc.E_BgpPolicy_BgpSetAigpAction] {
+	return ygnmi.NewWildcardQuery[oc.E_BgpPolicy_BgpSetAigpAction](
+		"RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions",
+		true,
+		false,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"state", "set-aigp-action"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_BgpPolicy_BgpSetAigpAction, bool) {
+			ret := gs.(*oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions).SetAigpAction
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-bgp-policy"
+//	Instantiating module: "openconfig-bgp-policy"
+//	Path from parent:     "config/set-aigp-action"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/config/set-aigp-action"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetAigpActionPath) Config() ygnmi.ConfigQuery[oc.E_BgpPolicy_BgpSetAigpAction] {
+	return ygnmi.NewConfigQuery[oc.E_BgpPolicy_BgpSetAigpAction](
+		"RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions",
+		false,
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "set-aigp-action"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_BgpPolicy_BgpSetAigpAction, bool) {
+			ret := gs.(*oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions).SetAigpAction
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
+// Config returns a Query that can be used in gNMI operations.
+//
+//	Defining module:      "openconfig-bgp-policy"
+//	Instantiating module: "openconfig-bgp-policy"
+//	Path from parent:     "config/set-aigp-action"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/config/set-aigp-action"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetAigpActionPathAny) Config() ygnmi.WildcardQuery[oc.E_BgpPolicy_BgpSetAigpAction] {
+	return ygnmi.NewWildcardQuery[oc.E_BgpPolicy_BgpSetAigpAction](
+		"RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions",
+		false,
+		true,
+		true,
+		false,
+		true,
+		false,
+		ygnmi.NewNodePath(
+			[]string{"config", "set-aigp-action"},
+			nil,
+			n.parent,
+		),
+		func(gs ygot.ValidatedGoStruct) (oc.E_BgpPolicy_BgpSetAigpAction, bool) {
+			ret := gs.(*oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions).SetAigpAction
+			v := reflect.ValueOf(ret)
+			return ret, v.IsValid() && !v.IsZero()
+		},
+		func() ygot.ValidatedGoStruct {
+			return new(oc.RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions)
+		},
+		func() *ytypes.Schema {
+			return &ytypes.Schema{
+				Root:       &oc.Root{},
+				SchemaTree: oc.SchemaTree,
+				Unmarshal:  oc.Unmarshal,
+			}
+		},
+		nil,
+		nil,
+	)
+}
+
 // RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetLocalPrefPath represents the /openconfig-routing-policy/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/state/set-local-pref YANG schema element.
 type RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetLocalPrefPath struct {
 	*ygnmi.NodePath
@@ -8737,6 +9103,80 @@ type RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActionsPathAny struct {
 // PathOrigin returns the name of the origin for the path object.
 func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActionsPath) PathOriginName() string {
 	return "openconfig"
+}
+
+// SetAigp (leaf): Set the AIGP metric attribute in the route update (RFC 7311,
+// Section 3.4)
+//
+//	Defining module:      "openconfig-bgp-policy"
+//	Instantiating module: "openconfig-routing-policy"
+//	Path from parent:     "*/set-aigp"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/*/set-aigp"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActionsPath) SetAigp() *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetAigpPath {
+	ps := &RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetAigpPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "set-aigp"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// SetAigp (leaf): Set the AIGP metric attribute in the route update (RFC 7311,
+// Section 3.4)
+//
+//	Defining module:      "openconfig-bgp-policy"
+//	Instantiating module: "openconfig-routing-policy"
+//	Path from parent:     "*/set-aigp"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/*/set-aigp"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActionsPathAny) SetAigp() *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetAigpPathAny {
+	ps := &RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetAigpPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "set-aigp"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// SetAigpAction (leaf): This leaf is mandatory when `set-aigp-action` is specified.
+//
+//	Defining module:      "openconfig-bgp-policy"
+//	Instantiating module: "openconfig-routing-policy"
+//	Path from parent:     "*/set-aigp-action"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/*/set-aigp-action"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActionsPath) SetAigpAction() *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetAigpActionPath {
+	ps := &RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetAigpActionPath{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "set-aigp-action"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
+}
+
+// SetAigpAction (leaf): This leaf is mandatory when `set-aigp-action` is specified.
+//
+//	Defining module:      "openconfig-bgp-policy"
+//	Instantiating module: "openconfig-routing-policy"
+//	Path from parent:     "*/set-aigp-action"
+//	Path from root:       "/routing-policy/policy-definitions/policy-definition/statements/statement/actions/bgp-actions/*/set-aigp-action"
+func (n *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActionsPathAny) SetAigpAction() *RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetAigpActionPathAny {
+	ps := &RoutingPolicy_PolicyDefinition_Statement_Actions_BgpActions_SetAigpActionPathAny{
+		NodePath: ygnmi.NewNodePath(
+			[]string{"*", "set-aigp-action"},
+			map[string]interface{}{},
+			n,
+		),
+		parent: n,
+	}
+	return ps
 }
 
 // SetAsPathPrepend (container): Action to prepend the specified AS number to the AS-path a
