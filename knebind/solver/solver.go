@@ -454,6 +454,11 @@ type ServiceDUT struct {
 // GetDims returns the dimensions of the DUT.
 func (d *ServiceDUT) GetDims() *binding.Dims { return d.AbstractDUT.Dims }
 
+// IsVirtual reports that the DUT is an emulated KNE node rather than physical
+// hardware. Tests may use this to scale parameters that emulated dataplanes
+// cannot sustain, such as traffic rates.
+func (d *ServiceDUT) IsVirtual() bool { return true }
+
 // Service returns the KNE service details for a given service name.
 func (d *ServiceDUT) Service(service string) (*tpb.Service, error) {
 	srv, ok := d.Services[service]
@@ -473,6 +478,10 @@ type ServiceATE struct {
 
 // GetDims returns the dimensions of the ATE.
 func (a *ServiceATE) GetDims() *binding.Dims { return a.AbstractATE.Dims }
+
+// IsVirtual reports that the ATE is an emulated KNE node rather than physical
+// hardware.
+func (a *ServiceATE) IsVirtual() bool { return true }
 
 // Service returns the KNE service details for a given service name.
 func (a *ServiceATE) Service(service string) (*tpb.Service, error) {
