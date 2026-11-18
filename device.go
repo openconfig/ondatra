@@ -80,6 +80,8 @@ const (
 	ARUBA = Vendor(opb.Device_ARUBA)
 	// ALPINE vendor.
 	ALPINE = Vendor(opb.Device_ALPINE)
+	// SONIC vendor.
+	SONIC = Vendor(opb.Device_SONIC)
 )
 
 // String returns the name of the vendor.
